@@ -1,0 +1,21 @@
+:root {
+  --color-background: #f7f7f3;
+  --color-foreground: #0f0f10;
+  --color-muted: #6e6e73;
+  --color-border: #d9d9d4;
+  --color-inverse: #f7f7f3;
+  --color-accent: #b5c8b0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --space-32: 128px;
+  --container-max: 1440px;
+  --content-max: 1280px;
+  --radius-sm: 2px;
+}

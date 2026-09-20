@@ -1,0 +1,12 @@
+:root {
+  --font-sans: "Geist", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: "Geist Mono", "SFMono-Regular", Consolas, monospace;
+}
+
+.display { font-size: clamp(3.5rem, 9vw, 9rem); line-height: 0.92; letter-spacing: -0.06em; font-weight: 500; }
+.heading-2 { font-size: clamp(2rem, 4vw, 4.5rem); line-height: 0.98; letter-spacing: -0.05em; font-weight: 500; }
+.heading-3 { font-size: clamp(1.25rem, 2vw, 2rem); line-height: 1.05; letter-spacing: -0.03em; font-weight: 500; }
+.body-large { font-size: clamp(1.25rem, 2vw, 2rem); line-height: 1.2; letter-spacing: -0.02em; }
+.body { font-size: 1rem; line-height: 1.5; }
+.small { font-size: 0.875rem; line-height: 1.4; }
+.mono-label { font-family: var(--font-mono); font-size: 0.6875rem; line-height: 1.2; letter-spacing: 0.08em; text-transform: uppercase; }
