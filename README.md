@@ -77,3 +77,12 @@ Form Phase 3 dùng **Supabase private records, Resend notification, Cloudflare T
 Bổ sung kiểm thử trình duyệt Chromium desktop/mobile và Firefox, axe-core accessibility, bộ HTTP security header, trang lỗi tiếng Việt, hai endpoint `/api/health` (liveness) và `/api/readiness` (chỉ kiểm tra cấu hình intake). Chạy `npm run test:e2e` sau khi `npm run build` và cài browser bằng `npx playwright install chromium firefox`. Chạy đo Lighthouse với `node scripts/lighthouse-baseline.mjs http://127.0.0.1:3199` trên production server được khởi động riêng tại port 3199.
 
 **Trạng thái phát hành: NO-GO.** Hệ thống tư vấn chưa được bật vì chưa có dịch vụ ngoài và phê duyệt pháp lý. Không có staging online, RUM p75, bản sao lưu phục hồi được xác minh hoặc giám sát uptime đã kích hoạt. Việc kiểm thử và tài liệu ở Phase 4 không tự động cho phép merge vào `main` hay triển khai DNS/production.
+
+## Phase 5 — Tài khoản & phân quyền (chưa bật đăng ký thật)
+
+- [Kiến trúc Supabase Auth, hướng dẫn Google OAuth và điều kiện kích hoạt](docs/PHASE5_AUTH_ARCHITECTURE.md)
+- [Báo cáo QA Phase 5](docs/PHASE5_QA.md)
+- [Database migration (Supabase/PostgreSQL)](docs/db/phase5_identity.sql)
+- [Bộ kiểm thử RLS thực qua PGlite](tests/rls-isolation.test.mjs)
+
+Các trang mới: `/dang-nhap`, `/dang-ky`, `/quen-mat-khau`, `/tai-khoan`, `/tai-khoan/doi-mat-khau`, `/quan-tri` và OAuth/email callbacks. Hệ thống quản lý vai trò không lấy quyền từ dữ liệu người dùng có thể tự sửa. `NEXT_PUBLIC_ATHENA_AUTH_ENABLED=false` mặc định; không có Supabase SMTP, Google OAuth hoặc database production được kích hoạt. Không được bật true cho môi trường công khai trước kiểm thử staging và phê duyệt pháp lý.
