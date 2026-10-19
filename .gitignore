@@ -7,3 +7,8 @@ out
 *.tsbuildinfo
 
 .qa/
+
+# Phase 4 local/CI test output
+playwright-report/
+test-results/
+.lighthouse/

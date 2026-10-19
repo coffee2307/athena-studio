@@ -424,3 +424,44 @@ em{font-family:"Times New Roman","Noto Serif",Georgia,serif;font-weight:400;lett
 .offer-card.reveal.is-visible:hover{transform:translateY(-6px)}
 @media(max-width:800px){.reveal-ready .reveal:not(.is-visible){filter:none}}
 @media(prefers-reduced-motion:reduce){.offer-card.reveal.is-visible:hover{transform:none!important}}
+
+/* Phase 4 WCAG 2.2 contrast remediation: small editorial labels remain readable */
+.section-index,.hero-topline,.hero-overline,.hero-bottom,.directory-number,
+.service-footer,.product-state,.method-item>span,.method-item p,
+.featured-footer p,.case-index,.case-card-summary,.case-state,
+.case-facts span,.case-detail-number,.case-detail-title div>p:last-child,
+.art-disclaimer,.case-story-row>p,.case-story-row div>p,.case-outcome-note,
+.case-evidence p:not(.small-index),.case-provenance span,.case-provenance p,
+.page-kicker,.page-hero-lede p,.page-section .lead-text,
+.legal-aside p,.legal-aside a,.legal-content>p,.legal-notice p,
+.legal-cards span,.legal-cards p,.legal-index-note,
+.offer-card .service-meta,.offer-card p,.offer-card .card-bottom,
+.contact-note,.contact-grid span,.contact-notice,.intake-steps>div>span,
+.studio-values article span,.studio-values p,.product-copy>p:not(.section-index),
+.product-status-card p,.detail-tile span,
+.footer-identity p,.footer-links p,.footer-links a,.footer-bottom,
+.footer-legal a,.result-count,.filter-chip:not(.is-active),
+.pv-top,.pv-bottom,.pv-card-mini,.pv-card>span,
+.pill-link.pill-light,.underlined-link {color:#535353}
+.athena-footer .footer-bottom a{color:#484848}
+.athena-footer .footer-upper .eyebrow{color:#595959}
+.footer-statement h2 span{color:#666}
+.service-footer .underlined-link{color:#454545}
+.closing-block .closing-inner .eyebrow{color:#d6d6d6}
+.closing-block .closing-inner h2 em{color:#bfbfbf}
+.art-econith .art-header span:last-child,
+.art-econith .art-bottom{opacity:1;color:#404040}
+.art-pham .art-header span:last-child,.art-pham .art-bottom{opacity:.82}
+.art-header span:last-child{opacity:1}
+.art-bottom{opacity:1}
+.art-pham .art-bottom{opacity:.82}
+.footer-upper .eyebrow{color:#535353}
+.closing-inner{isolation:isolate}
+.closing-inner:after{content:"ATHENA";position:absolute;z-index:-1;right:-2%;bottom:-10%;font-size:clamp(125px,25vw,440px);font-weight:700;letter-spacing:-.1em;color:rgba(255,255,255,.07);pointer-events:none}
+.closing-watermark{display:none}
+@media(max-width:560px){.closing-inner:after{font-size:27vw}}
+
+/* Contact form contrast on #f1f1ef surface */
+.intake-steps>.small-index,.contact-box>.small-index,
+.contact-box>p,.contact-box .form-offline p,
+.contact-box .contact-notice {color:#505050}

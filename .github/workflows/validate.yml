@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   test-and-build:
-    name: Lint, tests, build and audit
+    name: Lint, unit, build and audit
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -25,7 +25,7 @@ jobs:
         with:
           node-version: "24"
           cache: npm
-      - name: Install dependencies
+      - name: Install
         run: npm ci --no-audit --no-fund
       - name: ESLint
         run: npm run lint
@@ -37,5 +37,35 @@ jobs:
         run: npm run build
       - name: HTTP smoke tests
         run: npm run test:smoke
-      - name: Production dependency security gate
-        run: npm audit --omit=dev --audit-level=high
+      - name: Production security audit
+        run: npm run audit:runtime
+
+  browser-quality:
+    name: Browser E2E and automated accessibility
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+      - name: Install
+        run: npm ci --no-audit --no-fund
+      - name: Install supported browsers
+        run: npx playwright install --with-deps chromium firefox
+      - name: Build production
+        run: npm run build
+      - name: Playwright scenarios and axe checks
+        run: npm run test:e2e
+        env:
+          CI: "true"
+      - name: Upload failure evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: athena-browser-failure
+          path: |
+            test-results/
+            playwright-report/
+          retention-days: 7
