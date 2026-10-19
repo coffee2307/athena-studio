@@ -1,42 +1,45 @@
-# Athena
+# Athena Studio — Digital Solutions & Product Lab
 
-Athena is a minimalist digital product studio website for businesses. The initial codebase is intentionally lightweight and ready for future 3D work without including a 3D runtime yet.
+Athena Studio is a Next.js 15 / React 19 / TypeScript website rebuilt around four clear offers:
 
-## Stack
+1. Web Design & Development
+2. Website Care
+3. AI Integration
+4. Micro-SaaS Product Lab (concepts clearly labeled as unreleased)
 
-- Next.js App Router
-- React and TypeScript
-- Global CSS with modular tokens and reusable component styles
-- Strict TypeScript and ESLint
-
-## Architecture
-
-- `app/` contains routes, layout, metadata, and global styles.
-- `components/layout/` contains site chrome.
-- `components/sections/` contains page-level compositions.
-- `components/ui/` contains reusable presentational primitives.
-- `components/three/` is reserved for future React Three Fiber scenes.
-- `data/` contains navigation, service, project, and process content.
-- `lib/` contains constants, metadata, and small utilities.
-- `types/` contains shared TypeScript interfaces.
-- `public/branding/` contains brand assets.
-- `public/models/` is the future home for 3D models.
-- `public/projects/` contains project-specific assets.
-- `styles/` contains design tokens, typography, and utilities.
-
-## Install and run
+## Quick start
 
 ```bash
-npm install
+npm ci
 npm run dev
+npm run lint
+npm run build
 ```
 
-Open `http://localhost:3000` to view the site. Run `npm run lint` and `npm run build` before deployment.
+Visit http://localhost:3000. The homepage and four service detail pages are statically generated; the header and contact form use small client components.
 
-## Add a project
+## Configuration
 
-Add a typed entry to `data/projects.ts`, then place project imagery in `public/projects/<slug>/`. The work index and dynamic `/work/[slug]` route consume the same data automatically.
+Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SITE_URL`. To activate the contact form, set **all three** `RESEND_API_KEY`, `CONTACT_EMAIL`, and `CONTACT_FROM_EMAIL`; optionally set `NEXT_PUBLIC_CONTACT_EMAIL` to display a direct contact address. Without these credentials the form remains visibly unavailable rather than silently discarding customer inquiries. Never commit keys.
 
-## Future extension points
+The API route validates form input, checks same-origin requests, includes a honeypot, applies a basic per-process throttle and sends messages server-side with Resend. Production deployments should replace the per-process throttle with an edge or shared-store rate limit and add abuse monitoring.
 
-Add React Three Fiber and scene components under `components/three/`; store `.glb` or related model files under `public/models/`. Motion, GSAP, and page transitions can be introduced at the section and layout boundaries without changing content data.
+## Core routes
+
+- `/`: studio landing page.
+- `/services`: four service categories.
+- `/services/[slug]`: detailed scope and deliverables.
+- `/products`: Product Lab; no preorders or fake live subscriptions.
+- `/studio`: philosophy and approach.
+- `/contact`: project intake.
+- `/api/inquiry`: opt-in production email integration.
+
+## Design principles
+
+Premium editorial layouts inspired by the quality bar of the owner's PHAM project, without using PHAM assets or implying the projects belong to one brand. Expressive typography, warm dark/light surfaces, lime-accent data visualization, CSS-based sculptural hero, responsive grids, keyboard accessibility and reduced-motion support.
+
+## Before launch
+
+Verify domain and email ownership, deployment secrets, applicable privacy/terms content, anti-spam controls, service pricing and contract templates. No live client work, metrics, certifications or finished product claims are fabricated.
+
+See `REBUILD_PLAN.md` for scope, acceptance criteria and release phases.

@@ -1,7 +1,2 @@
 import Link from "next/link";
-import { Heading } from "@/components/ui/Heading";
-import { Section } from "@/components/ui/Section";
-
-export default function NotFound() {
-  return <Section className="not-found"><p className="eyebrow">404 / Page not found</p><Heading>That page moved<br />somewhere else.</Heading><Link className="text-link" href="/">Back to Athena <span aria-hidden="true">↗</span></Link></Section>;
-}
+export default function NotFound() { return <section className="page-section not-found"><div className="container"><p className="page-kicker" style={{color:"#60715d"}}>ERROR / 404</p><h2>Nothing here.<br /><em>Keep exploring.</em></h2><p>Trang bạn tìm kiếm không tồn tại hoặc đã chuyển địa chỉ.</p><Link href="/" className="pill-link pill-dark">Về trang chủ ↗</Link></div></section>; }
