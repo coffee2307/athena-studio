@@ -43,3 +43,24 @@ Premium editorial layouts inspired by the quality bar of the owner's PHAM projec
 Verify domain and email ownership, deployment secrets, applicable privacy/terms content, anti-spam controls, service pricing and contract templates. No live client work, metrics, certifications or finished product claims are fabricated.
 
 See `REBUILD_PLAN.md` for scope, acceptance criteria and release phases.
+
+## Approved master roadmap and Phase 0 baseline
+
+**Canonical source of truth:** [ATHENA_MASTER_ROADMAP.md](docs/ATHENA_MASTER_ROADMAP.md). It contains the owner-approved Phase 0–7 roadmap, white/black official owl identity direction, Vietnamese-language requirement, technical decisions, acceptance gates and owner-only actions. Future sessions should read this file *first* before proposing or implementing changes.
+
+- [Phase 0 security/architecture audit](docs/PHASE0_ARCHITECTURE_AUDIT.md)
+- [Phase 0 automated QA report](docs/PHASE0_QA.md)
+
+Phase 0 scripts (Node.js 24 and npm required):
+
+```bash
+npm ci
+npm run lint
+npm run typecheck
+npm run test:unit
+npm run build
+npm run test:smoke
+npm audit --omit=dev --audit-level=high
+```
+
+The automation in `.github/workflows/validate.yml` checks these gates on PRs. Phase 0 does not launch the site, change DNS or commission paid services. The current site remains a marketing demonstration until Phases 1–4 are accepted, and unfinished services should not be presented as commercially available.
