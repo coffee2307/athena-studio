@@ -56,3 +56,14 @@ Email công khai: `coffee2307@gmail.com`. Điện thoại: `0965747147`. Nút Za
 
 ## Ranh giới triển khai
 Không merge `main`, thay đổi DNS, thuê hosting, phát sinh chi phí hoặc triển khai production khi chưa có sự phê duyệt riêng. Các bước tiếp theo theo roadmap: Phase 3 tiếp nhận và vận hành dịch vụ; Phase 4 kiểm định và chuẩn bị phát hành; Phase 5–7 tài khoản, dashboard và Micro-SaaS.
+
+
+## Phase 3 — Tiếp nhận tư vấn và nâng cấp chuyển động
+
+- [Quy trình tiếp nhận, vận hành an toàn và cấu hình](docs/PHASE3_INTAKE_OPERATIONS.md)
+- [Database schema cho Supabase](docs/db/phase3_inquiries.sql)
+- [Báo cáo kiểm thử Phase 3](docs/PHASE3_QA.md)
+
+Trải nghiệm chuyển động đã mở rộng trên các trang: hiệu ứng reveal theo viewport (kể cả thẻ dự án thêm mới sau khi lọc), stagger, text entrance, hover tương tác, progress bar cuộn trang, con trỏ trang trí trên desktop. Giữ fallback hiển thị đầy đủ nếu không có JavaScript hoặc khi bật giảm chuyển động.
+
+Form Phase 3 dùng **Supabase private records, Resend notification, Cloudflare Turnstile và Upstash Redis shared rate limiting**. Không có credentials được commit. Muốn kích hoạt cần toàn bộ biến trong `.env.example`, migration SQL, quyền quản lý thông tin, kiểm chứng gửi email và xác minh hostname. Khi thiếu, website hiển thị liên kết email trực tiếp và API trả 503 (không giả vờ nhận). Không yêu cầu người dùng mua dịch vụ nếu chưa duyệt phương án chi phí.
