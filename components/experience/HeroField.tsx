@@ -26,7 +26,7 @@ export function HeroField() {
 
   return (
     <div className="intelligence-field" ref={root} onPointerMove={move} onPointerLeave={reset}
-      aria-label="Đồ họa chuyển động lấy cảm hứng từ đôi mắt cú Athena và các đường hội tụ.">
+      role="img" aria-label="Đồ họa chuyển động lấy cảm hứng từ đôi mắt cú Athena và các đường hội tụ.">
       <div className="field-scan field-scan-a" aria-hidden="true" />
       <div className="field-scan field-scan-b" aria-hidden="true" />
       <svg viewBox="0 0 850 780" className="field-lines" role="presentation" aria-hidden="true" fill="none">

@@ -67,3 +67,13 @@ Không merge `main`, thay đổi DNS, thuê hosting, phát sinh chi phí hoặc 
 Trải nghiệm chuyển động đã mở rộng trên các trang: hiệu ứng reveal theo viewport (kể cả thẻ dự án thêm mới sau khi lọc), stagger, text entrance, hover tương tác, progress bar cuộn trang, con trỏ trang trí trên desktop. Giữ fallback hiển thị đầy đủ nếu không có JavaScript hoặc khi bật giảm chuyển động.
 
 Form Phase 3 dùng **Supabase private records, Resend notification, Cloudflare Turnstile và Upstash Redis shared rate limiting**. Không có credentials được commit. Muốn kích hoạt cần toàn bộ biến trong `.env.example`, migration SQL, quyền quản lý thông tin, kiểm chứng gửi email và xác minh hostname. Khi thiếu, website hiển thị liên kết email trực tiếp và API trả 503 (không giả vờ nhận). Không yêu cầu người dùng mua dịch vụ nếu chưa duyệt phương án chi phí.
+
+## Phase 4 — Kiểm định và chuẩn bị phát hành (chưa production)
+
+- [Kết quả kiểm định Phase 4](docs/PHASE4_QA.md)
+- [Lighthouse baseline đo trên localhost](docs/PHASE4_PERFORMANCE_BASELINE.md)
+- [Runbook phát hành, giám sát và khôi phục](docs/PHASE4_RELEASE_RUNBOOK.md)
+
+Bổ sung kiểm thử trình duyệt Chromium desktop/mobile và Firefox, axe-core accessibility, bộ HTTP security header, trang lỗi tiếng Việt, hai endpoint `/api/health` (liveness) và `/api/readiness` (chỉ kiểm tra cấu hình intake). Chạy `npm run test:e2e` sau khi `npm run build` và cài browser bằng `npx playwright install chromium firefox`. Chạy đo Lighthouse với `node scripts/lighthouse-baseline.mjs http://127.0.0.1:3199` trên production server được khởi động riêng tại port 3199.
+
+**Trạng thái phát hành: NO-GO.** Hệ thống tư vấn chưa được bật vì chưa có dịch vụ ngoài và phê duyệt pháp lý. Không có staging online, RUM p75, bản sao lưu phục hồi được xác minh hoặc giám sát uptime đã kích hoạt. Việc kiểm thử và tài liệu ở Phase 4 không tự động cho phép merge vào `main` hay triển khai DNS/production.

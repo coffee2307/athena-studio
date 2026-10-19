@@ -10,7 +10,10 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test:unit": "node --test tests/*.test.mjs",
-    "test:smoke": "node scripts/smoke.mjs"
+    "test:smoke": "node scripts/smoke.mjs",
+    "test:e2e": "playwright test",
+    "test:e2e:chromium": "playwright test --project=chromium-desktop --project=chromium-mobile",
+    "audit:runtime": "npm audit --omit=dev --audit-level=high"
   },
   "dependencies": {
     "next": "15.5.28",
@@ -18,12 +21,15 @@
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
     "@eslint/eslintrc": "^3.3.1",
+    "@playwright/test": "1.64.1",
     "@types/node": "^22.15.0",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
     "eslint": "^9.32.0",
     "eslint-config-next": "15.5.28",
+    "lighthouse": "13.5.0",
     "typescript": "^5.8.3"
   },
   "overrides": {
