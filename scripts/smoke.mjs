@@ -5,7 +5,7 @@ async function freePort(){const s=createServer();await new Promise((ok,err)=>{s.
 const port=await freePort(),root="http://127.0.0.1:"+port;
 const app=spawn(process.execPath,["node_modules/next/dist/bin/next","start","-p",String(port),"-H","127.0.0.1"],{cwd:process.cwd(),stdio:["ignore","pipe","pipe"],env:{...process.env,NEXT_PUBLIC_SITE_URL:root,RESEND_API_KEY:"",CONTACT_EMAIL:"",CONTACT_FROM_EMAIL:""}});
 let stderr="",exited=false;app.stderr.on("data",s=>stderr+=s.toString());app.on("exit",()=>exited=true);
-const publicRoutes=["/","/dich-vu","/dich-vu/web-development","/dich-vu/website-care","/dich-vu/ai-integration","/dich-vu/micro-saas","/du-an","/du-an/pham","/du-an/econith","/san-pham","/ve-athena","/lien-he","/phap-ly","/phap-ly/quyen-rieng-tu","/phap-ly/dieu-khoan","/phap-ly/cookie","/robots.txt","/sitemap.xml","/og-athena.png","/api/health"];
+const publicRoutes=["/","/dich-vu","/dich-vu/web-development","/dich-vu/website-care","/dich-vu/ai-integration","/dich-vu/micro-saas","/du-an","/du-an/pham","/du-an/econith","/san-pham","/ve-athena","/lien-he","/phap-ly","/phap-ly/quyen-rieng-tu","/phap-ly/dieu-khoan","/phap-ly/cookie","/robots.txt","/sitemap.xml","/og-athena.png","/api/health","/dang-nhap","/dang-ky","/quen-mat-khau"];
 const oldPaths={"/services":"/dich-vu","/services/web-development":"/dich-vu/web-development","/products":"/san-pham","/studio":"/ve-athena","/contact":"/lien-he","/work":"/du-an","/work/pham":"/du-an/pham"};
 try{
  let ready=false;
@@ -31,6 +31,9 @@ try{
  const readinessData=await readiness.json();
  assert.equal(readinessData.verification,"configuration-only");
  assert.equal(readiness.headers.get("cache-control"),"no-store");
+ const account=await fetch(root+"/tai-khoan",{redirect:"manual"});
+ assert.ok([307,308].includes(account.status),"private account must redirect without Auth");
+ assert.equal(new URL(account.headers.get("location"),root).pathname,"/dang-nhap");
  const qrio=await fetch(root+"/du-an/qrio");
  assert.equal(qrio.status,404,"unverified Qrio must not be published");
  const sitemap=await (await fetch(root+"/sitemap.xml")).text();

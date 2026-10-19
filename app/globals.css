@@ -465,3 +465,67 @@ em{font-family:"Times New Roman","Noto Serif",Georgia,serif;font-weight:400;lett
 .intake-steps>.small-index,.contact-box>.small-index,
 .contact-box>p,.contact-box .form-offline p,
 .contact-box .contact-notice {color:#505050}
+
+/* ATHENA Phase 5 — authentication/editorial identity, no faux dashboard */
+.auth-page{background:#f6f6f4;min-height:calc(100vh - 100px)}
+.auth-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:clamp(35px,6vw,100px);padding-block:clamp(40px,6vw,90px);min-height:790px}
+.auth-aside{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;background:#161718;color:#fff;min-height:640px;padding:clamp(30px,4vw,65px)}
+.auth-aside::after{content:"";position:absolute;width:70%;aspect-ratio:1;border:1px solid rgba(255,255,255,.22);border-radius:50%;right:-28%;bottom:-14%;box-shadow:0 0 0 55px rgba(255,255,255,.025),0 0 0 120px rgba(255,255,255,.025);pointer-events:none}
+.auth-back{font-size:13px;align-self:flex-start;border-bottom:1px solid #6c6c6c;padding-bottom:7px}
+.auth-aside h2{font-size:clamp(55px,5.8vw,88px);line-height:1.06;letter-spacing:-.075em;margin:24px 0}
+.auth-aside h2 em{color:#c3c3c3}
+.auth-aside p:not(.small-index){font-size:15px;line-height:1.85;max-width:385px;color:#cecece}
+.auth-aside .small-index,.auth-aside-end{font-size:10px;color:#c8c8c8;letter-spacing:.15em}
+.auth-content{display:flex;flex-direction:column;justify-content:center;min-width:0;padding:clamp(10px,2vw,45px) 0}
+.auth-panel{max-width:570px;width:100%}
+.auth-panel h1{font-size:clamp(53px,6.6vw,90px);line-height:1.08;letter-spacing:-.08em;margin:21px 0 20px}
+.auth-panel h1 em{color:#888}
+.auth-description{font-size:15px;color:#545454;line-height:1.85;max-width:495px;margin-bottom:35px}
+.auth-form{display:flex;flex-direction:column;gap:23px}
+.auth-form label{display:flex;flex-direction:column;gap:9px;font-size:12px;font-weight:650;color:#464646}
+.auth-form input{width:100%;background:transparent;border:0;border-bottom:1px solid #a4a4a4;padding:15px 2px 14px;border-radius:0;color:#111;outline:none;font-size:15px}
+.auth-form input:focus{border-bottom-color:#111;box-shadow:0 2px 0 #111}
+.auth-form input::placeholder{color:#686868}
+.auth-form input:disabled{opacity:.72}
+.auth-submit{width:100%;margin-top:12px;cursor:pointer;font-size:14px}
+.auth-submit:disabled,.auth-google:disabled{opacity:.48;cursor:not-allowed}
+.auth-helper{display:flex;justify-content:flex-end;margin-top:-7px}
+.auth-helper a,.auth-text-link{font-size:12px;border-bottom:1px solid #555;align-self:flex-start;padding-bottom:3px}
+.auth-separator{position:relative;text-align:center;color:#696969;font-size:10px;letter-spacing:.13em;margin:25px 0}
+.auth-separator::before{content:"";height:1px;background:#c6c6c6;width:100%;position:absolute;top:50%;left:0}
+.auth-separator span{background:#f6f6f4;position:relative;padding:0 15px}
+.auth-google{width:100%;background:#fff;border:1px solid #bababa;border-radius:100px;min-height:57px;padding:13px 22px;display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:600;transition:background .25s,transform .25s}
+.auth-google:not(:disabled):hover{background:#ececeb;transform:translateY(-2px)}
+.auth-alternate{font-size:13px;margin-top:27px}
+.auth-alternate a,.auth-footnote a{text-decoration:underline;text-underline-offset:4px}
+.auth-footnote{color:#5c5c5c;font-size:12px;line-height:1.75;margin-top:19px}
+.auth-notice{padding:14px 19px;background:#e5ebe6;border-left:2px solid #386d4c;color:#2f4939;line-height:1.75;font-size:12px}
+.auth-notice.is-error{background:#f5e9e8;border-color:#a94c43;color:#7c2e28}
+.auth-info{margin:34px 0;padding:30px;background:#eaeae8;border:1px solid #d2d2d0;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.auth-info span,.account-pending span{font-size:10px;letter-spacing:.13em;color:#666}
+.auth-info strong{font-size:18px}
+.auth-info p{font-size:13px;line-height:1.8;color:#555;max-width:530px}
+.auth-unavailable h1{font-size:clamp(48px,5vw,78px)}
+.account-page{padding:clamp(50px,6vw,110px) 0 150px;background:#f8f8f6;min-height:80vh}
+.account-top{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.account-top .page-kicker{margin:0}
+.account-page h1{font-size:clamp(70px,10vw,155px);line-height:1.04;letter-spacing:-.095em;margin:58px 0 25px}
+.account-page h1 em{color:#888}
+.account-lede{max-width:730px;font-size:16px;line-height:1.9;color:#5e5e5e;margin-bottom:60px}
+.auth-signout{background:transparent;border:1px solid #555;border-radius:99px;padding:13px 23px;font-size:12px}
+.account-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}
+.account-section{background:#fff;padding:clamp(25px,3.8vw,60px);border:1px solid #e4e4e4}
+.account-section h2{font-size:clamp(32px,3.7vw,52px);letter-spacing:-.055em;margin:28px 0 40px}
+.account-section>.auth-text-link{margin-top:30px;display:inline-block}
+.role-chip{display:inline-flex;border:1px solid #999;border-radius:100px;padding:10px 17px;font-size:12px}
+.account-status>p:not(.small-index){font-size:14px;line-height:1.85;color:#5c5c5c;margin-top:27px}
+.account-pending{border-top:1px solid #ddd;margin-top:46px;padding-top:28px;display:flex;gap:14px;flex-direction:column}
+.account-pending strong{font-size:25px;letter-spacing:-.04em}
+.account-pending p{font-size:13px;color:#555;line-height:1.8}
+@media(max-width:960px){.auth-layout{grid-template-columns:1fr;min-height:initial;gap:30px}.auth-aside{min-height:300px}.auth-aside h2{font-size:62px}.auth-content{padding:35px 6px}.auth-panel{max-width:650px;margin:auto}}
+@media(max-width:600px){.auth-layout{padding-block:20px 60px}.auth-aside{min-height:255px;padding:29px}.auth-aside h2{font-size:48px;margin:14px 0}.auth-aside-end{margin-top:35px}.auth-panel h1{font-size:clamp(47px,13vw,70px)}.auth-content{padding:25px 0}.account-grid{grid-template-columns:1fr}.account-page h1{font-size:clamp(58px,13vw,100px)}.account-page{padding:60px 0 100px}}
+@media(prefers-reduced-motion:reduce){.auth-google,.auth-submit{transition:none!important}}
+
+.account-signout-all{margin-top:26px}
+.nav-account{font-size:12px;color:#454545;white-space:nowrap;border-bottom:1px solid #888;padding-bottom:5px}
+@media(max-width:1090px){.nav-account{display:none}}
