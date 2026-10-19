@@ -1,60 +1,28 @@
-# Athena Studio — Digital Solutions & Product Lab
+# Athena Studio — Thiết kế & Công nghệ
 
-Athena Studio is a Next.js 15 / React 19 / TypeScript website rebuilt around four clear offers:
+Website Next.js / React / TypeScript của Athena Studio, gồm bốn nhóm dịch vụ: **thiết kế website**, **chăm sóc website**, **tích hợp trí tuệ nhân tạo** và **nghiên cứu công cụ Micro-SaaS**.
 
-1. Web Design & Development
-2. Website Care
-3. AI Integration
-4. Micro-SaaS Product Lab (concepts clearly labeled as unreleased)
+## Trạng thái dự án
 
-## Quick start
+- **Phase 0**: đã xây nền tảng CI/test, cập nhật bản vá dependency, lưu roadmap và đánh giá kiến trúc.
+- **Phase 1**: giao diện **White Edition**, logo cú chính thức, typography và nội dung tiếng Việt, Hero Athena Intelligence Field, chuyển động và giao diện responsive.
+- **Phase 2–4**: Portfolio xác thực, vận hành tiếp nhận khách hàng, kiểm định production; **chưa hoàn tất**.
+- **Phase 5–7**: xác thực, dashboard khách hàng, Micro-SaaS thương mại; **chưa triển khai**.
+
+### Tài liệu chuẩn và báo cáo
+- [Roadmap chính thức được phê duyệt](docs/ATHENA_MASTER_ROADMAP.md)
+- [Kiến trúc và bảo mật Phase 0](docs/PHASE0_ARCHITECTURE_AUDIT.md)
+- [Kiểm thử Phase 0](docs/PHASE0_QA.md)
+- [Design System và Motion Phase 1](docs/PHASE1_DESIGN_SYSTEM.md)
+- [Kiểm thử Phase 1](docs/PHASE1_QA.md)
+
+## Chạy cục bộ
+
+Yêu cầu Node.js 24 và npm.
 
 ```bash
 npm ci
 npm run dev
-npm run lint
-npm run build
-```
-
-Visit http://localhost:3000. The homepage and four service detail pages are statically generated; the header and contact form use small client components.
-
-## Configuration
-
-Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SITE_URL`. To activate the contact form, set **all three** `RESEND_API_KEY`, `CONTACT_EMAIL`, and `CONTACT_FROM_EMAIL`; optionally set `NEXT_PUBLIC_CONTACT_EMAIL` to display a direct contact address. Without these credentials the form remains visibly unavailable rather than silently discarding customer inquiries. Never commit keys.
-
-The API route validates form input, checks same-origin requests, includes a honeypot, applies a basic per-process throttle and sends messages server-side with Resend. Production deployments should replace the per-process throttle with an edge or shared-store rate limit and add abuse monitoring.
-
-## Core routes
-
-- `/`: studio landing page.
-- `/services`: four service categories.
-- `/services/[slug]`: detailed scope and deliverables.
-- `/products`: Product Lab; no preorders or fake live subscriptions.
-- `/studio`: philosophy and approach.
-- `/contact`: project intake.
-- `/api/inquiry`: opt-in production email integration.
-
-## Design principles
-
-Premium editorial layouts inspired by the quality bar of the owner's PHAM project, without using PHAM assets or implying the projects belong to one brand. Expressive typography, warm dark/light surfaces, lime-accent data visualization, CSS-based sculptural hero, responsive grids, keyboard accessibility and reduced-motion support.
-
-## Before launch
-
-Verify domain and email ownership, deployment secrets, applicable privacy/terms content, anti-spam controls, service pricing and contract templates. No live client work, metrics, certifications or finished product claims are fabricated.
-
-See `REBUILD_PLAN.md` for scope, acceptance criteria and release phases.
-
-## Approved master roadmap and Phase 0 baseline
-
-**Canonical source of truth:** [ATHENA_MASTER_ROADMAP.md](docs/ATHENA_MASTER_ROADMAP.md). It contains the owner-approved Phase 0–7 roadmap, white/black official owl identity direction, Vietnamese-language requirement, technical decisions, acceptance gates and owner-only actions. Future sessions should read this file *first* before proposing or implementing changes.
-
-- [Phase 0 security/architecture audit](docs/PHASE0_ARCHITECTURE_AUDIT.md)
-- [Phase 0 automated QA report](docs/PHASE0_QA.md)
-
-Phase 0 scripts (Node.js 24 and npm required):
-
-```bash
-npm ci
 npm run lint
 npm run typecheck
 npm run test:unit
@@ -63,4 +31,35 @@ npm run test:smoke
 npm audit --omit=dev --audit-level=high
 ```
 
-The automation in `.github/workflows/validate.yml` checks these gates on PRs. Phase 0 does not launch the site, change DNS or commission paid services. The current site remains a marketing demonstration until Phases 1–4 are accepted, and unfinished services should not be presented as commercially available.
+Ứng dụng mặc định tại `http://localhost:3000`.
+
+## Cấu hình email
+
+Sao chép `.env.example` thành `.env.local` (tệp này được Git bỏ qua). Cần cấu hình `RESEND_API_KEY`, `CONTACT_EMAIL`, `CONTACT_FROM_EMAIL` và tên miền người gửi đã xác minh để gửi yêu cầu tư vấn. Khi chưa cấu hình, form **không giả vờ gửi thành công**; khách có thể dùng liên kết `mailto:coffee2307@gmail.com`. Trước production, API cần kiểm soát spam phân tán và kiểm thử gửi email thật.
+
+## Danh mục URL
+
+- `/`: trang chủ và đồ họa Hero.
+- `/services`: bốn nhóm dịch vụ.
+- `/services/[slug]`: thông tin chi tiết.
+- `/products`: Product Lab, sản phẩm nghiên cứu.
+- `/studio`: giới thiệu và tư duy thiết kế.
+- `/contact`: liên hệ, Zalo, WhatsApp và form có điều kiện.
+- `/api/inquiry`: tiếp nhận tư vấn ở server (cần cấu hình).
+- `/manifest.webmanifest`, `/sitemap.xml`, `/robots.txt`.
+
+## Nhận diện
+
+Logo cú tại `public/branding/logo-symbol-black.svg` là vector chính thức. Để tạo lại icon SVG, favicon ICO và PNG cho thiết bị:
+
+```bash
+node scripts/generate-brand-icons.mjs
+```
+
+Trang công khai sử dụng tiếng Việt với thuật ngữ kỹ thuật cần thiết. Giao diện nền trắng–đen, Hero đồ họa hội tụ lấy cảm hứng từ cú Athena; không sử dụng tài sản thương hiệu PHAM. Hỗ trợ bàn phím, thiết bị cảm ứng và `prefers-reduced-motion`.
+
+## Giới hạn và nguyên tắc công bố
+
+Các dự án PHAM, Qrio và ECONITH chỉ được thêm vào Portfolio sau khi xác minh vai trò, quyền công bố và thông tin có bằng chứng. SitePulse hiện là ý tưởng chưa ra mắt. Không có đăng nhập giả, báo giá đã chốt, kết quả khách hàng bịa đặt hay thanh toán trước sản phẩm chưa hoạt động.
+
+Không tự động merge, triển khai production, sửa DNS hoặc đăng ký dịch vụ có phí nếu chưa có phê duyệt riêng của chủ dự án.

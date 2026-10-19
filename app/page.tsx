@@ -1,76 +1,90 @@
 import Link from "next/link";
+import Image from "next/image";
+import { HeroField } from "@/components/experience/HeroField";
 import { offerings } from "@/lib/offerings";
 import { createMetadata } from "@/lib/metadata";
 
-export const metadata = createMetadata(undefined, "Athena Studio — đối tác thiết kế website, vận hành website, tích hợp AI và xây dựng công cụ Micro-SaaS cho doanh nghiệp.");
+export const metadata = createMetadata(undefined, "Athena Studio — thiết kế website, chăm sóc website, tích hợp AI và phát triển công cụ số. Chúng tôi kiến tạo những giải pháp có chiều sâu cho doanh nghiệp.");
 
-const stages = [
-  { no: "01", title: "Understand", body: "Hiểu doanh nghiệp, khách hàng và vấn đề cần giải quyết." },
-  { no: "02", title: "Shape", body: "Định hình giải pháp, phạm vi và trải nghiệm." },
-  { no: "03", title: "Build", body: "Thiết kế, phát triển và kiểm thử qua từng mốc." },
-  { no: "04", title: "Evolve", body: "Bàn giao, đo lường và tiếp tục cải tiến." },
+const steps = [
+  { n: "01", title: "Lắng nghe", detail: "Hiểu điều bạn cần giải quyết, không chỉ điều bạn muốn xây dựng." },
+  { n: "02", title: "Định hình", detail: "Cùng xác định định hướng, giải pháp và phạm vi phù hợp." },
+  { n: "03", title: "Kiến tạo", detail: "Thiết kế và phát triển có kiểm thử, phản hồi theo từng mốc." },
+  { n: "04", title: "Đồng hành", detail: "Bàn giao, hỗ trợ vận hành và liên tục cải thiện." },
 ];
 
 export default function HomePage() {
-  return (
-    <>
-      <section className="home-hero" aria-labelledby="hero-title">
-        <div className="hero-noise" aria-hidden="true" />
-        <div className="container hero-topline"><span className="micro-label"><span className="signal-dot" /> INDEPENDENT DIGITAL SOLUTIONS STUDIO</span><span className="micro-label hero-year">BASED IN VIETNAM / WORKING EVERYWHERE</span></div>
-        <div className="container hero-frame">
-          <div className="hero-copy">
-            <p className="hero-overline">DESIGN. ENGINEERING. INTELLIGENCE.</p>
-            <h1 id="hero-title">Beyond<br /><span>the ordinary</span><span className="hero-period">.</span></h1>
-            <div className="hero-lower"><p>Chúng tôi biến ý tưởng thành trải nghiệm số khác biệt — thiết kế có chủ đích, công nghệ có chiều sâu và hệ thống được xây để phát triển lâu dài.</p><Link className="pill-link pill-light" href="/contact">Khởi động dự án <span aria-hidden="true">↗</span></Link></div>
-          </div>
-          <div className="hero-art" aria-label="Tác phẩm đồ họa trừu tượng lấy cảm hứng từ một cấu trúc số chuyển động">
-            <div className="art-grid" aria-hidden="true" />
-            <div className="art-orbit art-orbit-one" aria-hidden="true" />
-            <div className="art-orbit art-orbit-two" aria-hidden="true" />
-            <div className="art-planet" aria-hidden="true"><div className="planet-highlight" /></div>
-            <div className="art-cross art-cross-one" aria-hidden="true">+</div>
-            <div className="art-cross art-cross-two" aria-hidden="true">+</div>
-            <div className="art-annotation art-ann-top">ATH / DIGITAL OBJECT 001<br />FORM FOLLOWS PURPOSE</div>
-            <div className="art-annotation art-ann-bottom">SYNTHESIS<br />IN PROGRESS ↗</div>
-            <div className="art-coordinates" aria-hidden="true">06° 12&apos; 24. 86″</div>
+  return <>
+    <section className="home-hero" aria-labelledby="hero-title">
+      <div className="container hero-topline"><span className="eyebrow"><span className="eyebrow-dot"/> STUDIO THIẾT KẾ & CÔNG NGHỆ ĐỘC LẬP</span><span className="eyebrow hero-year">TỪ VIỆT NAM · ĐẾN MỌI NƠI</span></div>
+      <div className="container hero-frame">
+        <div className="hero-copy">
+          <p className="hero-overline">THẤU HIỂU. THIẾT KẾ. KIẾN TẠO.</p>
+          <h1 id="hero-title">Nhìn xa.<br/><span>Kiến tạo</span><br/><em>khác biệt.</em></h1>
+          <div className="hero-lower">
+            <p>Chúng tôi kết hợp tư duy thiết kế và công nghệ để biến những bài toán của doanh nghiệp thành trải nghiệm số có ý nghĩa.</p>
+            <Link className="pill-link pill-dark" href="/contact">Bắt đầu dự án <span aria-hidden="true">↗</span></Link>
           </div>
         </div>
-        <div className="container hero-bottom"><span>01 — INTRODUCTION</span><span>SCROLL TO EXPLORE <b aria-hidden="true">↓</b></span></div>
-      </section>
+        <HeroField/>
+      </div>
+      <div className="container hero-bottom"><span>ATHENA / 001</span><span>CUỘN ĐỂ KHÁM PHÁ <span aria-hidden="true">↓</span></span></div>
+    </section>
 
-      <div className="manifesto-band"><div className="container"><span>Independent by nature.</span><span>Intentional by design.</span><span>Built to make an impact.</span></div></div>
+    <div className="manifesto-band"><div className="container">
+      <span>THIẾT KẾ CÓ CHỦ ĐÍCH</span><span className="manifesto-symbol" aria-hidden="true">✳</span><span>CÔNG NGHỆ CÓ CHIỀU SÂU</span><span className="manifesto-symbol" aria-hidden="true">✳</span><span>GIÁ TRỊ CÓ THỂ KIỂM CHỨNG</span>
+    </div></div>
 
-      <section className="section-space section-intro" id="about">
-        <div className="container intro-grid">
-          <div><p className="section-index"><span className="index-circle">01</span> WHAT WE BELIEVE</p></div>
-          <div><h2>Great digital experiences are <span>never accidental.</span></h2><div className="intro-bottom"><p>Không chỉ xây một website hay tích hợp một công cụ. Athena kết nối thiết kế, kỹ thuật và tư duy sản phẩm để tạo nên những giải pháp có ích, dễ vận hành và sẵn sàng mở rộng.</p><Link href="/studio" className="underlined-link">Khám phá Athena <span aria-hidden="true">↗</span></Link></div></div>
+    <section className="section-space section-intro">
+      <div className="container intro-grid">
+        <p className="section-index reveal"><span className="index-circle">01</span> TƯ DUY ATHENA</p>
+        <div className="intro-content reveal">
+          <h2>Công nghệ tốt không chỉ <em>hoạt động.</em><br/>Nó phải <span>có ý nghĩa.</span></h2>
+          <div className="intro-bottom"><p>Không bắt đầu bằng một giao diện có sẵn hay một công nghệ đang thịnh hành. Athena bắt đầu bằng câu hỏi: điều gì thực sự cần được cải thiện cho con người và doanh nghiệp?</p><Link className="underlined-link" href="/studio">Tìm hiểu Athena <span aria-hidden="true">↗</span></Link></div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section className="services-block section-space" id="expertise">
-        <div className="container"><div className="section-heading"><div><p className="section-index light"><span className="index-circle">02</span> OUR EXPERTISE</p><h2>What we <em>do.</em></h2></div><p>Bốn năng lực cốt lõi. Một cách tiếp cận nhất quán: tạo ra giá trị thực cho doanh nghiệp.</p></div>
-        <div className="service-directory">{offerings.map((item) =>
-          <Link key={item.slug} href={"/services/" + item.slug} className="directory-row"><span className="directory-number">{item.index} / 04</span><div className="directory-title"><strong>{item.title}</strong><span>{item.description}</span></div><span className="directory-arrow" aria-hidden="true">↗</span></Link>)}</div>
-        <div className="service-footer"><span>EXPERTISE, NOT EXCESS.</span><Link href="/services" className="underlined-link">Xem tất cả dịch vụ ↗</Link></div></div>
-      </section>
+    <section className="section-space services-block">
+      <div className="container">
+        <div className="section-heading reveal"><div><p className="section-index"><span className="index-circle">02</span> LĨNH VỰC CHUYÊN MÔN</p><h2>Bốn hướng đi.<br/><em>Một tầm nhìn.</em></h2></div><p>Từ xây dựng sản phẩm đến vận hành và tích hợp AI — mọi giải pháp đều cần rõ mục tiêu và có khả năng phát triển lâu dài.</p></div>
+        <div className="service-directory">{offerings.map(s=><Link key={s.slug} className="directory-row reveal" href={"/services/"+s.slug}>
+          <span className="directory-number">{s.index} / 04</span>
+          <div className="directory-title"><strong>{s.shortTitle}</strong><span>{s.description}</span></div>
+          <span className="directory-arrow" aria-hidden="true">↗</span>
+        </Link>)}</div>
+        <div className="service-footer"><span>HỆ GIẢI PHÁP ATHENA</span><Link href="/services" className="underlined-link">Khám phá dịch vụ ↗</Link></div>
+      </div>
+    </section>
 
-      <section className="product-feature section-space">
-        <div className="container product-split">
-          <div className="product-copy"><p className="section-index"><span className="index-circle">03</span> ATHENA PRODUCT LAB</p><span className="product-state"><span className="signal-dot" /> EXPLORATION STAGE</span><h2>Small tools.<br /><em>Real impact.</em></h2><p>Chúng tôi cũng tự xây dựng những sản phẩm Micro-SaaS tập trung vào các vấn đề cụ thể. Bắt đầu từ nhu cầu thật, kiểm chứng trước khi mở rộng.</p><Link href="/products" className="pill-link pill-dark">Khám phá Product Lab <span aria-hidden="true">↗</span></Link></div>
-          <div className="product-visual" aria-label="Minh họa giao diện sản phẩm thử nghiệm SitePulse">
-            <div className="pv-top"><span><i /> ATHENA LAB / 001</span><span>PREVIEW · CONCEPT</span></div>
-            <div className="pv-center"><div className="pv-ring"><div className="pv-ring-inner"><span>01</span><small>SITEPULSE</small></div></div><div className="pv-diagram"><span>MONITOR</span><span>DETECT</span><span>REPORT</span></div></div>
-            <div className="pv-bottom"><span>WEBSITE RELIABILITY, REIMAGINED.</span><span>↗</span></div>
-          </div>
+    <section className="section-space product-feature"><div className="container product-split">
+      <div className="product-copy reveal">
+        <p className="section-index"><span className="index-circle">03</span> XƯỞNG SẢN PHẨM</p>
+        <span className="product-state"><span className="eyebrow-dot"/> ĐANG NGHIÊN CỨU</span>
+        <h2>Những công cụ nhỏ.<br/><em>Giá trị lớn.</em></h2>
+        <p>Athena cũng nghiên cứu những sản phẩm Micro-SaaS giúp công việc mỗi ngày trở nên đơn giản hơn. Chúng tôi chỉ công bố sản phẩm khi đã được kiểm chứng.</p>
+        <Link className="pill-link pill-dark" href="/products">Khám phá sản phẩm <span aria-hidden="true">↗</span></Link>
+      </div>
+      <div className="product-visual reveal" aria-label="Minh họa định hướng sản phẩm SitePulse đang nghiên cứu">
+        <div className="pv-top"><span>ATHENA / XƯỞNG SẢN PHẨM</span><span>Ý TƯỞNG · 001</span></div>
+        <div className="pv-center">
+          <div className="pv-trace"><svg viewBox="0 0 460 320" role="presentation" aria-hidden="true"><path d="M0 160H75L104 125L131 204L166 156H223L251 107L288 210L320 161H460" fill="none" stroke="currentColor" strokeWidth="2"/></svg></div>
+          <div className="pv-card"><div className="pv-card-mini">CHƯA RA MẮT</div><Image src="/branding/logo-symbol-black.svg" alt="" width={54} height={54}/><strong>SitePulse</strong><span>Giám sát website · Ý tưởng</span></div>
         </div>
-      </section>
+        <div className="pv-bottom"><span>NGHIÊN CỨU → THỬ NGHIỆM → PHÁT TRIỂN</span><span aria-hidden="true">↗</span></div>
+      </div>
+    </div></section>
 
-      <section className="method-block section-space"><div className="container">
-        <div className="section-heading method-heading"><div><p className="section-index"><span className="index-circle">04</span> HOW WE WORK</p><h2>Clarity at <em>every step.</em></h2></div><p>Một quy trình gọn gàng, minh bạch và có thể kiểm chứng — từ ý tưởng đầu tiên đến vận hành thực tế.</p></div>
-        <div className="method-grid">{stages.map((stage) => <div className="method-item" key={stage.no}><span>{stage.no} — 04</span><div className="method-line" /><h3>{stage.title}</h3><p>{stage.body}</p></div>)}</div>
-      </div></section>
+    <section className="section-space method-block"><div className="container">
+      <div className="section-heading reveal"><div><p className="section-index"><span className="index-circle">04</span> PHƯƠNG PHÁP LÀM VIỆC</p><h2>Rõ ràng từ<br/><em>đầu đến cuối.</em></h2></div><p>Chúng tôi tin sự minh bạch, khả năng đo lường và cộng tác tốt quan trọng không kém một giao diện đẹp.</p></div>
+      <div className="method-grid">{steps.map(step=><div className="method-item reveal" key={step.n}><span>{step.n} / 04</span><div className="method-line"/><h3>{step.title}</h3><p>{step.detail}</p></div>)}</div>
+    </div></section>
 
-      <section className="closing-block"><div className="container closing-inner"><p className="micro-label"><span className="signal-dot" /> THE NEXT CHAPTER STARTS HERE</p><h2>Have an idea?<br /><em>Let&apos;s make it matter.</em></h2><Link href="/contact" className="pill-link pill-light">Trao đổi về dự án <span aria-hidden="true">↗</span></Link><span className="closing-watermark" aria-hidden="true">A</span></div></section>
-    </>
-  );
+    <section className="closing-block"><div className="container closing-inner">
+      <p className="eyebrow"><span className="eyebrow-dot"/> CÙNG BẮT ĐẦU MỘT ĐIỀU MỚI</p>
+      <h2>Ý tưởng của bạn.<br/><em>Chúng ta cùng làm.</em></h2>
+      <Link href="/contact" className="pill-link pill-light">Trao đổi về dự án <span aria-hidden="true">↗</span></Link>
+      <span className="closing-watermark" aria-hidden="true">ATHENA</span>
+    </div></section>
+  </>;
 }

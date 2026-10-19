@@ -1,45 +1,44 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { navigation } from "@/data/navigation";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
-  const headerRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
-  useEffect(() => setOpen(false), [pathname]);
+  const headerRef = useRef<HTMLElement>(null);
+  useEffect(() => { setOpen(false); }, [pathname]);
   useEffect(() => {
     if (!open) return;
-    const onOutside = (event: PointerEvent) => {
+    const outside = (event: PointerEvent) => {
       if (headerRef.current && !headerRef.current.contains(event.target as Node)) setOpen(false);
     };
-    document.addEventListener("pointerdown", onOutside);
-    return () => document.removeEventListener("pointerdown", onOutside);
+    const keydown = (event: KeyboardEvent) => { if (event.key === "Escape") setOpen(false); };
+    document.addEventListener("pointerdown", outside);
+    document.addEventListener("keydown", keydown);
+    return () => {
+      document.removeEventListener("pointerdown", outside);
+      document.removeEventListener("keydown", keydown);
+    };
   }, [open]);
-  useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => { if (event.key === "Escape") setOpen(false); };
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
-  }, []);
 
-  return (
-    <header className="athena-header" ref={headerRef}>
-      <div className="container nav-shell">
-        <Link href="/" aria-label="Athena Studio — Trang chủ" className="brand-lockup">
-          <span className="brand-symbol" aria-hidden="true">A<span className="brand-symbol-dot">.</span></span>
-          <span className="brand-wordmark">ATHENA<span>STUDIO</span></span>
-        </Link>
-        <nav className={open ? "nav-links nav-links-open" : "nav-links"} id="primary-nav" aria-label="Điều hướng chính">
-          {navigation.map((item) => <Link key={item.href} href={item.href} className={pathname === item.href ? "nav-current" : ""}>{item.label}</Link>)}
-          <Link className="nav-mobile-contact" href="/contact">Bắt đầu dự án <span aria-hidden="true">↗</span></Link>
-        </nav>
-        <Link href="/contact" className="nav-contact">Bắt đầu dự án <span aria-hidden="true">↗</span></Link>
-        <button className="mobile-toggle" type="button" aria-label={open ? "Đóng menu" : "Mở menu"} aria-controls="primary-nav" aria-expanded={open} onClick={() => setOpen(!open)}>
-          <span className="toggle-line" /><span className="toggle-line" />
-        </button>
-      </div>
-    </header>
-  );
+  return <header className="athena-header" ref={headerRef}>
+    <div className="container nav-shell">
+      <Link href="/" aria-label="Athena Studio — Trang chủ" className="brand-lockup">
+        <span className="brand-symbol"><Image src="/branding/logo-symbol-black.svg" alt="" width={52} height={52} priority /></span>
+        <span className="brand-wordmark">ATHENA<span>STUDIO</span></span>
+      </Link>
+      <nav className={open ? "nav-links nav-links-open" : "nav-links"} id="primary-nav" aria-label="Điều hướng chính">
+        {navigation.map(item => <Link href={item.href} key={item.href} className={pathname === item.href ? "nav-current" : ""}>{item.label}</Link>)}
+        <Link className="nav-mobile-contact" href="/contact">Liên hệ hợp tác <span aria-hidden="true">↗</span></Link>
+      </nav>
+      <Link href="/contact" className="nav-contact"><span>Bắt đầu dự án</span><span aria-hidden="true">↗</span></Link>
+      <button type="button" className={open ? "mobile-toggle toggle-open" : "mobile-toggle"} aria-label={open ? "Đóng menu" : "Mở menu"} aria-expanded={open} aria-controls="primary-nav" onClick={() => setOpen(!open)}>
+        <span/><span/>
+      </button>
+    </div>
+  </header>;
 }
