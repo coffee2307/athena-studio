@@ -1,11 +1,20 @@
 import type { Metadata, Viewport } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { ExperienceEffects } from "@/components/experience/ExperienceEffects";
+import { PageTransition } from "@/components/experience/PageTransition";
 import { createMetadata } from "@/lib/metadata";
 import "@/app/globals.css";
 
-export const metadata: Metadata = { ...createMetadata(), icons: { icon: "/branding/favicon.svg", shortcut: "/branding/favicon.svg" } };
-export const viewport: Viewport = { themeColor: "#0b0e0d", width: "device-width", initialScale: 1 };
+export const metadata: Metadata = {
+  ...createMetadata(),
+  icons: {
+    icon: [{url:"/branding/logo-symbol-black.svg",type:"image/svg+xml"},{url:"/branding/favicon.ico",sizes:"any"}],
+    shortcut: "/branding/logo-symbol-black.svg",
+    apple: "/apple-touch-icon.png",
+  },
+};
+export const viewport: Viewport = { themeColor: "#ffffff", width: "device-width", initialScale: 1 };
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="vi"><body><a className="skip-link" href="#main-content">Bỏ qua điều hướng</a><Navbar /><main id="main-content">{children}</main><Footer /></body></html>;
+  return <html lang="vi"><body><a className="skip-link" href="#main-content">Chuyển tới nội dung chính</a><Navbar/><main id="main-content"><PageTransition>{children}</PageTransition></main><Footer/><ExperienceEffects/></body></html>;
 }

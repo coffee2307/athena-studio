@@ -1,22 +1,29 @@
 import Link from "next/link";
+import Image from "next/image";
 import { navigation } from "@/data/navigation";
 import { offerings } from "@/lib/offerings";
-import { siteConfig } from "@/lib/constants";
 
 export function Footer() {
-  return (
-    <footer className="athena-footer">
-      <div className="container">
-        <div className="footer-top">
-          <div className="footer-heading">
-            <p className="micro-label"><span className="signal-dot" /> HAVE SOMETHING IN MIND?</p>
-            <h2>Hãy tạo nên<br /><em>điều tiếp theo.</em></h2>
-            <Link href="/contact" className="footer-big-link">Bắt đầu cùng Athena <span aria-hidden="true">↗</span></Link>
-          </div>
-          <div className="footer-side"><div className="foot-col"><p className="foot-label">KHÁM PHÁ</p>{navigation.map((link) => <Link href={link.href} key={link.href}>{link.label}</Link>)}<Link href="/contact">Liên hệ</Link></div><div className="foot-col"><p className="foot-label">CHUYÊN MÔN</p>{offerings.map((item) => <Link href={"/services/" + item.slug} key={item.slug}>{item.shortTitle}</Link>)}</div></div>
+  return <footer className="athena-footer">
+    <div className="container">
+      <div className="footer-upper">
+        <p className="eyebrow"><span className="eyebrow-dot"/> BẠN CÓ Ý TƯỞNG MỚI?</p>
+        <div className="footer-statement">
+          <h2>Hãy cùng tạo<br/><span>điều khác biệt.</span></h2>
+          <Link className="footer-round-link" href="/contact" aria-label="Bắt đầu dự án cùng Athena"><span aria-hidden="true">↗</span></Link>
         </div>
-        <div className="footer-bottom"><span className="footer-brand">ATHENA<span>®</span></span><span>Independent digital solutions studio.</span><span>© {new Date().getFullYear()} Athena Studio</span><span>{siteConfig.email ? <a href={"mailto:" + siteConfig.email}>{siteConfig.email}</a> : "Vietnam · Working remotely"}</span></div>
       </div>
-    </footer>
-  );
+      <div className="footer-middle">
+        <div className="footer-identity">
+          <Image src="/branding/logo-symbol-black.svg" alt="" width={62} height={62}/>
+          <div><strong>ATHENA STUDIO</strong><p>Studio thiết kế và công nghệ độc lập.<br/>Tập trung vào những giải pháp có giá trị thực.</p></div>
+        </div>
+        <div className="footer-links">
+          <div><p>KHÁM PHÁ</p>{navigation.map(n => <Link key={n.href} href={n.href}>{n.label}</Link>)}<Link href="/contact">Liên hệ</Link></div>
+          <div><p>GIẢI PHÁP</p>{offerings.map(s => <Link key={s.slug} href={"/services/" + s.slug}>{s.shortTitle}</Link>)}</div>
+        </div>
+      </div>
+      <div className="footer-bottom"><span>© {new Date().getFullYear()} ATHENA STUDIO</span><span>Thiết kế tại Việt Nam · Hợp tác không giới hạn địa lý</span><a href="mailto:coffee2307@gmail.com">coffee2307@gmail.com ↗</a></div>
+    </div>
+  </footer>;
 }
