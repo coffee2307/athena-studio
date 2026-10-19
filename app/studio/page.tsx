@@ -1,9 +1,11 @@
-import { StudioIntro } from "@/components/sections/StudioIntro";
-import { ContactCTA } from "@/components/sections/ContactCTA";
+import Link from "next/link";
 import { createMetadata } from "@/lib/metadata";
 
-export const metadata = createMetadata("Studio");
+export const metadata = createMetadata("Về Athena", "Tìm hiểu cách Athena Studio kết hợp thiết kế, kỹ thuật và trí tuệ nhân tạo để xây dựng những giải pháp số hữu ích.");
 
 export default function StudioPage() {
-  return <><StudioIntro /><ContactCTA /></>;
+ return <div className="page-shell"><section className="page-hero"><div className="container"><p className="page-kicker"><span className="signal-dot" /> INDEPENDENT BY NATURE / INTENTIONAL BY DESIGN</p><h1>Independent<br /><em>thinking.</em></h1><div className="page-hero-lede"><p>Athena là một studio công nghệ độc lập, được xây dựng với niềm tin rằng giải pháp số tốt nhất bắt đầu từ việc đặt câu hỏi đúng.</p><Link href="/contact" className="pill-link pill-light">Kết nối với chúng tôi ↗</Link></div></div></section>
+ <section className="page-section"><div className="container"><div className="studio-statement"><p className="section-index"><span className="index-circle">01</span> OUR POINT OF VIEW</p><h2>Less noise.<br /><em>More meaning.</em></h2><p className="lead-text">Chúng tôi không định nghĩa năng lực bằng số lượng công nghệ được sử dụng. Điều quan trọng là giải pháp có đúng vấn đề, người dùng có hiểu sản phẩm và doanh nghiệp có thể tự tin vận hành sau khi bàn giao hay không.</p></div><div className="studio-values"><article><span>01 /</span><h3>Purpose first.</h3><p>Bắt đầu từ mục tiêu kinh doanh và nhu cầu người dùng. Thiết kế chỉ có ý nghĩa khi phục vụ một mục đích rõ ràng.</p></article><article><span>02 /</span><h3>Built to last.</h3><p>Ưu tiên cấu trúc dễ bảo trì, hiệu năng, khả năng mở rộng và tài liệu vận hành, thay vì một bản trình diễn ngắn hạn.</p></article><article><span>03 /</span><h3>Human centered.</h3><p>Công nghệ và AI cần hỗ trợ con người, minh bạch về giới hạn và giữ quyền kiểm soát ở những quyết định quan trọng.</p></article></div></div></section>
+ <section className="closing-block"><div className="container closing-inner"><p className="micro-label"><span className="signal-dot" /> LET&apos;S CREATE SOMETHING USEFUL</p><h2>Thoughtful design.<br /><em>Meaningful work.</em></h2><Link href="/contact" className="pill-link pill-light">Bắt đầu câu chuyện ↗</Link><span className="closing-watermark" aria-hidden="true">A</span></div></section>
+ </div>;
 }

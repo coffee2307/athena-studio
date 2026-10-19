@@ -1,8 +1,22 @@
 import Link from "next/link";
-import Image from "next/image";
 import { navigation } from "@/data/navigation";
+import { offerings } from "@/lib/offerings";
 import { siteConfig } from "@/lib/constants";
 
 export function Footer() {
-  return <footer className="site-footer"><div className="page-container footer-grid"><div><Image className="footer-logo" src="/branding/logo-wordmark-white.svg" alt="Athena" width={112} height={112} /><p className="small footer-muted">Digital Product Studio</p></div><div><p className="eyebrow">Navigation</p><nav className="footer-nav" aria-label="Footer navigation">{navigation.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}</nav></div><div><p className="eyebrow">Start a conversation</p><a className="footer-email" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></div></div><div className="page-container footer-bottom"><span className="small">© {new Date().getFullYear()} Athena Studio</span><span className="small">Made with intent</span></div></footer>;
+  return (
+    <footer className="athena-footer">
+      <div className="container">
+        <div className="footer-top">
+          <div className="footer-heading">
+            <p className="micro-label"><span className="signal-dot" /> HAVE SOMETHING IN MIND?</p>
+            <h2>Hãy tạo nên<br /><em>điều tiếp theo.</em></h2>
+            <Link href="/contact" className="footer-big-link">Bắt đầu cùng Athena <span aria-hidden="true">↗</span></Link>
+          </div>
+          <div className="footer-side"><div className="foot-col"><p className="foot-label">KHÁM PHÁ</p>{navigation.map((link) => <Link href={link.href} key={link.href}>{link.label}</Link>)}<Link href="/contact">Liên hệ</Link></div><div className="foot-col"><p className="foot-label">CHUYÊN MÔN</p>{offerings.map((item) => <Link href={"/services/" + item.slug} key={item.slug}>{item.shortTitle}</Link>)}</div></div>
+        </div>
+        <div className="footer-bottom"><span className="footer-brand">ATHENA<span>®</span></span><span>Independent digital solutions studio.</span><span>© {new Date().getFullYear()} Athena Studio</span><span>{siteConfig.email ? <a href={"mailto:" + siteConfig.email}>{siteConfig.email}</a> : "Vietnam · Working remotely"}</span></div>
+      </div>
+    </footer>
+  );
 }
