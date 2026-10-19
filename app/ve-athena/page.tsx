@@ -1,0 +1,10 @@
+import Link from "next/link";
+import { createMetadata } from "@/lib/metadata";
+export const metadata=createMetadata("Về Athena","Athena Studio — tư duy thiết kế, công nghệ và phương pháp giải quyết vấn đề cho doanh nghiệp.", "/ve-athena");
+export default function StudioPage(){
+ return <div className="page-shell">
+ <section className="page-hero"><div className="container"><p className="page-kicker"><span className="eyebrow-dot"/> TƯ DUY ĐỘC LẬP / THIẾT KẾ CÓ CHỦ ĐÍCH</p><h1>Độc lập<br/><em>trong tư duy.</em></h1><div className="page-hero-lede"><p>Athena là studio thiết kế và công nghệ độc lập, được xây dựng trên niềm tin rằng một giải pháp tốt luôn bắt đầu từ câu hỏi đúng.</p><Link className="pill-link pill-dark" href="/lien-he">Kết nối với Athena ↗</Link></div></div></section>
+ <section className="page-section"><div className="container"><div className="studio-statement"><p className="section-index"><span className="index-circle">01</span> TRIẾT LÝ CỦA CHÚNG TÔI</p><h2>Ít ồn ào.<br/><em>Nhiều ý nghĩa.</em></h2><p className="lead-text">Chúng tôi không đo chất lượng bằng số lượng công nghệ hay hiệu ứng. Điều quan trọng là sản phẩm giải quyết đúng vấn đề, dễ sử dụng, có thể kiểm chứng và tiếp tục vận hành sau khi bàn giao.</p></div><div className="studio-values"><article><span>01 /</span><h3>Hiểu trước.</h3><p>Bắt đầu bằng mục tiêu kinh doanh, bối cảnh và nhu cầu người dùng thay vì chọn giao diện có sẵn.</p></article><article><span>02 /</span><h3>Xây bền vững.</h3><p>Ưu tiên hiệu năng, kiến trúc dễ bảo trì, bảo mật và sự minh bạch trong quy trình làm việc.</p></article><article><span>03 /</span><h3>Lấy con người làm trung tâm.</h3><p>Thiết kế và AI phải hỗ trợ con người, với những giới hạn được nhận diện và kiểm soát phù hợp.</p></article></div></div></section>
+ <section className="closing-block"><div className="container closing-inner"><p className="eyebrow">CÙNG XÂY ĐIỀU HỮU ÍCH</p><h2>Ý tưởng mới.<br/><em>Một bước khởi đầu.</em></h2><Link className="pill-link pill-light" href="/lien-he">Trao đổi cùng Athena ↗</Link><span className="closing-watermark" aria-hidden="true">ATHENA</span></div></section>
+ </div>;
+}

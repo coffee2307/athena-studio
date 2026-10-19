@@ -1,0 +1,11 @@
+import {LegalArticle} from "@/components/legal/LegalArticle";
+import {createMetadata} from "@/lib/metadata";
+export const metadata=createMetadata("Quyền riêng tư","Thông tin sơ bộ về cách Athena Studio xử lý thông tin khi bạn liên hệ qua website.","/phap-ly/quyen-rieng-tu");
+export default function Privacy(){return <LegalArticle label="Cách chúng tôi tiếp nhận và sử dụng thông tin bạn chủ động chia sẻ." title="Quyền riêng tư" updated="19/10/2026">
+ <h2>1. Phạm vi hiện tại</h2><p>Athena là website giới thiệu lĩnh vực hoạt động và dự án nghiên cứu. Hiện chưa có hệ thống tài khoản khách hàng, cổng thanh toán hoặc cơ sở dữ liệu khách hàng được triển khai công khai.</p>
+ <h2>2. Thông tin bạn gửi</h2><p>Nếu bạn chủ động liên hệ bằng email, điện thoại, Zalo hoặc WhatsApp, nội dung liên hệ có thể bao gồm tên, địa chỉ email, thông tin doanh nghiệp và nhu cầu tư vấn. Biểu mẫu trên website chỉ kích hoạt khi kênh chuyển email được cấu hình; nếu chưa sẵn sàng, chúng tôi hiển thị hướng dẫn liên hệ trực tiếp thay vì nhận dữ liệu mà không thể xử lý.</p>
+ <h2>3. Mục đích tiếp nhận</h2><p>Thông tin được dùng để phản hồi yêu cầu, trao đổi phạm vi công việc và xử lý thông tin liên quan đến cuộc trao đổi do bạn khởi tạo. Athena không công bố thông tin liên hệ của bạn như hồ sơ khách hàng hoặc lời chứng thực khi chưa có sự cho phép.</p>
+ <h2>4. Nhà cung cấp và liên kết ngoài</h2><p>Khi được cấu hình, biểu mẫu dự kiến chuyển thông tin qua dịch vụ gửi email Resend đến hộp thư quản lý. Liên kết GitHub, Zalo, WhatsApp và các dịch vụ ngoài được vận hành theo điều khoản của nhà cung cấp tương ứng. Chưa có cam kết rằng mọi nhà cung cấp, nơi lưu trữ hoặc thời hạn lưu giữ cuối cùng đã được xác nhận.</p>
+ <h2>5. Bảo mật và lưu giữ</h2><p>Hệ thống đã có kiểm tra dữ liệu đầu vào và cơ chế từ chối gửi khi kênh email không sẵn sàng. Các quy trình lưu giữ, xóa, sao lưu và kiểm soát truy cập phải được chốt trước khi tiếp nhận khách hàng ở môi trường production; không nên gửi mật khẩu, khóa API hay thông tin nhạy cảm qua biểu mẫu.</p>
+ <h2>6. Yêu cầu liên quan thông tin</h2><p>Bạn có thể liên hệ qua email công khai để đề nghị kiểm tra hoặc xử lý thông tin đã gửi. Mỗi yêu cầu sẽ cần được xác minh phù hợp trước khi phản hồi; quyền và thời hạn xử lý chính thức sẽ được làm rõ trong bản chính sách được rà soát pháp lý.</p>
+ </LegalArticle>}

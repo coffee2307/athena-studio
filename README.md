@@ -1,24 +1,15 @@
-# Athena Studio — Thiết kế & Công nghệ
+# ATHENA STUDIO
 
-Website Next.js / React / TypeScript của Athena Studio, gồm bốn nhóm dịch vụ: **thiết kế website**, **chăm sóc website**, **tích hợp trí tuệ nhân tạo** và **nghiên cứu công cụ Micro-SaaS**.
+Website studio thiết kế và công nghệ độc lập, sử dụng **Next.js 15**, **React 19** và **TypeScript**. Các lĩnh vực gồm phát triển website, chăm sóc website, tích hợp AI và nghiên cứu công cụ Micro-SaaS. Website đang phát triển theo roadmap đã phê duyệt, **chưa đưa lên production**.
 
-## Trạng thái dự án
+## Tài liệu chính thức
+- [Roadmap Phase 0–7 đã phê duyệt](docs/ATHENA_MASTER_ROADMAP.md) — nguồn tham chiếu ưu tiên khi bắt đầu phiên làm việc mới.
+- [Audit kiến trúc/bảo mật Phase 0](docs/PHASE0_ARCHITECTURE_AUDIT.md) và [QA Phase 0](docs/PHASE0_QA.md).
+- [Design & motion Phase 1](docs/PHASE1_DESIGN_SYSTEM.md) và [QA Phase 1](docs/PHASE1_QA.md).
+- [Kiến trúc Portfolio, quyền công bố Phase 2](docs/PHASE2_PORTFOLIO_GUIDE.md) và [QA Phase 2](docs/PHASE2_QA.md).
 
-- **Phase 0**: đã xây nền tảng CI/test, cập nhật bản vá dependency, lưu roadmap và đánh giá kiến trúc.
-- **Phase 1**: giao diện **White Edition**, logo cú chính thức, typography và nội dung tiếng Việt, Hero Athena Intelligence Field, chuyển động và giao diện responsive.
-- **Phase 2–4**: Portfolio xác thực, vận hành tiếp nhận khách hàng, kiểm định production; **chưa hoàn tất**.
-- **Phase 5–7**: xác thực, dashboard khách hàng, Micro-SaaS thương mại; **chưa triển khai**.
-
-### Tài liệu chuẩn và báo cáo
-- [Roadmap chính thức được phê duyệt](docs/ATHENA_MASTER_ROADMAP.md)
-- [Kiến trúc và bảo mật Phase 0](docs/PHASE0_ARCHITECTURE_AUDIT.md)
-- [Kiểm thử Phase 0](docs/PHASE0_QA.md)
-- [Design System và Motion Phase 1](docs/PHASE1_DESIGN_SYSTEM.md)
-- [Kiểm thử Phase 1](docs/PHASE1_QA.md)
-
-## Chạy cục bộ
-
-Yêu cầu Node.js 24 và npm.
+## Khởi chạy và kiểm tra
+Yêu cầu Node.js 24, npm.
 
 ```bash
 npm ci
@@ -31,35 +22,37 @@ npm run test:smoke
 npm audit --omit=dev --audit-level=high
 ```
 
-Ứng dụng mặc định tại `http://localhost:3000`.
+Chạy local tại `http://localhost:3000`. GitHub Actions kiểm tra tương tự trên pull request.
 
-## Cấu hình email
+## Các route được sử dụng
+| Đường dẫn | Mục đích |
+|---|---|
+| `/` | Hero và tổng quan Athena |
+| `/du-an` | Portfolio của founder và các dự án nghiên cứu có bằng chứng |
+| `/du-an/[slug]` | Case study PHAM, ECONITH; Qrio đang chờ nguồn và ẩn |
+| `/dich-vu` | Bốn dịch vụ và nhóm giải pháp |
+| `/dich-vu/[slug]` | Mô tả chi tiết từng dịch vụ |
+| `/san-pham` | Product Lab (SitePulse chỉ là ý tưởng) |
+| `/ve-athena` | Giới thiệu và triết lý |
+| `/lien-he` | Thông tin liên hệ và biểu mẫu có điều kiện |
+| `/phap-ly` | Thông tin pháp lý bản nháp, cần rà soát |
+| `/phap-ly/quyen-rieng-tu` | Thông tin quyền riêng tư dự kiến |
+| `/phap-ly/dieu-khoan` | Điều khoản sử dụng dự kiến |
+| `/phap-ly/cookie` | Chính sách cookie/lưu trữ hiện tại |
+| `/api/inquiry` | API tiếp nhận khách hàng, chưa mở khi email chưa cấu hình |
 
-Sao chép `.env.example` thành `.env.local` (tệp này được Git bỏ qua). Cần cấu hình `RESEND_API_KEY`, `CONTACT_EMAIL`, `CONTACT_FROM_EMAIL` và tên miền người gửi đã xác minh để gửi yêu cầu tư vấn. Khi chưa cấu hình, form **không giả vờ gửi thành công**; khách có thể dùng liên kết `mailto:coffee2307@gmail.com`. Trước production, API cần kiểm soát spam phân tán và kiểm thử gửi email thật.
+Các đường dẫn cũ (`/work`, `/services`, `/products`, `/studio`, `/contact`) chuyển hướng vĩnh viễn sang phiên bản tiếng Việt.
 
-## Danh mục URL
+## Portfolio và nguồn dữ liệu
+Mô hình dữ liệu ở `types/project.ts` và danh mục ở `data/projects.ts`. Mỗi entry yêu cầu phân loại `founder | research | client`, trạng thái, quyền công bố, nguồn minh chứng, vai trò, thách thức, tiếp cận và kết quả *được xác nhận*. Mặc định dự án chưa duyệt phải có `visibility:"review"`. Không tự biến dự án founder thành dự án khách hàng Athena.
 
-- `/`: trang chủ và đồ họa Hero.
-- `/services`: bốn nhóm dịch vụ.
-- `/services/[slug]`: thông tin chi tiết.
-- `/products`: Product Lab, sản phẩm nghiên cứu.
-- `/studio`: giới thiệu và tư duy thiết kế.
-- `/contact`: liên hệ, Zalo, WhatsApp và form có điều kiện.
-- `/api/inquiry`: tiếp nhận tư vấn ở server (cần cấu hình).
-- `/manifest.webmanifest`, `/sitemap.xml`, `/robots.txt`.
+PHAM có repository `coffee2307/pham-store` với theme Shopify; ECONITH có repository `coffee2307/econith` ở trạng thái nghiên cứu; Qrio chưa được đối chiếu và không có case study public. Ảnh đại diện là đồ họa CSS của Athena, không phải ảnh chụp sản phẩm hoặc chứng cứ kết quả.
 
-## Nhận diện
+## SEO và production
+`NEXT_PUBLIC_SITE_URL` chỉ đặt thành **tên miền HTTPS đã xác minh** khi được phê duyệt; cấu hình hiện tại từ chối indexing ở môi trường chưa có origin production. Metadata, canonical (khi có origin HTTPS), OG và sitemap lấy từ URL tiếng Việt. Script `node scripts/generate-og-image.mjs` tạo ảnh Open Graph từ nhận diện cú Athena.
 
-Logo cú tại `public/branding/logo-symbol-black.svg` là vector chính thức. Để tạo lại icon SVG, favicon ICO và PNG cho thiết bị:
+## Liên hệ
+Email công khai: `coffee2307@gmail.com`. Điện thoại: `0965747147`. Nút Zalo và WhatsApp cần xác thực bằng tài khoản thực của chủ dự án. Form cần cấu hình `RESEND_API_KEY`, `CONTACT_EMAIL`, `CONTACT_FROM_EMAIL` trong `.env.local` (không commit). Khi chưa cấu hình, form không nhận dữ liệu để tránh mất yêu cầu. Cần bổ sung kiểm soát spam phân tán trước production.
 
-```bash
-node scripts/generate-brand-icons.mjs
-```
-
-Trang công khai sử dụng tiếng Việt với thuật ngữ kỹ thuật cần thiết. Giao diện nền trắng–đen, Hero đồ họa hội tụ lấy cảm hứng từ cú Athena; không sử dụng tài sản thương hiệu PHAM. Hỗ trợ bàn phím, thiết bị cảm ứng và `prefers-reduced-motion`.
-
-## Giới hạn và nguyên tắc công bố
-
-Các dự án PHAM, Qrio và ECONITH chỉ được thêm vào Portfolio sau khi xác minh vai trò, quyền công bố và thông tin có bằng chứng. SitePulse hiện là ý tưởng chưa ra mắt. Không có đăng nhập giả, báo giá đã chốt, kết quả khách hàng bịa đặt hay thanh toán trước sản phẩm chưa hoạt động.
-
-Không tự động merge, triển khai production, sửa DNS hoặc đăng ký dịch vụ có phí nếu chưa có phê duyệt riêng của chủ dự án.
+## Ranh giới triển khai
+Không merge `main`, thay đổi DNS, thuê hosting, phát sinh chi phí hoặc triển khai production khi chưa có sự phê duyệt riêng. Các bước tiếp theo theo roadmap: Phase 3 tiếp nhận và vận hành dịch vụ; Phase 4 kiểm định và chuẩn bị phát hành; Phase 5–7 tài khoản, dashboard và Micro-SaaS.
