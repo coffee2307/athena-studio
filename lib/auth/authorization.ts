@@ -16,9 +16,15 @@ export async function verifiedRole(userId:string):Promise<AthenaRole|null>{
  if(!supabase)return null;
  const {data:{user},error}=await supabase.auth.getUser();
  if(error||!user||user.id!==userId)return null;
- const {data:memberships,error:dbError}=await supabase.from("athena_memberships").select("role,athena_workspaces!inner(kind)").eq("user_id",user.id).eq("athena_workspaces.kind","studio");
+ const {data:memberships,error:dbError}=await supabase.from("athena_memberships").select("role,athena_workspaces!inner(kind)").eq("user_id",user.id);
  if(dbError||!memberships?.length)return null;
- return memberships.some(m=>m.role==="admin")?"admin":memberships.some(m=>m.role==="client")?"client":null;
+ const studio=memberships.some(m=>{
+  if(m.role!=="admin")return false;
+  const workspace:unknown=m.athena_workspaces;
+  if(Array.isArray(workspace))return workspace.some(w=>w&&typeof w==="object"&&w.kind==="studio");
+  return !!workspace&&typeof workspace==="object"&&"kind" in workspace&&workspace.kind==="studio";
+ });
+ return studio?"admin":memberships.some(m=>m.role==="client")?"client":null;
 }
 export async function requireAdmin():Promise<User>{
  const user=await requireUser();
