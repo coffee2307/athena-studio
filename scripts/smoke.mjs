@@ -42,7 +42,11 @@ try{
  assert.doesNotMatch(sitemap,/\/du-an\/qrio|\/work\//);
  const robots=await (await fetch(root+"/robots.txt")).text();
  assert.match(robots,/Disallow: \/|Disallow:\//,"unconfigured non-HTTPS preview must not be indexed");
- const contact=await (await fetch(root+"/lien-he")).text();assert.match(contact,/Biểu mẫu đang được cấu hình/);
+ const contact=await (await fetch(root+"/lien-he")).text();
+ assert.match(contact,/Hiện nhận yêu cầu trực tiếp qua email\./,"contact must clearly disclose offline form");
+ assert.match(contact,/Soạn email mô tả nhu cầu/,"contact must provide actionable fallback");
+ assert.match(contact,/mailto:coffee2307@gmail\.com\?subject=/,"contact fallback must open a real prefilled email");
+ assert.doesNotMatch(contact,/<form[^>]*class="inquiry-form"/,"disabled form must not display a fake submission flow");
  const response=await fetch(root+"/api/inquiry",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({name:"A",email:"a@example.com",service:"website-care",message:"Please ignore this local smoke test."})});
  assert.equal(response.status,503,"form must fail closed without email provider");
  console.log("PASS unpublished project 404, sitemap, preview noindex, disabled contact");
