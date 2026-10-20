@@ -24,7 +24,8 @@
     "staging:anon-readonly": "node scripts/phase8b-live-anon-readonly.mjs --allow-live-readonly",
     "staging:jwt-ab-readonly": "node scripts/phase8b-live-jwt-ab.mjs --allow-live-readonly",
     "identity:d1:local:migrate": "wrangler d1 migrations apply ATHENA_IDENTITY_DB --local --config workers/identity/wrangler.toml --persist-to .qa/d1-phase8c3",
-    "identity:d1:local:dev": "wrangler dev --config workers/identity/wrangler.toml --local --persist-to .qa/d1-phase8c3"
+    "identity:d1:local:dev": "wrangler dev --config workers/identity/wrangler.toml --local --persist-to .qa/d1-phase8c3",
+    "perf:local": "node scripts/phase8c5-benchmark.mjs"
   },
   "dependencies": {
     "@fontsource/be-vietnam-pro": "5.3.0",
