@@ -3,6 +3,7 @@ import {readFile,writeFile,mkdir} from "node:fs/promises";
 import path from "node:path";
 import {fileURLToPath} from "node:url";
 import {summarize} from "../lib/sitepulse/core.mjs";
+import {privateReportPath} from "./sitepulse-check.mjs";
 
 export function formatPilotReport(rows){
  const metrics=summarize(rows);
@@ -15,19 +16,20 @@ export function formatPilotReport(rows){
   ""
  ];
  if(!metrics.length)return [...lines,"Chưa có kết quả kiểm tra hợp lệ.",""].join("\n");
- lines.push("| Mã mục tiêu | Số lượt kiểm tra | Thành công | Tỷ lệ quan sát | Sự cố 2 lần DOWN | Trạng thái cuối |","|---|---:|---:|---:|---:|---|");
+ lines.push("| Mã pilot | Mã mục tiêu | Số lượt kiểm tra | Thành công | Tỷ lệ quan sát | Sự cố 2 lần DOWN | Trạng thái cuối |","|---|---|---:|---:|---:|---:|---|");
  for(const m of metrics){
   const ratio=m.observedSuccessRatio===null?"—":(m.observedSuccessRatio*100).toFixed(1)+"%";
   const state={up:"Có phản hồi HTTP 2xx",attention:"Cần xem xét",down:"Không đạt kiểm tra"}[m.lastState]||"Không rõ";
-  lines.push("| "+m.id+" | "+m.checks+" | "+m.successfulChecks+" | "+ratio+" | "+m.confirmedIncidents+" | "+state+" |");
+  lines.push("| "+m.pilotId+" | "+m.id+" | "+m.checks+" | "+m.successfulChecks+" | "+ratio+" | "+m.confirmedIncidents+" | "+state+" |");
  }
  lines.push("","**Đề nghị:** Nhân sự Website Care kiểm tra bằng trình duyệt và một nguồn độc lập trước khi kết luận sự cố. Không tự động gửi thông báo tới khách hàng chỉ dựa trên một lượt kiểm tra.","");
  return lines.join("\n");
 }
 export async function exportPilotReport(env=process.env){
  if(env.ATHENA_SITEPULSE_ENABLED!=="true")return {enabled:false};
- const input=path.resolve(env.ATHENA_SITEPULSE_REPORT_FILE||".qa/sitepulse-results.jsonl");
+ const input=privateReportPath(env.ATHENA_SITEPULSE_REPORT_FILE);
  const output=path.resolve(env.ATHENA_SITEPULSE_MARKDOWN_FILE||".qa/sitepulse-report.md");
+ if(!output.startsWith(path.resolve(".qa")+path.sep)||!output.endsWith(".md"))throw Error("Báo cáo phải nằm trong thư mục riêng tư .qa/");
  let raw="";
  try{raw=await readFile(input,"utf8");}
  catch(e){if(e?.code!=="ENOENT")throw e;}

@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "pilotId": "pilot-placeholder",
+  "operatorAcknowledged": false,
+  "authorizationReference": "pending-approval-id",
+  "approvedAt": "2026-10-20T08:00:00Z",
+  "expiresAt": "2026-10-21T08:00:00Z",
+  "minimumIntervalMinutes": 15,
+  "maxChecksPerTargetPerDay": 8,
+  "targets": [
+    {
+      "id": "approved-site",
+      "url": "https://example.com/"
+    }
+  ]
+}
