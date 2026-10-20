@@ -38,7 +38,7 @@ export function Navbar() {
         <Link className="nav-mobile-contact" href="/lien-he">Liên hệ hợp tác <span aria-hidden="true">↗</span></Link>
       </nav>
       {authSettings().enabled&&<Link href="/dang-nhap" className="nav-account">Tài khoản ↗</Link>}
-      <Link href="/lien-he" className="nav-contact"><span>Bắt đầu dự án</span><span aria-hidden="true">↗</span></Link>
+      <Link href="/lien-he" className="nav-contact"><span>Gửi nhu cầu</span><span aria-hidden="true">↗</span></Link>
       <button type="button" className={open ? "mobile-toggle toggle-open" : "mobile-toggle"} aria-label={open ? "Đóng menu" : "Mở menu"} aria-expanded={open} aria-controls="primary-nav" onClick={() => setOpen(!open)}>
         <span/><span/>
       </button>

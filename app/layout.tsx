@@ -6,6 +6,7 @@ import { PageTransition } from "@/components/experience/PageTransition";
 import { createMetadata } from "@/lib/metadata";
 // Self-hosted fonts with explicit Vietnamese Unicode coverage (no external font CDN).
 import "@fontsource/be-vietnam-pro/400.css";
+import "@fontsource/be-vietnam-pro/400-italic.css";
 import "@fontsource/be-vietnam-pro/500.css";
 import "@fontsource/be-vietnam-pro/600.css";
 import "@fontsource/be-vietnam-pro/700.css";
