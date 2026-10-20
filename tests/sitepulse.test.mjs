@@ -19,6 +19,9 @@ test("SitePulse never accepts arbitrary user-supplied URLs, internal IP, redirec
   assert.throws(()=>parseTargets(JSON.stringify([{id:"homepage",label:"Test service",url}]),allow,true),undefined,url);
  }
  assert.throws(()=>parseTargets(JSON.stringify([{id:"same",label:"Label A",url:"https://example.com"},{id:"same",label:"Label B",url:"https://example.com"}]),allow,true));
+ for(const addr of ["127.0.0.1","10.0.0.1","localhost","router.local"]){
+  assert.throws(()=>parseTargets(JSON.stringify([{id:"target",label:"Approved hostname",url:"https://"+addr+"/"}]),addr,true));
+ }
  assert.deepEqual(parseTargets("{malformed}",allow,false),[]);
  assert.throws(()=>parseTargets("{malformed}",allow,true));
 });
@@ -27,6 +30,8 @@ test("DNS refuses private address even if resolver mixes it with public IPv4",as
  let called=0;
  const r=await checkTarget(t,{resolver:async()=>{called++;return [{address:"1.1.1.1",family:4},{address:"169.254.169.254",family:4}]}});
  assert.equal(r.detail,"blocked_private_address");assert.equal(r.state,"down");assert.equal(called,1);
+ const hung=await checkTarget(t,{resolver:async()=>new Promise(()=>{}),timeoutMs:30});
+ assert.equal(hung.detail,"dns_timeout");
 });
 test("Local real HTTP probe records status, TTFB, redirect refusal and timeout without following redirect",async()=>{
  let redirected=0;
@@ -57,7 +62,7 @@ test("Pilot requires explicit enable flag; never performs implicit network opera
  assert.equal(n,0);
  const logs=[];
  const env={ATHENA_SITEPULSE_ENABLED:"true",ATHENA_SITEPULSE_APPROVED_HOSTS:"example.com",ATHENA_SITEPULSE_TARGETS_JSON:JSON.stringify([{id:"sample",label:"Example",url:"https://example.com/"}]),ATHENA_SITEPULSE_REPORT_FILE:".qa/sitepulse-test-not-written.jsonl"};
- const success=await run({env,probe:async t=>({id:t.id,label:t.label,state:"up",checkedAt:"2026-10-20T10:00:00.000Z",httpStatus:200,ttfbMs:100}),writer:async(file,body)=>{logs.push({file,body});}});
+ const success=await run({env,probe:async t=>({id:t.id,label:t.label,state:"up",checkedAt:"2026-10-20T10:00:00.000Z",httpStatus:200,ttfbMs:100}),writer:async(file,body)=>{logs.push({file,body});},authorizationLoader:async()=>({schemaVersion:1,pilotId:"test-pilot",operatorAcknowledged:true,authorizationReference:"signed-sandbox-test",approvedAt:"2026-10-20T09:00:00Z",expiresAt:"2026-10-21T09:00:00Z",targets:[{id:"sample",url:"https://example.com/"}]}),clock:()=>new Date("2026-10-20T10:00:00Z"),historyLoader:async()=>[],lockEnabled:false});
  assert.equal(success.targets,1);assert.equal(logs.length,1);
  assert.equal(JSON.parse(logs[0].body).httpStatus,200);
 });

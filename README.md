@@ -108,3 +108,11 @@ Các trang mới: `/dang-nhap`, `/dang-ky`, `/quen-mat-khau`, `/tai-khoan`, `/ta
 
 SitePulse is an **operator-only, explicitly approved-domain HTTP probe**, **disabled by default**. `npm run sitepulse:check` records real sampled HTTP results only when enabled by an authorized operator; `npm run sitepulse:summary` summarizes local JSONL measurements. No scheduled checks, live alerts, customer dashboard, payment collection, fake uptime or production release. The user's approval is required before probing any external website or incurring hosting costs.
 Bản báo cáo tiếng Việt có thể xuất qua `npm run sitepulse:report`; kết quả dựa trên nhật ký đã đo (không phải chỉ số SLA). Không có dữ liệu đo thật được commit.
+
+### Phase 7.1 — Ủy quyền và chuẩn bị pilot SitePulse
+
+- [Runbook kiểm tra website có phép](docs/PHASE71_PILOT_RUNBOOK.md)
+- [Bộ phỏng vấn người vận hành website](docs/PHASE71_INTERVIEW_KIT.md)
+- [Mẫu hồ sơ đồng ý (để mặc định chưa phê duyệt)](docs/PHASE71_CONSENT_TEMPLATE.json)
+
+Bật SitePulse phải có hồ sơ chấp thuận ngoài Git và `.qa/sitepulse-consent.json` khớp chính xác target, thời hạn và quota. Không chạy website bên ngoài nếu chưa có quyền. Tỷ lệ HTTP 2xx theo mẫu không phải SLA. `main`, production, DNS và chi phí không thay đổi.
