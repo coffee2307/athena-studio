@@ -1,12 +1,12 @@
 # ATHENA PHASE 8 — BẢNG KIỂM CHỨNG BASELINE / GO-NO-GO
 
-**Ngày rà soát:** 20/10/2026. **Đây là snapshot tài liệu trước khi Phase 8 được phê duyệt.**
+**Ngày rà soát:** 20/10/2026. **Phase 8 đã được chủ dự án phê duyệt**; những trạng thái còn lại là cổng triển khai, không phải chứng nhận production.
 Quy ước: `CODE PASS` = mã và kiểm thử offline đạt; `PENDING` = chưa có bằng chứng thực địa; `BLOCKED` = không thể nghiệm thu nếu thiếu quyền/thiết lập bên ngoài; `NO-GO` = không đủ điều kiện kích hoạt.
 
 | Gate | Trạng thái đã có bằng chứng | Bằng chứng/đầu ra | Điều kiện nghiệm thu còn thiếu | Quyết định |
 |---|---|---|---|---|
-| R0 — Phạm vi Phase 8 | Roadmap gốc kết thúc Phase 7 | `ATHENA_MASTER_ROADMAP.md` | Chủ dự án duyệt phạm vi Phase 8 mới | **PENDING** |
-| R1 — Hợp nhất source | Các thay đổi ở chuỗi PR #2–#12 | Git branches, Draft PR/CI | Code review, xác định release SHA và tích hợp vào nhánh riêng, kiểm thử từ sạch | **PENDING** |
+| R0 — Phạm vi Phase 8 | Chủ dự án duyệt mở rộng Phase 8 ngày 20/10/2026 | Cuộc hội thoại chấp thuận + cập nhật `ATHENA_MASTER_ROADMAP.md` | Chỉ còn cổng triển khai thực tế theo từng track | **APPROVED** |
+| R1 — Hợp nhất source | Nhánh tích hợp 8A đã tạo, 13/13 commit ancestry PASS, local QA 45/45 và 60/60 | `PHASE8A_INTEGRATION_REPORT.md`, `PHASE8A_QA.md`, `npm run release:verify` | Linux CI của commit 8A, code review và release SHA sign-off; chưa merge main | **CANDIDATE — LOCAL PASS** |
 | R2 — Public website | Next.js static/SSR, unit/Playwright, Lighthouse lab | `PHASE4_QA.md`, `PHASE4_PERFORMANCE_BASELINE.md` | Hosting thật, quyền portfolio, device testing, real CWV p75 | **PENDING** |
 | R3 — Lead intake | Fail-closed backend, chống spam theo thiết kế | `PHASE4_RELEASE_RUNBOOK.md` | Gửi email thật, database, Turnstile/Upstash, retries, retention | **BLOCKED** |
 | R4 — Google/Email Auth | Auth routes, SSR, offline RLS | `PHASE5_QA.md`, `PHASE5_AUTH_ARCHITECTURE.md` | Supabase/SMTP/Google OAuth, real sessions | **BLOCKED** |

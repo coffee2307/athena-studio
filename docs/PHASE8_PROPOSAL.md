@@ -1,7 +1,7 @@
 # ATHENA STUDIO — ĐỀ XUẤT PHASE 8
 ## Tích hợp phát hành, vận hành thực tế và sẵn sàng thương mại
-Ngày soạn: 20/10/2026 · Trạng thái: **ĐỀ XUẤT, CHƯA ĐƯỢC DUYỆT VÀ CHƯA TRIỂN KHAI**
-Cơ sở: [Master roadmap được duyệt](ATHENA_MASTER_ROADMAP.md), hiện **kết thúc tại Phase 7**. Tài liệu này KHÔNG sửa phạm vi đã duyệt hoặc tự động cho phép giải ngân, triển khai, merge hay mở dữ liệu thật.
+Ngày soạn: 20/10/2026 · **Phạm vi Phase 8 đã được chủ dự án duyệt để triển khai vào 20/10/2026.** Vẫn yêu cầu kiểm định và phê duyệt riêng cho production, DNS, chi phí, migration trên dữ liệu thật và release SHA.
+Cơ sở: [Master roadmap được duyệt](ATHENA_MASTER_ROADMAP.md), nguyên gốc kết thúc tại Phase 7 và đã được bổ sung Phase 8 sau chấp thuận ngày 20/10/2026. Việc chấp thuận phạm vi **không tự động cho phép** giải ngân, deploy production, DNS, merge main hoặc migration trên dữ liệu thật.
 
 ## 1. Quyết định và sự thật hiện tại
 
@@ -72,7 +72,7 @@ Mục tiêu Phase 8 là chuyển Athena từ **mã nguồn đã kiểm thử** s
 
 ## 3. Thứ tự thực hiện và mốc GO/NO-GO
 
-1. **P8-G0 — Duyệt phạm vi mới:** chủ dự án xem và phê duyệt Workstream, xác nhận Phase 8 là mở rộng roadmap (chưa duyệt trong tài liệu gốc). Chỉ thực hiện audit tài liệu/kiểm thử local trước G0.
+1. **P8-G0 — Duyệt phạm vi mới: ĐÃ ĐẠT 20/10/2026.** Chủ dự án đã phê duyệt mở rộng roadmap, cho phép bắt đầu 8A. Quyền vận hành vẫn được kiểm soát bằng các cổng xác minh và release thực tế.
 2. **P8-G1 — Branch integration:** rà soát các Draft PR, tạo nhánh tích hợp tách biệt, CI xanh. Không merge vào main khi chưa được cho phép.
 3. **P8-G2 — Staging riêng:** sau khi duyệt host/provider/budget, kiểm thử migration, Auth, lead, backup A/B; mọi cờ mở public vẫn OFF.
 4. **P8-G3 — Business/legal + operations:** xác minh tên/đại diện chịu trách nhiệm, quyền nội dung, privacy/cookies, dữ liệu, incident/backup và nhân sự xử lý lead.
@@ -85,7 +85,7 @@ Không cam kết ngày kết thúc hoặc ngân sách khi chưa có nền tảng
 
 | Việc | Khi nào | Mức ưu tiên |
 |---|---|---|
-| Xác nhận thêm Phase 8 vào master roadmap, ưu tiên Track A/B | Trước khi thực thi mã Phase 8 | P0 |
+| Xác nhận thêm Phase 8 vào master roadmap, ưu tiên Track A/B | **Đã phê duyệt 20/10/2026** | P0 — hoàn thành |
 | Duyệt chiến lược release: giữ chuỗi PR hay tích hợp review có kiểm soát | Trước khi merge | P0 |
 | Xác minh pháp nhân/đại diện, điều khoản, quyền dùng logo, nội dung portfolio | Trước website thương mại | P0 |
 | Chọn hosting/staging region, URL và ngân sách **trần chi**; cho phép tạo provider | Trước 8B | P0 |
@@ -102,4 +102,4 @@ Không cam kết ngày kết thúc hoặc ngân sách khi chưa có nền tảng
 - SitePulse chỉ được coi là MVP thương mại khi có phê duyệt riêng và field/cost/customer validation; nguyên mẫu vẫn có thể giữ ở Product Lab công khai với trạng thái chưa bán.
 - Các kết quả đo/khách hàng/doanh thu/chỉ số ổn định đều có nguồn bằng chứng và ngày tháng; không dùng số mô phỏng.
 
-**Đề xuất giai đoạn này là TÀI LIỆU, không phải phê duyệt thực thi.** Cần chủ dự án xác nhận để cập nhật master roadmap và mở nhánh triển khai Phase 8 thật.
+**Phạm vi Phase 8 đã được chủ dự án phê duyệt ngày 20/10/2026.** Các cổng staging/production, chi phí, DNS, bảo mật, migration, danh tính nhà cung cấp và release SHA vẫn yêu cầu bằng chứng tương ứng; không coi đây là chấp thuận triển khai mù hoặc cam kết kết quả.

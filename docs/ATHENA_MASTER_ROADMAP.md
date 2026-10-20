@@ -62,6 +62,17 @@ Acceptance: customer A cannot access customer B's records or files by modifying 
 Scope: validate user problems and willingness to pay; prototype limited SitePulse monitoring concept or stronger validated opportunity; documentation/onboarding/observability, tenancy, pricing and billing only when legally and commercially ready.
 Acceptance: working narrowly scoped MVP tested with real users, operating costs measured, no simulated SaaS status presented as production.
 
+### Phase 8 — Integration, staging and commercial operations (APPROVED 2026-10-20)
+Source: [PHASE8_PROPOSAL.md](PHASE8_PROPOSAL.md), [PHASE8_ACCEPTANCE_MATRIX.md](PHASE8_ACCEPTANCE_MATRIX.md).
+Approval extends the roadmap and authorizes software engineering work. **It does not certify Phase 7 commercial acceptance and does not replace separate evidence/approval for main merge, production/DNS, chargeable services, real migrations or customer data.**
+
+- **8A (P0)**: Verify ancestry and review all Phase Draft PRs, create a single integratable release candidate from the most recent branch with backup; add fail-closed release verification and CI; perform review/testing. No main merge without release decision.
+- **8B (P0)**: Isolated real-provider staging for lead intake, Supabase Auth, Google OAuth and customer dashboard, including actual A/B tenant isolation, storage and recovery. Requires provisioned providers and credentials through approved secure channels.
+- **8C (P0)**: Security, accessibility/manual QA, incident response, performance and backup/restore evidence.
+- **8D (P1)**: Service packaging and responsible commercial launch preparations; continued authorized SitePulse pilot, user interviews and operating cost evidence. Do not claim revenue or subscriptions without proof.
+
+Launch tracks are independent: public studio V1 can pass its own release gates while protected customer tools and Micro-SaaS remain disabled. Acceptance requires independently verified evidence per track and a separate production GO/NO-GO.
+
 ## Technical choices
 - Keep Next.js + TypeScript as the application core.
 - Shared tokens, accessible reusable components, SSR/SSG for public content.
