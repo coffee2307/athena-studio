@@ -45,6 +45,13 @@ jobs:
         run: |
           docker compose --env-file deploy/vps/config.example -f deploy/vps/compose.yaml config --quiet
           bash -n deploy/vps/init/01-roles.sh deploy/vps/scripts/*.sh
+      - name: Validate optional SMTP overlay without secrets or deployment
+        env:
+          ATHENA_SMTP_HOST: smtp.example.invalid
+          ATHENA_SMTP_PORT: "587"
+          ATHENA_SMTP_SENDER: security@example.invalid
+          ATHENA_SMTP_USERNAME: test-owner
+        run: docker compose --env-file deploy/vps/config.example -f deploy/vps/compose.yaml -f deploy/vps/compose.smtp.yaml config --quiet
       - name: HTTP smoke tests
         run: npm run test:smoke
       - name: Production security audit

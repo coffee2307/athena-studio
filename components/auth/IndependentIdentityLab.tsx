@@ -34,13 +34,15 @@ export function IndependentIdentityLab({
  const [status,setStatus]=useState("");
  const [isError,setIsError]=useState(false);
  const [retryAt,setRetryAt]=useState(0);
+ const [resendAt,setResendAt]=useState(0);
  const [clock,setClock]=useState(()=>Date.now());
  const cooldown=Math.max(0,Math.ceil((retryAt-clock)/1000));
+ const resendCooldown=Math.max(0,Math.ceil((resendAt-clock)/1000));
  useEffect(()=>{
-  if(retryAt<=clock)return;
+  if(Math.max(retryAt,resendAt)<=clock)return;
   const id=window.setInterval(()=>setClock(Date.now()),1000);
   return ()=>window.clearInterval(id);
- },[retryAt,clock]);
+ },[retryAt,resendAt,clock]);
 
  function failure(errorCode?:string){
   setIsError(true);
@@ -55,9 +57,9 @@ export function IndependentIdentityLab({
    setStatus("Yêu cầu chưa thể hoàn tất. Vui lòng thử lại sau hoặc chọn phương thức khác.");
   }
  }
- async function requestOtp(event:FormEvent<HTMLFormElement>){
-  event.preventDefault();
-  if(pending||!otpEnabled||cooldown>0)return;
+ async function requestOtp(event:FormEvent<HTMLFormElement>|null){
+  event?.preventDefault();
+  if(pending||!otpEnabled||cooldown>0||(stage==="code"&&resendCooldown>0))return;
   const target=email.trim();
   if(target.length>254||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(target)){
    setIsError(true);setStatus("Vui lòng kiểm tra lại địa chỉ email.");return;
@@ -68,7 +70,8 @@ export function IndependentIdentityLab({
    const result=await client.emailOtp.sendVerificationOtp({email:target,type:"sign-in"});
    if(result.error){failure(result.error.code);return;}
    setStage("code");
-   setStatus("Yêu cầu mã đã được ghi nhận. Kiểm tra hộp thư và thư mục spam. Nếu chưa thấy email, việc gửi có thể gặp giới hạn.");
+   const now=Date.now();setClock(now);setResendAt(now+60_000);
+   setStatus("Yêu cầu gửi mã đã được tiếp nhận. Kiểm tra hộp thư và thư mục spam; có thể gửi lại sau 60 giây.");
   }catch{failure();}
   finally{setPending(false);}
  }
@@ -139,10 +142,16 @@ export function IndependentIdentityLab({
        placeholder="000000"/>
      </label>
     </>}
-    <button className="pill-link pill-dark identity-lab-button" type="submit" disabled={pending||cooldown>0}>
-     {pending?"Đang xử lý…":cooldown>0?`Thử lại sau ${cooldown}s`:stage==="email"?"Nhận mã xác minh →":"Xác minh và đăng nhập →"}
+    <button className="pill-link pill-dark identity-lab-button" type="submit" disabled={pending||(stage==="email"&&cooldown>0)}>
+     {pending?"Đang xử lý…":stage==="email"&&cooldown>0?`Thử lại sau ${cooldown}s`:stage==="email"?"Nhận mã xác minh →":"Xác minh và đăng nhập →"}
     </button>
-    {stage==="code"&&<button className="identity-lab-back" type="button" disabled={pending} onClick={()=>{setStage("email");setOtp("");setStatus("");}}>Dùng email khác</button>}
+    {stage==="code"&&<>
+     <button className="identity-lab-back" type="button" disabled={pending||resendCooldown>0||cooldown>0}
+      onClick={()=>void requestOtp(null)}>
+      {cooldown>0?`Giới hạn gửi mã (${cooldown}s)`:resendCooldown>0?`Gửi lại mã sau ${resendCooldown}s`:"Gửi lại mã xác minh"}
+     </button>
+     <button className="identity-lab-back" type="button" disabled={pending} onClick={()=>{setStage("email");setOtp("");setStatus("");}}>Dùng email khác</button>
+    </>}
    </form>}
   </>}
   {status&&<p className={isError?"identity-lab-notice is-error":"identity-lab-notice"} role={isError?"alert":"status"}>{status}</p>}

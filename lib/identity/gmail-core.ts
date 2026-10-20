@@ -6,6 +6,8 @@ function safeEmail(input:string):boolean{
 }
 /** Gmail only transfers a code; Athena/Better Auth validates it. Never log OTP. */
 export function gmailOtpTransport(settings:GmailSecrets,http:typeof fetch=fetch):AuthMailTransport{
+ let tokenCache:{value:string;expiresAt:number}|null=null;
+ let tokenRefresh:Promise<string>|null=null;
  return {
   async send(email:string,otp:string,purpose:OtpPurpose){
    if(!safeEmail(email)||!safeEmail(settings.sender)||!/^\d{6}$/.test(otp))
@@ -34,28 +36,54 @@ export function gmailOtpTransport(settings:GmailSecrets,http:typeof fetch=fetch)
     "Content-Type: text/html; charset=UTF-8","Content-Transfer-Encoding: base64","",encode64(html),
     "--"+boundary+"--",""
    ].join("\r\n");
-   const params=new URLSearchParams({
-    client_id:settings.clientId,client_secret:settings.clientSecret,
-    refresh_token:settings.refreshToken,grant_type:"refresh_token"
-   });
-   // One shared deadline; never automatically resend an ambiguous OTP delivery.
+   // The access token is held in process memory, never persisted or exposed.
+   // Caching avoids an extra OAuth network roundtrip for every OTP.
    const signal=AbortSignal.timeout(3800);
-   let response:Response;
-   try{response=await http("https://oauth2.googleapis.com/token",{
-    method:"POST",headers:{"content-type":"application/x-www-form-urlencoded"},
-    body:params,signal,cache:"no-store"
-   });}catch{throw new Error("ATHENA_MAIL_TOKEN_UNAVAILABLE");}
-   if(!response.ok)throw new Error("ATHENA_MAIL_TOKEN_UNAVAILABLE");
-   const data:unknown=await response.json().catch(()=>null);
-   if(!data||typeof data!=="object"||!("access_token" in data)||
-     typeof data.access_token!=="string"||!data.access_token)
-    throw new Error("ATHENA_MAIL_TOKEN_INVALID");
+   let token=tokenCache&&tokenCache.expiresAt>Date.now()?tokenCache.value:null;
+   if(!token){
+    // Concurrency collapse: many OTP requests trigger only one refresh call.
+    if(!tokenRefresh){
+     tokenRefresh=(async()=>{
+      const params=new URLSearchParams({
+       client_id:settings.clientId,client_secret:settings.clientSecret,
+       refresh_token:settings.refreshToken,grant_type:"refresh_token"
+      });
+      let response:Response;
+      try{response=await http("https://oauth2.googleapis.com/token",{
+       method:"POST",headers:{"content-type":"application/x-www-form-urlencoded"},
+       body:params,signal,cache:"no-store"
+      });}catch{throw new Error("ATHENA_MAIL_TOKEN_UNAVAILABLE");}
+      if(!response.ok)throw new Error("ATHENA_MAIL_TOKEN_UNAVAILABLE");
+      const data:unknown=await response.json().catch(()=>null);
+      if(!data||typeof data!=="object"||!("access_token" in data)||
+        typeof data.access_token!=="string"||!data.access_token)
+       throw new Error("ATHENA_MAIL_TOKEN_INVALID");
+      const fresh=data.access_token;
+      if("expires_in" in data&&typeof data.expires_in==="number"&&
+         Number.isFinite(data.expires_in)&&data.expires_in>=120){
+       const ttl=Math.min(3_600,data.expires_in)-60;
+       tokenCache={value:fresh,expiresAt:Date.now()+ttl*1_000};
+      }
+      return fresh;
+     })().finally(()=>{tokenRefresh=null;});
+    }
+    token=await tokenRefresh;
+   }
    let sent:Response;
    try{sent=await http("https://gmail.googleapis.com/gmail/v1/users/me/messages/send",{
-    method:"POST",headers:{"authorization":"Bearer "+data.access_token,"content-type":"application/json"},
+    method:"POST",headers:{"authorization":"Bearer "+token,"content-type":"application/json"},
     body:JSON.stringify({raw:Buffer.from(mime,"utf8").toString("base64url")}),signal,cache:"no-store"
    });}catch{throw new Error("ATHENA_MAIL_UNCERTAIN");}
-   if(!sent.ok)throw new Error(sent.status===429?"ATHENA_MAIL_QUOTA":"ATHENA_MAIL_UNAVAILABLE");
+   if(!sent.ok){
+    if(sent.status===401){
+     tokenCache=null;
+     throw new Error("ATHENA_MAIL_AUTH_REJECTED");
+    }
+    if(sent.status===429)throw new Error("ATHENA_MAIL_QUOTA");
+    // A Gmail 5xx could occur after message acceptance: never failover.
+    if(sent.status>=500)throw new Error("ATHENA_MAIL_UNCERTAIN");
+    throw new Error("ATHENA_MAIL_UNAVAILABLE");
+   }
    const accepted:unknown=await sent.json().catch(()=>null);
    if(!accepted||typeof accepted!=="object"||!("id" in accepted)||typeof accepted.id!=="string")
     throw new Error("ATHENA_MAIL_UNCERTAIN");

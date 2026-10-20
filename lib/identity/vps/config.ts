@@ -12,6 +12,9 @@ export type VpsIdentityConfig={
  gmail?:{
   sender:string;clientId:string;clientSecretFile:string;refreshTokenFile:string;
  };
+ smtp?:{
+  sender:string;host:string;port:465|587;username:string;passwordFile:string;
+ };
 };
 const AUTH_SECRET="/run/secrets/athena_auth_secret";
 const PG_SECRET="/run/secrets/athena_pg_password";
@@ -19,7 +22,8 @@ const SECRET_FILES={
  google:"/run/secrets/athena_google_secret",
  github:"/run/secrets/athena_github_secret",
  gmailClient:"/run/secrets/athena_gmail_secret",
- gmailRefresh:"/run/secrets/athena_gmail_refresh"
+ gmailRefresh:"/run/secrets/athena_gmail_refresh",
+ smtpPassword:"/run/secrets/athena_smtp_password"
 } as const;
 function pair(env:NodeJS.ProcessEnv,which:"GOOGLE"|"GITHUB",path:string):VpsOAuth|null|undefined{
  const id=env["ATHENA_"+which+"_OAUTH_CLIENT_ID"]||"";
@@ -65,12 +69,30 @@ export function parseVpsIdentityConfig(env:NodeJS.ProcessEnv=process.env):VpsIde
   gmail={sender,clientId,clientSecretFile:SECRET_FILES.gmailClient,
    refreshTokenFile:SECRET_FILES.gmailRefresh};
  }
+ let smtp:VpsIdentityConfig["smtp"];
+ if(env.ATHENA_SMTP_ENABLED==="true"){
+  const host=(env.ATHENA_SMTP_HOST||"").toLowerCase();
+  const port=Number(env.ATHENA_SMTP_PORT||"");
+  const sender=env.ATHENA_SMTP_SENDER||"";
+  const username=env.ATHENA_SMTP_USERNAME||"";
+  if(!/^(?=.{4,253}$)[a-z0-9](?:[a-z0-9.-]*[a-z0-9])$/.test(host)||
+   !host.includes(".")||host.includes("..")||
+   /(?:\.internal|\.localhost|\.local)$/.test(host)||
+   /^(?:localhost|127\.|10\.|192\.168\.|169\.254\.)/.test(host)||
+   (port!==465&&port!==587)||
+   !/^[^\s@<>]+@[^\s@<>]+\.[A-Za-z]{2,}$/.test(sender)||sender.length>254||
+   username.length<3||username.length>254||
+   env.ATHENA_SMTP_PASSWORD_FILE!==SECRET_FILES.smtpPassword)return null;
+  smtp={sender,host,port:port as 465|587,username,passwordFile:SECRET_FILES.smtpPassword};
+ }
+ // Failover must preserve the customer-visible sender identity.
+ if(gmail&&smtp&&gmail.sender.toLowerCase()!==smtp.sender.toLowerCase())return null;
  // No active Google/GitHub/mail configuration = no login routes.
- if(!google&&!github&&!gmail)return null;
+ if(!google&&!github&&!gmail&&!smtp)return null;
  return {
   origin,
   authSecretFile:AUTH_SECRET,
   database:{host:dbHost,port,name:dbName,user:dbUser,passwordFile:PG_SECRET},
-  ...(google?{google}:{}),...(github?{github}:{}),...(gmail?{gmail}:{})
+  ...(google?{google}:{}),...(github?{github}:{}),...(gmail?{gmail}:{}),...(smtp?{smtp}:{})
  };
 }
