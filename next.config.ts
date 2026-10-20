@@ -36,6 +36,8 @@ const headers=[
 ];
 const nextConfig:NextConfig={
  poweredByHeader:false,
+ // Private project documents allow up to 8 MiB; request envelope has bounded overhead.
+ experimental:{serverActions:{bodySizeLimit:"9mb"}},
  async headers(){return [{source:"/:path*",headers}];}
 };
 export default nextConfig;

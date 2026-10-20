@@ -1,0 +1,1 @@
+export default function Loading(){return <div className="container ops-loading" role="status" aria-live="polite"><p>Đang tải yêu cầu hỗ trợ…</p><div/><div/></div>}

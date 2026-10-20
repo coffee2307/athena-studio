@@ -86,3 +86,15 @@ Bổ sung kiểm thử trình duyệt Chromium desktop/mobile và Firefox, axe-c
 - [Bộ kiểm thử RLS thực qua PGlite](tests/rls-isolation.test.mjs)
 
 Các trang mới: `/dang-nhap`, `/dang-ky`, `/quen-mat-khau`, `/tai-khoan`, `/tai-khoan/doi-mat-khau`, `/quan-tri` và OAuth/email callbacks. Hệ thống quản lý vai trò không lấy quyền từ dữ liệu người dùng có thể tự sửa. `NEXT_PUBLIC_ATHENA_AUTH_ENABLED=false` mặc định; không có Supabase SMTP, Google OAuth hoặc database production được kích hoạt. Không được bật true cho môi trường công khai trước kiểm thử staging và phê duyệt pháp lý.
+
+## Phase 6 — Client Dashboard & Operations (bảo vệ bằng phân quyền)
+
+- [Kiến trúc dự án, hỗ trợ, tài liệu, thông báo và hướng dẫn triển khai](docs/PHASE6_OPERATIONS.md)
+- [Báo cáo QA, kiểm thử RLS và các điều kiện nghiệm thu](docs/PHASE6_QA.md)
+- [Migration bảng dự án, ticket, cột mốc, thông báo và audit](docs/db/phase6_operations.sql)
+- [Migration Supabase Storage bucket riêng tư](docs/db/phase6_storage.sql)
+- [Kiểm thử phân quyền thực bằng PGlite](tests/operations-rls.test.mjs) và [kiểm thử Storage RLS](tests/operations-storage.test.mjs)
+
+Đã xây các tuyến `/tai-khoan/du-an`, `/tai-khoan/du-an/[id]`, `/tai-khoan/ho-tro`, `/tai-khoan/ho-tro/[id]`, `/quan-tri`, `/quan-tri/du-an`, `/quan-tri/ho-tro`, cùng endpoint tải tài liệu riêng tư. Chưa có một dashboard khách hàng vận hành trên dịch vụ thật cho đến khi được chủ dự án xác minh.
+
+**Chốt triển khai độc lập:** `ATHENA_OPERATIONS_ENABLED=false` mặc định và là biến môi trường **server-side**. Chỉ bật khi cả Phase 5 authentication, ba migration và kiểm thử PostgREST/Supabase Storage đã được nghiệm thu. Không chuyển các biến môi trường quan trọng thành `NEXT_PUBLIC_*`. Thao tác và UI tiếp tục chặn khi cấu hình chưa được phê duyệt. Không triển khai DNS/production, merge main hoặc mua dịch vụ khi chưa có ủy quyền riêng.
