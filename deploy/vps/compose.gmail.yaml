@@ -1,0 +1,15 @@
+# Optional Gmail API OTP transport. Scope gmail.send only; Gmail quotas still apply.
+services:
+  web:
+    environment:
+      ATHENA_GMAIL_SENDER_ENABLED: "true"
+      ATHENA_GMAIL_SENDER: ${ATHENA_GMAIL_SENDER:?Set verified Gmail sender}
+      ATHENA_GMAIL_CLIENT_ID: ${ATHENA_GMAIL_CLIENT_ID:?Set approved Gmail API OAuth client ID}
+      ATHENA_GMAIL_CLIENT_SECRET_FILE: /run/secrets/athena_gmail_secret
+      ATHENA_GMAIL_REFRESH_TOKEN_FILE: /run/secrets/athena_gmail_refresh
+    secrets: [athena_gmail_secret,athena_gmail_refresh]
+secrets:
+  athena_gmail_secret:
+    file: ./secrets/athena_gmail_secret
+  athena_gmail_refresh:
+    file: ./secrets/athena_gmail_refresh

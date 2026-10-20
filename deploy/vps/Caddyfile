@@ -1,0 +1,17 @@
+{
+  email {$ATHENA_TLS_EMAIL}
+}
+{$ATHENA_DOMAIN} {
+  encode zstd gzip
+
+  @next_static path /_next/static/*
+  header @next_static Cache-Control "public, max-age=31536000, immutable"
+
+  @sensitive path /api/identity/* /api/athena/workspaces /api/operations/*
+  header @sensitive Cache-Control "private, no-store"
+
+  reverse_proxy web:3000 {
+    # Never accept a browser-supplied X-Real-IP as the identity for rate limiting.
+    header_up X-Real-IP {remote_host}
+  }
+}

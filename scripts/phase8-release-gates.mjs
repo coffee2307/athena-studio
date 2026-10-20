@@ -29,7 +29,9 @@ export const REQUIRED_DISABLED=Object.freeze([
  "ATHENA_SITEPULSE_ENABLED",
  "ATHENA_INDEPENDENT_AUTH_ENABLED",
  "ATHENA_IDENTITY_LOCAL_ONLY",
- "ATHENA_GMAIL_SENDER_ENABLED"
+ "ATHENA_GMAIL_SENDER_ENABLED",
+ "ATHENA_VPS_IDENTITY_ENABLED",
+ "ATHENA_VPS_RELEASE_APPROVED"
 ]);
 export const REQUIRED_UNSET=Object.freeze([
  "NEXT_PUBLIC_SUPABASE_URL",
@@ -52,7 +54,8 @@ export const REQUIRED_UNSET=Object.freeze([
  "ATHENA_GMAIL_CLIENT_ID",
  "ATHENA_GMAIL_CLIENT_SECRET",
  "ATHENA_GMAIL_REFRESH_TOKEN",
- "ATHENA_GMAIL_SENDER"
+ "ATHENA_GMAIL_SENDER",
+ "ATHENA_VPS_AUTH_ORIGIN"
 ]);
 export function assertSafeExampleEnv(raw){
  const vars=new Map();
@@ -80,6 +83,9 @@ export function assertSafeExampleEnv(raw){
 export function assertNoSensitiveTrackedFiles(files){
  const blocked=files.filter(f=>
   /(^|\/)\.qa\//i.test(f)||
+  /(^|\/)deploy\/vps\/(?:secrets|backups)\//i.test(f)||
+  /(^|\/)deploy\/vps\/(?:config\.local|compose\.override\.yaml)$/i.test(f)||
+  /\.(?:age|dump|backup)$/i.test(f)||
   /(^|\/)\.wrangler\//i.test(f)||
   /(^|\/)\.dev\.vars(?:\.|$)/i.test(f)||
   /\.(?:sqlite|sqlite3|db)(?:-wal|-shm|-journal)?$/i.test(f)||
@@ -122,6 +128,23 @@ export function assertSafeCloudWorkerConfig(raw){
   throw Error("Cloud worker routes or credentials must not appear in tracked config");
  return true;
 }
+export function assertSafeVpsDeploymentTemplate(compose,configExample,dockerignore){
+ const required=["ATHENA_VPS_IDENTITY_ENABLED=false","ATHENA_VPS_RELEASE_APPROVED=false"];
+ for(const line of required)
+  if(!configExample.split(/\r?\n/).includes(line))
+   throw Error("VPS identity template is enabled by default: "+line);
+ for(const flag of ["ATHENA_VPS_IDENTITY_ENABLED","ATHENA_VPS_RELEASE_APPROVED"])
+  if(!compose.includes("$"+"{"+flag+":-false}"))
+   throw Error("VPS deployment must default "+flag+" to false");
+ if(!compose.includes("internal: true")||!compose.includes("read_only: true")||
+  !compose.includes("no-new-privileges:true")||!compose.includes("ATHENA_VPS_PG_PASSWORD_FILE"))
+  throw Error("VPS isolation requirement missing");
+ if(/(?:5432|3000)\s*:\s*(?:5432|3000)/.test(compose))
+  throw Error("VPS must never publish DB or internal Next port");
+ if(!dockerignore.includes(".env*")||!dockerignore.includes("deploy/vps/secrets/"))
+  throw Error("VPS container could include local credentials");
+ return true;
+}
 export function verifyRelease(){
  const main="cc3be136de11d748cc71bbb0f2895fe494d35d17";
  const head=git(["rev-parse","HEAD"]);
@@ -134,6 +157,11 @@ export function verifyRelease(){
  }
  const env=assertSafeExampleEnv(readFileSync(path.join(root,".env.example"),"utf8"));
  assertSafeCloudWorkerConfig(readFileSync(path.join(root,"workers/identity/wrangler.toml"),"utf8"));
+ assertSafeVpsDeploymentTemplate(
+  readFileSync(path.join(root,"deploy/vps/compose.yaml"),"utf8"),
+  readFileSync(path.join(root,"deploy/vps/config.example"),"utf8"),
+  readFileSync(path.join(root,".dockerignore"),"utf8")
+ );
  const tracked=git(["ls-files","-z"]).split("\0").filter(Boolean);
  const count=assertNoSensitiveTrackedFiles(tracked);
  const required=[

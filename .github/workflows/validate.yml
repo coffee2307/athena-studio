@@ -41,6 +41,10 @@ jobs:
         run: npm run build
       - name: Identity Worker offline build (no cloud deployment)
         run: npx wrangler deploy --dry-run --config workers/identity/wrangler.toml --outdir .qa/worker-ci-dryrun
+      - name: Validate low-cost VPS Compose and operator scripts (no deployment)
+        run: |
+          docker compose --env-file deploy/vps/config.example -f deploy/vps/compose.yaml config --quiet
+          bash -n deploy/vps/init/01-roles.sh deploy/vps/scripts/*.sh
       - name: HTTP smoke tests
         run: npm run test:smoke
       - name: Production security audit

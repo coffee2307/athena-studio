@@ -19,3 +19,12 @@ test-results/
 .dev.vars.*
 **/.dev.vars
 **/.dev.vars.*
+
+# Phase 8C.4: NEVER track VPS credentials, private backups or operator config.
+deploy/vps/secrets/
+deploy/vps/backups/
+deploy/vps/config.local
+deploy/vps/compose.override.yaml
+*.age
+*.dump
+*.backup

@@ -1,0 +1,6 @@
+# Normalize Linux bootstrap scripts edited on Windows.
+deploy/vps/**/*.sh text eol=lf
+deploy/vps/Dockerfile text eol=lf
+deploy/vps/Caddyfile text eol=lf
+deploy/vps/compose.yaml text eol=lf
+deploy/vps/migrations/*.sql text eol=lf
