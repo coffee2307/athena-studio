@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "pilotId": "pham-pilot-01",
+  "operatorAcknowledged": false,
+  "authorizationReference": "pending-pham-approval",
+  "approvedAt": null,
+  "expiresAt": null,
+  "minimumIntervalMinutes": 15,
+  "maxChecksPerTargetPerDay": 8,
+  "targets": [
+    {
+      "id": "pham-home",
+      "url": "https://phamofficial.com/"
+    }
+  ]
+}
