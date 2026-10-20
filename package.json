@@ -13,7 +13,10 @@
     "test:smoke": "node scripts/smoke.mjs",
     "test:e2e": "playwright test",
     "test:e2e:chromium": "playwright test --project=chromium-desktop --project=chromium-mobile",
-    "audit:runtime": "npm audit --omit=dev --audit-level=high"
+    "audit:runtime": "npm audit --omit=dev --audit-level=high",
+    "sitepulse:check": "node scripts/sitepulse-check.mjs",
+    "sitepulse:summary": "node scripts/sitepulse-summary.mjs",
+    "sitepulse:report": "node scripts/sitepulse-report.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "0.12.7",

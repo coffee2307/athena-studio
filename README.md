@@ -98,3 +98,13 @@ Các trang mới: `/dang-nhap`, `/dang-ky`, `/quen-mat-khau`, `/tai-khoan`, `/ta
 Đã xây các tuyến `/tai-khoan/du-an`, `/tai-khoan/du-an/[id]`, `/tai-khoan/ho-tro`, `/tai-khoan/ho-tro/[id]`, `/quan-tri`, `/quan-tri/du-an`, `/quan-tri/ho-tro`, cùng endpoint tải tài liệu riêng tư. Chưa có một dashboard khách hàng vận hành trên dịch vụ thật cho đến khi được chủ dự án xác minh.
 
 **Chốt triển khai độc lập:** `ATHENA_OPERATIONS_ENABLED=false` mặc định và là biến môi trường **server-side**. Chỉ bật khi cả Phase 5 authentication, ba migration và kiểm thử PostgREST/Supabase Storage đã được nghiệm thu. Không chuyển các biến môi trường quan trọng thành `NEXT_PUBLIC_*`. Thao tác và UI tiếp tục chặn khi cấu hình chưa được phê duyệt. Không triển khai DNS/production, merge main hoặc mua dịch vụ khi chưa có ủy quyền riêng.
+
+## Phase 7 — Product Lab / SitePulse technical pilot
+
+- [Competitor study, business validation and pilot checklist](docs/PHASE7_PRODUCT_VALIDATION.md)
+- [QA gates and limitations](docs/PHASE7_QA.md)
+- [SitePulse browser page](app/san-pham/sitepulse/page.tsx)
+- [HTTP probe module and regression tests](lib/sitepulse/core.mjs)
+
+SitePulse is an **operator-only, explicitly approved-domain HTTP probe**, **disabled by default**. `npm run sitepulse:check` records real sampled HTTP results only when enabled by an authorized operator; `npm run sitepulse:summary` summarizes local JSONL measurements. No scheduled checks, live alerts, customer dashboard, payment collection, fake uptime or production release. The user's approval is required before probing any external website or incurring hosting costs.
+Bản báo cáo tiếng Việt có thể xuất qua `npm run sitepulse:report`; kết quả dựa trên nhật ký đã đo (không phải chỉ số SLA). Không có dữ liệu đo thật được commit.

@@ -652,3 +652,37 @@ em{font-family:"Times New Roman","Noto Serif",Georgia,serif;font-weight:400;lett
 .ops-audit-row>span{color:#555}
 .ops-audit-row strong{font-weight:550}
 @media(max-width:650px){.account-notification{align-items:flex-start;flex-direction:column;gap:14px}.ops-audit-row{grid-template-columns:1fr;gap:7px}}
+
+/* SitePulse research prototype — minimalist monochrome editorial */
+.sitepulse-hero{position:relative;overflow:hidden}
+.sitepulse-hero:after{content:"";position:absolute;right:-10%;top:12%;width:clamp(230px,33vw,560px);height:clamp(230px,33vw,560px);border-radius:50%;border:1px solid rgba(20,20,20,.12);box-shadow:0 0 0 50px rgba(20,20,20,.018),0 0 0 110px rgba(20,20,20,.012);pointer-events:none}
+.sitepulse-status{display:inline-flex;gap:12px;align-items:center;margin-top:50px;border:1px solid #b7b7b7;padding:13px 17px;border-radius:80px;font-size:10px;letter-spacing:.09em;color:#444;max-width:100%;position:relative;z-index:1}
+.sitepulse-status-dot{width:7px;height:7px;flex-shrink:0;background:#666;border-radius:50%}
+.sitepulse-diagram{display:grid;grid-template-columns:minmax(0,1fr) 30px minmax(0,1fr) 30px minmax(0,1fr);align-items:center;gap:12px;margin-top:55px;padding:25px 0}
+.sitepulse-diagram>div{border:1px solid #d4d4d4;min-height:195px;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(21px,3vw,38px);background:#f4f4f2}
+.sitepulse-diagram small,.sitepulse-diagram>div>span{font-size:10px;line-height:1.6;letter-spacing:.11em;color:#555}
+.sitepulse-diagram strong{font-size:clamp(30px,4vw,56px);letter-spacing:-.07em;font-weight:580;margin:15px 0}
+.sitepulse-arrow{text-align:center;color:#777;font-size:21px}
+.sitepulse-step-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:35px}
+.sitepulse-step-grid article{padding:31px 20px;border-top:1px solid #bababa}
+.sitepulse-step-grid article>span{font-size:10px;letter-spacing:.1em;color:#555}
+.sitepulse-step-grid h2{font-size:clamp(23px,2.6vw,35px);letter-spacing:-.06em;margin:29px 0 13px;line-height:1.2}
+.sitepulse-step-grid p,.sitepulse-boundaries p{font-size:13px;color:#575757;line-height:1.85}
+.detail-dark .sitepulse-boundaries{display:grid;grid-template-columns:1fr 1fr;gap:25px;margin-top:55px}
+.detail-dark .sitepulse-boundaries>div{border-top:1px solid #686868;padding-top:22px}
+.detail-dark .sitepulse-boundaries span{font-size:10px;color:#d3d3d3;letter-spacing:.1em}
+.detail-dark .sitepulse-boundaries p{color:#d0d0d0;margin-top:24px;max-width:560px}
+.sitepulse-feedback{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(30px,6vw,90px);align-items:start;margin-top:60px}
+.sitepulse-feedback h2{font-size:clamp(34px,5vw,70px);line-height:1.12;letter-spacing:-.075em}
+.sitepulse-feedback h2 em{color:#777}
+.sitepulse-feedback p{font-size:14px;line-height:1.9;color:#545454;margin-top:25px}
+.sitepulse-feedback>div:nth-child(2){border:1px solid #ccc;background:#f4f4f2;padding:clamp(28px,3vw,50px)}
+.sitepulse-feedback>div:nth-child(2)>p{margin-top:0;font-weight:650}
+.sitepulse-feedback ol{list-style:decimal;padding-left:22px;margin:20px 0 29px;color:#444;font-size:13px;line-height:2}
+.sitepulse-feedback li{padding:8px 0}
+@media(max-width:800px){.sitepulse-feedback,.detail-dark .sitepulse-boundaries{grid-template-columns:1fr}.sitepulse-step-grid{grid-template-columns:1fr}.sitepulse-step-grid article{padding:25px 0}}
+@media(max-width:600px){.sitepulse-diagram{grid-template-columns:1fr;gap:12px}.sitepulse-diagram>div{min-height:125px;padding:24px}.sitepulse-arrow{transform:rotate(90deg)}.sitepulse-status{font-size:9px;line-height:1.5;margin-top:35px}.sitepulse-hero:after{opacity:.5}}
+@media(prefers-reduced-motion:reduce){.sitepulse-hero:after{transition:none!important;animation:none!important}}
+
+/* Accessibility: legible lead text on SitePulse's dark editorial section. */
+.sitepulse-page .detail-dark .detail-intro .lead-text{color:#e0e0e0}
