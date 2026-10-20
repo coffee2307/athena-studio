@@ -27,9 +27,11 @@ RUN groupadd -g 1001 athena && useradd -r -u 1001 -g athena athena
 COPY --from=builder --chown=athena:athena /app/.next/standalone ./
 COPY --from=builder --chown=athena:athena /app/.next/static ./.next/static
 COPY --from=builder --chown=athena:athena /app/public ./public
+COPY --chown=athena:athena deploy/vps/healthcheck.cjs ./healthcheck.cjs
+COPY --chown=athena:athena scripts/phase8c5-benchmark*.mjs ./scripts/
 RUN mkdir -p /app/.next/cache && chown -R athena:athena /app/.next
 USER athena
 EXPOSE 3000
-HEALTHCHECK --interval=30s --timeout=4s --start-period=25s --retries=3 \
-  CMD node -e "fetch('http://127.0.0.1:3000/api/health',{signal:AbortSignal.timeout(3000)}).then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+HEALTHCHECK --interval=30s --timeout=7s --start-period=30s --retries=3 \
+  CMD ["node","/app/healthcheck.cjs"]
 CMD ["node","server.js"]

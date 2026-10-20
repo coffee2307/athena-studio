@@ -28,3 +28,5 @@ deploy/vps/compose.override.yaml
 *.age
 *.dump
 *.backup
+# Operator migration lock (not source or user data)
+deploy/vps/.athena-migration.lock

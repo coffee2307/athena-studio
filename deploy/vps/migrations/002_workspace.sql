@@ -1,8 +1,6 @@
 -- Athena-owned PostgreSQL authorization tables. Apply AFTER 001_better_auth.sql.
 -- No end-user can modify membership via any public route.
 -- Auth tables are accessed only through the private API using athena_app role.
-BEGIN;
-
 CREATE TABLE athena_workspace (
  id text PRIMARY KEY CHECK(length(id) BETWEEN 8 AND 128),
  title text NOT NULL CHECK(length(title) BETWEEN 1 AND 160),
@@ -29,4 +27,3 @@ GRANT SELECT ON athena_workspace,athena_membership TO athena_app;
 -- Only a separately audited admin operation can add, change or remove roles.
 -- No GRANT INSERT/UPDATE/DELETE on Athena membership/workspace to the web app.
 REVOKE CREATE ON SCHEMA public FROM PUBLIC;
-COMMIT;

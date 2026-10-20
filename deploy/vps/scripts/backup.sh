@@ -1,30 +1,38 @@
 #!/usr/bin/env bash
-# Operator-triggered encrypted PostgreSQL backup. No cron or live mutation by default.
+# Streaming encrypted dump: never creates a plaintext archive.
 set -Eeuo pipefail
 umask 077
-ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-cd "$ROOT"
 : "$ATHENA_BACKUP_DIR"
 : "$ATHENA_BACKUP_AGE_RECIPIENT"
 : "$ATHENA_BACKUP_OFFSITE_ACK"
 : "$ATHENA_COMPOSE_CONFIG"
-[[ "$ATHENA_BACKUP_OFFSITE_ACK" == "true" ]] || { echo "Offsite backup not acknowledged" >&2; exit 2; }
-[[ -d "$ATHENA_BACKUP_DIR" ]] || { echo "Backup destination missing; refusing fallback onto VPS disk" >&2; exit 2; }
-for bin in docker age sha256sum mktemp; do command -v "$bin" >/dev/null || { echo "$bin unavailable" >&2; exit 2; }; done
-stamp="$(date -u +%Y%m%dT%H%M%SZ)"
-file="$ATHENA_BACKUP_DIR/athena-identity-$stamp.age"
-tmp="$(mktemp "$ATHENA_BACKUP_DIR/.athena-pgdump-XXXXXXXX")"
-cleanup(){ rm -f -- "$tmp" "$file.part"; }
+if [[ "$ATHENA_BACKUP_OFFSITE_ACK" != "true" ]];then
+ echo "Refusing backup without explicit offsite acknowledgment" >&2;exit 2
+fi
+for bin in docker age sha256sum mktemp mountpoint;do
+ command -v "$bin" >/dev/null || { echo "Missing backup dependency: $bin" >&2;exit 2; }
+done
+[[ -d "$ATHENA_BACKUP_DIR" && ! -L "$ATHENA_BACKUP_DIR" ]] || {
+ echo "Backup directory must exist and not be a symlink" >&2;exit 2;
+}
+mountpoint -q "$ATHENA_BACKUP_DIR" || {
+ echo "Backup target is not an independent mountpoint; refusing VPS-local fallback" >&2;exit 2;
+}
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT"
+[[ -f "$ATHENA_COMPOSE_CONFIG" ]] || { echo "Missing private Compose environment" >&2;exit 2; }
+file="$(mktemp "$ATHENA_BACKUP_DIR/athena-identity-$(date -u +%Y%m%dT%H%M%SZ)-XXXXXXXX.age.part")"
+cleanup(){ rm -f -- "$file"; }
 trap cleanup EXIT
+# Pipefail catches pg_dump and age errors. Never publish a partial archive.
 docker compose --env-file "$ATHENA_COMPOSE_CONFIG" -f compose.yaml exec -T postgres \
-  pg_dump --username postgres --dbname athena_identity --format custom --no-owner --no-acl > "$tmp"
-[[ -s "$tmp" ]] || { echo "Empty pg_dump; refusing publication" >&2; exit 2; }
-docker compose --env-file "$ATHENA_COMPOSE_CONFIG" -f compose.yaml exec -T postgres \
-  pg_restore --list < "$tmp" >/dev/null
-age --encrypt --recipient "$ATHENA_BACKUP_AGE_RECIPIENT" --output "$file.part" "$tmp"
-[[ -s "$file.part" ]] || { echo "Encrypted backup missing" >&2; exit 2; }
-chmod 600 "$file.part"
-mv -- "$file.part" "$file"
-(cd "$ATHENA_BACKUP_DIR" && sha256sum "$(basename "$file")" > "$(basename "$file").sha256")
-echo "Encrypted archive and SHA256 manifest created on the offsite destination."
-echo "Recovery is NOT verified until an isolated restore drill succeeds."
+  pg_dump --username postgres --dbname athena_identity --format custom --no-owner --no-acl |
+ age --encrypt --recipient "$ATHENA_BACKUP_AGE_RECIPIENT" --output "$file"
+[[ -s "$file" ]] || { echo "Encrypted output empty; refusing to publish" >&2;exit 2; }
+chmod 600 "$file"
+final="$(printf %s "$file" | sed 's/\.part$//')"
+mv -- "$file" "$final"
+trap - EXIT
+(cd "$ATHENA_BACKUP_DIR" && sha256sum "$(basename "$final")" > "$(basename "$final").sha256")
+echo "Encrypted archive saved on independently mounted destination."
+echo "Recovery remains unverified until an isolated restore drill succeeds."

@@ -10,6 +10,8 @@ services:
       POSTGRES_PASSWORD_FILE: /run/secrets/athena_pg_admin_password
     command: ["postgres","-c","max_connections=30","-c","shared_buffers=128MB","-c","work_mem=4MB","-c","maintenance_work_mem=32MB","-c","max_wal_size=512MB","-c","password_encryption=scram-sha-256"]
     secrets: [athena_pg_admin_password,athena_pg_password]
+    # Bind-mounted file secrets: non-root containers must be able to READ them.
+    # Operator locks the host secrets DIRECTORY to root:root 0700.
     volumes:
       - identity_db:/var/lib/postgresql/data
       - ./init/01-roles.sh:/docker-entrypoint-initdb.d/01-roles.sh:ro
