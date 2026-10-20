@@ -4,6 +4,12 @@ import { Footer } from "@/components/layout/Footer";
 import { ExperienceEffects } from "@/components/experience/ExperienceEffects";
 import { PageTransition } from "@/components/experience/PageTransition";
 import { createMetadata } from "@/lib/metadata";
+// Self-hosted fonts with explicit Vietnamese Unicode coverage (no external font CDN).
+import "@fontsource/be-vietnam-pro/400.css";
+import "@fontsource/be-vietnam-pro/500.css";
+import "@fontsource/be-vietnam-pro/600.css";
+import "@fontsource/be-vietnam-pro/700.css";
+import "@fontsource/noto-serif/400-italic.css";
 import "@/app/globals.css";
 
 export const metadata: Metadata = {

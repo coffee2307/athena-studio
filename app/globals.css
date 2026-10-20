@@ -2,13 +2,13 @@
 :root{--ink:#111213;--text:#202123;--secondary:#62656a;--light:#ffffff;--paper:#f6f6f4;--panel:#ececea;--border:#dedfdd;--gutter:clamp(20px,4.8vw,78px);--content:1480px;--easing:cubic-bezier(.22,1,.36,1)}
 *,*:before,*:after{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;color:var(--ink);background:var(--light);font-family:"Segoe UI",Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+body{margin:0;color:var(--ink);background:var(--light);font-family:"Be Vietnam Pro","Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased;font-synthesis:weight;font-kerning:normal;text-rendering:optimizeLegibility}
 button,input,textarea,select{font:inherit}button,a{-webkit-tap-highlight-color:transparent}button{cursor:pointer}
 a{color:inherit;text-decoration:none}
 ::selection{background:#111;color:white}
 :focus-visible{outline:2px solid #111;outline-offset:4px}
 h1,h2,h3,h4,p{margin:0}h1,h2,h3{font-weight:600;letter-spacing:-.065em}
-em{font-family:"Times New Roman","Noto Serif",Georgia,serif;font-weight:400;letter-spacing:-.025em}
+em{font-family:"Noto Serif",Georgia,serif;font-weight:400;letter-spacing:-.025em}
 .container{width:min(calc(100% - var(--gutter)*2),var(--content));margin-inline:auto}
 .skip-link{position:fixed;top:-130px;left:15px;z-index:999;background:#111;color:#fff;padding:12px 18px}.skip-link:focus{top:12px}
 .eyebrow,.section-index,.hero-overline,.hero-bottom,.directory-number,.service-footer,.product-state,.pv-top,.pv-bottom,.method-item>span,.foot-label,.footer-bottom,.page-kicker,.service-meta,.small-index,.field-coordinate,.field-side-note{font-size:10px;line-height:1.65;font-weight:650;letter-spacing:.135em;text-transform:uppercase}
@@ -686,3 +686,27 @@ em{font-family:"Times New Roman","Noto Serif",Georgia,serif;font-weight:400;lett
 
 /* Accessibility: legible lead text on SitePulse's dark editorial section. */
 .sitepulse-page .detail-dark .detail-intro .lead-text{color:#e0e0e0}
+
+/* PHASE 8B — Vietnamese typography support.
+   Be Vietnam Pro covers Vietnamese marks and the Noto Serif italic cut keeps the
+   editorial accent. Reduce aggressive display tracking to protect stacked marks. */
+:root{--vi-display-tracking:-.035em}
+h1,h2,h3{font-kerning:normal;overflow-wrap:break-word}
+.hero-copy h1,.intro-content h2,.section-heading h2,.product-copy h2,
+.closing-inner h2,.footer-statement h2,.case-section-head h2,
+.case-card-info h3,.case-story-row h2,.case-detail-title h1,
+.auth-aside h2,.auth-panel h1,.account-page h1,.account-section h2,
+.legal-content h2,.legal-cards h2,.detail-tile h3{
+  letter-spacing:var(--vi-display-tracking);
+  line-height:1.16;
+}
+.hero-copy h1 em,.intro-content h2 em,.closing-inner h2 em,
+.product-copy h2 em{letter-spacing:-.012em}
+@media(max-width:767px){
+  .hero-copy h1,.intro-content h2,.section-heading h2,.product-copy h2,
+  .closing-inner h2,.footer-statement h2,.case-section-head h2,
+  .case-story-row h2,.auth-aside h2,.auth-panel h1,.account-page h1{
+    letter-spacing:-.025em;
+    line-height:1.2;
+  }
+}
