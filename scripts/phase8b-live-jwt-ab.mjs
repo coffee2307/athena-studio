@@ -43,6 +43,7 @@ export async function runJwtABReadOnly(env,request=fetch){
  for(const u of users){
   const identity=await get(`${target.origin}/auth/v1/user`,u);
   if(!identity||identity.id!==u.userId)throw new Error("jwt_subject_mismatch");
+  if(!identity.email_confirmed_at)throw new Error("auth_email_unverified");
  }
 
  async function compare(resource,id,owner,other){

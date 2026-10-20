@@ -18,13 +18,13 @@ const env=()=>({
  ATHENA_A_WORKSPACE_ID:WA,ATHENA_B_WORKSPACE_ID:WB,
  ATHENA_A_PROJECT_ID:PA,ATHENA_B_PROJECT_ID:PB
 });
-function mockProvider({leak=false}={}){
+function mockProvider({leak=false,unverified=false}={}){
  const calls=[];
  const fetcher=async(url,opts)=>{
   calls.push({url,opts});
   const a=opts.headers.Authorization===`Bearer ${jwtA}`;
   const current=a?{id:A,workspace:WA,project:PA}:{id:B,workspace:WB,project:PB};
-  if(url.endsWith("/auth/v1/user"))return {status:200,json:async()=>({id:current.id})};
+  if(url.endsWith("/auth/v1/user"))return {status:200,json:async()=>({id:current.id,email_confirmed_at:unverified?null:"2026-10-20T00:00:00Z"})};
   const id=new URL(url).searchParams.get("id").slice(3);
   const rows=(leak||id===current.workspace||id===current.project)?[{id}]:[];
   return {status:200,json:async()=>rows};
@@ -47,6 +47,7 @@ test("Verifier fails closed when tenant data leaks or accounts are not configure
  const {fetcher}=mockProvider({leak:true});
  await assert.rejects(()=>runJwtABReadOnly(env(),fetcher),/tenant_read_isolation_failed/);
  await assert.rejects(()=>runJwtABReadOnly({...env(),ATHENA_A_JWT:""},fetcher),/verified_test_jwts_required/);
+ await assert.rejects(()=>runJwtABReadOnly(env(),mockProvider({unverified:true}).fetcher),/auth_email_unverified/);
  await assert.rejects(()=>runJwtABReadOnly({...env(),ATHENA_B_USER_ID:A},fetcher),/A_and_B_must_be_distinct/);
  await assert.rejects(()=>runJwtABReadOnly({...env(),NEXT_PUBLIC_ATHENA_AUTH_ENABLED:"true"},fetcher),/public_features_must_remain_disabled/);
  await assert.rejects(()=>runJwtABReadOnly({...env(),ATHENA_B_PROJECT_ID:""},fetcher),/both_project_ids_required_or_neither/);
