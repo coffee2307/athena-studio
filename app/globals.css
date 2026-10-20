@@ -717,3 +717,26 @@ h1,h2,h3{font-kerning:normal;overflow-wrap:break-word}
 .auth-recovery p{color:#595d62;line-height:1.8}
 .auth-recovery a{text-decoration:underline;text-underline-offset:4px;font-weight:600}
 .auth-recovery a:focus-visible{outline-offset:3px}
+
+/* Local-only independent identity QA. Not linked from public navigation. */
+.identity-lab-page{min-height:80vh;background:#f6f6f4;padding:clamp(52px,9vw,110px) 22px 140px;display:flex;align-items:flex-start;justify-content:center}
+.identity-lab{width:min(100%,650px);background:#fff;border:1px solid #dfdfdc;padding:clamp(28px,5vw,65px);box-shadow:0 15px 60px rgba(0,0,0,.045);display:flex;flex-direction:column;gap:20px}
+.identity-lab .small-index{font-size:10px;color:#5e5e5e;letter-spacing:.16em}
+.identity-lab h1{font-size:clamp(40px,6.5vw,65px);line-height:1.18;letter-spacing:-.035em}
+.identity-lab h1 em{font-family:"Noto Serif",Georgia,serif;color:#626262}
+.identity-lab-caption{color:#53565a;font-size:14px;line-height:1.85}
+.identity-lab-social{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.identity-lab-social button{background:#fff;border:1px solid #bbb;border-radius:100px;padding:17px 19px;text-align:center;font-size:13px;cursor:pointer;min-height:54px}
+.identity-lab-social button:not(:disabled):hover{background:#eee}
+.identity-lab-form{display:flex;flex-direction:column;gap:20px;border-top:1px solid #ddd;padding-top:25px}
+.identity-lab-form label{font-size:12px;font-weight:600;display:flex;flex-direction:column;gap:10px}
+.identity-lab-form input{font:inherit;font-size:15px;border:1px solid #bcbcbc;background:#fafaf9;padding:15px 16px;border-radius:6px;width:100%;min-height:52px}
+.identity-lab-form input:focus-visible,.identity-lab-social button:focus-visible,.identity-lab-button:focus-visible{outline:2px solid #111;outline-offset:3px}
+.identity-lab-form input:disabled{color:#666}
+.identity-lab-button{width:100%;justify-content:center;min-height:55px;margin-top:5px}
+.identity-lab-button:disabled,.identity-lab-social button:disabled{opacity:.55;cursor:not-allowed}
+.identity-lab-back{font-size:12px;text-decoration:underline;text-underline-offset:3px;align-self:center;background:none;border:0;cursor:pointer}
+.identity-lab-notice{font-size:13px;line-height:1.7;padding:15px 17px;border-left:3px solid #58685b;background:#e6ede7}
+.identity-lab-notice.is-error{border-color:#b75746;background:#f5ebe8;color:#633528}
+.identity-lab-confirmed{padding:22px;border:1px solid #b4c8b9;background:#eaf1eb;font-size:14px;line-height:1.7}
+.identity-lab-foot{border-top:1px solid #e1e1dd;padding-top:20px;font-size:12px;line-height:1.8;color:#626262}
