@@ -75,3 +75,14 @@ No actual VPS or cloud DB provisioned. No live Linux Docker stack or full backup
 - For a Linux host using Docker Compose file-backed secrets, note that ownership/mode remapping may be ignored. Secure the **host directory** containing secrets with root-only permissions (0700), keep the three files read-only inside containers (typically mode 0444 under that root-protected directory), and verify readability as the non-root application user. The previous recommendation for 0600 root-owned files was not generally compatible with such bind mounts.
 
 Full acceptance checklist: ../../docs/PHASE8C5_VPS_RELIABILITY.md.
+
+
+## Phase 8C.6 — optional SMTP relay and mail-delivery resilience
+
+- SMTP is an **optional** transport, not a mandatory paid service. Leave the main Compose file untouched; after obtaining explicit approval, add the overlay named compose.smtp.yaml with ATHENA_SMTP_HOST (approved FQDN), ATHENA_SMTP_PORT (587 or 465), ATHENA_SMTP_SENDER (verified From address), ATHENA_SMTP_USERNAME and a private secret file secrets/athena_smtp_password. Do not commit the secret; keep the host secrets directory inaccessible to ordinary users.
+- Gmail can remain the primary method while SMTP is a fallback, or SMTP can be used **without any Google API app**. If both are configured, the From address must match to prevent identity confusion.
+- Athena falls back **only** for definite rejection before acceptance (Gmail OAuth refresh failure, Gmail 401 or explicit quota 429). No automatic retry or second provider is used after an uncertain SMTP/Gmail send, avoiding double codes and out-of-order emails.
+- Gmail short-lived access tokens are cached in process memory and concurrent token refreshes are coalesced; no refresh token is persisted in a separate cache.
+- The localhost-only Identity Lab adds a 60-second resend countdown; this is merely a UX convenience. Backend OTP attempt and request rate limits remain enforced in Better Auth's database tables.
+- Real OAuth callbacks and transactional inbox deliverability have **not** been checked. Do not activate public signup until the customer-facing portal, verified mail sender, recovery behavior and real TLS cookies have all passed separate acceptance.
+- The standalone Next.js runtime continues to host the API, so SMTP introduces no Redis, background job server or extra public service.

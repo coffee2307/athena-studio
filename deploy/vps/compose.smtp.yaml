@@ -1,0 +1,15 @@
+# Optional SMTP relay. For production, require TLS and independently managed credentials.
+# This adapter can point to any SMTP provider; it does not use Supabase Auth.
+services:
+  web:
+    environment:
+      ATHENA_SMTP_ENABLED: "true"
+      ATHENA_SMTP_HOST: ${ATHENA_SMTP_HOST:?Supply an owner-approved SMTP hostname}
+      ATHENA_SMTP_PORT: ${ATHENA_SMTP_PORT:-587}
+      ATHENA_SMTP_SENDER: ${ATHENA_SMTP_SENDER:?Supply verified sender address}
+      ATHENA_SMTP_USERNAME: ${ATHENA_SMTP_USERNAME:?Supply sender login}
+      ATHENA_SMTP_PASSWORD_FILE: /run/secrets/athena_smtp_password
+    secrets: [athena_smtp_password]
+secrets:
+  athena_smtp_password:
+    file: ./secrets/athena_smtp_password

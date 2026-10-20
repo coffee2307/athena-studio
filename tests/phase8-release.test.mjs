@@ -9,7 +9,7 @@ const fixture=()=>{
 };
 test("Phase 8A enforces fail-closed account, operations and SitePulse flags",()=>{
  const base=fixture();
- assert.equal(assertSafeExampleEnv(base).flagsDisabled,9);
+ assert.equal(assertSafeExampleEnv(base).flagsDisabled,10);
  for(const key of REQUIRED_DISABLED){
   assert.throws(()=>assertSafeExampleEnv(base.replace(key+"=false",key+"=true")),new RegExp(key));
   assert.throws(()=>assertSafeExampleEnv(base.replace(key+"=false","")),new RegExp(key));
@@ -32,7 +32,7 @@ test("No approval or private data are silently packaged into a tracked release",
 });
 test("Release candidate manifest communicates held gates without falsely claiming production",()=>{
  const doc=createReleaseEvidence({head:"a",base:"b",ancestry:[{phase:"Phase7",sha:"def"}],
-  env:{flagsDisabled:9,providerValuesBlank:22},trackedCount:200});
+  env:{flagsDisabled:10,providerValuesBlank:26},trackedCount:200});
  assert.equal(doc.codeStatus,"candidate-not-production-approved");
  assert.ok(doc.holds.includes("no-production-deploy"));
  assert.ok(doc.notes.some(s=>s.includes("CI pass")));
@@ -60,5 +60,5 @@ test("Actual local ancestry and provider defaults pass on Phase 8A integration b
  assert.equal(result.baseMain,"cc3be136de11d748cc71bbb0f2895fe494d35d17");
  assert.equal(result.verifiedAncestry.length,13);
  assert.ok(result.trackedFileCount>100);
- assert.equal(result.defaultFlagsOff,9);
+ assert.equal(result.defaultFlagsOff,10);
 });
