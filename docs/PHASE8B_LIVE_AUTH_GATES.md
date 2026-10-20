@@ -1,57 +1,54 @@
-# Athena Studio — Phase 8B, live HTTP Auth boundary QA
+# Athena Studio — Phase 8B live Supabase Auth and tenant-isolation QA
 
 Date: 2026-10-20 (Asia/Ho_Chi_Minh)
-Scope: owner-authorized **isolated Supabase staging** `vsykqdlfmtndjwnfmfph`.
-Source: `feat/athena-phase8b-live-readonly-20261020` (stacked on live RLS hardening #16).
-**No production deploy, no public signup UI, no application document writes, no Storage objects and no paid resources.** Two owner-approved controlled Auth signups were subsequently performed for A/B testing; see below.
+Project: Athena Studio isolated Supabase staging `vsykqdlfmtndjwnfmfph` (Mumbai, `ap-south-1`).
+Git: stacked Draft PR #17 on Draft PR #16. **No production deployment, DNS changes, public web Auth, paid service or real customer data.**
 
-## Completed: live anonymous Data API negative checks
-- Script: `scripts/phase8b-live-anon-readonly.mjs`.
-- Local CLI invocation: use Node 24+ and approved private environment; set `ATHENA_STAGING_PROJECT_REF=vsykqdlfmtndjwnfmfph`. Never put credentials into the repository.
-- The script enforces exact project URL, non-secret publishable key, disabled public feature flags and an explicit `--allow-live-readonly` switch.
-- Only **GET** requests with `apikey` header; **no Authorization bearer publishable key**. Response bodies and credential values are never logged.
-- 11/11 protected tables returned **HTTP 401** from the real project; test exit code **0**.
-- First run was NO-GO (one 400 caused by the test selecting a nonexistent `id` column on the composite-key membership table; one transient network error). Corrected to `select=*` and implemented one bounded retry for network failures; re-run yielded **11/11 401**, no application changes.
-- A `200` with an empty result is still treated as failure: empty tables cannot establish that anonymous access is properly denied.
-- A `404` is only **not exposed**, not proof of an effective row-level policy. This is an endpoint boundary check, not RLS multi-tenant proof.
+## Scope and observed results
 
-## Controlled A/B signup — verified on real Supabase
-- Two specifically approved test email accounts were created with standard Supabase Auth `signUp` (publishable key, not service role). Both returned an Auth user with no immediate session, so email verification remains required. This action was owner-directed and is NOT public website signup.
-- Read-back: **2 Auth users; 2 user profiles; 0 workspaces; 0 memberships; 0 Storage objects**. Both users had `email_confirmed_at IS NULL` and no sign-in session at the time of inspection.
-- Strong random passwords were generated separately and stored under the local Windows user's DPAPI encryption in gitignored `.qa/` files; never committed, logged or placed in docs. Neither account has been granted a project or studio admin role.
-- Auth signup API acceptance is not proof that confirmation mail reached both inboxes. The human inbox owner must verify delivery and click each confirmation link before the authenticated tenant access test proceeds.
-- Supabase Security Advisor now also flags **WARN: leaked-password protection disabled**. This capability requires a paid Pro plan according to Supabase documentation; no paid upgrade is authorized. Random high-entropy passwords and no public Auth UI reduce staging risk but do not satisfy production acceptance. See https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection.
+| Gate | Live observation | Assessment |
+| --- | --- | --- |
+| Anonymous REST boundary | 11/11 Athena tables returned HTTP 401 | PASS, endpoint boundary only |
+| Owner-approved test Auth | 2 independently confirmed email identities, 2 profiles | PASS |
+| JWT sign-in | 2/2 successful Supabase email+password sessions with real JWTs | PASS |
+| Workspace A/B RLS | A sees only A, B sees only B: 4/4 read assertions | PASS |
+| Project A/B RLS | A sees only A, B sees only B: 4/4 read assertions | PASS |
+| Cross-project write | A cannot insert ticket into B project | PASS |
+| Author spoof | A cannot insert ticket using B's author UUID | PASS |
+| Privilege escalation | Client A cannot create a studio/admin membership | PASS |
+| Profile privacy | A cannot read B profile | PASS |
+| Authorized client write | A and B each successfully created one own ticket | PASS |
+| Ticket/message isolation | B cannot read A ticket, post into it, or read A's message; A can add its own message | PASS |
+| Document metadata privilege | Client cannot register project document metadata | PASS |
+| Storage client upload denial | HTTP 400 with provider status 403, code `AccessDenied`; no object created | PASS, denial only |
+| Admin upload / signed URLs | No authorized studio-admin fixture or real files | NOT TESTED |
+| Browser OAuth, custom SMTP, restore rehearsal | No live acceptance evidence | NOT TESTED |
 
-## Prepared, NOT executed on live Supabase: real JWT A/B read checks
-- Script: `scripts/phase8b-live-jwt-ab.mjs`. Runs only after approved, independently verified A/B test accounts with different client workspaces exist.
-- Requires A/B JWTs, real Supabase Auth user UUIDs, A/B workspace UUIDs and optionally A/B project UUIDs **in the operator's transient private environment**.
-- Before querying tenant data, validates both identities via `GET /auth/v1/user`; checks exact expected subject UUIDs.
-- For each workspace and (if both project IDs supplied) project: each authorized user must see its own row and not the other user's row.
-- Rejects missing credentials, identical user/workspace/project IDs, wrong Supabase project and enabled public flags. All calls are GET; returns a secret-free summary.
-- Two controlled owner-approved Auth accounts now exist and both remain **email unconfirmed** at last read-back. Consequently **no real JWT A/B proof**; local mocked tests only confirm harness behavior. No browser write, spoofing, Storage signed URL, Google OAuth, SMTP delivery, backup/restore or consent testing has been accepted.
+## Controlled test data (read back from PostgreSQL)
 
-## Local verification and commands
-```powershell
-cd 'F:\Athena Studio'
-npm run test:unit
-npm run lint
-npm run typecheck
+- Auth users: **2**, both verified; automatic profiles: **2**.
+- Isolated client workspaces: **2**; role `client` memberships: **2**; studio-admin memberships: **0**.
+- Synthetic projects: **2**; tickets: **2**; ticket messages: **1**.
+- Document metadata: **0**; bucket `athena-project-files` objects: **0**.
+- No real customer data. Synthetic fixtures are retained temporarily for the remaining Phase 8B validation and must be deleted at the final staging cleanup gate.
 
-# Real staging boundary check (private env file is ignored by Git)
-$env:ATHENA_STAGING_PROJECT_REF='vsykqdlfmtndjwnfmfph'
-node --env-file=.env.local scripts/phase8b-live-anon-readonly.mjs --allow-live-readonly
-Remove-Item Env:ATHENA_STAGING_PROJECT_REF
+## Execution and evidence boundaries
 
-# Only AFTER verified A/B users and workspace IDs exist:
-# Inject ATHENA_A_JWT, ATHENA_B_JWT, ATHENA_A_USER_ID, ATHENA_B_USER_ID,
-# ATHENA_A_WORKSPACE_ID and ATHENA_B_WORKSPACE_ID securely; optional A/B project IDs.
-# node --env-file=.env.local scripts/phase8b-live-jwt-ab.mjs --allow-live-readonly
-```
+- Real A/B test addresses were explicitly provided by the owner, but exact email addresses, user UUIDs, private passwords and JWTs must never be recorded in public Git documentation.
+- Standard Supabase Auth `signUp` used the publishable API key. Both signups later had `email_confirmed_at` set by Supabase; real password sign-in with separate JWTs then succeeded.
+- Each randomly generated high-entropy testing password is encrypted at rest with Windows DPAPI under gitignored `.qa/`. Tokens are obtained transiently by `signInWithPassword` and are not persisted or printed.
+- Shared, tracked `scripts/phase8b-live-jwt-ab.mjs` uses read-only REST requests, validates both subjects through `/auth/v1/user`, and explicitly requires `email_confirmed_at`. The private per-machine harness obtained both valid JWTs and returned `pass=true`, `verifiedWorkspaceReads=4`, `verifiedProjectReads=4`.
+- A separate gitignored private QA harness performed controlled positive/negative tenant writes. The initial all-in-one assertion at Storage expected only HTTP 401/403 and thus exited nonzero when Storage returned HTTP 400. PostgreSQL confirmed 0 stored objects and 0 document rows. A focused follow-up tested the documented denial payload, yielding `HTTP 400 / provider status 403 / AccessDenied` and exit 0, consistent with Supabase Storage logs. Do **not** mistake the outer HTTP code for successful authorization.
+- No `service_role` key was used by the sign-in or JWT tests. Management SQL was used only for explicitly scoped, synthetic QA fixtures and read-back. No historical migrations were modified.
+- GitHub CI and local QA remain separate from authenticated provider acceptance; recheck GitHub Actions for each newly pushed commit.
 
-## Gate / next step
-1. **Completed:** The owner provided two test inboxes; standard Supabase Auth `signUp` succeeded for A and B. Each user has an automatically created profile and a separate locally Windows-DPAPI-protected random password. Credentials and identifiers remain in gitignored local tooling only, never in GitHub.
-2. **Pending human email action:** Verify both signup emails. After the server confirms `email_confirmed_at` for both, an authorized operator may provision two isolated `kind='client'` workspaces with separate memberships. Never prematurely grant a studio admin role or expose service keys.
-3. Run JWT read isolation; then extend separately to controlled write/author-spoofing and private Storage checks, cleaning synthetic data afterward.
-4. Keep all public Auth, Google, Dashboard and Operations flags disabled until all mandatory provider/backup/legal gates pass.
+## Remaining security and release holds
 
-A successful isolated HTTP probe must **not** be called Phase 8B completion, commercial readiness or production security acceptance.
+1. **Studio administrator:** Set up one independently verified admin identity and controlled studio workspace. Never elevate an unverified test account or grant admin automatically. Only after approval, exercise privileged document registration, real Storage upload, download, signed URL isolation and controlled deletion.
+2. **Provider integration:** Validate real browser login sessions, Google OAuth callbacks, custom SMTP/transactional email, spam controls and failure handling on isolated HTTPS staging.
+3. **Recovery/compliance:** Perform backup/restore rehearsal, retention/deletion cleanup, human accessibility/security QA, privacy notice and consent acceptance.
+4. **Security advisor:** Supabase currently also reports WARN `auth_leaked_password_protection`. The leaked-password protection option requires Pro plan or above; no paid upgrade is authorized. Staging uses random high-entropy passwords but cannot claim full production security acceptance. [Supabase password security guidance](https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection).
+5. **Public signup:** `disable_signup=false` was observed on the Supabase Auth API, although the Athena web Auth feature flag remains OFF. Before production, explicitly manage provider-level signup eligibility, abuse protection and deployment gates; a disabled website UI is not a complete provider-level signup block.
+6. **Change control:** Keep PR #17 as Draft, do not merge into `main`, do not connect production customers, and do not turn on Client Dashboard yet.
+
+**Current result:** Phase 8B *real JWT A/B read, controlled write authorization and negative Storage-upload scope* have live evidence, but **Phase 8B overall remains NO-GO** until privileged Storage, mail/OAuth, operational recovery and production controls pass.
