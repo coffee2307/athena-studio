@@ -25,6 +25,12 @@ test("Storage SQL: signed-link eligibility follows private metadata + project RL
   await db.exec((await readFile(new URL("../docs/db/phase5_identity.sql",import.meta.url),"utf8")).replace("create extension if not exists pgcrypto;",""));
   await db.exec(await readFile(new URL("../docs/db/phase6_operations.sql",import.meta.url),"utf8"));
   await db.exec(await readFile(new URL("../docs/db/phase6_storage.sql",import.meta.url),"utf8"));
+  const patch=await readFile(new URL("../docs/db/phase8b_security_hardening.sql",import.meta.url),"utf8");
+  await db.exec(patch); // Apply once, as recorded in Supabase migration history.
+  const invoker=await db.query("select prosecdef from pg_proc where proname=$1",["athena_discard_failed_document"]);
+  assert.equal(invoker.rows[0].prosecdef,false);
+  const workspacePolicies=await db.query("select count(*)::int as n from pg_policies where schemaname='public' and tablename='athena_workspaces' and cmd='SELECT'");
+  assert.equal(workspacePolicies.rows[0].n,1);
   await db.exec(`insert into auth.users(id,raw_user_meta_data) values
    ('${OWNER}','{"full_name":"Operator"}'),('${A}','{"full_name":"Client A"}'),('${B}','{"full_name":"Client B"}');
    insert into public.athena_workspaces(id,name,kind) values ('${STUDIO}','Athena','studio'),('${WA}','A company','client'),('${WB}','B company','client');

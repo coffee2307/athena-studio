@@ -65,6 +65,7 @@ test("No secrets in inventory JSON; missing/invalid provider values are reported
 test("Ordered migration inventory hashes real source; altered list fails preflight",()=>{
  const m=migrationsWithSha256();
  assert.deepEqual(m.map(x=>x.path),REQUIRED_MIGRATIONS);
+ assert.equal(m.length,5);
  assert.ok(m.every(x=>/^[a-f0-9]{64}$/.test(x.sha256)));
  assert.equal(stagingReadiness(good(),m.slice(1)).readyForProviderIntegration,false);
 });

@@ -133,3 +133,7 @@ Chủ dự án đã phê duyệt mở rộng [Phase 8](docs/PHASE8_PROPOSAL.md) 
 - `npm run staging:inventory`: xem các điều kiện cấu hình còn thiếu mà không lộ secrets. Dự kiến NO-GO khi chưa cấu hình provider.
 - `npm run staging:preflight`: chỉ xác nhận đủ cấu hình để **bắt đầu kiểm định staging**, không thay thế email thật, OAuth, RLS A/B, backup hay phê duyệt vận hành.
 - Không áp dụng migration, bật Auth/Dashboard, tạo provider, đổi DNS hoặc phát sinh chi phí bằng các lệnh trên.
+
+### Phase 8B — Real Supabase staging security hardening
+
+Đã khởi tạo 5 migration (Phase 3/5/6/Storage và `phase8b_security_hardening.sql`) trên dự án Supabase Athena Studio riêng (Mumbai, Free). Xem [báo cáo môi trường thực](docs/PHASE8B_LIVE_SUPABASE_QA.md). Bộ kiểm tra `npm run staging:inventory` kiểm tra cấu hình của **máy đang chạy**, không tự nhận trạng thái thực tế của dự án Supabase; real Auth/JWT và email vẫn chưa nghiệm thu. Không tự bật dịch vụ hoặc triển khai production.

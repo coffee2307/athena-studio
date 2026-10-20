@@ -13,7 +13,8 @@ export const REQUIRED_MIGRATIONS=Object.freeze([
  "docs/db/phase3_inquiries.sql",
  "docs/db/phase5_identity.sql",
  "docs/db/phase6_operations.sql",
- "docs/db/phase6_storage.sql"
+ "docs/db/phase6_storage.sql",
+ "docs/db/phase8b_security_hardening.sql"
 ]);
 export const PRIVATE_ENV=Object.freeze([
  "SUPABASE_SERVICE_ROLE_KEY","RESEND_API_KEY","UPSTASH_REDIS_REST_TOKEN",
