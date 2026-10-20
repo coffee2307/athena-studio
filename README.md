@@ -126,3 +126,10 @@ Bật SitePulse phải có hồ sơ chấp thuận ngoài Git và `.qa/sitepulse
 ## Phase 8 — đã được duyệt phạm vi, đang triển khai 8A
 
 Chủ dự án đã phê duyệt mở rộng [Phase 8](docs/PHASE8_PROPOSAL.md) và bắt đầu workstream 8A tích hợp release. Xem [bảng GO/NO-GO](docs/PHASE8_ACCEPTANCE_MATRIX.md), [báo cáo tích hợp 8A](docs/PHASE8A_INTEGRATION_REPORT.md), [bằng chứng QA 8A](docs/PHASE8A_QA.md) và chạy `npm run release:verify` để xác minh chuỗi commit, tệp riêng tư và các cờ tắt mặc định. Chưa bật Auth, Dashboard, SitePulse công khai; chưa merge `main`, DNS, hosting hoặc thanh toán.
+
+## Phase 8B — Staging preflight (cấu hình, chưa kết nối dịch vụ thật)
+
+- [Runbook môi trường staging và các cổng kiểm định](docs/PHASE8B_STAGING_RUNBOOK.md)
+- `npm run staging:inventory`: xem các điều kiện cấu hình còn thiếu mà không lộ secrets. Dự kiến NO-GO khi chưa cấu hình provider.
+- `npm run staging:preflight`: chỉ xác nhận đủ cấu hình để **bắt đầu kiểm định staging**, không thay thế email thật, OAuth, RLS A/B, backup hay phê duyệt vận hành.
+- Không áp dụng migration, bật Auth/Dashboard, tạo provider, đổi DNS hoặc phát sinh chi phí bằng các lệnh trên.

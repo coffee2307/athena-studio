@@ -18,7 +18,9 @@
     "sitepulse:summary": "node scripts/sitepulse-summary.mjs",
     "sitepulse:report": "node scripts/sitepulse-report.mjs",
     "sitepulse:pham-plan": "node scripts/sitepulse-pham-plan.mjs",
-    "release:verify": "node scripts/phase8-release-gates.mjs"
+    "release:verify": "node scripts/phase8-release-gates.mjs",
+    "staging:inventory": "node scripts/phase8-staging-preflight.mjs",
+    "staging:preflight": "node scripts/phase8-staging-preflight.mjs --require-configuration"
   },
   "dependencies": {
     "@supabase/ssr": "0.12.7",
