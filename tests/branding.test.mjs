@@ -26,8 +26,10 @@ test("generated favicon preserves official owl path vectors",async()=>{
 test("core UI copy and accessibility language are Vietnamese",async()=>{
  const home=await readFile(src("app/page.tsx"),"utf8");
  const layout=await readFile(src("app/layout.tsx"),"utf8");
- assert.match(home,/Nhìn xa/);
+ assert.match(home,/Website chưa hiệu quả/);
  assert.match(layout,/html lang="vi"/);
- assert.match(home,/TƯ DUY ATHENA/);
- assert.match(home,/BỐN|Bốn|Bốn hướng đi|Bốn năng lực|Bốn lĩnh vực|Bốn trụ cột|Bốn|Bốn|Bốn|Bốn|LĨNH VỰC CHUYÊN MÔN/);
+ assert.match(home,/DỊCH VỤ CHO DOANH NGHIỆP/);
+ assert.match(home,/Hướng xử lý cụ thể/);
+ assert.match(home,/KHI NÀO BẠN CẦN/);
+ assert.match(home,/không phải danh sách hợp đồng khách hàng Athena/);
 });
