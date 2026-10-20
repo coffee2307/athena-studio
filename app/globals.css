@@ -710,3 +710,10 @@ h1,h2,h3{font-kerning:normal;overflow-wrap:break-word}
     line-height:1.2;
   }
 }
+
+/* PHASE 8C - ATHENA IDENTITY RESILIENCE: accessible recovery, no vendor details */
+.auth-recovery{display:flex;flex-direction:column;gap:9px;border:1px solid #d5d5d2;background:#f4f4f1;padding:18px 20px;color:#303336;font-size:12px;line-height:1.8}
+.auth-recovery strong{font-size:13px;font-weight:650}
+.auth-recovery p{color:#595d62;line-height:1.8}
+.auth-recovery a{text-decoration:underline;text-underline-offset:4px;font-weight:600}
+.auth-recovery a:focus-visible{outline-offset:3px}
