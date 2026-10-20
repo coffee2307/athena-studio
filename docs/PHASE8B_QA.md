@@ -46,3 +46,7 @@ Automated gates must be recorded upon completion: ESLint, TypeScript, unit tests
 | Real provider connection, email/Google login, A/B real JWT, backup restore | **NOT RUN / BLOCKED** |
 
 Cloud GitHub CI on this new Phase 8B commit must pass separately. **Do not misstate this config-only increment as completion of Phase 8B staging.**
+
+## Live project follow-up — 20 October 2026
+
+The Supabase connection was refreshed and successfully enumerated the standalone Athena Studio Free project, ref `vsykqdlfmtndjwnfmfph`, PostgreSQL 17, region Mumbai. Five migrations now exist in live Supabase history. A new **security hardening** migration was applied after PGlite tests. Verified SQL catalog: cleanup function `SECURITY INVOKER`, exactly one workspace SELECT policy, six new FK indexes, zero Auth users/files. Supabase Security Advisor WARN count: zero (one intentional RLS/no-browser-policy INFO for lead intake). See [live QA](PHASE8B_LIVE_SUPABASE_QA.md). Neither real JWT tenant sessions nor provider emails have been validated.

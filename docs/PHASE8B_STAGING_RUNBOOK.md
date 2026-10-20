@@ -9,11 +9,12 @@ Status: **local configuration inventory implemented; real staging integrations r
 
 - `npm run staging:inventory`: safe, read-only inventory of fourteen configuration checks; reports missing check **names only**, never keys, domain ownership tokens or credential values.
 - `npm run staging:preflight`: strict read-only check; exits nonzero if prerequisites missing. A PASS means that **configuration appears sufficient to begin staging integration tests**, not that a provider is trusted, live or authorized for production.
-- Reproducible SHA-256 inventory of these existing SQL migration files **in application order**:
+- Reproducible SHA-256 inventory of these SQL migration files **in application order**:
   1. `phase3_inquiries.sql` — private lead intake
   2. `phase5_identity.sql` — Auth profiles, studio/customer workspace and RLS
   3. `phase6_operations.sql` — projects, tickets, audit and notifications
   4. `phase6_storage.sql` — private Storage bucket, policies, failed-upload cleanup
+  5. `phase8b_security_hardening.sql` — invoker cleanup, single workspace policy and missing-FK indexes
 - `.env.example` adds `ATHENA_STAGING_APPROVED=false`, `ATHENA_STAGING_ORIGIN=`, `ATHENA_STAGING_PROJECT_REF=`, requiring separate confirmation of an isolated HTTPS origin/project.
 - Rejects local or PHAM's live domain as a staging origin and refuses to mark readiness if Auth, Google, Operations or SitePulse are already enabled **before real staging acceptance**.
 - Offline tests ensure unknown secret values are not echoed in the JSON output, validate staging host isolation and migration hashes.
