@@ -122,3 +122,7 @@ Bật SitePulse phải có hồ sơ chấp thuận ngoài Git và `.qa/sitepulse
 - [Phạm vi, tần suất và cổng phê duyệt](docs/PHASE72_PHAM_PILOT_PROPOSAL.md)
 - [Mẫu xác nhận PHAM mặc định bị từ chối](docs/PHASE72_PHAM_CONSENT_DRAFT.json)
 - Chạy `npm run sitepulse:pham-plan` để xem **đề xuất hoàn toàn ngoại tuyến**, không gửi request HTTP/DNS và không kích hoạt SitePulse. Phải nhận phê duyệt riêng trước lần kiểm tra thật.
+
+## Đề xuất Phase 8 — chưa được duyệt
+
+Roadmap đã duyệt trong `docs/ATHENA_MASTER_ROADMAP.md` hiện dừng tại Phase 7. Để chuẩn bị giai đoạn tiếp theo mà không tự đổi phạm vi, xem [đề xuất Phase 8](docs/PHASE8_PROPOSAL.md) và [bảng trạng thái GO/NO-GO](docs/PHASE8_ACCEPTANCE_MATRIX.md). Đây chỉ là tài liệu rà soát tích hợp/ra mắt thương mại; không kích hoạt Auth, Dashboard, SitePulse, staging, DNS, thanh toán hay merge vào `main`. Chủ dự án cần duyệt phạm vi mới trước khi lập trình Phase 8.
