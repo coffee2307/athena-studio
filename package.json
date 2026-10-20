@@ -20,7 +20,9 @@
     "sitepulse:pham-plan": "node scripts/sitepulse-pham-plan.mjs",
     "release:verify": "node scripts/phase8-release-gates.mjs",
     "staging:inventory": "node scripts/phase8-staging-preflight.mjs",
-    "staging:preflight": "node scripts/phase8-staging-preflight.mjs --require-configuration"
+    "staging:preflight": "node scripts/phase8-staging-preflight.mjs --require-configuration",
+    "staging:anon-readonly": "node scripts/phase8b-live-anon-readonly.mjs --allow-live-readonly",
+    "staging:jwt-ab-readonly": "node scripts/phase8b-live-jwt-ab.mjs --allow-live-readonly"
   },
   "dependencies": {
     "@supabase/ssr": "0.12.7",
