@@ -1,0 +1,18 @@
+# Athena Phase 8C.3 — LOCAL-ONLY default, never deploy without owner approval.
+name = "athena-identity-candidate"
+main = "src/index.ts"
+compatibility_date = "2026-10-20"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = false
+
+[vars]
+ATHENA_CLOUD_IDENTITY_ENABLED = "false"
+ATHENA_AUTH_ORIGIN = ""
+
+[[d1_databases]]
+binding = "ATHENA_IDENTITY_DB"
+database_name = "athena-identity-local-only"
+# Placeholder ID for offline Wrangler D1 simulation. Must be replaced after
+# explicit Cloudflare project creation and approval before real deployment.
+database_id = "00000000-0000-0000-0000-000000000000"
+migrations_dir = "migrations"

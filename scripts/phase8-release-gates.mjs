@@ -80,6 +80,9 @@ export function assertSafeExampleEnv(raw){
 export function assertNoSensitiveTrackedFiles(files){
  const blocked=files.filter(f=>
   /(^|\/)\.qa\//i.test(f)||
+  /(^|\/)\.wrangler\//i.test(f)||
+  /(^|\/)\.dev\.vars(?:\.|$)/i.test(f)||
+  /\.(?:sqlite|sqlite3|db)(?:-wal|-shm|-journal)?$/i.test(f)||
   /(^|\/)\.env\.(?!example$)/i.test(f)||
   /\.(?:pem|p12|pfx|key)$/i.test(f)||
   /(?:^|\/)sitepulse-results.*\.(?:jsonl|json)$/i.test(f)
@@ -107,6 +110,18 @@ export function createReleaseEvidence({head,base,ancestry,env,trackedCount}){
     "A CI pass is not equivalent to Supabase/Auth, SMTP, Storage, backup or business acceptance."]
  };
 }
+export function assertSafeCloudWorkerConfig(raw){
+ if(!/^workers_dev\s*=\s*false\s*$/m.test(raw))throw Error("Cloud identity worker must default to private");
+ if(!/^ATHENA_CLOUD_IDENTITY_ENABLED\s*=\s*"false"\s*$/m.test(raw))
+  throw Error("Cloud identity worker must be OFF in tracked configuration");
+ if(!/^ATHENA_AUTH_ORIGIN\s*=\s*""\s*$/m.test(raw))
+  throw Error("Cloud identity public origin requires independent review");
+ if(!/^database_id\s*=\s*"00000000-0000-0000-0000-000000000000"\s*$/m.test(raw))
+  throw Error("Cloud D1 must have placeholder binding until explicit approval");
+ if(/^\s*routes?\s*=/m.test(raw)||/BETTER_AUTH_SECRET\s*=/.test(raw))
+  throw Error("Cloud worker routes or credentials must not appear in tracked config");
+ return true;
+}
 export function verifyRelease(){
  const main="cc3be136de11d748cc71bbb0f2895fe494d35d17";
  const head=git(["rev-parse","HEAD"]);
@@ -118,6 +133,7 @@ export function verifyRelease(){
   prev=sha;
  }
  const env=assertSafeExampleEnv(readFileSync(path.join(root,".env.example"),"utf8"));
+ assertSafeCloudWorkerConfig(readFileSync(path.join(root,"workers/identity/wrangler.toml"),"utf8"));
  const tracked=git(["ls-files","-z"]).split("\0").filter(Boolean);
  const count=assertNoSensitiveTrackedFiles(tracked);
  const required=[

@@ -12,3 +12,10 @@ out
 playwright-report/
 test-results/
 .lighthouse/
+
+# Cloudflare Wrangler local-only state and secret fixtures
+.wrangler/
+.dev.vars
+.dev.vars.*
+**/.dev.vars
+**/.dev.vars.*

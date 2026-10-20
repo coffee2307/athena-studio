@@ -39,6 +39,8 @@ jobs:
         run: npm run release:verify
       - name: Production build
         run: npm run build
+      - name: Identity Worker offline build (no cloud deployment)
+        run: npx wrangler deploy --dry-run --config workers/identity/wrangler.toml --outdir .qa/worker-ci-dryrun
       - name: HTTP smoke tests
         run: npm run test:smoke
       - name: Production security audit
