@@ -116,3 +116,9 @@ Bản báo cáo tiếng Việt có thể xuất qua `npm run sitepulse:report`; 
 - [Mẫu hồ sơ đồng ý (để mặc định chưa phê duyệt)](docs/PHASE71_CONSENT_TEMPLATE.json)
 
 Bật SitePulse phải có hồ sơ chấp thuận ngoài Git và `.qa/sitepulse-consent.json` khớp chính xác target, thời hạn và quota. Không chạy website bên ngoài nếu chưa có quyền. Tỷ lệ HTTP 2xx theo mẫu không phải SLA. `main`, production, DNS và chi phí không thay đổi.
+
+### Phase 7.2 — Đề xuất pilot cho PHAM Official (chưa được phê duyệt)
+
+- [Phạm vi, tần suất và cổng phê duyệt](docs/PHASE72_PHAM_PILOT_PROPOSAL.md)
+- [Mẫu xác nhận PHAM mặc định bị từ chối](docs/PHASE72_PHAM_CONSENT_DRAFT.json)
+- Chạy `npm run sitepulse:pham-plan` để xem **đề xuất hoàn toàn ngoại tuyến**, không gửi request HTTP/DNS và không kích hoạt SitePulse. Phải nhận phê duyệt riêng trước lần kiểm tra thật.
