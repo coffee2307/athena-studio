@@ -48,7 +48,9 @@ try{
  const contact=await (await fetch(root+"/contact")).text();
  assert.match(contact,/Hiện nhận yêu cầu trực tiếp qua email\./,"contact must clearly disclose offline form");
  assert.match(contact,/Soạn email mô tả nhu cầu/,"contact must provide actionable fallback");
- assert.match(contact,/mailto:coffee2307@gmail\.com\?subject=/,"contact fallback must open a real prefilled email");
+ assert.match(contact,/aria-label="Liên hệ nhanh"/,"contact fallback must expose direct contact options");
+ assert.match(contact,/https:\/\/wa\.me\/84965747147/,"WhatsApp shortcut must have a real target");
+ assert.match(contact,/https:\/\/zalo\.me\/0965747147/,"Zalo shortcut must have a real target");
  assert.doesNotMatch(contact,/<form[^>]*class="inquiry-form"/,"disabled form must not display a fake submission flow");
  const response=await fetch(root+"/api/inquiry",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({name:"A",email:"a@example.com",service:"website-care",message:"Please ignore this local smoke test."})});
  assert.equal(response.status,503,"form must fail closed without email provider");

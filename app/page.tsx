@@ -1,4 +1,5 @@
 import {Icon} from "@/components/ui/Icon";
+import {ServiceTicker} from "@/components/experience/ServiceTicker";
 import Link from "next/link";
 import {offerings} from "@/lib/offerings";
 import {featuredProjects} from "@/data/projects";
@@ -43,6 +44,8 @@ export default function HomePage(){
     </div>
    </div>
   </section>
+  <ServiceTicker/>
+
 
   <section id="giai-phap" className="section-space client-solutions" aria-labelledby="solutions-title">
    <div className="container">

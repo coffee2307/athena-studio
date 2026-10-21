@@ -8,9 +8,10 @@ test("CTA dẫn đến hành động khác nhau theo ngữ cảnh, không quay l
  await expect(page).toHaveURL(/\/contact$/);
  const newAction=page.locator(".agency-footer-cta-button");
  await expect(newAction).toHaveText(/Soạn email tư vấn/);
- await expect(newAction).toHaveAttribute("href",/^mailto:coffee2307@gmail.com\?subject=/);
- await expect(page.locator(".agency-header .agency-primary-cta")).toHaveAttribute("href",/^mailto:/);
- await expect(page.locator(".form-offline a")).toHaveAttribute("href",/^mailto:/);
+ await newAction.click();
+ await expect(page.getByRole("dialog",{name:"Soạn yêu cầu tư vấn"})).toBeVisible();
+ await expect(page.locator(".agency-header .agency-primary-cta")).toHaveCount(1);
+ await expect(page.locator(".form-offline button")).toHaveText(/Soạn email mô tả nhu cầu/);
 });
 
 test("Các nút liên hệ luôn là đường dẫn thật và header có số điện thoại",async({page,isMobile})=>{

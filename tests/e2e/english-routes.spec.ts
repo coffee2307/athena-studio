@@ -56,5 +56,5 @@ test("Sitemap exposes English paths only and menu/CTA use canonical links",async
   await expect(page.locator(".agency-desktop-nav a[href='/projects']")).toBeVisible();
  }
  await page.goto("/contact");
- await expect(page.locator(".agency-footer-cta-button")).toHaveAttribute("href",/^mailto:/);
+ await expect(page.locator(".agency-footer-cta-button")).toHaveText(/Soạn email tư vấn/);
 });

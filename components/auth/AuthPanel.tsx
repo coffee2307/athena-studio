@@ -86,7 +86,7 @@ export function AuthPanel({mode,googleEnabled=false}:{mode:Mode;googleEnabled?:b
   <p className="small-index">ATHENA / BẢO MẬT TÀI KHOẢN</p>
   <h1>{mode==="login"?"Đăng nhập":mode==="signup"?"Tạo tài khoản":mode==="forgot"?"Khôi phục":"Mật khẩu mới"}<em>.</em></h1>
   <p className="auth-description">{mode==="login"?"Truy cập hồ sơ của bạn bằng tài khoản đã xác minh.":mode==="signup"?"Đăng ký để chuẩn bị sử dụng các dịch vụ khách hàng của Athena.":mode==="forgot"?"Nhập email để nhận hướng dẫn khôi phục mật khẩu.":"Vui lòng đặt mật khẩu mới để bảo vệ tài khoản."}</p>
-  <form className="auth-form" onSubmit={submit} aria-busy={pending}>
+  <form method="post" className="auth-form" onSubmit={submit} aria-busy={pending}>
    {mode==="signup"&&<label>Họ và tên<input name="full_name" required minLength={2} maxLength={80} autoComplete="name" placeholder="Tên của bạn"/></label>}
    {mode!=="password"&&<label>Địa chỉ email<input name="email" type="email" required maxLength={200} autoComplete="email" placeholder="ten@example.com"/></label>}
    {mode!=="forgot"&&<label>{mode==="password"?"Mật khẩu mới":"Mật khẩu"}

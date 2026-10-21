@@ -30,3 +30,6 @@ deploy/vps/compose.override.yaml
 *.backup
 # Operator migration lock (not source or user data)
 deploy/vps/.athena-migration.lock
+# Third-party agent skill packages are installed locally from skills-lock.json.
+# Do not vendor unreviewed executable scripts or upstream copies into the public repository.
+.agents/skills/

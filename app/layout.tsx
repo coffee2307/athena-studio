@@ -14,6 +14,7 @@ import "@fontsource/be-vietnam-pro/700.css";
 import "@fontsource/noto-serif/400-italic.css";
 import "@/app/globals.css";
 import "@/app/agency-relaunch.css";
+import "@/app/contact-experience.css";
 
 export const metadata: Metadata = {
   ...createMetadata(),
