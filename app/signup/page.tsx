@@ -9,5 +9,6 @@ export const dynamic="force-dynamic";
 export const metadata={...createMetadata("Đăng ký tài khoản",undefined,"/signup"),robots:{index:false,follow:false}};
 export default function Register(){
  const settings=authSettings();
- return <AuthShell>{standaloneIdentityConfig()?.localPassword?<LocalPasswordAuth mode="signup"/>:settings.enabled?<AuthPanel mode="signup" googleEnabled={process.env.NEXT_PUBLIC_ATHENA_GOOGLE_ENABLED==="true"}/>:<AuthUnavailable/>}</AuthShell>;
+ const identity=standaloneIdentityConfig();
+ return <AuthShell>{identity?.localPassword?<LocalPasswordAuth mode="signup" googleEnabled={Boolean(identity.google)} githubEnabled={Boolean(identity.github)}/>:settings.enabled?<AuthPanel mode="signup" googleEnabled={process.env.NEXT_PUBLIC_ATHENA_GOOGLE_ENABLED==="true"}/>:<AuthUnavailable/>}</AuthShell>;
 }

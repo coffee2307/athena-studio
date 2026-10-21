@@ -22,7 +22,23 @@ export function Navbar(){
  const [scrolled,setScrolled]=useState(false);
  const trigger=useRef<HTMLButtonElement>(null);
  const panel=useRef<HTMLElement>(null);
- useEffect(()=>{setOpen(false);},[pathname]);
+ const desktopServices=useRef<HTMLDetailsElement>(null);
+ useEffect(()=>{setOpen(false);if(desktopServices.current)desktopServices.current.open=false;},[pathname]);
+ useEffect(()=>{
+  const dismiss=(event:PointerEvent)=>{
+   const node=desktopServices.current;
+   if(node?.open&&!node.contains(event.target as Node))node.open=false;
+  };
+  const escape=(event:KeyboardEvent)=>{
+   if(event.key==="Escape"&&desktopServices.current?.open){
+    desktopServices.current.open=false;
+    desktopServices.current.querySelector<HTMLElement>("summary")?.focus();
+   }
+  };
+  document.addEventListener("pointerdown",dismiss);
+  document.addEventListener("keydown",escape);
+  return()=>{document.removeEventListener("pointerdown",dismiss);document.removeEventListener("keydown",escape);};
+ },[]);
  useEffect(()=>{
   const listen=()=>setScrolled(window.scrollY>12);
   listen();window.addEventListener("scroll",listen,{passive:true});
@@ -57,9 +73,9 @@ export function Navbar(){
     <span className="brand-wordmark">ATHENA{" "}<span>STUDIO</span></span>
    </Link>
    <nav className="agency-desktop-nav" aria-label="Điều hướng chính">
-    <details className="agency-service-menu">
+    <details className="agency-service-menu" ref={desktopServices}>
      <summary className={pathname.startsWith("/services")?"agency-nav-current":""}>Dịch vụ <Icon name="chevron-down" size={15}/></summary>
-     <div className="agency-dropdown">
+     <div className="agency-dropdown" onClick={e=>{if((e.target as HTMLElement).closest("a")&&desktopServices.current)desktopServices.current.open=false;}}>
       <p>CHỌN GIẢI PHÁP THEO NHU CẦU</p>
       {solutions.map(s=><Link href={s.href} key={s.href}><span><strong>{s.title}</strong><small>{s.detail}</small></span><Icon name="arrow-up-right" size={17}/></Link>)}
       <Link href="/services" className="agency-dropdown-all">Xem tất cả dịch vụ <Icon name="arrow-right" size={16}/></Link>
