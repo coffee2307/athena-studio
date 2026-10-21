@@ -1,0 +1,1 @@
+export default function Loading(){return <div className="container ops-loading" role="status" aria-live="polite"><p>Đang tải danh sách dự án đã được cấp quyền…</p><div/><div/><div/></div>}

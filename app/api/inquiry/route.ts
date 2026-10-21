@@ -1,74 +1,69 @@
-import { NextRequest, NextResponse } from "next/server";
+import {NextRequest,NextResponse} from "next/server";
+import {getInquirySettings} from "@/lib/inquiry/config";
+import {parseInquiry} from "@/lib/inquiry/validation";
+import {verifyChallenge,limitInquiry,recordInquiry,notifyOwner,setNotification} from "@/lib/inquiry/providers";
 
-export const runtime = "nodejs";
+export const runtime="nodejs";
+export const dynamic="force-dynamic";
+const MAX_BYTES=12_000;
 
-const services = new Set(["web-development", "website-care", "ai-integration", "micro-saas", "other"]);
-const attempts = new Map<string, { count: number; startedAt: number }>();
-const WINDOW_MS = 15 * 60 * 1000;
-const LIMIT = 3;
-const MAX_BYTES = 12_000;
-
-function escapeHtml(input: string) {
-  return input.replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char] || char);
+function fail(status:number,message:string){
+ return NextResponse.json({ok:false,error:message},{status,headers:{"Cache-Control":"no-store"}});
 }
-function validString(value: unknown, max: number) {
-  return typeof value === "string" && value.trim().length <= max ? value.trim() : null;
-}
-function jsonError(message: string, status: number) {
-  return NextResponse.json({ error: message }, { status });
-}
-
-export async function POST(request: NextRequest) {
-  const apiKey = process.env.RESEND_API_KEY;
-  const recipient = process.env.CONTACT_EMAIL;
-  const sender = process.env.CONTACT_FROM_EMAIL;
-  if (!apiKey || !recipient || !sender) return jsonError("Contact channel is not configured", 503);
-  const origin = request.headers.get("origin");
-  if (origin && origin !== request.nextUrl.origin) return jsonError("Origin not allowed", 403);
-  if (!request.headers.get("content-type")?.toLowerCase().startsWith("application/json")) return jsonError("JSON required", 415);
-  const bodyText = await request.text();
-  if (Buffer.byteLength(bodyText, "utf8") > MAX_BYTES) return jsonError("Request too large", 413);
-  let data: Record<string, unknown>;
-  try { data = JSON.parse(bodyText) as Record<string, unknown>; } catch { return jsonError("Invalid JSON", 400); }
-  if (!data || typeof data !== "object" || Array.isArray(data)) return jsonError("Invalid request", 400);
-  if (data.website) return NextResponse.json({ ok: true });
-  const name = validString(data.name, 100);
-  const email = validString(data.email, 200);
-  const company = validString(data.company ?? "", 120);
-  const service = validString(data.service, 50);
-  const message = validString(data.message, 4000);
-  if (!name || !email || !company && data.company !== undefined && data.company !== "" || !service || !message ||
-      name.length < 2 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !services.has(service) || message.length < 20) {
-    return jsonError("Please check your form fields", 400);
+async function readBounded(request:NextRequest):Promise<string|null>{
+ if(!request.body)return null;
+ const length=request.headers.get("content-length");
+ if(length&&Number(length)>MAX_BYTES)return null;
+ const reader=request.body.getReader();
+ let bytes=0;
+ const chunks:Uint8Array[]=[];
+ try{
+  while(true){
+   const {done,value}=await reader.read();
+   if(done)break;
+   bytes+=value.byteLength;
+   if(bytes>MAX_BYTES){await reader.cancel().catch(()=>{});return null;}
+   chunks.push(value);
   }
-  const forwarded = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
-  const ip = forwarded || "unknown";
-  const now = Date.now();
-  const previous = attempts.get(ip);
-  const current = previous && now - previous.startedAt < WINDOW_MS ? previous : { count: 0, startedAt: now };
-  if (current.count >= LIMIT) return jsonError("Rate limit reached", 429);
-  current.count++;
-  attempts.set(ip, current);
-  if (attempts.size > 3000) for (const [key, entry] of attempts) if (now - entry.startedAt > WINDOW_MS) attempts.delete(key);
-
-  const html = [
-    "<h2>New Athena Studio inquiry</h2>",
-    "<p><strong>Name:</strong> " + escapeHtml(name) + "</p>",
-    "<p><strong>Email:</strong> " + escapeHtml(email) + "</p>",
-    "<p><strong>Company:</strong> " + escapeHtml(company || "—") + "</p>",
-    "<p><strong>Service:</strong> " + escapeHtml(service) + "</p>",
-    "<p><strong>Message:</strong><br>" + escapeHtml(message).replace(/\n/g, "<br>") + "</p>",
-  ].join("");
-
-  try {
-    const upstream = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: { Authorization: "Bearer " + apiKey, "Content-Type": "application/json" },
-      body: JSON.stringify({ from: sender, to: [recipient], reply_to: email, subject: "Athena inquiry — " + service, html }),
-      cache: "no-store",
-      signal: AbortSignal.timeout(10000),
-    });
-    if (!upstream.ok) return jsonError("Message delivery unavailable", 502);
-    return NextResponse.json({ ok: true }, { status: 201 });
-  } catch { return jsonError("Message delivery unavailable", 502); }
+  const result=new Uint8Array(bytes);let offset=0;
+  for(const chunk of chunks){result.set(chunk,offset);offset+=chunk.byteLength;}
+  return new TextDecoder("utf-8",{fatal:true}).decode(result);
+ }catch{return null;}finally{reader.releaseLock();}
+}
+export async function POST(request:NextRequest){
+ const settings=getInquirySettings();
+ if(!settings)return fail(503,"Biểu mẫu chưa được kích hoạt. Vui lòng liên hệ qua email.");
+ const expectedOrigin=new URL(settings.origin).origin;
+ if(request.headers.get("origin")!==expectedOrigin)return fail(403,"Nguồn yêu cầu không được phép.");
+ if(!/^application\/json(?:\s*;|$)/i.test(request.headers.get("content-type")||""))return fail(415,"Yêu cầu dữ liệu JSON.");
+ const raw=await readBounded(request);
+ if(!raw)return fail(413,"Nội dung yêu cầu quá lớn hoặc không hợp lệ.");
+ let body:unknown;
+ try{body=JSON.parse(raw);}catch{return fail(400,"Dữ liệu gửi lên không hợp lệ.");}
+ const parsed=parseInquiry(body);
+ if(!parsed.ok)return fail(400,parsed.error);
+ const item=parsed.value;
+ // Honeypot responses never claim that the user's valid submission was stored.
+ if(item.website)return NextResponse.json({ok:true,ignored:true},{status:200});
+ try{
+  const validated=await verifyChallenge(settings,item.captcha);
+  if(!validated)return fail(403,"Xác minh chống spam chưa thành công. Vui lòng thử lại.");
+ }catch{return fail(503,"Không thể xác minh yêu cầu lúc này. Vui lòng thử lại sau.");}
+ try{
+  if(!(await limitInquiry(settings,item.email)))return fail(429,"Bạn đã gửi quá nhiều yêu cầu. Vui lòng thử lại sau.");
+ }catch{return fail(503,"Hệ thống bảo vệ biểu mẫu tạm thời không khả dụng.");}
+ let id:string;
+ try{id=await recordInquiry(settings,item);}
+ catch{return fail(503,"Chưa thể lưu yêu cầu. Vui lòng gửi email trực tiếp.");}
+ // At this point the request is durable. Email is a secondary notification;
+ // a mail outage must not misrepresent a saved lead as rejected.
+ let notified=false;
+ try{notified=await notifyOwner(settings,item,id);}catch{notified=false;}
+ try{await setNotification(settings,id,notified?"sent":"failed");}
+ catch{console.error("Inquiry notification status update failed",id);}
+ return NextResponse.json({
+  ok:true,reference:id.slice(0,8),
+  message:notified?"Yêu cầu đã được ghi nhận và thông báo đến Athena.":"Yêu cầu đã được lưu. Thông báo nội bộ đang gặp sự cố nhưng thông tin của bạn không bị mất.",
+  notificationDelayed:!notified
+ },{status:201,headers:{"Cache-Control":"no-store"}});
 }

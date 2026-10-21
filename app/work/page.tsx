@@ -1,2 +1,2 @@
-import { redirect } from "next/navigation";
-export default function WorkPage() { redirect("/products"); }
+import {permanentRedirect} from "next/navigation";
+export default function LegacyWork(){permanentRedirect("/du-an");}

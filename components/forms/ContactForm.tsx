@@ -1,52 +1,51 @@
 "use client";
-
-import { FormEvent, useEffect, useState } from "react";
-
-type Props = { configured: boolean; contactEmail: string };
-type State = "idle" | "sending" | "success" | "error";
-
-export function ContactForm({ configured, contactEmail }: Props) {
-  const [state, setState] = useState<State>("idle");
-  const [message, setMessage] = useState("");
-  const [service, setService] = useState("");
-  useEffect(() => {
-    const selected = new URLSearchParams(window.location.search).get("service");
-    if (selected && ["web-development", "website-care", "ai-integration", "micro-saas", "other"].includes(selected)) setService(selected);
-  }, []);
-
-  async function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (!configured || state === "sending") return;
-    const form = event.currentTarget;
-    const fields = Object.fromEntries(new FormData(form).entries());
-    setState("sending");
-    setMessage("");
-    try {
-      const response = await fetch("/api/inquiry", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(fields) });
-      if (!response.ok) throw new Error(response.status === 429 ? "Bạn đã gửi nhiều yêu cầu. Hãy thử lại sau." : "Không thể gửi yêu cầu. Vui lòng thử lại hoặc liên hệ trực tiếp.");
-      form.reset();
-      setState("success");
-      setMessage("Đã tiếp nhận yêu cầu. Athena sẽ liên hệ khi có thể.");
-    } catch (error) {
-      setState("error");
-      setMessage(error instanceof Error ? error.message : "Có lỗi xảy ra khi gửi yêu cầu.");
-    }
-  }
-
-  return <div className="contact-box">
-    <p className="small-index">PROJECT INQUIRY / ATHENA</p>
-    <h2>Tell us what<br /><em>you&apos;re building.</em></h2>
-    <p>Gửi mô tả ngắn về dự án hoặc vấn đề bạn muốn giải quyết. Không gửi mật khẩu, API key hay dữ liệu nhạy cảm.</p>
-    {configured ? <form className="inquiry-form" onSubmit={submit} noValidate={false}>
-      <div className="field-pair"><label>Họ tên <span>*</span><input name="name" required maxLength={100} autoComplete="name" placeholder="Tên của bạn" /></label><label>Email <span>*</span><input name="email" type="email" required maxLength={200} autoComplete="email" placeholder="email@example.com" /></label></div>
-      <label>Tổ chức / doanh nghiệp<input name="company" maxLength={120} autoComplete="organization" placeholder="Không bắt buộc" /></label>
-      <label>Giải pháp quan tâm <span>*</span><select name="service" value={service} onChange={(event) => setService(event.target.value)} required><option value="" disabled>Chọn một dịch vụ</option><option value="web-development">Thiết kế website</option><option value="website-care">Website Care</option><option value="ai-integration">Tích hợp AI</option><option value="micro-saas">Micro-SaaS / Product Lab</option><option value="other">Chưa xác định</option></select></label>
-      <label>Mô tả dự án <span>*</span><textarea name="message" required rows={5} minLength={20} maxLength={4000} placeholder="Bạn đang muốn xây dựng hoặc cải thiện điều gì?" /></label>
-      <div className="trap-field" aria-hidden="true"><label>Website<input name="website" tabIndex={-1} autoComplete="off" /></label></div>
-      <button type="submit" className="pill-link pill-dark form-submit" disabled={state === "sending"}>{state === "sending" ? "Đang gửi..." : "Gửi yêu cầu"} <span aria-hidden="true">↗</span></button>
-      <p className="form-privacy">Thông tin chỉ được sử dụng để phản hồi yêu cầu và trao đổi về dự án.</p>
-      {message && <p role={state === "error" ? "alert" : "status"} className={state === "error" ? "form-status form-error" : "form-status"}>{message}</p>}
-    </form> : <div className="form-offline" role="status"><strong>Biểu mẫu đang được cấu hình.</strong><p>Hệ thống tiếp nhận yêu cầu chưa được kết nối với dịch vụ gửi email. Chúng tôi không hiển thị một biểu mẫu gửi giả khi chưa thể tiếp nhận dữ liệu.</p>{contactEmail && <a className="pill-link pill-dark" href={"mailto:" + contactEmail}>Gửi email trực tiếp <span aria-hidden="true">↗</span></a>}</div>}
-    <p className="contact-notice">Nếu yêu cầu liên quan đến website đang hoạt động, vui lòng nêu nền tảng (Shopify, WordPress, Next.js…) và mục tiêu ưu tiên.</p>
-  </div>;
+import {Icon} from "@/components/ui/Icon";
+import {FormEvent,useCallback,useEffect,useState} from "react";
+import Link from "next/link";
+import {TurnstileField} from "@/components/forms/TurnstileField";
+type Props={configured:boolean;contactEmail:string;siteKey:string};
+type Status="idle"|"sending"|"success"|"error";
+export function ContactForm({configured,contactEmail,siteKey}:Props){
+ const [status,setStatus]=useState<Status>("idle"),[message,setMessage]=useState(""),[reference,setReference]=useState("");
+ const [service,setService]=useState(""),[captcha,setCaptcha]=useState("");
+ const updateCaptcha=useCallback((token:string)=>setCaptcha(token),[]);
+ useEffect(()=>{const x=new URLSearchParams(window.location.search).get("service");if(x&&["web-development","website-care","ai-integration","micro-saas","other"].includes(x))setService(x);},[]);
+ async function submit(event:FormEvent<HTMLFormElement>){
+  event.preventDefault();
+  if(!configured||status==="sending"||!captcha)return;
+  const form=event.currentTarget;
+  const payload={...Object.fromEntries(new FormData(form)),captcha,consent:(new FormData(form)).get("consent")==="yes"};
+  setStatus("sending");setMessage("");
+  try{
+   const response=await fetch("/api/inquiry",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+   const data:unknown=await response.json();
+   const result=data&&typeof data==="object"?data as Record<string,unknown>:{};
+   if(!response.ok)throw Error(typeof result.error==="string"?result.error:"Không thể gửi yêu cầu. Vui lòng thử lại.");
+   if(result.ignored===true)throw Error("Không thể xác nhận yêu cầu. Vui lòng thử lại hoặc liên hệ email.");
+   setStatus("success");setReference(typeof result.reference==="string"?result.reference:"");
+   setMessage(typeof result.message==="string"?result.message:"Yêu cầu đã được lưu.");
+   form.reset();setService("");setCaptcha("");
+  }catch(e){setStatus("error");setMessage(e instanceof Error?e.message:"Có lỗi xảy ra. Vui lòng liên hệ qua email.");}
+ }
+ return <div className="contact-box">
+  <p className="small-index">YÊU CẦU TƯ VẤN / ATHENA</p><h2>Mô tả vấn đề<br/><em>bạn cần xử lý.</em></h2>
+  <p>Gửi thông tin website (nếu có), khó khăn hiện tại và mục tiêu mong muốn. Không gửi mật khẩu, mã truy cập hoặc dữ liệu nhạy cảm.</p>
+  {configured?<form className="inquiry-form" onSubmit={submit}>
+   <div className="field-pair"><label>Họ tên <span>*</span><input name="name" required minLength={2} maxLength={100} autoComplete="name" placeholder="Tên của bạn"/></label><label>Địa chỉ email <span>*</span><input name="email" required type="email" maxLength={200} autoComplete="email" placeholder="email@example.com"/></label></div>
+   <label>Đơn vị / doanh nghiệp<input name="company" maxLength={120} autoComplete="organization" placeholder="Không bắt buộc"/></label>
+   <label>Dịch vụ quan tâm <span>*</span><select name="service" required value={service} onChange={e=>setService(e.target.value)}><option value="" disabled>Chọn một lĩnh vực</option><option value="web-development">Thiết kế website</option><option value="website-care">Chăm sóc website</option><option value="ai-integration">Tích hợp AI</option><option value="micro-saas">Công cụ Micro-SaaS</option><option value="other">Chưa xác định</option></select></label>
+   <label>Vấn đề cần giải quyết <span>*</span><textarea name="message" required rows={5} minLength={20} maxLength={4000} placeholder="Website/quy trình hiện tại đang gặp vấn đề gì? Bạn muốn cải thiện điều gì?"/></label>
+   <div className="trap-field" aria-hidden="true"><label>Trang web<input name="website" tabIndex={-1} autoComplete="off"/></label></div>
+   <label className="privacy-consent"><input type="checkbox" name="consent" required value="yes"/><span>Tôi đồng ý để Athena sử dụng thông tin này nhằm phản hồi yêu cầu. Xem <Link href="/phap-ly/quyen-rieng-tu" target="_blank" rel="noopener noreferrer">thông tin quyền riêng tư</Link>.</span></label>
+   <TurnstileField siteKey={siteKey} onToken={updateCaptcha}/>
+   <button className="pill-link pill-dark form-submit" type="submit" disabled={status==="sending"||!captcha}>{status==="sending"?"Đang ghi nhận…":"Gửi yêu cầu"} <Icon name="arrow-up-right" size={18}/></button>
+   {message&&<div className={status==="error"?"form-status form-error":"form-status"} role={status==="error"?"alert":"status"}><p>{message}</p>{reference&&<p>Mã tham chiếu: <strong>{reference}</strong></p>}</div>}
+   <p className="form-privacy">Dữ liệu chỉ được nhận khi việc lưu trữ và chống spam đã cấu hình đầy đủ.</p>
+  </form>:<div className="form-offline" role="status">
+   <strong>Hiện nhận yêu cầu trực tiếp qua email.</strong>
+   <p>Biểu mẫu trực tuyến chưa được kích hoạt. Bạn vẫn có thể gửi thông tin để trao đổi qua email; nút bên dưới mở một thư mẫu để bạn điền nhanh.</p>
+   <a href={"mailto:"+contactEmail+"?subject="+encodeURIComponent("Yêu cầu tư vấn Athena Studio")+"&body="+encodeURIComponent("1. Website hiện tại (nếu có):\n\n2. Vấn đề đang gặp:\n\n3. Mục tiêu ưu tiên và thời hạn dự kiến:\n\n4. Thông tin liên hệ:\n")} className="pill-link pill-dark">Soạn email mô tả nhu cầu <Icon name="arrow-up-right" size={18}/></a>
+  </div>}
+  <p className="contact-notice">Nếu cần trao đổi trực tiếp, bạn có thể gọi điện hoặc gửi email qua phần Liên hệ phía dưới trang.</p>
+ </div>;
 }

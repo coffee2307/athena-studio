@@ -1,0 +1,13 @@
+# Template only. Enable explicitly AFTER offsite mount and recovery drill.
+[Unit]
+Description=Daily Athena encrypted PostgreSQL backup (owner-approved)
+
+[Timer]
+OnCalendar=*-*-* 03:10:00
+AccuracySec=10min
+RandomizedDelaySec=30min
+Persistent=true
+Unit=athena-backup.service
+
+[Install]
+WantedBy=timers.target

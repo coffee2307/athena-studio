@@ -1,0 +1,26 @@
+# Never include personal secrets, local DBs or test evidence in images
+.git/
+.github/
+.next/
+.qa/
+.wrangler/
+node_modules/
+test-results/
+playwright-report/
+.lighthouse/
+.env*
+**/.env*
+**/.dev.vars*
+deploy/vps/secrets/
+deploy/vps/backups/
+deploy/vps/config.local
+deploy/vps/compose.override.yaml
+*.age
+*.dump
+*.backup
+deploy/vps/.athena-migration.lock
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.pem
+*.key

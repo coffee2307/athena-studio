@@ -1,0 +1,7 @@
+# Offline validation only. Example values must NEVER be used to go live.
+ATHENA_DOMAIN=athena.invalid
+ATHENA_SITE_ORIGIN=https://athena.invalid
+ATHENA_TLS_EMAIL=admin@example.invalid
+ATHENA_WEB_IMAGE=athena-web:qa-only
+ATHENA_VPS_IDENTITY_ENABLED=false
+ATHENA_VPS_RELEASE_APPROVED=false

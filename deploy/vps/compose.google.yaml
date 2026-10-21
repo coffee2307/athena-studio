@@ -1,0 +1,10 @@
+# Optional identity provider. Client grants only identity/email, not Google Drive access.
+services:
+  web:
+    environment:
+      ATHENA_GOOGLE_OAUTH_CLIENT_ID: ${ATHENA_GOOGLE_OAUTH_CLIENT_ID:?Set approved Google OAuth client ID}
+      ATHENA_GOOGLE_OAUTH_CLIENT_SECRET_FILE: /run/secrets/athena_google_secret
+    secrets: [athena_google_secret]
+secrets:
+  athena_google_secret:
+    file: ./secrets/athena_google_secret

@@ -7,20 +7,58 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test:unit": "node --test tests/*.test.mjs",
+    "test:smoke": "node scripts/smoke.mjs",
+    "test:e2e": "playwright test",
+    "test:e2e:chromium": "playwright test --project=chromium-desktop --project=chromium-mobile",
+    "audit:runtime": "npm audit --omit=dev --audit-level=high",
+    "sitepulse:check": "node scripts/sitepulse-check.mjs",
+    "sitepulse:summary": "node scripts/sitepulse-summary.mjs",
+    "sitepulse:report": "node scripts/sitepulse-report.mjs",
+    "sitepulse:pham-plan": "node scripts/sitepulse-pham-plan.mjs",
+    "release:verify": "node scripts/phase8-release-gates.mjs",
+    "staging:inventory": "node scripts/phase8-staging-preflight.mjs",
+    "staging:preflight": "node scripts/phase8-staging-preflight.mjs --require-configuration",
+    "staging:anon-readonly": "node scripts/phase8b-live-anon-readonly.mjs --allow-live-readonly",
+    "staging:jwt-ab-readonly": "node scripts/phase8b-live-jwt-ab.mjs --allow-live-readonly",
+    "identity:d1:local:migrate": "wrangler d1 migrations apply ATHENA_IDENTITY_DB --local --config workers/identity/wrangler.toml --persist-to .qa/d1-phase8c3",
+    "identity:d1:local:dev": "wrangler dev --config workers/identity/wrangler.toml --local --persist-to .qa/d1-phase8c3",
+    "perf:local": "node scripts/phase8c5-benchmark.mjs"
   },
   "dependencies": {
-    "next": "^15.5.0",
+    "@fontsource/be-vietnam-pro": "5.3.0",
+    "@fontsource/noto-serif": "5.3.0",
+    "@supabase/ssr": "0.12.7",
+    "@supabase/supabase-js": "2.118.0",
+    "better-auth": "1.7.12",
+    "drizzle-orm": "0.45.4",
+    "next": "15.5.28",
+    "nodemailer": "10.1.7",
+    "pg": "8.16.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "@cloudflare/workers-types": "5.20261019.1",
+    "@electric-sql/pglite": "0.5.10",
+    "@electric-sql/pglite-socket": "0.2.13",
     "@eslint/eslintrc": "^3.3.1",
+    "@playwright/test": "1.64.1",
     "@types/node": "^22.15.0",
+    "@types/nodemailer": "8.0.2",
+    "@types/pg": "8.15.5",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
     "eslint": "^9.32.0",
-    "eslint-config-next": "^15.5.0",
-    "typescript": "^5.8.3"
+    "eslint-config-next": "15.5.28",
+    "lighthouse": "13.5.0",
+    "typescript": "^5.8.3",
+    "wrangler": "4.151.3"
+  },
+  "overrides": {
+    "postcss": "8.5.31"
   }
 }

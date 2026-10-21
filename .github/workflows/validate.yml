@@ -1,0 +1,193 @@
+name: Athena validation
+
+on:
+  push:
+    branches:
+      - main
+      - "feat/**"
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test-and-build:
+    name: Lint, unit, build and audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+      - name: Install
+        run: npm ci --no-audit --no-fund
+      - name: ESLint
+        run: npm run lint
+      - name: TypeScript
+        run: npm run typecheck
+      - name: Unit tests
+        run: npm run test:unit
+      - name: Release integrity and disabled-provider gate
+        run: npm run release:verify
+      - name: Production build
+        run: npm run build
+      - name: Identity Worker offline build (no cloud deployment)
+        run: npx wrangler deploy --dry-run --config workers/identity/wrangler.toml --outdir .qa/worker-ci-dryrun
+      - name: Validate low-cost VPS Compose and operator scripts (no deployment)
+        run: |
+          docker compose --env-file deploy/vps/config.example -f deploy/vps/compose.yaml config --quiet
+          bash -n deploy/vps/init/01-roles.sh deploy/vps/scripts/*.sh
+      - name: Validate optional SMTP overlay without secrets or deployment
+        env:
+          ATHENA_SMTP_HOST: smtp.example.invalid
+          ATHENA_SMTP_PORT: "587"
+          ATHENA_SMTP_SENDER: security@example.invalid
+          ATHENA_SMTP_USERNAME: test-owner
+        run: docker compose --env-file deploy/vps/config.example -f deploy/vps/compose.yaml -f deploy/vps/compose.smtp.yaml config --quiet
+      - name: HTTP smoke tests
+        run: npm run test:smoke
+      - name: Production security audit
+        run: npm run audit:runtime
+
+  browser-quality:
+    name: Browser E2E and automated accessibility
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+      - name: Install
+        run: npm ci --no-audit --no-fund
+      - name: Install supported browsers
+        run: npx playwright install --with-deps chromium firefox
+      - name: Build production
+        run: npm run build
+      - name: Playwright scenarios and axe checks
+        run: npm run test:e2e
+        env:
+          CI: "true"
+      - name: Upload failure evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: athena-browser-failure
+          path: |
+            test-results/
+            playwright-report/
+          retention-days: 7
+
+
+  postgres-runtime:
+    name: Real PostgreSQL 17 identity and ACL
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: athena_ci
+          POSTGRES_PASSWORD: athena-ci-ephemeral-only-2026
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres -d athena_ci"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 10
+    env:
+      ATHENA_CI_REAL_POSTGRES: "true"
+      ATHENA_CI_PG_HOST: "127.0.0.1"
+      ATHENA_CI_PG_DATABASE: "athena_ci"
+      ATHENA_CI_PG_PASSWORD: "athena-ci-ephemeral-only-2026"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+      - name: Install
+        run: npm ci --no-audit --no-fund
+      - name: Run isolated real PostgreSQL integration
+        run: node --test tests/phase8c5-real-postgres.test.mjs
+
+
+  vps-container-smoke:
+    name: Linux VPS container boot and DB readiness
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create isolated CI-only secret files
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p deploy/vps/secrets
+          chmod 700 deploy/vps/secrets
+          for key in athena_pg_admin_password athena_pg_password athena_auth_secret; do
+            openssl rand -base64 48 > "deploy/vps/secrets/$key"
+            chmod 0444 "deploy/vps/secrets/$key"
+          done
+      - name: Build production-like standalone image
+        run: |
+          docker build -f deploy/vps/Dockerfile --build-arg SITE_ORIGIN=https://athena.invalid -t athena-web:qa-only .
+      - name: Start private PostgreSQL and non-root web only
+        run: |
+          docker compose --env-file deploy/vps/config.example -f deploy/vps/compose.yaml up --no-build -d postgres web
+      - name: Verify real Linux services and fail-closed Auth
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker compose --env-file deploy/vps/config.example -f deploy/vps/compose.yaml ps
+          for attempt in $(seq 1 18); do
+            if docker compose --env-file deploy/vps/config.example -f deploy/vps/compose.yaml exec -T web node /app/healthcheck.cjs; then
+              break
+            fi
+            if [ "$attempt" -eq 18 ]; then
+              echo "Container DB readiness did not succeed" >&2
+              exit 1
+            fi
+            sleep 3
+          done
+          docker compose --env-file deploy/vps/config.example -f deploy/vps/compose.yaml exec -T web \
+            node -e "Promise.all(['/api/health','/api/identity/get-session','/api/athena/workspaces'].map(async p=>{let r=await fetch('http://127.0.0.1:3000'+p);return [p,r.status]})).then(x=>{console.log(x);if(x[0][1]!==200||x[1][1]!==503||x[2][1]!==503)process.exit(1)}).catch(()=>process.exit(1))"
+      - name: Validate Caddy reverse proxy configuration (offline)
+        run: |
+          docker compose --env-file deploy/vps/config.example -f deploy/vps/compose.yaml run --rm --no-deps --entrypoint caddy caddy validate --config /etc/caddy/Caddyfile
+      - name: Apply and replay versioned migrations on isolated containers
+        shell: bash
+        env:
+          ATHENA_VPS_MIGRATION_APPROVED: reviewed-staging-only
+          ATHENA_COMPOSE_CONFIG: config.example
+        run: |
+          set -euo pipefail
+          bash deploy/vps/scripts/migrate.sh --apply-reviewed-staging
+          bash deploy/vps/scripts/migrate.sh --apply-reviewed-staging
+          docker compose --env-file deploy/vps/config.example -f deploy/vps/compose.yaml exec -T web node /app/healthcheck.cjs
+      - name: Bounded on-container HTTP sample and resource snapshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker compose --env-file deploy/vps/config.example -f deploy/vps/compose.yaml exec -T web \
+            node scripts/phase8c5-benchmark.mjs --run-local --origin http://127.0.0.1:3000 --path /api/health --requests 80 --concurrency 4
+          docker compose --env-file deploy/vps/config.example -f deploy/vps/compose.yaml exec -T web \
+            node scripts/phase8c5-benchmark.mjs --run-local --origin http://127.0.0.1:3000 --path / --requests 40 --concurrency 3
+          ids=$(docker compose --env-file deploy/vps/config.example -f deploy/vps/compose.yaml ps -q postgres web)
+          docker stats --no-stream --format '{{.Name}} {{.MemUsage}} {{.CPUPerc}}' $ids
+      - name: Tear down ephemeral CI containers and volumes
+        if: always()
+        run: |
+          docker compose --env-file deploy/vps/config.example -f deploy/vps/compose.yaml down -v --remove-orphans || true
+          rm -rf deploy/vps/secrets

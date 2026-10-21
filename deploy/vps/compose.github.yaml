@@ -1,0 +1,10 @@
+# Optional GitHub OAuth LOGIN only. Customer repo access needs separate GitHub App install.
+services:
+  web:
+    environment:
+      ATHENA_GITHUB_OAUTH_CLIENT_ID: ${ATHENA_GITHUB_OAUTH_CLIENT_ID:?Set approved GitHub OAuth client ID}
+      ATHENA_GITHUB_OAUTH_CLIENT_SECRET_FILE: /run/secrets/athena_github_secret
+    secrets: [athena_github_secret]
+secrets:
+  athena_github_secret:
+    file: ./secrets/athena_github_secret
