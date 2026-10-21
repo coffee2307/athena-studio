@@ -31,8 +31,8 @@ test("Auth requires validated HTTPS Supabase and site origin",()=>{
  }finally{for(const k of keys){if(prior[k]===undefined)delete process.env[k];else process.env[k]=prior[k];}}
 });
 test("Redirect allowlist blocks open redirects, protocol relative URLs, and role spoofing",()=>{
- for(const path of ["/tai-khoan","/tai-khoan/doi-mat-khau","/quan-tri"])assert.equal(allowedDestination(path),path);
- for(const path of ["https://evil.test","//evil.test","/\\evil.test","/%2Fevil","/api/inquiry","/auth/callback","/quan-tri?admin=true","javascript:alert(1)"])assert.equal(allowedDestination(path),"/tai-khoan");
+ for(const path of ["/account","/account/change-password","/admin"])assert.equal(allowedDestination(path),path);
+ for(const path of ["https://evil.test","//evil.test","/\\evil.test","/%2Fevil","/api/inquiry","/auth/callback","/admin?admin=true","javascript:alert(1)"])assert.equal(allowedDestination(path),"/account");
 });
 test("Identity SQL uses owner-scoped RLS and disallows browser role writes",async()=>{
  const sql=await readFile(new URL("../docs/db/phase5_identity.sql",import.meta.url),"utf8");

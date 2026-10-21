@@ -3,9 +3,9 @@ import {test,expect} from "@playwright/test";
 test("CTA dẫn đến hành động khác nhau theo ngữ cảnh, không quay lại trang hiện tại",async({page})=>{
  await page.goto("/");
  const footer=page.locator(".agency-footer-cta-button");
- await expect(footer).toHaveAttribute("href","/lien-he");
+ await expect(footer).toHaveAttribute("href","/contact");
  await footer.click();
- await expect(page).toHaveURL(/\/lien-he$/);
+ await expect(page).toHaveURL(/\/contact$/);
  const newAction=page.locator(".agency-footer-cta-button");
  await expect(newAction).toHaveText(/Soạn email tư vấn/);
  await expect(newAction).toHaveAttribute("href",/^mailto:coffee2307@gmail.com\?subject=/);
@@ -41,8 +41,8 @@ test("Menu mobile nhận chạm thật và điều hướng sau cuộn trang",as
  await expect(page.locator(".agency-mobile-panel")).toBeVisible();
  await expect(page.locator("body")).toHaveCSS("overflow","hidden");
  await expect(page.locator(".agency-mobile-panel a[href='tel:+84965747147']")).toBeVisible();
- await page.locator(".agency-mobile-panel a[href='/du-an']").tap();
- await expect(page).toHaveURL(/\/du-an$/);
+ await page.locator(".agency-mobile-panel a[href='/projects']").tap();
+ await expect(page).toHaveURL(/\/projects$/);
  await expect(page.locator(".agency-mobile-panel")).not.toBeVisible();
  await page.evaluate(()=>window.scrollTo(0,450));
  await toggle.tap();
@@ -52,7 +52,7 @@ test("Menu mobile nhận chạm thật và điều hướng sau cuộn trang",as
 });
 
 test("Trang dự án không công khai nhãn nội bộ hoặc mã nguồn",async({page})=>{
- for(const path of ["/","/du-an","/du-an/pham","/du-an/econith"]){
+ for(const path of ["/","/projects","/projects/pham","/projects/econith"]){
   await page.goto(path);
   const body=page.locator("main");
   for(const term of ["PHÂN LOẠI","Dự án founder","VAI TRÒ THỰC HIỆN","không được trình bày là hợp đồng","Đã đối chiếu"]){

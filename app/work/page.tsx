@@ -1,2 +1,2 @@
 import {permanentRedirect} from "next/navigation";
-export default function LegacyWork(){permanentRedirect("/du-an");}
+export default function LegacyWork(){permanentRedirect("/projects");}

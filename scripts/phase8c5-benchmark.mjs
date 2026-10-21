@@ -18,7 +18,7 @@ const concurrency=integer(arg("--concurrency","4"),1,12);
 const path=arg("--path","/api/health");
 const output=arg("--json-out","");
 if(!argv.includes("--run-local")||!origin||!count||!concurrency||
- !["/","/api/health","/dich-vu"].includes(path)||
+ !["/","/api/health","/services"].includes(path)||
  (output&&!/^\.qa\/benchmark-[a-z0-9-]+\.json$/.test(output))){
  process.stderr.write("Safe usage: node scripts/phase8c5-benchmark.mjs --run-local --origin http://127.0.0.1:3000 --path /api/health --requests 60 --concurrency 4\n");
  process.exit(2);

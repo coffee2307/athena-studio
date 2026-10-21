@@ -28,16 +28,16 @@ export default function HomePage(){
       <h1 id="hero-title">Website chưa hiệu quả?<br/><span>Công việc còn thủ công?</span></h1>
       <p className="client-hero-lede">Athena hỗ trợ thiết kế website, cải thiện hệ thống hiện có và ứng dụng AI vào những công việc lặp lại. <strong>Bắt đầu từ vấn đề của bạn, không phải từ một công nghệ được chọn sẵn.</strong></p>
       <div className="client-hero-actions">
-       <Link className="pill-link pill-dark" href="/lien-he">Gửi nhu cầu của bạn <Icon name="arrow-up-right" size={18}/></Link>
+       <Link className="pill-link pill-dark" href="/contact">Gửi nhu cầu của bạn <Icon name="arrow-up-right" size={18}/></Link>
        <Link className="underlined-link" href="#giai-phap">Xem Athena hỗ trợ gì <Icon name="arrow-right" size={17} className="agency-down-icon"/></Link>
       </div>
       <p className="client-hero-helper">Chưa rõ cần giải pháp nào? Chỉ cần mô tả vấn đề đang gặp.</p>
      </div>
      <aside className="client-quick-nav" aria-label="Tìm giải pháp theo nhu cầu">
       <p className="client-quick-label">BẠN ĐANG CẦN GÌ?</p>
-      <Link href="/dich-vu/web-development"><span className="client-quick-index">01</span><span><strong>Tôi cần website mới</strong><small>Trang giới thiệu, landing page, cửa hàng trực tuyến</small></span><Icon name="arrow-up-right" size={18}/></Link>
-      <Link href="/dich-vu/website-care"><span className="client-quick-index">02</span><span><strong>Website hiện tại có vấn đề</strong><small>Chậm, lỗi, khó cập nhật hoặc thiếu người chăm sóc</small></span><Icon name="arrow-up-right" size={18}/></Link>
-      <Link href="/dich-vu/ai-integration"><span className="client-quick-index">03</span><span><strong>Tôi muốn bớt việc thủ công</strong><small>Tra cứu nội bộ, xử lý tài liệu, tự động hóa quy trình</small></span><Icon name="arrow-up-right" size={18}/></Link>
+      <Link href="/services/web-development"><span className="client-quick-index">01</span><span><strong>Tôi cần website mới</strong><small>Trang giới thiệu, landing page, cửa hàng trực tuyến</small></span><Icon name="arrow-up-right" size={18}/></Link>
+      <Link href="/services/website-care"><span className="client-quick-index">02</span><span><strong>Website hiện tại có vấn đề</strong><small>Chậm, lỗi, khó cập nhật hoặc thiếu người chăm sóc</small></span><Icon name="arrow-up-right" size={18}/></Link>
+      <Link href="/services/ai-integration"><span className="client-quick-index">03</span><span><strong>Tôi muốn bớt việc thủ công</strong><small>Tra cứu nội bộ, xử lý tài liệu, tự động hóa quy trình</small></span><Icon name="arrow-up-right" size={18}/></Link>
       <p className="client-quick-foot">Chọn nhu cầu để xem phạm vi và đầu ra có thể triển khai.</p>
      </aside>
     </div>
@@ -57,7 +57,7 @@ export default function HomePage(){
       <h3>{s.shortTitle}</h3>
       <p className="client-solution-label">KHI NÀO BẠN CẦN?</p><p className="client-solution-problem">{s.challenge}</p>
       <p className="client-solution-label">ATHENA CÓ THỂ BÀN GIAO</p><p className="client-solution-delivery">{s.output}</p>
-      <Link href={"/dich-vu/"+s.slug} className="client-solution-link">Xem phạm vi dịch vụ <Icon name="arrow-up-right" size={18}/></Link>
+      <Link href={"/services/"+s.slug} className="client-solution-link">Xem phạm vi dịch vụ <Icon name="arrow-up-right" size={18}/></Link>
      </article>)}
     </div>
     <p className="client-solution-note">Không cam kết doanh thu hoặc hiệu quả khi chưa khảo sát và thống nhất chỉ số đo lường. Các đề xuất đều tùy thuộc dữ liệu, nền tảng và phạm vi thực tế.</p>
@@ -73,7 +73,7 @@ export default function HomePage(){
    <div className="method-grid">{steps.map(step=><div className="method-item reveal" key={step.number}><span>{step.number} / 03</span><div className="method-line"/><h3>{step.title}</h3><p>{step.detail}</p></div>)}</div>
    <div className="client-process-cta">
     <p><strong>Để trao đổi nhanh hơn:</strong> hãy gửi địa chỉ website (nếu có), vấn đề cần xử lý và mục tiêu ưu tiên. Có thể gửi trực tiếp qua email nếu biểu mẫu đang bảo trì.</p>
-    <Link href="/lien-he" className="underlined-link">Xem cách liên hệ <Icon name="arrow-up-right" size={18}/></Link>
+    <Link href="/contact" className="underlined-link">Xem cách liên hệ <Icon name="arrow-up-right" size={18}/></Link>
    </div>
   </div></section>
 
@@ -85,7 +85,7 @@ export default function HomePage(){
      <p>Khám phá các sản phẩm số và hướng nghiên cứu của người sáng lập Athena, qua trải nghiệm, tính năng và cách giải quyết vấn đề.</p>
     </div>
     <div className="portfolio-grid">{featuredProjects.map((p,i)=><ProjectCard key={p.slug} project={p} index={i}/>)}</div>
-    <div className="featured-footer"><p>Tìm hiểu cách sản phẩm được thiết kế cho nhu cầu thực tế.</p><Link href="/du-an" className="underlined-link">Xem hồ sơ dự án <Icon name="arrow-up-right" size={18}/></Link></div>
+    <div className="featured-footer"><p>Tìm hiểu cách sản phẩm được thiết kế cho nhu cầu thực tế.</p><Link href="/projects" className="underlined-link">Xem hồ sơ dự án <Icon name="arrow-up-right" size={18}/></Link></div>
    </div>
   </section>
 
@@ -93,14 +93,14 @@ export default function HomePage(){
    <div><p className="section-index"><span className="index-circle">04</span> PHÒNG NGHIÊN CỨU</p>
     <h2>Phần mềm chuyên biệt <span>đang được nghiên cứu.</span></h2>
     <p>Product Lab và SitePulse chưa được mở bán. Đây là hướng nghiên cứu, không phải dịch vụ có thể đặt mua ngay.</p></div>
-   <Link href="/san-pham" className="underlined-link">Xem trạng thái sản phẩm <Icon name="arrow-up-right" size={18}/></Link>
+   <Link href="/products" className="underlined-link">Xem trạng thái sản phẩm <Icon name="arrow-up-right" size={18}/></Link>
   </div></section>
 
   <section className="closing-block"><div className="container closing-inner">
    <p className="eyebrow"><span className="eyebrow-dot"/> TRAO ĐỔI NHU CẦU THỰC TẾ</p>
    <h2>Đang gặp vấn đề<br/><span>với website hoặc quy trình?</span></h2>
    <p className="client-closing-copy">Hãy mô tả ngắn gọn điều đang gây khó khăn. Athena sẽ xem xét để trao đổi phạm vi và hướng xử lý phù hợp, không yêu cầu bạn phải chuẩn bị tài liệu kỹ thuật.</p>
-   <Link href="/lien-he" className="pill-link pill-light">Gửi yêu cầu tư vấn <Icon name="arrow-up-right" size={18}/></Link>
+   <Link href="/contact" className="pill-link pill-light">Gửi yêu cầu tư vấn <Icon name="arrow-up-right" size={18}/></Link>
    <span className="closing-watermark" aria-hidden="true">ATHENA</span>
   </div></section>
  </>;

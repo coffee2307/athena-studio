@@ -175,7 +175,7 @@ export function verifyRelease(){
   "docs/db/phase3_inquiries.sql","docs/db/phase5_identity.sql",
   "docs/db/phase6_operations.sql","docs/db/phase6_storage.sql",
   "docs/db/phase8b_security_hardening.sql",
-  "app/san-pham/sitepulse/page.tsx","tests/operations-rls.test.mjs",
+  "app/products/sitepulse/page.tsx","tests/operations-rls.test.mjs",
   "tests/sitepulse-consent.test.mjs"
  ];
  for(const f of required)if(!tracked.includes(f))throw Error("Missing required tracked file: "+f);

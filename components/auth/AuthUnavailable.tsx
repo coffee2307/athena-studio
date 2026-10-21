@@ -9,6 +9,6 @@ export function AuthUnavailable(){
    <strong>Chưa tiếp nhận đăng ký</strong>
    <p>Không có dữ liệu tài khoản giả, phiên đăng nhập mô phỏng hoặc quyền truy cập không được xác minh.</p>
   </div>
-  <Link className="pill-link pill-dark" href="/lien-he">Liên hệ Athena ↗</Link>
+  <Link className="pill-link pill-dark" href="/contact">Liên hệ Athena ↗</Link>
  </div>;
 }

@@ -5,8 +5,8 @@ async function freePort(){const s=createServer();await new Promise((ok,err)=>{s.
 const port=await freePort(),root="http://127.0.0.1:"+port;
 const app=spawn(process.execPath,["node_modules/next/dist/bin/next","start","-p",String(port),"-H","127.0.0.1"],{cwd:process.cwd(),stdio:["ignore","pipe","pipe"],env:{...process.env,NEXT_PUBLIC_SITE_URL:root,RESEND_API_KEY:"",CONTACT_EMAIL:"",CONTACT_FROM_EMAIL:""}});
 let stderr="",exited=false;app.stderr.on("data",s=>stderr+=s.toString());app.on("exit",()=>exited=true);
-const publicRoutes=["/","/dich-vu","/dich-vu/web-development","/dich-vu/website-care","/dich-vu/ai-integration","/dich-vu/micro-saas","/du-an","/du-an/pham","/du-an/econith","/san-pham","/ve-athena","/quy-trinh","/bao-gia","/lien-he","/phap-ly","/phap-ly/quyen-rieng-tu","/phap-ly/dieu-khoan","/phap-ly/cookie","/phap-ly/chinh-sach-dich-vu","/robots.txt","/sitemap.xml","/og-athena.png","/api/health","/dang-nhap","/dang-ky","/quen-mat-khau"];
-const oldPaths={"/services":"/dich-vu","/services/web-development":"/dich-vu/web-development","/products":"/san-pham","/studio":"/ve-athena","/contact":"/lien-he","/work":"/du-an","/work/pham":"/du-an/pham"};
+const publicRoutes=["/","/services","/services/web-development","/services/website-care","/services/ai-integration","/services/micro-saas","/projects","/projects/pham","/projects/econith","/products","/about","/process","/pricing","/contact","/legal","/legal/privacy","/legal/terms","/legal/cookies","/legal/service-policy","/robots.txt","/sitemap.xml","/og-athena.png","/api/health","/login","/signup","/forgot-password"];
+const oldPaths={"/dich-vu":"/services","/dich-vu/web-development":"/services/web-development","/du-an":"/projects","/du-an/pham":"/projects/pham","/san-pham":"/products","/san-pham/sitepulse":"/products/sitepulse","/ve-athena":"/about","/quy-trinh":"/process","/bao-gia":"/pricing","/lien-he":"/contact","/phap-ly":"/legal","/phap-ly/quyen-rieng-tu":"/legal/privacy","/phap-ly/dieu-khoan":"/legal/terms","/phap-ly/cookie":"/legal/cookies","/dang-nhap":"/login","/dang-ky":"/signup","/tai-khoan":"/account","/quan-tri":"/admin","/work":"/projects","/work/pham":"/projects/pham","/studio":"/about"};
 try{
  let ready=false;
  for(let i=0;i<90;i++){if(exited)throw Error("Server exited: "+stderr);try{let x=await fetch(root+"/",{signal:AbortSignal.timeout(1500)});if(x.ok){ready=true;break}}catch{}await new Promise(r=>setTimeout(r,350))}
@@ -31,21 +31,21 @@ try{
  const readinessData=await readiness.json();
  assert.equal(readinessData.verification,"configuration-only");
  assert.equal(readiness.headers.get("cache-control"),"no-store");
- const account=await fetch(root+"/tai-khoan",{redirect:"manual"});
+ const account=await fetch(root+"/account",{redirect:"manual"});
  assert.ok([307,308].includes(account.status),"private account must redirect without Auth");
- assert.equal(new URL(account.headers.get("location"),root).pathname,"/dang-nhap");
- const qrio=await fetch(root+"/du-an/qrio");
+ assert.equal(new URL(account.headers.get("location"),root).pathname,"/login");
+ const qrio=await fetch(root+"/projects/qrio");
  assert.equal(qrio.status,404,"unverified Qrio must not be published");
  const sitemap=await (await fetch(root+"/sitemap.xml")).text();
- assert.match(sitemap,/\/du-an\/pham/);
- assert.match(sitemap,/\/du-an\/econith/);
- assert.match(sitemap,/\/quy-trinh/);
- assert.match(sitemap,/\/bao-gia/);
- assert.match(sitemap,/\/phap-ly\/chinh-sach-dich-vu/);
- assert.doesNotMatch(sitemap,/\/du-an\/qrio|\/work\//);
+ assert.match(sitemap,/\/projects\/pham/);
+ assert.match(sitemap,/\/projects\/econith/);
+ assert.match(sitemap,/\/process/);
+ assert.match(sitemap,/\/pricing/);
+ assert.match(sitemap,/\/legal\/service-policy/);
+ assert.doesNotMatch(sitemap,/\/projects\/qrio|\/work\//);
  const robots=await (await fetch(root+"/robots.txt")).text();
  assert.match(robots,/Disallow: \/|Disallow:\//,"unconfigured non-HTTPS preview must not be indexed");
- const contact=await (await fetch(root+"/lien-he")).text();
+ const contact=await (await fetch(root+"/contact")).text();
  assert.match(contact,/Hiện nhận yêu cầu trực tiếp qua email\./,"contact must clearly disclose offline form");
  assert.match(contact,/Soạn email mô tả nhu cầu/,"contact must provide actionable fallback");
  assert.match(contact,/mailto:coffee2307@gmail\.com\?subject=/,"contact fallback must open a real prefilled email");

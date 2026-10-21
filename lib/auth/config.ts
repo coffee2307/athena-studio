@@ -11,8 +11,8 @@ export function authSettings(){
  return {url,key,origin,enabled:process.env.NEXT_PUBLIC_ATHENA_AUTH_ENABLED==="true"&&valid};
 }
 export function allowedDestination(candidate:string|null|undefined){
- if(candidate==="/tai-khoan/doi-mat-khau")return candidate;
- if(candidate==="/tai-khoan")return candidate;
- if(candidate==="/quan-tri")return candidate;
- return "/tai-khoan";
+ if(candidate==="/account/change-password")return candidate;
+ if(candidate==="/account")return candidate;
+ if(candidate==="/admin")return candidate;
+ return "/account";
 }

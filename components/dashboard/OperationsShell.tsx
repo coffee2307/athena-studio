@@ -4,14 +4,14 @@ import {messageFromNotice} from "@/lib/operations/models";
 
 export function OperationsShell({children,admin=false,notice,title,subtitle}:{children:ReactNode;admin?:boolean;notice?:string;title:string;subtitle:string}){
  const nav=admin?[
-  {href:"/quan-tri",label:"Tổng quan"},
-  {href:"/quan-tri/du-an",label:"Dự án"},
-  {href:"/quan-tri/ho-tro",label:"Hỗ trợ"},
-  {href:"/tai-khoan",label:"Hồ sơ"}
+  {href:"/admin",label:"Tổng quan"},
+  {href:"/admin/projects",label:"Dự án"},
+  {href:"/admin/support",label:"Hỗ trợ"},
+  {href:"/account",label:"Hồ sơ"}
  ]:[
-  {href:"/tai-khoan",label:"Hồ sơ"},
-  {href:"/tai-khoan/du-an",label:"Dự án"},
-  {href:"/tai-khoan/ho-tro",label:"Hỗ trợ"}
+  {href:"/account",label:"Hồ sơ"},
+  {href:"/account/projects",label:"Dự án"},
+  {href:"/account/support",label:"Hỗ trợ"}
  ];
  return <section className="ops-app">
   <div className="container">
