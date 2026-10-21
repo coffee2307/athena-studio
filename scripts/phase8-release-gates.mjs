@@ -114,7 +114,7 @@ export function createReleaseEvidence({head,base,ancestry,env,trackedCount}){
   baseMain:base,head,verifiedAncestry:ancestry,
   defaultFlagsOff:env.flagsDisabled,defaultProviderValuesBlank:env.providerValuesBlank,
   trackedFileCount:trackedCount,
-  holds:["no-merge-main","no-production-deploy","no-DNS-change",
+  holds:["main-merge-after-verification","no-production-deploy","no-DNS-change",
     "no-real-provider-or-customer-migration","no-paid-service-activation",
     "sitepulse-commercial-validation-pending"],
   notes:["Programmatic ancestry and config checks are necessary but not sufficient for secure release.",
@@ -175,7 +175,7 @@ export function verifyRelease(){
   "docs/db/phase3_inquiries.sql","docs/db/phase5_identity.sql",
   "docs/db/phase6_operations.sql","docs/db/phase6_storage.sql",
   "docs/db/phase8b_security_hardening.sql",
-  "app/san-pham/sitepulse/page.tsx","tests/operations-rls.test.mjs",
+  "app/products/sitepulse/page.tsx","tests/operations-rls.test.mjs",
   "tests/sitepulse-consent.test.mjs"
  ];
  for(const f of required)if(!tracked.includes(f))throw Error("Missing required tracked file: "+f);

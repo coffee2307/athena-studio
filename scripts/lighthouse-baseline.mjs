@@ -8,7 +8,7 @@ const launcher=path.resolve("node_modules/lighthouse/cli/index.js");
 const configurations=[
  {name:"desktop-home",route:"/",preset:"desktop"},
  {name:"mobile-home",route:"/",preset:"mobile"},
- {name:"mobile-portfolio",route:"/du-an",preset:"mobile"}
+ {name:"mobile-portfolio",route:"/projects",preset:"mobile"}
 ];
 const result=[];
 for(const item of configurations){

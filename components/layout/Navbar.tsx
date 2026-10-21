@@ -7,11 +7,13 @@ import {useEffect,useRef,useState} from "react";
 import {navigation} from "@/data/navigation";
 import {Icon} from "@/components/ui/Icon";
 import {siteConfig} from "@/lib/constants";
+import {contactChannels} from "@/lib/contact-channels";
+import {ConsultationCTA} from "@/components/layout/ConsultationCTA";
 
 const solutions=[
- {href:"/dich-vu/web-development",title:"Thiết kế website",detail:"Website mới, landing page, trang bán hàng"},
- {href:"/dich-vu/website-care",title:"Chăm sóc website",detail:"Sửa lỗi, cập nhật và tối ưu vận hành"},
- {href:"/dich-vu/ai-integration",title:"Tích hợp AI",detail:"Giảm công việc lặp lại và hỗ trợ nhân sự"}
+ {href:"/services/web-development",title:"Thiết kế website",detail:"Website mới, landing page, trang bán hàng"},
+ {href:"/services/website-care",title:"Chăm sóc website",detail:"Sửa lỗi, cập nhật và tối ưu vận hành"},
+ {href:"/services/ai-integration",title:"Tích hợp AI",detail:"Giảm công việc lặp lại và hỗ trợ nhân sự"}
 ];
 
 export function Navbar(){
@@ -47,7 +49,7 @@ export function Navbar(){
  return <header className={scrolled?"athena-header agency-header is-scrolled":"athena-header agency-header"}>
   <div className="agency-topline"><div className="container agency-topline-inner">
    <span>WEBSITE · VẬN HÀNH · ỨNG DỤNG AI</span>
-   <a href={"mailto:"+siteConfig.email}><Icon name="mail" size={13}/>{siteConfig.email}</a>
+   <div className="agency-topline-contacts"><a href={contactChannels.phone}><Icon name="phone" size={13}/>{siteConfig.phone}</a><a href={contactChannels.email}><Icon name="mail" size={13}/>{siteConfig.email}</a></div>
   </div></div>
   <div className="container agency-nav-shell">
    <Link href="/" className="brand-lockup" aria-label="Athena Studio — Trang chủ">
@@ -56,40 +58,41 @@ export function Navbar(){
    </Link>
    <nav className="agency-desktop-nav" aria-label="Điều hướng chính">
     <details className="agency-service-menu">
-     <summary className={pathname.startsWith("/dich-vu")?"agency-nav-current":""}>Dịch vụ <Icon name="chevron-down" size={15}/></summary>
+     <summary className={pathname.startsWith("/services")?"agency-nav-current":""}>Dịch vụ <Icon name="chevron-down" size={15}/></summary>
      <div className="agency-dropdown">
       <p>CHỌN GIẢI PHÁP THEO NHU CẦU</p>
       {solutions.map(s=><Link href={s.href} key={s.href}><span><strong>{s.title}</strong><small>{s.detail}</small></span><Icon name="arrow-up-right" size={17}/></Link>)}
-      <Link href="/dich-vu" className="agency-dropdown-all">Xem tất cả dịch vụ <Icon name="arrow-right" size={16}/></Link>
+      <Link href="/services" className="agency-dropdown-all">Xem tất cả dịch vụ <Icon name="arrow-right" size={16}/></Link>
      </div>
     </details>
-    {navigation.filter(i=>i.href!=="/dich-vu").map(i=><Link key={i.href} href={i.href} className={pathname===i.href||pathname.startsWith(i.href+"/")?"agency-nav-current":""}>{i.label}</Link>)}
+    {navigation.filter(i=>i.href!=="/services").map(i=><Link key={i.href} href={i.href} className={pathname===i.href||pathname.startsWith(i.href+"/")?"agency-nav-current":""}>{i.label}</Link>)}
    </nav>
    <div className="agency-nav-actions">
-    <Link className="agency-auth-link" href="/dang-nhap"><Icon name="user" size={17}/> Đăng nhập</Link>
-    <Link className="agency-register-link" href="/dang-ky">Đăng ký</Link>
-    <Link className="agency-primary-cta" href="/lien-he">Yêu cầu tư vấn <Icon name="arrow-up-right" size={17}/></Link>
+    <Link className="agency-auth-link" href="/login"><Icon name="user" size={17}/> Đăng nhập</Link>
+    <Link className="agency-register-link" href="/signup">Đăng ký</Link>
+    <ConsultationCTA className="agency-primary-cta" label="Yêu cầu tư vấn" iconSize={17}/>
    </div>
    <button ref={trigger} type="button" className={open?"agency-menu-toggle is-open":"agency-menu-toggle"}
     aria-label={open?"Đóng menu":"Mở menu"} aria-expanded={open} aria-controls="athena-mobile-menu"
-    onClick={()=>setOpen(o=>!o)}>
+    onClick={()=>setOpen(o=>!o)} style={{touchAction:"manipulation"}}>
     <span className="agency-toggle-line"/><span className="agency-toggle-line"/>
    </button>
   </div>
   <button type="button" aria-label="Đóng menu điều hướng" tabIndex={open?0:-1} aria-hidden={!open}
    className={open?"agency-menu-backdrop is-open":"agency-menu-backdrop"} onClick={()=>setOpen(false)}/>
   <nav ref={panel} id="athena-mobile-menu" aria-label="Điều hướng trên điện thoại"
-   className={open?"agency-mobile-panel is-open":"agency-mobile-panel"} inert={!open}>
+   className={open?"agency-mobile-panel is-open":"agency-mobile-panel"} inert={!open} onClick={event=>{if((event.target as HTMLElement).closest("a"))setOpen(false);}}>
    <div className="agency-mobile-scroll">
     <span className="agency-mobile-eyebrow">ATHENA / KHÁM PHÁ</span>
-    <Link href="/dich-vu" className="agency-mobile-primary">Dịch vụ <Icon name="arrow-up-right"/></Link>
+    <Link href="/services" className="agency-mobile-primary">Dịch vụ <Icon name="arrow-up-right"/></Link>
     <div className="agency-mobile-services">
      {solutions.map(s=><Link href={s.href} key={s.href}>{s.title}<Icon name="arrow-right" size={17}/></Link>)}
     </div>
-    {navigation.filter(i=>i.href!=="/dich-vu").map(i=><Link href={i.href} key={i.href} className="agency-mobile-primary">{i.label}<Icon name="arrow-up-right"/></Link>)}
-    <div className="agency-mobile-account"><Link href="/dang-nhap"><Icon name="user" size={17}/> Đăng nhập</Link><Link href="/dang-ky">Đăng ký tài khoản</Link></div>
-    <Link className="agency-mobile-cta" href="/lien-he">Gửi yêu cầu tư vấn <Icon name="arrow-up-right" size={18}/></Link>
-    <a href={"mailto:"+siteConfig.email} className="agency-mobile-email">{siteConfig.email}</a>
+    {navigation.filter(i=>i.href!=="/services").map(i=><Link href={i.href} key={i.href} className="agency-mobile-primary">{i.label}<Icon name="arrow-up-right"/></Link>)}
+    <div className="agency-mobile-account"><Link href="/login"><Icon name="user" size={17}/> Đăng nhập</Link><Link href="/signup">Đăng ký tài khoản</Link></div>
+    <ConsultationCTA className="agency-mobile-cta" label="Gửi yêu cầu tư vấn" iconSize={18}/>
+    <a href={contactChannels.phone} className="agency-mobile-email"><Icon name="phone" size={16}/>{siteConfig.phone}</a>
+    <a href={contactChannels.email} className="agency-mobile-email"><Icon name="mail" size={16}/>{siteConfig.email}</a>
    </div>
   </nav>
  </header>;

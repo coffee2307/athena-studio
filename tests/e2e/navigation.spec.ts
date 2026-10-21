@@ -3,7 +3,7 @@ test("Public navigation and translated case studies work",async({page})=>{
  await page.goto("/");
  await expect(page.locator("html")).toHaveAttribute("lang","vi");
  await expect(page.getByRole("heading",{level:1})).toBeVisible();
- await page.goto("/du-an");
+ await page.goto("/projects");
  await expect(page.getByRole("heading",{level:1})).toBeVisible();
  await expect(page.locator(".case-card")).toHaveCount(2);
  await page.getByRole("button",{name:"Nghiên cứu"}).click();
@@ -11,11 +11,11 @@ test("Public navigation and translated case studies work",async({page})=>{
  await expect(page.locator(".case-card").getByRole("heading",{name:"ECONITH"})).toBeVisible();
  await page.getByRole("button",{name:"Tất cả"}).click();
  await expect(page.locator(".case-card")).toHaveCount(2);
- await page.goto("/du-an/qrio");
+ await page.goto("/projects/qrio");
  await expect(page.locator("body")).toContainText("không tồn tại");
 });
 test("Viewport has no horizontal overflow and all content is reachable",async({page})=>{
- for(const url of ["/","/du-an","/dich-vu","/lien-he","/phap-ly"]){
+ for(const url of ["/","/projects","/services","/contact","/legal"]){
   await page.goto(url);await page.waitForLoadState("domcontentloaded");
   const width=await page.evaluate(()=>({screen:innerWidth,document:document.documentElement.scrollWidth}));
   expect(width.document,url+" overflow").toBeLessThanOrEqual(width.screen+1);
@@ -39,8 +39,8 @@ test("Responsive mobile navigation has proper state and keyboard close",async({p
  await page.keyboard.press("Escape");
  await expect(page.getByRole("button",{name:"Mở menu"})).toHaveAttribute("aria-expanded","false");
  await toggle.click();
- await page.locator(".agency-mobile-panel a[href=\"/du-an\"]").click();
- await expect(page).toHaveURL(/\/du-an$/);
+ await page.locator(".agency-mobile-panel a[href=\"/projects\"]").click();
+ await expect(page).toHaveURL(/\/projects$/);
 });
 test("Reduced motion preserves routes and disables reveal hiding",async({page})=>{
  await page.emulateMedia({reducedMotion:"reduce"});
@@ -49,11 +49,11 @@ test("Reduced motion preserves routes and disables reveal hiding",async({page})=
   animation:getComputedStyle(document.querySelector(".client-hero-copy h1")!).animationDuration}));
  expect(state.active).toBe(false);
  expect(parseFloat(state.animation)).toBeLessThanOrEqual(0.05);
- await page.goto("/du-an");
+ await page.goto("/projects");
  await expect(page.locator(".case-card")).toHaveCount(2);
 });
 test("No fake inquiry submission; readiness reports blocked",async({page,request})=>{
- await page.goto("/lien-he");
+ await page.goto("/contact");
  await expect(page.locator(".form-offline")).toBeVisible();
  await expect(page.getByRole("link",{name:/Soạn email mô tả nhu cầu/})).toHaveAttribute("href",/mailto:coffee2307@gmail.com/);
  const inquiry=await request.post("/api/inquiry",{data:{name:"Example",email:"test@example.com"}});

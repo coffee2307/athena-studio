@@ -5,19 +5,20 @@ test("A customer can identify a need and find the matching service without readi
  await expect(page.getByRole("heading",{level:1})).toContainText("Website chưa hiệu quả?");
  const shortcuts=page.locator(".client-quick-nav a");
  await expect(shortcuts).toHaveCount(3);
- await expect(shortcuts.nth(0)).toHaveAttribute("href","/dich-vu/web-development");
- await expect(shortcuts.nth(1)).toHaveAttribute("href","/dich-vu/website-care");
- await expect(shortcuts.nth(2)).toHaveAttribute("href","/dich-vu/ai-integration");
+ await expect(shortcuts.nth(0)).toHaveAttribute("href","/services/web-development");
+ await expect(shortcuts.nth(1)).toHaveAttribute("href","/services/website-care");
+ await expect(shortcuts.nth(2)).toHaveAttribute("href","/services/ai-integration");
  await expect(page.locator(".client-solution-card")).toHaveCount(3);
- await expect(page.getByRole("link",{name:/Gửi nhu cầu của bạn/})).toHaveAttribute("href","/lien-he");
+ await expect(page.getByRole("link",{name:/Gửi nhu cầu của bạn/})).toHaveAttribute("href","/contact");
  await expect(page.locator(".client-lab-band")).toContainText("chưa được mở bán");
- await expect(page.locator(".case-section-head")).toContainText("không phải danh sách hợp đồng khách hàng");
+ await expect(page.locator(".case-section-head")).toContainText("Khám phá các sản phẩm số và hướng nghiên cứu");
+ await expect(page.locator(".case-section-head")).not.toContainText("không phải danh sách hợp đồng khách hàng");
  await page.locator(".client-quick-nav a").nth(1).click();
- await expect(page).toHaveURL(/\/dich-vu\/website-care$/);
+ await expect(page).toHaveURL(/\/services\/website-care$/);
 });
 
 test("A visitor gets a usable brief and a direct email path while the inquiry form is offline",async({page})=>{
- await page.goto("/lien-he");
+ await page.goto("/contact");
  await expect(page).toHaveTitle(/Athena/i);
  const steps=page.locator(".contact-help-steps>div");
  await expect(steps).toHaveCount(3);
@@ -62,11 +63,11 @@ test("Vietnamese display typography uses a single locally bundled family without
 });
 
 test("Solutions and service detail show concrete deliverables, not unverified outcomes",async({page})=>{
- await page.goto("/dich-vu");
+ await page.goto("/services");
  await expect(page.getByRole("heading",{level:1})).toContainText("Bạn cần giải quyết");
  await expect(page.locator(".service-solution-grid .client-solution-card")).toHaveCount(3);
  await expect(page.locator(".service-solution-grid")).toContainText("PHẠM VI CÓ THỂ BÀN GIAO");
  await expect(page.locator(".client-lab-band")).toContainText("NGHIÊN CỨU, CHƯA MỞ BÁN");
  await page.getByRole("link",{name:/Trình bày nhu cầu/}).click();
- await expect(page).toHaveURL(/\/lien-he$/);
+ await expect(page).toHaveURL(/\/contact$/);
 });

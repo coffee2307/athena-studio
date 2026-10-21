@@ -5,10 +5,10 @@ import type {User} from "@supabase/supabase-js";
 export type AthenaRole="admin"|"client";
 export async function requireUser():Promise<User>{
  const supabase=await serverAuthClient();
- if(!supabase)redirect("/dang-nhap");
+ if(!supabase)redirect("/login");
  const {data,error}=await supabase.auth.getUser();
- if(error||!data.user)redirect("/dang-nhap");
- if(!data.user.email_confirmed_at)redirect("/dang-nhap?notice=verify");
+ if(error||!data.user)redirect("/login");
+ if(!data.user.email_confirmed_at)redirect("/login?notice=verify");
  return data.user;
 }
 export async function verifiedRole(userId:string):Promise<AthenaRole|null>{
@@ -28,6 +28,6 @@ export async function verifiedRole(userId:string):Promise<AthenaRole|null>{
 }
 export async function requireAdmin():Promise<User>{
  const user=await requireUser();
- if(await verifiedRole(user.id)!=="admin")redirect("/tai-khoan?notice=denied");
+ if(await verifiedRole(user.id)!=="admin")redirect("/account?notice=denied");
  return user;
 }

@@ -50,15 +50,15 @@ export function AuthPanel({mode,googleEnabled=false}:{mode:Mode;googleEnabled?:b
   switch(mode){
    case "login":action={kind:"login",email,password};break;
    case "signup":action={kind:"signup",email,password,fullName,
-    redirectTo:origin+"/auth/callback?next="+encodeURIComponent("/tai-khoan")};break;
+    redirectTo:origin+"/auth/callback?next="+encodeURIComponent("/account")};break;
    case "forgot":action={kind:"forgot",email,
-    redirectTo:origin+"/auth/callback?next="+encodeURIComponent("/tai-khoan/doi-mat-khau")};break;
+    redirectTo:origin+"/auth/callback?next="+encodeURIComponent("/account/change-password")};break;
    case "password":action={kind:"password",password};break;
   }
   try{
    const result=await runIdentityAction(supabaseIdentityAdapter(),action);
    if(!result.ok){displayFailure(result.failure);return;}
-   if(mode==="login"){window.location.assign("/tai-khoan");return;}
+   if(mode==="login"){window.location.assign("/account");return;}
    if(mode==="signup")
     setMessage("Nếu địa chỉ đủ điều kiện đăng ký, hướng dẫn xác minh sẽ được gửi qua email. Vui lòng kiểm tra hộp thư và thư mục spam.");
    if(mode==="forgot")
@@ -91,7 +91,7 @@ export function AuthPanel({mode,googleEnabled=false}:{mode:Mode;googleEnabled?:b
    {mode!=="password"&&<label>Địa chỉ email<input name="email" type="email" required maxLength={200} autoComplete="email" placeholder="ten@example.com"/></label>}
    {mode!=="forgot"&&<label>{mode==="password"?"Mật khẩu mới":"Mật khẩu"}
     <input name="password" type="password" minLength={mode==="login"?1:12} required autoComplete={mode==="login"?"current-password":"new-password"} placeholder="Tối thiểu 12 ký tự"/></label>}
-   {mode==="login"&&<div className="auth-helper"><Link href="/quen-mat-khau">Quên mật khẩu?</Link></div>}
+   {mode==="login"&&<div className="auth-helper"><Link href="/forgot-password">Quên mật khẩu?</Link></div>}
    <button className="pill-link pill-dark auth-submit" type="submit" disabled={pending||cooldown>0}>
     {pending?"Đang xử lý…":cooldown>0?`Có thể thử lại sau ${cooldown}s`:mode==="login"?"Đăng nhập →":mode==="signup"?"Đăng ký →":mode==="forgot"?"Gửi hướng dẫn →":"Cập nhật mật khẩu →"}
    </button>
@@ -101,15 +101,15 @@ export function AuthPanel({mode,googleEnabled=false}:{mode:Mode;googleEnabled?:b
     <p>Việc tạm dừng nút gửi chỉ tránh thao tác lặp lại trên thiết bị này; không bảo đảm nhà cung cấp đã hết giới hạn sau khi đếm ngược kết thúc.</p>
     {(mode==="signup"||mode==="login")&&googleEnabled
      ?<p>Nếu muốn, bạn có thể dùng nút đăng nhập Google bên dưới. Hai phương thức không tự động liên kết tài khoản.</p>
-     :<p>Bạn có thể <Link href="/lien-he">liên hệ Athena</Link> nếu cần được hỗ trợ.</p>}
+     :<p>Bạn có thể <Link href="/contact">liên hệ Athena</Link> nếu cần được hỗ trợ.</p>}
    </div>}
   </form>
   {(mode==="login"||mode==="signup")&&<>
    <div className="auth-separator"><span>HOẶC</span></div>
    <button type="button" className="auth-google" onClick={google} disabled={!googleEnabled||pending}>Tiếp tục với Google <span aria-hidden="true">↗</span></button>
    {!googleEnabled&&<p className="auth-footnote">Google OAuth sẽ khả dụng sau khi hoàn tất cấu hình và xác minh ứng dụng.</p>}
-   <p className="auth-alternate">{mode==="login"?<>Chưa có tài khoản? <Link href="/dang-ky">Đăng ký</Link></>:<>Đã có tài khoản? <Link href="/dang-nhap">Đăng nhập</Link></>}</p>
+   <p className="auth-alternate">{mode==="login"?<>Chưa có tài khoản? <Link href="/signup">Đăng ký</Link></>:<>Đã có tài khoản? <Link href="/login">Đăng nhập</Link></>}</p>
   </>}
-  <p className="auth-footnote">Athena không bao giờ yêu cầu bạn chia sẻ mật khẩu qua email hoặc tin nhắn. Xem <Link href="/phap-ly/quyen-rieng-tu">chính sách quyền riêng tư</Link>.</p>
+  <p className="auth-footnote">Athena không bao giờ yêu cầu bạn chia sẻ mật khẩu qua email hoặc tin nhắn. Xem <Link href="/legal/privacy">chính sách quyền riêng tư</Link>.</p>
  </div>;
 }

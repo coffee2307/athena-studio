@@ -8,7 +8,7 @@ export function LegalArticle({label,title,updated,children}:{label:string;title:
    <div className="page-hero-lede"><p>{label}</p><span className="legal-update">CẬP NHẬT: {updated}</span></div>
   </div></section>
   <section className="page-section"><div className="container legal-layout">
-   <aside className="legal-aside"><p>PHÁP LÝ / ATHENA</p><Link href="/phap-ly">Tổng quan</Link><Link href="/phap-ly/quyen-rieng-tu">Quyền riêng tư</Link><Link href="/phap-ly/dieu-khoan">Điều khoản sử dụng</Link><Link href="/phap-ly/cookie">Cookie</Link><Link href="/phap-ly/chinh-sach-dich-vu">Chính sách dịch vụ</Link></aside>
+   <aside className="legal-aside"><p>PHÁP LÝ / ATHENA</p><Link href="/legal">Tổng quan</Link><Link href="/legal/privacy">Quyền riêng tư</Link><Link href="/legal/terms">Điều khoản sử dụng</Link><Link href="/legal/cookies">Cookie</Link><Link href="/legal/service-policy">Chính sách dịch vụ</Link></aside>
    <article className="legal-content">
     <div className="legal-notice" role="note"><strong>Tài liệu đang được rà soát</strong><p>Đây là nội dung thông tin sơ bộ về website Athena. Trước khi vận hành thương mại và thu thập thông tin khách hàng, các chính sách phải được xác nhận theo pháp nhân, dịch vụ và hạ tầng thực tế.</p></div>
     {children}
