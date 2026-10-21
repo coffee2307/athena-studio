@@ -31,5 +31,6 @@ test("core UI copy and accessibility language are Vietnamese",async()=>{
  assert.match(home,/DỊCH VỤ CHO DOANH NGHIỆP/);
  assert.match(home,/Hướng xử lý cụ thể/);
  assert.match(home,/KHI NÀO BẠN CẦN/);
- assert.match(home,/không phải danh sách hợp đồng khách hàng Athena/);
+ assert.match(home,/Khám phá các sản phẩm số và hướng nghiên cứu/);
+ assert.doesNotMatch(home,/không phải danh sách hợp đồng khách hàng Athena/);
 });

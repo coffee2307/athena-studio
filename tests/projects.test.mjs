@@ -9,9 +9,9 @@ test("published portfolio never exposes a source repository or nonapproved media
   assert.equal(p.visibility,"published");
   assert.ok(!("sourceUrl" in p),`repository URL is not public case-study content: ${p.slug}`);
   assert.ok(["founder","research","client"].includes(p.kind));
-  assert.ok(p.responsibility.length>25);
+  assert.ok(!("responsibility" in p),`internal project responsibility must not leak: ${p.slug}`);
   assert.ok(p.challenge.length>25);
-  assert.ok(p.outcomeNote.length>25);
+  assert.ok(!("outcomeNote" in p),`internal QA note must not leak: ${p.slug}`);
   assert.ok(p.gallery.every(g=>g.rightsVerified&&g.alt.length>15&&g.caption.length>15));
  }
  const pham=getProjectBySlug("pham");

@@ -114,7 +114,7 @@ export function createReleaseEvidence({head,base,ancestry,env,trackedCount}){
   baseMain:base,head,verifiedAncestry:ancestry,
   defaultFlagsOff:env.flagsDisabled,defaultProviderValuesBlank:env.providerValuesBlank,
   trackedFileCount:trackedCount,
-  holds:["no-merge-main","no-production-deploy","no-DNS-change",
+  holds:["main-merge-after-verification","no-production-deploy","no-DNS-change",
     "no-real-provider-or-customer-migration","no-paid-service-activation",
     "sitepulse-commercial-validation-pending"],
   notes:["Programmatic ancestry and config checks are necessary but not sufficient for secure release.",
