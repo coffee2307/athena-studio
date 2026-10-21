@@ -11,7 +11,8 @@ test("A customer can identify a need and find the matching service without readi
  await expect(page.locator(".client-solution-card")).toHaveCount(3);
  await expect(page.getByRole("link",{name:/Gửi nhu cầu của bạn/})).toHaveAttribute("href","/contact");
  await expect(page.locator(".client-lab-band")).toContainText("chưa được mở bán");
- await expect(page.locator(".case-section-head")).toContainText("không phải danh sách hợp đồng khách hàng");
+ await expect(page.locator(".case-section-head")).toContainText("Khám phá các sản phẩm số và hướng nghiên cứu");
+ await expect(page.locator(".case-section-head")).not.toContainText("không phải danh sách hợp đồng khách hàng");
  await page.locator(".client-quick-nav a").nth(1).click();
  await expect(page).toHaveURL(/\/services\/website-care$/);
 });
