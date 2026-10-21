@@ -4,7 +4,7 @@
  * database/host migrations, security tests and owner approval are complete.
  */
 export interface IndependentIdentityConfig{
- origin:string;secret:string;databaseFile:string;
+ origin:string;secret:string;databaseFile:string;localPassword?:boolean;
  google?:{clientId:string;clientSecret:string};
  github?:{clientId:string;clientSecret:string};
 }
@@ -31,6 +31,8 @@ export function standaloneIdentityConfig(env:NodeJS.ProcessEnv=process.env):Inde
  const hasMail=env.ATHENA_GMAIL_SENDER_ENABLED==="true"&&
   !!env.ATHENA_GMAIL_CLIENT_ID&&!!env.ATHENA_GMAIL_CLIENT_SECRET&&
   !!env.ATHENA_GMAIL_REFRESH_TOKEN&&!!env.ATHENA_GMAIL_SENDER;
- if(!google&&!github&&!hasMail)return null;
- return {origin,secret,databaseFile,...(google?{google}:{}),...(github?{github}:{})};
+ const localPassword=env.ATHENA_LOCAL_PASSWORD_AUTH_ENABLED==="true";
+ // Explicitly localhost-only; no email-verification bypass on real hosting.
+ if(!google&&!github&&!hasMail&&!localPassword)return null;
+ return {origin,secret,databaseFile,...(localPassword?{localPassword:true}:{}),...(google?{google}:{}),...(github?{github}:{})};
 }

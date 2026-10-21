@@ -37,7 +37,7 @@ export default function ContactPage(){
     </div>
 
    </div>
-   <ContactForm configured={configured} siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY||""} contactEmail={siteConfig.email}/>
+   <ContactForm configured={configured} siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY||""}/>
   </div></section>
  </div>;
 }

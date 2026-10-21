@@ -1,11 +1,12 @@
 "use client";
 import {Icon} from "@/components/ui/Icon";
+import {showContactDialog} from "@/lib/contact-channels";
 import {FormEvent,useCallback,useEffect,useState} from "react";
 import Link from "next/link";
 import {TurnstileField} from "@/components/forms/TurnstileField";
-type Props={configured:boolean;contactEmail:string;siteKey:string};
+type Props={configured:boolean;siteKey:string};
 type Status="idle"|"sending"|"success"|"error";
-export function ContactForm({configured,contactEmail,siteKey}:Props){
+export function ContactForm({configured,siteKey}:Props){
  const [status,setStatus]=useState<Status>("idle"),[message,setMessage]=useState(""),[reference,setReference]=useState("");
  const [service,setService]=useState(""),[captcha,setCaptcha]=useState("");
  const updateCaptcha=useCallback((token:string)=>setCaptcha(token),[]);
@@ -44,7 +45,7 @@ export function ContactForm({configured,contactEmail,siteKey}:Props){
   </form>:<div className="form-offline" role="status">
    <strong>Hiện nhận yêu cầu trực tiếp qua email.</strong>
    <p>Biểu mẫu trực tuyến chưa được kích hoạt. Bạn vẫn có thể gửi thông tin để trao đổi qua email; nút bên dưới mở một thư mẫu để bạn điền nhanh.</p>
-   <a href={"mailto:"+contactEmail+"?subject="+encodeURIComponent("Yêu cầu tư vấn Athena Studio")+"&body="+encodeURIComponent("1. Website hiện tại (nếu có):\n\n2. Vấn đề đang gặp:\n\n3. Mục tiêu ưu tiên và thời hạn dự kiến:\n\n4. Thông tin liên hệ:\n")} className="pill-link pill-dark">Soạn email mô tả nhu cầu <Icon name="arrow-up-right" size={18}/></a>
+   <button type="button" onClick={()=>showContactDialog("email")} className="pill-link pill-dark">Soạn email mô tả nhu cầu <Icon name="arrow-up-right" size={18}/></button>
   </div>}
   <p className="contact-notice">Nếu cần trao đổi trực tiếp, bạn có thể gọi điện hoặc gửi email qua phần Liên hệ phía dưới trang.</p>
  </div>;

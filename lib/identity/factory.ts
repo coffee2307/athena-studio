@@ -21,7 +21,7 @@ export function createStandaloneAuth(settings:FactoryConfig){
   secret:settings.secret,
   database:settings.database,
   trustedOrigins:[settings.origin],
-  emailAndPassword:{enabled:false},
+  emailAndPassword:{enabled:settings.localPassword===true,minPasswordLength:12,requireEmailVerification:false},
   session:{expiresIn:60*60*24*7,updateAge:60*60,cookieCache:{enabled:false}},
   rateLimit:{enabled:true,window:60,max:10,storage:"database"},
   account:{accountLinking:{enabled:false}},

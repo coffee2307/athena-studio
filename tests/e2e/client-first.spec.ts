@@ -25,8 +25,10 @@ test("A visitor gets a usable brief and a direct email path while the inquiry fo
  await expect(steps.nth(0)).toContainText("Hiện trạng");
  await expect(steps.nth(1)).toContainText("Vấn đề");
  await expect(steps.nth(2)).toContainText("Ưu tiên");
- const email=page.getByRole("link",{name:/Soạn email mô tả nhu cầu/});
- await expect(email).toHaveAttribute("href",/mailto:coffee2307@gmail.com\?subject=.*&body=/);
+ const email=page.getByRole("button",{name:/Soạn email mô tả nhu cầu/});
+ await email.click();
+ await expect(page.getByRole("dialog",{name:"Soạn yêu cầu tư vấn"})).toBeVisible();
+ await expect(page.getByRole("link",{name:/Soạn bằng Gmail/})).toHaveAttribute("href",/mail.google.com/);
  await expect(page.locator(".form-offline")).toBeVisible();
 });
 

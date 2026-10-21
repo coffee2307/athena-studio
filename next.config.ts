@@ -20,8 +20,8 @@ const policy=[
  "style-src 'self' 'unsafe-inline'",
  // Next.js static hydration uses framework inline scripts; strict nonces are
  // deferred until the verified hosting model supports per-request nonce SSR.
- "script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com",
- ["connect-src 'self' https://challenges.cloudflare.com",supabaseOrigin].filter(Boolean).join(" "),
+ ["script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com",...(process.env.NODE_ENV==="development"?["'unsafe-eval'"]:[])].join(" "),
+ ["connect-src 'self' https://challenges.cloudflare.com",supabaseOrigin,...(process.env.NODE_ENV==="development"?["ws://127.0.0.1:*","ws://localhost:*"]:[])].filter(Boolean).join(" "),
  "frame-src https://challenges.cloudflare.com",
  ...(httpsOrigin?["upgrade-insecure-requests"]:[])
 ].join("; ");

@@ -55,7 +55,7 @@ test("Reduced motion preserves routes and disables reveal hiding",async({page})=
 test("No fake inquiry submission; readiness reports blocked",async({page,request})=>{
  await page.goto("/contact");
  await expect(page.locator(".form-offline")).toBeVisible();
- await expect(page.getByRole("link",{name:/Soạn email mô tả nhu cầu/})).toHaveAttribute("href",/mailto:coffee2307@gmail.com/);
+ await expect(page.getByRole("button",{name:/Soạn email mô tả nhu cầu/})).toBeVisible();
  const inquiry=await request.post("/api/inquiry",{data:{name:"Example",email:"test@example.com"}});
  expect(inquiry.status()).toBe(503);
  const health=await request.get("/api/health");
