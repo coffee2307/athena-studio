@@ -40,3 +40,29 @@ test("Better Auth local password signup persists hashed credentials, session and
   assert.equal(db.prepare('SELECT count(*) as c FROM "session"').get().c>=1,true);
  }finally{db.close();}
 });
+
+
+test("Google and GitHub OAuth are visible as configured-only providers, not automatically enabled",()=>{
+ const base={
+  NODE_ENV:"development",ATHENA_INDEPENDENT_AUTH_ENABLED:"true",
+  ATHENA_IDENTITY_LOCAL_ONLY:"true",ATHENA_LOCAL_PASSWORD_AUTH_ENABLED:"true",
+  NEXT_PUBLIC_SITE_URL:"http://127.0.0.1:3182",
+  BETTER_AUTH_SECRET:randomBytes(48).toString("base64url"),
+  ATHENA_IDENTITY_DB_PATH:".qa/auth-provider-test.sqlite"
+ };
+ const none=standaloneIdentityConfig(base);
+ assert.ok(none?.localPassword);
+ assert.equal(none.google,undefined);
+ assert.equal(none.github,undefined);
+ const partial={...base,ATHENA_GOOGLE_OAUTH_CLIENT_ID:"client-test-valid"};
+ assert.equal(standaloneIdentityConfig(partial),null,"partial provider config must fail closed");
+ const both={...base,
+  ATHENA_GOOGLE_OAUTH_CLIENT_ID:"google-client-id-test",
+  ATHENA_GOOGLE_OAUTH_CLIENT_SECRET:"google-client-secret-test",
+  ATHENA_GITHUB_OAUTH_CLIENT_ID:"github-client-id-test",
+  ATHENA_GITHUB_OAUTH_CLIENT_SECRET:"github-client-secret-test"};
+ const configured=standaloneIdentityConfig(both);
+ assert.equal(configured?.google?.clientId,"google-client-id-test");
+ assert.equal(configured?.github?.clientId,"github-client-id-test");
+ assert.equal(standaloneIdentityConfig({...both,NODE_ENV:"production"}),null);
+});

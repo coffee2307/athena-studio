@@ -45,6 +45,7 @@ export default function HomePage(){
    </div>
   </section>
   <ServiceTicker/>
+  <div className="athena-editorial-seam" aria-label="Nguyên tắc thực hiện"><div className="container athena-editorial-seam-inner"><span>Phạm vi rõ ràng</span><span>Kiểm thử trước bàn giao</span><span>Hỗ trợ theo thỏa thuận</span></div></div>
 
 
   <section id="giai-phap" className="section-space client-solutions" aria-labelledby="solutions-title">

@@ -2,7 +2,7 @@
 import Image from "next/image";
 import {useCallback,useEffect,useRef,useState} from "react";
 import {Icon} from "@/components/ui/Icon";
-import {contactChannels,consultationEmail,consultationGmail,consultationOutlook,consultationText} from "@/lib/contact-channels";
+import {contactChannels,consultationEmail,consultationGmail,consultationOutlook} from "@/lib/contact-channels";
 type Channel="phone"|"zalo"|"whatsapp"|"email";
 const channels:{id:Channel;label:string;href:string;qr?:string;icon?:string}[]=[
  {id:"phone",label:"Gọi điện",href:contactChannels.phone,qr:"/qr/phone.png"},
@@ -77,13 +77,11 @@ export function ContactDock(){
     </div>
     <h2 id="athena-contact-title">{active==="email"?"Soạn yêu cầu tư vấn":active==="phone"?"Gọi Athena trực tiếp":"Liên hệ qua "+choice.label}</h2>
     {active==="email"?<>
-     <p>Chọn ứng dụng email trên web, hoặc sao chép nội dung thư để gửi thủ công. Không cần cài ứng dụng email trên máy tính.</p>
+     <p>Chọn Gmail hoặc Outlook để mở thư đã điền sẵn nội dung. Bạn có thể chỉnh sửa trước khi gửi.</p>
      <div className="athena-email-address">coffee2307@gmail.com</div>
      <div className="athena-contact-buttons">
       <a href={consultationGmail} target="_blank" rel="noopener noreferrer" className="athena-contact-primary">Soạn bằng Gmail <Icon name="arrow-up-right" size={16}/></a>
       <a href={consultationOutlook} target="_blank" rel="noopener noreferrer">Soạn bằng Outlook <Icon name="arrow-up-right" size={16}/></a>
-      <a href={consultationEmail}>Mở ứng dụng email <Icon name="arrow-up-right" size={16}/></a>
-      <button onClick={()=>copy(consultationText)}>Sao chép nội dung thư <Icon name="arrow-right" size={16}/></button>
      </div>
     </>:<>
      <p>{active==="phone"?"Dùng điện thoại quét mã QR để mở bàn phím gọi điện đã điền sẵn số.":"Quét mã QR bằng camera điện thoại hoặc nhấn nút bên dưới để mở "+choice.label+"."}</p>

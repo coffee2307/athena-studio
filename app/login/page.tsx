@@ -9,5 +9,6 @@ export const dynamic="force-dynamic";
 export const metadata={...createMetadata("Đăng nhập tài khoản",undefined,"/login"),robots:{index:false,follow:false}};
 export default function Login(){
  const settings=authSettings();
- return <AuthShell>{standaloneIdentityConfig()?.localPassword?<LocalPasswordAuth mode="login"/>:settings.enabled?<AuthPanel mode="login" googleEnabled={process.env.NEXT_PUBLIC_ATHENA_GOOGLE_ENABLED==="true"}/>:<AuthUnavailable/>}</AuthShell>;
+ const identity=standaloneIdentityConfig();
+ return <AuthShell>{identity?.localPassword?<LocalPasswordAuth mode="login" googleEnabled={Boolean(identity.google)} githubEnabled={Boolean(identity.github)}/>:settings.enabled?<AuthPanel mode="login" googleEnabled={process.env.NEXT_PUBLIC_ATHENA_GOOGLE_ENABLED==="true"}/>:<AuthUnavailable/>}</AuthShell>;
 }
