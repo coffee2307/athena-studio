@@ -9,6 +9,7 @@ import {Icon} from "@/components/ui/Icon";
 import {siteConfig} from "@/lib/constants";
 import {contactChannels} from "@/lib/contact-channels";
 import {ConsultationCTA} from "@/components/layout/ConsultationCTA";
+import {SessionNavigation} from "@/components/auth/SessionNavigation";
 
 const solutions=[
  {href:"/services/web-development",title:"Thiết kế website",detail:"Website mới, landing page, trang bán hàng"},
@@ -84,8 +85,7 @@ export function Navbar(){
     {navigation.filter(i=>i.href!=="/services").map(i=><Link key={i.href} href={i.href} className={pathname===i.href||pathname.startsWith(i.href+"/")?"agency-nav-current":""}>{i.label}</Link>)}
    </nav>
    <div className="agency-nav-actions">
-    <Link className="agency-auth-link" href="/login"><Icon name="user" size={17}/> Đăng nhập</Link>
-    <Link className="agency-register-link" href="/signup">Đăng ký</Link>
+    <SessionNavigation/>
     <ConsultationCTA className="agency-primary-cta" label="Yêu cầu tư vấn" iconSize={17}/>
    </div>
    <button ref={trigger} type="button" className={open?"agency-menu-toggle is-open":"agency-menu-toggle"}
@@ -105,7 +105,7 @@ export function Navbar(){
      {solutions.map(s=><Link href={s.href} key={s.href}>{s.title}<Icon name="arrow-right" size={17}/></Link>)}
     </div>
     {navigation.filter(i=>i.href!=="/services").map(i=><Link href={i.href} key={i.href} className="agency-mobile-primary">{i.label}<Icon name="arrow-up-right"/></Link>)}
-    <div className="agency-mobile-account"><Link href="/login"><Icon name="user" size={17}/> Đăng nhập</Link><Link href="/signup">Đăng ký tài khoản</Link></div>
+    <div className="agency-mobile-account"><SessionNavigation mobile/></div>
     <ConsultationCTA className="agency-mobile-cta" label="Gửi yêu cầu tư vấn" iconSize={18}/>
     <a href={contactChannels.phone} className="agency-mobile-email"><Icon name="phone" size={16}/>{siteConfig.phone}</a>
     <a href={contactChannels.email} className="agency-mobile-email"><Icon name="mail" size={16}/>{siteConfig.email}</a>

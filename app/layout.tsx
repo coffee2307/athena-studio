@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Navbar } from "@/components/layout/Navbar";
+import {AuthSessionProvider} from "@/components/auth/AuthSessionProvider";
 import { Footer } from "@/components/layout/Footer";
 import { ContactDock } from "@/components/layout/ContactDock";
 import { ExperienceEffects } from "@/components/experience/ExperienceEffects";
@@ -16,6 +17,7 @@ import "@/app/globals.css";
 import "@/app/agency-relaunch.css";
 import "@/app/contact-experience.css";
 import "@/app/athena-refinement.css";
+import "@/app/auth-profile.css";
 
 export const metadata: Metadata = {
   ...createMetadata(),
@@ -27,5 +29,5 @@ export const metadata: Metadata = {
 };
 export const viewport: Viewport = { themeColor: "#ffffff", width: "device-width", initialScale: 1 };
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="vi"><body><a className="skip-link" href="#main-content">Chuyển tới nội dung chính</a><Navbar/><main id="main-content"><PageTransition>{children}</PageTransition></main><Footer/><ContactDock/><ExperienceEffects/></body></html>;
+  return <html lang="vi"><body><a className="skip-link" href="#main-content">Chuyển tới nội dung chính</a><AuthSessionProvider><Navbar/><main id="main-content"><PageTransition>{children}</PageTransition></main><Footer/></AuthSessionProvider><ContactDock/><ExperienceEffects/></body></html>;
 }

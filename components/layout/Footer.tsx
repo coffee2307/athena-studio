@@ -6,6 +6,7 @@ import {siteConfig} from "@/lib/constants";
 import {contactChannels} from "@/lib/contact-channels";
 import {Icon} from "@/components/ui/Icon";
 import {ConsultationCTA} from "@/components/layout/ConsultationCTA";
+import {SessionNavigation} from "@/components/auth/SessionNavigation";
 
 export function Footer(){
  return <footer className="athena-footer agency-footer">
@@ -41,8 +42,7 @@ export function Footer(){
     <div className="agency-footer-column"><h3>HỖ TRỢ</h3>
      <Link href="/process">Quy trình hợp tác</Link>
      <Link href="/pricing">Cách lập báo giá</Link>
-     <Link href="/login">Đăng nhập</Link>
-     <Link href="/signup">Đăng ký</Link>
+     <SessionNavigation mobile/>
      <Link href="/legal/privacy">Quyền riêng tư</Link>
      <Link href="/legal/terms">Điều khoản sử dụng</Link>
      <Link href="/legal/service-policy">Chính sách dịch vụ</Link>

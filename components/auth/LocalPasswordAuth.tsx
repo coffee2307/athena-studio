@@ -11,12 +11,23 @@ function ProviderIcon({provider}:{provider:"google"|"github"}){
 export function LocalPasswordAuth({mode,googleEnabled=false,githubEnabled=false}:{mode:Mode;googleEnabled?:boolean;githubEnabled?:boolean}){
  const [ready,setReady]=useState(false);
  const [busy,setBusy]=useState(false),[error,setError]=useState(""),[info,setInfo]=useState("");
- useEffect(()=>{setReady(true);auth().getSession().then(x=>{if(x.data?.session)window.location.replace("/account-preview");}).catch(()=>{});},[]);
+ useEffect(()=>{
+  setReady(true);
+  const errorCode=new URLSearchParams(window.location.search).get("error");
+  const messages:Record<string,string>={
+   invalid_code:"GitHub/Google không thể đổi mã ủy quyền thành phiên đăng nhập. Hãy mở luồng đăng nhập mới và kiểm tra Client ID/Secret đúng cùng OAuth App, callback trùng chính xác và mã chưa sử dụng.",
+   state_mismatch:"Phiên xác thực đã hết hạn hoặc trạng thái đăng nhập không khớp. Hãy bắt đầu lại từ nút đăng nhập trên Athena.",
+   state_security_mismatch:"Cookie xác thực không khớp. Hãy dùng một địa chỉ duy nhất: http://127.0.0.1:3182, không chuyển giữa localhost và 127.0.0.1.",
+   email_not_verified:"Email tài khoản nhà cung cấp chưa được xác minh."
+  };
+  if(errorCode)setError(messages[errorCode]||"Đăng nhập OAuth chưa hoàn tất. Hãy thử lại và kiểm tra cấu hình nhà cung cấp.");
+  if(!errorCode)auth().getSession().then(x=>{if(x.data?.session)window.location.replace("/profile");}).catch(()=>{});
+ },[]);
  async function loginWith(provider:"google"|"github"){
   if(busy||!ready||(provider==="google"&&!googleEnabled)||(provider==="github"&&!githubEnabled))return;
   setBusy(true);setError("");setInfo("");
   try{
-   const result=await auth().signIn.social({provider,callbackURL:window.location.origin+"/account-preview",errorCallbackURL:window.location.origin+"/login"});
+   const result=await auth().signIn.social({provider,callbackURL:window.location.origin+"/profile",errorCallbackURL:window.location.origin+"/login"});
    if(result.error)setError("Không thể kết nối "+(provider==="google"?"Google":"GitHub")+". Hãy thử lại hoặc dùng email và mật khẩu.");
   }catch{setError("Không khởi tạo được đăng nhập "+(provider==="google"?"Google":"GitHub")+".");}
   finally{setBusy(false);}
@@ -35,9 +46,9 @@ export function LocalPasswordAuth({mode,googleEnabled=false,githubEnabled=false}
      ?await c.signUp.email({email,password,name})
      :await c.signIn.email({email,password});
    if(response.error){setError(mode==="login"?"Không thể đăng nhập. Kiểm tra email, mật khẩu hoặc thử lại sau.":"Không thể tạo tài khoản. Email có thể đã được sử dụng hoặc hệ thống đang giới hạn yêu cầu.");return;}
-   const session=await c.getSession();
-   if(!session.data?.user){setError("Chưa xác minh được phiên đăng nhập. Vui lòng thử lại.");return;}
-   setInfo("Đã tạo phiên đăng nhập thử nghiệm.");window.location.assign("/account-preview");
+   // The Better Auth server has accepted the sign-in and issued a response;
+   // /profile independently verifies the session cookie on the server.
+   setInfo("?ang m? h? s??");window.location.assign("/profile");
   }catch{setError("Không kết nối được máy chủ xác thực cục bộ. Vui lòng thử lại.");}
   finally{setBusy(false);}
  }

@@ -1,0 +1,1 @@
+export default function ProfileLoading(){return <div className="athena-profile-page"><div className="container athena-profile-wrap"><p>Đang tải hồ sơ…</p></div></div>;}
