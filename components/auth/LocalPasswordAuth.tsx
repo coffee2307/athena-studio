@@ -53,9 +53,9 @@ export function LocalPasswordAuth({mode,googleEnabled=false,githubEnabled=false}
   finally{setBusy(false);}
  }
  return <div className="auth-panel">
-  <p className="small-index">ATHENA / MÔI TRƯỜNG THỬ NGHIỆM NỘI BỘ</p>
+  <p className="small-index">ATHENA / T?I KHO?N</p>
   <h1>{mode==="login"?"Đăng nhập":"Tạo tài khoản"}<em>.</em></h1>
-  <p className="auth-description">Tài khoản thử nghiệm thực sự được lưu vào cơ sở dữ liệu cục bộ và có phiên đăng nhập. Đây chưa phải tài khoản khách hàng trên website công khai; không cấp quyền dự án và email chưa được xác minh.</p>
+  <p className="auth-description">Ch?o m?ng ??n Athena Studio. ??ng nh?p ho?c t?o t?i kho?n ?? qu?n l? th?ng tin c? nh?n.</p>
   <div className="athena-oauth-providers" role="group" aria-label="Đăng nhập bằng tài khoản khác">
    {(["google","github"] as const).map(provider=>{
     const enabled=provider==="google"?googleEnabled:githubEnabled;
@@ -79,6 +79,6 @@ export function LocalPasswordAuth({mode,googleEnabled=false,githubEnabled=false}
   {error&&<p className="auth-notice is-error" role="alert">{error}</p>}
   {info&&<p className="auth-notice" role="status">{info}</p>}
   <p className="auth-alternate">{mode==="login"?<>Chưa có tài khoản thử nghiệm? <Link href="/signup">Đăng ký</Link></>:<>Đã có tài khoản thử nghiệm? <Link href="/login">Đăng nhập</Link></>}</p>
-  <p className="auth-footnote">Không dùng mật khẩu thật của bất kỳ tài khoản nào trong môi trường thử nghiệm này.</p>
+  <p className="auth-footnote">B?n th? nghi?m c?c b?. Kh?ng s? d?ng m?t kh?u ?ang d?ng tr?n d?ch v? kh?c.</p>
  </div>;
 }
