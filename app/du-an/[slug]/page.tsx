@@ -23,23 +23,20 @@ export default async function CaseStudy({params}:Props){
    <Link href="/du-an" className="case-back"><Icon name="arrow-right" size={17} className="agency-back-icon"/> Tất cả dự án</Link>
    <div className="case-detail-title"><div><p className="page-kicker"><span className="eyebrow-dot"/> {p.kicker}</p>
     <h1>{p.title}<span>.</span></h1><p>{p.summary}</p></div>
-    <div className="case-detail-number">{p.kind==="research"?"DỰ ÁN NGHIÊN CỨU":"SẢN PHẨM CỦA FOUNDER"}</div>
+    <div className="case-detail-number">{p.kind==="research"?"NGHIÊN CỨU CÔNG NGHỆ":"THIẾT KẾ SẢN PHẨM"}</div>
    </div>
    <ProjectArtwork project={p}/>
-   <p className="art-disclaimer">{p.gallery.some(x=>x.rightsVerified)?"Hình ảnh được chụp từ giao diện sản phẩm công khai, không phải ảnh chụp mã nguồn.":"Ảnh phía trên là đồ họa nhận diện, không phải ảnh chụp phần mềm."}</p>
+   {!p.gallery.length&&<p className="art-disclaimer">Hình minh họa định hướng thiết kế.</p>}
   </div></section>
   <section className="page-section agency-case-story"><div className="container">
    <div className="case-facts">
-    <div><span>PHÂN LOẠI</span><strong>{p.kind==="research"?"Nghiên cứu":"Dự án founder"}</strong></div>
-    <div><span>TÌNH TRẠNG</span><strong>{p.status}</strong></div>
     <div><span>LĨNH VỰC</span><strong>{p.category}</strong></div>
-    <div><span>ẢNH GIAO DIỆN</span><strong>{p.gallery.length?"Đã đối chiếu":"Chưa được duyệt"}</strong></div>
+    <div><span>CHUYÊN MÔN</span><strong>{p.technologies.slice(0,2).join(" · ")}</strong></div>
    </div>
-   <div className="case-provenance"><span>VAI TRÒ THỰC HIỆN</span><p>{p.responsibility}</p></div>
    <div className="agency-case-section-title">
     <p className="section-index"><span className="index-circle">01</span> TRẢI NGHIỆM KHÁCH HÀNG CÓ THỂ XEM</p>
-    <h2>Giao diện thực tế.<br/><span>Không phải mã nguồn.</span></h2>
-    <p>{p.evidenceNote}</p>
+    <h2>Khám phá sản phẩm.<br/><span>Từ bài toán đến trải nghiệm.</span></h2>
+    <p>{p.gallery.length?"Những màn hình và thành phần trải nghiệm được lựa chọn để giới thiệu dự án.":"Các hướng thiết kế và năng lực đang được xây dựng trong dự án."}</p>
    </div>
    <ProjectGallery project={p}/>
    <div className="agency-case-section-title agency-case-functional">
@@ -51,7 +48,7 @@ export default async function CaseStudy({params}:Props){
     <div className="case-story-row"><p>03 / BỐI CẢNH</p><div><h2>Bài toán ban đầu.</h2><p>{p.introduction}</p></div></div>
     <div className="case-story-row"><p>04 / THÁCH THỨC</p><div><h2>Vấn đề cần giải quyết.</h2><p>{p.challenge}</p></div></div>
     <div className="case-story-row"><p>05 / GIẢI PHÁP</p><div><h2>Hướng triển khai.</h2><p>{p.approach}</p><div className="case-tags">{p.technologies.map(t=><span key={t}>{t}</span>)}</div></div></div>
-    <div className="case-story-row"><p>06 / TÌNH TRẠNG</p><div><h2>Đã có gì để xem?</h2><p>{p.outcome}</p><small className="case-outcome-note">{p.outcomeNote}</small></div></div>
+    <div className="case-story-row"><p>06 / TÌNH TRẠNG</p><div><h2>Đã có gì để xem?</h2><p>{p.outcome}</p></div></div>
    </div>
    <div className="agency-case-actions">
     {p.websiteUrl&&<a href={p.websiteUrl} target="_blank" rel="noopener noreferrer" className="agency-outline-cta">Xem website dự án <Icon name="arrow-up-right" size={18}/></a>}

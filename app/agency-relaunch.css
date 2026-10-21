@@ -9,6 +9,7 @@
 .agency-topline{background:#141515;color:#f2f2ef;font-size:10px;letter-spacing:.11em}
 .agency-topline-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:28px}
 .agency-topline a{display:inline-flex;align-items:center;gap:8px;letter-spacing:.01em;font-weight:550}
+.agency-topline-contacts{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
 .agency-nav-shell{height:76px;display:flex;align-items:center;justify-content:space-between;gap:25px}
 .agency-header .brand-lockup{min-width:0;gap:10px;flex-shrink:0}
 .agency-header .brand-symbol{width:45px;height:45px}
@@ -53,21 +54,22 @@
 .agency-menu-toggle{display:none}
 .agency-menu-backdrop,.agency-mobile-panel{display:none}
 
-/* Contact widget — only displays verified messaging providers. */
-.agency-contact-dock{position:fixed;right:22px;bottom:26px;z-index:90;display:flex;align-items:flex-end;flex-direction:column;gap:10px}
-.agency-dock-trigger{display:flex;align-items:center;justify-content:center;gap:9px;border-radius:999px;
- background:#161718;color:#fff;border:1px solid #161718;min-height:52px;padding:0 19px;
- box-shadow:0 8px 25px rgba(0,0,0,.16);font-size:13px;font-weight:700;transition:transform .2s,background .2s}
-.agency-dock-trigger:hover{transform:translateY(-2px);background:#333}
-.agency-dock-options{display:grid;gap:0;min-width:203px;padding:7px;border:1px solid #dadad6;
- background:#fff;box-shadow:0 15px 40px rgba(0,0,0,.13);border-radius:13px;
- opacity:0;visibility:hidden;transform:translateY(9px) scale(.985);
- transition:opacity .25s ease,transform .25s cubic-bezier(.22,1,.36,1),visibility .25s}
-.agency-dock-options.is-open{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
-.agency-dock-options a{display:flex;align-items:center;gap:12px;padding:12px;border-radius:8px;font-size:12px;font-weight:600}
-.agency-dock-options a:hover{background:#efefee}
-.agency-brand-icon{width:20px;display:inline-grid;place-items:center;font-size:17px;font-weight:800}
-.agency-contact-dock :focus-visible{outline-offset:3px}
+/* Three always-visible contact methods: direct touch targets, no intermediate toggle. */
+.agency-contact-dock{position:fixed;right:20px;bottom:max(24px, env(safe-area-inset-bottom));z-index:90;display:flex;flex-direction:column;gap:11px;align-items:flex-end}
+.agency-contact-action{position:relative;display:flex;align-items:center;justify-content:center;
+ width:52px;height:52px;min-width:48px;min-height:48px;border-radius:16px;color:#fff;
+ box-shadow:0 7px 19px rgba(0,0,0,.16);transition:transform .2s ease,box-shadow .2s ease;
+ touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.agency-contact-action-phone{background:#202425}
+.agency-contact-action-whatsapp{background:#128c4d}
+.agency-contact-action-zalo{background:#0068ff}
+.agency-zalo-mark{font-size:15px;font-weight:850;letter-spacing:-.065em;font-family:Arial,sans-serif;color:white}
+.agency-contact-action>span{pointer-events:none;position:absolute;right:calc(100% + 9px);top:50%;transform:translate(5px,-50%);
+ background:#202425;color:#fff;font-size:12px;font-weight:700;white-space:nowrap;border-radius:7px;
+ opacity:0;visibility:hidden;padding:9px 12px;transition:opacity .2s,transform .2s,visibility .2s}
+.agency-contact-action:hover,.agency-contact-action:focus-visible{transform:translateY(-2px);box-shadow:0 10px 25px rgba(0,0,0,.22)}
+.agency-contact-action:hover>span,.agency-contact-action:focus-visible>span{opacity:1;visibility:visible;transform:translate(0,-50%)}
+.agency-contact-action:focus-visible{outline:3px solid #101111;outline-offset:3px}
 
 /* Footer with directly accessible phone, email, legal and account routes. */
 .agency-footer{background:#f7f7f5;border-top:1px solid #dedfdb}
@@ -110,7 +112,7 @@
  .agency-nav-shell{height:74px}
  .agency-desktop-nav,.agency-nav-actions{display:none}
  .agency-header .brand-lockup{min-width:0}
- .agency-menu-toggle{position:relative;z-index:120;display:flex;align-items:center;justify-content:center;
+ .agency-menu-toggle{position:relative;z-index:120;display:flex;align-items:center;justify-content:center;touch-action:manipulation;-webkit-tap-highlight-color:transparent;
  flex-direction:column;gap:6px;width:46px;height:46px;border:1px solid #d3d5d3;border-radius:10px;
  background:#fff;transition:background .2s ease}
  .agency-menu-toggle:hover{background:#f4f4f2}
@@ -140,7 +142,7 @@
  .agency-mobile-account a{font-size:13px;font-weight:650;display:inline-flex;align-items:center;gap:6px}
  .agency-mobile-cta{margin-top:20px;display:flex;align-items:center;justify-content:space-between;gap:10px;
  padding:16px 18px;border-radius:9px;background:#151515;color:#fff;font-size:13px;font-weight:700}
- .agency-mobile-email{display:block;font-size:12px;margin-top:21px;color:#54575a}
+ .agency-mobile-email{display:flex;align-items:center;gap:9px;font-size:12px;margin-top:17px;color:#35393c;min-height:26px}
  .agency-footer-main{grid-template-columns:repeat(3,minmax(0,1fr))}
  .agency-footer-brand{grid-column:1/-1}
 }
@@ -152,8 +154,8 @@
  .agency-footer-brand{grid-column:1/-1}
  .agency-footer-column h3{font-size:10px}
  .agency-footer-bottom{flex-direction:column;align-items:flex-start}
- .agency-contact-dock{right:13px;bottom:14px}
- .agency-dock-trigger{min-height:48px;padding:0 15px}
+ .agency-contact-dock{right:12px;bottom:max(12px, env(safe-area-inset-bottom));gap:8px}
+ .agency-contact-action{width:48px;height:48px;border-radius:14px}
 }
 @media(prefers-reduced-motion:reduce){
  .agency-header *, .agency-header *::before,.agency-header *::after,

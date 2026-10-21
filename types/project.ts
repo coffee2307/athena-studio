@@ -15,13 +15,10 @@ export interface Project {
   challenge: string;
   approach: string;
   outcome: string;
-  outcomeNote: string;
   technologies: string[];
   activities: string[];
   websiteUrl?: string;
   gallery: {src:string;alt:string;caption:string;rightsVerified:boolean}[];
-  responsibility: string;
-  evidenceNote: string;
   artwork: "pham"|"econith"|"qrio"|"neutral";
   updatedLabel: string;
 }

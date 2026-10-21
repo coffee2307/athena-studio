@@ -82,10 +82,10 @@ export default function HomePage(){
     <div className="case-section-head reveal">
      <div><p className="section-index"><span className="index-circle">03</span> SẢN PHẨM ĐÃ THỰC HIỆN / NGHIÊN CỨU</p>
       <h2 id="featured-projects-heading">Xem cách làm,<br/><span>không chỉ nghe giới thiệu.</span></h2></div>
-     <p>Đây là sản phẩm do founder phát triển hoặc nghiên cứu, <strong>không phải danh sách hợp đồng khách hàng Athena</strong>. Mỗi hồ sơ nêu rõ vai trò và trạng thái hiện tại.</p>
+     <p>Khám phá các sản phẩm số và hướng nghiên cứu của người sáng lập Athena, qua trải nghiệm, tính năng và cách giải quyết vấn đề.</p>
     </div>
     <div className="portfolio-grid">{featuredProjects.map((p,i)=><ProjectCard key={p.slug} project={p} index={i}/>)}</div>
-    <div className="featured-footer"><p>Chúng tôi không gắn kết quả kinh doanh chưa được xác minh cho các dự án này.</p><Link href="/du-an" className="underlined-link">Xem hồ sơ dự án <Icon name="arrow-up-right" size={18}/></Link></div>
+    <div className="featured-footer"><p>Tìm hiểu cách sản phẩm được thiết kế cho nhu cầu thực tế.</p><Link href="/du-an" className="underlined-link">Xem hồ sơ dự án <Icon name="arrow-up-right" size={18}/></Link></div>
    </div>
   </section>
 

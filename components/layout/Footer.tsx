@@ -5,6 +5,7 @@ import {offerings} from "@/lib/offerings";
 import {siteConfig} from "@/lib/constants";
 import {contactChannels} from "@/lib/contact-channels";
 import {Icon} from "@/components/ui/Icon";
+import {ConsultationCTA} from "@/components/layout/ConsultationCTA";
 
 export function Footer(){
  return <footer className="athena-footer agency-footer">
@@ -13,7 +14,7 @@ export function Footer(){
     <div><p className="eyebrow"><span className="eyebrow-dot"/> TRAO ĐỔI NHU CẦU WEBSITE HOẶC TỰ ĐỘNG HÓA</p>
      <h2>Cần một giải pháp<br/><span>phù hợp với bạn?</span></h2>
      <p>Gửi vấn đề đang gặp, website hiện tại nếu có và kết quả mong muốn. Athena sẽ trao đổi khả năng thực hiện và phạm vi trước khi chốt báo giá.</p></div>
-    <Link href="/lien-he" className="agency-footer-cta-button">Gửi yêu cầu tư vấn <Icon name="arrow-up-right" size={20}/></Link>
+    <ConsultationCTA className="agency-footer-cta-button" label="Gửi yêu cầu tư vấn" contactLabel="Soạn email tư vấn" iconSize={20}/>
    </div>
    <div className="agency-footer-main">
     <div className="agency-footer-brand">
@@ -50,7 +51,7 @@ export function Footer(){
    </div>
    <div className="agency-footer-bottom">
     <span>© {new Date().getFullYear()} Athena Studio · Thiết kế và công nghệ độc lập</span>
-    <span>Thông tin dự án được phân loại theo nguồn gốc và quyền công bố</span>
+    <span>Website · Vận hành · Ứng dụng AI</span>
     <Link href="/phap-ly">Thông tin pháp lý <Icon name="arrow-right" size={14}/></Link>
    </div>
   </div>
