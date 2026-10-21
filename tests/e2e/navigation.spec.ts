@@ -35,11 +35,11 @@ test("Responsive mobile navigation has proper state and keyboard close",async({p
  await page.goto("/");
  const toggle=page.getByRole("button",{name:"Mở menu"});
  await toggle.click();
- await expect(page.getByRole("button",{name:"Đóng menu"})).toHaveAttribute("aria-expanded","true");
+ await expect(page.getByRole("button",{name:"Đóng menu",exact:true})).toHaveAttribute("aria-expanded","true");
  await page.keyboard.press("Escape");
  await expect(page.getByRole("button",{name:"Mở menu"})).toHaveAttribute("aria-expanded","false");
  await toggle.click();
- await page.getByRole("link",{name:"Dự án"}).first().click();
+ await page.locator(".agency-mobile-panel a[href=\"/du-an\"]").click();
  await expect(page).toHaveURL(/\/du-an$/);
 });
 test("Reduced motion preserves routes and disables reveal hiding",async({page})=>{

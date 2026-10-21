@@ -1,7 +1,8 @@
 import type {NavigationItem} from "@/types/common";
 export const navigation:NavigationItem[]=[
- {label:"Dự án",href:"/du-an"},
  {label:"Dịch vụ",href:"/dich-vu"},
- {label:"Sản phẩm",href:"/san-pham"},
- {label:"Về Athena",href:"/ve-athena"}
+ {label:"Dự án",href:"/du-an"},
+ {label:"Quy trình",href:"/quy-trinh"},
+ {label:"Về Athena",href:"/ve-athena"},
+ {label:"Sản phẩm",href:"/san-pham"}
 ];

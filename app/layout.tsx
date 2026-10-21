@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { ContactDock } from "@/components/layout/ContactDock";
 import { ExperienceEffects } from "@/components/experience/ExperienceEffects";
 import { PageTransition } from "@/components/experience/PageTransition";
 import { createMetadata } from "@/lib/metadata";
@@ -12,6 +13,7 @@ import "@fontsource/be-vietnam-pro/600.css";
 import "@fontsource/be-vietnam-pro/700.css";
 import "@fontsource/noto-serif/400-italic.css";
 import "@/app/globals.css";
+import "@/app/agency-relaunch.css";
 
 export const metadata: Metadata = {
   ...createMetadata(),
@@ -23,5 +25,5 @@ export const metadata: Metadata = {
 };
 export const viewport: Viewport = { themeColor: "#ffffff", width: "device-width", initialScale: 1 };
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="vi"><body><a className="skip-link" href="#main-content">Chuyển tới nội dung chính</a><Navbar/><main id="main-content"><PageTransition>{children}</PageTransition></main><Footer/><ExperienceEffects/></body></html>;
+  return <html lang="vi"><body><a className="skip-link" href="#main-content">Chuyển tới nội dung chính</a><Navbar/><main id="main-content"><PageTransition>{children}</PageTransition></main><Footer/><ContactDock/><ExperienceEffects/></body></html>;
 }

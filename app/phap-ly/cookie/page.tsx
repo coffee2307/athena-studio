@@ -1,9 +1,25 @@
 import {LegalArticle} from "@/components/legal/LegalArticle";
 import {createMetadata} from "@/lib/metadata";
-export const metadata=createMetadata("Cookie","Thông tin sơ bộ về cookie và các công nghệ lưu trữ dữ liệu của website Athena Studio.","/phap-ly/cookie");
-export default function Cookie(){return <LegalArticle title="Cookie và lưu trữ" label="Các công nghệ vận hành website và lựa chọn của người truy cập." updated="19/10/2026">
- <h2>1. Tình trạng hiện tại</h2><p>Ở phiên bản website công khai đang phát triển, Athena chưa cố ý tích hợp cookie quảng cáo hoặc SDK phân tích hành vi phục vụ tiếp thị. Hiện không có chức năng đăng nhập khách hàng. Hạ tầng hosting và các tích hợp trong tương lai có thể sử dụng cookie kỹ thuật.</p>
- <h2>2. Những công nghệ có thể xuất hiện</h2><p>Trình duyệt có thể lưu bộ nhớ đệm tài nguyên, dữ liệu phiên hoặc các thông tin kỹ thuật khi sử dụng dịch vụ liên kết ngoài. Sau khi bổ sung xác thực, cookie phiên bảo mật sẽ cần được phân loại và công bố chính xác theo cấu hình thực tế.</p>
- <h2>3. Kiểm soát của bạn</h2><p>Bạn có thể quản lý cookie qua cài đặt trình duyệt. Việc chặn cookie kỹ thuật có thể ảnh hưởng những chức năng đòi hỏi phiên xác thực sau này, nhưng website hiện vẫn cho phép duyệt nội dung công khai mà không cần tạo tài khoản.</p>
- <h2>4. Điều chỉnh tương lai</h2><p>Trước khi bổ sung phân tích, quảng cáo hoặc công cụ của bên thứ ba sử dụng cookie không thiết yếu, Athena sẽ đánh giá yêu cầu thông báo và xin lựa chọn phù hợp. Không hiển thị banner đồng ý chỉ để trang trí khi chưa có cơ chế quản lý lựa chọn hoạt động.</p>
+export const metadata=createMetadata("Cookie và công nghệ lưu trữ","Thông tin về cookie thiết yếu, phiên đăng nhập, lưu trữ trình duyệt, kênh bên thứ ba và lựa chọn của bạn trên Athena Studio.","/phap-ly/cookie");
+export default function Cookies(){return <LegalArticle title="Cookie và lưu trữ" label="Những loại dữ liệu trình duyệt có thể lưu và lựa chọn của người truy cập." updated="21/10/2026">
+ <h2>1. Cookie là gì?</h2>
+ <p>Cookie là dữ liệu nhỏ do website hoặc dịch vụ liên quan lưu trên trình duyệt để nhận biết một phiên truy cập hoặc ghi nhớ lựa chọn. Bộ nhớ đệm của trình duyệt, local storage và session storage là các cơ chế khác; không phải tất cả đều là cookie.</p>
+ <h2>2. Những gì Athena đang dùng</h2>
+ <p>Website công khai chủ yếu cung cấp nội dung giới thiệu dịch vụ và dự án. Các thành phần phía máy chủ, dịch vụ hosting hoặc bảo vệ website có thể tạo dữ liệu kỹ thuật cần thiết để xử lý yêu cầu. Hiện tại, hệ thống đăng nhập mới và các tích hợp email đang được nghiệm thu riêng, không được coi là đã vận hành công khai.</p>
+ <p>Athena chưa công bố việc triển khai công cụ quảng cáo hoặc theo dõi tiếp thị cá nhân hóa trên trang công khai. Trước khi mở cookie không thiết yếu, cần kiểm kê chính xác tên cookie, thời hạn, mục đích và cơ chế lựa chọn.</p>
+ <h2>3. Các nhóm công nghệ cần phân biệt</h2>
+ <div className="agency-legal-table-wrap"><table className="agency-legal-table"><thead><tr><th>Nhóm</th><th>Công dụng</th><th>Trạng thái</th></tr></thead><tbody>
+  <tr><td>Hoạt động thiết yếu</td><td>Phục vụ trang, an ninh mạng và giao tiếp máy chủ.</td><td>Phụ thuộc cấu hình hạ tầng đang chạy</td></tr>
+  <tr><td>Phiên đăng nhập</td><td>Duy trì phiên đã xác thực và bảo vệ quyền truy cập.</td><td>Chưa mở công khai</td></tr>
+  <tr><td>Thống kê hoặc tiếp thị</td><td>Phân tích hành vi, đo lường chiến dịch hoặc cá nhân hóa quảng cáo.</td><td>Chưa được phê duyệt triển khai</td></tr>
+  <tr><td>Nền tảng ngoài</td><td>Zalo, WhatsApp, Google, GitHub hoặc nền tảng được bạn mở từ liên kết.</td><td>Chỉ phát sinh theo dịch vụ và tương tác thực tế</td></tr>
+ </tbody></table></div>
+ <h2>4. Cookie đăng nhập trong tương lai</h2>
+ <p>Nếu Athena Identity được mở, cookie phiên dự kiến có thuộc tính bảo mật phù hợp với HTTPS, giới hạn truy cập từ JavaScript và xác thực phía máy chủ. Thời hạn phiên, khả năng đăng xuất và cách thu hồi quyền cần được kiểm thử trên domain production trước khi công bố chi tiết.</p>
+ <h2>5. Cách quản lý</h2>
+ <p>Bạn có thể xóa hoặc chặn cookie trong phần cài đặt của trình duyệt. Việc chặn dữ liệu thiết yếu có thể khiến đăng nhập hoặc một số hoạt động bảo mật không dùng được khi tính năng tương ứng được kích hoạt. Việc xóa bộ nhớ đệm trình duyệt không xóa bản sao email mà bạn đã chủ động gửi.</p>
+ <h2>6. Lựa chọn đối với cookie không thiết yếu</h2>
+ <p>Nếu công cụ đo lường hoặc tiếp thị không thiết yếu được triển khai, Athena sẽ cung cấp thông tin và cơ chế lựa chọn phù hợp trước khi kích hoạt. Không hiển thị banner hoặc nút “Đồng ý tất cả” nếu thực tế không có bộ phận ghi nhớ và thực thi lựa chọn đó.</p>
+ <h2>7. Thay đổi và yêu cầu</h2>
+ <p>Trang này sẽ được cập nhật khi triển khai các nhà cung cấp, tính năng tài khoản hoặc hệ thống theo dõi mới. Có thể gửi thắc mắc đến <a href="mailto:coffee2307@gmail.com">coffee2307@gmail.com</a>.</p>
  </LegalArticle>}

@@ -1,55 +1,57 @@
-import type { Project } from "@/types/project";
+import type {Project} from "@/types/project";
 
-/**
- * A published entry MUST have independently traceable source and owner-approved
- * classification. Client delivery/revenue claims may never be inferred from a repo.
- * Entries marked review are never returned by getPublishedProjects().
- */
-export const projects: Project[] = [
-  {
-    slug:"pham",title:"PHAM",kicker:"THƯƠNG HIỆU / TRẢI NGHIỆM SỐ",category:"Thương mại điện tử",
-    kind:"founder",status:"đang phát triển",visibility:"published",featured:true,
-    summary:"Hệ thống trải nghiệm thương hiệu thời trang và thương mại điện tử phát triển trên Shopify.",
-    introduction:"PHAM là thương hiệu thời trang riêng của founder. Repository công khai cho thấy hệ thống theme Shopify được tùy biến sâu và cấu trúc quản lý các đợt phát hành sản phẩm (Edition). Đây là dự án của founder, không phải hợp đồng khách hàng độc lập do Athena thực hiện.",
-    challenge:"Xây dựng trải nghiệm trực tuyến có bản sắc riêng cho thương hiệu, đồng thời thiết kế các luồng đặt hàng, phát hành giới hạn và vận hành có kiểm soát.",
-    approach:"Repository sử dụng Shopify Liquid và các thành phần theme tùy chỉnh. Tài liệu dự án mô tả kiến trúc Edition, trạng thái đặt chỗ, quy trình hoàn tất thanh toán và kết nối Cloudflare Worker/D1 với Shopify. Những nội dung đó phản ánh thiết kế hệ thống trong mã nguồn, không chứng minh đã triển khai thương mại thành công.",
-    outcome:"Đã có mã nguồn theme tùy biến và tài liệu quy trình Edition. Việc phát hành, giao hàng, doanh thu hoặc số khách hàng thực tế chưa được xác minh để công bố tại Athena.",
-    outcomeNote:"Kết quả trình bày là hiện vật mã nguồn và tài liệu, không phải chỉ số thương mại.",
-    technologies:["Shopify Liquid","JavaScript","CSS","Cloudflare Worker / D1 (theo tài liệu kiến trúc)"],
-    activities:["Thiết kế trải nghiệm thương hiệu","Phát triển theme Shopify","Kiến trúc quy trình Edition","Tổ chức tài liệu triển khai"],
-    sourceUrl:"https://github.com/coffee2307/pham-store",
-    websiteUrl:undefined,gallery:[],responsibility:"Dự án riêng của founder Athena; không ghi nhận là khách hàng của studio.",
-    evidenceNote:"Đối chiếu repository pham-store: các thư mục sections/, templates/, layout/ và docs/PHAM_EDITION_SYSTEM.md. Trạng thái production phải được xác nhận riêng.",
-    artwork:"pham",updatedLabel:"Đối chiếu nguồn · 10/2026"
-  },
-  {
-    slug:"econith",title:"ECONITH",kicker:"NGHIÊN CỨU / HỆ THỐNG ĐỊNH LƯỢNG",category:"Nghiên cứu công nghệ",
-    kind:"research",status:"nghiên cứu",visibility:"published",featured:true,
-    summary:"Nền tảng nghiên cứu định lượng, dữ liệu thị trường và mô phỏng kinh tế đang được kiểm định.",
-    introduction:"ECONITH là một dự án nghiên cứu công nghệ do founder phát triển. Repository công khai chứa các miền xử lý dữ liệu và định lượng, mô phỏng World, API và giao diện điều khiển; đây không phải một dịch vụ giao dịch đã được chứng minh lợi nhuận.",
-    challenge:"Tách biệt dữ liệu thị trường thực và môi trường mô phỏng, tổ chức pipeline nghiên cứu có thể kiểm định, đồng thời giới hạn hành vi tự động khi chưa đạt yêu cầu an toàn.",
-    approach:"Mã nguồn và README mô tả Quant với các tầng dữ liệu, tín hiệu, kiểm soát rủi ro và dashboard; World phục vụ nghiên cứu kịch bản. Tài liệu ghi rõ trạng thái SIM/DEMO và giới hạn của tự động hóa, đánh giá khoa học và quá trình huấn luyện.",
-    outcome:"Repository có kiến trúc, công cụ nghiên cứu và quy trình kiểm định được mô tả. Không có đủ bằng chứng để khẳng định độ chính xác dự báo, lợi nhuận thật hoặc vận hành tự động an toàn trong production.",
-    outcomeNote:"Kết quả công bố chỉ phản ánh chức năng và tài liệu kỹ thuật đã đối chiếu.",
-    technologies:["Python","TypeScript","Mô hình dữ liệu","Dashboard","API"],
-    activities:["Nghiên cứu hệ thống định lượng","Kiến trúc dữ liệu","Mô phỏng và kiểm định","Giao diện giám sát"],
-    sourceUrl:"https://github.com/coffee2307/econith",
-    gallery:[],responsibility:"Dự án nghiên cứu của founder; không phải dự án bàn giao cho khách hàng Athena.",
-    evidenceNote:"Đối chiếu README trên nhánh main tại 10/2026; README có mốc báo cáo 13/09/2026 và không đại diện cho kiểm thử production hiện tại.",
-    artwork:"econith",updatedLabel:"Đối chiếu nguồn · 10/2026"
-  },
-  {
-    slug:"qrio",title:"Qrio",kicker:"DỰ ÁN / ĐANG XÁC MINH",category:"Dự án cá nhân",
-    kind:"founder",status:"đang phát triển",visibility:"review",featured:false,
-    summary:"Thông tin đang chờ xác minh trước khi công bố.",
-    introduction:"Chưa đủ tài liệu để xuất bản case study.",
-    challenge:"Chưa xác minh.",approach:"Chưa xác minh.",outcome:"Chưa xác minh.",
-    outcomeNote:"Không công bố thành tích khi thiếu bằng chứng.",technologies:[],activities:[],
-    gallery:[],responsibility:"Đang chờ founder xác nhận vai trò và tài sản được phép công bố.",
-    evidenceNote:"Không tìm thấy repository công khai coffee2307/qrio tại thời điểm audit.",artwork:"qrio",updatedLabel:"Chờ rà soát"
-  }
+/** Public case studies contain only owner-approved descriptive and visual data.
+ * Never include source repository URLs or internal architecture evidence in props. */
+export const projects:Project[]=[
+ {
+  slug:"pham",title:"PHAM",kicker:"THƯƠNG HIỆU / TRẢI NGHIỆM THƯƠNG MẠI ĐIỆN TỬ",
+  category:"Website thời trang",kind:"founder",status:"đang phát triển",visibility:"published",featured:true,
+  summary:"Website thời trang có giao diện biên tập đặc trưng, trang sản phẩm tương tác và hệ thống trình bày đợt phát hành giới hạn.",
+  introduction:"PHAM là thương hiệu riêng của founder Athena. Trang web công khai được phát triển theo hướng thương mại điện tử cao cấp, ưu tiên việc khám phá sản phẩm, kể câu chuyện thiết kế và điều hướng từ cảm nhận thị giác đến thông tin đặt hàng.",
+  challenge:"Kết hợp bản sắc thời trang độc lập với trải nghiệm web hoạt động trên desktop và điện thoại; giới thiệu một sản phẩm có nhiều lớp nội dung mà không gây rối cho người xem.",
+  approach:"Tổ chức hero chuyển động tương tác, khu vực khám phá PHAM-001, ảnh và màn hình thông tin sản phẩm, lựa chọn kích cỡ, cùng cách trình bày trạng thái đợt phát hành. Thiết kế nhấn mạnh tính nhất quán trên những điểm chạm chính.",
+  outcome:"Trang chủ và trang chi tiết PHAM-001 đang hiển thị công khai. Ảnh chụp bên dưới ghi lại giao diện thực tại thời điểm đối chiếu; không đồng nghĩa hệ thống thanh toán đã mở bán hoặc đã có doanh thu.",
+  outcomeNote:"Trạng thái, giá và quy trình mua hàng trên website đích có thể thay đổi. Athena không công bố doanh thu, chuyển đổi hoặc số đơn chưa xác minh.",
+  technologies:["Shopify","Thiết kế giao diện","Responsive","Tương tác sản phẩm"],
+  activities:["Thiết kế trải nghiệm thương hiệu","Trang sản phẩm PHAM-001","Điều hướng và trình bày sản phẩm","Thiết kế trải nghiệm mobile"],
+  websiteUrl:"https://phamofficial.com/",
+  gallery:[
+   {src:"/portfolio/pham-desktop.webp",alt:"Ảnh chụp trang chủ PHAM trên desktop với giao diện thời trang đen trắng và sản phẩm PHAM-001",caption:"Trang chủ PHAM — desktop, chụp từ website công khai ngày 21/10/2026",rightsVerified:true},
+   {src:"/portfolio/pham-product.webp",alt:"Ảnh chụp trang PHAM-001 với hình áo khoác và trải nghiệm Inspect the Form",caption:"Giao diện khám phá sản phẩm PHAM-001 — desktop",rightsVerified:true},
+   {src:"/portfolio/pham-mobile.webp",alt:"Ảnh chụp trang chủ PHAM trên màn hình điện thoại",caption:"Trang chủ PHAM — giao diện điện thoại",rightsVerified:true},
+   {src:"/portfolio/pham-product-mobile.webp",alt:"Ảnh chụp trang PHAM-001 trên điện thoại",caption:"Trang sản phẩm PHAM-001 — giao diện điện thoại",rightsVerified:true}
+  ],
+  responsibility:"Dự án thương hiệu do founder Athena phát triển; không được trình bày là hợp đồng khách hàng độc lập của studio.",
+  evidenceNote:"Ảnh chụp từ website PHAM đang truy cập công khai. Không cung cấp đường dẫn mã nguồn hoặc quyền quản trị dự án.",
+  artwork:"pham",updatedLabel:"Giao diện thực tế · 21/10/2026"
+ },
+ {
+  slug:"econith",title:"ECONITH",kicker:"NGHIÊN CỨU / PHÂN TÍCH ĐỊNH LƯỢNG",category:"Nghiên cứu công nghệ",
+  kind:"research",status:"nghiên cứu",visibility:"published",featured:true,
+  summary:"Hệ thống nghiên cứu dữ liệu thị trường, mô phỏng và đánh giá tín hiệu định lượng với các cổng kiểm định an toàn.",
+  introduction:"ECONITH là hệ thống nghiên cứu đang được phát triển và kiểm định bởi founder. Nội dung giới thiệu tập trung vào chức năng, mục tiêu của từng luồng phân tích và giới hạn nghiên cứu, không công bố thuật toán hoặc mã nguồn riêng.",
+  challenge:"Tổ chức dữ liệu, kiểm định tín hiệu và mô phỏng trong cùng một quy trình đủ minh bạch để phân biệt kết quả nghiên cứu với giao dịch thực tế.",
+  approach:"Định hướng kết hợp dashboard, trạng thái nguồn dữ liệu, báo cáo kiểm thử, phân tích tín hiệu và các cơ chế kiểm soát việc mở tính năng nhạy cảm. Chỉ những giao diện không chứa dữ liệu và cấu hình nội bộ mới được phép đưa lên hồ sơ công khai.",
+  outcome:"Các khối nghiên cứu và kiểm thử đang được tiếp tục hoàn thiện. Chưa có ảnh chụp dashboard đã được duyệt công bố và chưa có cơ sở khẳng định lợi nhuận giao dịch thực.",
+  outcomeNote:"Ảnh dashboard sẽ được bổ sung sau khi loại bỏ thông tin tài khoản, dữ liệu nội bộ và nhận được phê duyệt công bố. Không sử dụng mockup làm giả ảnh phần mềm.",
+  technologies:["Nghiên cứu dữ liệu","Dashboard","Kiểm định mô hình","Quản lý rủi ro"],
+  activities:["Luồng thu thập và kiểm chứng dữ liệu","Phân tích tín hiệu","Báo cáo kiểm thử","Giao diện giám sát"],
+  gallery:[],
+  responsibility:"Dự án nghiên cứu của founder; không phải dịch vụ đầu tư, cam kết sinh lời hoặc hợp đồng khách hàng Athena.",
+  evidenceNote:"Nội dung dự án đang được phân loại để công bố công khai. Các phương pháp, cấu hình vận hành và mã nguồn được giữ riêng.",
+  artwork:"econith",updatedLabel:"Nghiên cứu · Chưa công bố ảnh giao diện"
+ },
+ {
+  slug:"qrio",title:"Qrio",kicker:"DỰ ÁN ĐANG XÁC MINH",category:"Dự án cá nhân",
+  kind:"founder",status:"đang phát triển",visibility:"review",featured:false,
+  summary:"Đang rà soát quyền và tài sản được phép công bố.",introduction:"Chưa đủ tư liệu đã duyệt.",
+  challenge:"Chưa xác minh.",approach:"Chưa xác minh.",outcome:"Chưa xác minh.",
+  outcomeNote:"Không công bố thành tích khi thiếu bằng chứng.",technologies:[],activities:[],
+  gallery:[],responsibility:"Chờ founder xác nhận vai trò và ảnh được phép công bố.",
+  evidenceNote:"Chưa có ảnh hoặc chức năng được nghiệm thu để đăng lên website.",artwork:"qrio",updatedLabel:"Chờ rà soát"
+ }
 ];
-export const publicProjects=projects.filter(p=>p.visibility==="published"&&Boolean(p.sourceUrl));
+export const publicProjects=projects.filter(p=>p.visibility==="published");
 export const featuredProjects=publicProjects.filter(p=>p.featured);
-export function getProjectBySlug(slug:string):Project|undefined {return publicProjects.find(p=>p.slug===slug);}
-export function getAllProjectDrafts():Project[]{return projects;}
+export function getProjectBySlug(slug:string){return publicProjects.find(p=>p.slug===slug);}
+export function getAllProjectDrafts(){return projects;}

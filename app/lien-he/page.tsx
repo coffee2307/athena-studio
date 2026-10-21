@@ -1,6 +1,8 @@
 import {createMetadata} from "@/lib/metadata";
 import {ContactForm} from "@/components/forms/ContactForm";
 import {siteConfig} from "@/lib/constants";
+import {contactChannels} from "@/lib/contact-channels";
+import {Icon} from "@/components/ui/Icon";
 import {isInquiryEnabled} from "@/lib/inquiry/config";
 
 export const dynamic="force-dynamic";
@@ -27,8 +29,13 @@ export default function ContactPage(){
      <div><span>EMAIL</span><strong><a href={"mailto:"+siteConfig.email}>{siteConfig.email}</a></strong></div>
      <div><span>ĐIỆN THOẠI</span><strong><a href="tel:+84965747147">{siteConfig.phone}</a></strong></div>
     </div>
-    <div className="contact-social"><a href="https://zalo.me/0965747147" target="_blank" rel="noopener noreferrer">Nhắn qua Zalo ↗</a><a href="https://wa.me/84965747147" target="_blank" rel="noopener noreferrer">Nhắn qua WhatsApp ↗</a></div>
-    <p className="contact-note" style={{fontSize:12}}>Các liên kết nhắn tin chỉ hoạt động nếu tài khoản tương ứng đã được kích hoạt trên số liên hệ.</p>
+    <div className="contact-social agency-contact-links">
+     <a href={contactChannels.phone}><Icon name="phone" size={18}/> Gọi điện</a>
+     <a href={contactChannels.email}><Icon name="mail" size={18}/> Gửi email</a>
+     {contactChannels.zalo&&<a href={contactChannels.zalo} target="_blank" rel="noopener noreferrer">Nhắn Zalo <Icon name="arrow-up-right" size={16}/></a>}
+     {contactChannels.whatsapp&&<a href={contactChannels.whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp <Icon name="arrow-up-right" size={16}/></a>}
+    </div>
+
    </div>
    <ContactForm configured={configured} siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY||""} contactEmail={siteConfig.email}/>
   </div></section>

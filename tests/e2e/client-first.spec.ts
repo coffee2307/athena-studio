@@ -34,7 +34,7 @@ test("Vietnamese display typography uses a single locally bundled family without
  await page.evaluate(()=>document.fonts.ready);
  const metrics=await page.evaluate(async()=>{
   await document.fonts.load('italic 400 36px "Be Vietnam Pro"','Đặng Nguyễn ễ ệ ứ ự');
-  const footer=document.querySelector(".footer-statement h2 span");
+  const footer=document.querySelector(".agency-footer-cta h2 span");
   const italics=document.querySelector(".page-hero h1 em");
   const h1=document.querySelector(".client-hero-copy h1");
   const footerStyle=footer?getComputedStyle(footer):null;

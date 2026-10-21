@@ -1,0 +1,104 @@
+import {test,expect} from "@playwright/test";
+
+test("Desktop header includes service choices, commercial process, account entry and quote CTA",async({page,isMobile})=>{
+ await page.goto("/");
+ if(isMobile)return;
+ const header=page.locator(".agency-header");
+ await expect(header.getByRole("link",{name:/Đăng nhập/})).toHaveAttribute("href","/dang-nhap");
+ await expect(header.getByRole("link",{name:/Đăng ký/})).toHaveAttribute("href","/dang-ky");
+ await expect(header.getByRole("link",{name:/Yêu cầu tư vấn/})).toHaveAttribute("href","/lien-he");
+ const menu=header.locator(".agency-service-menu");
+ await menu.locator("summary").click();
+ await expect(menu).toHaveAttribute("open","");
+ await expect(menu.locator(".agency-dropdown a")).toHaveCount(4);
+ await menu.locator("summary").click();
+ await expect(menu).not.toHaveAttribute("open","");
+ await expect(header.getByRole("link",{name:"Quy trình"})).toHaveAttribute("href","/quy-trinh");
+});
+
+test("Animated mobile navigation traps focus, locks document scroll, closes with Escape",async({page,isMobile})=>{
+ if(!isMobile)return;
+ await page.goto("/");
+ const menu=page.locator(".agency-mobile-panel");
+ const toggle=page.getByRole("button",{name:"Mở menu"});
+ await expect(menu).not.toBeVisible();
+ await toggle.click();
+ await expect(menu).toBeVisible();
+ await expect(page.locator("body")).toHaveCSS("overflow","hidden");
+ await expect(page.locator(".agency-mobile-panel .agency-mobile-services a")).toHaveCount(3);
+ await expect(menu.getByRole("link",{name:"Đăng ký tài khoản"})).toHaveAttribute("href","/dang-ky");
+ const details=await menu.evaluate(el=>({
+  duration:getComputedStyle(el).transitionDuration,
+  opacity:getComputedStyle(el).opacity,
+  width:document.documentElement.scrollWidth,
+  viewport:innerWidth
+ }));
+ expect(details.duration).not.toBe("0s");
+ expect(details.width).toBeLessThanOrEqual(details.viewport+1);
+ await page.keyboard.press("Escape");
+ await expect(menu).not.toBeVisible();
+ await expect(page.getByRole("button",{name:"Mở menu"})).toBeFocused();
+ await expect(page.locator("body")).not.toHaveCSS("overflow","hidden");
+});
+
+test("Portfolio presents real PHAM screenshots but never public repository links",async({page})=>{
+ await page.goto("/du-an/pham");
+ await expect(page.locator(".agency-project-gallery .agency-gallery-item")).toHaveCount(4);
+ await expect(page.locator(".agency-project-gallery img").first()).toHaveAttribute("src",/pham-desktop/);
+ await expect(page.getByRole("link",{name:/Xem website dự án/})).toHaveAttribute("href","https://phamofficial.com/");
+ await expect(page.locator("main")).not.toContainText("Mở repository gốc");
+ expect(await page.locator("main a[href*='github.com']").count()).toBe(0);
+ await page.goto("/du-an/econith");
+ await expect(page.locator(".agency-gallery-awaiting")).toBeVisible();
+ await expect(page.locator(".agency-project-gallery")).toHaveCount(0);
+ expect(await page.locator("main a[href*='github.com']").count()).toBe(0);
+});
+
+test("Footer and contact widget expose real primary channels, without unverified messaging links",async({page})=>{
+ await page.goto("/");
+ await expect(page.locator(".agency-footer-contact a[href='tel:+84965747147']")).toBeVisible();
+ await expect(page.locator(".agency-footer-contact a[href='mailto:coffee2307@gmail.com']")).toBeVisible();
+ await expect(page.locator(".agency-footer-column a[href='/phap-ly/chinh-sach-dich-vu']")).toBeVisible();
+ const open=page.getByRole("button",{name:"Mở các kênh liên hệ"});
+ await open.click();
+ await expect(page.getByRole("button",{name:"Đóng các kênh liên hệ"})).toHaveAttribute("aria-expanded","true");
+ await expect(page.locator(".agency-dock-options a[href='mailto:coffee2307@gmail.com']")).toBeVisible();
+ await expect(page.locator(".agency-dock-options a[href='tel:+84965747147']")).toBeVisible();
+ await page.keyboard.press("Escape");
+ await expect(page.locator(".agency-dock-options")).not.toBeVisible();
+ await page.goto("/lien-he");
+ await expect(page.locator("main")).not.toContainText("Các liên kết nhắn tin chỉ hoạt động nếu tài khoản tương ứng");
+});
+
+test("Business process and pricing pages explain deliverables, customer responsibilities and cost scope",async({page})=>{
+ await page.goto("/quy-trinh");
+ await expect(page.getByRole("heading",{level:1})).toContainText("Làm rõ đầu ra");
+ await expect(page.locator(".agency-process-step")).toHaveCount(6);
+ await expect(page.locator(".agency-process-roles").first()).toContainText("Khách hàng");
+ await page.getByRole("link",{name:/Xem cách Athena lập báo giá/}).click();
+ await expect(page).toHaveURL(/\/bao-gia$/);
+ await expect(page.locator(".agency-price-card")).toHaveCount(3);
+ await expect(page.locator(".agency-pricing-inclusions>div")).toHaveCount(6);
+});
+
+test("Realistic legal disclosure covers providers, ownership, retention uncertainty and essential cookies",async({page})=>{
+ await page.goto("/phap-ly");
+ await expect(page.locator(".legal-cards>a")).toHaveCount(4);
+ await page.goto("/phap-ly/quyen-rieng-tu");
+ await expect(page.locator(".legal-content")).toContainText("nhà cung cấp");
+ await expect(page.locator(".legal-content")).toContainText("Thời hạn lưu giữ");
+ await expect(page.locator(".legal-content")).toContainText("repository");
+ await page.goto("/phap-ly/cookie");
+ await expect(page.locator(".agency-legal-table tbody tr")).toHaveCount(4);
+ await expect(page.locator(".legal-content")).toContainText("Không hiển thị banner");
+ await page.goto("/phap-ly/chinh-sach-dich-vu");
+ await expect(page.locator(".legal-content")).toContainText("Bảo hành, bảo trì");
+ await expect(page.locator(".legal-content")).toContainText("bàn giao");
+});
+
+test("Sign-in and sign-up routes stay honest and closed until secure identity release",async({page})=>{
+ await page.goto("/dang-nhap");
+ await expect(page.locator("body")).toContainText(/chưa|tạm|khả dụng|kích hoạt|chưa sẵn sàng/i);
+ await page.goto("/dang-ky");
+ await expect(page.locator("body")).toContainText(/chưa|tạm|khả dụng|kích hoạt|chưa sẵn sàng/i);
+});

@@ -1,0 +1,318 @@
+/* ATHENA / commercial website review — monochrome, content-first, accessible.
+ * Kept separate from the legacy design system for auditability and rollback. */
+.agency-header{
+ position:sticky;top:0;z-index:100;background:#fff;
+ border-bottom:1px solid #e6e6e3;backdrop-filter:none;-webkit-backdrop-filter:none;
+ box-shadow:0 0 0 rgba(0,0,0,0);transition:box-shadow .24s ease;
+}
+.agency-header.is-scrolled{box-shadow:0 6px 24px rgba(0,0,0,.055)}
+.agency-topline{background:#141515;color:#f2f2ef;font-size:10px;letter-spacing:.11em}
+.agency-topline-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:28px}
+.agency-topline a{display:inline-flex;align-items:center;gap:8px;letter-spacing:.01em;font-weight:550}
+.agency-nav-shell{height:76px;display:flex;align-items:center;justify-content:space-between;gap:25px}
+.agency-header .brand-lockup{min-width:0;gap:10px;flex-shrink:0}
+.agency-header .brand-symbol{width:45px;height:45px}
+.agency-header .brand-symbol img{width:40px;height:40px}
+.agency-header .brand-wordmark{font-size:17px}
+.agency-desktop-nav{display:flex;align-items:center;gap:clamp(12px,1.6vw,29px);height:100%}
+.agency-desktop-nav>a,.agency-service-menu>summary{
+ color:#393b3c;font-size:12px;font-weight:550;white-space:nowrap;
+ display:flex;align-items:center;gap:6px;cursor:pointer;
+ transition:color .2s ease;
+}
+.agency-desktop-nav>a:hover,.agency-service-menu>summary:hover,
+.agency-desktop-nav .agency-nav-current{color:#000}
+.agency-desktop-nav .agency-nav-current{font-weight:750}
+.agency-service-menu{height:100%;display:flex;align-items:center;position:relative}
+.agency-service-menu>summary{list-style:none}
+.agency-service-menu>summary::-webkit-details-marker{display:none}
+.agency-service-menu>summary svg{transition:transform .24s ease}
+.agency-service-menu[open]>summary svg{transform:rotate(180deg)}
+.agency-dropdown{position:absolute;top:calc(100% - 2px);left:-24px;width:min(380px,85vw);padding:23px;
+ background:#fff;border:1px solid #dcdedb;box-shadow:0 23px 55px rgba(0,0,0,.11);
+ display:flex;flex-direction:column;gap:0;z-index:110;
+ animation:agency-dropdown-enter .24s cubic-bezier(.22,1,.36,1) both;
+}
+@keyframes agency-dropdown-enter{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.agency-dropdown>p{font-size:10px;letter-spacing:.13em;font-weight:700;color:#56595c;margin-bottom:10px}
+.agency-dropdown>a{display:flex;justify-content:space-between;align-items:center;gap:14px;border-top:1px solid #e5e5e3;padding:16px 2px}
+.agency-dropdown>a>span{display:flex;flex-direction:column;gap:6px}
+.agency-dropdown strong{font-size:14px;font-weight:700;letter-spacing:-.01em}
+.agency-dropdown small{font-size:11px;color:#53565a;line-height:1.55}
+.agency-dropdown>a:hover{background:#f5f5f3;padding-inline:9px}
+.agency-dropdown>a.agency-dropdown-all{font-weight:650;font-size:12px}
+.agency-nav-actions{display:flex;gap:clamp(9px,1.2vw,19px);align-items:center}
+.agency-auth-link,.agency-register-link{white-space:nowrap;font-weight:600;font-size:11px}
+.agency-auth-link{display:flex;align-items:center;gap:7px}
+.agency-register-link{color:#545658}
+.agency-auth-link:hover,.agency-register-link:hover{text-decoration:underline;text-underline-offset:4px}
+.agency-primary-cta{white-space:nowrap;background:#121313;color:#fff;border-radius:8px;
+ display:flex;align-items:center;justify-content:center;gap:12px;font-size:12px;font-weight:700;
+ padding:15px 17px;transition:background .2s ease,transform .25s cubic-bezier(.22,1,.36,1)}
+.agency-primary-cta:hover{background:#3b3d3d;transform:translateY(-2px)}
+.agency-menu-toggle{display:none}
+.agency-menu-backdrop,.agency-mobile-panel{display:none}
+
+/* Contact widget — only displays verified messaging providers. */
+.agency-contact-dock{position:fixed;right:22px;bottom:26px;z-index:90;display:flex;align-items:flex-end;flex-direction:column;gap:10px}
+.agency-dock-trigger{display:flex;align-items:center;justify-content:center;gap:9px;border-radius:999px;
+ background:#161718;color:#fff;border:1px solid #161718;min-height:52px;padding:0 19px;
+ box-shadow:0 8px 25px rgba(0,0,0,.16);font-size:13px;font-weight:700;transition:transform .2s,background .2s}
+.agency-dock-trigger:hover{transform:translateY(-2px);background:#333}
+.agency-dock-options{display:grid;gap:0;min-width:203px;padding:7px;border:1px solid #dadad6;
+ background:#fff;box-shadow:0 15px 40px rgba(0,0,0,.13);border-radius:13px;
+ opacity:0;visibility:hidden;transform:translateY(9px) scale(.985);
+ transition:opacity .25s ease,transform .25s cubic-bezier(.22,1,.36,1),visibility .25s}
+.agency-dock-options.is-open{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+.agency-dock-options a{display:flex;align-items:center;gap:12px;padding:12px;border-radius:8px;font-size:12px;font-weight:600}
+.agency-dock-options a:hover{background:#efefee}
+.agency-brand-icon{width:20px;display:inline-grid;place-items:center;font-size:17px;font-weight:800}
+.agency-contact-dock :focus-visible{outline-offset:3px}
+
+/* Footer with directly accessible phone, email, legal and account routes. */
+.agency-footer{background:#f7f7f5;border-top:1px solid #dedfdb}
+.agency-footer-cta{padding:clamp(64px,7vw,115px) 0;display:flex;justify-content:space-between;align-items:flex-end;gap:34px;border-bottom:1px solid #d2d3d0}
+.agency-footer-cta h2{font-size:clamp(38px,5.8vw,82px);line-height:1.2;letter-spacing:-.04em;margin:25px 0}
+.agency-footer-cta h2 span{color:#686b6c}
+.agency-footer-cta p:not(.eyebrow){font-size:14px;line-height:1.9;color:#4d5052;max-width:670px}
+.agency-footer-cta-button{display:inline-flex;align-items:center;justify-content:space-between;gap:20px;
+ border-radius:8px;background:#121313;color:#fff;padding:17px 19px;white-space:nowrap;
+ font-size:13px;font-weight:700;transition:background .2s,transform .2s}
+.agency-footer-cta-button:hover{transform:translateY(-2px);background:#383838}
+.agency-footer-main{display:grid;grid-template-columns:minmax(250px,1.6fr) repeat(3,minmax(125px,1fr));
+ gap:clamp(28px,4vw,76px);padding:clamp(45px,6vw,78px) 0}
+.agency-footer-brand-lockup{display:flex;align-items:center;gap:11px;font-size:20px;font-weight:800;letter-spacing:.06em}
+.agency-footer-brand-lockup img{width:47px;height:47px}
+.agency-footer-brand-lockup span{display:flex;flex-direction:column;gap:1px}
+.agency-footer-brand-lockup small{font-size:9px;letter-spacing:.29em;font-weight:600}
+.agency-footer-brand>p{font-size:13px;line-height:1.85;color:#56595b;max-width:380px;margin-top:20px}
+.agency-footer-contact{display:flex;align-items:flex-start;flex-direction:column;gap:13px;margin-top:26px}
+.agency-footer-contact a{font-size:13px;display:inline-flex;align-items:center;gap:11px;font-weight:650;word-break:break-word}
+.agency-footer-contact a:hover{text-decoration:underline;text-underline-offset:4px}
+.agency-footer-column{display:flex;flex-direction:column;align-items:flex-start;gap:15px}
+.agency-footer-column h3{font-size:11px;font-weight:750;color:#414445;letter-spacing:.08em;margin-bottom:10px}
+.agency-footer-column a{font-size:12px;color:#505356;line-height:1.5}
+.agency-footer-column a:hover{color:#050505;text-decoration:underline;text-underline-offset:4px}
+.agency-footer-bottom{border-top:1px solid #d2d3d0;display:flex;justify-content:space-between;gap:14px;
+ align-items:center;padding:22px 0 28px;font-size:11px;color:#626568;line-height:1.7}
+.agency-footer-bottom a{display:inline-flex;gap:6px;align-items:center;color:#242526;font-weight:650}
+
+/* Readability improvements for legacy glyph-only arrows. */
+.agency-footer .eyebrow,.agency-mobile-eyebrow{color:#434647}
+@media(max-width:1200px){
+ .agency-nav-shell{gap:16px}
+ .agency-desktop-nav{gap:14px}
+ .agency-register-link{display:none}
+ .agency-footer-main{grid-template-columns:minmax(220px,1.3fr) repeat(3,minmax(115px,1fr));gap:26px}
+}
+@media(max-width:980px){
+ .agency-topline{display:none}
+ .agency-nav-shell{height:74px}
+ .agency-desktop-nav,.agency-nav-actions{display:none}
+ .agency-header .brand-lockup{min-width:0}
+ .agency-menu-toggle{position:relative;z-index:120;display:flex;align-items:center;justify-content:center;
+ flex-direction:column;gap:6px;width:46px;height:46px;border:1px solid #d3d5d3;border-radius:10px;
+ background:#fff;transition:background .2s ease}
+ .agency-menu-toggle:hover{background:#f4f4f2}
+ .agency-toggle-line{width:23px;height:2px;background:#111;display:block;
+ transition:transform .34s cubic-bezier(.22,1,.36,1),opacity .3s;transform-origin:center}
+ .agency-menu-toggle.is-open .agency-toggle-line:first-child{transform:translateY(4px) rotate(45deg)}
+ .agency-menu-toggle.is-open .agency-toggle-line:last-child{transform:translateY(-4px) rotate(-45deg)}
+ .agency-menu-backdrop{display:block;position:fixed;inset:74px 0 0;z-index:101;
+ border:0;background:rgba(0,0,0,.32);opacity:0;visibility:hidden;pointer-events:none;
+ backdrop-filter:blur(1.5px);transition:opacity .28s ease,visibility .28s}
+ .agency-menu-backdrop.is-open{opacity:1;visibility:visible;pointer-events:auto}
+ .agency-mobile-panel{display:block;position:fixed;z-index:105;top:74px;left:0;right:0;
+ max-height:calc(100dvh - 74px);min-height:0;background:#fff;overflow:hidden;
+ visibility:hidden;opacity:0;transform:translateY(-15px);
+ box-shadow:0 26px 60px rgba(0,0,0,.12);
+ transition:transform .34s cubic-bezier(.22,1,.36,1),opacity .28s ease,visibility .34s}
+ .agency-mobile-panel.is-open{visibility:visible;opacity:1;transform:translateY(0)}
+ .agency-mobile-scroll{overflow-y:auto;max-height:calc(100dvh - 74px);padding:24px var(--gutter) 34px}
+ .agency-mobile-eyebrow{font-size:10px;font-weight:750;letter-spacing:.13em;display:block;margin-bottom:19px}
+ .agency-mobile-primary{display:flex;align-items:center;justify-content:space-between;gap:10px;
+ border-top:1px solid #e0e1dd;padding:15px 0;font-size:clamp(20px,4.7vw,30px);
+ letter-spacing:-.025em;font-weight:650}
+ .agency-mobile-services{padding:0 0 15px 14px;display:grid;gap:0}
+ .agency-mobile-services a{font-size:13px;display:flex;justify-content:space-between;align-items:center;
+ padding:11px 0;color:#515558}
+ .agency-mobile-account{display:flex;align-items:center;gap:19px;flex-wrap:wrap;border-top:1px solid #dededb;padding-top:24px}
+ .agency-mobile-account a{font-size:13px;font-weight:650;display:inline-flex;align-items:center;gap:6px}
+ .agency-mobile-cta{margin-top:20px;display:flex;align-items:center;justify-content:space-between;gap:10px;
+ padding:16px 18px;border-radius:9px;background:#151515;color:#fff;font-size:13px;font-weight:700}
+ .agency-mobile-email{display:block;font-size:12px;margin-top:21px;color:#54575a}
+ .agency-footer-main{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .agency-footer-brand{grid-column:1/-1}
+}
+@media(max-width:640px){
+ .agency-footer-cta{display:block;padding:65px 0}
+ .agency-footer-cta h2{font-size:clamp(36px,8.7vw,54px)}
+ .agency-footer-cta-button{margin-top:26px;max-width:100%}
+ .agency-footer-main{grid-template-columns:repeat(2,minmax(0,1fr));gap:35px 22px;padding:50px 0}
+ .agency-footer-brand{grid-column:1/-1}
+ .agency-footer-column h3{font-size:10px}
+ .agency-footer-bottom{flex-direction:column;align-items:flex-start}
+ .agency-contact-dock{right:13px;bottom:14px}
+ .agency-dock-trigger{min-height:48px;padding:0 15px}
+}
+@media(prefers-reduced-motion:reduce){
+ .agency-header *, .agency-header *::before,.agency-header *::after,
+ .agency-contact-dock *, .agency-footer *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+
+/* Commercial service flow / process / policy reading and project evidence */
+.agency-process-head{display:flex;justify-content:space-between;gap:36px;align-items:flex-end;margin-bottom:40px}
+.agency-process-head h2,.agency-faq-title,.agency-case-section-title h2{
+ font-size:clamp(33px,4.7vw,66px);font-weight:650;line-height:1.24;letter-spacing:-.035em;max-width:920px;
+}
+.agency-process-head h2 span,.agency-faq-title span,.agency-case-section-title h2 span{color:#777}
+.agency-process-head>p{max-width:510px;line-height:1.9;color:#53565a;font-size:14px}
+.agency-process-head>.section-index{align-self:flex-start}
+.agency-process-page .agency-process-head{flex-direction:column;align-items:flex-start}
+.agency-process-list{border-top:1px solid #cdd0ce}
+.agency-process-step{display:grid;grid-template-columns:68px minmax(250px,1fr) minmax(220px,.65fr);
+ gap:22px;padding:32px 0;border-bottom:1px solid #cdd0ce}
+.agency-process-index{font-size:14px;font-weight:750;color:#515457;padding-top:3px;letter-spacing:.07em}
+.agency-process-step h3{font-size:clamp(21px,2.5vw,33px);font-weight:650;line-height:1.3;letter-spacing:-.025em;margin-bottom:13px}
+.agency-process-step div>p{font-size:13px;color:#55585a;line-height:1.85;max-width:670px}
+.agency-process-deliverable{display:flex;gap:9px;align-items:flex-start;margin-top:21px;
+ font-size:13px;line-height:1.8;color:#202123}
+.agency-process-deliverable svg{flex-shrink:0;margin-top:2px}
+.agency-process-deliverable strong{white-space:nowrap}
+.agency-process-roles{display:flex;flex-direction:column;gap:19px;border-left:1px solid #e0e1de;padding-left:22px}
+.agency-process-roles p{display:flex;flex-direction:column;gap:5px}
+.agency-process-roles strong{display:block;color:#242628;font-size:12px;font-weight:750}
+.agency-section-muted{background:#f5f5f3}
+.agency-outline-cta{border:1px solid #1c1c1c;border-radius:7px;padding:16px 20px;gap:24px;
+ display:inline-flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:700;
+ transition:background .2s ease,color .2s ease,transform .24s ease}
+.agency-outline-cta:hover{background:#161616;color:#fff;transform:translateY(-2px)}
+.agency-faq-title{margin:27px 0 35px}
+.agency-faq-list{border-top:1px solid #ccc}
+.agency-faq-list details{border-bottom:1px solid #d5d5d2}
+.agency-faq-list summary{display:flex;justify-content:space-between;align-items:center;gap:25px;
+ list-style:none;cursor:pointer;padding:22px 6px;font-size:clamp(15px,1.6vw,19px);
+ line-height:1.55;font-weight:650}
+.agency-faq-list summary::-webkit-details-marker{display:none}
+.agency-faq-list summary svg{flex-shrink:0;transition:transform .23s ease}
+.agency-faq-list details[open] summary svg{transform:rotate(180deg)}
+.agency-faq-list details>p{padding:0 40px 25px 6px;color:#52565a;max-width:830px;font-size:14px;line-height:1.9}
+.agency-final-cta{background:#181a1a;color:#fff;padding:clamp(60px,8vw,114px) 0}
+.agency-final-cta .container{display:flex;flex-direction:column;align-items:flex-start;gap:18px}
+.agency-final-cta p{letter-spacing:.14em;font-size:11px;font-weight:700;color:#ddd}
+.agency-final-cta h2{font-size:clamp(35px,5vw,69px);letter-spacing:-.035em;line-height:1.23;margin:6px 0 8px}
+.agency-final-cta a{display:inline-flex;gap:26px;align-items:center;padding:16px 21px;
+ border-radius:7px;background:#fff;color:#111;font-weight:750;font-size:13px}
+.agency-price-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.agency-price-card{border:1px solid #ddd;background:#fafaf8;padding:clamp(23px,3vw,35px);
+ display:flex;flex-direction:column}
+.agency-price-card>span{font-size:10px;letter-spacing:.12em;color:#56595a;font-weight:650}
+.agency-price-card h3{font-size:clamp(22px,2.4vw,34px);line-height:1.24;letter-spacing:-.03em;margin:27px 0 18px}
+.agency-price-card strong{font-size:12px;font-weight:800;margin:17px 0 7px}
+.agency-price-card p{font-size:13px;line-height:1.86;color:#55595b}
+.agency-pricing-inclusions{border-top:1px solid #cacbc7;margin-top:33px}
+.agency-pricing-inclusions>div{border-bottom:1px solid #d7d8d4;padding:21px 6px;
+ display:grid;grid-template-columns:48px 1fr 24px;gap:20px;align-items:center}
+.agency-pricing-inclusions span{font-size:11px;font-weight:700;color:#505254}
+.agency-pricing-inclusions p{font-size:clamp(14px,1.5vw,17px);font-weight:550}
+.agency-pricing-caveat{font-size:13px;line-height:1.9;color:#54575a;max-width:800px;margin-top:25px}
+
+/* Real project screenshots (no repository links or invented metrics). */
+.agency-real-art{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#131414;border:1px solid #222}
+.agency-real-art img{object-fit:cover;object-position:center 21%}
+.agency-real-art.is-compact{aspect-ratio:1.52}
+.agency-real-art.is-compact img{object-position:top center}
+.agency-screenshot-tag{position:absolute;bottom:15px;left:15px;z-index:2;
+ font-size:9px;letter-spacing:.09em;font-weight:750;background:#fff;color:#171717;
+ padding:10px 12px;border-radius:4px}
+.agency-case-section-title{margin:60px 0 29px}
+.agency-case-section-title h2{margin:19px 0}
+.agency-case-section-title>p:not(.section-index){font-size:13px;line-height:1.85;color:#54585b;max-width:790px}
+.agency-project-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.agency-gallery-item{margin:0;min-width:0}
+.agency-gallery-item.is-featured{grid-column:1 / -1}
+.agency-gallery-image{position:relative;aspect-ratio:1.2;background:#eee;overflow:hidden;border:1px solid #e1e1de}
+.agency-gallery-item.is-featured .agency-gallery-image{aspect-ratio:16/10}
+.agency-gallery-image img{object-fit:contain;object-position:center center}
+.agency-gallery-item.is-featured .agency-gallery-image img{object-fit:cover;object-position:top center}
+.agency-gallery-item figcaption{display:flex;gap:12px;align-items:flex-start;
+ padding:13px 3px 3px;font-size:12px;line-height:1.65;color:#4f5355}
+.agency-gallery-item figcaption span{font-size:10px;letter-spacing:.06em;font-weight:750;white-space:nowrap}
+.agency-gallery-awaiting{display:flex;gap:20px;padding:28px;background:#f4f4f2;border:1px solid #dededb;align-items:flex-start}
+.agency-gallery-awaiting svg{flex-shrink:0}
+.agency-gallery-awaiting h3{font-size:19px;letter-spacing:-.02em;margin-bottom:10px}
+.agency-gallery-awaiting p{font-size:13px;line-height:1.9;color:#505356;max-width:670px}
+.agency-case-functional{margin-top:95px}
+.agency-case-feature-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:70px}
+.agency-case-feature-grid>div{min-height:170px;border:1px solid #d8d9d6;padding:22px;
+ display:flex;flex-direction:column;justify-content:space-between;gap:18px}
+.agency-case-feature-grid span{font-size:11px;font-weight:650;color:#626568}
+.agency-case-feature-grid h3{font-size:clamp(14px,1.6vw,18px);line-height:1.55;letter-spacing:-.02em;font-weight:650}
+.agency-case-actions{display:flex;flex-wrap:wrap;gap:13px;margin-top:35px}
+.agency-back-icon{transform:rotate(180deg)}
+.agency-case-detail .case-detail-title h1{overflow-wrap:anywhere}
+
+/* Legal pages — high-signal disclosure, easy scanning and responsive table. */
+.agency-legal-disclosure{display:flex;gap:18px;align-items:flex-start;
+ border:1px solid #d7d9d6;background:#f6f6f3;padding:25px;margin-top:29px}
+.agency-legal-disclosure svg{flex-shrink:0}
+.agency-legal-disclosure p{max-width:960px;color:#4e5255;line-height:1.85;font-size:13px}
+.agency-legal-table-wrap{overflow-x:auto;width:100%;margin:16px 0 24px}
+.agency-legal-table{border-collapse:collapse;width:100%;min-width:520px;font-size:13px;line-height:1.75}
+.agency-legal-table th,.agency-legal-table td{padding:13px;text-align:left;border:1px solid #dededb;vertical-align:top}
+.agency-legal-table th{background:#f4f4f2;font-weight:750}
+.agency-legal-table td{color:#44484a}
+.legal-content h2{scroll-margin-top:120px}
+.legal-content a:not(.pill-link){text-decoration:underline;text-underline-offset:3px}
+.legal-content a:hover{color:#000}
+@media(max-width:1100px){
+ .agency-process-step{grid-template-columns:48px minmax(0,1fr)}
+ .agency-process-roles{grid-column:2;flex-direction:row;padding-left:0;border-left:0;border-top:1px solid #ddd;padding-top:17px}
+ .agency-process-roles p{flex:1}
+ .agency-case-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:767px){
+ .agency-process-head{align-items:flex-start;flex-direction:column}
+ .agency-process-step{grid-template-columns:38px minmax(0,1fr);gap:15px;padding:25px 0}
+ .agency-process-roles{flex-direction:column;gap:14px}
+ .agency-process-roles p{font-size:12px}
+ .agency-price-grid,.agency-project-gallery{grid-template-columns:1fr}
+ .agency-gallery-item.is-featured{grid-column:auto}
+ .agency-gallery-item .agency-gallery-image{aspect-ratio:1.2}
+ .agency-gallery-item.is-featured .agency-gallery-image{aspect-ratio:16/10}
+ .agency-case-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .agency-case-feature-grid>div{min-height:145px;padding:16px}
+ .agency-case-section-title{margin-top:45px}
+ .agency-gallery-awaiting{padding:21px}
+}
+
+.agency-about-principles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.agency-about-principles article{border-top:1px solid #ccc;padding:24px 15px 32px 0}
+.agency-about-principles span{font-size:11px;font-weight:750;color:#595d5f}
+.agency-about-principles h3{font-size:clamp(22px,2.4vw,35px);letter-spacing:-.03em;line-height:1.3;margin:22px 0 10px}
+.agency-about-principles p{font-size:14px;line-height:1.9;color:#505458;max-width:510px}
+.agency-about-page .agency-price-card .agency-outline-cta{margin-top:auto;align-self:flex-start}
+.agency-about-page .agency-price-card>p{margin-bottom:25px}
+.agency-contact-links{display:flex;gap:10px;flex-wrap:wrap}
+.agency-contact-links a{display:inline-flex;gap:10px;align-items:center;border:1px solid #dbdcda;padding:12px 14px;border-radius:8px;
+ font-size:13px;font-weight:650;transition:background .2s}
+.agency-contact-links a:hover{background:#f2f2f0}
+@media(max-width:640px){.agency-about-principles{grid-template-columns:1fr}}
+
+/* Accessibility: date label on legal pages must meet AA contrast. */
+.agency-header ~ main .legal-update,.legal-hero .legal-update{color:#484c4e!important}
+
+.agency-down-icon{transform:rotate(90deg)}
+
+/* Put actual product interface above the fold on project pages. */
+.agency-case-detail .case-detail-hero{padding:clamp(24px,3vw,44px) 0 45px}
+.agency-case-detail .case-detail-title{padding:35px 0 29px;align-items:flex-end}
+.agency-case-detail .case-detail-title h1{font-size:clamp(80px,10vw,146px);line-height:1;
+ letter-spacing:-.07em;margin:16px 0 18px}
+.agency-case-detail .case-detail-title div>p:last-child{font-size:clamp(16px,1.8vw,22px);max-width:680px}
+.agency-case-detail .agency-real-art{aspect-ratio:2.15}
+@media(max-width:767px){
+ .agency-case-detail .case-detail-title{padding:28px 0 22px;align-items:flex-start;flex-direction:column}
+ .agency-case-detail .case-detail-title h1{font-size:clamp(66px,16vw,95px)}
+ .agency-case-detail .agency-real-art{aspect-ratio:1.18}
+}

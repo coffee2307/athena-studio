@@ -18,7 +18,6 @@ export interface Project {
   outcomeNote: string;
   technologies: string[];
   activities: string[];
-  sourceUrl?: string;
   websiteUrl?: string;
   gallery: {src:string;alt:string;caption:string;rightsVerified:boolean}[];
   responsibility: string;

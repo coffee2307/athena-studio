@@ -1,4 +1,5 @@
 "use client";
+import {Icon} from "@/components/ui/Icon";
 import {FormEvent,useCallback,useEffect,useState} from "react";
 import Link from "next/link";
 import {TurnstileField} from "@/components/forms/TurnstileField";
@@ -37,14 +38,14 @@ export function ContactForm({configured,contactEmail,siteKey}:Props){
    <div className="trap-field" aria-hidden="true"><label>Trang web<input name="website" tabIndex={-1} autoComplete="off"/></label></div>
    <label className="privacy-consent"><input type="checkbox" name="consent" required value="yes"/><span>Tôi đồng ý để Athena sử dụng thông tin này nhằm phản hồi yêu cầu. Xem <Link href="/phap-ly/quyen-rieng-tu" target="_blank" rel="noopener noreferrer">thông tin quyền riêng tư</Link>.</span></label>
    <TurnstileField siteKey={siteKey} onToken={updateCaptcha}/>
-   <button className="pill-link pill-dark form-submit" type="submit" disabled={status==="sending"||!captcha}>{status==="sending"?"Đang ghi nhận…":"Gửi yêu cầu"} <span aria-hidden="true">↗</span></button>
+   <button className="pill-link pill-dark form-submit" type="submit" disabled={status==="sending"||!captcha}>{status==="sending"?"Đang ghi nhận…":"Gửi yêu cầu"} <Icon name="arrow-up-right" size={18}/></button>
    {message&&<div className={status==="error"?"form-status form-error":"form-status"} role={status==="error"?"alert":"status"}><p>{message}</p>{reference&&<p>Mã tham chiếu: <strong>{reference}</strong></p>}</div>}
    <p className="form-privacy">Dữ liệu chỉ được nhận khi việc lưu trữ và chống spam đã cấu hình đầy đủ.</p>
   </form>:<div className="form-offline" role="status">
    <strong>Hiện nhận yêu cầu trực tiếp qua email.</strong>
    <p>Biểu mẫu trực tuyến chưa được kích hoạt. Bạn vẫn có thể gửi thông tin để trao đổi qua email; nút bên dưới mở một thư mẫu để bạn điền nhanh.</p>
-   <a href={"mailto:"+contactEmail+"?subject="+encodeURIComponent("Yêu cầu tư vấn Athena Studio")+"&body="+encodeURIComponent("1. Website hiện tại (nếu có):\n\n2. Vấn đề đang gặp:\n\n3. Mục tiêu ưu tiên và thời hạn dự kiến:\n\n4. Thông tin liên hệ:\n")} className="pill-link pill-dark">Soạn email mô tả nhu cầu <span aria-hidden="true">↗</span></a>
+   <a href={"mailto:"+contactEmail+"?subject="+encodeURIComponent("Yêu cầu tư vấn Athena Studio")+"&body="+encodeURIComponent("1. Website hiện tại (nếu có):\n\n2. Vấn đề đang gặp:\n\n3. Mục tiêu ưu tiên và thời hạn dự kiến:\n\n4. Thông tin liên hệ:\n")} className="pill-link pill-dark">Soạn email mô tả nhu cầu <Icon name="arrow-up-right" size={18}/></a>
   </div>}
-  <p className="contact-notice">Bạn cũng có thể liên hệ bằng điện thoại, Zalo hoặc WhatsApp qua các liên kết bên cạnh.</p>
+  <p className="contact-notice">Nếu cần trao đổi trực tiếp, bạn có thể gọi điện hoặc gửi email qua phần Liên hệ phía dưới trang.</p>
  </div>;
 }
