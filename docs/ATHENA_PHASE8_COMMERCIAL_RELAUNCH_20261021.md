@@ -77,3 +77,18 @@ staging migrations. CI success is necessary but insufficient for production GO.
 Do not publish private repositories or customer-facing live metrics without separate evidence.
 Do not run live SMTP / OAuth / deploy on the owner's behalf before credentials and operating
 conditions are accepted.
+
+## Local Lighthouse baseline (homepage, simulated mobile)
+
+Run on 2026-10-21 against the local Next.js production server at 127.0.0.1,
+not against a public production VPS: **Performance 97 / Accessibility 100 /
+Best Practices 100 / SEO 66**. Local lab metrics: LCP about 2.0s, FCP about
+1.1s, TBT about 160ms, CLS 0.049. These are not independently verified field
+Core Web Vitals or service-level guarantees. SEO 66 is caused by the deliberate
+`robots.txt` and preview noindex restriction. Do not remove the restriction
+until a real public domain, policy, security review and launch are approved.
+
+Lighthouse also flagged the visible/accessible brand-name text separation in a
+zero-weight manual name audit; fixed by preserving whitespace between ATHENA and
+STUDIO in the accessible link's visible label. This needs verifying on the
+newest HEAD before release.

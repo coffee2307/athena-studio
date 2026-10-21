@@ -4,6 +4,8 @@ test("Desktop header includes service choices, commercial process, account entry
  await page.goto("/");
  if(isMobile)return;
  const header=page.locator(".agency-header");
+ await expect(header.locator(".brand-lockup")).toHaveAccessibleName("Athena Studio — Trang chủ");
+ expect((await header.locator(".brand-wordmark").textContent())?.includes("ATHENA STUDIO")).toBe(true);
  await expect(header.getByRole("link",{name:/Đăng nhập/})).toHaveAttribute("href","/dang-nhap");
  await expect(header.getByRole("link",{name:/Đăng ký/})).toHaveAttribute("href","/dang-ky");
  await expect(header.getByRole("link",{name:/Yêu cầu tư vấn/})).toHaveAttribute("href","/lien-he");

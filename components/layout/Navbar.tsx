@@ -52,7 +52,7 @@ export function Navbar(){
   <div className="container agency-nav-shell">
    <Link href="/" className="brand-lockup" aria-label="Athena Studio — Trang chủ">
     <span className="brand-symbol"><Image src="/branding/logo-symbol-black.svg" alt="" width={48} height={48} priority/></span>
-    <span className="brand-wordmark">ATHENA<span>STUDIO</span></span>
+    <span className="brand-wordmark">ATHENA{" "}<span>STUDIO</span></span>
    </Link>
    <nav className="agency-desktop-nav" aria-label="Điều hướng chính">
     <details className="agency-service-menu">
