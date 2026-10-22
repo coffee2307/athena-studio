@@ -15,21 +15,25 @@
     ],
     "pages": [
       "Trang chủ",
-      "Giới thiệu",
       "Dự án",
+      "Chi tiết dự án",
+      "Chuyên môn",
+      "Studio",
       "Liên hệ"
     ],
     "features": [
       "Bố cục dự án bất đối xứng",
       "Typography tiêu đề lớn",
       "Trang case study theo cấu trúc bài toán và giải pháp",
-      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
+      "Website demo nhiều trang với điều hướng desktop/mobile",
+      "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+      "Trải nghiệm trong popup hoặc mở toàn màn hình"
     ],
     "modules": [
       "content",
       "contact"
     ],
-    "version": "1.0.0",
+    "version": "2.0.0",
     "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
@@ -68,22 +72,25 @@
     ],
     "pages": [
       "Trang chủ",
+      "Giải pháp",
+      "Chi tiết giải pháp",
       "Dịch vụ",
-      "Năng lực",
-      "Quy trình",
+      "Về NORTH",
       "Liên hệ"
     ],
     "features": [
       "Điều hướng theo nhu cầu",
       "Khối dịch vụ theo vấn đề",
       "Lời kêu gọi tư vấn rõ ràng",
-      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
+      "Website demo nhiều trang với điều hướng desktop/mobile",
+      "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+      "Trải nghiệm trong popup hoặc mở toàn màn hình"
     ],
     "modules": [
       "content",
       "contact"
     ],
-    "version": "1.0.0",
+    "version": "2.0.0",
     "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
@@ -122,21 +129,25 @@
     ],
     "pages": [
       "Trang chủ",
-      "Danh mục",
+      "Cửa hàng",
       "Chi tiết sản phẩm",
-      "Giỏ hàng"
+      "Bộ sưu tập",
+      "Câu chuyện",
+      "Liên hệ"
     ],
     "features": [
       "Lưới sản phẩm linh hoạt",
       "Trang chi tiết có thông tin rõ",
       "Có thể kết nối Shopify hoặc backend riêng sau khi chốt phạm vi",
-      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
+      "Website demo nhiều trang với điều hướng desktop/mobile",
+      "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+      "Trải nghiệm trong popup hoặc mở toàn màn hình"
     ],
     "modules": [
       "catalog",
       "commerce"
     ],
-    "version": "1.0.0",
+    "version": "2.0.0",
     "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
@@ -175,22 +186,26 @@
     ],
     "pages": [
       "Trang chủ",
-      "Bộ sưu tập",
-      "Sản phẩm",
-      "Về thương hiệu"
+      "Collection",
+      "Chi tiết sản phẩm",
+      "Atelier",
+      "Manifesto",
+      "Liên hệ"
     ],
     "features": [
       "Mở đầu kiểu campaign",
       "Trang bộ sưu tập biên tập",
       "Tùy biến theo quy trình ra mắt",
-      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
+      "Website demo nhiều trang với điều hướng desktop/mobile",
+      "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+      "Trải nghiệm trong popup hoặc mở toàn màn hình"
     ],
     "modules": [
       "catalog",
       "commerce",
       "content"
     ],
-    "version": "1.0.0",
+    "version": "2.0.0",
     "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
@@ -229,21 +244,25 @@
     ],
     "pages": [
       "Trang chủ",
+      "Nền tảng",
+      "Chi tiết tính năng",
       "Tính năng",
-      "Bảng giá",
-      "Tài liệu"
+      "Về LUMA",
+      "Liên hệ"
     ],
     "features": [
       "Trình bày sản phẩm bằng giao diện",
       "Tách tính năng theo công việc",
       "Có thể tích hợp xác thực sau khi có yêu cầu vận hành",
-      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
+      "Website demo nhiều trang với điều hướng desktop/mobile",
+      "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+      "Trải nghiệm trong popup hoặc mở toàn màn hình"
     ],
     "modules": [
       "content",
       "auth"
     ],
-    "version": "1.0.0",
+    "version": "2.0.0",
     "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
@@ -281,21 +300,26 @@
       "Campaign"
     ],
     "pages": [
-      "Trang chiến dịch",
-      "Thông tin",
-      "Đăng ký / Liên hệ"
+      "Trang chủ",
+      "Chương trình",
+      "Chi tiết hoạt động",
+      "Trải nghiệm",
+      "Về MỞ",
+      "Liên hệ"
     ],
     "features": [
       "Một luồng nội dung xuyên suốt",
       "Điểm nhấn chữ lớn",
       "Có thể kết nối biểu mẫu theo cấu hình dự án",
-      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
+      "Website demo nhiều trang với điều hướng desktop/mobile",
+      "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+      "Trải nghiệm trong popup hoặc mở toàn màn hình"
     ],
     "modules": [
       "content",
       "contact"
     ],
-    "version": "1.0.0",
+    "version": "2.0.0",
     "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
@@ -334,22 +358,26 @@
     ],
     "pages": [
       "Trang chủ",
-      "Thực đơn / Dịch vụ",
-      "Không gian",
-      "Đặt chỗ"
+      "Thực đơn",
+      "Chi tiết món",
+      "Trải nghiệm",
+      "Câu chuyện căn bếp",
+      "Đặt bàn"
     ],
     "features": [
       "Thông tin giờ mở cửa và địa điểm",
       "Nội dung phục vụ lựa chọn dịch vụ",
       "Module booking chỉ bật khi có backend đã kiểm thử",
-      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
+      "Website demo nhiều trang với điều hướng desktop/mobile",
+      "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+      "Trải nghiệm trong popup hoặc mở toàn màn hình"
     ],
     "modules": [
       "content",
       "contact",
       "booking"
     ],
-    "version": "1.0.0",
+    "version": "2.0.0",
     "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
@@ -388,20 +416,24 @@
     ],
     "pages": [
       "Trang chủ",
-      "Chuyên mục",
       "Bài viết",
-      "Tìm kiếm"
+      "Chi tiết bài viết",
+      "Chuyên mục",
+      "Tòa soạn",
+      "Liên hệ"
     ],
     "features": [
       "Trang bài viết ưu tiên khả năng đọc",
       "Chuyên mục và nội dung liên quan",
       "Sẵn sàng nối CMS sau khi chọn quy trình biên tập",
-      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
+      "Website demo nhiều trang với điều hướng desktop/mobile",
+      "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+      "Trải nghiệm trong popup hoặc mở toàn màn hình"
     ],
     "modules": [
       "content"
     ],
-    "version": "1.0.0",
+    "version": "2.0.0",
     "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
@@ -441,7 +473,8 @@
     "pages": [
       "Trang chủ",
       "Công trình",
-      "Chi tiết dự án",
+      "Chi tiết công trình",
+      "Dịch vụ",
       "Studio",
       "Liên hệ"
     ],
@@ -449,13 +482,15 @@
       "Bộ lọc công trình theo loại hình",
       "Thư viện ảnh toàn màn hình",
       "Trang dự án theo giai đoạn",
-      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
+      "Website demo nhiều trang với điều hướng desktop/mobile",
+      "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+      "Trải nghiệm trong popup hoặc mở toàn màn hình"
     ],
     "modules": [
       "content",
       "contact"
     ],
-    "version": "1.0.0",
+    "version": "2.0.0",
     "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
@@ -494,23 +529,26 @@
     ],
     "pages": [
       "Trang chủ",
+      "Liệu trình",
+      "Chi tiết liệu trình",
       "Dịch vụ",
-      "Đội ngũ",
-      "Bảng giá",
+      "Về chúng tôi",
       "Đặt lịch"
     ],
     "features": [
       "Danh mục liệu trình",
       "Hồ sơ đội ngũ",
       "Biểu mẫu đặt lịch mô phỏng",
-      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
+      "Website demo nhiều trang với điều hướng desktop/mobile",
+      "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+      "Trải nghiệm trong popup hoặc mở toàn màn hình"
     ],
     "modules": [
       "content",
       "contact",
       "booking"
     ],
-    "version": "1.0.0",
+    "version": "2.0.0",
     "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
@@ -549,23 +587,26 @@
     ],
     "pages": [
       "Trang chủ",
-      "Danh sách căn",
-      "Chi tiết dự án",
-      "Tiện ích",
+      "Bất động sản",
+      "Chi tiết căn",
+      "Dịch vụ",
+      "Về NEST",
       "Liên hệ"
     ],
     "features": [
       "Lọc căn theo diện tích và mức giá",
       "Thư viện ảnh công trình",
       "Đăng ký lịch tham quan mô phỏng",
-      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
+      "Website demo nhiều trang với điều hướng desktop/mobile",
+      "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+      "Trải nghiệm trong popup hoặc mở toàn màn hình"
     ],
     "modules": [
       "content",
       "catalog",
       "contact"
     ],
-    "version": "1.0.0",
+    "version": "2.0.0",
     "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
@@ -606,21 +647,24 @@
       "Trang chủ",
       "Khóa học",
       "Chi tiết khóa học",
-      "Giảng viên",
+      "Lộ trình",
+      "Về MỞ",
       "Tư vấn"
     ],
     "features": [
       "Lọc khóa theo cấp độ",
       "Thẻ chương trình học",
       "Biểu mẫu tư vấn mô phỏng",
-      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
+      "Website demo nhiều trang với điều hướng desktop/mobile",
+      "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+      "Trải nghiệm trong popup hoặc mở toàn màn hình"
     ],
     "modules": [
       "content",
       "catalog",
       "contact"
     ],
-    "version": "1.0.0",
+    "version": "2.0.0",
     "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",

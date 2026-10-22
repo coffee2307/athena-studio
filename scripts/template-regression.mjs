@@ -10,9 +10,9 @@ const errors=[];
 page.on("pageerror",e=>errors.push(e.message));
 for(const slug of names){
  const response=await page.goto(root+"/template-demos/"+slug,{waitUntil:"domcontentloaded",timeout:35000});
- await page.locator(".template-demo-hero h1").waitFor({timeout:10000});
- await page.locator(".template-demo-hero-image img").waitFor();
- await page.waitForTimeout(380);
+ await page.locator(".world-hero h1").waitFor({timeout:10000});
+ await page.locator(".world-hero-visual img").waitFor();
+ await page.waitForTimeout(550);
  await page.screenshot({path:"public/template-previews/"+slug+".jpg",type:"jpeg",quality:82,animations:"disabled"});
  console.log(slug,response?.status(),await page.title());
 }

@@ -1,5 +1,5 @@
 import {notFound} from "next/navigation";
-import {DemoWebsite} from "@/components/templates/DemoWebsite";
+import {WorldSite} from "@/components/templates/WorldSite";
 import {getTemplate,templates} from "@/lib/templates";
 import type {Metadata} from "next";
 
@@ -14,5 +14,5 @@ export async function generateMetadata({params}:Props):Promise<Metadata>{
 export default async function TemplateDemoPage({params,searchParams}:Props){
  const [{slug},{embed}]=await Promise.all([params,searchParams]);
  if(!getTemplate(slug))notFound();
- return <DemoWebsite slug={slug} embedded={embed==="1"}/>;
+ return <WorldSite slug={slug} section="home" embedded={embed==="1"}/>;
 }
