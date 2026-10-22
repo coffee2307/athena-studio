@@ -193,3 +193,56 @@ jobs:
         run: |
           docker compose --env-file deploy/vps/config.example -f deploy/vps/compose.yaml down -v --remove-orphans || true
           rm -rf deploy/vps/secrets
+
+  isolated-recovery-drill:
+    name: Encrypted backup restore in an isolated PostgreSQL container
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install age
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes age
+      - name: Create ephemeral encrypted fixture and run real restore drill
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          mkdir -p .qa/recovery-ci
+          chmod 700 .qa/recovery-ci
+          age-keygen -o .qa/recovery-ci/identity 2>/dev/null
+          age-keygen -y .qa/recovery-ci/identity > .qa/recovery-ci/recipient
+          docker run -d --name athena-recovery-source --network none \
+            --tmpfs /var/lib/postgresql/data:rw,nosuid,size=256m \
+            -e POSTGRES_HOST_AUTH_METHOD=trust -e POSTGRES_DB=athena_identity \
+            postgres:17-alpine >/dev/null
+          cleanup() {
+            docker rm -fv athena-recovery-source >/dev/null 2>&1 || true
+            rm -rf .qa/recovery-ci
+          }
+          trap cleanup EXIT
+          for attempt in $(seq 1 30); do
+            if docker exec athena-recovery-source pg_isready -U postgres -d athena_identity >/dev/null 2>&1; then break; fi
+            [ "$attempt" -lt 30 ] || exit 1
+            sleep 1
+          done
+          docker exec athena-recovery-source psql -X -v ON_ERROR_STOP=1 -U postgres \
+            -d athena_identity -c "CREATE ROLE athena_app LOGIN PASSWORD 'ephemeral-ci-only';" >/dev/null
+          for migration in deploy/vps/migrations/001_better_auth.sql deploy/vps/migrations/002_workspace.sql; do
+            docker exec -i athena-recovery-source psql -X -v ON_ERROR_STOP=1 -U postgres \
+              -d athena_identity < "$migration"
+          done
+          docker exec -i athena-recovery-source psql -X -v ON_ERROR_STOP=1 -U postgres -d athena_identity >/dev/null <<'SQL'
+          CREATE TABLE athena_schema_migrations(migration_name text PRIMARY KEY, checksum_sha256 char(64) NOT NULL, applied_at timestamptz NOT NULL DEFAULT now());
+          INSERT INTO athena_schema_migrations VALUES ('ci-fixture', repeat('a',64), now());
+          SQL
+          archive=".qa/recovery-ci/athena-identity-20261022T120000Z-ciFixture.age"
+          docker exec athena-recovery-source pg_dump -U postgres -d athena_identity --format custom --no-owner --no-acl \
+            | age --encrypt --recipient "$(cat .qa/recovery-ci/recipient)" --output "$archive"
+          (cd .qa/recovery-ci && sha256sum "$(basename "$archive")" > "$(basename "$archive").sha256")
+          ATHENA_BACKUP_AGE_IDENTITY="$PWD/.qa/recovery-ci/identity" \
+            bash deploy/vps/scripts/restore-drill.sh --drill "$PWD/$archive"
+          if docker ps -a --format '{{.Names}}' | grep -q '^athena_restore_drill_'; then
+            echo "Restore drill left an isolated container behind" >&2
+            exit 1
+          fi
