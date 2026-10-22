@@ -2,13 +2,17 @@
 import {createContext,useContext,useEffect,useRef,useState,type ReactNode} from "react";
 
 export type AuthSessionState={status:"loading"|"anonymous"|"authenticated";name:string};
-const Context=createContext<AuthSessionState>({status:"loading",name:""});
+// The public read-only preview has no server-side identity endpoint.
+const identityEndpointEnabled=process.env.NODE_ENV==="development"||process.env.NEXT_PUBLIC_ATHENA_AUTH_ENABLED==="true";
+const initialState:AuthSessionState={status:identityEndpointEnabled?"loading":"anonymous",name:""};
+const Context=createContext<AuthSessionState>(initialState);
 export function useAuthSession(){return useContext(Context);}
 export function AuthSessionProvider({children}:{children:ReactNode}){
- const [state,setState]=useState<AuthSessionState>({status:"loading",name:""});
+ const [state,setState]=useState<AuthSessionState>(initialState);
  const lastFetch=useRef(0);
  const activeRequest=useRef<Promise<void>|null>(null);
  useEffect(()=>{
+  if(!identityEndpointEnabled)return;
   let alive=true;
   const refresh=(force=false)=>{
    if(activeRequest.current)return activeRequest.current;

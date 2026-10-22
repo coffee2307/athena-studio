@@ -35,6 +35,8 @@ const headers=[
  ...(httpsOrigin?[{key:"Strict-Transport-Security",value:"max-age=31536000"}]:[])
 ];
 const nextConfig:NextConfig={
+ // Dedicated, isolated Next.js build directory for authenticated local preview.
+ ...(process.env.ATHENA_NEXT_DIST_DIR?{distDir:process.env.ATHENA_NEXT_DIST_DIR}:{}),
  // Build a minimal single-process image for small VPS hosts only when requested.
  ...(process.env.ATHENA_VPS_STANDALONE_BUILD==="true"?{output:"standalone" as const}:{}),
  poweredByHeader:false,
