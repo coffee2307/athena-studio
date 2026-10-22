@@ -3,7 +3,7 @@
 ## Why the previous mobile preview broke
 The team used `next dev` on `127.0.0.1:3182` and also ran `next build`/Playwright against the same `.next` directory. Next.js served a valid HTML page referencing development CSS/JS files while those files were gone or replaced. Both localhost and Cloudflare returned missing static assets; browsers fell back to Times New Roman, default blue links and raw HTML layout.
 
-**Never share a Next.js development server as a client preview.** The private preview runs a fixed production build from `.next-preview`. Ordinary `npm run dev` and `npm run build` use the normal `.next` and cannot overwrite the files serving the preview.
+**Never share a Next.js development server as a client preview.** The private preview compiles `NEXT_PUBLIC_ATHENA_READ_ONLY_PREVIEW=true` and runs a fixed production build from `.next-preview`. Ordinary `npm run dev` and `npm run build` use the normal `.next` and cannot overwrite the files serving the preview.
 
 ## Commands on the authorized Windows machine
 In `F:\Athena Studio`:

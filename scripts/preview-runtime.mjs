@@ -9,7 +9,7 @@ const nextBin=resolve("node_modules/next/dist/bin/next");
 const args=[nextBin,command,...(command==="start"?["-H","127.0.0.1","-p","3182"]:[])];
 const child=spawn(process.execPath,args,{
  cwd:process.cwd(),
- env:{...process.env,ATHENA_NEXT_DIST_DIR:".next-preview"},
+ env:{...process.env,ATHENA_NEXT_DIST_DIR:".next-preview",NEXT_PUBLIC_ATHENA_READ_ONLY_PREVIEW:"true"},
  stdio:"inherit",
  windowsHide:true
 });

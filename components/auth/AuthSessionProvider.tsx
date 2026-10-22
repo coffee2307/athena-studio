@@ -3,7 +3,7 @@ import {createContext,useContext,useEffect,useRef,useState,type ReactNode} from 
 
 export type AuthSessionState={status:"loading"|"anonymous"|"authenticated";name:string};
 // The public read-only preview has no server-side identity endpoint.
-const identityEndpointEnabled=process.env.NODE_ENV==="development"||process.env.NEXT_PUBLIC_ATHENA_AUTH_ENABLED==="true";
+const identityEndpointEnabled=process.env.NEXT_PUBLIC_ATHENA_READ_ONLY_PREVIEW!=="true";
 const initialState:AuthSessionState={status:identityEndpointEnabled?"loading":"anonymous",name:""};
 const Context=createContext<AuthSessionState>(initialState);
 export function useAuthSession(){return useContext(Context);}

@@ -28,7 +28,8 @@ test("Animated mobile navigation traps focus, locks document scroll, closes with
  await expect(menu).toBeVisible();
  await expect(page.locator("body")).toHaveCSS("overflow","hidden");
  await expect(page.locator(".agency-mobile-panel .agency-mobile-services a")).toHaveCount(3);
- await expect(menu.getByRole("link",{name:"Đăng ký tài khoản"})).toHaveAttribute("href","/signup");
+ await expect(menu.locator("a.agency-mobile-signin")).toHaveAttribute("href","/login");
+ await expect(menu.locator("a.agency-mobile-signup")).toHaveAttribute("href","/signup");
  const details=await menu.evaluate(el=>({
   duration:getComputedStyle(el).transitionDuration,
   opacity:getComputedStyle(el).opacity,
