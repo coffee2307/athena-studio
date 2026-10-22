@@ -81,3 +81,9 @@ npm run audit:runtime
 - **P6:** workspace/customer dashboard and only the needed project management features.
 
 Never publish a live production environment from a Cloudflare quick tunnel or treat its basic-password preview as production hosting.
+
+## Dependency audit availability — fail closed
+
+GitHub Actions runs `npm run audit:runtime` against production dependencies at the existing high-severity threshold. The wrapper in `scripts/audit-runtime.mjs` retries only explicitly transient npm advisory outages (429/502/503/504 or selected transport errors), with at most three bounded attempts. Reported vulnerabilities, unknown errors and continued unavailability still cause **NO-GO**.
+
+A successful build does not replace a successful advisory response. Never suppress the gate with `continue-on-error` or by using the audit result from a different runner.
