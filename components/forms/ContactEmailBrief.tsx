@@ -61,7 +61,7 @@ export function ContactEmailBrief(){
    <textarea id="athena-draft-preview" readOnly value={"Chủ đề: "+draft.subject+"\n\n"+draft.body} rows={8}/>
    <div className="athena-email-brief-actions">
     <a className="pill-link pill-dark" href={draft.href}>Mở ứng dụng email <Icon name="arrow-up-right" size={17}/></a>
-    <button type="button" onClick={copy} className="pill-link athena-email-copy"><span aria-hidden="true">?</span> {copied?"Đã sao chép":"Sao chép bản nháp"}</button>
+    <button type="button" onClick={copy} className="pill-link athena-email-copy"><Icon name="copy" size={17}/> {copied?"Đã sao chép":"Sao chép bản nháp"}</button>
    </div>
   </div>}
   {error&&<p className="athena-email-brief-error" role="alert">{error}</p>}
