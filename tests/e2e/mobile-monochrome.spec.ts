@@ -55,3 +55,34 @@ test("Reduced-motion mobile menu locks and restores background scroll",async({pa
  await trigger.click();
  await expect(page.locator("body")).not.toHaveCSS("overflow","hidden");
 });
+
+test("Mobile menu exposes distinct square login/sign-up controls and a valid menu counter",async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ await page.route("**/api/identity/get-session",route=>route.fulfill({status:503,contentType:"application/json",body:'{"error":"disabled"}'}));
+ await page.goto("/");
+ await page.locator(".agency-menu-toggle").click();
+ const menu=page.locator("#athena-mobile-menu");
+ await expect(menu.locator(".agency-mobile-menu-counter")).toHaveText("01 / 05");
+ const signin=menu.locator(".agency-mobile-signin");
+ const signup=menu.locator(".agency-mobile-signup");
+ await expect(signin).toBeVisible();
+ await expect(signup).toBeVisible();
+ await expect(signin).toHaveAttribute("href","/login");
+ await expect(signup).toHaveAttribute("href","/signup");
+ await expect(signin).toHaveCSS("border-radius","0px");
+ await expect(signup).toHaveCSS("border-radius","0px");
+ await expect(menu).toHaveCSS("border-top-left-radius","0px");
+});
+
+test("Pending mobile identity shows readable Vietnamese text, not CSS-generated garbling",async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ let release:()=>void=()=>{};
+ const blocked=new Promise<void>(resolve=>{release=()=>resolve();});
+ await page.route("**/api/identity/get-session",async route=>{await blocked;await route.fulfill({status:503,contentType:"application/json",body:'{"error":"disabled"}'});});
+ await page.goto("/",{waitUntil:"domcontentloaded"});
+ await page.locator(".agency-menu-toggle").click();
+ const status=page.locator(".agency-mobile-account .agency-auth-loading.mobile");
+ await expect(status).toHaveText("Đang kiểm tra tài khoản…");
+ await expect(status).toHaveAttribute("role","status");
+ release();
+});

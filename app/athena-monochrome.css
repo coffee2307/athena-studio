@@ -230,6 +230,5 @@ body{background:#fff;color:#111}
 
 /* Replace an empty account loading block with readable microcopy. */
 @media(max-width:980px){
- .agency-mobile-account .agency-auth-loading.mobile{width:auto;height:auto;background:transparent;opacity:1;border-radius:0}
- .agency-mobile-account .agency-auth-loading.mobile::after{content:"?ang ki?m tra t?i kho?n?";font-size:12px;color:#666;font-weight:550}
+ .agency-mobile-account .agency-auth-loading.mobile{width:auto;height:auto;background:transparent;opacity:1;border-radius:0;font-size:12px;color:#666;font-weight:550}
 }
