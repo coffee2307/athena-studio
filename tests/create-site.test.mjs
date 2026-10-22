@@ -24,3 +24,31 @@ test("scaffolder creates an isolated site and refuses unregistered modules or ov
   assert.throws(()=>execFileSync(process.execPath,[cli,"--template","creative-studio","--name","client-site","--brand","Client Brand","--out",output],{cwd:root,stdio:"pipe"}));
  }finally{await rm(folder,{recursive:true,force:true});}
 });
+
+test("scaffolder never writes inside a dot-prefixed repository path",async()=>{
+ const output=join(root,"..athena-test-output");
+ try{
+  assert.throws(()=>execFileSync(process.execPath,[cli,"--template","creative-studio","--name","safe-site","--brand","Safe Brand","--out",output],{cwd:root,stdio:"pipe"}));
+ }finally{await rm(output,{recursive:true,force:true});}
+});
+test("brand token literals survive generation and unknown flags are refused",async()=>{
+ const folder=await mkdtemp(join(tmpdir(),"athena-literal-"));
+ try{
+  const brand='Brand __TEMPLATE_SLUG__ "Q" \\ Atelier';
+  execFileSync(process.execPath,[cli,"--template","modern-corporate","--name","literal-site","--brand",brand,"--out",join(folder,"site")],{cwd:root,stdio:"pipe"});
+  const manifest=JSON.parse(await readFile(join(folder,"site/project.manifest.json"),"utf8"));
+  assert.equal(manifest.brand,brand);
+  assert.throws(()=>execFileSync(process.execPath,[cli,"--template","creative-studio","--name","bad-flag","--brand","Safe Brand","--out",join(folder,"bad"),"--unknown","yes"],{cwd:root,stdio:"pipe"}));
+ }finally{await rm(folder,{recursive:true,force:true});}
+});
+
+test("scaffolder safely serializes a configured contact email as a source literal",async()=>{
+ const folder=await mkdtemp(join(tmpdir(),"athena-email-"));
+ try{
+  const output=join(folder,"site");
+  execFileSync(process.execPath,[cli,"--template","creative-studio","--name","email-site","--brand","Email Studio","--out",output,"--email","coffee@example.com"],{cwd:root,stdio:"pipe"});
+  const config=await readFile(join(output,"src/config/site.ts"),"utf8");
+  assert.match(config,/contactEmail:"coffee@example\.com"/);
+  assert.throws(()=>execFileSync(process.execPath,[cli,"--template","creative-studio","--name","bad-email","--brand","Email Studio","--out",join(folder,"bad"),"--email",'coffee";process.exit(1);//@example.com'],{cwd:root,stdio:"pipe"}));
+ }finally{await rm(folder,{recursive:true,force:true});}
+});

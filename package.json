@@ -30,7 +30,8 @@
     "preview:build": "node scripts/preview-runtime.mjs build",
     "preview:start": "node scripts/preview-runtime.mjs start",
     "preview:canary": "node scripts/preview-canary.mjs",
-    "preview:proxy": "node scripts/preview-readonly.mjs"
+    "preview:proxy": "node scripts/preview-readonly.mjs",
+    "test:starter": "node scripts/verify-starter.mjs"
   },
   "dependencies": {
     "@fontsource/be-vietnam-pro": "5.3.0",

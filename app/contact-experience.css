@@ -47,3 +47,5 @@
 }
 .athena-contact-dialog button,.athena-contact-dialog a,.agency-contact-action{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .athena-contact-dialog button{user-select:none}
+
+.athena-project-brief{border:0;border-top:1px solid #d3d3d3;margin:6px 0;padding:20px 0 0;display:grid;gap:18px;min-width:0}.athena-project-brief legend{padding:0 10px 0 0;font-size:11px;font-weight:650;letter-spacing:.03em;color:#343434}.athena-project-brief .brief-help{font-size:11px;line-height:1.7;color:#555;margin:0}.athena-project-brief select{min-height:44px}

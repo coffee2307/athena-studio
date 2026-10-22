@@ -6,6 +6,8 @@ import Link from "next/link";
 import {TurnstileField} from "@/components/forms/TurnstileField";
 import {ContactEmailBrief} from "@/components/forms/ContactEmailBrief";
 import {getTemplate} from "@/lib/templates";
+import {ProjectBriefFields} from "@/components/forms/ProjectBriefFields";
+import {briefFieldsFromForm,composeInquiryMessage} from "@/lib/project-brief";
 type Props={configured:boolean;siteKey:string};
 type Status="idle"|"sending"|"success"|"error";
 export function ContactForm({configured,siteKey}:Props){
@@ -20,10 +22,10 @@ export function ContactForm({configured,siteKey}:Props){
   const form=event.currentTarget;
   const formData=new FormData(form);
   const formMessage=String(formData.get("message")||"");
-  const templateName=getTemplate(selectedTemplate)?.title;
-  const payload={...Object.fromEntries(formData),message:templateName?`Mẫu tham khảo: ${templateName}\n\n${formMessage}`.slice(0,4000):formMessage,captcha,consent:formData.get("consent")==="yes"};
   setStatus("sending");setMessage("");
   try{
+   const template=getTemplate(selectedTemplate);
+   const payload={...Object.fromEntries(formData),message:composeInquiryMessage(formMessage,{...briefFieldsFromForm(formData),template:template?.title,templateSlug:template?.slug,templateVersion:template?.version}),captcha,consent:formData.get("consent")==="yes"};
    const response=await fetch("/api/inquiry",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
    const data:unknown=await response.json();
    const result=data&&typeof data==="object"?data as Record<string,unknown>:{};
@@ -37,11 +39,12 @@ export function ContactForm({configured,siteKey}:Props){
  return <div className="contact-box">
   <p className="small-index">YÊU CẦU TƯ VẤN / ATHENA</p><h2>Mô tả vấn đề<br/><em>bạn cần xử lý.</em></h2>
   <p>Gửi thông tin website (nếu có), khó khăn hiện tại và mục tiêu mong muốn. Không gửi mật khẩu, mã truy cập hoặc dữ liệu nhạy cảm.</p>
-  {configured?<form className="inquiry-form" onSubmit={submit}>
    {selectedTemplate&&getTemplate(selectedTemplate)&&<div className="template-inquiry-selection"><span>MẪU BẠN ĐANG THAM KHẢO</span><strong>{getTemplate(selectedTemplate)?.title}</strong><Link href="/services/web-development/templates">Xem lại thư viện</Link></div>}
+  {configured?<form className="inquiry-form" onSubmit={submit}>
    <div className="field-pair"><label>Họ tên <span>*</span><input name="name" required minLength={2} maxLength={100} autoComplete="name" placeholder="Tên của bạn"/></label><label>Địa chỉ email <span>*</span><input name="email" required type="email" maxLength={200} autoComplete="email" placeholder="email@example.com"/></label></div>
    <label>Đơn vị / doanh nghiệp<input name="company" maxLength={120} autoComplete="organization" placeholder="Không bắt buộc"/></label>
    <label>Dịch vụ quan tâm <span>*</span><select name="service" required value={service} onChange={e=>setService(e.target.value)}><option value="" disabled>Chọn một lĩnh vực</option><option value="web-development">Thiết kế website</option><option value="website-care">Chăm sóc website</option><option value="ai-integration">Tích hợp AI</option><option value="micro-saas">Công cụ Micro-SaaS</option><option value="other">Chưa xác định</option></select></label>
+   <ProjectBriefFields/>
    <label>Vấn đề cần giải quyết <span>*</span><textarea name="message" required rows={5} minLength={20} maxLength={4000} placeholder="Website/quy trình hiện tại đang gặp vấn đề gì? Bạn muốn cải thiện điều gì?"/></label>
    <div className="trap-field" aria-hidden="true"><label>Trang web<input name="website" tabIndex={-1} autoComplete="off"/></label></div>
    <label className="privacy-consent"><input type="checkbox" name="consent" required value="yes"/><span>Tôi đồng ý để Athena sử dụng thông tin này nhằm phản hồi yêu cầu. Xem <Link href="/legal/privacy" target="_blank" rel="noopener noreferrer">thông tin quyền riêng tư</Link>.</span></label>
@@ -55,7 +58,7 @@ export function ContactForm({configured,siteKey}:Props){
    <p>Biểu mẫu trực tuyến chưa được kích hoạt. Bạn vẫn có thể gửi thông tin để trao đổi qua email; nút bên dưới mở một thư mẫu để bạn điền nhanh.</p>
    <button type="button" onClick={()=>showContactDialog("email")} className="pill-link pill-dark">Soạn email mô tả nhu cầu <Icon name="arrow-up-right" size={18}/></button>
   </div>
-   <details className="athena-email-brief-details"><summary>Ho?c chu?n b? email theo nhu c?u c? th? <Icon name="chevron-down" size={18}/></summary><ContactEmailBrief templateName={getTemplate(selectedTemplate)?.title}/></details>
+   <details className="athena-email-brief-details" open={Boolean(selectedTemplate)}><summary>Hoặc chuẩn bị email theo nhu cầu cụ thể <Icon name="chevron-down" size={18}/></summary><ContactEmailBrief key={selectedTemplate||"default"} template={getTemplate(selectedTemplate)} defaultService={service}/></details>
   </>}
   <p className="contact-notice">Nếu cần trao đổi trực tiếp, bạn có thể gọi điện hoặc gửi email qua phần Liên hệ phía dưới trang.</p>
  </div>;

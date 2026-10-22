@@ -1,14 +1,21 @@
 "use client";
-import {useState,type FormEvent} from "react";
+import {useEffect,useState,type FormEvent} from "react";
 import {createInquiryEmailDraft} from "@/lib/contact-email-draft";
 import {siteConfig} from "@/lib/constants";
 import {Icon} from "@/components/ui/Icon";
 
+import {ProjectBriefFields} from "@/components/forms/ProjectBriefFields";
+import {briefFieldsFromForm} from "@/lib/project-brief";
+import type {Template} from "@/lib/templates";
+
 type Draft=ReturnType<typeof createInquiryEmailDraft>;
-export function ContactEmailBrief({templateName}:{templateName?:string}){
+export function ContactEmailBrief({template,defaultService=""}:{template?:Pick<Template,"title"|"slug"|"version">;defaultService?:string}){
  const [draft,setDraft]=useState<Draft|null>(null);
  const [error,setError]=useState("");
  const [copied,setCopied]=useState(false);
+ const templateService=template?"web-development":defaultService;
+ const [service,setService]=useState(templateService);
+ useEffect(()=>setService(templateService),[templateService]);
  function prepare(event:FormEvent<HTMLFormElement>){
   event.preventDefault();
   setError("");setCopied(false);
@@ -19,7 +26,8 @@ export function ContactEmailBrief({templateName}:{templateName?:string}){
     email:String(data.get("email")||""),
     service:String(data.get("service")||""),
     message:String(data.get("message")||""),
-    template:templateName
+    ...briefFieldsFromForm(data),
+    template:template?.title,templateSlug:template?.slug,templateVersion:template?.version
    },siteConfig.email));
   }catch(e){setDraft(null);setError(e instanceof Error?e.message:"Thông tin chưa hợp lệ.");}
  }
@@ -41,7 +49,7 @@ export function ContactEmailBrief({templateName}:{templateName?:string}){
     <label>Email liên hệ <span>*</span><input name="email" type="email" required maxLength={200} autoComplete="email" placeholder="email@example.com"/></label>
    </div>
    <label>Dịch vụ quan tâm <span>*</span>
-    <select name="service" required defaultValue="">
+    <select name="service" required value={template?"web-development":service} onChange={event=>setService(event.target.value)}>
      <option value="" disabled>Chọn dịch vụ</option>
      <option value="web-development">Thiết kế website</option>
      <option value="website-care">Chăm sóc website</option>
@@ -50,6 +58,7 @@ export function ContactEmailBrief({templateName}:{templateName?:string}){
      <option value="other">Chưa xác định</option>
     </select>
    </label>
+   <ProjectBriefFields/>
    <label>Nhu cầu và mục tiêu <span>*</span>
     <textarea name="message" minLength={20} maxLength={4000} required rows={4} placeholder="Tình trạng hiện tại, điều cần cải thiện và kết quả bạn mong muốn."/>
    </label>

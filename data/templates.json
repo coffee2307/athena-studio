@@ -211,6 +211,7 @@
       "Có thể kết nối biểu mẫu theo cấu hình dự án"
     ],
     "modules": [
+      "content",
       "contact"
     ],
     "version": "1.0.0",
