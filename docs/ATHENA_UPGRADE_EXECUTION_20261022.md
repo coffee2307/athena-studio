@@ -31,5 +31,5 @@ Các log local tạm thời nằm trong `.qa/upgrade-20261022/` và không đư�
 ## Rà soát cuối và cổng phát hành
 
 - Lượt review độc lập không phát hiện lỗi Critical/Important. Ba nhận xét Minor đã được xử lý: giữ dịch vụ từ URL, mã hóa recipient mailto và bật module nội dung cho template campaign. Hai kỳ vọng menu E2E cũ đã được đồng bộ với các mục hiện có.
-- Đã cập nhật PR #39 và đẩy các commit bằng lease; run cuối `39779079518` đạt 7/7 jobs.
+- Các lượt GitHub Actions trên PR #39 đều đạt **7/7 jobs**, gồm browser/accessibility, lint/type/unit/build/audit, ba starter độc lập, PostgreSQL và container VPS.
 - PR #39 vẫn là draft sẵn sàng review. Merge hoặc deploy production cần quyết định riêng.
