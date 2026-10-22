@@ -1,0 +1,49 @@
+/* Production-A email draft fallback. Strict monochrome, no hidden submission. */
+.athena-email-brief-details{
+ margin-top:15px;border:1px solid #d4d4d4;background:#fafafa;
+}
+.athena-email-brief-details>summary{
+ display:flex;align-items:center;justify-content:space-between;gap:12px;
+ padding:18px 20px;font-size:13px;font-weight:700;color:#171717;
+ cursor:pointer;list-style:none;min-height:54px;
+}
+.athena-email-brief-details>summary::-webkit-details-marker{display:none}
+.athena-email-brief-details[open]>summary{border-bottom:1px solid #dedede}
+.athena-email-brief-details>summary svg{flex-shrink:0;transition:transform .18s ease}
+.athena-email-brief-details[open]>summary svg{transform:rotate(180deg)}
+.athena-email-brief{padding:21px}
+.athena-email-brief-heading>span{display:block;font-size:10px;letter-spacing:.12em;font-weight:700;color:#555}
+.athena-email-brief-heading p{font-size:12px;line-height:1.8;color:#5a5a5a;margin-top:10px}
+.athena-email-brief-form{margin-top:22px;gap:16px}
+.athena-email-brief-form label{font-size:12px}
+.athena-email-brief-form input,.athena-email-brief-form select,.athena-email-brief-form textarea{
+ background:#fff;color:#141414;font-size:16px;border-color:#cacaca;border-radius:0
+}
+.athena-email-brief-form input:focus-visible,.athena-email-brief-form select:focus-visible,
+.athena-email-brief-form textarea:focus-visible{outline:2px solid #111;outline-offset:2px}
+.athena-email-brief-prepare{min-height:50px;border:0;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.athena-email-brief-result{margin-top:23px;padding:20px;border:1px solid #bbb;background:#fff}
+.athena-email-brief-result>strong{font-size:14px}
+.athena-email-brief-result>p{font-size:12px;line-height:1.7;color:#505050;margin:12px 0}
+.athena-email-brief-result>label{font-size:11px;font-weight:700;display:block;margin-bottom:9px}
+.athena-email-brief-result>textarea{
+ width:100%;min-height:170px;padding:13px;border:1px solid #d4d4d4;
+ background:#fafafa;color:#222;font:12px/1.6 "Be Vietnam Pro",sans-serif;resize:vertical
+}
+.athena-email-brief-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.athena-email-brief-actions>a,.athena-email-brief-actions>button{
+ min-height:47px;font-size:11px;border:1px solid #181818;
+ display:inline-flex;align-items:center;justify-content:center;gap:9px;
+ padding:11px 13px;border-radius:0
+}
+.athena-email-copy{background:#fff;color:#161616}
+.athena-email-brief-error{color:#9c2525;font-size:12px;margin-top:10px}
+@media(max-width:640px){
+ .athena-email-brief{padding:16px}
+ .athena-email-brief-form .field-pair{grid-template-columns:1fr}
+ .athena-email-brief-actions{flex-direction:column}
+ .athena-email-brief-actions>a,.athena-email-brief-actions>button{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+ .athena-email-brief-details>summary svg{transition:none}
+}

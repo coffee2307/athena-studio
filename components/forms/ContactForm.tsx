@@ -4,6 +4,7 @@ import {showContactDialog} from "@/lib/contact-channels";
 import {FormEvent,useCallback,useEffect,useState} from "react";
 import Link from "next/link";
 import {TurnstileField} from "@/components/forms/TurnstileField";
+import {ContactEmailBrief} from "@/components/forms/ContactEmailBrief";
 type Props={configured:boolean;siteKey:string};
 type Status="idle"|"sending"|"success"|"error";
 export function ContactForm({configured,siteKey}:Props){
@@ -42,11 +43,14 @@ export function ContactForm({configured,siteKey}:Props){
    <button className="pill-link pill-dark form-submit" type="submit" disabled={status==="sending"||!captcha}>{status==="sending"?"Đang ghi nhận…":"Gửi yêu cầu"} <Icon name="arrow-up-right" size={18}/></button>
    {message&&<div className={status==="error"?"form-status form-error":"form-status"} role={status==="error"?"alert":"status"}><p>{message}</p>{reference&&<p>Mã tham chiếu: <strong>{reference}</strong></p>}</div>}
    <p className="form-privacy">Dữ liệu chỉ được nhận khi việc lưu trữ và chống spam đã cấu hình đầy đủ.</p>
-  </form>:<div className="form-offline" role="status">
+  </form>:<>
+  <div className="form-offline" role="status">
    <strong>Hiện nhận yêu cầu trực tiếp qua email.</strong>
    <p>Biểu mẫu trực tuyến chưa được kích hoạt. Bạn vẫn có thể gửi thông tin để trao đổi qua email; nút bên dưới mở một thư mẫu để bạn điền nhanh.</p>
    <button type="button" onClick={()=>showContactDialog("email")} className="pill-link pill-dark">Soạn email mô tả nhu cầu <Icon name="arrow-up-right" size={18}/></button>
-  </div>}
+  </div>
+  <details className="athena-email-brief-details"><summary>Ho?c chu?n b? email theo nhu c?u c? th? <Icon name="chevron-down" size={18}/></summary><ContactEmailBrief/></details>
+  </>}
   <p className="contact-notice">Nếu cần trao đổi trực tiếp, bạn có thể gọi điện hoặc gửi email qua phần Liên hệ phía dưới trang.</p>
  </div>;
 }

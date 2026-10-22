@@ -37,6 +37,8 @@ jobs:
         run: npm run test:unit
       - name: Release integrity and disabled-provider gate
         run: npm run release:verify
+      - name: Production-A candidate gates (no deployment)
+        run: npm run release:preflight
       - name: Production build
         run: npm run build
       - name: Identity Worker offline build (no cloud deployment)

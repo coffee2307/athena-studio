@@ -1,5 +1,8 @@
 # ATHENA STUDIO
 
+> **Latest release candidate:** [Production A release gates and operator runbook](docs/ATHENA_PRODUCTION_A_RUNBOOK_20261022.md). URL paths are **English**, UI copy stays Vietnamese. Public indexing is OFF unless separately owner-approved. Older phase descriptions below are retained for historical context.
+
+
 Website studio thiết kế và công nghệ độc lập, sử dụng **Next.js 15**, **React 19** và **TypeScript**. Các lĩnh vực gồm phát triển website, chăm sóc website, tích hợp AI và nghiên cứu công cụ Micro-SaaS. Website đang phát triển theo roadmap đã phê duyệt, **chưa đưa lên production**.
 
 ## Tài liệu chính thức
@@ -17,6 +20,7 @@ npm run dev
 npm run lint
 npm run typecheck
 npm run test:unit
+npm run release:preflight
 npm run build
 npm run test:smoke
 npm audit --omit=dev --audit-level=high
@@ -24,32 +28,32 @@ npm audit --omit=dev --audit-level=high
 
 Chạy local tại `http://localhost:3000`. GitHub Actions kiểm tra tương tự trên pull request.
 
-## Các route được sử dụng
-| Đường dẫn | Mục đích |
-|---|---|
-| `/` | Hero và tổng quan Athena |
-| `/du-an` | Portfolio của founder và các dự án nghiên cứu có bằng chứng |
-| `/du-an/[slug]` | Case study PHAM, ECONITH; Qrio đang chờ nguồn và ẩn |
-| `/dich-vu` | Bốn dịch vụ và nhóm giải pháp |
-| `/dich-vu/[slug]` | Mô tả chi tiết từng dịch vụ |
-| `/san-pham` | Product Lab (SitePulse chỉ là ý tưởng) |
-| `/ve-athena` | Giới thiệu và triết lý |
-| `/lien-he` | Thông tin liên hệ và biểu mẫu có điều kiện |
-| `/phap-ly` | Thông tin pháp lý bản nháp, cần rà soát |
-| `/phap-ly/quyen-rieng-tu` | Thông tin quyền riêng tư dự kiến |
-| `/phap-ly/dieu-khoan` | Điều khoản sử dụng dự kiến |
-| `/phap-ly/cookie` | Chính sách cookie/lưu trữ hiện tại |
-| `/api/inquiry` | API tiếp nhận khách hàng, chưa mở khi email chưa cấu hình |
+## Current canonical routes
 
-Các đường dẫn cũ (`/work`, `/services`, `/products`, `/studio`, `/contact`) chuyển hướng vĩnh viễn sang phiên bản tiếng Việt.
+Public URLs use English lowercase slugs, while the interface remains Vietnamese. Historical Vietnamese slugs redirect permanently (308).
+
+| Path | Purpose |
+|---|---|
+| `/` | Homepage |
+| `/services`, `/services/[slug]` | Commercial services |
+| `/projects`, `/projects/[slug]` | Portfolio; no PHAM/ECONITH private source |
+| `/process`, `/pricing` | Workflow and scope-based quote guidance |
+| `/products`, `/products/sitepulse` | Research product lab |
+| `/about`, `/contact` | Studio and contact |
+| `/legal/*` | Terms, privacy, service policy and cookies |
+| `/login`, `/signup`, `/profile` | Gated identity and profile |
+| `/api/inquiry` | Contact intake, closed unless complete backend/spam configuration |
 
 ## Portfolio và nguồn dữ liệu
 Mô hình dữ liệu ở `types/project.ts` và danh mục ở `data/projects.ts`. Mỗi entry yêu cầu phân loại `founder | research | client`, trạng thái, quyền công bố, nguồn minh chứng, vai trò, thách thức, tiếp cận và kết quả *được xác nhận*. Mặc định dự án chưa duyệt phải có `visibility:"review"`. Không tự biến dự án founder thành dự án khách hàng Athena.
 
 PHAM có repository `coffee2307/pham-store` với theme Shopify; ECONITH có repository `coffee2307/econith` ở trạng thái nghiên cứu; Qrio chưa được đối chiếu và không có case study public. Ảnh đại diện là đồ họa CSS của Athena, không phải ảnh chụp sản phẩm hoặc chứng cứ kết quả.
 
-## SEO và production
-`NEXT_PUBLIC_SITE_URL` chỉ đặt thành **tên miền HTTPS đã xác minh** khi được phê duyệt; cấu hình hiện tại từ chối indexing ở môi trường chưa có origin production. Metadata, canonical (khi có origin HTTPS), OG và sitemap lấy từ URL tiếng Việt. Script `node scripts/generate-og-image.mjs` tạo ảnh Open Graph từ nhận diện cú Athena.
+## SEO and public release
+
+The HTTPS site URL does NOT authorize search indexing. `ATHENA_PUBLIC_SITE_RELEASE_APPROVED=false` by default. `robots.txt` and page metadata stay noindex until explicit domain, owner and release approval; the read-only preview is always blocked.
+
+Run `npm run release:preflight` for a non-deploying candidate check. See the [Production A runbook](docs/ATHENA_PRODUCTION_A_RUNBOOK_20261022.md) for staged and production GO/NO-GO evidence. Production A and Identity/Portal Production B are independently gated.
 
 ## Liên hệ
 Email công khai: `coffee2307@gmail.com`. Điện thoại: `0965747147`. Nút Zalo và WhatsApp cần xác thực bằng tài khoản thực của chủ dự án. Form cần cấu hình `RESEND_API_KEY`, `CONTACT_EMAIL`, `CONTACT_FROM_EMAIL` trong `.env.local` (không commit). Khi chưa cấu hình, form không nhận dữ liệu để tránh mất yêu cầu. Cần bổ sung kiểm soát spam phân tán trước production.
