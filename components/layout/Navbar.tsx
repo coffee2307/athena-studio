@@ -99,7 +99,7 @@ export function Navbar(){
   <nav ref={panel} id="athena-mobile-menu" aria-label="Điều hướng trên điện thoại"
    className={open?"agency-mobile-panel is-open":"agency-mobile-panel"} inert={!open} onClick={event=>{if((event.target as HTMLElement).closest("a"))setOpen(false);}}>
    <div className="agency-mobile-scroll">
-    <div className="agency-mobile-menu-heading"><span>KHÁM PHÁ ATHENA</span><span className="agency-mobile-menu-counter">01 ? 05</span></div>
+    <div className="agency-mobile-menu-heading"><span>KHÁM PHÁ ATHENA</span><span className="agency-mobile-menu-counter">01 / {String(navigation.length).padStart(2,"0")}</span></div>
     <p className="agency-mobile-section-label">ĐIỀU HƯỚNG</p>
     <div className="agency-mobile-main-links">
      <Link href="/services" className="agency-mobile-primary"><span>Dịch vụ</span><Icon name="arrow-up-right" size={19}/></Link>
