@@ -34,7 +34,7 @@ for(const width of [320,375,390,428]){
 }
 test("Main site visual palette is grayscale",async({page})=>{
  await page.goto("/");
- const selectors=[".client-hero",".client-quick-nav",".client-solution-card",".client-solution-card:nth-child(2)",".client-solution-card:nth-child(3)",".athena-editorial-seam",".agency-footer-cta"];
+ const selectors=[".client-hero",".client-quick-nav",".client-solution-row",".client-solution-row:nth-child(2)",".client-solution-row:nth-child(3)",".athena-editorial-seam",".agency-footer-cta"];
  for(const selector of selectors){
   const el=page.locator(selector).first();
   await expect(el).toBeVisible();
