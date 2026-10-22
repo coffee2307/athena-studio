@@ -42,11 +42,11 @@ test("Desktop services dropdown closes on outside click, Escape, and navigation"
  await expect(details).not.toHaveAttribute("open","");
 });
 
-test("Home hierarchy remains usable without horizontal overflow at mobile width",async({page,isMobile})=>{
+test("Home hierarchy remains usable without horizontal overflow at mobile width",async({page})=>{
  await page.goto("/");
  await expect(page.locator(".client-quick-nav")).toBeVisible();
  await expect(page.locator(".athena-editorial-seam")).toContainText("Kiểm thử trước bàn giao");
- await expect(page.locator(".client-solution-card")).toHaveCount(3);
+ await expect(page.locator(".client-solution-row")).toHaveCount(3);
  const width=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,client:document.documentElement.clientWidth}));
  expect(width.scroll).toBeLessThanOrEqual(width.client+1);
 });
