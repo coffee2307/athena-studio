@@ -55,13 +55,25 @@ export default function HomePage(){
       <h2 id="solutions-title">Vấn đề bạn gặp.<br/><span>Hướng xử lý cụ thể.</span></h2></div>
      <p>Chọn đúng nhu cầu để xem phần việc và kết quả bàn giao dự kiến. Chi phí, tiến độ và phạm vi được xác định sau khi hiểu hiện trạng.</p>
     </div>
-    <div className="client-solution-grid">
-     {services.map(s=><article className="client-solution-card reveal" key={s.slug}>
-      <div className="client-solution-top"><span>{s.index} / 03</span><span>{s.eyebrow}</span></div>
-      <h3>{s.shortTitle}</h3>
-      <p className="client-solution-label">KHI NÀO BẠN CẦN?</p><p className="client-solution-problem">{s.challenge}</p>
-      <p className="client-solution-label">ATHENA CÓ THỂ BÀN GIAO</p><p className="client-solution-delivery">{s.output}</p>
-      <Link href={"/services/"+s.slug} className="client-solution-link">Xem phạm vi dịch vụ <Icon name="arrow-up-right" size={18}/></Link>
+    <div className="client-solution-list">
+     {services.map(s=><article className="client-solution-row reveal" key={s.slug}>
+      <div className="client-solution-meta">
+       <span className="client-solution-number">{s.index}</span>
+       <span className="client-solution-eyebrow">{s.eyebrow}</span>
+      </div>
+      <div className="client-solution-summary">
+       <h3>{s.shortTitle}</h3>
+       <p>{s.subtitle}</p>
+      </div>
+      <div className="client-solution-detail">
+       <p className="client-solution-label">PHÙ HỢP KHI</p>
+       <p className="client-solution-problem">{s.challenge}</p>
+      </div>
+      <div className="client-solution-detail">
+       <p className="client-solution-label">ĐẦU RA DỰ KIẾN</p>
+       <p className="client-solution-delivery">{s.output}</p>
+      </div>
+      <Link href={"/services/"+s.slug} className="client-solution-link"><span>Xem phạm vi dịch vụ</span><Icon name="arrow-up-right" size={18}/></Link>
      </article>)}
     </div>
     <p className="client-solution-note">Không cam kết doanh thu hoặc hiệu quả khi chưa khảo sát và thống nhất chỉ số đo lường. Các đề xuất đều tùy thuộc dữ liệu, nền tảng và phạm vi thực tế.</p>

@@ -1,0 +1,12 @@
+# Template only. Run after the scheduled 03:10 UTC backup window.
+[Unit]
+Description=Daily Athena backup integrity and freshness check
+
+[Timer]
+OnCalendar=*-*-* 05:00:00 UTC
+AccuracySec=5min
+Persistent=true
+Unit=athena-backup-status.service
+
+[Install]
+WantedBy=timers.target
