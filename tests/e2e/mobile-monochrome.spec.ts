@@ -76,8 +76,8 @@ test("Mobile menu exposes distinct square login/sign-up controls and a valid men
 
 test("Pending mobile identity shows readable Vietnamese text, not CSS-generated garbling",async({page})=>{
  await page.setViewportSize({width:390,height:844});
- let release=()=>{};
- const blocked=new Promise<void>(resolve=>{release=resolve;});
+ let release:()=>void=()=>{};
+ const blocked=new Promise<void>(resolve=>{release=()=>resolve();});
  await page.route("**/api/identity/get-session",async route=>{await blocked;await route.fulfill({status:503,contentType:"application/json",body:'{"error":"disabled"}'});});
  await page.goto("/",{waitUntil:"domcontentloaded"});
  await page.locator(".agency-menu-toggle").click();
