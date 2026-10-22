@@ -29,6 +29,7 @@
     "perf:local": "node scripts/phase8c5-benchmark.mjs",
     "preview:build": "node scripts/preview-runtime.mjs build",
     "preview:start": "node scripts/preview-runtime.mjs start",
+    "preview:canary": "node scripts/preview-canary.mjs",
     "preview:proxy": "node scripts/preview-readonly.mjs"
   },
   "dependencies": {

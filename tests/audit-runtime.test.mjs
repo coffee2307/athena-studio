@@ -4,6 +4,9 @@ import {classifyAudit,auditCommand} from "../scripts/audit-runtime.mjs";
 
 test("A completed clean npm security audit passes",()=>{
  assert.equal(classifyAudit(0,"found 0 vulnerabilities"),"pass");
+ assert.equal(classifyAudit(0,"found 2 vulnerabilities (2 moderate)"),"pass");
+ assert.equal(classifyAudit(0,""),"failure");
+ assert.equal(classifyAudit(0,"npm warn audit 503 Service Unavailable"),"failure");
 });
 test("High/critical vulnerabilities never pass and are never misclassified as service outages",()=>{
  assert.equal(classifyAudit(1,"3 vulnerabilities (1 moderate, 2 high)"),"failure");

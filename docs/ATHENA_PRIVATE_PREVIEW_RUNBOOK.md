@@ -16,6 +16,14 @@ In `F:\Athena Studio`:
 
 The old `npm run dev -- -H 127.0.0.1 -p 3182` can still be used for local-only Better Auth development after stopping the production preview on the same port. It is **not** suitable for the public tunnel. Standalone Better Auth remains gated by `NODE_ENV=development`, so real login/profile editing are not available through this production visual preview.
 
+## Pin the approved public tunnel origin
+
+For public canary checks, create ignored `.qa/preview-approved-origin.txt` containing the **exact** verified live HTTPS quick-tunnel origin (one line, no trailing slash). Check the current Cloudflare process output before changing this file. The canary rejects a different tunnel before reading/sending the Basic Auth password, even if the hostname ends in `.trycloudflare.com`. Never commit this local approval file.
+
+## Canary after every preview update
+
+Run `npm run preview:canary` after starting the production preview and its Basic Auth proxy. It checks 9 public routes, authentication, HTML no-store/noindex, compiled stylesheet/JS/font assets with private immutable caching, blocked API and POST. It reports sample p50/p95 response times, **not** a 5G field-performance SLA. Any failure exits nonzero. The password stays only in ignored `.qa/preview-password.txt` and is never printed. To check the actual Cloudflare URL set `ATHENA_PRIVATE_PREVIEW_ORIGIN=https://<live-subdomain>.trycloudflare.com` as an environment variable before invoking the command. This is a one-shot check and does not create a recurring service or modify DNS.
+
 ## Browser caching and security
 - Authenticated HTML/RSC: `Cache-Control: private, no-store`; do not cache pages containing or potentially containing dynamic information.
 - Content-addressed `/_next/static/` CSS, JS, fonts: `Cache-Control: private, max-age=31536000, immutable` (client-browser cache only, not shared CDN cache). When the build changes, filenames change.

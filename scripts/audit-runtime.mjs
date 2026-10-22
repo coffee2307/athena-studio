@@ -9,7 +9,12 @@ import {fileURLToPath} from "node:url";
 import {setTimeout as sleep} from "node:timers/promises";
 
 export function classifyAudit(exitCode, output=""){
- if(exitCode===0)return "pass";
+ // A zero exit is not evidence of a completed audit if the advisory endpoint failed.
+ if(exitCode===0){
+  const knownCompletion=/\b(?:found \d+ vulnerabilities|found 1 vulnerability|\d+ vulnerabilities \(|\d+ vulnerability \()\b/i.test(output);
+  const outage=/\b(?:429|502|503|504)\s+(?:Too Many Requests|Bad Gateway|Service Unavailable|Gateway Timeout)\b|audit endpoint returned an error/i.test(output);
+  return knownCompletion&&!outage?"pass":"failure";
+ }
  const transient=/(?:\b(?:429 Too Many Requests|502 Bad Gateway|503 Service Unavailable|504 Gateway Timeout)\b|npm (?:warn|error) audit (?:429|502|503|504)\b|npm error audit endpoint returned an error|\b(?:ETIMEDOUT|ECONNRESET|EAI_AGAIN)\b)/i.test(output);
  // Never treat a partial vulnerability report as successful/merely transient.
  const hasVulnerabilityReport=/\b\d+\s+vulnerabilit(?:y|ies)\b/i.test(output);

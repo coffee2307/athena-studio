@@ -33,6 +33,8 @@ npm run audit:runtime
 
 `node scripts/production-preflight.mjs --production` is intentionally expected to exit nonzero in a local branch or without external proof. This should not be changed merely to make CI green.
 
+**Post-update preview canary:** Run `npm run preview:canary` for nine public routes, hashed CSS and JS, noindex, Basic Auth and blocked mutations. Repeat using `ATHENA_PRIVATE_PREVIEW_ORIGIN` on the live verified quick tunnel. Samples do not prove a mobile 5G SLA. Runtime npm dependency audit allows at most three retries for explicit transient provider outages; a real High/Critical vulnerability, unknown error or permanently unavailable advisory service must fail the release.
+
 ## Production A — required independent, real-world evidence
 
 | Gate | Owner/operator evidence to capture | Current status |
