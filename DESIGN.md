@@ -2,20 +2,22 @@
 
 Source: existing Athena visual identity, reviewed with Emil Kowalski Design Engineering, Impeccable, Taste Skill v2, Anthropic Frontend Design, and Superpowers. These are project design decisions, not testimonials or authority claims.
 
-## Visual direction: engineered editorial, not an empty white room
+## Visual direction: strict monochrome editorial identity
 
-- Canvas: warm-neutral off-white `#f6f7f5`, pure white `#ffffff`, dark ink `#171c19`.
-- Secondary text `#5b615c`, structure/borders `#d9ddd7`, restrained sage `#c9dfcf`.
-- Official WhatsApp green and Zalo blue appear only on recognizably functional contact buttons; not decorative section accents.
-- Typeface: Be Vietnam Pro across UI. Use a deliberate display/body scale, generous readability, and correct Vietnamese diacritics.
-- Use section alternation, small editorial details, credible screenshots, and grouped service content to create rhythm. Empty space must have purpose.
-- Distinguish hero, service selection, case studies, workflow, FAQ, and final CTA by information hierarchy, not repetitive identical cards.
+- Brand design is **BLACK / WHITE / NEUTRAL GRAYS ONLY**. No sage, green, beige, blue or pastel surfaces. This is the owner's explicit art direction; do not reintroduce colored accents while experimenting with UI.
+- Canvas white `#ffffff`, off-white `#f6f6f6`, light divider `#dedede`, ink `#111111`, subtle type `#686868`, high-contrast dark blocks `#121212`.
+- The only chromatic marks permitted are authentic third-party app logos (e.g. Zalo / WhatsApp) rendered on **white** contact buttons, and red error text when necessary for semantic safety. No gradient or glowing tinted backgrounds.
+- Typeface: Be Vietnam Pro with generous legibility for Vietnamese diacritics. Use editorial scale and asymmetry for rhythm rather than decorative colors.
+- Main service selector is a dark panel, while the hero is white/off-white; distinguish cards through neutral gray values, hierarchy, depth and content rather than chromatic color coding.
+- Mobile nav is a full-height sheet beneath the 72px header with one visible close control, semantic sectioning, <=300ms transform/opacity transitions, preserved focus, scroll lock and Escape/backdrop dismissal.
+- Mobile footer is **not** a compressed desktop 3-column grid. Use a clear dark CTA, stacked brand and contact area, scannable groups and legible legal/copyright copy. Hide floating shortcuts while footer contact links are visible to avoid overlap.
+- No unnecessary AI-sounding claims, invented case studies, or internal founder/developer labels on the public website.
 
 ## Functional elements
 
 - Desktop contact: explicit dialog for phone, Zalo, WhatsApp, email, with direct URLs, local QR assets, keyboard focus, and Escape/backdrop dismiss.
 - Mobile contact: native application deep links when supported; labels and tap areas are at least 44px.
-- Email: web-based Gmail/Outlook composition or a copyable message; do not rely only on `mailto:`.
+- Email: web-based Gmail/Outlook composition with prefilled subjects and body; do not rely only on `mailto:`.
 - Account: use verified sessions; local demo must never masquerade as production customer access.
 
 ## Motion principles

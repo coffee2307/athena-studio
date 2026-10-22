@@ -7,7 +7,7 @@
 .athena-ticker:hover .athena-ticker-track{animation-play-state:paused}
 .athena-ticker-group{display:flex;align-items:center;flex-shrink:0}
 .athena-ticker-group>span{font-size:clamp(12px,1.5vw,17px);letter-spacing:.11em;font-weight:750;white-space:nowrap;margin-right:40px;display:flex;align-items:center;gap:40px}
-.athena-ticker-symbol{font-size:20px;color:#b0d4ba;font-weight:400}
+.athena-ticker-symbol{font-size:20px;color:#cacaca;font-weight:400}
 @keyframes athena-marquee-forward{from{transform:translateX(-50%)}to{transform:translateX(0)}}
 .athena-contact-overlay{position:fixed;inset:0;background:rgba(13,17,16,.62);display:flex;align-items:center;justify-content:center;padding:16px;z-index:900;backdrop-filter:blur(9px);animation:athena-overlay-in .18s ease both}
 @keyframes athena-overlay-in{from{opacity:0}to{opacity:1}}
@@ -24,14 +24,14 @@
 .athena-contact-qr{width:fit-content;padding:10px;border:1px solid #e3e6e0;background:white;border-radius:12px;margin:18px auto 8px}
 .athena-contact-qr img{display:block;width:166px;height:166px}
 .athena-contact-number{display:block;font-size:24px;text-align:center;letter-spacing:.06em;margin-bottom:18px}
-.athena-email-address{margin:17px 0;padding:13px 15px;border:1px solid #dadfd6;border-radius:8px;font-size:14px;font-weight:650;overflow-wrap:anywhere}
+.athena-email-address{margin:17px 0;padding:13px 15px;border:1px solid #dddddd;border-radius:8px;font-size:14px;font-weight:650;overflow-wrap:anywhere}
 .athena-contact-buttons{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:19px}
 .athena-contact-buttons>*{min-height:48px;display:flex;align-items:center;justify-content:space-between;gap:8px;border-radius:8px;padding:12px;border:1px solid #d3d6d0;font-size:12px;font-weight:700;cursor:pointer;text-align:left;transition:background .15s,transform .15s}
 .athena-contact-buttons>*:hover{background:#edf0ea;transform:translateY(-1px)}
 .athena-contact-buttons .athena-contact-primary{background:#191d1b;color:#fff;border-color:#191d1b}
 .athena-contact-buttons .athena-contact-primary:hover{background:#343a36}
 .athena-copy-feedback{min-height:19px;margin-top:10px}
-.athena-contact-dialog button:focus-visible,.athena-contact-dialog a:focus-visible{outline:3px solid #7ab894;outline-offset:3px}
+.athena-contact-dialog button:focus-visible,.athena-contact-dialog a:focus-visible{outline:3px solid #a8a8a8;outline-offset:3px}
 @media(max-width:767px){.athena-ticker{padding:14px 0}.athena-ticker-group>span{gap:24px;margin-right:24px;font-size:12px}.athena-contact-dialog{border-radius:17px}.athena-contact-buttons{grid-template-columns:1fr}.athena-contact-qr img{width:140px;height:140px}}
 @media(prefers-reduced-motion:reduce){.athena-ticker-track{animation:none!important}.athena-contact-overlay,.athena-contact-dialog{animation:none!important}.athena-contact-buttons>*{transition:none!important}}
 

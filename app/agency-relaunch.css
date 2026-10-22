@@ -61,8 +61,8 @@
  box-shadow:0 7px 19px rgba(0,0,0,.16);transition:transform .2s ease,box-shadow .2s ease;
  touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .agency-contact-action-phone{background:#202425}
-.agency-contact-action-whatsapp{background:#128c4d}
-.agency-contact-action-zalo{background:#0068ff}
+.agency-contact-action-whatsapp{background:#6e6e6e}
+.agency-contact-action-zalo{background:#5d5d5d}
 .agency-zalo-mark{font-size:15px;font-weight:850;letter-spacing:-.065em;font-family:Arial,sans-serif;color:white}
 .agency-contact-action>span{pointer-events:none;position:absolute;right:calc(100% + 9px);top:50%;transform:translate(5px,-50%);
  background:#202425;color:#fff;font-size:12px;font-weight:700;white-space:nowrap;border-radius:7px;
@@ -198,7 +198,7 @@
 .agency-faq-list summary::-webkit-details-marker{display:none}
 .agency-faq-list summary svg{flex-shrink:0;transition:transform .23s ease}
 .agency-faq-list details[open] summary svg{transform:rotate(180deg)}
-.agency-faq-list details>p{padding:0 40px 25px 6px;color:#52565a;max-width:830px;font-size:14px;line-height:1.9}
+.agency-faq-list details>p{padding:0 40px 25px 6px;color:#555555;max-width:830px;font-size:14px;line-height:1.9}
 .agency-final-cta{background:#181a1a;color:#fff;padding:clamp(60px,8vw,114px) 0}
 .agency-final-cta .container{display:flex;flex-direction:column;align-items:flex-start;gap:18px}
 .agency-final-cta p{letter-spacing:.14em;font-size:11px;font-weight:700;color:#ddd}
@@ -292,7 +292,7 @@
 .agency-about-principles article{border-top:1px solid #ccc;padding:24px 15px 32px 0}
 .agency-about-principles span{font-size:11px;font-weight:750;color:#595d5f}
 .agency-about-principles h3{font-size:clamp(22px,2.4vw,35px);letter-spacing:-.03em;line-height:1.3;margin:22px 0 10px}
-.agency-about-principles p{font-size:14px;line-height:1.9;color:#505458;max-width:510px}
+.agency-about-principles p{font-size:14px;line-height:1.9;color:#535353;max-width:510px}
 .agency-about-page .agency-price-card .agency-outline-cta{margin-top:auto;align-self:flex-start}
 .agency-about-page .agency-price-card>p{margin-bottom:25px}
 .agency-contact-links{display:flex;gap:10px;flex-wrap:wrap}

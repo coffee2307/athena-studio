@@ -1,9 +1,9 @@
 /* Session-aware account navigation and real Better Auth profile. */
 .agency-auth-loading{display:inline-block;width:111px;height:36px;border-radius:8px;background:#e8ebe7;opacity:.45}
 .agency-auth-loading.mobile{width:100%;height:42px}
-.agency-profile-link,.agency-mobile-profile{display:inline-flex;gap:9px;align-items:center;color:#1b2920;font-size:12px;font-weight:750;min-height:44px;white-space:nowrap}
-.agency-profile-link:hover,.agency-mobile-profile:hover{color:#477050}
-.agency-profile-avatar{width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;background:#d9e7d9;color:#233b29;border:1px solid #afc6b1;border-radius:50%;font-size:15px;font-weight:800;flex-shrink:0}
+.agency-profile-link,.agency-mobile-profile{display:inline-flex;gap:9px;align-items:center;color:#252525;font-size:12px;font-weight:750;min-height:44px;white-space:nowrap}
+.agency-profile-link:hover,.agency-mobile-profile:hover{color:#656565}
+.agency-profile-avatar{width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;background:#e3e3e3;color:#353535;border:1px solid #c0c0c0;border-radius:50%;font-size:15px;font-weight:800;flex-shrink:0}
 .agency-mobile-profile{width:100%;font-size:15px;gap:13px}
 .agency-mobile-profile .agency-profile-avatar{width:42px;height:42px}
 .athena-profile-page{background:#f5f6f2;min-height:75vh;padding:clamp(35px,6vw,88px) 0 clamp(75px,9vw,145px)}
@@ -11,24 +11,24 @@
 .athena-profile-top{display:flex;align-items:center;justify-content:space-between;gap:20px}
 .athena-profile-top .auth-submit{margin:0;min-height:44px}
 .athena-profile-hero{display:flex;align-items:center;gap:clamp(24px,4vw,48px);padding:55px 0 62px;border-bottom:1px solid #d9e0d9}
-.athena-profile-large-avatar{width:clamp(88px,12vw,143px);height:clamp(88px,12vw,143px);display:flex;align-items:center;justify-content:center;border-radius:23px;flex-shrink:0;background:#193126;color:#e5efdf;font-size:clamp(42px,6vw,72px);font-weight:700}
+.athena-profile-large-avatar{width:clamp(88px,12vw,143px);height:clamp(88px,12vw,143px);display:flex;align-items:center;justify-content:center;border-radius:23px;flex-shrink:0;background:#2b2b2b;color:#ececec;font-size:clamp(42px,6vw,72px);font-weight:700}
 .athena-profile-hero h1{font-size:clamp(48px,7vw,96px);line-height:1.14;letter-spacing:-.045em;margin:11px 0 14px}
-.athena-profile-hero h1 span{color:#7ca58b}
-.athena-profile-hero p{color:#4b6153;line-height:1.7}
+.athena-profile-hero h1 span{color:#9a9a9a}
+.athena-profile-hero p{color:#5b5b5b;line-height:1.7}
 .athena-profile-grid{display:grid;grid-template-columns:1.07fr .93fr;gap:17px;margin-top:30px}
 .athena-profile-card{padding:clamp(23px,3.4vw,43px);background:#fff;border:1px solid #dce2db;border-radius:13px}
 .athena-profile-card-muted{background:#e6ece5}
 .athena-profile-card h2{font-size:clamp(26px,3.2vw,38px);letter-spacing:-.03em;line-height:1.2;margin:18px 0 25px}
-.athena-profile-card p:not(.small-index){color:#465a4c;line-height:1.9}
+.athena-profile-card p:not(.small-index){color:#555555;line-height:1.9}
 .athena-profile-form{display:flex;flex-direction:column;gap:11px;margin-bottom:28px}
-.athena-profile-form label,.athena-profile-field span{font-size:11px;font-weight:700;letter-spacing:.045em;color:#55645b}
-.athena-profile-form input{min-height:52px;padding:12px 15px;border:1px solid #cbd5cb;border-radius:7px;background:#fff;font-size:16px}
+.athena-profile-form label,.athena-profile-field span{font-size:11px;font-weight:700;letter-spacing:.045em;color:#606060}
+.athena-profile-form input{min-height:52px;padding:12px 15px;border:1px solid #d2d2d2;border-radius:7px;background:#fff;font-size:16px}
 .athena-profile-form .pill-link{align-self:flex-start;border-radius:8px;margin:8px 0 0}
-.athena-profile-status,.athena-profile-error{font-size:12px;min-height:18px;color:#386947}
+.athena-profile-status,.athena-profile-error{font-size:12px;min-height:18px;color:#5c5c5c}
 .athena-profile-error{color:#9b392d}
-.athena-profile-field{display:flex;flex-direction:column;gap:7px;padding:18px 0;border-top:1px solid #e2e8e0}
+.athena-profile-field{display:flex;flex-direction:column;gap:7px;padding:18px 0;border-top:1px solid #e6e6e6}
 .athena-profile-field strong{font-size:14px;overflow-wrap:anywhere}
-.athena-profile-limited{margin-top:30px;border:1px solid #b5c9b8;padding:16px 20px;font-size:13px;font-weight:750;border-radius:8px}
+.athena-profile-limited{margin-top:30px;border:1px solid #c4c4c4;padding:16px 20px;font-size:13px;font-weight:750;border-radius:8px}
 .athena-profile-contact-link{margin-top:24px;display:inline-flex;gap:12px;font-size:13px;font-weight:700;text-decoration:underline;text-underline-offset:6px}
 @media(max-width:850px){.athena-profile-grid{grid-template-columns:1fr}}
 @media(max-width:600px){.athena-profile-hero{align-items:flex-start;flex-direction:column;padding:38px 0 34px}.athena-profile-top{flex-wrap:wrap}.athena-profile-top .auth-submit{padding:10px 16px}.athena-profile-card{padding:23px}}
