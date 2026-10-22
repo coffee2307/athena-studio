@@ -4,6 +4,7 @@ import Link from "next/link";
 import {standaloneAuth} from "@/lib/identity/server";
 import {standaloneIdentityConfig} from "@/lib/identity/gate";
 import {ProfileEditor} from "@/components/auth/ProfileEditor";
+import {GitHubRepositoryPanel} from "@/components/auth/GitHubRepositoryPanel";
 import {LocalSignOut} from "@/components/auth/LocalSignOut";
 
 export const dynamic="force-dynamic";
@@ -62,7 +63,8 @@ export default async function Profile(){
       <div className="athena-profile-field"><span>Xác minh email</span><strong className={user.emailVerified?"athena-profile-verified":"athena-profile-unverified"}><span aria-hidden="true">●</span> {user.emailVerified?"Đã xác minh":"Chưa xác minh"}</strong></div>
       <div className="athena-profile-field"><span>Quyền truy cập</span><strong>Cá nhân · Chưa cấp quyền dự án</strong></div>
      </section>
-     <section className="athena-profile-support" aria-labelledby="project-heading">
+     <GitHubRepositoryPanel/>
+      <section className="athena-profile-support" aria-labelledby="project-heading">
       <div className="athena-profile-support-icon" aria-hidden="true">↗</div>
       <p className="athena-profile-section-number">03 / DỰ ÁN VÀ HỖ TRỢ</p>
       <h2 id="project-heading">Bắt đầu một<br/>dự án mới?</h2>

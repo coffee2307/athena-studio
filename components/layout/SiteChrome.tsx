@@ -11,6 +11,9 @@ import {PageTransition} from "@/components/experience/PageTransition";
 export function SiteChrome({children}:{children:ReactNode}){
  const pathname=usePathname();
  const isAuthenticationPage=pathname==="/login"||pathname==="/signup"||pathname==="/forgot-password";
+ if(pathname.startsWith("/template-demos/")){
+  return <main id="main-content" className="template-demo-main">{children}</main>;
+ }
  if(isAuthenticationPage){
   return <AuthSessionProvider>
    <Navbar/>

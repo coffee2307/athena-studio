@@ -21,6 +21,10 @@ export default function Privacy(){return <LegalArticle label="Thông tin nào đ
  <p>Bạn có thể gửi email yêu cầu xác nhận Athena đang nắm giữ thông tin nào từ cuộc trao đổi, đề nghị chỉnh sửa, hạn chế sử dụng hoặc xóa khi phù hợp. Để tránh tiết lộ dữ liệu cho người không có quyền, Athena có thể cần xác minh quyền kiểm soát email hoặc mối liên hệ với yêu cầu ban đầu trước khi xử lý. Thời gian xử lý sẽ được thông báo theo từng trường hợp và các nghĩa vụ áp dụng.</p>
  <h2 id="bao-mat-du-an">8. Thông tin dự án không công khai</h2>
  <p>Với tài liệu, giao diện quản trị, repository, mã nguồn, thông tin truy cập hoặc bí mật thương mại của khách hàng, quyền xem và công bố sẽ được quy định riêng. Athena không tự biến một repository được cấp quyền làm việc thành nội dung marketing công khai. Portfolio chỉ nên chứa ảnh và thông tin đã xác nhận quyền sử dụng.</p>
- <h2 id="thay-doi">9. Thay đổi và liên hệ</h2>
+ <h2 id="github">9. Kết nối và chia sẻ repository GitHub</h2>
+ <p>Đăng nhập bằng GitHub chỉ xác minh danh tính. Để Athena xem repository, bạn cần tự cài GitHub App riêng với quyền chỉ đọc Metadata và Contents, sau đó chủ động chọn chia sẻ từng repository trong hồ sơ. Athena không thể đẩy mã hoặc thay đổi cài đặt repository.</p>
+ <p>Athena lưu tên repository, nhánh mặc định, trạng thái riêng tư, tài khoản cài đặt và thời điểm chia sẻ trong cơ sở dữ liệu danh tính. Token truy cập chỉ dùng trong thời gian ngắn và không được lưu. Nhân sự Athena nằm trong danh sách được phép mới có thể yêu cầu tải gói mã nguồn tối đa 50 MB; gói được truyền trực tiếp từ GitHub và không lưu trên máy chủ ứng dụng.</p>
+ <p>Bạn có thể thu hồi chia sẻ theo từng repository trong hồ sơ hoặc gỡ GitHub App tại GitHub. Tính năng chỉ hoạt động sau khi GitHub App được cấu hình.</p>
+ <h2 id="thay-doi">10. Thay đổi và liên hệ</h2>
  <p>Chính sách được cập nhật nếu Athena kích hoạt thêm đăng nhập, lưu trữ hồ sơ, phân tích hành vi hoặc nhà cung cấp xử lý dữ liệu. Phiên bản mới sẽ hiển thị ngày cập nhật và phạm vi thay đổi. Yêu cầu liên quan thông tin đã gửi: <a href="mailto:coffee2307@gmail.com?subject=Yeu%20cau%20quyen%20rieng%20tu%20Athena">coffee2307@gmail.com</a>.</p>
  </LegalArticle>}
