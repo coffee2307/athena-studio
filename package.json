@@ -13,7 +13,7 @@
     "test:smoke": "node scripts/smoke.mjs",
     "test:e2e": "playwright test",
     "test:e2e:chromium": "playwright test --project=chromium-desktop --project=chromium-mobile",
-    "audit:runtime": "npm audit --omit=dev --audit-level=high",
+    "audit:runtime": "node scripts/audit-runtime.mjs",
     "sitepulse:check": "node scripts/sitepulse-check.mjs",
     "sitepulse:summary": "node scripts/sitepulse-summary.mjs",
     "sitepulse:report": "node scripts/sitepulse-report.mjs",
@@ -29,6 +29,7 @@
     "perf:local": "node scripts/phase8c5-benchmark.mjs",
     "preview:build": "node scripts/preview-runtime.mjs build",
     "preview:start": "node scripts/preview-runtime.mjs start",
+    "preview:canary": "node scripts/preview-canary.mjs",
     "preview:proxy": "node scripts/preview-readonly.mjs"
   },
   "dependencies": {
