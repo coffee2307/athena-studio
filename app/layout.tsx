@@ -24,6 +24,9 @@ import "@/app/products-projects.css";
 import "@/app/profile-github.css";
 import "@/app/template-revamp.css";
 import "@/app/template-worlds.css";
+import "@/app/template-signatures.css";
+import "@/app/template-special-existing.css";
+import "@/app/template-legacy-signatures.css";
 
 export const metadata: Metadata = {
   ...createMetadata(),
@@ -35,5 +38,5 @@ export const metadata: Metadata = {
 };
 export const viewport: Viewport = { themeColor: "#ffffff", width: "device-width", initialScale: 1 };
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="vi"><body><a className="skip-link" href="#main-content">Chuyển tới nội dung chính</a><SiteChrome>{children}</SiteChrome></body></html>;
+  return <html lang="vi"><body><a className="skip-link" href="#main-content">ChuyĂ¡Â»Æ’n tĂ¡Â»â€ºi nĂ¡Â»â„¢i dung chÄ‚Â­nh</a><SiteChrome>{children}</SiteChrome></body></html>;
 }

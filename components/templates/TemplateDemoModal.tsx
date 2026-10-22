@@ -24,7 +24,7 @@ export function TemplateDemoModal({template,onClose}:{template:Template|null;onC
     <a href={template.demoPath} target="_blank" rel="noopener noreferrer">Mở tab mới ↗</a><button className="template-demo-close" type="button" onClick={onClose} aria-label="Đóng bản xem trước">×</button>
    </div></div>
    <div className={"template-demo-viewport template-demo-viewport-"+device}>
-    <iframe key={template.slug} title={"Website demo "+template.title} src={template.demoPath} loading="eager" referrerPolicy="same-origin" />
+    <iframe key={template.slug} title={"Website demo "+template.title} src={template.demoPath+"?embed=1"} loading="eager" referrerPolicy="same-origin" />
    </div>
   </section>
   <aside className="template-demo-info">

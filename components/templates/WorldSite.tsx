@@ -5,6 +5,9 @@ import {useEffect,useId,useState,type FormEvent} from "react";
 import {copies} from "@/data/demo-worlds";
 import {worldDetails} from "@/data/demo-world-details";
 import {TemplateEngagementPrompt} from "@/components/templates/TemplateEngagementPrompt";
+import {WorldSpecialHome,hasSpecializedHomepage} from "@/components/templates/WorldSpecialHome";
+import {WorldExistingSpecialHome,hasExistingSpecialHome} from "@/components/templates/WorldExistingSpecialHome";
+import {WorldLegacySpecialHome,hasLegacySpecialHome} from "@/components/templates/WorldLegacySpecialHome";
 
 export type WorldSection="home"|"work"|"services"|"about"|"contact"|"detail";
 type Props={slug:string;section?:WorldSection;itemIndex?:number;embedded?:boolean};
@@ -12,7 +15,7 @@ const groupMap:Record<string,number[]>={
  "creative-studio":[1,2,1],"modern-corporate":[1,2,2],"commerce-standard":[1,2,1],
  "fashion-archive":[1,1,2],"saas-product":[1,1,2],"campaign-landing":[1,2,1],
  "hospitality-booking":[1,1,2],"editorial-journal":[2,1,2],"architecture-studio":[1,2,1],
- "wellness-clinic":[1,2,1],"property-showcase":[1,2,1],"education-platform":[1,2,1]
+ "wellness-clinic":[1,2,1],"property-showcase":[1,2,1],"education-platform":[1,2,1],"pet-store":[1,2,1],"auto-showroom":[1,2,1],"engineering-industry":[1,2,1],"finance-trust":[1,2,1],"construction-firm":[1,2,1],"music-label":[1,2,1],"live-concert":[1,2,1],"team-intranet":[1,2,1]
 };
 function picture(slug:string,n:number){return "/template-demos/"+slug+"/image-"+(n%5+1)+".jpg";}
 function Arrow(){return <span aria-hidden="true">↗</span>;}
@@ -20,6 +23,7 @@ function Arrow(){return <span aria-hidden="true">↗</span>;}
 export function WorldSite({slug,section="home",itemIndex,embedded=false}:Props){
  const world=copies[slug],extra=worldDetails[slug];
  const [menuOpen,setMenuOpen]=useState(false);
+ const [isFramed,setIsFramed]=useState(false);
  const [filter,setFilter]=useState("Tất cả");
  const [cart,setCart]=useState(0);
  const [cartOpen,setCartOpen]=useState(false);
@@ -37,7 +41,8 @@ export function WorldSite({slug,section="home",itemIndex,embedded=false}:Props){
   {id:"about",label:extra?.navAbout??"Về chúng tôi",href:root+"/about"},
   {id:"contact",label:"Liên hệ",href:root+"/contact"}
  ];
- useEffect(()=>{setMenuOpen(false);setFilter("Tất cả");setFormState("idle");window.scrollTo(0,0);},[slug,section,itemIndex]);
+ useEffect(()=>{setMenuOpen(false);setFilter("Tất cả");setFormState("idle");},[slug,section,itemIndex]);
+ useEffect(()=>{try{setIsFramed(window.self!==window.top)}catch{setIsFramed(true)}},[]);
  useEffect(()=>{try{setCart(Number(window.sessionStorage.getItem("athena-demo-cart-"+slug)||0));}catch{}},[slug]);
  useEffect(()=>{const close=(event:KeyboardEvent)=>{if(event.key==="Escape"){setLightbox(null);setCartOpen(false);setMenuOpen(false);}};window.addEventListener("keydown",close);return()=>window.removeEventListener("keydown",close);},[]);
  if(!world||!extra)return <div className="world-site world-missing"><h1>Không tìm thấy website demo.</h1><Link href="/services/web-development/templates">Về thư viện mẫu</Link></div>;
@@ -136,14 +141,14 @@ export function WorldSite({slug,section="home",itemIndex,embedded=false}:Props){
   <div className="world-announcement"><span>{world.eyebrow}</span><span>EXPERIENCE CONCEPT / 2026</span></div>
   <header className="world-header">
    <Link className="world-brand" href={root} aria-label={world.brand+" — Trang chủ"}>{world.brand}</Link>
-   <nav className="world-desktop-nav" aria-label={"Điều hướng "+world.brand}>{pages.map(p=><Link key={p.id} href={p.href} aria-current={(section==="detail"?"work":section)===p.id?"page":undefined}>{p.label}</Link>)}</nav>
+   <nav className="world-desktop-nav" aria-label={"Điều hướng "+world.brand}>{pages.map(p=><Link key={p.id} href={p.href} scroll={false} onClick={()=>window.scrollTo({top:0,left:0,behavior:"auto"})} aria-current={(section==="detail"?"work":section)===p.id?"page":undefined}>{p.label}</Link>)}</nav>
    <div className="world-header-actions">{isShop&&<button className="world-cart-button" type="button" onClick={()=>setCartOpen(true)} aria-label={"Mở giỏ hàng với "+cart+" sản phẩm"}>BAG ({cart})</button>}<Link className="world-header-cta" href={root+"/contact"}>{isBooking?"Đặt lịch":"Bắt đầu"} <Arrow/></Link><button className="world-menu-toggle" type="button" aria-expanded={menuOpen} aria-controls={"world-menu-"+slug} aria-label={menuOpen?"Đóng menu":"Mở menu"} onClick={()=>setMenuOpen(!menuOpen)}><span/><span/></button></div>
   </header>
-  <div className={"world-mobile-nav"+(menuOpen?" is-open":"")} id={"world-menu-"+slug} aria-hidden={!menuOpen}>{pages.map((p,i)=><Link tabIndex={menuOpen?0:-1} key={p.id} href={p.href} onClick={()=>setMenuOpen(false)}><span>0{i+1}</span>{p.label}<Arrow/></Link>)}<div className="world-mobile-nav-bottom"><strong>{world.brand}</strong><span>{extra.slogan}</span></div></div>
-  {section==="home"?home():section==="work"?work():section==="detail"?detail():section==="services"?services():section==="about"?about():contact()}
+  <div className={"world-mobile-nav"+(menuOpen?" is-open":"")} id={"world-menu-"+slug} aria-hidden={!menuOpen}>{pages.map((p,i)=><Link tabIndex={menuOpen?0:-1} key={p.id} href={p.href} scroll={false} onClick={()=>{setMenuOpen(false);window.scrollTo({top:0,left:0,behavior:"auto"});}}><span>0{i+1}</span>{p.label}<Arrow/></Link>)}<div className="world-mobile-nav-bottom"><strong>{world.brand}</strong><span>{extra.slogan}</span></div></div>
+  {section==="home"?(hasSpecializedHomepage(slug)?<WorldSpecialHome slug={slug} world={world} extra={extra} addToCart={addToCart}/>:hasExistingSpecialHome(slug)?<WorldExistingSpecialHome slug={slug} world={world} extra={extra} addToCart={addToCart}/>:hasLegacySpecialHome(slug)?<WorldLegacySpecialHome slug={slug} world={world} extra={extra}/>:home()):section==="work"?work():section==="detail"?detail():section==="services"?services():section==="about"?about():contact()}
   <footer className="world-footer"><div className="world-footer-main"><div className="world-footer-identity"><Link href={root}>{world.brand}</Link><p>{extra.slogan}</p></div><div className="world-footer-column"><span>KHÁM PHÁ</span>{pages.slice(0,3).map(p=><Link key={p.id} href={p.href}>{p.label}</Link>)}</div><div className="world-footer-column"><span>THÔNG TIN</span>{pages.slice(3).map(p=><Link key={p.id} href={p.href}>{p.label}</Link>)}<Link href={root+"/work"}>Khám phá nội dung</Link></div><div className="world-footer-column"><span>TRẢI NGHIỆM</span><Link href={root+"/contact"}>Gửi yêu cầu ↗</Link><p>Một dự án website mẫu của Athena Studio. Tất cả chức năng giao dịch chỉ mang tính mô phỏng.</p></div></div><div className="world-footer-bottom"><span>© 2026 {world.brand} — {extra.footerLine}</span><Link href="#world-top">TRỞ LÊN ĐẦU ↑</Link><span>CREATED FOR ATHENA DEMO LIBRARY</span></div></footer>
   {isShop&&cartOpen&&<div className="world-drawer-backdrop" onClick={()=>setCartOpen(false)} role="presentation"><aside className="world-cart-drawer" role="dialog" aria-modal="true" aria-label="Giỏ hàng demo" onClick={event=>event.stopPropagation()}><div className="world-drawer-head"><span>YOUR BAG / DEMO</span><button onClick={()=>setCartOpen(false)} aria-label="Đóng giỏ">×</button></div><h2>Giỏ hàng của bạn.</h2><p>{cart?cart+" sản phẩm đã được thêm vào giỏ demo.":"Giỏ hàng hiện đang trống."}</p><div className="world-drawer-info">Không có xử lý thanh toán, thông tin cá nhân hay đơn hàng thật.</div>{cart>0&&<button onClick={resetCart} className="world-drawer-secondary">Xóa giỏ mô phỏng</button>}<Link href={root+"/work"} onClick={()=>setCartOpen(false)} className="world-btn">Tiếp tục mua sắm <Arrow/></Link></aside></div>}
   {lightbox!==null&&<div className="world-lightbox" role="dialog" aria-modal="true" aria-label="Xem ảnh" onClick={()=>setLightbox(null)}><button onClick={()=>setLightbox(null)} aria-label="Đóng ảnh">×</button><Image src={img(lightbox)} alt={world.brand+" — ảnh trải nghiệm"} width={1600} height={1100} sizes="90vw"/></div>}
-  {!embedded&&<TemplateEngagementPrompt slug={slug}/>}
+  {!embedded&&!isFramed&&section==="home"&&<TemplateEngagementPrompt slug={slug}/>}
  </div>;
 }
