@@ -4,7 +4,7 @@ import {Icon} from "@/components/ui/Icon";
 import {useAuthSession} from "@/components/auth/AuthSessionProvider";
 export function SessionNavigation({mobile=false}:{mobile?:boolean}){
  const session=useAuthSession();
- if(session.status==="loading")return <span className={mobile?"agency-auth-loading mobile":"agency-auth-loading"} aria-label="Đang kiểm tra phiên đăng nhập"/>;
+ if(session.status==="loading")return <span className={mobile?"agency-auth-loading mobile":"agency-auth-loading"} role="status" aria-label="Đang kiểm tra phiên đăng nhập">{mobile?"Đang kiểm tra tài khoản…":null}</span>;
  if(session.status==="authenticated"){
   const initials=session.name?Array.from(session.name)[0].toLocaleUpperCase("vi"):"A";
   return <Link href="/profile" className={mobile?"agency-mobile-profile":"agency-profile-link"} aria-label="Hồ sơ cá nhân" title={session.name||"Hồ sơ cá nhân"}>
