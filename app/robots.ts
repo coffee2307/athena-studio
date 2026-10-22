@@ -1,6 +1,8 @@
 import type {MetadataRoute} from "next";
-import {siteConfig} from "@/lib/constants";
+import {publicReleaseDecision} from "@/lib/release/public";
 export default function robots():MetadataRoute.Robots {
- const publicUrl=process.env.NEXT_PUBLIC_SITE_URL?.startsWith("https://");
- return {rules:{userAgent:"*",...(publicUrl?{allow:"/"}:{disallow:"/"})},...(publicUrl?{sitemap:new URL("/sitemap.xml",siteConfig.url).toString()}:{})};
+ const gate=publicReleaseDecision();
+ return gate.approved&&gate.origin
+  ?{rules:{userAgent:"*",allow:"/"},sitemap:new URL("/sitemap.xml",gate.origin).toString()}
+  :{rules:{userAgent:"*",disallow:"/"}};
 }

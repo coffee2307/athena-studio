@@ -19,6 +19,7 @@
     "sitepulse:report": "node scripts/sitepulse-report.mjs",
     "sitepulse:pham-plan": "node scripts/sitepulse-pham-plan.mjs",
     "release:verify": "node scripts/phase8-release-gates.mjs",
+    "release:preflight": "node scripts/production-preflight.mjs --candidate",
     "staging:inventory": "node scripts/phase8-staging-preflight.mjs",
     "staging:preflight": "node scripts/phase8-staging-preflight.mjs --require-configuration",
     "staging:anon-readonly": "node scripts/phase8b-live-anon-readonly.mjs --allow-live-readonly",
