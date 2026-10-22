@@ -1,6 +1,6 @@
 import {chromium} from "@playwright/test";
 import fs from "node:fs/promises";
-const root="http://localhost:3000";
+const root=process.env.ATHENA_TEST_ORIGIN||"http://127.0.0.1:3182";
 const names=["creative-studio","modern-corporate","commerce-standard","fashion-archive","saas-product","campaign-landing","hospitality-booking","editorial-journal","architecture-studio","wellness-clinic","property-showcase","education-platform"];
 await fs.mkdir("public/template-previews",{recursive:true});
 await fs.mkdir(".qa",{recursive:true});
