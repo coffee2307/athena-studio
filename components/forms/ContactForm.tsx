@@ -5,18 +5,23 @@ import {FormEvent,useCallback,useEffect,useState} from "react";
 import Link from "next/link";
 import {TurnstileField} from "@/components/forms/TurnstileField";
 import {ContactEmailBrief} from "@/components/forms/ContactEmailBrief";
+import {getTemplate} from "@/lib/templates";
 type Props={configured:boolean;siteKey:string};
 type Status="idle"|"sending"|"success"|"error";
 export function ContactForm({configured,siteKey}:Props){
  const [status,setStatus]=useState<Status>("idle"),[message,setMessage]=useState(""),[reference,setReference]=useState("");
  const [service,setService]=useState(""),[captcha,setCaptcha]=useState("");
+ const [selectedTemplate,setSelectedTemplate]=useState("");
  const updateCaptcha=useCallback((token:string)=>setCaptcha(token),[]);
- useEffect(()=>{const x=new URLSearchParams(window.location.search).get("service");if(x&&["web-development","website-care","ai-integration","micro-saas","other"].includes(x))setService(x);},[]);
+ useEffect(()=>{const params=new URLSearchParams(window.location.search);const x=params.get("service");if(x&&["web-development","website-care","ai-integration","micro-saas","other"].includes(x))setService(x);const slug=params.get("template");if(slug&&getTemplate(slug)){setSelectedTemplate(slug);setService("web-development");}},[]);
  async function submit(event:FormEvent<HTMLFormElement>){
   event.preventDefault();
   if(!configured||status==="sending"||!captcha)return;
   const form=event.currentTarget;
-  const payload={...Object.fromEntries(new FormData(form)),captcha,consent:(new FormData(form)).get("consent")==="yes"};
+  const formData=new FormData(form);
+  const formMessage=String(formData.get("message")||"");
+  const templateName=getTemplate(selectedTemplate)?.title;
+  const payload={...Object.fromEntries(formData),message:templateName?`Mẫu tham khảo: ${templateName}\n\n${formMessage}`.slice(0,4000):formMessage,captcha,consent:formData.get("consent")==="yes"};
   setStatus("sending");setMessage("");
   try{
    const response=await fetch("/api/inquiry",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
@@ -26,13 +31,14 @@ export function ContactForm({configured,siteKey}:Props){
    if(result.ignored===true)throw Error("Không thể xác nhận yêu cầu. Vui lòng thử lại hoặc liên hệ email.");
    setStatus("success");setReference(typeof result.reference==="string"?result.reference:"");
    setMessage(typeof result.message==="string"?result.message:"Yêu cầu đã được lưu.");
-   form.reset();setService("");setCaptcha("");
+   form.reset();setService("");setCaptcha("");setSelectedTemplate("");
   }catch(e){setStatus("error");setMessage(e instanceof Error?e.message:"Có lỗi xảy ra. Vui lòng liên hệ qua email.");}
  }
  return <div className="contact-box">
   <p className="small-index">YÊU CẦU TƯ VẤN / ATHENA</p><h2>Mô tả vấn đề<br/><em>bạn cần xử lý.</em></h2>
   <p>Gửi thông tin website (nếu có), khó khăn hiện tại và mục tiêu mong muốn. Không gửi mật khẩu, mã truy cập hoặc dữ liệu nhạy cảm.</p>
   {configured?<form className="inquiry-form" onSubmit={submit}>
+   {selectedTemplate&&getTemplate(selectedTemplate)&&<div className="template-inquiry-selection"><span>MẪU BẠN ĐANG THAM KHẢO</span><strong>{getTemplate(selectedTemplate)?.title}</strong><Link href="/services/web-development/templates">Xem lại thư viện</Link></div>}
    <div className="field-pair"><label>Họ tên <span>*</span><input name="name" required minLength={2} maxLength={100} autoComplete="name" placeholder="Tên của bạn"/></label><label>Địa chỉ email <span>*</span><input name="email" required type="email" maxLength={200} autoComplete="email" placeholder="email@example.com"/></label></div>
    <label>Đơn vị / doanh nghiệp<input name="company" maxLength={120} autoComplete="organization" placeholder="Không bắt buộc"/></label>
    <label>Dịch vụ quan tâm <span>*</span><select name="service" required value={service} onChange={e=>setService(e.target.value)}><option value="" disabled>Chọn một lĩnh vực</option><option value="web-development">Thiết kế website</option><option value="website-care">Chăm sóc website</option><option value="ai-integration">Tích hợp AI</option><option value="micro-saas">Công cụ Micro-SaaS</option><option value="other">Chưa xác định</option></select></label>
@@ -49,7 +55,7 @@ export function ContactForm({configured,siteKey}:Props){
    <p>Biểu mẫu trực tuyến chưa được kích hoạt. Bạn vẫn có thể gửi thông tin để trao đổi qua email; nút bên dưới mở một thư mẫu để bạn điền nhanh.</p>
    <button type="button" onClick={()=>showContactDialog("email")} className="pill-link pill-dark">Soạn email mô tả nhu cầu <Icon name="arrow-up-right" size={18}/></button>
   </div>
-  <details className="athena-email-brief-details"><summary>Ho?c chu?n b? email theo nhu c?u c? th? <Icon name="chevron-down" size={18}/></summary><ContactEmailBrief/></details>
+   <details className="athena-email-brief-details"><summary>Ho?c chu?n b? email theo nhu c?u c? th? <Icon name="chevron-down" size={18}/></summary><ContactEmailBrief templateName={getTemplate(selectedTemplate)?.title}/></details>
   </>}
   <p className="contact-notice">Nếu cần trao đổi trực tiếp, bạn có thể gọi điện hoặc gửi email qua phần Liên hệ phía dưới trang.</p>
  </div>;

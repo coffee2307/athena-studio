@@ -1,0 +1,1 @@
+{"project":"__PROJECT_NAME__","brand":"__BRAND_NAME__","template":"__TEMPLATE_SLUG__","variant":"__TEMPLATE_VARIANT__","templateVersion":"__TEMPLATE_VERSION__","modules":__MODULES_JSON__,"architecture":"single-project-modular-monolith","database":"not-configured"}

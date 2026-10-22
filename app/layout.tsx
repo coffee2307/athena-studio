@@ -16,6 +16,7 @@ import "@/app/auth-profile.css";
 import "@/app/auth-pages-redesign.css";
 import "@/app/athena-monochrome.css";
 import "@/app/production-a.css";
+import "@/app/templates.css";
 
 export const metadata: Metadata = {
   ...createMetadata(),

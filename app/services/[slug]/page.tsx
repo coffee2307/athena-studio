@@ -34,6 +34,8 @@ export default async function ServiceDetail({params}:PageProps){
    <div className="detail-tile-grid">{item.features.map((feature,i)=><div className="detail-tile" key={feature}><span>{String(i+1).padStart(2,"0")} / {research?"HƯỚNG NGHIÊN CỨU":"HẠNG MỤC"}</span><h3>{feature}</h3></div>)}</div>
   </div></section>
 
+  {item.slug==="web-development"&&<section className="page-section template-service-band"><div className="container template-personalize-note"><div><strong>Muốn xem các hướng giao diện trước?</strong><span>Khám phá thư viện mẫu theo ngành và phong cách, rồi chọn mẫu làm định hướng ban đầu.</span></div><Link className="pill-link pill-dark" href="/services/web-development/templates">Khám phá mẫu website <Icon name="arrow-up-right" size={18}/></Link></div></section>}
+
   <section className="page-section detail-dark"><div className="container">
    <p className="section-index"><span className="index-circle">02</span> {research?"TRẠNG THÁI NGHIÊN CỨU":"PHẠM VI CÔNG VIỆC"}</p>
    <div className="detail-intro" style={{marginTop:40}}>

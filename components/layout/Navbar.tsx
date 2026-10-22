@@ -13,6 +13,7 @@ import {SessionNavigation} from "@/components/auth/SessionNavigation";
 
 const solutions=[
  {href:"/services/web-development",title:"Thiết kế website",detail:"Website mới, landing page, trang bán hàng"},
+ {href:"/services/web-development/templates",title:"Thư viện mẫu website",detail:"Khám phá bố cục và phong cách theo ngành"},
  {href:"/services/website-care",title:"Chăm sóc website",detail:"Sửa lỗi, cập nhật và tối ưu vận hành"},
  {href:"/services/ai-integration",title:"Tích hợp AI",detail:"Giảm công việc lặp lại và hỗ trợ nhân sự"}
 ];

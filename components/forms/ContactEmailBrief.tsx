@@ -5,7 +5,7 @@ import {siteConfig} from "@/lib/constants";
 import {Icon} from "@/components/ui/Icon";
 
 type Draft=ReturnType<typeof createInquiryEmailDraft>;
-export function ContactEmailBrief(){
+export function ContactEmailBrief({templateName}:{templateName?:string}){
  const [draft,setDraft]=useState<Draft|null>(null);
  const [error,setError]=useState("");
  const [copied,setCopied]=useState(false);
@@ -18,7 +18,8 @@ export function ContactEmailBrief(){
     name:String(data.get("name")||""),
     email:String(data.get("email")||""),
     service:String(data.get("service")||""),
-    message:String(data.get("message")||"")
+    message:String(data.get("message")||""),
+    template:templateName
    },siteConfig.email));
   }catch(e){setDraft(null);setError(e instanceof Error?e.message:"Thông tin chưa hợp lệ.");}
  }

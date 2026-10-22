@@ -2,9 +2,10 @@
  * Client-side email draft fallback. Does not transmit or store a lead.
  * The visitor must review and send the message in their own email client.
  */
-export type EmailBriefFields={name:string;email:string;service:string;message:string};
+export type EmailBriefFields={name:string;email:string;service:string;message:string;template?:string};
 export function createInquiryEmailDraft(fields:EmailBriefFields,recipient:string){
  const name=fields.name.trim(),email=fields.email.trim(),service=fields.service.trim(),message=fields.message.trim();
+ const template=fields.template?.trim().slice(0,120);
  if(name.length<2||name.length>100)throw Error("Vui lòng nhập tên hợp lệ.");
  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)||email.length>200)throw Error("Địa chỉ email không hợp lệ.");
  if(!["web-development","website-care","ai-integration","micro-saas","other"].includes(service))
@@ -24,6 +25,7 @@ export function createInquiryEmailDraft(fields:EmailBriefFields,recipient:string
   "Họ tên: "+name,
   "Email liên hệ: "+email,
   "Dịch vụ quan tâm: "+options[service],
+  ...(template? ["Mẫu website tham khảo: "+template]:[]),
   "",
   "Vấn đề và mục tiêu:",
   message,

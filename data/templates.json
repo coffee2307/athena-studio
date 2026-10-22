@@ -1,0 +1,298 @@
+[
+  {
+    "slug": "creative-studio",
+    "title": "Studio sáng tạo",
+    "category": "Portfolio / Studio",
+    "industry": "Sáng tạo",
+    "style": "Editorial",
+    "purpose": "Giới thiệu năng lực và dự án",
+    "description": "Một portfolio có nhịp đọc tạp chí, đặt tuyên ngôn và dự án nổi bật cạnh nhau.",
+    "variant": "portfolio",
+    "tags": [
+      "Portfolio",
+      "Creative Studio",
+      "Editorial"
+    ],
+    "pages": [
+      "Trang chủ",
+      "Giới thiệu",
+      "Dự án",
+      "Liên hệ"
+    ],
+    "features": [
+      "Bố cục dự án bất đối xứng",
+      "Typography tiêu đề lớn",
+      "Trang case study theo cấu trúc bài toán và giải pháp"
+    ],
+    "modules": [
+      "content",
+      "contact"
+    ],
+    "version": "1.0.0",
+    "status": "preview",
+    "compatibility": {
+      "starter": "web-foundation@1",
+      "next": "15.5.x",
+      "react": "19.x"
+    }
+  },
+  {
+    "slug": "modern-corporate",
+    "title": "Doanh nghiệp hiện đại",
+    "category": "Doanh nghiệp",
+    "industry": "Dịch vụ B2B",
+    "style": "Modern Corporate",
+    "purpose": "Trình bày dịch vụ và tạo yêu cầu tư vấn",
+    "description": "Kiến trúc thông tin rõ ràng cho doanh nghiệp cần giải thích dịch vụ, quy trình và năng lực.",
+    "variant": "corporate",
+    "tags": [
+      "Corporate",
+      "B2B",
+      "Rõ ràng"
+    ],
+    "pages": [
+      "Trang chủ",
+      "Dịch vụ",
+      "Năng lực",
+      "Quy trình",
+      "Liên hệ"
+    ],
+    "features": [
+      "Điều hướng theo nhu cầu",
+      "Khối dịch vụ theo vấn đề",
+      "Lời kêu gọi tư vấn rõ ràng"
+    ],
+    "modules": [
+      "content",
+      "contact"
+    ],
+    "version": "1.0.0",
+    "status": "preview",
+    "compatibility": {
+      "starter": "web-foundation@1",
+      "next": "15.5.x",
+      "react": "19.x"
+    }
+  },
+  {
+    "slug": "commerce-standard",
+    "title": "Cửa hàng trực tuyến",
+    "category": "Thương mại điện tử",
+    "industry": "Bán lẻ",
+    "style": "Minimalist",
+    "purpose": "Trưng bày sản phẩm và dẫn tới nền tảng thanh toán",
+    "description": "Một mặt tiền thương mại gọn, ưu tiên danh mục, hình ảnh sản phẩm và khả năng khám phá.",
+    "variant": "commerce",
+    "tags": [
+      "E-commerce",
+      "Catalog",
+      "Minimalist"
+    ],
+    "pages": [
+      "Trang chủ",
+      "Danh mục",
+      "Chi tiết sản phẩm",
+      "Giỏ hàng"
+    ],
+    "features": [
+      "Lưới sản phẩm linh hoạt",
+      "Trang chi tiết có thông tin rõ",
+      "Có thể kết nối Shopify hoặc backend riêng sau khi chốt phạm vi"
+    ],
+    "modules": [
+      "catalog",
+      "commerce"
+    ],
+    "version": "1.0.0",
+    "status": "preview",
+    "compatibility": {
+      "starter": "web-foundation@1",
+      "next": "15.5.x",
+      "react": "19.x"
+    }
+  },
+  {
+    "slug": "fashion-archive",
+    "title": "Thương hiệu thời trang",
+    "category": "Fashion / Luxury",
+    "industry": "Thời trang",
+    "style": "Luxury",
+    "purpose": "Kể câu chuyện bộ sưu tập và bán sản phẩm",
+    "description": "Giao diện thời trang giàu khoảng trống, hình ảnh biên tập và thông tin sản phẩm có chủ đích.",
+    "variant": "fashion",
+    "tags": [
+      "Fashion",
+      "Luxury",
+      "Campaign"
+    ],
+    "pages": [
+      "Trang chủ",
+      "Bộ sưu tập",
+      "Sản phẩm",
+      "Về thương hiệu"
+    ],
+    "features": [
+      "Mở đầu kiểu campaign",
+      "Trang bộ sưu tập biên tập",
+      "Tùy biến theo quy trình ra mắt"
+    ],
+    "modules": [
+      "catalog",
+      "commerce",
+      "content"
+    ],
+    "version": "1.0.0",
+    "status": "preview",
+    "compatibility": {
+      "starter": "web-foundation@1",
+      "next": "15.5.x",
+      "react": "19.x"
+    }
+  },
+  {
+    "slug": "saas-product",
+    "title": "Sản phẩm công nghệ",
+    "category": "SaaS / Công nghệ",
+    "industry": "Phần mềm",
+    "style": "Futuristic",
+    "purpose": "Giải thích sản phẩm và chuyển đổi đăng ký",
+    "description": "Bố cục sản phẩm số có màn hình giao diện, lợi ích và lộ trình dùng thử.",
+    "variant": "saas",
+    "tags": [
+      "SaaS",
+      "Technology",
+      "Product-led"
+    ],
+    "pages": [
+      "Trang chủ",
+      "Tính năng",
+      "Bảng giá",
+      "Tài liệu"
+    ],
+    "features": [
+      "Trình bày sản phẩm bằng giao diện",
+      "Tách tính năng theo công việc",
+      "Có thể tích hợp xác thực sau khi có yêu cầu vận hành"
+    ],
+    "modules": [
+      "content",
+      "auth"
+    ],
+    "version": "1.0.0",
+    "status": "preview",
+    "compatibility": {
+      "starter": "web-foundation@1",
+      "next": "15.5.x",
+      "react": "19.x"
+    }
+  },
+  {
+    "slug": "campaign-landing",
+    "title": "Landing page chiến dịch",
+    "category": "Landing Page",
+    "industry": "Marketing",
+    "style": "Brutalist",
+    "purpose": "Tập trung một chiến dịch hoặc sự kiện",
+    "description": "Một trang đơn có điểm nhấn mạnh, nội dung ngắn và CTA không bị phân tán.",
+    "variant": "campaign",
+    "tags": [
+      "Landing Page",
+      "Brutalist",
+      "Campaign"
+    ],
+    "pages": [
+      "Trang chiến dịch",
+      "Thông tin",
+      "Đăng ký / Liên hệ"
+    ],
+    "features": [
+      "Một luồng nội dung xuyên suốt",
+      "Điểm nhấn chữ lớn",
+      "Có thể kết nối biểu mẫu theo cấu hình dự án"
+    ],
+    "modules": [
+      "contact"
+    ],
+    "version": "1.0.0",
+    "status": "preview",
+    "compatibility": {
+      "starter": "web-foundation@1",
+      "next": "15.5.x",
+      "react": "19.x"
+    }
+  },
+  {
+    "slug": "hospitality-booking",
+    "title": "Nhà hàng và đặt lịch",
+    "category": "Nhà hàng / Dịch vụ",
+    "industry": "Nhà hàng",
+    "style": "Warm Minimal",
+    "purpose": "Giới thiệu địa điểm và nhận đặt chỗ",
+    "description": "Thông tin địa điểm, thực đơn và hành động đặt chỗ được ưu tiên trên điện thoại.",
+    "variant": "hospitality",
+    "tags": [
+      "Hospitality",
+      "Booking",
+      "Mobile-first"
+    ],
+    "pages": [
+      "Trang chủ",
+      "Thực đơn / Dịch vụ",
+      "Không gian",
+      "Đặt chỗ"
+    ],
+    "features": [
+      "Thông tin giờ mở cửa và địa điểm",
+      "Nội dung phục vụ lựa chọn dịch vụ",
+      "Module booking chỉ bật khi có backend đã kiểm thử"
+    ],
+    "modules": [
+      "content",
+      "contact",
+      "booking"
+    ],
+    "version": "1.0.0",
+    "status": "preview",
+    "compatibility": {
+      "starter": "web-foundation@1",
+      "next": "15.5.x",
+      "react": "19.x"
+    }
+  },
+  {
+    "slug": "editorial-journal",
+    "title": "Tạp chí và xuất bản",
+    "category": "Blog / Editorial",
+    "industry": "Nội dung",
+    "style": "Editorial",
+    "purpose": "Xuất bản bài viết và chuyên mục",
+    "description": "Hệ thống bài viết theo chuyên mục với cấp bậc nội dung và typography dễ đọc.",
+    "variant": "editorial",
+    "tags": [
+      "Blog",
+      "Magazine",
+      "Editorial"
+    ],
+    "pages": [
+      "Trang chủ",
+      "Chuyên mục",
+      "Bài viết",
+      "Tìm kiếm"
+    ],
+    "features": [
+      "Trang bài viết ưu tiên khả năng đọc",
+      "Chuyên mục và nội dung liên quan",
+      "Sẵn sàng nối CMS sau khi chọn quy trình biên tập"
+    ],
+    "modules": [
+      "content"
+    ],
+    "version": "1.0.0",
+    "status": "preview",
+    "compatibility": {
+      "starter": "web-foundation@1",
+      "next": "15.5.x",
+      "react": "19.x"
+    }
+  }
+]
