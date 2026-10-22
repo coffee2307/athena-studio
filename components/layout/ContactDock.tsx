@@ -13,6 +13,14 @@ const channels:{id:Channel;label:string;href:string;qr?:string;icon?:string}[]=[
 export function ContactDock(){
  const [active,setActive]=useState<Channel|null>(null);
  const [copied,setCopied]=useState(false);
+ const [footerVisible,setFooterVisible]=useState(false);
+ useEffect(()=>{
+  const footer=document.querySelector(".agency-footer");
+  if(!footer||typeof IntersectionObserver==="undefined")return;
+  const observer=new IntersectionObserver(([entry])=>setFooterVisible(entry.isIntersecting),{threshold:0});
+  observer.observe(footer);
+  return()=>observer.disconnect();
+ },[]);
  const closer=useRef<HTMLButtonElement>(null);
  const previous=useRef<HTMLElement|null>(null);
  const close=useCallback(()=>{setActive(null);previous.current?.focus();},[]);
@@ -56,7 +64,7 @@ export function ContactDock(){
  }
  const choice=channels.find(c=>c.id===active);
  return <>
-  <nav className="agency-contact-dock" aria-label="Liên hệ nhanh">
+  <nav className={footerVisible?"agency-contact-dock is-footer-visible":"agency-contact-dock"} aria-label="Liên hệ nhanh">
    {channels.filter(c=>c.id!=="email").map(c=><a key={c.id} href={c.href}
      className={"agency-contact-action agency-contact-action-"+c.id}
      aria-label={c.id==="phone"?"Gọi điện trực tiếp cho Athena":"Mở "+c.label+" với số liên hệ Athena"}

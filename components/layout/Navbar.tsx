@@ -49,7 +49,7 @@ export function Navbar(){
   if(!open)return;
   const previous=document.body.style.overflow;
   document.body.style.overflow="hidden";
-  const first=panel.current?.querySelector<HTMLAnchorElement>("a");
+  const first=panel.current?.querySelector<HTMLElement>(".agency-mobile-primary");
   first?.focus({preventScroll:true});
   const onKey=(event:KeyboardEvent)=>{
    if(event.key==="Escape"){setOpen(false);trigger.current?.focus();return;}
@@ -99,16 +99,26 @@ export function Navbar(){
   <nav ref={panel} id="athena-mobile-menu" aria-label="Điều hướng trên điện thoại"
    className={open?"agency-mobile-panel is-open":"agency-mobile-panel"} inert={!open} onClick={event=>{if((event.target as HTMLElement).closest("a"))setOpen(false);}}>
    <div className="agency-mobile-scroll">
-    <span className="agency-mobile-eyebrow">ATHENA / KHÁM PHÁ</span>
-    <Link href="/services" className="agency-mobile-primary">Dịch vụ <Icon name="arrow-up-right"/></Link>
-    <div className="agency-mobile-services">
-     {solutions.map(s=><Link href={s.href} key={s.href}>{s.title}<Icon name="arrow-right" size={17}/></Link>)}
+    <div className="agency-mobile-menu-heading"><span>KHÁM PHÁ ATHENA</span><span className="agency-mobile-menu-counter">01 ? 05</span></div>
+    <p className="agency-mobile-section-label">ĐIỀU HƯỚNG</p>
+    <div className="agency-mobile-main-links">
+     <Link href="/services" className="agency-mobile-primary"><span>Dịch vụ</span><Icon name="arrow-up-right" size={19}/></Link>
+     {navigation.filter(i=>i.href!=="/services").map(i=><Link href={i.href} key={i.href} className="agency-mobile-primary"><span>{i.label}</span><Icon name="arrow-up-right" size={19}/></Link>)}
     </div>
-    {navigation.filter(i=>i.href!=="/services").map(i=><Link href={i.href} key={i.href} className="agency-mobile-primary">{i.label}<Icon name="arrow-up-right"/></Link>)}
+    <div className="agency-mobile-service-group">
+     <p className="agency-mobile-section-label">GIẢI PHÁP NỔI BẬT</p>
+     <div className="agency-mobile-services">
+      {solutions.map((solution,index)=><Link href={solution.href} key={solution.href}><span className="agency-mobile-service-index">0{index+1}</span><span>{solution.title}</span><Icon name="arrow-up-right" size={15}/></Link>)}
+     </div>
+    </div>
     <div className="agency-mobile-account"><SessionNavigation mobile/></div>
-    <ConsultationCTA className="agency-mobile-cta" label="Gửi yêu cầu tư vấn" iconSize={18}/>
-    <a href={contactChannels.phone} className="agency-mobile-email"><Icon name="phone" size={16}/>{siteConfig.phone}</a>
-    <a href={contactChannels.email} className="agency-mobile-email"><Icon name="mail" size={16}/>{siteConfig.email}</a>
+    <div className="agency-mobile-contact">
+     <ConsultationCTA className="agency-mobile-cta" label="Gửi yêu cầu tư vấn" iconSize={18}/>
+     <div className="agency-mobile-contact-meta">
+      <a href={contactChannels.phone} className="agency-mobile-email"><Icon name="phone" size={15}/>{siteConfig.phone}</a>
+      <a href={contactChannels.email} className="agency-mobile-email"><Icon name="mail" size={15}/>Email</a>
+     </div>
+    </div>
    </div>
   </nav>
  </header>;

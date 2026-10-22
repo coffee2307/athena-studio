@@ -1,0 +1,218 @@
+/* ATHENA / MONOCHROME 2026
+   Strict black/white/grayscale editorial identity.
+   Mobile navigation and footer are optically structured for narrow screens.
+   Contact icon artwork retains its authentic SVG brand colors. */
+:root{
+ --athena-charcoal:#101010;
+ --athena-sage:#e7e7e7;
+ --athena-warm:#f5f5f5;
+ --athena-hairline:#d7d7d7;
+}
+body{background:#fff;color:#111}
+.client-hero{background:#f5f5f5;background-image:linear-gradient(rgba(0,0,0,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.028) 1px,transparent 1px)}
+.client-hero::before{background:radial-gradient(circle at 45% 45%,rgba(0,0,0,.043),transparent 70%)}
+.client-hero-kicker,.client-hero-helper,.client-quick-label,.client-quick-index,.client-quick-foot{color:inherit}
+.client-hero-copy h1 span{color:#757575}
+.client-hero .pill-dark{background:#141414}
+.client-quick-nav,.auth-aside{background:#111;border-color:#252525;color:#fff}
+.client-quick-nav::after{border-color:rgba(255,255,255,.16)}
+.client-quick-nav>a small,.client-quick-nav>a svg{color:#c5c5c5}
+.athena-editorial-seam{background:#ececec;border-color:#d8d8d8}
+.athena-editorial-seam-inner span{color:#303030}
+.athena-editorial-seam-inner span:before{background:#555}
+.client-solutions{background:#fafafa}
+.client-solution-card{background:#ededed;border-color:#dedede}
+.client-solution-card:nth-child(2){background:#f5f5f5;border-color:#dfdfdf}
+.client-solution-card:nth-child(3){background:#e8e8e8;border-color:#d9d9d9}
+.client-solution-card .client-solution-top,.client-solution-link{color:#333}
+.client-solution-card:hover{border-color:#9c9c9c}
+.method-block,.client-lab-band{background:#ededed;border-color:#d7d7d7}
+.closing-block{background:#111}
+.closing-inner h2 span{color:#bababa}
+.closing-block .pill-light{background:#fff;color:#111}
+.athena-ticker-symbol{color:#eee}
+.athena-profile-hero{background:#141414;border-color:#2d2d2d}
+.athena-profile-hero .athena-profile-large-avatar{background:#e3e3e3;color:#151515;border-color:#eee}
+.athena-profile-page{background:#f6f6f6}
+.athena-profile-support{background:#e9e9e9;border-color:#d1d1d1}
+.athena-profile-support h2{color:#171717}
+.athena-profile-support a{background:#141414;color:#fff}
+.athena-profile-support a:hover{background:#3a3a3a}
+.athena-profile-hero .athena-profile-led{background:#e9e9e9;box-shadow:0 0 0 5px rgba(255,255,255,.09)}
+.athena-profile-hero h1,.athena-profile-identity>p{color:#fafafa}
+.athena-profile-card h2 span{color:#808080}
+.athena-auth-card .auth-panel h1 em{color:#6a6a6a}
+/* Preserve official colorful marks even when their surrounding surfaces are monochrome. */
+.agency-contact-action-zalo,.agency-contact-action-whatsapp{background:#fff!important;border-color:#e2e2e2!important}
+
+/* Mobile menu: sheet is attached to trigger region, independent backdrop and
+   compositor-only slide. No height/position animations; supports reduced motion. */
+@media(max-width:980px){
+ .agency-header{isolation:isolate}
+ .agency-nav-shell{height:72px}
+ .agency-menu-toggle{
+  position:relative;z-index:120;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  width:46px;height:46px;gap:6px;border:1px solid #dedede;border-radius:10px;background:#f6f6f6;
+  touch-action:manipulation;transition:border-color .2s ease,background-color .2s ease;
+ }
+ .agency-menu-toggle.is-open{border-color:#111;background:#111}
+ .agency-toggle-line{width:22px;height:2px;background:#161616;border-radius:2px;transform-origin:center;transition:transform .26s cubic-bezier(.2,.7,.25,1),background-color .2s ease}
+ .agency-menu-toggle.is-open .agency-toggle-line{background:#fff}
+ .agency-menu-toggle.is-open .agency-toggle-line:first-child{transform:translateY(4px) rotate(45deg)}
+ .agency-menu-toggle.is-open .agency-toggle-line:last-child{transform:translateY(-4px) rotate(-45deg)}
+ .agency-menu-backdrop{
+  display:block;position:fixed;inset:72px 0 0;z-index:101;border:0;
+  background:rgba(0,0,0,.48);backdrop-filter:blur(3px);
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .25s ease,visibility 0s linear .28s;
+ }
+ .agency-menu-backdrop.is-open{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .25s ease,visibility 0s}
+ .agency-mobile-panel{
+  display:block;position:fixed;z-index:105;top:72px;left:auto;right:0;bottom:0;
+  width:min(430px,calc(100vw - 38px));border-left:1px solid #dedede;border-radius:14px 0 0 0;
+  height:calc(100dvh - 72px);min-height:0;max-height:none;
+  background:#f9f9f9;border-top:1px solid #e7e7e7;
+  box-shadow:0 28px 50px rgba(0,0,0,.10);
+  opacity:0;visibility:hidden;pointer-events:none;
+  transform:translate3d(22px,0,0);
+  transition:transform .29s cubic-bezier(.19,.78,.26,1),opacity .24s ease,visibility 0s linear .3s;
+  will-change:transform,opacity;
+ }
+ .agency-mobile-panel.is-open{
+  opacity:1;visibility:visible;pointer-events:auto;
+  transform:translate3d(0,0,0);
+  transition:transform .29s cubic-bezier(.19,.78,.26,1),opacity .24s ease,visibility 0s;
+ }
+ .agency-mobile-scroll{
+  height:100%;min-height:0;max-height:none;overflow-y:auto;overscroll-behavior:contain;
+  padding:17px clamp(18px,4vw,30px) calc(28px + env(safe-area-inset-bottom));
+  -webkit-overflow-scrolling:touch;
+ }
+ .agency-mobile-menu-heading{display:flex;justify-content:space-between;align-items:center;min-height:48px;margin-bottom:16px}
+ .agency-mobile-menu-heading>span{font-size:11px;letter-spacing:.12em;font-weight:800;color:#555}
+ .agency-mobile-close{
+  border:1px solid #dedede;background:#fff;color:#111;
+  border-radius:50%;width:44px;height:44px;
+  display:inline-flex;align-items:center;justify-content:center;
+  touch-action:manipulation;
+ }
+ .agency-mobile-close:focus-visible,.agency-menu-toggle:focus-visible{outline:2px solid #111;outline-offset:3px}
+ .agency-mobile-section-label{font-size:10px;letter-spacing:.13em;font-weight:750;color:#696969;margin:15px 0 9px}
+ .agency-mobile-main-links{border-top:1px solid #d7d7d7}
+ .agency-mobile-primary{
+  display:flex;align-items:center;justify-content:space-between;gap:15px;
+  min-height:55px;padding:9px 2px;
+  border-top:0;border-bottom:1px solid #e2e2e2;
+  color:#111;font-weight:630;font-size:clamp(19px,4.9vw,24px);letter-spacing:-.045em;
+  touch-action:manipulation;
+ }
+ .agency-mobile-primary svg{color:#777;width:18px;transition:transform .18s ease}
+ .agency-mobile-primary:active{background:#efefef}
+ .agency-mobile-service-group{margin:25px 0 20px}
+ .agency-mobile-services{padding:0;display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid #d8d8d8}
+ .agency-mobile-services a{
+  min-height:46px;display:grid;grid-template-columns:30px minmax(0,1fr) 19px;
+  gap:10px;align-items:center;padding:10px 2px;
+  border-bottom:1px solid #e3e3e3;color:#292929;font-size:13px;font-weight:600;
+  touch-action:manipulation;
+ }
+ .agency-mobile-services .agency-mobile-service-index{font-size:10px;color:#8a8a8a;font-weight:650;letter-spacing:.06em}
+ .agency-mobile-services a svg{color:#757575}
+ .agency-mobile-account{
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+  border:1px solid #dedede;background:#fff;border-radius:9px;
+  padding:11px 16px;margin:22px 0 0;min-height:64px;
+ }
+ .agency-mobile-account a{min-height:42px;font-size:13px}
+ .agency-mobile-contact{margin-top:18px}
+ .agency-mobile-cta{
+  min-height:54px;display:flex;align-items:center;justify-content:space-between;
+  margin:0;padding:16px 18px;background:#141414;color:#fff;
+  border-radius:9px;font-size:13px;font-weight:750;
+ }
+ .agency-mobile-contact-meta{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:14px}
+ .agency-mobile-email{font-size:12px;color:#535353;min-height:44px;margin:0;display:inline-flex;gap:9px;align-items:center}
+}
+
+/* Footer is a mobile document, not a compressed desktop grid. */
+@media(max-width:640px){
+ .agency-footer{background:#f6f6f6;border-color:#dedede}
+ .agency-footer-cta{
+  margin:25px 0 0;padding:30px 24px;display:flex;flex-direction:column;gap:0;align-items:stretch;
+  background:#121212;border:1px solid #121212;border-radius:14px;color:#fff;
+ }
+ .agency-footer-cta .eyebrow{color:#d5d5d5;font-size:10px;letter-spacing:.06em}
+ .agency-footer-cta h2{
+  margin:17px 0 15px;font-size:clamp(32px,8.4vw,44px);line-height:1.18;letter-spacing:-.04em;color:#fff
+ }
+ .agency-footer-cta h2 span{color:#a6a6a6}
+ .agency-footer-cta p:not(.eyebrow){color:#c5c5c5;font-size:12px;line-height:1.85}
+ .agency-footer-cta-button{
+  margin-top:24px;width:100%;max-width:none;min-height:54px;
+  background:#fff;color:#121212;border-radius:8px;
+  display:flex;align-items:center;justify-content:space-between;padding:16px;
+ }
+ .agency-footer-cta-button:hover{background:#e9e9e9}
+ .agency-footer-main{display:flex;flex-direction:column;gap:0;padding:39px 0 14px}
+ .agency-footer-brand{grid-column:auto;padding-bottom:27px}
+ .agency-footer-brand-lockup{font-size:19px}
+ .agency-footer-brand>p{margin-top:17px;max-width:380px;color:#555;font-size:12px;line-height:1.8}
+ .agency-footer-contact{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;
+  margin-top:25px
+ }
+ .agency-footer-contact a{
+  display:flex;align-items:center;gap:9px;justify-content:flex-start;
+  border:1px solid #dedede;border-radius:8px;
+  background:#fff;min-height:46px;padding:11px 12px;
+  font-size:11px;font-weight:670;min-width:0;overflow-wrap:anywhere;
+ }
+ .agency-footer-contact a:nth-child(-n+2){grid-column:1/-1}
+ .agency-footer-column{
+  border-top:1px solid #d8d8d8;padding:22px 0;
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  align-items:start;gap:14px 18px
+ }
+ .agency-footer-column h3{
+  grid-column:1/-1;margin:0 0 2px;font-size:10px;letter-spacing:.13em;color:#3d3d3d
+ }
+ .agency-footer-column a{font-size:12px;line-height:1.5;color:#545454;min-height:30px;display:inline-flex;align-items:center}
+ .agency-footer-column .agency-mobile-profile{font-size:12px}
+ .agency-footer-bottom{
+  padding:24px 0 calc(34px + env(safe-area-inset-bottom));
+  border-color:#d7d7d7;flex-direction:column;align-items:flex-start;gap:7px;
+  color:#626262;font-size:10px;line-height:1.7
+ }
+ .agency-footer-bottom>span:nth-child(2){display:none}
+ .agency-footer-bottom a{min-height:36px;text-decoration:underline;text-underline-offset:3px}
+}
+@media(max-width:360px){
+ .agency-footer-contact{grid-template-columns:1fr}
+ .agency-footer-contact a{grid-column:1/-1}
+ .agency-mobile-contact-meta{gap:11px}
+}
+/* Hover effects are for hover devices, never touch-scrolling. */
+@media(hover:none),(pointer:coarse){
+ .agency-menu-toggle:hover{background:#f6f6f6}
+ .agency-menu-toggle.is-open:hover{background:#111}
+ .agency-footer-cta-button:hover{background:#fff}
+ .agency-mobile-primary:hover{transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+ .agency-menu-backdrop,.agency-mobile-panel,.agency-menu-toggle,.agency-toggle-line,.agency-mobile-primary svg{transition:none!important;animation:none!important}
+}
+
+@media(max-width:980px){.agency-mobile-menu-counter{font-size:10px;letter-spacing:.14em;color:#777;font-weight:650}}
+
+/* Footer has its own contact links; hide floating shortcuts to avoid overlap. */
+@media(max-width:640px){
+ .agency-contact-dock{transition:opacity .18s ease,transform .18s ease,visibility 0s linear .18s}
+ .agency-contact-dock.is-footer-visible{opacity:0;transform:translateY(12px);visibility:hidden;pointer-events:none}
+}
+@media(prefers-reduced-motion:reduce){.agency-contact-dock{transition:none!important}}
+
+/* Replace an empty account loading block with readable microcopy. */
+@media(max-width:980px){
+ .agency-mobile-account .agency-auth-loading.mobile{width:auto;height:auto;background:transparent;opacity:1;border-radius:0}
+ .agency-mobile-account .agency-auth-loading.mobile::after{content:"?ang ki?m tra t?i kho?n?";font-size:12px;color:#666;font-weight:550}
+}

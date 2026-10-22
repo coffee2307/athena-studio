@@ -14,6 +14,8 @@ import "@/app/contact-experience.css";
 import "@/app/athena-refinement.css";
 import "@/app/auth-profile.css";
 import "@/app/auth-pages-redesign.css";
+import "@/app/athena-monochrome.css";
+import "@/app/athena-monochrome.css";
 
 export const metadata: Metadata = {
   ...createMetadata(),

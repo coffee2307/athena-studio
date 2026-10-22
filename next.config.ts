@@ -38,6 +38,7 @@ const nextConfig:NextConfig={
  // Build a minimal single-process image for small VPS hosts only when requested.
  ...(process.env.ATHENA_VPS_STANDALONE_BUILD==="true"?{output:"standalone" as const}:{}),
  poweredByHeader:false,
+ devIndicators:false,
  // Private project documents allow up to 8 MiB; request envelope has bounded overhead.
  experimental:{serverActions:{bodySizeLimit:"9mb"}},
  async redirects(){return [
