@@ -6,10 +6,16 @@
  */
 import {readFileSync} from "node:fs";
 import {performance} from "node:perf_hooks";
-import {previewRoutes,safePreviewOrigin,extractStaticAssets,latencySummary} from "../lib/preview-canary.mjs";
+import {previewRoutes,safePreviewOrigin,approvedPreviewOrigin,extractStaticAssets,latencySummary} from "../lib/preview-canary.mjs";
 
 const raw=process.env.ATHENA_PRIVATE_PREVIEW_ORIGIN||"http://127.0.0.1:3184";
 const origin=safePreviewOrigin(raw);
+if(origin!=="http://127.0.0.1:3184"){
+ let pinned="";
+ try{pinned=readFileSync(new URL("../.qa/preview-approved-origin.txt",import.meta.url),"utf8").trim();}
+ catch{throw new Error("External tunnel not approved: create ignored .qa/preview-approved-origin.txt with the verified exact HTTPS URL");}
+ if(!approvedPreviewOrigin(origin,pinned))throw new Error("External tunnel mismatch: refusing to send Basic Auth credentials");
+}
 const password=readFileSync(new URL("../.qa/preview-password.txt",import.meta.url),"utf8").trim();
 if(password.length<16)throw Error("Preview credential missing or too short");
 const auth={"Authorization":"Basic "+Buffer.from("athena:"+password).toString("base64")};
