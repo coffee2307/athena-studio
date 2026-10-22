@@ -20,6 +20,26 @@ try{
   const body=await res.arrayBuffer();assert.ok(body.byteLength>(path==="/robots.txt"?10:30),path+" empty");
   console.log("PASS",path,res.status);
  }
+ // Verify the actual build graph, not just that HTML routes return 200.
+ // A missing Next CSS/JS chunk previously left mobile with unstyled browser-default HTML.
+ const homeHtml=await (await fetch(root+"/",{signal:AbortSignal.timeout(10000)})).text();
+ const staticRefs=[...new Set([...homeHtml.matchAll(/(?:href|src)="([^"]*\/_next\/static\/[^"]+\.(?:css|js)(?:\?[^"]*)?)"/g)].map(match=>match[1]))];
+ assert.ok(staticRefs.some(ref=>/\.css(?:\?|$)/.test(ref)),"Home must reference at least one production CSS asset");
+ assert.ok(staticRefs.some(ref=>/\.js(?:\?|$)/.test(ref)),"Home must reference at least one production JavaScript asset");
+ for(const asset of staticRefs){
+  const url=new URL(asset,root);
+  assert.equal(url.origin,root,"Never follow cross-origin asset references in local smoke");
+  const kind=/\.css(?:\?|$)/.test(asset)?"css":"js";
+  const response=await fetch(url,{redirect:"manual",signal:AbortSignal.timeout(10000)});
+  assert.equal(response.status,200,asset+" missing or unexpectedly redirected");
+  const type=response.headers.get("content-type")||"";
+  assert.match(type,kind==="css"?/text\/css/i:/(?:application|text)\/javascript/i,asset+" incorrect content type");
+  assert.match(response.headers.get("cache-control")||"",/immutable/i,asset+" should be immutable and content-addressed");
+  const body=await response.text();
+  assert.ok(body.length>24,asset+" empty");
+  assert.doesNotMatch(body.slice(0,200),/<!doctype html|<html\b/i,asset+" must not serve HTML as CSS/JS");
+ }
+ console.log("PASS",staticRefs.length,"production CSS/JS assets, valid types, immutable cache, no HTML fallback");
  for(const [oldPath,to] of Object.entries(oldPaths)){
   const result=await fetch(root+oldPath,{redirect:"manual"});
   assert.ok([307,308].includes(result.status),oldPath+" must redirect");
