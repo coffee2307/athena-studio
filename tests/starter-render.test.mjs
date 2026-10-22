@@ -20,9 +20,9 @@ async function setup(){
  const {presets}=await import("../starter/web-foundation/src/config/presets.ts");
  return {Home,presets};
 }
-test("all eight presets render their own content, semantic layout and working local anchors",async()=>{
+test("all twelve presets render their own content, semantic layout and working local anchors",async()=>{
  const {Home,presets}=await setup();
- assert.equal(Object.keys(presets).length,8);
+ assert.equal(Object.keys(presets).length,12);
  const rendered=new Set();
  for(const [variant,preset] of Object.entries(presets)){
   const template=registry.find(item=>item.variant===variant);

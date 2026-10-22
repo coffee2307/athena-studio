@@ -1,0 +1,27 @@
+.github-repository-card{grid-column:1/-1}
+.github-repository-title{display:flex;justify-content:space-between;align-items:flex-start;gap:18px}
+.github-repository-title h2{margin-bottom:7px}
+.github-lock-mark{display:grid;place-items:center;width:42px;height:42px;border:1px solid #c9cbc7;font-size:11px;font-weight:850;letter-spacing:-.05em}
+.github-access-note{display:grid;gap:5px;margin:18px 0;padding:15px 16px;border-left:3px solid #303433;background:#f4f5f2}
+.github-access-note strong{font-size:11px}
+.github-access-note span,.github-panel-empty p{font-size:10px;line-height:1.7;color:#5e625e}
+.github-panel-empty{padding:18px 0;border-top:1px solid #d9dbd8}
+.github-panel-empty>strong{font-size:13px}
+.github-connect-button{display:inline-flex;min-height:42px;align-items:center;margin-top:10px;padding:10px 14px;background:#181a19;color:#fff;text-decoration:none;font-size:10px;font-weight:750}
+.github-connected-account{display:grid;grid-template-columns:1fr auto;align-items:center;gap:5px;padding:13px 0;border-block:1px solid #d8dad7}
+.github-connected-account>span:first-child{grid-column:1/-1;font-size:8px;letter-spacing:.12em;color:#656965;font-weight:800}
+.github-connected-account strong{font-size:15px}
+.github-connected-account>span:last-child{font-size:9px;color:#626662}
+.github-repo-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:15px;align-items:center;padding:15px 0;border-bottom:1px solid #e0e1df}
+.github-repo-information{min-width:0;display:grid;gap:5px}
+.github-repo-information strong{font-size:12px;overflow-wrap:anywhere}
+.github-repo-information>span{font-size:9px;color:#636763}
+.github-repo-information p{margin:0;font-size:10px;color:#777b77;line-height:1.5}
+.github-share-button{min-height:38px;padding:9px 12px;border:1px solid #171918;background:#171918;color:#fff;font:inherit;font-size:9px;font-weight:750;cursor:pointer}
+.github-share-button.is-shared{background:#f0f1ee;color:#242624}
+.github-share-button:disabled,.github-refresh-button:disabled{opacity:.55;cursor:wait}
+.github-refresh-button{margin-top:15px;padding:8px 0;border:0;border-bottom:1px solid currentColor;background:transparent;color:#272927;font:inherit;font-size:10px;cursor:pointer}
+.github-panel-status,.github-panel-error{font-size:10px;line-height:1.65}
+.github-panel-status{color:#3c6747}
+.github-panel-error{padding:11px 13px;background:#fff1f0;color:#8a2d27}
+@media(max-width:620px){.github-repo-row{grid-template-columns:1fr;align-items:start}.github-share-button{justify-self:start}.github-connected-account{grid-template-columns:1fr}.github-connected-account>span:last-child{grid-column:1/-1}.github-lock-mark{display:none}}

@@ -22,18 +22,34 @@
     "features": [
       "Bố cục dự án bất đối xứng",
       "Typography tiêu đề lớn",
-      "Trang case study theo cấu trúc bài toán và giải pháp"
+      "Trang case study theo cấu trúc bài toán và giải pháp",
+      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
     ],
     "modules": [
       "content",
       "contact"
     ],
     "version": "1.0.0",
-    "status": "preview",
+    "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
       "next": "15.5.x",
       "react": "19.x"
+    },
+    "estimatedPrice": "18–32 triệu đồng",
+    "qualityTier": "Studio",
+    "demoPath": "/template-demos/creative-studio",
+    "images": [
+      "/template-demos/creative-studio/image-1.jpg",
+      "/template-demos/creative-studio/image-2.jpg",
+      "/template-demos/creative-studio/image-3.jpg",
+      "/template-demos/creative-studio/image-4.jpg",
+      "/template-demos/creative-studio/image-5.jpg"
+    ],
+    "reference": {
+      "name": "startbootstrap-freelancer",
+      "url": "https://github.com/StartBootstrap/startbootstrap-freelancer",
+      "license": "MIT"
     }
   },
   {
@@ -60,18 +76,34 @@
     "features": [
       "Điều hướng theo nhu cầu",
       "Khối dịch vụ theo vấn đề",
-      "Lời kêu gọi tư vấn rõ ràng"
+      "Lời kêu gọi tư vấn rõ ràng",
+      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
     ],
     "modules": [
       "content",
       "contact"
     ],
     "version": "1.0.0",
-    "status": "preview",
+    "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
       "next": "15.5.x",
       "react": "19.x"
+    },
+    "estimatedPrice": "22–45 triệu đồng",
+    "qualityTier": "Business",
+    "demoPath": "/template-demos/modern-corporate",
+    "images": [
+      "/template-demos/modern-corporate/image-1.jpg",
+      "/template-demos/modern-corporate/image-2.jpg",
+      "/template-demos/modern-corporate/image-3.jpg",
+      "/template-demos/modern-corporate/image-4.jpg",
+      "/template-demos/modern-corporate/image-5.jpg"
+    ],
+    "reference": {
+      "name": "startbootstrap-agency",
+      "url": "https://github.com/StartBootstrap/startbootstrap-agency",
+      "license": "MIT"
     }
   },
   {
@@ -97,18 +129,34 @@
     "features": [
       "Lưới sản phẩm linh hoạt",
       "Trang chi tiết có thông tin rõ",
-      "Có thể kết nối Shopify hoặc backend riêng sau khi chốt phạm vi"
+      "Có thể kết nối Shopify hoặc backend riêng sau khi chốt phạm vi",
+      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
     ],
     "modules": [
       "catalog",
       "commerce"
     ],
     "version": "1.0.0",
-    "status": "preview",
+    "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
       "next": "15.5.x",
       "react": "19.x"
+    },
+    "estimatedPrice": "28–60 triệu đồng",
+    "qualityTier": "Commerce",
+    "demoPath": "/template-demos/commerce-standard",
+    "images": [
+      "/template-demos/commerce-standard/image-1.jpg",
+      "/template-demos/commerce-standard/image-2.jpg",
+      "/template-demos/commerce-standard/image-3.jpg",
+      "/template-demos/commerce-standard/image-4.jpg",
+      "/template-demos/commerce-standard/image-5.jpg"
+    ],
+    "reference": {
+      "name": "startbootstrap-shop-homepage",
+      "url": "https://github.com/StartBootstrap/startbootstrap-shop-homepage",
+      "license": "MIT"
     }
   },
   {
@@ -134,7 +182,8 @@
     "features": [
       "Mở đầu kiểu campaign",
       "Trang bộ sưu tập biên tập",
-      "Tùy biến theo quy trình ra mắt"
+      "Tùy biến theo quy trình ra mắt",
+      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
     ],
     "modules": [
       "catalog",
@@ -142,11 +191,26 @@
       "content"
     ],
     "version": "1.0.0",
-    "status": "preview",
+    "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
       "next": "15.5.x",
       "react": "19.x"
+    },
+    "estimatedPrice": "25–55 triệu đồng",
+    "qualityTier": "Editorial Commerce",
+    "demoPath": "/template-demos/fashion-archive",
+    "images": [
+      "/template-demos/fashion-archive/image-1.jpg",
+      "/template-demos/fashion-archive/image-2.jpg",
+      "/template-demos/fashion-archive/image-3.jpg",
+      "/template-demos/fashion-archive/image-4.jpg",
+      "/template-demos/fashion-archive/image-5.jpg"
+    ],
+    "reference": {
+      "name": "startbootstrap-creative",
+      "url": "https://github.com/StartBootstrap/startbootstrap-creative",
+      "license": "MIT"
     }
   },
   {
@@ -172,18 +236,34 @@
     "features": [
       "Trình bày sản phẩm bằng giao diện",
       "Tách tính năng theo công việc",
-      "Có thể tích hợp xác thực sau khi có yêu cầu vận hành"
+      "Có thể tích hợp xác thực sau khi có yêu cầu vận hành",
+      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
     ],
     "modules": [
       "content",
       "auth"
     ],
     "version": "1.0.0",
-    "status": "preview",
+    "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
       "next": "15.5.x",
       "react": "19.x"
+    },
+    "estimatedPrice": "30–75 triệu đồng",
+    "qualityTier": "Product UI",
+    "demoPath": "/template-demos/saas-product",
+    "images": [
+      "/template-demos/saas-product/image-1.jpg",
+      "/template-demos/saas-product/image-2.jpg",
+      "/template-demos/saas-product/image-3.jpg",
+      "/template-demos/saas-product/image-4.jpg",
+      "/template-demos/saas-product/image-5.jpg"
+    ],
+    "reference": {
+      "name": "startbootstrap-new-age",
+      "url": "https://github.com/StartBootstrap/startbootstrap-new-age",
+      "license": "MIT"
     }
   },
   {
@@ -208,18 +288,34 @@
     "features": [
       "Một luồng nội dung xuyên suốt",
       "Điểm nhấn chữ lớn",
-      "Có thể kết nối biểu mẫu theo cấu hình dự án"
+      "Có thể kết nối biểu mẫu theo cấu hình dự án",
+      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
     ],
     "modules": [
       "content",
       "contact"
     ],
     "version": "1.0.0",
-    "status": "preview",
+    "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
       "next": "15.5.x",
       "react": "19.x"
+    },
+    "estimatedPrice": "12–24 triệu đồng",
+    "qualityTier": "Campaign",
+    "demoPath": "/template-demos/campaign-landing",
+    "images": [
+      "/template-demos/campaign-landing/image-1.jpg",
+      "/template-demos/campaign-landing/image-2.jpg",
+      "/template-demos/campaign-landing/image-3.jpg",
+      "/template-demos/campaign-landing/image-4.jpg",
+      "/template-demos/campaign-landing/image-5.jpg"
+    ],
+    "reference": {
+      "name": "startbootstrap-landing-page",
+      "url": "https://github.com/StartBootstrap/startbootstrap-landing-page",
+      "license": "MIT"
     }
   },
   {
@@ -245,7 +341,8 @@
     "features": [
       "Thông tin giờ mở cửa và địa điểm",
       "Nội dung phục vụ lựa chọn dịch vụ",
-      "Module booking chỉ bật khi có backend đã kiểm thử"
+      "Module booking chỉ bật khi có backend đã kiểm thử",
+      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
     ],
     "modules": [
       "content",
@@ -253,11 +350,26 @@
       "booking"
     ],
     "version": "1.0.0",
-    "status": "preview",
+    "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
       "next": "15.5.x",
       "react": "19.x"
+    },
+    "estimatedPrice": "20–42 triệu đồng",
+    "qualityTier": "Hospitality",
+    "demoPath": "/template-demos/hospitality-booking",
+    "images": [
+      "/template-demos/hospitality-booking/image-1.jpg",
+      "/template-demos/hospitality-booking/image-2.jpg",
+      "/template-demos/hospitality-booking/image-3.jpg",
+      "/template-demos/hospitality-booking/image-4.jpg",
+      "/template-demos/hospitality-booking/image-5.jpg"
+    ],
+    "reference": {
+      "name": "startbootstrap-business-casual",
+      "url": "https://github.com/StartBootstrap/startbootstrap-business-casual",
+      "license": "MIT"
     }
   },
   {
@@ -283,17 +395,252 @@
     "features": [
       "Trang bài viết ưu tiên khả năng đọc",
       "Chuyên mục và nội dung liên quan",
-      "Sẵn sàng nối CMS sau khi chọn quy trình biên tập"
+      "Sẵn sàng nối CMS sau khi chọn quy trình biên tập",
+      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
     ],
     "modules": [
       "content"
     ],
     "version": "1.0.0",
-    "status": "preview",
+    "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
       "next": "15.5.x",
       "react": "19.x"
+    },
+    "estimatedPrice": "18–38 triệu đồng",
+    "qualityTier": "Publisher",
+    "demoPath": "/template-demos/editorial-journal",
+    "images": [
+      "/template-demos/editorial-journal/image-1.jpg",
+      "/template-demos/editorial-journal/image-2.jpg",
+      "/template-demos/editorial-journal/image-3.jpg",
+      "/template-demos/editorial-journal/image-4.jpg",
+      "/template-demos/editorial-journal/image-5.jpg"
+    ],
+    "reference": {
+      "name": "startbootstrap-clean-blog",
+      "url": "https://github.com/StartBootstrap/startbootstrap-clean-blog",
+      "license": "MIT"
+    }
+  },
+  {
+    "slug": "architecture-studio",
+    "title": "Kiến trúc & không gian",
+    "category": "Kiến trúc / Nội thất",
+    "industry": "Kiến trúc",
+    "style": "Vật liệu tối giản",
+    "purpose": "Trưng bày công trình, quy trình và năng lực thiết kế",
+    "description": "Một portfolio giàu khoảng thở, để ảnh công trình dẫn dắt câu chuyện từ ý tưởng đến không gian hoàn thiện.",
+    "variant": "architecture",
+    "tags": [
+      "Architecture",
+      "Interior",
+      "Portfolio"
+    ],
+    "pages": [
+      "Trang chủ",
+      "Công trình",
+      "Chi tiết dự án",
+      "Studio",
+      "Liên hệ"
+    ],
+    "features": [
+      "Bộ lọc công trình theo loại hình",
+      "Thư viện ảnh toàn màn hình",
+      "Trang dự án theo giai đoạn",
+      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
+    ],
+    "modules": [
+      "content",
+      "contact"
+    ],
+    "version": "1.0.0",
+    "status": "interactive-demo",
+    "compatibility": {
+      "starter": "web-foundation@1",
+      "next": "15.5.x",
+      "react": "19.x"
+    },
+    "estimatedPrice": "24–52 triệu đồng",
+    "qualityTier": "Architecture",
+    "demoPath": "/template-demos/architecture-studio",
+    "images": [
+      "/template-demos/architecture-studio/image-1.jpg",
+      "/template-demos/architecture-studio/image-2.jpg",
+      "/template-demos/architecture-studio/image-3.jpg",
+      "/template-demos/architecture-studio/image-4.jpg",
+      "/template-demos/architecture-studio/image-5.jpg"
+    ],
+    "reference": {
+      "name": "startbootstrap-agency",
+      "url": "https://github.com/StartBootstrap/startbootstrap-agency",
+      "license": "MIT"
+    }
+  },
+  {
+    "slug": "wellness-clinic",
+    "title": "Chăm sóc sức khỏe",
+    "category": "Sức khỏe / Chăm sóc",
+    "industry": "Sức khỏe",
+    "style": "Organic Calm",
+    "purpose": "Giới thiệu liệu trình và giúp khách đặt lịch tư vấn",
+    "description": "Trải nghiệm nhẹ nhàng, thông tin dịch vụ rõ ràng và hành trình đặt lịch phù hợp trên điện thoại.",
+    "variant": "wellness",
+    "tags": [
+      "Wellness",
+      "Clinic",
+      "Booking"
+    ],
+    "pages": [
+      "Trang chủ",
+      "Dịch vụ",
+      "Đội ngũ",
+      "Bảng giá",
+      "Đặt lịch"
+    ],
+    "features": [
+      "Danh mục liệu trình",
+      "Hồ sơ đội ngũ",
+      "Biểu mẫu đặt lịch mô phỏng",
+      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
+    ],
+    "modules": [
+      "content",
+      "contact",
+      "booking"
+    ],
+    "version": "1.0.0",
+    "status": "interactive-demo",
+    "compatibility": {
+      "starter": "web-foundation@1",
+      "next": "15.5.x",
+      "react": "19.x"
+    },
+    "estimatedPrice": "20–44 triệu đồng",
+    "qualityTier": "Wellness",
+    "demoPath": "/template-demos/wellness-clinic",
+    "images": [
+      "/template-demos/wellness-clinic/image-1.jpg",
+      "/template-demos/wellness-clinic/image-2.jpg",
+      "/template-demos/wellness-clinic/image-3.jpg",
+      "/template-demos/wellness-clinic/image-4.jpg",
+      "/template-demos/wellness-clinic/image-5.jpg"
+    ],
+    "reference": {
+      "name": "startbootstrap-freelancer",
+      "url": "https://github.com/StartBootstrap/startbootstrap-freelancer",
+      "license": "MIT"
+    }
+  },
+  {
+    "slug": "property-showcase",
+    "title": "Bất động sản cao cấp",
+    "category": "Bất động sản",
+    "industry": "Bất động sản",
+    "style": "Quiet Luxury",
+    "purpose": "Giới thiệu dự án, tiện ích và nhận yêu cầu xem nhà",
+    "description": "Cách trình bày bất động sản theo từng không gian, bản đồ tiện ích và thông tin có thể so sánh.",
+    "variant": "property",
+    "tags": [
+      "Real Estate",
+      "Property",
+      "Lead"
+    ],
+    "pages": [
+      "Trang chủ",
+      "Danh sách căn",
+      "Chi tiết dự án",
+      "Tiện ích",
+      "Liên hệ"
+    ],
+    "features": [
+      "Lọc căn theo diện tích và mức giá",
+      "Thư viện ảnh công trình",
+      "Đăng ký lịch tham quan mô phỏng",
+      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
+    ],
+    "modules": [
+      "content",
+      "catalog",
+      "contact"
+    ],
+    "version": "1.0.0",
+    "status": "interactive-demo",
+    "compatibility": {
+      "starter": "web-foundation@1",
+      "next": "15.5.x",
+      "react": "19.x"
+    },
+    "estimatedPrice": "25–58 triệu đồng",
+    "qualityTier": "Property",
+    "demoPath": "/template-demos/property-showcase",
+    "images": [
+      "/template-demos/property-showcase/image-1.jpg",
+      "/template-demos/property-showcase/image-2.jpg",
+      "/template-demos/property-showcase/image-3.jpg",
+      "/template-demos/property-showcase/image-4.jpg",
+      "/template-demos/property-showcase/image-5.jpg"
+    ],
+    "reference": {
+      "name": "startbootstrap-business-casual",
+      "url": "https://github.com/StartBootstrap/startbootstrap-business-casual",
+      "license": "MIT"
+    }
+  },
+  {
+    "slug": "education-platform",
+    "title": "Nền tảng giáo dục",
+    "category": "Giáo dục / Đào tạo",
+    "industry": "Giáo dục",
+    "style": "Bright Learning",
+    "purpose": "Giới thiệu khóa học, lộ trình và đăng ký tư vấn",
+    "description": "Bố cục sáng rõ để người học khám phá chương trình, giảng viên và cách học trước khi đăng ký.",
+    "variant": "education",
+    "tags": [
+      "Education",
+      "Learning",
+      "Courses"
+    ],
+    "pages": [
+      "Trang chủ",
+      "Khóa học",
+      "Chi tiết khóa học",
+      "Giảng viên",
+      "Tư vấn"
+    ],
+    "features": [
+      "Lọc khóa theo cấp độ",
+      "Thẻ chương trình học",
+      "Biểu mẫu tư vấn mô phỏng",
+      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
+    ],
+    "modules": [
+      "content",
+      "catalog",
+      "contact"
+    ],
+    "version": "1.0.0",
+    "status": "interactive-demo",
+    "compatibility": {
+      "starter": "web-foundation@1",
+      "next": "15.5.x",
+      "react": "19.x"
+    },
+    "estimatedPrice": "22–48 triệu đồng",
+    "qualityTier": "Education",
+    "demoPath": "/template-demos/education-platform",
+    "images": [
+      "/template-demos/education-platform/image-1.jpg",
+      "/template-demos/education-platform/image-2.jpg",
+      "/template-demos/education-platform/image-3.jpg",
+      "/template-demos/education-platform/image-4.jpg",
+      "/template-demos/education-platform/image-5.jpg"
+    ],
+    "reference": {
+      "name": "startbootstrap-landing-page",
+      "url": "https://github.com/StartBootstrap/startbootstrap-landing-page",
+      "license": "MIT"
     }
   }
 ]
