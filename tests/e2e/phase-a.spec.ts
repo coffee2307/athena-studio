@@ -48,7 +48,7 @@ test("Menu mobile nhận chạm thật và điều hướng sau cuộn trang",as
  await page.evaluate(()=>window.scrollTo(0,450));
  await toggle.tap();
  await expect(page.locator(".agency-mobile-panel")).toBeVisible();
- await page.getByRole("button",{name:"Đóng menu điều hướng"}).tap({force:true});
+ await page.locator(".agency-menu-backdrop").tap({position:{x:5,y:220}});
  await expect(page.locator(".agency-mobile-panel")).not.toBeVisible();
 });
 
