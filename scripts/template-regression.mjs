@@ -1,0 +1,35 @@
+import {chromium} from "@playwright/test";
+import fs from "node:fs/promises";
+const root="http://localhost:3000";
+const names=["creative-studio","modern-corporate","commerce-standard","fashion-archive","saas-product","campaign-landing","hospitality-booking","editorial-journal","architecture-studio","wellness-clinic","property-showcase","education-platform"];
+await fs.mkdir("public/template-previews",{recursive:true});
+await fs.mkdir(".qa",{recursive:true});
+const browser=await chromium.launch({headless:true,executablePath:process.platform==="win32"?"C:/Program Files/Google/Chrome/Application/chrome.exe":undefined});
+const page=await browser.newPage({viewport:{width:1440,height:900},deviceScaleFactor:1});
+const errors=[];
+page.on("pageerror",e=>errors.push(e.message));
+for(const slug of names){
+ const response=await page.goto(root+"/template-demos/"+slug,{waitUntil:"domcontentloaded",timeout:35000});
+ await page.locator(".template-demo-hero h1").waitFor({timeout:10000});
+ await page.locator(".template-demo-hero-image img").waitFor();
+ await page.waitForTimeout(380);
+ await page.screenshot({path:"public/template-previews/"+slug+".jpg",type:"jpeg",quality:82,animations:"disabled"});
+ console.log(slug,response?.status(),await page.title());
+}
+await page.goto(root+"/services/web-development/templates",{waitUntil:"domcontentloaded",timeout:35000});
+await page.waitForTimeout(1300);
+await page.screenshot({path:".qa/template-gallery-after.png"});
+console.log("CARDS",await page.locator(".template-card").count());
+await page.locator(".template-card-preview").first().click();
+await page.locator(".template-revamp-dialog[open] iframe").waitFor({timeout:10000});
+console.log("MODAL",await page.locator(".template-revamp-dialog[open] iframe").getAttribute("src"));
+await page.getByRole("button",{name:"Mobile",exact:true}).click();
+console.log("MOBILE_FRAME",await page.locator(".template-demo-viewport-mobile iframe").count());
+await page.getByRole("button",{name:"Đóng bản xem trước"}).click();
+await page.setViewportSize({width:390,height:844});
+await page.reload({waitUntil:"domcontentloaded"});
+await page.waitForTimeout(600);
+console.log("MOBILE_OVERFLOW",await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,client:document.documentElement.clientWidth})));
+await page.screenshot({path:".qa/template-gallery-mobile-after.png"});
+console.log("JS_ERRORS",JSON.stringify(errors));
+await browser.close();

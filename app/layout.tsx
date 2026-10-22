@@ -21,6 +21,7 @@ import "@/app/template-demo.css";
 import "@/app/template-modal.css";
 import "@/app/products-projects.css";
 import "@/app/profile-github.css";
+import "@/app/template-revamp.css";
 
 export const metadata: Metadata = {
   ...createMetadata(),
