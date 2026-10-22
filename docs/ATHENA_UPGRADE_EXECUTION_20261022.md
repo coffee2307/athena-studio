@@ -24,7 +24,7 @@ Baseline local trước đợt này: `3641105` (`feat: add template library and 
 - Chromium desktop/mobile: **166 đạt, 0 lỗi, 4 skip theo điều kiện thiết bị** trên toàn bộ E2E. Trong đó 58 test axe, auth, lựa chọn mẫu, tạo brief, không gửi inquiry, keyboard, reduced motion và overflow đạt.
 - Starter: `creative-studio`, `modern-corporate` và `commerce-standard` đều qua cài độc lập, typecheck, build và HTTP/anchor smoke.
 - Visual QA: đã chụp và xem thư viện, trang mẫu và liên hệ tại 1440×1000 và 390×844; các trang không tràn ngang.
-- CI trên commit mới chưa chạy vì thay đổi chưa được đẩy lên PR #39.
+- GitHub Actions run `39777641527` cho PR #39 đã đạt **7/7 jobs**, gồm browser/accessibility, lint/type/unit/build/audit, ba starter độc lập, PostgreSQL và container VPS.
 
 Các log local tạm thời nằm trong `.qa/upgrade-20261022/` và không được commit. Chỉ kết luận các mục đang chờ sau khi đọc exit code và báo cáo cuối của tiến trình.
 
@@ -32,4 +32,4 @@ Các log local tạm thời nằm trong `.qa/upgrade-20261022/` và không đư�
 
 - Lượt review độc lập không phát hiện lỗi Critical/Important. Ba nhận xét Minor đã được xử lý: giữ dịch vụ từ URL, mã hóa recipient mailto và bật module nội dung cho template campaign. Hai kỳ vọng menu E2E cũ đã được đồng bộ với các mục hiện có.
 - Cập nhật PR #39 và đẩy lên nhánh bằng lease để không ghi đè thay đổi từ xa.
-- Theo dõi GitHub Actions sau khi cập nhật PR. Không merge hoặc deploy cho đến khi có quyết định riêng.
+- PR #39 vẫn là draft sẵn sàng review. Không merge hoặc deploy cho đến khi có quyết định riêng.

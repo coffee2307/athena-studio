@@ -49,7 +49,7 @@ Nếu cần lưu dữ liệu, hãy tạo ranh giới dữ liệu riêng cho từ
 
 ## Cổng trước khi phát hành
 
-1. Yêu cầu build CI xanh cho cả ba preset và toàn bộ test Chromium/Firefox.
+1. Build CI đã đạt cho ba preset và toàn bộ test Chromium/Firefox; kiểm tra lại cổng này cho mọi commit phát hành sau.
 2. Chụp kiểm tra preview ở desktop và mobile; rà soát nội dung, focus, reduced motion, tương phản và overflow trước khi công khai.
 3. Xác nhận production origin, index/noindex và metadata; bật đúng biến môi trường, sender email và provider sau khi test staging.
 4. Sao lưu database và xác minh có thể phục hồi; giữ migrations theo thứ tự và kiểm tra health/rollback trên staging.
