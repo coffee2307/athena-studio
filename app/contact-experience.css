@@ -1,10 +1,9 @@
 /* Athena interaction layer: accessible contact sheet and moving editorial ribbon */
-.athena-ticker{position:relative;overflow:hidden;background:#1b1e1e;color:#f1f3ef;padding:18px 0;border-block:1px solid #303333;isolation:isolate}
+.athena-ticker{position:relative;overflow:hidden;background:#171717;color:#f7f7f7;padding:18px 0;border-block:1px solid #303030;isolation:isolate}
 .athena-ticker::before,.athena-ticker::after{position:absolute;top:0;bottom:0;width:6%;content:"";z-index:2;pointer-events:none}
-.athena-ticker::before{left:0;background:linear-gradient(to right,#1b1e1e,transparent)}
-.athena-ticker::after{right:0;background:linear-gradient(to left,#1b1e1e,transparent)}
+.athena-ticker::before{left:0;background:linear-gradient(to right,#171717,transparent)}
+.athena-ticker::after{right:0;background:linear-gradient(to left,#171717,transparent)}
 .athena-ticker-track{width:max-content;display:flex;align-items:center;animation:athena-marquee-forward 44s linear infinite;will-change:transform}
-.athena-ticker:hover .athena-ticker-track{animation-play-state:paused}
 .athena-ticker-group{display:flex;align-items:center;flex-shrink:0}
 .athena-ticker-group>span{font-size:clamp(12px,1.5vw,17px);letter-spacing:.11em;font-weight:750;white-space:nowrap;margin-right:40px;display:flex;align-items:center;gap:40px}
 .athena-ticker-symbol{font-size:20px;color:#cacaca;font-weight:400}
@@ -48,3 +47,5 @@
 }
 .athena-contact-dialog button,.athena-contact-dialog a,.agency-contact-action{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .athena-contact-dialog button{user-select:none}
+
+.athena-project-brief{border:0;border-top:1px solid #d3d3d3;margin:6px 0;padding:20px 0 0;display:grid;gap:18px;min-width:0}.athena-project-brief legend{padding:0 10px 0 0;font-size:11px;font-weight:650;letter-spacing:.03em;color:#343434}.athena-project-brief .brief-help{font-size:11px;line-height:1.7;color:#555;margin:0}.athena-project-brief select{min-height:44px}

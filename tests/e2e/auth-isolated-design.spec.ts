@@ -1,14 +1,14 @@
 import {test,expect} from "@playwright/test";
 
 for(const route of ["/login","/signup"]){
- test(`${route} is an isolated, centered account card without global chrome`,async({page})=>{
+ test(`${route} keeps a centered account card below the shared white header without footer`,async({page})=>{
   await page.goto(route);
   const frame=page.locator(".athena-auth-screen");
   const card=page.locator(".athena-auth-card");
   await expect(frame).toBeVisible();
   await expect(card).toBeVisible();
-  await expect(card.locator(".athena-auth-back")).toBeVisible();
-  await expect(page.locator(".athena-header")).toHaveCount(0);
+  await expect(page.locator(".athena-header")).toBeVisible();
+  await expect(page.locator(".athena-header")).toHaveCSS("background-color","rgb(255, 255, 255)");
   await expect(page.locator(".athena-footer")).toHaveCount(0);
   await expect(page.locator(".athena-ticker-track")).toHaveCount(0);
   await expect(page.locator(".agency-contact-dock")).toHaveCount(0);

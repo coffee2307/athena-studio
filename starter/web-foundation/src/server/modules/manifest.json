@@ -1,0 +1,1 @@
+{"modules":__MODULES_JSON__,"activation":"explicit-per-project","notes":"Danh sách lựa chọn của dự án; mỗi module cần implementation, secrets, persistence và acceptance riêng trước khi bật."}

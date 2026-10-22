@@ -12,7 +12,7 @@ test("Desktop header includes service choices, commercial process, account entry
  const menu=header.locator(".agency-service-menu");
  await menu.locator("summary").click();
  await expect(menu).toHaveAttribute("open","");
- await expect(menu.locator(".agency-dropdown a")).toHaveCount(4);
+ await expect(menu.locator(".agency-dropdown a")).toHaveCount(5);
  await menu.locator("summary").click();
  await expect(menu).not.toHaveAttribute("open","");
  await expect(header.getByRole("link",{name:"Quy trình"})).toHaveAttribute("href","/process");
@@ -27,7 +27,7 @@ test("Animated mobile navigation traps focus, locks document scroll, closes with
  await toggle.click();
  await expect(menu).toBeVisible();
  await expect(page.locator("body")).toHaveCSS("overflow","hidden");
- await expect(page.locator(".agency-mobile-panel .agency-mobile-services a")).toHaveCount(3);
+ await expect(page.locator(".agency-mobile-panel .agency-mobile-services a")).toHaveCount(4);
  await expect(menu.locator("a.agency-mobile-signin")).toHaveAttribute("href","/login");
  await expect(menu.locator("a.agency-mobile-signup")).toHaveAttribute("href","/signup");
  const details=await menu.evaluate(el=>({

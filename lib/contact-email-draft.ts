@@ -1,10 +1,12 @@
+import {composeInquiryMessage,type ProjectBriefFields} from "./project-brief.ts";
 /**
  * Client-side email draft fallback. Does not transmit or store a lead.
  * The visitor must review and send the message in their own email client.
  */
-export type EmailBriefFields={name:string;email:string;service:string;message:string};
+export type EmailBriefFields={name:string;email:string;service:string;message:string}&ProjectBriefFields;
 export function createInquiryEmailDraft(fields:EmailBriefFields,recipient:string){
  const name=fields.name.trim(),email=fields.email.trim(),service=fields.service.trim(),message=fields.message.trim();
+ const inquiryMessage=composeInquiryMessage(message,fields);
  if(name.length<2||name.length>100)throw Error("Vui lòng nhập tên hợp lệ.");
  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)||email.length>200)throw Error("Địa chỉ email không hợp lệ.");
  if(!["web-development","website-care","ai-integration","micro-saas","other"].includes(service))
@@ -26,7 +28,7 @@ export function createInquiryEmailDraft(fields:EmailBriefFields,recipient:string
   "Dịch vụ quan tâm: "+options[service],
   "",
   "Vấn đề và mục tiêu:",
-  message,
+  inquiryMessage,
   "",
   "Vui lòng phản hồi qua email nêu trên.",
   "",

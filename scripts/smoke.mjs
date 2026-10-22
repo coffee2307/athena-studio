@@ -5,7 +5,7 @@ async function freePort(){const s=createServer();await new Promise((ok,err)=>{s.
 const port=await freePort(),root="http://127.0.0.1:"+port;
 const app=spawn(process.execPath,["node_modules/next/dist/bin/next","start","-p",String(port),"-H","127.0.0.1"],{cwd:process.cwd(),stdio:["ignore","pipe","pipe"],env:{...process.env,NEXT_PUBLIC_SITE_URL:root,RESEND_API_KEY:"",CONTACT_EMAIL:"",CONTACT_FROM_EMAIL:""}});
 let stderr="",exited=false;app.stderr.on("data",s=>stderr+=s.toString());app.on("exit",()=>exited=true);
-const publicRoutes=["/","/services","/services/web-development","/services/website-care","/services/ai-integration","/services/micro-saas","/projects","/projects/pham","/projects/econith","/products","/about","/process","/pricing","/contact","/legal","/legal/privacy","/legal/terms","/legal/cookies","/legal/service-policy","/robots.txt","/sitemap.xml","/og-athena.png","/api/health","/login","/signup","/forgot-password"];
+const publicRoutes=["/","/services","/services/web-development","/services/web-development/templates","/templates/creative-studio","/templates/modern-corporate","/services/website-care","/services/ai-integration","/services/micro-saas","/projects","/projects/pham","/projects/econith","/products","/about","/process","/pricing","/contact","/legal","/legal/privacy","/legal/terms","/legal/cookies","/legal/service-policy","/robots.txt","/sitemap.xml","/og-athena.png","/api/health","/login","/signup","/forgot-password"];
 const oldPaths={"/dich-vu":"/services","/dich-vu/web-development":"/services/web-development","/du-an":"/projects","/du-an/pham":"/projects/pham","/san-pham":"/products","/san-pham/sitepulse":"/products/sitepulse","/ve-athena":"/about","/quy-trinh":"/process","/bao-gia":"/pricing","/lien-he":"/contact","/phap-ly":"/legal","/phap-ly/quyen-rieng-tu":"/legal/privacy","/phap-ly/dieu-khoan":"/legal/terms","/phap-ly/cookie":"/legal/cookies","/dang-nhap":"/login","/dang-ky":"/signup","/tai-khoan":"/account","/quan-tri":"/admin","/work":"/projects","/work/pham":"/projects/pham","/studio":"/about"};
 try{
  let ready=false;
@@ -62,6 +62,8 @@ try{
  assert.match(sitemap,/\/process/);
  assert.match(sitemap,/\/pricing/);
  assert.match(sitemap,/\/legal\/service-policy/);
+ assert.match(sitemap,/\/services\/web-development\/templates/);
+ assert.match(sitemap,/\/templates\/creative-studio/);
  assert.doesNotMatch(sitemap,/\/projects\/qrio|\/work\//);
  const robots=await (await fetch(root+"/robots.txt")).text();
  assert.match(robots,/Disallow: \/|Disallow:\//,"unconfigured non-HTTPS preview must not be indexed");

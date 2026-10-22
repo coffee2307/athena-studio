@@ -12,7 +12,10 @@ export function SiteChrome({children}:{children:ReactNode}){
  const pathname=usePathname();
  const isAuthenticationPage=pathname==="/login"||pathname==="/signup"||pathname==="/forgot-password";
  if(isAuthenticationPage){
-  return <main id="main-content" className="athena-auth-main">{children}</main>;
+  return <AuthSessionProvider>
+   <Navbar/>
+   <main id="main-content" className="athena-auth-main">{children}</main>
+  </AuthSessionProvider>;
  }
  return <AuthSessionProvider>
   <Navbar/>

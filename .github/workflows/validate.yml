@@ -194,6 +194,21 @@ jobs:
           docker compose --env-file deploy/vps/config.example -f deploy/vps/compose.yaml down -v --remove-orphans || true
           rm -rf deploy/vps/secrets
 
+  starter-build:
+    name: Independent starter / ${{ matrix.template }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        template: [creative-studio, modern-corporate, commerce-standard]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Generate, install, typecheck, build and HTTP check isolated site
+        run: node scripts/verify-starter.mjs "${{ matrix.template }}"
   isolated-recovery-drill:
     name: Encrypted backup restore in an isolated PostgreSQL container
     runs-on: ubuntu-latest
