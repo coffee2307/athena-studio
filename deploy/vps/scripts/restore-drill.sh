@@ -28,6 +28,10 @@ digest="$(printf '%s' "$record" | cut -c1-64)"
 
 drill="athena_restore_drill_$(date -u +%Y%m%d%H%M%S)_$RANDOM"
 created=false
+restore_debug=false
+if [[ -v ATHENA_RESTORE_DEBUG ]]; then restore_debug="$ATHENA_RESTORE_DEBUG"; fi
+restore_stderr=/dev/null
+if [[ "$restore_debug" == true ]]; then restore_stderr=/dev/stderr; fi
 cleanup(){
  result=$?
  trap - EXIT
@@ -61,7 +65,7 @@ done
 # Stream decrypt and restore; keep archive, key, and database off persistent disk.
 if ! timeout 180 age --decrypt --identity "$ATHENA_BACKUP_AGE_IDENTITY" "$encrypted" 2>/dev/null |
  timeout 180 docker exec -i "$drill" pg_restore --exit-on-error --single-transaction \
- --no-owner --no-acl --username postgres --dbname athena_recovery >/dev/null 2>&1; then
+ --no-owner --no-acl --username postgres --dbname athena_recovery >/dev/null 2>"$restore_stderr"; then
  echo "Isolated restore failed (details withheld)" >&2; exit 1
 fi
 # Confirm expected tables can be read without exposing customer rows.

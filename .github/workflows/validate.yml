@@ -240,6 +240,7 @@ jobs:
           docker exec athena-recovery-source pg_dump -U postgres -d athena_identity --format custom --no-owner --no-acl \
             | age --encrypt --recipient "$(cat .qa/recovery-ci/recipient)" --output "$archive"
           (cd .qa/recovery-ci && sha256sum "$(basename "$archive")" > "$(basename "$archive").sha256")
+          export ATHENA_RESTORE_DEBUG=true
           ATHENA_BACKUP_AGE_IDENTITY="$PWD/.qa/recovery-ci/identity" \
             bash deploy/vps/scripts/restore-drill.sh --drill "$PWD/$archive"
           if docker ps -a --format '{{.Names}}' | grep -q '^athena_restore_drill_'; then
