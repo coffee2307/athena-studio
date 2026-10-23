@@ -21,7 +21,7 @@ export function LocalPasswordAuth({mode,googleEnabled=false,githubEnabled=false,
   }
   if(errorCode)setError(oauthErrorAdvice(errorCode));
   if(!errorCode)auth().getSession().then(x=>{if(x.data?.session)window.location.replace("/profile");}).catch(()=>{});
- },[]);
+ },[expectedOrigin]);
  async function loginWith(provider:"google"|"github"){
   if(busy||!ready||(provider==="google"&&!googleEnabled)||(provider==="github"&&!githubEnabled))return;
   if(!matchesIdentityOrigin(expectedOrigin,window.location.origin)){

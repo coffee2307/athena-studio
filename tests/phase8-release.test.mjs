@@ -16,6 +16,10 @@ test("Phase 8A enforces fail-closed account, operations and SitePulse flags",()=
  }
  for(const key of REQUIRED_UNSET)assert.throws(()=>assertSafeExampleEnv(
   base.replace(key+"=",key+"=forbidden-secret")),new RegExp(key));
+ assert.equal(assertSafeExampleEnv(base.replace("http://localhost:3000","http://127.0.0.1:3182")).flagsDisabled,10);
+ for(const unsafe of ["http://0.0.0.0:3182","http://127.0.0.1:3000","https://athena.example","http://localhost:3182"]){
+  assert.throws(()=>assertSafeExampleEnv(base.replace("http://localhost:3000",unsafe)),/remain local/,unsafe);
+ }
  assert.throws(()=>assertSafeExampleEnv(base+"NEXT_PUBLIC_SITE_URL=http://new-origin.test\n"),/Duplicate/);
  assert.throws(()=>assertSafeExampleEnv(base+"NEXT_PUBLIC_UNREVIEWED_PUBLIC_KEY=x\n"),/security review/);
 });

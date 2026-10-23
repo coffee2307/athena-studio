@@ -36,7 +36,7 @@ if(process.env.CI==="true"||process.env.NODE_ENV==="production"){
    }
    await plan.runMigrations();
    console.log("Local Better Auth schema verified in "+settings.databaseFile+" (no credentials printed).");
-  }catch(error){
+  }catch{
    console.error("Local identity migration failed. Do not delete the database; inspect schema before retrying.");
    process.exitCode=1;
   }finally{
