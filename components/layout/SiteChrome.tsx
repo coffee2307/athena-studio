@@ -2,7 +2,6 @@
 import type {ReactNode} from "react";
 import {usePathname} from "next/navigation";
 import {Navbar} from "@/components/layout/Navbar";
-import {AuthNavigation} from "@/components/auth/AuthNavigation";
 import {AuthSessionProvider} from "@/components/auth/AuthSessionProvider";
 import {Footer} from "@/components/layout/Footer";
 import {ContactDock} from "@/components/layout/ContactDock";
@@ -17,7 +16,7 @@ export function SiteChrome({children}:{children:ReactNode}){
  }
  if(isAuthenticationPage){
   return <AuthSessionProvider>
-   <AuthNavigation/>
+   <Navbar/>
    <main id="main-content" className="athena-auth-main">{children}</main>
   </AuthSessionProvider>;
  }

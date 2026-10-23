@@ -88,3 +88,7 @@
  .athena-auth-main .athena-auth-screen{min-height:calc(100dvh - 69px);padding-top:22px}
 }
 @media(prefers-reduced-motion:reduce){.home-demo-section *{transition:none!important}}
+
+/* Authentication shares the marketing navbar; account form remains centered. */
+@media(min-width:981px){.athena-auth-main .athena-auth-screen{min-height:calc(100svh - 105px);min-height:calc(100dvh - 105px)}}
+@media(max-width:980px){.athena-auth-main .athena-auth-screen{min-height:calc(100svh - 73px);min-height:calc(100dvh - 73px)}}

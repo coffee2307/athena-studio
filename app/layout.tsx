@@ -29,6 +29,7 @@ import "@/app/template-special-existing.css";
 import "@/app/template-legacy-signatures.css";
 import "@/app/template-experience-pages.css";
 import "@/app/athena-home-showcase-and-navigation.css";
+import "@/app/athena-products-fix.css";
 
 export const metadata: Metadata = {
   ...createMetadata(),
