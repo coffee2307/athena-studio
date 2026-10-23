@@ -36,3 +36,35 @@
 .world-site .special-footer-cta a:focus-visible{
  outline:3px solid currentColor;outline-offset:4px;
 }
+
+/* SaaS uses a light dashboard inside its dark landing page. These foregrounds
+   are deliberately calibrated for the light nested panels, not the dark hero. */
+.world-site[data-world="saas-product"] .legacy-saas-top span {color:#4c5869}
+.world-site[data-world="saas-product"] .legacy-saas-columns aside {color:#45536b}
+.world-site[data-world="saas-product"] .legacy-saas-columns aside span:first-child {color:#344489}
+.world-site[data-world="saas-product"] .legacy-saas-metrics span {color:#405273}
+.world-site[data-world="saas-product"] .legacy-saas-row span {color:#394b79}
+.world-site[data-world="saas-product"] .legacy-saas-features header span {color:#37477b}
+.world-site[data-world="saas-product"] .legacy-saas-feature>div:first-child>span {color:#445275}
+.world-site[data-world="saas-product"] .legacy-saas-feature p {color:#42516a}
+
+/* Restaurant: warm earth tones remain, but descriptive copy and small
+   labels must stay readable on the cream/terracotta surfaces. */
+.world-site[data-world="hospitality-booking"] {--w-muted:#4b584d}
+.world-site[data-world="hospitality-booking"] .restaurant-opening>p {color:#694936}
+.world-site[data-world="hospitality-booking"] .restaurant-opening>span {color:#465849}
+.world-site[data-world="hospitality-booking"] .restaurant-menu-heading span {color:#68472e}
+.world-site[data-world="hospitality-booking"] .restaurant-dishes a small {color:#62452f}
+.world-site[data-world="hospitality-booking"] .restaurant-dishes p {color:#485047}
+.world-site[data-world="hospitality-booking"] .restaurant-reserve>div:last-child>span {color:#62452e}
+.world-site[data-world="hospitality-booking"] .restaurant-reserve p {color:#415346}
+.world-site[data-world="hospitality-booking"] .world-footer {
+ --w-muted:#435146;
+}
+.world-site[data-world="hospitality-booking"] .world-footer :is(p,span,.world-footer-bottom,a[href="#world-top"]) {
+ color:#435146;
+}
+.world-site[data-world="hospitality-booking"] .world-footer .world-footer-identity>a,
+.world-site[data-world="hospitality-booking"] .world-footer .world-footer-column>a {
+ color:#293b2e;
+}

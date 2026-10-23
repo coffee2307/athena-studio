@@ -22,7 +22,17 @@ test("template dialog provides iframe demo, pricing and working navigation",asyn
  await expect(dialog.getByText("Cấu trúc dự kiến")).toBeVisible();
  const demo=page.frameLocator(".template-demo-viewport iframe");
  await expect(demo.locator(".world-header")).toBeVisible();
- await demo.locator(".world-desktop-nav a[href$='/services']").click();
+ // The iframe uses its own responsive breakpoint, independent of the host
+ // viewport. Exercise whichever navigation is visible in the preview frame.
+ const desktopNav=demo.locator(".world-desktop-nav a[href$='/services']");
+ if(await desktopNav.isVisible()){
+  await desktopNav.click();
+ }else{
+  await demo.getByRole("button",{name:"Mở menu"}).click();
+  await expect(demo.locator(".world-mobile-nav.is-open")).toBeVisible();
+  await demo.locator(".world-mobile-nav a[href$='/services']").click();
+ }
+ await expect(demo.locator(".experience-services")).toBeVisible();
  await expect(demo.locator(".experience-service-panels")).toBeVisible();
  await dialog.getByRole("button",{name:"Đóng bản xem trước"}).click();
  await expect(dialog).not.toBeVisible();
