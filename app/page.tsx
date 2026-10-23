@@ -1,9 +1,8 @@
 import {Icon} from "@/components/ui/Icon";
+import {HomeTemplateShowcase} from "@/components/home/HomeTemplateShowcase";
 import {ServiceTicker} from "@/components/experience/ServiceTicker";
 import Link from "next/link";
 import {offerings} from "@/lib/offerings";
-import {featuredProjects} from "@/data/projects";
-import {ProjectCard} from "@/components/portfolio/ProjectCard";
 import {createMetadata} from "@/lib/metadata";
 
 export const metadata=createMetadata(
@@ -93,17 +92,7 @@ export default function HomePage(){
    </div>
   </div></section>
 
-  <section className="section-space portfolio-featured" aria-labelledby="featured-projects-heading">
-   <div className="container">
-    <div className="case-section-head reveal">
-     <div><p className="section-index"><span className="index-circle">03</span> SẢN PHẨM ĐÃ THỰC HIỆN / NGHIÊN CỨU</p>
-      <h2 id="featured-projects-heading">Xem cách làm,<br/><span>không chỉ nghe giới thiệu.</span></h2></div>
-     <p>Khám phá các sản phẩm số và hướng nghiên cứu của người sáng lập Athena, qua trải nghiệm, tính năng và cách giải quyết vấn đề.</p>
-    </div>
-    <div className="portfolio-grid">{featuredProjects.map((p,i)=><ProjectCard key={p.slug} project={p} index={i}/>)}</div>
-    <div className="featured-footer"><p>Tìm hiểu cách sản phẩm được thiết kế cho nhu cầu thực tế.</p><Link href="/projects" className="underlined-link">Xem hồ sơ dự án <Icon name="arrow-up-right" size={18}/></Link></div>
-   </div>
-  </section>
+  <HomeTemplateShowcase/>
 
   <section className="client-lab-band" aria-label="Phòng nghiên cứu sản phẩm"><div className="container client-lab-inner">
    <div><p className="section-index"><span className="index-circle">04</span> PHÒNG NGHIÊN CỨU</p>

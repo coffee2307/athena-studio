@@ -28,6 +28,7 @@ import "@/app/template-signatures.css";
 import "@/app/template-special-existing.css";
 import "@/app/template-legacy-signatures.css";
 import "@/app/template-experience-pages.css";
+import "@/app/athena-home-showcase-and-navigation.css";
 
 export const metadata: Metadata = {
   ...createMetadata(),
@@ -39,5 +40,5 @@ export const metadata: Metadata = {
 };
 export const viewport: Viewport = { themeColor: "#ffffff", width: "device-width", initialScale: 1 };
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="vi"><body><a className="skip-link" href="#main-content">ChuyĂ¡Â»Æ’n tĂ¡Â»â€ºi nĂ¡Â»â„¢i dung chÄ‚Â­nh</a><SiteChrome>{children}</SiteChrome></body></html>;
+  return <html lang="vi"><body><a className="skip-link" href="#main-content">Chuyển tới nội dung chính</a><SiteChrome>{children}</SiteChrome></body></html>;
 }
