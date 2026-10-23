@@ -58,7 +58,10 @@ docker create --name "$drill" --network none --memory 512m --cpus 1 --pids-limit
 created=true
 docker start "$drill" >/dev/null
 for attempt in $(seq 1 30); do
- if docker exec "$drill" pg_isready -U postgres -d athena_recovery >/dev/null 2>&1; then break; fi
+ # pg_isready alone may see the temporary init server, which stops before final boot.
+ # Wait for the official image to finish initialization and accept connections.
+ if docker logs "$drill" 2>&1 | grep -Fq "PostgreSQL init process complete; ready for start up." &&
+    docker exec "$drill" pg_isready -U postgres -d athena_recovery >/dev/null 2>&1; then break; fi
  [[ "$attempt" -lt 30 ]] || { echo "Recovery container did not become ready" >&2; exit 1; }
  sleep 1
 done

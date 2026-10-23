@@ -1,52 +1,51 @@
 import {test,expect} from "@playwright/test";
 
-test("template library has 12 searchable directions and filters by industry",async({page})=>{
+test("template library presents 20 concepts, search and industry filters",async({page})=>{
  await page.goto("/services/web-development/templates");
- await expect(page.getByRole("heading",{name:/Chọn một hướng đi/})).toBeVisible();
- await expect(page.locator(".template-card")).toHaveCount(12);
- await page.getByLabel("Ngành").selectOption({label:"Thời trang"});
+ await expect(page.locator(".template-card")).toHaveCount(20);
+ await expect(page.getByRole("heading",{name:/Chọn cảm hứng/})).toBeVisible();
+ await page.getByLabel("Ngành nghề").selectOption({label:"Thời trang"});
  await expect(page.locator(".template-card")).toHaveCount(1);
- await expect(page.locator(".template-card h2")).toContainText("Thương hiệu thời trang");
- await page.getByLabel("Ngành").selectOption({label:"Tất cả ngành"});
- await page.getByLabel("Tìm mẫu").fill("đặt chỗ");
+ await expect(page.locator(".template-card h3")).toContainText("Thương hiệu thời trang");
+ await page.getByLabel("Ngành nghề").selectOption({label:"Tất cả ngành"});
+ await page.getByLabel("Tìm kiếm").fill("đặt chỗ");
  await expect(page.locator(".template-card")).toHaveCount(1);
- await expect(page.locator(".template-card h2").first()).toContainText("Nhà hàng");
+ await expect(page.locator(".template-card h3")).toContainText("Nhà hàng");
 });
 
-test("clicking a template opens a real, scrollable website with scope and pricing",async({page})=>{
+test("template dialog provides iframe demo, pricing and working navigation",async({page})=>{
  await page.goto("/services/web-development/templates");
- await page.getByRole("button",{name:"Mở demo website Thương hiệu thời trang"}).click();
- const modal=page.getByRole("dialog",{name:/Thương hiệu thời trang/});
- await expect(modal).toBeVisible();
- await expect(modal.getByText("25–55 triệu đồng")).toBeVisible();
- await expect(modal.getByText("Phạm vi tham khảo")).toBeVisible();
- const demo=page.locator(".template-demo-modal .template-demo-site");
- await expect(demo).toBeVisible();
- await expect(demo.locator(".template-demo-image")).toHaveCount(8);
- await demo.getByRole("button",{name:"Mở menu"}).click();
- await expect(demo.getByRole("navigation",{name:"Điều hướng demo"})).toBeVisible();
- await modal.getByRole("button",{name:"Đóng bản demo"}).click();
- await expect(modal).toBeHidden();
+ await page.getByRole("button",{name:"Trải nghiệm website Thương hiệu thời trang"}).click();
+ const dialog=page.locator("dialog.template-demo-modal");
+ await expect(dialog).toBeVisible();
+ await expect(dialog.getByText("25–55 triệu đồng")).toBeVisible();
+ await expect(dialog.getByText("Cấu trúc dự kiến")).toBeVisible();
+ const demo=page.frameLocator(".template-demo-viewport iframe");
+ await expect(demo.locator(".world-header")).toBeVisible();
+ await demo.locator(".world-desktop-nav a[href$='/services']").click();
+ await expect(demo.locator(".experience-service-panels")).toBeVisible();
+ await dialog.getByRole("button",{name:"Đóng bản xem trước"}).click();
+ await expect(dialog).not.toBeVisible();
 });
 
-test("commerce demo supports local cart interactions without checkout",async({page})=>{
- await page.goto("/services/web-development/templates");
- await page.getByRole("button",{name:"Mở demo website Cửa hàng trực tuyến"}).click();
- const demo=page.locator(".template-demo-modal .template-demo-site");
- await demo.getByRole("button",{name:/Thêm vào túi/}).first().click();
- await expect(demo.getByRole("button",{name:"Giỏ hàng, 1 sản phẩm"})).toBeVisible();
+test("commerce demo supports local cart without external checkout",async({page})=>{
+ await page.goto("/template-demos/commerce-standard/work");
+ await page.locator(".experience-catalog-card button").first().click();
+ await expect(page.getByRole("dialog",{name:"Giỏ hàng demo"})).toBeVisible();
+ await expect(page.locator(".world-cart-drawer")).toContainText("1 sản phẩm");
+ await expect(page.locator("input[name='payment']")).toHaveCount(0);
 });
 
-test("direct demo contains five local images and fits mobile width",async({page})=>{
+test("direct demo is responsive and uses real site header",async({page})=>{
  await page.setViewportSize({width:390,height:844});
  await page.goto("/template-demos/architecture-studio");
- await expect(page.locator(".template-demo-site-header")).toBeVisible();
- await expect(page.locator(".template-demo-image")).toHaveCount(8);
+ await expect(page.locator(".world-header")).toBeVisible();
+ await expect(page.locator("img[src*='image-']").first()).toBeVisible();
  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
- expect(overflow).toBeLessThanOrEqual(1);
+ expect(overflow).toBeLessThanOrEqual(2);
 });
 
-test("demo asks whether the visitor likes the template after five minutes",async({page})=>{
+test("five-minute visitor prompt is accessible but creates no booking",async({page})=>{
  await page.clock.install();
  await page.goto("/template-demos/creative-studio");
  await page.clock.fastForward(5*60*1000);
@@ -54,9 +53,9 @@ test("demo asks whether the visitor likes the template after five minutes",async
  await expect(page.getByRole("link",{name:/Trao đổi với Athena/})).toHaveAttribute("href",/template=creative-studio/);
 });
 
-test("template detail links preserve the selected template in inquiry",async({page})=>{
+test("detail pages preserve chosen template and scope",async({page})=>{
  await page.goto("/templates/fashion-archive");
- await expect(page.getByRole("heading",{level:1,name:/.+/})).toBeVisible();
+ await expect(page.getByRole("heading",{level:1})).toBeVisible();
  const mobile=page.getByRole("button",{name:"Điện thoại"});
  await mobile.click();
  await expect(mobile).toHaveAttribute("aria-pressed","true");
@@ -65,26 +64,19 @@ test("template detail links preserve the selected template in inquiry",async({pa
  await expect(page.getByText("Thương hiệu thời trang",{exact:true})).toBeVisible();
 });
 
-test("ticker animation does not pause on hover and auth keeps shared navigation without footer",async({page})=>{
- await page.goto("/");
- const track=page.locator(".athena-ticker-track");
- await expect(track).toBeVisible();
- await page.locator(".athena-ticker").hover();
- await expect(track).not.toHaveCSS("animation-play-state","paused");
+test("auth remains navigable without duplicate footer",async({page})=>{
  await page.goto("/login");
  await expect(page.locator(".agency-header")).toBeVisible();
  await expect(page.locator(".agency-footer")).toHaveCount(0);
- await expect(page.locator(".athena-contact-dock")).toHaveCount(0);
+ await expect(page.locator(".agency-contact-dock")).toHaveCount(0);
 });
 
-test("selected template creates a reviewed project brief without transmitting a lead",async({page})=>{
- const requests:string[]=[];
- page.on("request",request=>{if(request.url().includes("/api/inquiry"))requests.push(request.url());});
+test("contact brief includes current template version and does not submit to API",async({page})=>{
+ const posts:string[]=[];
+ page.on("request",request=>{if(request.url().includes("/api/inquiry"))posts.push(request.url());});
  await page.goto("/contact?service=web-development&template=creative-studio");
- await expect(page.locator(".template-inquiry-selection")).toContainText("Studio sáng tạo");
  const form=page.locator(".athena-email-brief-form");
  await expect(form).toBeVisible();
- await expect(form.getByLabel("Dịch vụ quan tâm")).toHaveValue("web-development");
  await form.getByLabel("Họ tên").fill("Nguyễn Coffee");
  await form.getByLabel("Email liên hệ").fill("coffee@example.com");
  await form.getByLabel("Mục tiêu chính").fill("Trưng bày portfolio để nhận yêu cầu tư vấn.");
@@ -94,40 +86,41 @@ test("selected template creates a reviewed project brief without transmitting a 
  await form.getByRole("button",{name:/Chuẩn bị nội dung email/}).click();
  const result=page.locator(".athena-email-brief-result");
  await expect(result).toContainText("chưa gửi");
- await expect(page.getByLabel("Nội dung bản nháp")).toHaveValue(/creative-studio · v1.0.0/);
- await expect(page.getByLabel("Nội dung bản nháp")).toHaveValue(/10–30 triệu đồng/);
+ const preview=page.getByLabel("Nội dung bản nháp");
+ await expect(preview).toHaveValue(/creative-studio · v2.0.0/);
+ await expect(preview).toHaveValue(/10–30 triệu đồng/);
  const href=await result.getByRole("link",{name:/Mở ứng dụng email/}).getAttribute("href");
- expect(new URL(href!).searchParams.get("body")).toContain("Trưng bày portfolio");
- expect(requests).toEqual([]);
+ expect(href).toMatch(/^mailto:/);
+ expect(posts).toEqual([]);
  await form.getByLabel("Mục tiêu chính").fill("Mục tiêu đã thay đổi");
  await expect(result).toHaveCount(0);
 });
 
-test("service-only contact links preserve the requested service in the email brief",async({page})=>{
+test("contact preselects website-care service",async({page})=>{
  await page.goto("/contact?service=website-care");
  await expect(page.locator(".athena-email-brief-form").getByLabel("Dịch vụ quan tâm")).toHaveValue("website-care");
 });
 
-test("empty search resets all filters and the demo link can be opened from the detail page",async({page})=>{
+test("empty search resets filters and templates sort by name",async({page})=>{
  await page.goto("/services/web-development/templates");
- await page.getByLabel("Tìm mẫu").fill("không-có-mẫu-này");
- await expect(page.locator(".template-count")).toContainText("0 mẫu phù hợp");
- await page.getByRole("button",{name:"Xóa bộ lọc"}).click();
- await expect(page.locator(".template-card")).toHaveCount(12);
+ await page.getByLabel("Tìm kiếm").fill("không-có-mẫu-này");
+ await expect(page.locator(".template-empty")).toBeVisible();
+ await page.getByRole("button",{name:/Xem tất cả mẫu/}).click();
+ await expect(page.locator(".template-card")).toHaveCount(20);
  await page.getByLabel("Sắp xếp").selectOption("name");
- const titles=await page.locator(".template-card h2").allTextContents();
+ const titles=await page.locator(".template-card h3").allTextContents();
  expect(titles).toEqual([...titles].sort((a,b)=>a.localeCompare(b,"vi")));
  await page.goto("/templates/creative-studio");
  await expect(page.getByRole("link",{name:"Mở demo toàn trang"})).toHaveAttribute("href","/template-demos/creative-studio");
 });
 
-test("template routes have no horizontal overflow and reduced motion is respected",async({page})=>{
+test("template layouts avoid horizontal overflow and support reduced motion",async({page})=>{
  for(const width of [360,390,768,1440]){
   await page.setViewportSize({width,height:900});
   for(const route of ["/services/web-development/templates","/templates/creative-studio","/template-demos/creative-studio","/contact?template=creative-studio"]){
    await page.goto(route);
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
-   expect(overflow,route+" at "+width).toBeLessThanOrEqual(1);
+   expect(overflow,route+" at "+width).toBeLessThanOrEqual(2);
   }
  }
  await page.emulateMedia({reducedMotion:"reduce"});

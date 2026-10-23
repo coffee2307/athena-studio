@@ -10,5 +10,5 @@ export const metadata={...createMetadata("Đăng nhập tài khoản",undefined,
 export default function Login(){
  const settings=authSettings();
  const identity=standaloneIdentityConfig();
- return <AuthShell>{identity?.localPassword?<LocalPasswordAuth mode="login" googleEnabled={Boolean(identity.google)} githubEnabled={Boolean(identity.github)}/>:settings.enabled?<AuthPanel mode="login" googleEnabled={process.env.NEXT_PUBLIC_ATHENA_GOOGLE_ENABLED==="true"}/>:<AuthUnavailable/>}</AuthShell>;
+ return <AuthShell>{identity&&(identity.localPassword||identity.github||identity.google)?<LocalPasswordAuth mode="login" expectedOrigin={identity.origin} passwordEnabled={identity.localPassword===true} googleEnabled={Boolean(identity.google)} githubEnabled={Boolean(identity.github)}/>:settings.enabled?<AuthPanel mode="login" googleEnabled={process.env.NEXT_PUBLIC_ATHENA_GOOGLE_ENABLED==="true"}/>:<AuthUnavailable/>}</AuthShell>;
 }

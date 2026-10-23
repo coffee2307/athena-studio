@@ -9,10 +9,10 @@ test("A customer can identify a need and find the matching service without readi
  await expect(shortcuts.nth(1)).toHaveAttribute("href","/services/website-care");
  await expect(shortcuts.nth(2)).toHaveAttribute("href","/services/ai-integration");
  await expect(page.locator(".client-solution-row")).toHaveCount(3);
- await expect(page.getByRole("link",{name:/Gửi nhu cầu của bạn/})).toHaveAttribute("href","/contact");
+ await expect(page.getByRole("link",{name:/Bắt đầu dự án/})).toHaveAttribute("href","/start");
  await expect(page.locator(".client-lab-band")).toContainText("chưa được mở bán");
- await expect(page.locator(".case-section-head")).toContainText("Khám phá các sản phẩm số và hướng nghiên cứu");
- await expect(page.locator(".case-section-head")).not.toContainText("không phải danh sách hợp đồng khách hàng");
+ await expect(page.locator("#website-mau")).toContainText("Một phong cách riêng");
+ await expect(page.locator("#website-mau .home-demo-card")).toHaveCount(4);
  await page.locator(".client-quick-nav a").nth(1).click();
  await expect(page).toHaveURL(/\/services\/website-care$/);
 });
