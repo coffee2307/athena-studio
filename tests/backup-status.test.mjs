@@ -40,7 +40,12 @@ test("backup status rejects stale archives, symlinks and invalid freshness thres
  assert.equal((await inspectBackupDirectory(dir,{now:now+37*60*60*1000})).stale,true);
  const other=path.join(path.dirname(dir),"outside.age");
  await writeFile(other,"secret");
- await symlink(other,path.join(dir,"athena-identity-20261022T115000Z-link1.age"));
+ try{await symlink(other,path.join(dir,"athena-identity-20261022T115000Z-link1.age"));}
+ catch(error){
+  if(process.platform==="win32"&&["EPERM","EACCES"].includes(error?.code))
+   t.diagnostic("Symlink creation requires Windows Developer Mode/admin; running stale and threshold assertions without the symlink fixture.");
+  else throw error;
+ }
  const result=await inspectBackupDirectory(dir,{now});
  assert.equal(result.validArchives,1);
  await assert.rejects(()=>inspectBackupDirectory(dir,{maxAgeHours:0}),/maximum backup age/);

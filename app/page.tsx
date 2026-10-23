@@ -28,7 +28,7 @@ export default function HomePage(){
       <h1 id="hero-title">Website chưa hiệu quả?<br/><span>Công việc còn thủ công?</span></h1>
       <p className="client-hero-lede">Athena hỗ trợ thiết kế website, cải thiện hệ thống hiện có và ứng dụng AI vào những công việc lặp lại. <strong>Bắt đầu từ vấn đề của bạn, không phải từ một công nghệ được chọn sẵn.</strong></p>
       <div className="client-hero-actions">
-       <Link className="pill-link pill-dark" href="/contact">Gửi nhu cầu của bạn <Icon name="arrow-up-right" size={18}/></Link>
+       <Link className="pill-link pill-dark" href="/start">Bắt đầu dự án <Icon name="arrow-up-right" size={18}/></Link>
        <Link className="underlined-link" href="#giai-phap">Xem Athena hỗ trợ gì <Icon name="arrow-right" size={17} className="agency-down-icon"/></Link>
       </div>
       <p className="client-hero-helper">Chưa rõ cần giải pháp nào? Chỉ cần mô tả vấn đề đang gặp.</p>
@@ -105,7 +105,7 @@ export default function HomePage(){
    <p className="eyebrow"><span className="eyebrow-dot"/> TRAO ĐỔI NHU CẦU THỰC TẾ</p>
    <h2>Đang gặp vấn đề<br/><span>với website hoặc quy trình?</span></h2>
    <p className="client-closing-copy">Hãy mô tả ngắn gọn điều đang gây khó khăn. Athena sẽ xem xét để trao đổi phạm vi và hướng xử lý phù hợp, không yêu cầu bạn phải chuẩn bị tài liệu kỹ thuật.</p>
-   <Link href="/contact" className="pill-link pill-light">Gửi yêu cầu tư vấn <Icon name="arrow-up-right" size={18}/></Link>
+   <Link href="/start" className="pill-link pill-light">Chuẩn bị yêu cầu tư vấn <Icon name="arrow-up-right" size={18}/></Link>
    <span className="closing-watermark" aria-hidden="true">ATHENA</span>
   </div></section>
  </>;
