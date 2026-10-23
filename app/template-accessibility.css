@@ -1,0 +1,38 @@
+/* Accessible foreground contrast across the template gallery and embedded demos.
+   Neutral monochrome values meet WCAG normal text contrast on the declared
+   light paper surfaces without flattening each sector's layout. */
+.templates-page .templates-intro-top,
+.templates-page .templates-intro-bottom,
+.templates-page .templates-intro h1 em,
+.templates-page .templates-intro-number small,
+.templates-page .templates-results p,
+.templates-page .templates-catalog .template-card-meta,
+.templates-page .templates-catalog .template-card-content > p,
+.templates-page .template-card-footer > span,
+.templates-page .template-thumbnail-browser,
+.templates-page .templates-catalog .template-personalize-note small {
+ color:#4f5250;
+}
+.templates-page .template-thumbnail-browser{background:#f7f7f7}
+.templates-page .template-search-label,
+.templates-page .template-filters label{color:#343837}
+.template-detail .template-detail-aside h2 em,
+.template-detail .template-detail-aside > p:not(.section-index),
+.template-detail .template-preview-disclaimer,
+.template-detail .template-reference-note,
+.template-detail .template-scope-metrics span{color:#4b504d}
+.template-revamp-dialog .template-demo-url,
+.template-revamp-dialog .template-demo-eyebrow,
+.template-revamp-dialog .template-demo-index,
+.template-revamp-dialog .template-demo-price span,
+.template-revamp-dialog .template-demo-quality span,
+.template-revamp-dialog .template-demo-price small,
+.template-revamp-dialog .template-demo-quality small,
+.template-revamp-dialog .template-demo-note{color:#4f5351}
+.world-site .special-footer-cta a{
+ background:#fff;
+ color:#171717;
+}
+.world-site .special-footer-cta a:focus-visible{
+ outline:3px solid currentColor;outline-offset:4px;
+}

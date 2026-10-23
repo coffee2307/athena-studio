@@ -31,6 +31,7 @@ import "@/app/template-experience-pages.css";
 import "@/app/athena-home-showcase-and-navigation.css";
 import "@/app/athena-products-fix.css";
 import "@/app/athena-soft-launch.css";
+import "@/app/template-accessibility.css";
 
 export const metadata: Metadata = {
   ...createMetadata(),
