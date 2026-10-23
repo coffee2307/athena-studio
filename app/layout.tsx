@@ -7,6 +7,7 @@ import "@fontsource/be-vietnam-pro/400-italic.css";
 import "@fontsource/be-vietnam-pro/500.css";
 import "@fontsource/be-vietnam-pro/600.css";
 import "@fontsource/be-vietnam-pro/700.css";
+import "@fontsource/noto-serif/400.css";
 import "@fontsource/noto-serif/400-italic.css";
 import "@/app/globals.css";
 import "@/app/agency-relaunch.css";
@@ -21,6 +22,16 @@ import "@/app/template-demo.css";
 import "@/app/template-modal.css";
 import "@/app/products-projects.css";
 import "@/app/profile-github.css";
+import "@/app/template-revamp.css";
+import "@/app/template-worlds.css";
+import "@/app/template-signatures.css";
+import "@/app/template-special-existing.css";
+import "@/app/template-legacy-signatures.css";
+import "@/app/template-experience-pages.css";
+import "@/app/athena-home-showcase-and-navigation.css";
+import "@/app/athena-products-fix.css";
+import "@/app/athena-soft-launch.css";
+import "@/app/template-accessibility.css";
 
 export const metadata: Metadata = {
   ...createMetadata(),

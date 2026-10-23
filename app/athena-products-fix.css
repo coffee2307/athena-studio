@@ -1,0 +1,125 @@
+/* ATHENA / PRODUCT LAB — restored presentation, monochrome product documentation. */
+.athena-products-page{background:#fff;color:#141515;overflow:clip}
+.athena-products-page *{box-sizing:border-box}
+.athena-products-page :is(h1,h2,h3,p){margin-top:0}
+.athena-products-page a{color:inherit;text-decoration:none}
+.athena-products-page :is(a,button):focus-visible{outline:2px solid #111;outline-offset:4px}
+.athena-products-intro{padding:clamp(55px,7vw,115px) 0 clamp(64px,7vw,112px);background:#f4f4f2;border-bottom:1px solid #dededa}
+.athena-product-breadcrumb{display:flex;align-items:center;gap:12px;font-size:10px;color:#6e7472;letter-spacing:.05em;margin-bottom:clamp(50px,6vw,93px)}
+.athena-product-breadcrumb a{border-bottom:1px solid #7f8583;padding-bottom:4px}
+.athena-products-heading{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(245px,.55fr);gap:clamp(25px,5vw,90px);align-items:end}
+.athena-products-heading h1{font-size:clamp(53px,8vw,123px);line-height:1.045;letter-spacing:-.085em;font-weight:650;margin:28px 0 0}
+.athena-products-heading h1 span{color:#838583}
+.athena-products-intro-aside{padding-bottom:10px}
+.athena-products-intro-aside p{font-size:14px;line-height:1.95;color:#565c5a;max-width:400px}
+.athena-products-intro-aside span{display:block;margin-top:55px;font-size:10px;letter-spacing:.13em;font-weight:800;color:#555b59}
+.athena-products-showcase{padding:clamp(65px,7vw,108px) 0 clamp(85px,8vw,120px)}
+.athena-products-section-top{display:flex;justify-content:space-between;align-items:end;gap:25px;margin-bottom:26px}
+.athena-products-section-top>div>span,.athena-products-section-top>span{font-size:10px;letter-spacing:.16em;font-weight:780;color:#565a58}
+.athena-products-section-top p{font-size:12px;color:#6c706f;margin:11px 0 0}
+.athena-product-card{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:0;min-width:0;background:#191b1a;color:#f8f8f3;border:1px solid #2e312e}
+.athena-product-copy{padding:clamp(28px,5vw,77px);min-width:0;display:flex;flex-direction:column;align-items:flex-start}
+.athena-product-topline{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;width:100%}
+.athena-product-topline>span:last-child{color:#9fa3a0;font-size:9px;letter-spacing:.11em}
+.athena-product-status{display:inline-flex;gap:9px;align-items:center;padding:9px 12px;border:1px solid #525854;color:#f2f3ef;font-size:9px;font-weight:780;letter-spacing:.08em}
+.athena-product-status i{width:7px;height:7px;border-radius:50%;background:#cfcfc9;flex-shrink:0}
+.athena-product-copy h2{font-size:clamp(66px,8vw,132px);line-height:1.05;letter-spacing:-.085em;font-weight:620;margin:clamp(55px,8vw,135px) 0 22px}
+.athena-product-copy h2 span{color:#a6a8a5}
+.athena-product-purpose{font-size:clamp(24px,3vw,43px);line-height:1.2;letter-spacing:-.05em;font-weight:560;max-width:520px;margin-bottom:25px}
+.athena-product-desc{font-size:13px;line-height:1.95;color:#b9bcb9;max-width:505px;margin-bottom:48px}
+.athena-product-facts{width:100%;display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid #444744}
+.athena-product-facts>div{padding:17px 0;display:grid;grid-template-columns:115px 1fr;align-items:baseline;gap:20px;border-bottom:1px solid #444744}
+.athena-product-facts span{font-size:9px;letter-spacing:.12em;font-weight:750;color:#a2a7a3}
+.athena-product-facts strong{font-size:12px;line-height:1.65;font-weight:580;color:#f0f0ec}
+.athena-product-actions{display:flex;flex-wrap:wrap;gap:20px;align-items:center;margin-top:42px}
+.athena-product-primary{display:inline-flex;align-items:center;gap:25px;justify-content:space-between;padding:17px 19px;background:#f7f7f4;color:#171918!important;font-size:11px;font-weight:800;transition:background .22s,transform .22s;min-height:53px}
+.athena-product-primary:hover{background:#dadcda;transform:translateY(-2px)}
+.athena-product-secondary{display:inline-flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #787c79;font-size:11px;font-weight:700;color:#e2e3df!important}
+.athena-product-secondary:hover{color:white!important}
+.athena-product-visual{display:flex;min-width:0;min-height:680px;padding:clamp(25px,4vw,60px);background:#d8dad6;flex-direction:column;justify-content:center;gap:27px}
+.athena-product-window{width:100%;background:#202322;color:#f8f8f4;border:1px solid #494e49;box-shadow:0 28px 78px #14171447;transform:rotate(-1deg);min-width:0}
+.athena-product-window-top{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:15px;background:#303430;border-bottom:1px solid #515851;font-size:8px;letter-spacing:.12em;color:#c3c7bf}
+.athena-product-window-top>span:first-child{display:flex;gap:5px}
+.athena-product-window-top i{width:7px;height:7px;border-radius:50%;border:1px solid #a4aaa0;display:block}
+.athena-product-window-body{padding:clamp(22px,3vw,42px)}
+.athena-product-window-label{font-size:8px;letter-spacing:.15em;color:#aeb4ae}
+.athena-product-window-body h3{font-size:clamp(31px,3.6vw,52px);margin:17px 0 30px;letter-spacing:-.07em;font-weight:650}
+.athena-product-window-body h3 span{color:#b9bcb7}
+.athena-product-sample{border:1px solid #525952;padding:22px;display:grid;gap:10px;background:#171a18}
+.athena-product-sample>span{font-size:8px;letter-spacing:.1em;color:#aaaead}
+.athena-product-sample strong{font-size:clamp(20px,2.8vw,34px);letter-spacing:-.06em;font-weight:570;overflow-wrap:anywhere}
+.athena-product-sample>span:last-child{color:#dededb}
+.athena-product-mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:13px}
+.athena-product-mini-grid>div{border:1px solid #535954;padding:17px 15px;display:flex;flex-direction:column;gap:10px}
+.athena-product-mini-grid span{font-size:8px;letter-spacing:.08em;color:#acb2ac}
+.athena-product-mini-grid strong{font-size:clamp(28px,3vw,43px);font-weight:480;line-height:1}
+.athena-product-mini-grid small{font-size:9px;color:#bec3be;line-height:1.5}
+.athena-product-window-bottom{display:flex;justify-content:space-between;gap:18px;padding-top:25px;color:#b9bcb7;font-size:9px;letter-spacing:.08em}
+.athena-product-visual-foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;color:#515653;font-size:9px;letter-spacing:.09em;line-height:1.6}
+.athena-products-capabilities{padding:clamp(85px,9vw,145px) 0;background:#f3f3f0}
+.athena-products-cap-head{display:grid;grid-template-columns:.38fr .62fr;gap:35px;align-items:start;margin-bottom:65px}
+.athena-products-cap-head h2{font-size:clamp(48px,6vw,91px);line-height:1.11;letter-spacing:-.067em;font-weight:580;margin:0}
+.athena-products-cap-head h2 span{color:#858a87}
+.athena-product-cap-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:25px}
+.athena-product-cap-list article{border-top:1px solid #aeb2ae;padding-top:24px}
+.athena-product-cap-list article>span{font-size:10px;letter-spacing:.12em;color:#686e6a}
+.athena-product-cap-list h3{font-size:clamp(25px,2.6vw,39px);font-weight:580;letter-spacing:-.045em;line-height:1.2;margin:60px 0 18px}
+.athena-product-cap-list p{font-size:13px;line-height:1.9;color:#646966;max-width:355px}
+.athena-products-next{padding:clamp(90px,9vw,145px) 0;background:#1c1e1d;color:#f6f6f2}
+.athena-products-next-inner{display:flex;align-items:end;justify-content:space-between;gap:35px}
+.athena-products-next-inner>div{max-width:800px}
+.athena-products-next .section-index{color:#ebebea}
+.athena-products-next h2{font-size:clamp(51px,7vw,105px);font-weight:520;letter-spacing:-.077em;line-height:1.08;margin:32px 0 25px}
+.athena-products-next p:not(.section-index){max-width:630px;font-size:14px;color:#b9beb9;line-height:1.85}
+.athena-products-next .athena-product-primary{white-space:nowrap;flex-shrink:0}
+@media(max-width:1100px){
+ .athena-products-heading{grid-template-columns:1fr;gap:22px}
+ .athena-products-intro-aside{display:flex;align-items:end;justify-content:space-between;gap:25px}
+ .athena-products-intro-aside span{margin:0;text-align:right}
+ .athena-product-card{grid-template-columns:1fr}
+ .athena-product-copy{padding:55px 6%}
+ .athena-product-copy h2{margin-top:65px}
+ .athena-product-visual{min-height:500px;padding:50px 6%}
+ .athena-product-window{max-width:650px;align-self:center}
+ .athena-product-cap-list{gap:18px}
+ .athena-products-next-inner{flex-direction:column;align-items:start}
+}
+@media(max-width:700px){
+ .athena-products-intro{padding:47px 0 70px}
+ .athena-product-breadcrumb{margin-bottom:60px}
+ .athena-products-heading h1{font-size:clamp(47px,10vw,76px)}
+ .athena-products-intro-aside{flex-direction:column;align-items:start}
+ .athena-products-intro-aside span{text-align:left}
+ .athena-products-section-top>span{display:none}
+ .athena-products-showcase{padding:65px 0 85px}
+ .athena-product-copy{padding:38px 25px 48px}
+ .athena-product-copy h2{margin-top:58px;font-size:clamp(57px,12vw,86px)}
+ .athena-product-purpose{font-size:29px}
+ .athena-product-desc{margin-bottom:30px}
+ .athena-product-facts>div{grid-template-columns:1fr;gap:6px}
+ .athena-product-actions{flex-direction:column;align-items:stretch}
+ .athena-product-secondary{align-self:start}
+ .athena-product-visual{padding:33px 20px;min-height:400px}
+ .athena-product-window{transform:none}
+ .athena-product-window-top{padding:12px}
+ .athena-product-window-top>span:last-child{display:none}
+ .athena-product-window-body{padding:23px}
+ .athena-product-window-body h3{font-size:34px}
+ .athena-product-sample{padding:15px}
+ .athena-product-mini-grid{gap:7px}
+ .athena-product-mini-grid>div{padding:12px 9px}
+ .athena-product-mini-grid strong{font-size:29px}
+ .athena-product-mini-grid small{font-size:8px}
+ .athena-product-window-bottom{flex-direction:column;gap:5px}
+ .athena-product-visual-foot>span{font-size:8px}
+ .athena-products-capabilities{padding:78px 0}
+ .athena-products-cap-head{grid-template-columns:1fr;gap:23px;margin-bottom:45px}
+ .athena-products-cap-head h2{font-size:clamp(44px,9vw,70px)}
+ .athena-product-cap-list{grid-template-columns:1fr;gap:20px}
+ .athena-product-cap-list article{padding:20px 0 6px}
+ .athena-product-cap-list h3{margin:25px 0 11px}
+ .athena-products-next{padding:85px 0}
+ .athena-products-next h2{font-size:clamp(43px,9vw,68px)}
+ .athena-products-next .athena-product-primary{white-space:normal}
+}
+@media(prefers-reduced-motion:reduce){.athena-products-page *{transition:none!important}}

@@ -22,7 +22,7 @@ const policy=[
  // deferred until the verified hosting model supports per-request nonce SSR.
  ["script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com",...(process.env.NODE_ENV==="development"?["'unsafe-eval'"]:[])].join(" "),
  ["connect-src 'self' https://challenges.cloudflare.com",supabaseOrigin,...(process.env.NODE_ENV==="development"?["ws://127.0.0.1:*","ws://localhost:*"]:[])].filter(Boolean).join(" "),
- "frame-src https://challenges.cloudflare.com",
+ "frame-src 'self' https://challenges.cloudflare.com",
  ...(httpsOrigin?["upgrade-insecure-requests"]:[])
 ].join("; ");
 const headers=[
@@ -78,6 +78,13 @@ const nextConfig:NextConfig={
   {source:"/legal/chinh-sach-dich-vu",destination:"/legal/service-policy",permanent:true},
   {source:"/legal/cookie",destination:"/legal/cookies",permanent:true},
  ];},
- async headers(){return [{source:"/:path*",headers}];}
+ async headers(){return [
+  {source:"/:path*",headers},
+  // Only interactive demo routes may be embedded by the same Athena origin.
+  {source:"/template-demos/:path*",headers:[
+   {key:"X-Frame-Options",value:"SAMEORIGIN"},
+   {key:"Content-Security-Policy",value:policy.replace("frame-ancestors 'none'","frame-ancestors 'self'")}
+  ]}
+ ];}
 };
 export default nextConfig;

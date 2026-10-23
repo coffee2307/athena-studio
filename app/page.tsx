@@ -1,9 +1,8 @@
 import {Icon} from "@/components/ui/Icon";
+import {HomeTemplateShowcase} from "@/components/home/HomeTemplateShowcase";
 import {ServiceTicker} from "@/components/experience/ServiceTicker";
 import Link from "next/link";
 import {offerings} from "@/lib/offerings";
-import {featuredProjects} from "@/data/projects";
-import {ProjectCard} from "@/components/portfolio/ProjectCard";
 import {createMetadata} from "@/lib/metadata";
 
 export const metadata=createMetadata(
@@ -29,7 +28,7 @@ export default function HomePage(){
       <h1 id="hero-title">Website chưa hiệu quả?<br/><span>Công việc còn thủ công?</span></h1>
       <p className="client-hero-lede">Athena hỗ trợ thiết kế website, cải thiện hệ thống hiện có và ứng dụng AI vào những công việc lặp lại. <strong>Bắt đầu từ vấn đề của bạn, không phải từ một công nghệ được chọn sẵn.</strong></p>
       <div className="client-hero-actions">
-       <Link className="pill-link pill-dark" href="/contact">Gửi nhu cầu của bạn <Icon name="arrow-up-right" size={18}/></Link>
+       <Link className="pill-link pill-dark" href="/start">Bắt đầu dự án <Icon name="arrow-up-right" size={18}/></Link>
        <Link className="underlined-link" href="#giai-phap">Xem Athena hỗ trợ gì <Icon name="arrow-right" size={17} className="agency-down-icon"/></Link>
       </div>
       <p className="client-hero-helper">Chưa rõ cần giải pháp nào? Chỉ cần mô tả vấn đề đang gặp.</p>
@@ -93,17 +92,7 @@ export default function HomePage(){
    </div>
   </div></section>
 
-  <section className="section-space portfolio-featured" aria-labelledby="featured-projects-heading">
-   <div className="container">
-    <div className="case-section-head reveal">
-     <div><p className="section-index"><span className="index-circle">03</span> SẢN PHẨM ĐÃ THỰC HIỆN / NGHIÊN CỨU</p>
-      <h2 id="featured-projects-heading">Xem cách làm,<br/><span>không chỉ nghe giới thiệu.</span></h2></div>
-     <p>Khám phá các sản phẩm số và hướng nghiên cứu của người sáng lập Athena, qua trải nghiệm, tính năng và cách giải quyết vấn đề.</p>
-    </div>
-    <div className="portfolio-grid">{featuredProjects.map((p,i)=><ProjectCard key={p.slug} project={p} index={i}/>)}</div>
-    <div className="featured-footer"><p>Tìm hiểu cách sản phẩm được thiết kế cho nhu cầu thực tế.</p><Link href="/projects" className="underlined-link">Xem hồ sơ dự án <Icon name="arrow-up-right" size={18}/></Link></div>
-   </div>
-  </section>
+  <HomeTemplateShowcase/>
 
   <section className="client-lab-band" aria-label="Phòng nghiên cứu sản phẩm"><div className="container client-lab-inner">
    <div><p className="section-index"><span className="index-circle">04</span> PHÒNG NGHIÊN CỨU</p>
@@ -116,7 +105,7 @@ export default function HomePage(){
    <p className="eyebrow"><span className="eyebrow-dot"/> TRAO ĐỔI NHU CẦU THỰC TẾ</p>
    <h2>Đang gặp vấn đề<br/><span>với website hoặc quy trình?</span></h2>
    <p className="client-closing-copy">Hãy mô tả ngắn gọn điều đang gây khó khăn. Athena sẽ xem xét để trao đổi phạm vi và hướng xử lý phù hợp, không yêu cầu bạn phải chuẩn bị tài liệu kỹ thuật.</p>
-   <Link href="/contact" className="pill-link pill-light">Gửi yêu cầu tư vấn <Icon name="arrow-up-right" size={18}/></Link>
+   <Link href="/start" className="pill-link pill-light">Chuẩn bị yêu cầu tư vấn <Icon name="arrow-up-right" size={18}/></Link>
    <span className="closing-watermark" aria-hidden="true">ATHENA</span>
   </div></section>
  </>;

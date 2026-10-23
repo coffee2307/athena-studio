@@ -8,7 +8,7 @@ test("Desktop header includes service choices, commercial process, account entry
  expect((await header.locator(".brand-wordmark").textContent())?.includes("ATHENA STUDIO")).toBe(true);
  await expect(header.getByRole("link",{name:/Đăng nhập/})).toHaveAttribute("href","/login");
  await expect(header.getByRole("link",{name:/Đăng ký/})).toHaveAttribute("href","/signup");
- await expect(header.getByRole("link",{name:/Yêu cầu tư vấn/})).toHaveAttribute("href","/contact");
+ await expect(header.getByRole("link",{name:/Yêu cầu tư vấn/})).toHaveAttribute("href","/start");
  const menu=header.locator(".agency-service-menu");
  await menu.locator("summary").click();
  await expect(menu).toHaveAttribute("open","");

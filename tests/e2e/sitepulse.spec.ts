@@ -1,7 +1,7 @@
 import {test,expect} from "@playwright/test";
 test("SitePulse product research page is transparent, responsive and noncommercial",async({page})=>{
  await page.goto("/products");
- await page.getByRole("link",{name:/Khám phá nguyên mẫu/}).click();
+ await page.getByRole("link",{name:/Khám phá SitePulse/}).click();
  await expect(page).toHaveURL(/\/products\/sitepulse$/);
  await expect(page.getByRole("heading",{level:1})).toContainText("Biết sớm.");
  await expect(page.locator(".sitepulse-status")).toContainText("CHƯA PHÁT HÀNH");

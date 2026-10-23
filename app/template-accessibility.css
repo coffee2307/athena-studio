@@ -1,0 +1,70 @@
+/* Accessible foreground contrast across the template gallery and embedded demos.
+   Neutral monochrome values meet WCAG normal text contrast on the declared
+   light paper surfaces without flattening each sector's layout. */
+.templates-page .templates-intro-top,
+.templates-page .templates-intro-bottom,
+.templates-page .templates-intro h1 em,
+.templates-page .templates-intro-number small,
+.templates-page .templates-results p,
+.templates-page .templates-catalog .template-card-meta,
+.templates-page .templates-catalog .template-card-content > p,
+.templates-page .template-card-footer > span,
+.templates-page .template-thumbnail-browser,
+.templates-page .templates-catalog .template-personalize-note small {
+ color:#4f5250;
+}
+.templates-page .template-thumbnail-browser{background:#f7f7f7}
+.templates-page .template-search-label,
+.templates-page .template-filters label{color:#343837}
+.template-detail .template-detail-aside h2 em,
+.template-detail .template-detail-aside > p:not(.section-index),
+.template-detail .template-preview-disclaimer,
+.template-detail .template-reference-note,
+.template-detail .template-scope-metrics span{color:#4b504d}
+.template-revamp-dialog .template-demo-url,
+.template-revamp-dialog .template-demo-eyebrow,
+.template-revamp-dialog .template-demo-index,
+.template-revamp-dialog .template-demo-price span,
+.template-revamp-dialog .template-demo-quality span,
+.template-revamp-dialog .template-demo-price small,
+.template-revamp-dialog .template-demo-quality small,
+.template-revamp-dialog .template-demo-note{color:#4f5351}
+.world-site .special-footer-cta a{
+ background:#fff;
+ color:#171717;
+}
+.world-site .special-footer-cta a:focus-visible{
+ outline:3px solid currentColor;outline-offset:4px;
+}
+
+/* SaaS uses a light dashboard inside its dark landing page. These foregrounds
+   are deliberately calibrated for the light nested panels, not the dark hero. */
+.world-site[data-world="saas-product"] .legacy-saas-top span {color:#4c5869}
+.world-site[data-world="saas-product"] .legacy-saas-columns aside {color:#45536b}
+.world-site[data-world="saas-product"] .legacy-saas-columns aside span:first-child {color:#344489}
+.world-site[data-world="saas-product"] .legacy-saas-metrics span {color:#405273}
+.world-site[data-world="saas-product"] .legacy-saas-row span {color:#394b79}
+.world-site[data-world="saas-product"] .legacy-saas-features header span {color:#37477b}
+.world-site[data-world="saas-product"] .legacy-saas-feature>div:first-child>span {color:#445275}
+.world-site[data-world="saas-product"] .legacy-saas-feature p {color:#42516a}
+
+/* Restaurant: warm earth tones remain, but descriptive copy and small
+   labels must stay readable on the cream/terracotta surfaces. */
+.world-site[data-world="hospitality-booking"] {--w-muted:#4b584d}
+.world-site[data-world="hospitality-booking"] .restaurant-opening>p {color:#694936}
+.world-site[data-world="hospitality-booking"] .restaurant-opening>span {color:#465849}
+.world-site[data-world="hospitality-booking"] .restaurant-menu-heading span {color:#68472e}
+.world-site[data-world="hospitality-booking"] .restaurant-dishes a small {color:#62452f}
+.world-site[data-world="hospitality-booking"] .restaurant-dishes p {color:#485047}
+.world-site[data-world="hospitality-booking"] .restaurant-reserve>div:last-child>span {color:#62452e}
+.world-site[data-world="hospitality-booking"] .restaurant-reserve p {color:#415346}
+.world-site[data-world="hospitality-booking"] .world-footer {
+ --w-muted:#435146;
+}
+.world-site[data-world="hospitality-booking"] .world-footer :is(p,span,.world-footer-bottom,a[href="#world-top"]) {
+ color:#435146;
+}
+.world-site[data-world="hospitality-booking"] .world-footer .world-footer-identity>a,
+.world-site[data-world="hospitality-booking"] .world-footer .world-footer-column>a {
+ color:#293b2e;
+}

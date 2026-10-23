@@ -5,6 +5,8 @@
 
 Website studio thiết kế và công nghệ độc lập, sử dụng **Next.js 15**, **React 19** và **TypeScript**. Các lĩnh vực gồm phát triển website, chăm sóc website, tích hợp AI và nghiên cứu công cụ Micro-SaaS. Website đang phát triển theo roadmap đã phê duyệt, **chưa đưa lên production**.
 
+**Soft Launch candidate:** [Playbook nhận dự án & điều kiện phát hành](docs/ATHENA_SOFT_LAUNCH_PLAYBOOK_20261023.md). Biểu mẫu hướng dẫn tại `/start` chỉ tạo bản nháp email, chưa tự gửi và không lưu thông tin lên máy chủ. Public production vẫn bị khóa cho đến khi có nghiệm thu riêng.
+
 ## Tài liệu chính thức
 - [Roadmap Phase 0–7 đã phê duyệt](docs/ATHENA_MASTER_ROADMAP.md) — nguồn tham chiếu ưu tiên khi bắt đầu phiên làm việc mới.
 - [Audit kiến trúc/bảo mật Phase 0](docs/PHASE0_ARCHITECTURE_AUDIT.md) và [QA Phase 0](docs/PHASE0_QA.md).

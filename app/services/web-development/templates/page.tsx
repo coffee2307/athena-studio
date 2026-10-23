@@ -1,5 +1,22 @@
 import Link from "next/link";
 import {TemplateGallery} from "@/components/templates/TemplateGallery";
 import {templates,templateIndustries,templateStyles} from "@/lib/templates";
-export const metadata={title:"Mẫu website demo tương tác | Athena",description:"Khám phá 12 hướng thiết kế website với demo cuộn trang và tương tác trực tiếp."};
-export default function TemplatesPage(){return <div><section className="templates-intro"><p className="eyebrow">THƯ VIỆN THIẾT KẾ / 12 HƯỚNG</p><h1>Chọn một hướng đi phù hợp.</h1><p>Mỗi mẫu mở ra một website demo có thể cuộn và thử tương tác, kèm phạm vi, mức giá tham khảo, chất lượng và liên kết trải nghiệm toàn trang. Ảnh trong demo được lưu cùng dự án; nội dung, đặt lịch và giỏ hàng chỉ mô phỏng thao tác.</p><Link href="/contact">Tư vấn thiết kế website</Link></section><TemplateGallery templates={templates} industries={templateIndustries} styles={templateStyles}/></div>}
+
+export const metadata={
+ title:"Thư viện mẫu website | Athena Studio",
+ description:"Trải nghiệm các mẫu website tương tác do Athena thiết kế, xem trước trên nhiều thiết bị và chọn hướng phù hợp cho thương hiệu."
+};
+
+export default function TemplatesPage(){
+ return <div className="templates-page">
+  <section className="templates-intro">
+   <div className="templates-intro-top"><span>ATHENA STUDIO / WEB DESIGN</span><span>THE DESIGN LIBRARY — 2026</span></div>
+   <div className="templates-intro-grid">
+    <div><p className="templates-intro-label"><span aria-hidden="true">✳</span> BỘ SƯU TẬP GIAO DIỆN</p><h1>Chọn cảm hứng.<br/><em>Tạo bản sắc riêng.</em></h1></div>
+    <div className="templates-intro-aside"><span className="templates-intro-number">{String(templates.length).padStart(2,"0")}<small>WEBSITE CONCEPTS</small></span><p>Mỗi mẫu là một website demo có thể truy cập, cuộn trang và thử tương tác. Khám phá phong cách, xem phạm vi triển khai và hình dung phiên bản dành riêng cho doanh nghiệp của bạn.</p><Link href="/contact?service=web-development">Trao đổi về dự án <span aria-hidden="true">↗</span></Link></div>
+   </div>
+   <div className="templates-intro-bottom"><span>KHÁM PHÁ THEO LĨNH VỰC & PHONG CÁCH</span><span>CUỘN ĐỂ XEM BỘ SƯU TẬP ↓</span></div>
+  </section>
+  <TemplateGallery templates={templates} industries={templateIndustries} styles={templateStyles}/>
+ </div>
+}

@@ -13,7 +13,7 @@ export default function Pricing(){
   <section className="page-hero"><div className="container">
    <p className="page-kicker"><span className="eyebrow-dot"/> BÁO GIÁ THEO PHẠM VI THỰC TẾ</p>
    <h1>Biết mình trả cho<br/><em>những công việc gì.</em></h1>
-   <div className="page-hero-lede"><p>Athena chưa công bố bảng giá cố định khi chưa chuẩn hóa các gói và chi phí vận hành. Bạn sẽ nhận đề xuất theo hạng mục cụ thể, tránh báo giá đẹp nhưng thiếu phần việc quan trọng.</p><Link href="/contact" className="pill-link pill-dark">Gửi yêu cầu báo giá <Icon name="arrow-up-right" size={18}/></Link></div>
+   <div className="page-hero-lede"><p>Athena chưa công bố bảng giá cố định khi chưa chuẩn hóa các gói và chi phí vận hành. Bạn sẽ nhận đề xuất theo hạng mục cụ thể, tránh báo giá đẹp nhưng thiếu phần việc quan trọng.</p><Link href="/start" className="pill-link pill-dark">Chuẩn bị yêu cầu báo giá <Icon name="arrow-up-right" size={18}/></Link></div>
   </div></section>
   <section className="page-section"><div className="container">
    <p className="section-index"><span className="index-circle">01</span> NHỮNG YẾU TỐ CẦN BIẾT</p>

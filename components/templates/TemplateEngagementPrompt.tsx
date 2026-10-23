@@ -6,9 +6,17 @@ export function TemplateEngagementPrompt({slug,embedded=false}:{slug:string;embe
  const [open,setOpen]=useState(false);
  const [dismissed,setDismissed]=useState(false);
  useEffect(()=>{
-  const key="athena-demo-interest-"+slug;
-  if(window.sessionStorage.getItem(key)==="dismissed")return;
-  const timer=window.setTimeout(()=>setOpen(true),5*60*1000);
+  const dismissedKey="athena-demo-interest-"+slug;
+  const startedKey="athena-demo-interest-start-"+slug;
+  let remaining=5*60*1000;
+  try{
+   if(window.sessionStorage.getItem(dismissedKey)==="dismissed")return;
+   const saved=Number(window.sessionStorage.getItem(startedKey));
+   const start=Number.isFinite(saved)&&saved>0?saved:Date.now();
+   if(!saved)window.sessionStorage.setItem(startedKey,String(start));
+   remaining=Math.max(0,5*60*1000-(Date.now()-start));
+  }catch{/* Session storage may be unavailable in private browsing. */}
+  const timer=window.setTimeout(()=>setOpen(true),remaining);
   return()=>window.clearTimeout(timer);
  },[slug]);
  function close(){
