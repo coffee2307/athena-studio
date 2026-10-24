@@ -1,0 +1,64 @@
+name: Athena — capture true immersive demo thumbnails
+on:
+  push:
+    branches: [feat/athena-immersive-phase0-20261024]
+    paths:
+      - .github/workflows/athena-immersive-thumbnails.yml
+      - components/templates/WorldImmersiveHome.tsx
+      - app/immersive-phase0.css
+      - public/template-demos/creative-studio/**
+      - public/template-demos/architecture-studio/**
+      - public/template-demos/auto-showroom/**
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: athena-immersive-thumbnails
+  cancel-in-progress: false
+jobs:
+  screenshot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout latest reviewed feature branch
+        uses: actions/checkout@v4
+        with:
+          ref: feat/athena-immersive-phase0-20261024
+          persist-credentials: true
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install Athena dependencies and screenshot browser
+        run: |
+          npm ci --no-audit --no-fund
+          npx playwright install --with-deps chromium
+      - name: Start exact same Athena demo website on loopback
+        run: |
+          npm run dev > /tmp/athena-thumbnails-next.log 2>&1 &
+          echo $! > /tmp/athena-thumbnails-server.pid
+          for i in $(seq 1 90); do
+            if curl --fail --silent http://127.0.0.1:3182/template-demos/creative-studio >/dev/null; then break; fi
+            sleep 2
+          done
+          curl --fail --silent --output /dev/null http://127.0.0.1:3182/template-demos/creative-studio
+      - name: Capture identical live page previews at 1440x900
+        run: |
+          mkdir -p public/template-previews
+          for slug in creative-studio architecture-studio auto-showroom; do
+            npx playwright screenshot --browser chromium --viewport-size "1440,900" --wait-for-timeout 2500 "http://127.0.0.1:3182/template-demos/$slug" "public/template-previews/$slug.png"
+            test -s "public/template-previews/$slug.png"
+            file "public/template-previews/$slug.png"
+          done
+      - name: Commit only three authentic preview screenshots
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f public/template-previews/creative-studio.png public/template-previews/architecture-studio.png public/template-previews/auto-showroom.png
+          if git diff --cached --quiet; then
+            echo "Previews already match their current pages"
+            exit 0
+          fi
+          git commit -m "build(gallery): capture actual Creative Architecture and Auto demo screens"
+          git pull --rebase origin feat/athena-immersive-phase0-20261024
+          git push origin HEAD:feat/athena-immersive-phase0-20261024
