@@ -83,12 +83,13 @@ export function ImmersiveJourney({slug}: {slug: World}) {
   const jump = useCallback((index: number) => {
     const track = trackRef.current;
     if (!track) return;
-    const target = track.offsetTop + (track.offsetHeight - window.innerHeight) * (index / 3 + 0.025);
+    const target = track.getBoundingClientRect().top + window.scrollY +
+      Math.max(1, track.offsetHeight - window.innerHeight) * (index / 3 + 0.025);
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     window.scrollTo({top: target, behavior: reduced ? "auto" : "smooth"});
   }, []);
 
-  return <main className={"athena-journey athena-journey-" + slug}>
+  return <main id="main-content" className={"athena-journey athena-journey-" + slug}>
     <div className="journey-topline">
       <Link href={"/template-demos/" + slug} aria-label="Quay lại website mẫu">← TRỞ VỀ WEBSITE MẪU</Link>
       <span>ATHENA / IMMERSIVE WORLDS</span>
