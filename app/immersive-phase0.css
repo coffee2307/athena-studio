@@ -159,3 +159,28 @@
 .ix-render-toggle:hover{background:#fff;color:#111}
 .ix-render-toggle:focus-visible{outline:3px solid #fff;outline-offset:3px}
 .ix-render-toggle[aria-pressed=false]{background:#fff;color:#151515}
+
+/* Phase 1.1: all interactions live outside the visual stacking context.
+   The cinematic hero may overlap its background, never its controls. */
+.ix-scene-rail{position:relative;isolation:isolate;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:22px;background:#17191c;color:#fff;padding:22px clamp(20px,5vw,80px);border-top:1px solid #ffffff30}
+.ix-scene-rail-copy{display:flex;flex-direction:column;align-items:start;gap:6px;min-width:160px}
+.ix-scene-rail-copy>span{font-size:10px;font-weight:750;letter-spacing:.13em;color:#b8c1cc}
+.ix-scene-rail-copy strong{font-size:clamp(13px,1.2vw,17px);font-weight:700;line-height:1.4}
+.ix-scene-rail-copy p{color:#c0c6ce;font-size:11px;line-height:1.65;max-width:460px}
+.ix-rail-actions{display:flex;align-items:center;justify-content:end;gap:14px;flex-wrap:wrap}
+.ix-scene-rail .ix-mode-list button{min-height:44px;min-width:44px;background:#262c34;border-color:#a9b1bb;color:#fff}
+.ix-scene-rail .ix-mode-list button[aria-pressed=true]{background:#fff;color:#17191c;border-color:#fff}
+.ix-scene-rail .ix-mode-list button:focus-visible,.ix-scene-rail .ix-render-toggle:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.ix-scene-rail .ix-render-toggle{flex-shrink:0;background:#25282e;border-color:#aaa}
+@media(max-width:950px){
+ .ix-scene-rail{flex-direction:column;align-items:stretch}
+ .ix-scene-rail-copy p{max-width:none}
+ .ix-rail-actions{justify-content:space-between}
+}
+@media(max-width:560px){
+ .ix-scene-rail{padding:22px 16px}
+ .ix-rail-actions{align-items:stretch;gap:12px}
+ .ix-scene-rail .ix-mode-list{justify-content:start;flex:1 1 100%}
+ .ix-scene-rail .ix-mode-list button{flex:1 1 auto;min-height:48px;font-size:11px;padding:12px}
+ .ix-scene-rail .ix-render-toggle{width:100%;min-height:48px;font-size:11px}
+}
