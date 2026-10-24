@@ -106,3 +106,8 @@
  .ix-site[data-immersive="true"].ix-architecture-studio .ix-hero-links,
  .ix-site[data-immersive="true"].ix-auto-showroom .ix-hero-links{margin-top:22px;gap:10px}
 }
+
+/* Required WCAG contrast: scene rail ON/OFF override has greater specificity
+   than the generic .ix-render-toggle[aria-pressed] rule. */
+.ix-scene-rail .ix-render-toggle[aria-pressed="false"]{background:#fff;color:#16191d;border-color:#fff}
+.ix-scene-rail .ix-render-toggle[aria-pressed="true"]{background:#25282e;color:#fff;border-color:#b8bec5}
