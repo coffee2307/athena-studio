@@ -44,7 +44,8 @@ try {
           document.documentElement.scrollWidth - document.documentElement.clientWidth
         );
         const primary = slug + "-" + viewport.name + "-01.png";
-        await page.screenshot({path: resolve(output, primary), animations: "disabled"});
+        await stage.scrollIntoViewIfNeeded();
+        await stage.screenshot({path: resolve(output, primary), animations: "disabled"});
         const record = {slug, viewport: viewport.name, renderer, overflow, ...caps, primary};
         if (overflow > 2) summary.errors.push(slug + ": overflow " + overflow + " px on " + viewport.name);
         if (renderer !== "ready") summary.errors.push(slug + ": WebGL not rendering on " + viewport.name);
@@ -58,7 +59,8 @@ try {
           const selected = await stage.getAttribute("data-preset");
           if (selected !== "2") summary.errors.push(slug + ": interactive mode selection broken");
           const alternate = slug + "-" + viewport.name + "-03.png";
-          await page.screenshot({path: resolve(output, alternate), animations: "disabled"});
+          await stage.scrollIntoViewIfNeeded();
+          await stage.screenshot({path: resolve(output, alternate), animations: "disabled"});
           record.alternate = alternate;
         }
         summary.captures.push(record);
