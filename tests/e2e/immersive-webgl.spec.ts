@@ -13,14 +13,17 @@ for (const slug of worlds) {
     const canvas = stage.locator("canvas.ix-3d-canvas");
     const fallback = stage.locator(".ix-hero-photograph");
     const rail = page.locator(".ix-scene-rail");
-    const toggle = rail.getByRole("button", {name: "Tắt chế độ 3D"});
+    const toggle = rail.getByRole("button", {name: "Bật chế độ 3D"});
 
     await expect(stage).toBeVisible();
     await expect(canvas).toHaveCount(1);
     await expect(fallback).toBeVisible();
     await expect(canvas).toHaveAttribute("data-renderer", /^(ready|fallback)$/, {timeout: 15000});
-    await expect(toggle).toHaveAttribute("aria-pressed", "true");
+    await expect(toggle).toHaveAttribute("aria-pressed", "false");
 
+    await toggle.click();
+    await expect(rail.getByRole("button", {name: "Tắt chế độ 3D"})).toHaveAttribute("aria-pressed", "true");
+    await expect(canvas).toHaveAttribute("data-renderer", /^(ready|fallback)$/, {timeout: 15000});
     // WebGL context availability is machine-dependent. 3D must be live
     // where supported; otherwise the image fallback must remain usable.
     const state = await canvas.getAttribute("data-renderer");
@@ -33,7 +36,7 @@ for (const slug of worlds) {
       expect(size.height).toBeGreaterThan(0);
     }
 
-    await toggle.click();
+    await rail.getByRole("button", {name: "Tắt chế độ 3D"}).click();
     await expect(rail.getByRole("button", {name: "Bật chế độ 3D"})).toHaveAttribute("aria-pressed", "false");
     await expect(canvas).toHaveAttribute("data-renderer", "fallback");
     await expect(fallback).toBeVisible();
