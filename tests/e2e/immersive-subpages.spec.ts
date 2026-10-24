@@ -14,8 +14,10 @@ for(const slug of worlds){
      await expect(link).toHaveAttribute("href","/template-demos/"+slug+"/experience");
      const image=feature.locator("img");
      await expect(image).toHaveCount(1);
-     const loaded=await image.evaluate(node=>(node as HTMLImageElement).complete);
-     expect(loaded).toBe(true);
+     await expect.poll(async()=>image.evaluate(node=> {
+       const img=node as HTMLImageElement;
+       return img.complete&&img.naturalWidth>0;
+     })).toBe(true);
      const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
      expect(overflow,slug+"/"+route+" mobile horizontal overflow").toBeLessThanOrEqual(2);
      await expect(page.locator("canvas.ix-3d-canvas")).toHaveCount(0);
