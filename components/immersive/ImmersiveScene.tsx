@@ -57,7 +57,7 @@ function createProgram(gl: WebGL2RenderingContext) {
  * Leaves the original photograph visible when WebGL is unavailable, context is
  * lost, or the visitor requests reduced motion.
  */
-export function ImmersiveScene({slug, preset, enabled = true}: {slug: WorldSlug; preset: number; enabled?: boolean}) {
+export function ImmersiveScene({slug, preset, enabled = true, scrollRootId}: {slug: WorldSlug; preset: number; enabled?: boolean; scrollRootId?: string}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const presetRef = useRef(preset);
   const [status, setStatus] = useState<StageStatus>("loading");
@@ -129,8 +129,11 @@ export function ImmersiveScene({slug, preset, enabled = true}: {slug: WorldSlug;
       targetY = Math.max(-1, Math.min(1, (event.clientY - rect.top) / rect.height * 2 - 1));
     };
     const syncScroll = () => {
-      const rect = canvas.getBoundingClientRect();
-      targetScroll = Math.max(0, Math.min(1, -rect.top / Math.max(1, rect.height)));
+      const target = scrollRootId ? document.getElementById(scrollRootId) : canvas;
+      if (!target) return;
+      const rect = target.getBoundingClientRect();
+      const extent = scrollRootId ? rect.height - window.innerHeight : rect.height;
+      targetScroll = Math.max(0, Math.min(1, -rect.top / Math.max(1, extent)));
     };
 
     function draw(now: number) {
@@ -223,7 +226,7 @@ export function ImmersiveScene({slug, preset, enabled = true}: {slug: WorldSlug;
       motion.removeEventListener("change", motionChange);
       gl.deleteProgram(program);
     };
-  }, [slug, enabled]);
+  }, [slug, enabled, scrollRootId]);
 
   return <canvas
     ref={canvasRef}
