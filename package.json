@@ -33,7 +33,7 @@
     "preview:canary": "node scripts/preview-canary.mjs",
     "preview:proxy": "node scripts/preview-readonly.mjs",
     "test:starter": "node scripts/verify-starter.mjs",
-    "postinstall": "node scripts/sync-three-draco.mjs"
+    "sync:draco": "node scripts/sync-three-draco.mjs"
   },
   "dependencies": {
     "@fontsource/be-vietnam-pro": "5.3.0",
