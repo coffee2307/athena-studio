@@ -9,7 +9,7 @@ type Props = {params: Promise<{slug: string}>};
 export function generateStaticParams() {return slugs.map(slug => ({slug}));}
 export async function generateMetadata({params}: Props): Promise<Metadata> {
   const {slug} = await params;
-  return {title: "Trải nghiệm 3D — Athena Studio", description: "Hành trình 3D tương tác theo cuộn trang, giới thiệu mẫu thiết kế website Athena.", robots: {index: false, follow: false}};
+  return {title: "Trải nghiệm 3D — " + slug + " — Athena Studio", description: "Hành trình 3D tương tác theo cuộn trang, giới thiệu mẫu thiết kế website Athena.", robots: {index: false, follow: false}};
 }
 
 export default async function ExperiencePage({params}: Props) {
