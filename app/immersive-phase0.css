@@ -144,3 +144,92 @@
 .ix-creative-studio .ix-manifesto p{color:#505050!important}
 .ix-creative-studio .ix-hero-copy>p{color:#505050!important}
 .ix-creative-studio .ix-hero-copy .ix-hero-text-link{color:#171717!important}
+
+/* Phase 1 / GPU scene: keep the licensed photo as a real, accessible fallback. */
+.ix-3d-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;opacity:0;display:block;pointer-events:none;transition:opacity .65s ease}
+.ix-3d-canvas.is-active{opacity:1}
+.ix-hero-visual .ix-visual-vignette{z-index:2}
+.ix-hero-visual .ix-visual-coordinate{z-index:3}
+.ix-hero-visual .ix-scene-footer{z-index:4}
+.ix-hero-visual .ix-studio-overlay{z-index:3}
+@media(prefers-reduced-motion:reduce){.ix-3d-canvas{display:none!important}}
+
+/* Accessible 3D opt-out control for visitors on slow or battery-constrained devices. */
+.ix-render-toggle{appearance:none;background:#1119;border:1px solid #fffb;color:#fff;backdrop-filter:blur(10px);padding:10px 13px;min-height:44px;min-width:78px;cursor:pointer;font:700 10px/1.2 "Be Vietnam Pro",sans-serif;letter-spacing:.12em;text-align:center}
+.ix-render-toggle:hover{background:#fff;color:#111}
+.ix-render-toggle:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.ix-render-toggle[aria-pressed=false]{background:#fff;color:#151515}
+
+/* Phase 1.1: all interactions live outside the visual stacking context.
+   The cinematic hero may overlap its background, never its controls. */
+.ix-scene-rail{position:relative;isolation:isolate;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:22px;background:#17191c;color:#fff;padding:22px clamp(20px,5vw,80px);border-top:1px solid #ffffff30}
+.ix-scene-rail-copy{display:flex;flex-direction:column;align-items:start;gap:6px;min-width:160px}
+.ix-scene-rail-copy>span{font-size:10px;font-weight:750;letter-spacing:.13em;color:#b8c1cc}
+.ix-scene-rail-copy strong{font-size:clamp(13px,1.2vw,17px);font-weight:700;line-height:1.4}
+.ix-scene-rail-copy p{color:#c0c6ce;font-size:11px;line-height:1.65;max-width:460px}
+.ix-rail-actions{display:flex;align-items:center;justify-content:end;gap:14px;flex-wrap:wrap}
+.ix-scene-rail .ix-mode-list button{min-height:44px;min-width:44px;background:#262c34;border-color:#a9b1bb;color:#fff}
+.ix-scene-rail .ix-mode-list button[aria-pressed=true]{background:#fff;color:#17191c;border-color:#fff}
+.ix-scene-rail .ix-mode-list button:focus-visible,.ix-scene-rail .ix-render-toggle:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.ix-scene-rail .ix-render-toggle{flex-shrink:0;background:#25282e;border-color:#aaa}
+@media(max-width:950px){
+ .ix-scene-rail{flex-direction:column;align-items:stretch}
+ .ix-scene-rail-copy p{max-width:none}
+ .ix-rail-actions{justify-content:space-between}
+}
+@media(max-width:560px){
+ .ix-scene-rail{padding:22px 16px}
+ .ix-rail-actions{align-items:stretch;gap:12px}
+ .ix-scene-rail .ix-mode-list{justify-content:start;flex:1 1 100%}
+ .ix-scene-rail .ix-mode-list button{flex:1 1 auto;min-height:48px;font-size:11px;padding:12px}
+ .ix-scene-rail .ix-render-toggle{width:100%;min-height:48px;font-size:11px}
+}
+
+/* Immersive gallery journey entry — links to a genuine scroll-driven 3D route. */
+.ix-hero-links .ix-journey-link{display:inline-flex;align-items:center;gap:18px;min-height:48px;padding:12px 17px;border:1px solid currentColor;font-size:12px;font-weight:760;text-decoration:none}
+.ix-hero-links .ix-journey-link:hover{background:#171717;color:#fff}
+.ix-architecture-studio .ix-hero-links .ix-journey-link,.ix-auto-showroom .ix-hero-links .ix-journey-link{color:#fff}
+.ix-architecture-studio .ix-hero-links .ix-journey-link:hover,.ix-auto-showroom .ix-hero-links .ix-journey-link:hover{background:#fff;color:#171717}
+.ix-hero-links .ix-journey-link:focus-visible{outline:3px solid currentColor;outline-offset:3px}
+
+/* Template world Phase 1.3 — editorial continuity on all child pages.
+   No WebGL on subpages; keeps navigation, lists, and forms responsive. */
+.ix-subpage-feature{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(300px,.85fr);min-height:340px;background:#15171c;color:#fff;isolation:isolate;border-bottom:1px solid #434850}
+.ix-subpage-feature-copy{padding:clamp(28px,4vw,65px);display:flex;flex-direction:column;justify-content:space-between;gap:35px}
+.ix-subpage-feature-kicker{display:flex;flex-wrap:wrap;gap:10px 40px;justify-content:space-between;font-weight:750;font-size:10px;letter-spacing:.16em;color:#ced0d6}
+.ix-subpage-feature h2{font-weight:590;letter-spacing:-.066em;line-height:1.18;font-size:clamp(28px,3.3vw,57px);max-width:870px;text-wrap:balance}
+.ix-subpage-feature-bottom{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:10px;letter-spacing:.10em;color:#c5c9d0}
+.ix-subpage-feature-bottom a{display:inline-flex;align-items:center;justify-content:space-between;gap:20px;min-height:44px;padding:10px 13px;text-decoration:none;color:#fff;border:1px solid #ffffff7d;font-size:10px;font-weight:750}
+.ix-subpage-feature-bottom a:hover,.ix-subpage-feature-bottom a:focus-visible{background:#fff;color:#171717}
+.ix-subpage-feature-art{position:relative;min-height:290px;overflow:hidden}
+.ix-subpage-feature-art img{object-fit:cover;object-position:center;filter:saturate(.75) contrast(1.05)}
+.ix-subpage-feature-art:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#000a,transparent 35%);pointer-events:none}
+.ix-subpage-feature-art>span{z-index:2;position:absolute;bottom:20px;left:24px;color:#fff;font-size:9px;font-weight:700;letter-spacing:.11em}
+.ix-subpage-creative-studio{background:#15171c}
+.ix-subpage-architecture-studio{background:#282923}
+.ix-subpage-auto-showroom{background:#0a1424}
+.ix-subpage-auto-showroom .ix-subpage-feature-art img{filter:saturate(.72) contrast(1.13)}
+.ix-subpage-architecture-studio .ix-subpage-feature-art img{filter:saturate(.63) sepia(.15) contrast(1.05)}
+.world-site[data-world="creative-studio"] .experience-sub,
+.world-site[data-world="architecture-studio"] .experience-sub,
+.world-site[data-world="auto-showroom"] .experience-sub{content-visibility:auto;contain-intrinsic-size:auto 1600px}
+.world-site[data-world="creative-studio"] .world-about-hero,
+.world-site[data-world="architecture-studio"] .world-about-hero,
+.world-site[data-world="auto-showroom"] .world-about-hero{padding-top:clamp(30px,5vw,75px)}
+/* Do not animate or filter full-width photographs on every pointer event. */
+.ix-hero-photograph{transform:none!important;transition:none!important}
+.ix-hero-image{inset:0;animation:none}
+.ix-hero-visual{contain:layout paint}
+.ix-hero-visual .ix-3d-canvas{z-index:1}
+@media(max-width:760px){
+ .ix-subpage-feature{grid-template-columns:1fr;min-height:0}
+ .ix-subpage-feature-copy{min-height:240px;padding:25px 20px;gap:22px}
+ .ix-subpage-feature h2{font-size:clamp(28px,7.5vw,44px)}
+ .ix-subpage-feature-art{min-height:230px;max-height:320px}
+ .ix-subpage-feature-bottom{align-items:flex-start}
+ .ix-subpage-feature-bottom a{width:100%}
+ .ix-hero-visual{--ix-x:0px!important;--ix-y:0px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .ix-subpage-feature *, .ix-subpage-feature *::before, .ix-subpage-feature *::after{animation:none!important;transition:none!important}
+}

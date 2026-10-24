@@ -1,0 +1,65 @@
+name: Athena Immersive — visual evidence
+on:
+  push:
+    branches:
+      - feat/athena-immersive-engine-20261024
+    paths:
+      - ".github/workflows/athena-immersive-visual-qa.yml"
+      - "components/immersive/**"
+      - "components/templates/WorldImmersiveHome.tsx"
+      - "app/immersive-phase0.css"
+      - "scripts/immersive-visual-qa.mjs"
+  pull_request:
+    branches:
+      - feat/athena-immersive-phase0-20261024
+    paths:
+      - ".github/workflows/athena-immersive-visual-qa.yml"
+      - "components/immersive/**"
+      - "components/templates/WorldImmersiveHome.tsx"
+      - "app/immersive-journey.css"
+      - "app/immersive-phase0.css"
+      - "app/template-demos/**/experience/**"
+      - "scripts/immersive-visual-qa.mjs"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: athena-immersive-visual-qa
+  cancel-in-progress: true
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Install isolated Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Build production site
+        run: npm run build
+      - name: Start loopback-only server
+        run: |
+          npm run start -- -p 3189 -H 127.0.0.1 > /tmp/athena-immersive-qa.log 2>&1 &
+          for i in $(seq 1 90); do
+            if curl -fsS http://127.0.0.1:3189/template-demos/creative-studio >/dev/null; then exit 0; fi
+            sleep 2
+          done
+          cat /tmp/athena-immersive-qa.log
+          exit 1
+      - name: Capture real scene frames and interactions
+        env:
+          ATHENA_QA_BASE_URL: http://127.0.0.1:3189
+        run: node scripts/immersive-visual-qa.mjs
+      - name: Upload visual QA screenshots and report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: immersive-visual-qa
+          path: artifacts/immersive-qa/
+          if-no-files-found: warn
+          retention-days: 7

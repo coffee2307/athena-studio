@@ -1,0 +1,37 @@
+import {expect,test} from "@playwright/test";
+
+const worlds=[
+ {slug:"creative-studio",headline:/Ý tưởng không ở yên/},
+ {slug:"architecture-studio",headline:/Bề mặt\. Ánh sáng/},
+ {slug:"auto-showroom",headline:/Thiết kế được cảm nhận/}
+] as const;
+
+for(const {slug,headline} of worlds){
+ test("Athena creative direction: "+slug+" keeps its original visual identity across viewports",async({page})=>{
+  for(const width of [390,1440]){
+   await page.setViewportSize({width,height:900});
+   await page.goto("/template-demos/"+slug);
+   const home=page.locator(".immersive-home");
+   const editorial=page.locator(".ix-editorial");
+   await expect(home).toBeVisible();
+   await expect(home).toHaveAttribute("data-immersive","false");
+   await expect(editorial.getByRole("heading",{name:headline})).toHaveCount(1);
+   await expect(editorial.locator("figure")).toHaveCount(2);
+   await expect(editorial.getByRole("link",{name:/Khám phá bộ sưu tập|Xem hồ sơ công trình|Đi sâu vào từng dự án/}))
+      .toHaveAttribute("href","/template-demos/"+slug+"/work");
+   await editorial.scrollIntoViewIfNeeded();
+   // Lazy photos should only load after the image itself enters the viewport.
+   await editorial.locator("figure img").first().scrollIntoViewIfNeeded();
+   await expect.poll(async()=>editorial.locator("figure img").first().evaluate(node=>{
+    const image=node as HTMLImageElement;return image.complete&&image.naturalWidth>0;
+   })).toBe(true);
+   const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
+   expect(overflow,slug+" "+width+"px overflow").toBeLessThanOrEqual(2);
+   await page.locator(".ix-render-toggle").click();
+   await expect(home).toHaveAttribute("data-immersive","true");
+   if(slug==="creative-studio"){
+     await expect(page.locator(".ix-studio-overlay")).toHaveCount(0);
+   }
+  }
+ });
+}

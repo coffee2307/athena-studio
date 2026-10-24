@@ -58,6 +58,9 @@ test("direct demo is responsive and uses real site header",async({page})=>{
 test("five-minute visitor prompt is accessible but creates no booking",async({page})=>{
  await page.clock.install();
  await page.goto("/template-demos/creative-studio");
+ // Interact after hydration so the invitation timer is armed before advancing the clock.
+ await page.locator(".ix-scene-rail .ix-mode-list button").nth(1).click();
+ await expect(page.locator(".ix-scene-rail .ix-mode-list button").nth(1)).toHaveAttribute("aria-pressed","true");
  await page.clock.fastForward(5*60*1000);
  await expect(page.getByRole("dialog",{name:/Bạn có thích mẫu này/})).toBeVisible();
  await expect(page.getByRole("link",{name:/Trao đổi với Athena/})).toHaveAttribute("href",/template=creative-studio/);
