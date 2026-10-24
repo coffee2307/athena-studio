@@ -88,6 +88,9 @@ try {
         record.subpage = slug + "-" + viewport.name + "-about.png";
         await subpage.screenshot({path:resolve(output,record.subpage),animations:"disabled"});
 
+        const textureErrors = browserErrors.filter(message =>
+          /Couldn't load texture|BLOB_CSP_FAILURE|refused to connect because it violates|asset failed|incomplete 3D render/i.test(message));
+        if(textureErrors.length)summary.errors.push(slug + " / " + viewport.name + " GLB TEXTURE FAILED: " + textureErrors.slice(0,3).join(" | "));
         summary.captures.push(record);
         console.log(slug, viewport.name, JSON.stringify(record));
       } catch (error) {
