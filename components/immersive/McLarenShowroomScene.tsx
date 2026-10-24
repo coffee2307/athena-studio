@@ -3,12 +3,11 @@
 import {useEffect, useRef, useState} from "react";
 import * as THREE from "three";
 import {GLTFLoader} from "three/addons/loaders/GLTFLoader.js";
-import {DRACOLoader} from "three/addons/loaders/DRACOLoader.js";
 import {RoomEnvironment} from "three/addons/environments/RoomEnvironment.js";
 import type {WorldSceneProps} from "./WorldScene";
 import {McLarenLoadingUI} from "./McLarenLoadingUI";
 
-const MODEL_PATH="/models/mclaren-ultimate-vision-gt.glb";
+const MODEL_PATH="/models/mclaren.glb";
 type SceneState="loading"|"ready"|"fallback";
 const clamp=(value:number,min:number,max:number)=>Math.max(min,Math.min(max,value));
 
@@ -54,42 +53,16 @@ function makeStage(){
 }
 
 function tuneMaterials(model:THREE.Object3D){
+ // Do not repaint the user-supplied vehicle: retain original material color,
+ // texture maps, roughness, metallic factor and glTF clearcoat settings.
  model.traverse(child=>{
   if(!(child instanceof THREE.Mesh))return;
-  child.castShadow=false;child.receiveShadow=false;
+  child.castShadow=false;
+  child.receiveShadow=false;
   const materials=Array.isArray(child.material)?child.material:[child.material];
   for(const mat of materials){
    if(!(mat instanceof THREE.MeshStandardMaterial))continue;
-   const n=(mat.name||"").toLowerCase();
-   // Keep every original UV map, carbon texture, decal and mesh intact.
-   // The source GLB has cyan/orange body material factors, even though the
-   // reference viewer shows a black car. Match the intended black livery.
-   if(n==="body_1"||n==="body_2"){
-    mat.color.set(n==="body_1"?0x11161c:0x080c10);
-    if(mat instanceof THREE.MeshPhysicalMaterial){
-     mat.metalness=.53;
-     mat.roughness=.17;
-     mat.clearcoat=.91;
-     mat.clearcoatRoughness=.085;
-     mat.envMapIntensity=1.05;
-     mat.needsUpdate=true;
-    }else{
-     mat.metalness=.49;mat.roughness=.18;mat.envMapIntensity=.98;
-    }
-   }else if(n==="sm_152_t"){
-    // The source GLB also contains untextured orange outer-body trim.
-    mat.color.set(0x101418);
-    mat.metalness=.50;mat.roughness=.20;mat.envMapIntensity=.9;
-   }else if(n.includes("carbon")){
-    mat.metalness=.36;mat.roughness=.29;mat.envMapIntensity=1.0;
-   }else if(n.includes("glass")){
-    mat.metalness=.08;mat.roughness=.19;mat.envMapIntensity=.85;
-   }else if(n.includes("headlight")||n.includes("rear_light")){
-    if(mat instanceof THREE.MeshPhysicalMaterial)mat.clearcoat=1;
-    mat.emissiveIntensity=Math.max(mat.emissiveIntensity,.85);
-   }else if(n.includes("wheel")||n.includes("rims")){
-    mat.metalness=.72;mat.roughness=.30;mat.envMapIntensity=1.28;
-   }
+   mat.envMapIntensity=Math.min(mat.envMapIntensity??1,1.15);
   }
  });
 }
@@ -159,11 +132,6 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   scene.environmentIntensity=.78;
 
   const loader=new GLTFLoader();
-  const draco=new DRACOLoader();
-  draco.setDecoderPath("/draco/");
-  draco.setDecoderConfig({type:"wasm"});
-  draco.setWorkerLimit(2);
-  loader.setDRACOLoader(draco);
 
   const car=new THREE.Group();
   scene.add(car);
@@ -249,7 +217,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   canvas.addEventListener("pointercancel",pointerUp);
   motion.addEventListener("change",onMotion);
 
-  // All Draco/WebP assets are served by Athena; no third-party runtime calls.
+  // The replacement GLB is self-hosted with WebP textures; no Draco decoder is needed.
   setPhase("Đang tải mô hình và vật liệu");
   loader.load(MODEL_PATH,gltf=>{
    if(disposed)return;
@@ -303,7 +271,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    floor.stage.traverse(obj=>{
     if(obj instanceof THREE.Mesh){obj.geometry.dispose();(obj.material as THREE.Material).dispose();}
    });
-   floor.tex.dispose();generated.texture.dispose();pmrem.dispose();draco.dispose();
+   floor.tex.dispose();generated.texture.dispose();pmrem.dispose();
    renderer.dispose();
   };
   return dispose;
