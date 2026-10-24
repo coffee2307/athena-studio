@@ -10,6 +10,7 @@ const palette = {
   ink:[0.055,0.075,0.095] as RGB,
   steel:[0.62,0.70,0.77] as RGB,
   silver:[0.85,0.89,0.94] as RGB,
+  paint:[0.79,0.85,0.91] as RGB,
   dark:[0.14,0.18,0.23] as RGB,
   gold:[0.71,0.53,0.30] as RGB,
   cream:[0.87,0.81,0.68] as RGB,
@@ -134,7 +135,7 @@ function auto(){
  const m=new Geometry();
  m.box([0,-1.70,0],[6.6,.16,3.65],palette.ink);
  // Low-slung touring coupe with tapered silhouette and distinct cabin.
- m.polygonSide([[-2.32,-.77],[-2.43,-.39],[-2.19,-.08],[1.88,.01],[2.38,-.25],[2.44,-.71],[2.2,-.94],[-2.14,-.94]],-.91,.91,palette.silver);
+ m.polygonSide([[-2.32,-.77],[-2.43,-.39],[-2.19,-.08],[1.88,.01],[2.38,-.25],[2.44,-.71],[2.2,-.94],[-2.14,-.94]],-.91,.91,palette.paint);
  m.polygonSide([[-1.25,-.14],[-.54,.77],[.79,.79],[1.53,-.10]],-.74,.74,palette.steel);
  for(const z of [-.769,.769]){
    const windowColor=palette.glass;
