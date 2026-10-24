@@ -4,7 +4,7 @@ import {getTemplate,templates} from "@/lib/templates";
 import type {Metadata} from "next";
 
 type Props={params:Promise<{slug:string}>;searchParams:Promise<{embed?:string}>};
-export function generateStaticParams(){return templates.map(template=>({slug:template.slug}));}
+export function generateStaticParams(){return templates.filter(template=>template.slug!=="digital-creators").map(template=>({slug:template.slug}));}
 export async function generateMetadata({params}:Props):Promise<Metadata>{
  const {slug}=await params;
  const item=getTemplate(slug);

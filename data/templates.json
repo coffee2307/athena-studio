@@ -1159,7 +1159,7 @@
       "Education"
     ],
     "pages": [
-      "Trang chủ / Rubik 3D",
+      "Trang chủ",
       "Giới thiệu / Tranh nét cọ",
       "Hoạt động / Thành phố khối 3D",
       "Đăng ký / Demo"
@@ -1185,9 +1185,7 @@
     "estimatedPrice": "Theo phạm vi tùy biến",
     "qualityTier": "Immersive Studio",
     "demoPath": "/template-demos/digital-creators",
-    "images": [
-      "/template-previews/creative-studio.jpg"
-    ],
+    "images": [],
     "reference": {
       "name": "coffee2307/digital-creators",
       "url": "https://github.com/coffee2307/digital-creators",

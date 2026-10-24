@@ -1,8 +1,8 @@
 import {test,expect} from "@playwright/test";
 
-test("template library presents 20 concepts, search and industry filters",async({page})=>{
+test("template library presents 21 concepts, search and industry filters",async({page})=>{
  await page.goto("/services/web-development/templates");
- await expect(page.locator(".template-card")).toHaveCount(20);
+ await expect(page.locator(".template-card")).toHaveCount(21);
  await expect(page.getByRole("heading",{name:/Chọn cảm hứng/})).toBeVisible();
  await page.getByLabel("Ngành nghề").selectOption({label:"Thời trang"});
  await expect(page.locator(".template-card")).toHaveCount(1);
@@ -50,7 +50,7 @@ test("direct demo is responsive and uses real site header",async({page})=>{
  await page.setViewportSize({width:390,height:844});
  await page.goto("/template-demos/architecture-studio");
  await expect(page.locator(".world-header")).toBeVisible();
- await expect(page.locator("img[src*='image-']").first()).toBeVisible();
+ await expect(page.locator(".immersive-stage")).toBeVisible();
  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
  expect(overflow).toBeLessThanOrEqual(2);
 });
@@ -116,7 +116,7 @@ test("empty search resets filters and templates sort by name",async({page})=>{
  await page.getByLabel("Tìm kiếm").fill("không-có-mẫu-này");
  await expect(page.locator(".template-empty")).toBeVisible();
  await page.getByRole("button",{name:/Xem tất cả mẫu/}).click();
- await expect(page.locator(".template-card")).toHaveCount(20);
+ await expect(page.locator(".template-card")).toHaveCount(21);
  await page.getByLabel("Sắp xếp").selectOption("name");
  const titles=await page.locator(".template-card h3").allTextContents();
  expect(titles).toEqual([...titles].sort((a,b)=>a.localeCompare(b,"vi")));
@@ -136,4 +136,20 @@ test("template layouts avoid horizontal overflow and support reduced motion",asy
  await page.emulateMedia({reducedMotion:"reduce"});
  await page.goto("/");
  await expect(page.locator(".athena-ticker-track")).toHaveCSS("animation-name","none");
+});
+
+
+test("immersive phase 0 worlds and local Digital Creators build are reachable",async({page})=>{
+ await page.goto("/template-demos/creative-studio");
+ await expect(page.locator(".immersive-stage")).toBeVisible();
+ await page.getByRole("button",{name:/Không gian/}).click();
+ await expect(page.locator(".immersive-stage")).toHaveAttribute("data-preset","1");
+ await page.goto("/template-demos/auto-showroom");
+ await page.getByRole("button",{name:/Silver/}).click();
+ await expect(page.locator(".immersive-stage")).toHaveAttribute("data-preset","1");
+ await page.goto("/template-demos/digital-creators");
+ await expect(page.locator(".digital-creators-embed iframe")).toBeVisible();
+ const html=await page.request.get("/immersive/digital-creators/index.html");
+ expect(html.status()).toBe(200);
+ expect(await html.text()).toContain("assets/index-");
 });

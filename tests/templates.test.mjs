@@ -11,17 +11,17 @@ test("template registry has unique, complete entries and only supported optional
   assert.equal(slugs.has(item.slug),false);slugs.add(item.slug);
   for(const key of ["title","category","industry","style","purpose","description","variant","version"])assert.ok(item[key],`${item.slug}: ${key}`);
   assert.ok(item.pages.length>0);assert.ok(item.features.length>0);
-  assert.ok(["web-foundation@1","web-foundation@2"].includes(item.compatibility.starter),item.slug+": unsupported starter");
+  assert.ok(["web-foundation@1","web-foundation@2","standalone-vite@1"].includes(item.compatibility.starter),item.slug+": unsupported starter");
   assert.equal(item.compatibility.next,"15.5.x");
   assert.equal(item.compatibility.react,"19.x");
   assert.equal(item.status,"interactive-demo");
-  assert.equal(item.images.length,5);
+  assert.equal(item.images.length,item.variant==="immersive"?0:5);
   assert.equal(item.demoPath,"/template-demos/"+item.slug);
   assert.ok(item.pages.includes("Trang chủ"),item.slug+": no home page");
   assert.ok(item.estimatedPrice); assert.ok(item.qualityTier); assert.ok(item.reference?.url);
   assert.ok(item.modules.every(module=>["content","contact","catalog","commerce","auth","booking"].includes(module)));
  }
- assert.equal(registry.length,20);
+ assert.equal(registry.length,21);
 });
 test("contact email draft includes the selected template and still requires an explicit send",()=>{
  const draft=createInquiryEmailDraft({name:"Coffee",email:"coffee@example.com",service:"web-development",message:"Tôi cần xây dựng website cho dự án mới.",template:"Studio sáng tạo"},"studio@example.com");
