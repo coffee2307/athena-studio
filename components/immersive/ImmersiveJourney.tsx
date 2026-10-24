@@ -85,8 +85,9 @@ export function ImmersiveJourney({slug}: {slug: World}) {
     if (!track) return;
     const target = track.getBoundingClientRect().top + window.scrollY +
       Math.max(1, track.offsetHeight - window.innerHeight) * (index / 3 + 0.025);
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    window.scrollTo({top: target, behavior: reduced ? "auto" : "smooth"});
+    // Native immediate scroll removes asynchronous smooth-scroll races and
+    // preserves deterministic chapter/camera state on low-end devices.
+    window.scrollTo({top: target, behavior: "instant"});
   }, []);
 
   return <main id="main-content" className={"athena-journey athena-journey-" + slug}>
