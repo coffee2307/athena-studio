@@ -33,6 +33,7 @@ import "@/app/athena-products-fix.css";
 import "@/app/athena-soft-launch.css";
 import "@/app/template-accessibility.css";
 import "@/app/immersive-phase0.css";
+import "@/app/immersive-journey.css";
 
 export const metadata: Metadata = {
   ...createMetadata(),
