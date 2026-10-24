@@ -57,7 +57,7 @@ function createProgram(gl: WebGL2RenderingContext) {
  * Leaves the original photograph visible when WebGL is unavailable, context is
  * lost, or the visitor requests reduced motion.
  */
-export function ImmersiveScene({slug, preset}: {slug: WorldSlug; preset: number}) {
+export function ImmersiveScene({slug, preset, enabled = true}: {slug: WorldSlug; preset: number; enabled?: boolean}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const presetRef = useRef(preset);
   const [status, setStatus] = useState<StageStatus>("loading");
@@ -66,6 +66,10 @@ export function ImmersiveScene({slug, preset}: {slug: WorldSlug; preset: number}
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    if (!enabled) {
+      setStatus("fallback");
+      return;
+    }
 
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (motion.matches) {
@@ -216,7 +220,7 @@ export function ImmersiveScene({slug, preset}: {slug: WorldSlug; preset: number}
       motion.removeEventListener("change", motionChange);
       gl.deleteProgram(program);
     };
-  }, [slug]);
+  }, [slug, enabled]);
 
   return <canvas
     ref={canvasRef}
