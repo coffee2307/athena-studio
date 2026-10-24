@@ -6,6 +6,7 @@ import {GLTFLoader} from "three/addons/loaders/GLTFLoader.js";
 import {DRACOLoader} from "three/addons/loaders/DRACOLoader.js";
 import {RoomEnvironment} from "three/addons/environments/RoomEnvironment.js";
 import type {WorldSceneProps} from "./WorldScene";
+import {McLarenLoadingUI} from "./McLarenLoadingUI";
 
 const MODEL_PATH="/models/mclaren-ultimate-vision-gt.glb";
 type SceneState="loading"|"ready"|"fallback";
@@ -60,24 +61,29 @@ function tuneMaterials(model:THREE.Object3D){
   for(const mat of materials){
    if(!(mat instanceof THREE.MeshStandardMaterial))continue;
    const n=(mat.name||"").toLowerCase();
-   // Preserve textures and original livery; only adjust physical lighting.
+   // Keep every original UV map, carbon texture, decal and mesh intact.
+   // The source GLB has cyan/orange body material factors, even though the
+   // reference viewer shows a black car. Match the intended black livery.
    if(n==="body_1"||n==="body_2"){
-    // Preserve source mesh, mapping and UVs; refine clearcoat with a McLaren-orange studio palette.
-    mat.color.set(n==="body_1"?0xdc6417:0xeb7023);
+    mat.color.set(n==="body_1"?0x11161c:0x080c10);
     if(mat instanceof THREE.MeshPhysicalMaterial){
-     mat.metalness=.66;
-     mat.roughness=.22;
-     mat.clearcoat=.95;
+     mat.metalness=.53;
+     mat.roughness=.17;
+     mat.clearcoat=.91;
      mat.clearcoatRoughness=.085;
-     mat.envMapIntensity=1.16;
+     mat.envMapIntensity=1.05;
      mat.needsUpdate=true;
     }else{
-     mat.metalness=.56;mat.roughness=.24;mat.envMapIntensity=1.05;
+     mat.metalness=.49;mat.roughness=.18;mat.envMapIntensity=.98;
     }
+   }else if(n==="sm_152_t"){
+    // The source GLB also contains untextured orange outer-body trim.
+    mat.color.set(0x101418);
+    mat.metalness=.50;mat.roughness=.20;mat.envMapIntensity=.9;
    }else if(n.includes("carbon")){
     mat.metalness=.36;mat.roughness=.29;mat.envMapIntensity=1.0;
    }else if(n.includes("glass")){
-    mat.metalness=.18;mat.roughness=.12;mat.envMapIntensity=1.65;
+    mat.metalness=.08;mat.roughness=.19;mat.envMapIntensity=.85;
    }else if(n.includes("headlight")||n.includes("rear_light")){
     if(mat instanceof THREE.MeshPhysicalMaterial)mat.clearcoat=1;
     mat.emissiveIntensity=Math.max(mat.emissiveIntensity,.85);
@@ -94,19 +100,24 @@ function tuneMaterials(model:THREE.Object3D){
  * procedural PMREM studio. It deliberately renders on demand, not at 60 FPS
  * while idle, and keeps the editorial photo as a graceful WebGL fallback.
  */
-export function McLarenShowroomScene({preset,enabled=true,scrollRootId}:WorldSceneProps){
+export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequestFallback}:WorldSceneProps){
  const canvasRef=useRef<HTMLCanvasElement>(null);
  const modeRef=useRef(preset);
  const wakeRef=useRef<()=>void>(()=>{});
  const [status,setStatus]=useState<SceneState>("loading");
+ const [percent,setPercent]=useState(0);
+ const [phase,setPhase]=useState("Đang chuẩn bị bộ dựng 3D");
+ const [slow,setSlow]=useState(false);
  modeRef.current=preset;
  useEffect(()=>{wakeRef.current();},[preset]);
 
  useEffect(()=>{
   const canvas=canvasRef.current;
   if(!canvas||!enabled)return;
+  const slowTimer=window.setTimeout(()=>setSlow(true),8500);
+  const finishLoading=()=>window.clearTimeout(slowTimer);
   const motion=window.matchMedia("(prefers-reduced-motion: reduce)");
-  if(motion.matches){setStatus("fallback");return;}
+  if(motion.matches){setStatus("fallback");finishLoading();return;}
 
   let renderer:THREE.WebGLRenderer;
   try{
@@ -116,7 +127,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId}:WorldSce
    });
   }catch(error){
    console.warn("Athena McLaren: WebGL unavailable",error);
-   setStatus("fallback");return;
+   setStatus("fallback");finishLoading();return;
   }
   renderer.outputColorSpace=THREE.SRGBColorSpace;
   renderer.toneMapping=THREE.ACESFilmicToneMapping;
@@ -151,6 +162,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId}:WorldSce
   const draco=new DRACOLoader();
   draco.setDecoderPath("/draco/");
   draco.setDecoderConfig({type:"wasm"});
+  draco.setWorkerLimit(2);
   loader.setDRACOLoader(draco);
 
   const car=new THREE.Group();
@@ -203,7 +215,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId}:WorldSce
    cool.intensity=.85+currentMode*.18;
    rim.intensity=1.65+currentMode*.22;
    renderer.render(scene,camera);
-   if(!drawn){drawn=true;setStatus("ready");}
+   if(!drawn){drawn=true;finishLoading();setPercent(100);setStatus("ready");}
    const movement=Math.abs(currentMode-modeRef.current)+Math.abs(currentProgress-goalProgress)+Math.abs(turn-dragTurn)+camera.position.distanceTo(wanted);
    if(movement>.006)schedule();
   }
@@ -220,8 +232,8 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId}:WorldSce
   const pointerUp=()=>{drag=false;};
   const onScroll=()=>{measureProgress();schedule();};
   const onVisibility=()=>{if(document.hidden){cancelAnimationFrame(request);request=0;}else schedule();};
-  const onLost=(event:Event)=>{event.preventDefault();setStatus("fallback");cancelAnimationFrame(request);request=0;visible=false;};
-  const onMotion=()=>{if(motion.matches){setStatus("fallback");visible=false;cancelAnimationFrame(request);request=0;}};
+  const onLost=(event:Event)=>{event.preventDefault();finishLoading();setStatus("fallback");cancelAnimationFrame(request);request=0;visible=false;};
+  const onMotion=()=>{if(motion.matches){finishLoading();setStatus("fallback");visible=false;cancelAnimationFrame(request);request=0;}};
   const intersection=new IntersectionObserver(entries=>{
    visible=entries.some(item=>item.isIntersecting);
    if(visible){measureProgress();schedule();}else{cancelAnimationFrame(request);request=0;}
@@ -238,8 +250,10 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId}:WorldSce
   motion.addEventListener("change",onMotion);
 
   // All Draco/WebP assets are served by Athena; no third-party runtime calls.
+  setPhase("Đang tải mô hình và vật liệu");
   loader.load(MODEL_PATH,gltf=>{
    if(disposed)return;
+   setPercent(94);setPhase("Đang hoàn thiện ánh sáng và bề mặt sơn");
    model=gltf.scene;tuneMaterials(model);
    const bounds=new THREE.Box3().setFromObject(model);
    const dims=bounds.getSize(new THREE.Vector3());
@@ -249,14 +263,19 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId}:WorldSce
    model.position.set(-center.x*scalar,.07-bounds.min.y*scalar,-center.z*scalar);
    car.add(model);
    loaded=true;resize();measureProgress();schedule();
-  },undefined,error=>{
+  },event=>{
+   if(disposed||!event.total)return;
+   const next=Math.min(90,Math.round(event.loaded/event.total*90));
+   setPercent(previous=>next>=previous+3?next:previous);
+   if(next>=87)setPhase("Đang giải nén hình học và texture");
+  },error=>{
    if(disposed)return;
    console.warn("Athena McLaren model unavailable:",error);
-   setStatus("fallback");
+   finishLoading();setStatus("fallback");
   });
 
   const dispose=()=>{
-   disposed=true;wakeRef.current=()=>{};
+   disposed=true;finishLoading();wakeRef.current=()=>{};
    cancelAnimationFrame(request);
    intersection.disconnect();resizeObserver.disconnect();
    window.removeEventListener("scroll",onScroll);
@@ -290,9 +309,14 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId}:WorldSce
   return dispose;
  },[enabled,scrollRootId]);
 
- return <canvas ref={canvasRef}
-  aria-hidden="true" data-scene-type="auto-showroom"
-  data-renderer={status} data-geometry="gltf-draco-mclaren"
-  className={"ix-3d-canvas ix-auto-3d-canvas"+(status==="ready"?" is-active":"")}
- />;
+ return <>
+  <canvas ref={canvasRef}
+   aria-hidden="true" data-scene-type="auto-showroom"
+   data-renderer={status} data-geometry="gltf-draco-mclaren"
+   className={"ix-3d-canvas ix-auto-3d-canvas"+(status==="ready"?" is-active":"")}
+  />
+  {status!=="ready"&&
+    <McLarenLoadingUI progress={percent} phase={phase} slow={slow}
+      failed={status==="fallback"} onFallback={onRequestFallback}/>}
+ </>;
 }
