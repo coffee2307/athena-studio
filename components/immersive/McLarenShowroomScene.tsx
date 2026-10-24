@@ -68,7 +68,7 @@ function tuneMaterials(model:THREE.Object3D){
 }
 
 /**
- * A self-hosted, compressed McLaren Ultimate Vision GT model.
+ * A self-hosted McLaren GLB model with WebP textures.
  * Interactive lighting is physically based, with ACES tonemapping and a
  * procedural PMREM studio. It deliberately renders on demand, not at 60 FPS
  * while idle, and keeps the editorial photo as a graceful WebGL fallback.
@@ -235,7 +235,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    if(disposed||!event.total)return;
    const next=Math.min(90,Math.round(event.loaded/event.total*90));
    setPercent(previous=>next>=previous+3?next:previous);
-   if(next>=87)setPhase("Đang giải nén hình học và texture");
+   if(next>=87)setPhase("Đang xử lý hình học và texture");
   },error=>{
    if(disposed)return;
    console.warn("Athena McLaren model unavailable:",error);
@@ -280,7 +280,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
  return <>
   <canvas ref={canvasRef}
    aria-hidden="true" data-scene-type="auto-showroom"
-   data-renderer={status} data-geometry="gltf-draco-mclaren"
+   data-renderer={status} data-geometry="gltf-webp-mclaren"
    className={"ix-3d-canvas ix-auto-3d-canvas"+(status==="ready"?" is-active":"")}
   />
   {status!=="ready"&&
