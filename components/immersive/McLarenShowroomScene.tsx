@@ -147,7 +147,10 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   let request=0,visible=true,frameTime=0,drawn=false;
   let drag=false,previousX=0,turn=0,dragTurn=0;
   let currentMode=modeRef.current,currentProgress=0,goalProgress=0;
-  const limit=isMobile?1000/24:1000/38;
+  // Desktop renders on every requested RAF during active interaction, not at an
+  // artificial 38 FPS ceiling. Mobile retains a 30 FPS cap and pixel budget.
+  // Offscreen/idle rendering remains stopped by schedule()/IntersectionObserver.
+  const limit=isMobile?30:0;
 
   const schedule=()=>{
    if(!disposed&&loaded&&visible&&!document.hidden&&!request)request=requestAnimationFrame(draw);
