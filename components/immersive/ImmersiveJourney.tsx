@@ -42,8 +42,8 @@ const stories: Record<World, Story> = {
     image: "/template-demos/auto-showroom/image-5.jpg",
     chapters: [
       {eyebrow: "01 — ÁNH SÁNG", title: "Một đường nét đầu tiên.", description: "Ánh sáng di chuyển trên bề mặt thân xe trong không gian tối, nhấn mạnh hình dáng nguyên khối.", detail: "Light · Silhouette"},
-      {eyebrow: "02 — THIẾT KẾ", title: "Hình khối có chủ đích.", description: "Màu sơn chuyển thành bạc khói, phần mui và bề mặt xe thay đổi khi góc nhìn dịch chuyển.", detail: "Bodywork · Design"},
-      {eyebrow: "03 — HIỆU NĂNG", title: "Khác biệt từ chi tiết.", description: "Chuyển sang sắc đỏ thể thao và thay đổi chi tiết ngoại thất để khám phá biến thể hiệu năng.", detail: "Performance · Form"},
+      {eyebrow: "02 — THIẾT KẾ", title: "Hình khối có chủ đích.", description: "Quan sát thân xe, các đường khí động học và vật liệu ở góc nhìn thứ hai mà không thay đổi mô hình nguyên bản.", detail: "Bodywork · Design"},
+      {eyebrow: "03 — HIỆU NĂNG", title: "Khác biệt từ chi tiết.", description: "Góc quan sát mới làm rõ phần đuôi xe, cánh gió và những chi tiết kết cấu trong mô hình GLB gốc.", detail: "Aerodynamics · Form"},
     ],
   },
 };
@@ -54,7 +54,7 @@ export function ImmersiveJourney({slug}: {slug: World}) {
   const story = stories[slug];
   const [chapter, setChapter] = useState(0);
   const [enabled, setEnabled] = useState(true);
-  const [progress, setProgress] = useState(0);
+  const progressFillRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLElement>(null);
   const rootId = "athena-journey-" + slug;
   useEffect(() => {
@@ -66,7 +66,9 @@ export function ImmersiveJourney({slug}: {slug: World}) {
       const rect = track.getBoundingClientRect();
       const extent = Math.max(1, rect.height - window.innerHeight);
       const current = clamp(-rect.top / extent);
-      setProgress(previous => Math.abs(previous - current) >= 0.004 ? current : previous);
+      // Avoid rerendering the entire Three.js scene / React story tree per scroll.
+      // Keep the progress meter and camera anchored to the same scroll snapshot.
+      if(progressFillRef.current)progressFillRef.current.style.transform = "scaleX(" + current.toFixed(5) + ")";
       setChapter(Math.min(2, Math.floor(current * 3)));
     };
     const schedule = () => {if (!raf) raf = requestAnimationFrame(update);};
@@ -112,7 +114,7 @@ export function ImmersiveJourney({slug}: {slug: World}) {
         </div>
         <div className="journey-stage-foot" aria-hidden="true">
           <span>SCROLL / DISCOVER</span>
-          <div className="journey-progress"><div style={{transform: "scaleX(" + progress.toFixed(4) + ")"}}/></div>
+          <div className="journey-progress"><div ref={progressFillRef} style={{transform:"scaleX(0)"}}/></div>
           <span>{String(chapter + 1).padStart(2,"0")} / 03</span>
         </div>
         <div className="journey-chapter-nav" role="group" aria-label="Di chuyển giữa các chương">
