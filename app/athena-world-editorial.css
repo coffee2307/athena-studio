@@ -1,0 +1,58 @@
+/* Athena Design Engineering: distinct editorial interludes for three immersive worlds.
+   Photo-first; no new GPU contexts or runtime animation loops. */
+.ix-editorial{--editorial-ink:#191919;--editorial-surface:#f0eee9;--editorial-muted:#65635d;background:var(--editorial-surface);color:var(--editorial-ink);padding:clamp(72px,9vw,140px) clamp(22px,6vw,100px) clamp(78px,10vw,150px);overflow:clip}
+.ix-editorial-heading{display:grid;grid-template-columns:minmax(120px,.55fr) minmax(0,1.75fr) minmax(200px,.8fr);gap:24px clamp(22px,3vw,58px);align-items:start;margin-bottom:clamp(40px,6vw,90px)}
+.ix-editorial-eyebrow{font-size:10px;font-weight:800;letter-spacing:.15em;line-height:1.7;padding-top:11px}
+.ix-editorial-heading h2{font-size:clamp(43px,5.5vw,99px);letter-spacing:-.085em;line-height:1.04;font-weight:610;max-width:1000px;text-wrap:balance}
+.ix-editorial-intro{padding-top:7px}
+.ix-editorial-intro p{font-size:clamp(13px,1.1vw,15px);line-height:1.95;color:var(--editorial-muted)}
+.ix-editorial-intro a{font-size:12px;display:inline-flex;gap:24px;align-items:center;justify-content:space-between;text-decoration:none;border-bottom:1px solid currentColor;min-height:44px;margin-top:26px;font-weight:750;max-width:300px}
+.ix-editorial-intro a:hover,.ix-editorial-intro a:focus-visible{outline-offset:3px}
+.ix-editorial-photo-grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,.9fr);gap:clamp(13px,2.4vw,38px);align-items:end}
+.ix-editorial figure{margin:0;position:relative;overflow:hidden;background:#d5d2c9;isolation:isolate}
+.ix-editorial figure img{object-fit:cover;filter:saturate(.86) contrast(1.045)}
+.ix-editorial figure::after{content:"";position:absolute;inset:40% 0 0;pointer-events:none;background:linear-gradient(0deg,#000a,transparent)}
+.ix-editorial-feature{aspect-ratio:1.28}
+.ix-editorial-secondary{aspect-ratio:.77}
+.ix-editorial figcaption{position:absolute;z-index:1;left:clamp(15px,2vw,32px);right:clamp(15px,2vw,32px);bottom:clamp(15px,2vw,32px);display:flex;justify-content:space-between;gap:12px;color:#fff;font-size:10px;letter-spacing:.12em;font-weight:760}
+.ix-editorial-studio{--editorial-surface:#f3f0ea}
+.ix-editorial-architecture{--editorial-surface:#ddd9ce;--editorial-ink:#25251e;--editorial-muted:#595951}
+.ix-editorial-architecture .ix-editorial-feature{aspect-ratio:1.4}
+.ix-editorial-architecture .ix-editorial-secondary{aspect-ratio:.82}
+.ix-editorial-automotive{--editorial-surface:#0f1319;--editorial-ink:#f5f3ed;--editorial-muted:#c4c6cb}
+.ix-editorial-automotive figure{background:#1f2631}
+.ix-editorial-automotive figure img{filter:saturate(.78) contrast(1.16)}
+.ix-editorial-automotive .ix-editorial-feature{aspect-ratio:1.72}
+.ix-editorial-automotive .ix-editorial-secondary{aspect-ratio:.96}
+.ix-editorial-automotive .ix-editorial-heading h2{font-weight:550}
+/* Artist-owned hero space: disable decorative overlay while examining a model. */
+.ix-studio-overlay{pointer-events:none}
+.ix-hero-copy .ix-hero-primary,.ix-hero-copy .ix-journey-link{min-height:48px;touch-action:manipulation}
+.ix-scene-rail button{touch-action:manipulation}
+.ix-work-item:focus-visible .ix-work-shot{outline:3px solid currentColor;outline-offset:4px}
+@media (hover:hover) and (pointer:fine){
+ .ix-editorial figure img{transition:transform .65s cubic-bezier(.2,.8,.2,1)}
+ .ix-editorial figure:hover img{transform:scale(1.026)}
+}
+@media(max-width:1000px){
+ .ix-editorial-heading{grid-template-columns:minmax(115px,.4fr) minmax(0,1.6fr)}
+ .ix-editorial-intro{grid-column:2}
+ .ix-editorial-heading h2{font-size:clamp(43px,6.7vw,76px)}
+}
+@media(max-width:760px){
+ .ix-editorial{padding:72px 20px 82px}
+ .ix-editorial-heading{display:flex;flex-direction:column;gap:18px;margin-bottom:35px}
+ .ix-editorial-heading h2{font-size:clamp(38px,9.2vw,65px);line-height:1.06}
+ .ix-editorial-eyebrow{padding:0}
+ .ix-editorial-intro{padding:0;max-width:580px}
+ .ix-editorial-photo-grid{grid-template-columns:minmax(0,1fr);gap:13px}
+ .ix-editorial-feature,.ix-editorial-architecture .ix-editorial-feature,.ix-editorial-automotive .ix-editorial-feature{aspect-ratio:4/4.25}
+ .ix-editorial-secondary,.ix-editorial-architecture .ix-editorial-secondary,.ix-editorial-automotive .ix-editorial-secondary{aspect-ratio:16/10;width:88%;margin-left:auto!important}
+ .ix-editorial figcaption{font-size:9px}
+ .ix-visual-coordinate span:last-child{display:none}
+ .ix-scene-rail-copy p{font-size:12px}
+ .ix-scene-rail .ix-mode-list button{min-width:44px}
+}
+@media(prefers-reduced-motion:reduce){
+ .ix-editorial figure img{transition:none!important;transform:none!important}
+}
