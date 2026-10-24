@@ -28,9 +28,9 @@ test("all 21 Athena templates have unique immersive direction and honest deliver
 });
 
 test("first immersive scenes are WebGL2 with deterministic mobile safety guards", async () => {
-  const [canvas, shader, style, world] = await Promise.all([
+  const [canvas, mesh, style, world] = await Promise.all([
     read("components/immersive/ImmersiveScene.tsx"),
-    read("components/immersive/scene-shaders.ts"),
+    read("components/immersive/mesh-worlds.ts"),
     read("app/immersive-phase0.css"),
     read("components/templates/WorldImmersiveHome.tsx"),
   ]);
@@ -38,9 +38,11 @@ test("first immersive scenes are WebGL2 with deterministic mobile safety guards"
   assert.match(canvas, /prefers-reduced-motion/);
   assert.match(canvas, /webglcontextlost/);
   assert.match(canvas, /IntersectionObserver/);
-  assert.match(canvas, /pixelBudget/);
-  assert.match(shader, /#version 300 es/);
-  assert.match(shader, /mapScene/);
+  assert.match(canvas, /maxPixels|const cap=/);
+  assert.match(canvas, /#version 300 es/);
+  assert.match(mesh, /makeWorldMesh/);
+  assert.match(mesh, /tubeRing/);
+  assert.match(canvas, /drawArrays/);
   assert.match(style, /\.ix-3d-canvas\.is-active/);
   assert.match(world, /<ImmersiveScene/);
 });
