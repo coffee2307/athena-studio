@@ -5,6 +5,7 @@ import {useState} from "react";
 import type {DemoCopy} from "@/data/demo-worlds";
 import type {WorldDetail} from "@/data/demo-world-details";
 import {ImmersiveScene} from "@/components/immersive/ImmersiveScene";
+import {WorldEditorialInterlude} from "@/components/templates/WorldEditorialInterlude";
 
 const scenes=new Set(["creative-studio","architecture-studio","auto-showroom"]);
 export function hasImmersiveHome(slug:string){return scenes.has(slug);}
@@ -21,7 +22,7 @@ const sceneDescriptions:Record<string,string[]>={
 };
 function Series({slug,world,root}:{slug:string;world:DemoCopy;root:string}){
  return <section className="ix-series" aria-labelledby={"ix-series-"+slug}>
-  <div className="ix-series-heading"><div><span>02 / SELECTED WORK</span><h2 id={"ix-series-"+slug}>{world.section}<span className="ix-period">.</span></h2></div><Link href={root+"/work"}>Toàn bộ dự án <span aria-hidden="true">↗</span></Link></div>
+  <div className="ix-series-heading"><div><span>03 / SELECTED WORK</span><h2 id={"ix-series-"+slug}>{world.section}<span className="ix-period">.</span></h2></div><Link href={root+"/work"}>Toàn bộ dự án <span aria-hidden="true">↗</span></Link></div>
   <div className="ix-series-grid">{world.cards.map((card,i)=><Link href={root+"/work/"+(i+1)} className="ix-work-item" key={card.title}>
    <div className="ix-work-shot"><Image src={root+"/image-"+(i+3)+".jpg"} alt={"Hình ảnh minh họa cho "+card.title} fill sizes="(max-width: 760px) 100vw, 34vw" loading="lazy"/><span className="ix-work-number">{String(i+1).padStart(2,"0")} / 03</span></div>
    <div className="ix-work-meta"><span>{card.label}</span><span aria-hidden="true">↗</span></div><h3>{card.title}</h3><p>{card.text}</p>
@@ -51,8 +52,8 @@ export function WorldImmersiveHome({slug,world,extra}:Props){
     <div className="ix-hero-image" key={activeImage}><Image src={activeImage} fill priority quality={88} alt={"Ảnh concept "+world.brand+": "+caption} sizes="(max-width: 820px) 100vw, 70vw" className="ix-hero-photograph"/></div>
     <ImmersiveScene slug={slug as "creative-studio"|"architecture-studio"|"auto-showroom"} preset={mode} enabled={enable3D}/>
     <div className="ix-visual-vignette" aria-hidden="true"/>
-    <div className="ix-visual-coordinate"><span>EDITION / 2026</span><span>ART DIRECTION / INTERACTIVE 3D OPTIONAL</span></div>
-    {isStudio&&<div className="ix-studio-overlay" aria-hidden="true"><span>01 / 03</span><strong>FORM<br/><em>&amp; FEELING.</em></strong><span>SORA © STUDIO</span></div>}
+    <div className="ix-visual-coordinate"><span>EDITION / 2026</span><span>{enable3D?"3D STUDY / ACTIVE":"EDITORIAL VIEW / 3D OPTIONAL"}</span></div>
+    {isStudio&&!enable3D&&<div className="ix-studio-overlay" aria-hidden="true"><span>01 / 03</span><strong>FORM<br/><em>&amp; FEELING.</em></strong><span>SORA © STUDIO</span></div>}
     {isArch&&<div className="ix-arch-overlay" aria-hidden="true"><span>MỘC / ARCHITECTURE</span><strong>Built around<br/><i>the way we live.</i></strong></div>}
     {!isStudio&&!isArch&&<div className="ix-auto-overlay" aria-hidden="true"><span>VELAR / MOTOR COLLECTION</span><strong>BEYOND<br/>THE <i>ORDINARY.</i></strong></div>}
     <div className="ix-scene-footer"><div className="ix-scene-caption"><span>{String(mode+1).padStart(2,"0")} / 03</span><strong>{caption}</strong></div></div>
@@ -67,7 +68,8 @@ export function WorldImmersiveHome({slug,world,extra}:Props){
    </div>
   </section>
   <section className="ix-manifesto"><span>01 / THE STUDIO</span><h2>{extra.storyTitle}</h2><div><p>{extra.story}</p><Link href={root+"/about"}>Về chúng tôi <span aria-hidden="true">↗</span></Link></div></section>
+  <WorldEditorialInterlude slug={slug as "creative-studio"|"architecture-studio"|"auto-showroom"}/>
   <Series slug={slug} world={world} root={root}/>
-  <section className="ix-ending"><span>03 / GET IN TOUCH</span><h2>{extra.contactTitle}</h2><p>{extra.contactIntro}</p><Link href={root+"/contact"}>Bắt đầu một cuộc trò chuyện <span aria-hidden="true">↗</span></Link></section>
+  <section className="ix-ending"><span>04 / GET IN TOUCH</span><h2>{extra.contactTitle}</h2><p>{extra.contactIntro}</p><Link href={root+"/contact"}>Bắt đầu một cuộc trò chuyện <span aria-hidden="true">↗</span></Link></section>
  </main>;
 }
