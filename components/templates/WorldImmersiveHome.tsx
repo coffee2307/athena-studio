@@ -30,6 +30,7 @@ function Series({slug,world,root}:{slug:string;world:DemoCopy;root:string}){
 }
 export function WorldImmersiveHome({slug,world,extra}:Props){
  const [mode,setMode]=useState(0);
+ const [enable3D,setEnable3D]=useState(true);
  const [reduced,setReduced]=useState(false);
  const viewport=useRef<HTMLDivElement>(null);
  useEffect(()=>{
@@ -65,9 +66,9 @@ export function WorldImmersiveHome({slug,world,extra}:Props){
    </div>
    <div className="ix-hero-visual immersive-stage" ref={viewport} onPointerMove={track} onPointerLeave={reset} data-scene={slug} data-preset={mode}>
     <div className="ix-hero-image" key={activeImage}><Image src={activeImage} fill priority quality={88} alt={"Ảnh concept "+world.brand+": "+caption} sizes="(max-width: 820px) 100vw, 70vw" className="ix-hero-photograph"/></div>
-    <ImmersiveScene slug={slug as "creative-studio"|"architecture-studio"|"auto-showroom"} preset={mode}/>
+    <ImmersiveScene slug={slug as "creative-studio"|"architecture-studio"|"auto-showroom"} preset={mode} enabled={enable3D}/>
     <div className="ix-visual-vignette" aria-hidden="true"/>
-    <div className="ix-visual-coordinate"><span>EDITION / 2026</span><span>LIVE 3D CONCEPT / {String(mode+1).padStart(2,"0")}</span></div>
+    <div className="ix-visual-coordinate"><span>EDITION / 2026</span><button type="button" className="ix-render-toggle" aria-pressed={enable3D} aria-label={enable3D?"Tắt chế độ 3D":"Bật chế độ 3D"} onClick={()=>setEnable3D(value=>!value)}>3D {enable3D?"ON":"OFF"}</button></div>
     {isStudio&&<div className="ix-studio-overlay" aria-hidden="true"><span>01 / 03</span><strong>FORM<br/><em>&amp; FEELING.</em></strong><span>SORA © STUDIO</span></div>}
     {isArch&&<div className="ix-arch-overlay" aria-hidden="true"><span>MỘC / ARCHITECTURE</span><strong>Built around<br/><i>the way we live.</i></strong></div>}
     {!isStudio&&!isArch&&<div className="ix-auto-overlay" aria-hidden="true"><span>VELAR / MOTOR COLLECTION</span><strong>BEYOND<br/>THE <i>ORDINARY.</i></strong></div>}
