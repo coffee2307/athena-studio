@@ -50,7 +50,7 @@ export function WorldImmersiveHome({slug,world,extra}:Props){
    </div>
    <div className="ix-hero-visual immersive-stage" data-scene={slug} data-preset={mode}>
     <div className="ix-hero-image" key={activeImage}><Image src={activeImage} fill priority quality={88} alt={"Ảnh concept "+world.brand+": "+caption} sizes="(max-width: 820px) 100vw, 70vw" className="ix-hero-photograph"/></div>
-    <WorldScene slug={slug as "creative-studio"|"architecture-studio"|"auto-showroom"} preset={mode} enabled={enable3D}/>
+    <WorldScene slug={slug as "creative-studio"|"architecture-studio"|"auto-showroom"} preset={mode} enabled={enable3D} onRequestFallback={()=>setEnable3D(false)}/>
     <div className="ix-visual-vignette" aria-hidden="true"/>
     <div className="ix-visual-coordinate"><span>EDITION / 2026</span><span>{enable3D?"3D STUDY / ACTIVE":"EDITORIAL VIEW / 3D OPTIONAL"}</span></div>
     {isStudio&&!enable3D&&<div className="ix-studio-overlay" aria-hidden="true"><span>01 / 03</span><strong>FORM<br/><em>&amp; FEELING.</em></strong><span>SORA © STUDIO</span></div>}
