@@ -20,6 +20,8 @@ for(const {slug,headline} of worlds){
    await expect(editorial.getByRole("link",{name:/Khám phá bộ sưu tập|Xem hồ sơ công trình|Đi sâu vào từng dự án/}))
       .toHaveAttribute("href","/template-demos/"+slug+"/work");
    await editorial.scrollIntoViewIfNeeded();
+   // Lazy photos should only load after the image itself enters the viewport.
+   await editorial.locator("figure img").first().scrollIntoViewIfNeeded();
    await expect.poll(async()=>editorial.locator("figure img").first().evaluate(node=>{
     const image=node as HTMLImageElement;return image.complete&&image.naturalWidth>0;
    })).toBe(true);
