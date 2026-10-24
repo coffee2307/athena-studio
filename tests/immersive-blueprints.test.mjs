@@ -44,5 +44,5 @@ test("first immersive scenes are WebGL2 with deterministic mobile safety guards"
   assert.match(mesh, /tubeRing/);
   assert.match(canvas, /drawArrays/);
   assert.match(style, /\.ix-3d-canvas\.is-active/);
-  assert.match(world, /<ImmersiveScene/);
+  assert.match(world, /<WorldScene/);
 });
