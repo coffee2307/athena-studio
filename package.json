@@ -32,7 +32,8 @@
     "preview:start": "node scripts/preview-runtime.mjs start",
     "preview:canary": "node scripts/preview-canary.mjs",
     "preview:proxy": "node scripts/preview-readonly.mjs",
-    "test:starter": "node scripts/verify-starter.mjs"
+    "test:starter": "node scripts/verify-starter.mjs",
+    "postinstall": "node scripts/sync-three-draco.mjs"
   },
   "dependencies": {
     "@fontsource/be-vietnam-pro": "5.3.0",
@@ -45,7 +46,8 @@
     "nodemailer": "10.1.7",
     "pg": "8.16.3",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "three": "0.180.0"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.14.0",
@@ -63,7 +65,8 @@
     "eslint-config-next": "15.5.28",
     "lighthouse": "13.5.0",
     "typescript": "^5.8.3",
-    "wrangler": "4.151.3"
+    "wrangler": "4.151.3",
+    "@types/three": "0.180.0"
   },
   "overrides": {
     "postcss": "8.5.31"
