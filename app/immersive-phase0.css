@@ -24,3 +24,35 @@
 .phase0-dc-art-cube i{background:#aed3ec;border-radius:4px;box-shadow:inset -3px -3px #0002}.phase0-dc-art-cube i:nth-child(even){background:#f2b5ce}.phase0-dc-art-cube i:nth-child(3n){background:#bba9f3}
 .phase0-dc-art:hover .phase0-dc-art-cube{transform:translate(-50%,-50%) rotate(2deg) skew(5deg,5deg)}
 @media(prefers-reduced-motion:reduce){.phase0-dc-art-cube{transition:none}}
+
+/* Athena Phase 0 editorial portfolio */
+.phase0-projects{overflow:hidden;background:#fff}
+.phase0-projects-hero{background:#101010;color:#fff;padding:26px var(--gutter) 0}
+.phase0-projects-top{border-bottom:1px solid #444;display:flex;justify-content:space-between;gap:16px;padding:0 0 20px;font-size:10px;letter-spacing:.15em;color:#aaa}
+.phase0-projects-lead{display:grid;grid-template-columns:2.2fr 1fr;gap:50px;align-items:end;padding:clamp(65px,10vw,145px) 0}
+.phase0-projects-lead h1{font-size:clamp(55px,9vw,148px);letter-spacing:-.1em;line-height:.94}.phase0-projects-lead h1 em{color:#bbb}
+.phase0-projects-lead p{font-size:clamp(13px,1.4vw,16px);line-height:1.9;color:#bdbdbd;max-width:380px}
+.phase0-projects-bottom{padding:18px 0;display:flex;justify-content:space-between;gap:15px;color:#aaa;border-top:1px solid #444;font-size:10px;font-weight:700;letter-spacing:.13em}
+.phase0-projects-work{padding:clamp(70px,9vw,130px) var(--gutter)}
+.phase0-projects-work-title{display:grid;grid-template-columns:1fr 2fr 1fr;gap:30px;align-items:start;margin-bottom:45px}
+.phase0-projects-work-title span{font-size:10px;font-weight:750;letter-spacing:.14em;padding-top:10px}
+.phase0-projects-work-title h2{font-size:clamp(38px,5.6vw,88px);letter-spacing:-.08em;line-height:1.02}
+.phase0-projects-work-title p{font-size:13px;line-height:1.8;color:#646464;padding-top:10px}
+.phase0-portfolio-directory .portfolio-controls{padding:16px 0;border-block:1px solid #dedede;margin-bottom:24px}
+.phase0-portfolio-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:clamp(20px,3vw,52px)!important}
+.phase0-portfolio-grid .case-card:first-child{grid-column:1/-1}
+.phase0-portfolio-grid .case-card-link{display:block;overflow:hidden;background:#f2f2f2}
+.phase0-portfolio-grid .case-card-link>.agency-real-art,.phase0-portfolio-grid .case-card-link>.portfolio-art,.phase0-portfolio-grid .case-card-link>.phase0-dc-art{aspect-ratio:1.55!important;min-height:0!important}
+.phase0-portfolio-grid .case-card:first-child .case-card-link>.agency-real-art{aspect-ratio:2.1!important}
+.phase0-portfolio-grid .case-card-info{padding:22px 0!important;background:white!important;display:flex!important;justify-content:space-between;align-items:center}
+.phase0-portfolio-grid .case-card-info h3{font-size:clamp(34px,4.8vw,66px)!important;letter-spacing:-.085em;line-height:1.12}
+.phase0-portfolio-grid .case-index{font-size:10px;letter-spacing:.12em}.phase0-portfolio-grid .case-card-summary{color:#666;font-size:13px;line-height:1.75;max-width:560px}
+.phase0-portfolio-grid .case-arrow{flex-shrink:0;background:#111;color:#fff;width:45px;height:45px;border-radius:50%;display:grid;place-items:center}
+.phase0-portfolio-grid .case-card .agency-real-art img{transition:transform .75s ease}.phase0-portfolio-grid .case-card:hover .agency-real-art img{transform:scale(1.035)}
+.phase0-projects-cta{margin:0 var(--gutter) clamp(60px,9vw,120px);padding:clamp(28px,6vw,80px);background:#161616;color:#fff;display:flex;align-items:end;justify-content:space-between;gap:32px}
+.phase0-projects-cta span{font-size:10px;letter-spacing:.13em}.phase0-projects-cta h2{font-size:clamp(40px,5.2vw,86px);line-height:1.02;letter-spacing:-.085em;margin:23px 0}.phase0-projects-cta h2 em{color:#bbb}
+.phase0-projects-cta p{font-size:13px;color:#bbb;line-height:1.8}.phase0-projects-cta a{background:#fff;color:#111;white-space:nowrap;padding:19px 23px;font-size:12px;font-weight:700}
+.phase0-projects-note{padding:0 var(--gutter) 40px;color:#666;font-size:11px;line-height:1.75}
+@media(max-width:900px){.phase0-projects-lead{grid-template-columns:1fr}.phase0-projects-work-title{grid-template-columns:1fr 2fr}.phase0-projects-work-title p{grid-column:2}.phase0-projects-cta{align-items:start;flex-direction:column}}
+@media(max-width:640px){.phase0-projects-top{align-items:start;flex-direction:column}.phase0-projects-lead h1{font-size:clamp(48px,12vw,72px)}.phase0-projects-work-title{display:block}.phase0-projects-work-title h2{margin:18px 0}.phase0-portfolio-grid{grid-template-columns:1fr!important}.phase0-portfolio-grid .case-card:first-child{grid-column:auto}.phase0-portfolio-grid .case-card-link>.agency-real-art{aspect-ratio:1.4!important}.phase0-projects-cta{margin-inline:16px}.phase0-projects-cta a{white-space:normal}}
+@media(prefers-reduced-motion:reduce){.phase0-portfolio-grid .case-card .agency-real-art img{transition:none}}
