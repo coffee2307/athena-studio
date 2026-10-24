@@ -103,7 +103,7 @@ export function ImmersiveJourney({slug}: {slug: World}) {
     <section className="journey-scroll" ref={trackRef} id={rootId} aria-label="Hành trình 3D theo cuộn trang">
       <div className="journey-stage">
         <div className="journey-backdrop"><Image src={story.image} alt="" fill priority sizes="100vw"/></div>
-        <WorldScene slug={slug} preset={chapter} enabled={enabled} scrollRootId={rootId}/>
+        <WorldScene slug={slug} preset={chapter} enabled={enabled} scrollRootId={rootId} onRequestFallback={()=>setEnabled(false)}/>
         <div className="journey-vignette" aria-hidden="true"/>
         <div className="journey-frame-corner journey-frame-corner-tl"/>
         <div className="journey-frame-corner journey-frame-corner-br"/>
