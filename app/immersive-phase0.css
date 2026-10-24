@@ -144,3 +144,12 @@
 .ix-creative-studio .ix-manifesto p{color:#505050!important}
 .ix-creative-studio .ix-hero-copy>p{color:#505050!important}
 .ix-creative-studio .ix-hero-copy .ix-hero-text-link{color:#171717!important}
+
+/* Phase 1 / GPU scene: keep the licensed photo as a real, accessible fallback. */
+.ix-3d-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;opacity:0;display:block;pointer-events:none;transition:opacity .65s ease}
+.ix-3d-canvas.is-active{opacity:1}
+.ix-hero-visual .ix-visual-vignette{z-index:2}
+.ix-hero-visual .ix-visual-coordinate{z-index:3}
+.ix-hero-visual .ix-scene-footer{z-index:4}
+.ix-hero-visual .ix-studio-overlay{z-index:3}
+@media(prefers-reduced-motion:reduce){.ix-3d-canvas{display:none!important}}
