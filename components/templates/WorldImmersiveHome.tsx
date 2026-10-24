@@ -63,7 +63,7 @@ export function WorldImmersiveHome({slug,world,extra}:Props){
    <div className="ix-scene-rail-copy"><span>INTERACTIVE STUDY / 0{mode+1}</span><strong aria-live="polite">{caption}</strong><p>Ảnh editorial được ưu tiên để tải nhanh. Bật 3D khi muốn khám phá mô hình; nhấn một trong ba góc nhìn để thay đổi cấu trúc.</p></div>
    <div className="ix-rail-actions">
     <div className="immersive-mode-selector ix-mode-list" role="group" aria-label="Chọn chế độ 3D">{labels.map((label,i)=><button type="button" key={label} aria-pressed={mode===i} onClick={()=>setMode(i)}><span>{String(i+1).padStart(2,"0")}</span>{label}</button>)}</div>
-    <button type="button" className="ix-render-toggle" aria-pressed={enable3D} aria-label={enable3D?"Tắt chế độ 3D":"Bật chế độ 3D"} onClick={()=>setEnable3D(value=>!value)}>3D {enable3D?"ON":"OFF"}</button>
+    <button type="button" className="ix-render-toggle" aria-pressed={enable3D ? "true" : "false"} aria-label={enable3D?"Tắt chế độ 3D":"Bật chế độ 3D"} onClick={()=>setEnable3D(value=>!value)}>3D {enable3D?"ON":"OFF"}</button>
    </div>
   </section>
   <section className="ix-manifesto"><span>01 / THE STUDIO</span><h2>{extra.storyTitle}</h2><div><p>{extra.story}</p><Link href={root+"/about"}>Về chúng tôi <span aria-hidden="true">↗</span></Link></div></section>
