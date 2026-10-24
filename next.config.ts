@@ -84,6 +84,15 @@ const nextConfig:NextConfig={
   {source:"/template-demos/:path*",headers:[
    {key:"X-Frame-Options",value:"SAMEORIGIN"},
    {key:"Content-Security-Policy",value:policy.replace("frame-ancestors 'none'","frame-ancestors 'self'")}
+  ]},
+  // Independently compiled Digital Creators must be frameable only by Athena's own gallery.
+  // The original site's self-hosted assets and font links require route-specific policy.
+  {source:"/immersive/digital-creators/:path*",headers:[
+   {key:"X-Frame-Options",value:"SAMEORIGIN"},
+   {key:"Content-Security-Policy",value:policy
+    .replace("frame-ancestors 'none'","frame-ancestors 'self'")
+    .replace("font-src 'self' data:","font-src 'self' data: https://fonts.gstatic.com")
+    .replace("style-src 'self' 'unsafe-inline'","style-src 'self' 'unsafe-inline' https://fonts.googleapis.com")}
   ]}
  ];}
 };
