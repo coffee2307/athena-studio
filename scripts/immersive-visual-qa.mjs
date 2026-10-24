@@ -26,6 +26,9 @@ try {
     });
     for (const slug of worlds) {
       const page = await context.newPage();
+      const browserErrors = [];
+      page.on("pageerror", error => browserErrors.push("pageerror: " + String(error)));
+      page.on("console", entry => {if(entry.type()==="error"||entry.type()==="warning") browserErrors.push("console: "+entry.text());});
       try {
         await page.goto(baseURL + "/template-demos/" + slug, {waitUntil: "domcontentloaded", timeout: 30000});
         const stage = page.locator(".immersive-stage");
@@ -69,7 +72,9 @@ try {
         summary.captures.push(record);
         console.log(slug, viewport.name, JSON.stringify(record));
       } catch (error) {
-        summary.errors.push(slug + " / " + viewport.name + ": " + String(error));
+        const actualState = await page.locator("canvas.ix-3d-canvas").getAttribute("data-renderer").catch(() => "missing");
+        const pressed = await page.locator(".ix-render-toggle").getAttribute("aria-pressed").catch(() => "missing");
+        summary.errors.push(slug + " / " + viewport.name + ": " + String(error) + "; renderer=" + actualState + "; pressed=" + pressed + "; browserErrors=" + JSON.stringify(browserErrors.slice(-6)));
       } finally {
         await page.close();
       }
