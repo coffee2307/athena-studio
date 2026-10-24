@@ -157,3 +157,34 @@
 @media(prefers-reduced-motion:reduce){
  .ix-car-load-track>span{transition:none!important}
 }
+
+/* McLaren mobile visual QA: give the 3D car its own stage below the copy,
+   instead of drawing the car underneath primary calls to action. */
+@media(max-width:760px){
+ .ix-auto-showroom.ix-site[data-immersive="true"] .ix-hero,
+ .ix-auto-showroom.ix-site[data-immersive="true"] .ix-hero-visual{
+  min-height:1030px;
+ }
+ .ix-auto-showroom.ix-site[data-immersive="true"] .ix-hero-visual .ix-auto-3d-canvas{
+  top:510px;
+  bottom:auto;
+  height:395px;
+ }
+ .ix-auto-showroom.ix-site[data-immersive="true"] .ix-hero-copy{
+  padding-bottom:0;
+ }
+ .ix-auto-showroom.ix-site[data-immersive="true"] .ix-scene-footer{
+  bottom:106px;
+  left:22px;
+  right:22px;
+  align-items:flex-start;
+ }
+ .ix-auto-showroom.ix-site[data-immersive="true"] .ix-scene-caption{text-align:left}
+ .ix-auto-showroom.ix-site[data-immersive="true"] .ix-hero-bottom{
+  position:absolute;
+  bottom:16px;
+  left:22px;
+  right:22px;
+  margin:0;
+ }
+}
