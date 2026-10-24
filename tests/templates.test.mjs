@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {readFile} from "node:fs/promises";
-import {existsSync} from "node:fs";
+import {existsSync,statSync} from "node:fs";
 import {createInquiryEmailDraft} from "../lib/contact-email-draft.ts";
 
 const registry=JSON.parse(await readFile(new URL("../data/templates.json",import.meta.url),"utf8"));
@@ -43,4 +43,12 @@ test("Digital Creators is vendored verbatim and the gallery uses a real screensh
   "../public/immersive/digital-creators/index.html",
   "../public/template-previews/digital-creators.png"
  ])assert.ok(existsSync(new URL(file,import.meta.url)),file);
+});
+
+test("the three Phase 0 immersive covers exist as real browser captures",()=>{
+ for(const slug of ["creative-studio","architecture-studio","auto-showroom"]){
+  const file=new URL("../public/template-previews/"+slug+".png",import.meta.url);
+  assert.ok(existsSync(file),slug+" is missing its live preview");
+  assert.ok(statSync(file).size>20000,slug+" screenshot is empty or truncated");
+ }
 });

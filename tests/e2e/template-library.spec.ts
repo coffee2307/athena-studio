@@ -145,7 +145,7 @@ test("immersive phase 0 worlds and local Digital Creators build are reachable",a
  await page.getByRole("button",{name:/Không gian/}).click();
  await expect(page.locator(".immersive-stage")).toHaveAttribute("data-preset","1");
  await page.goto("/template-demos/auto-showroom");
- await page.getByRole("button",{name:/Silver/}).click();
+ await page.getByRole("button",{name:/Atlas SUV/}).click();
  await expect(page.locator(".immersive-stage")).toHaveAttribute("data-preset","1");
  await page.goto("/template-demos/digital-creators");
  await expect(page).toHaveURL(/\/immersive\/digital-creators\/index\.html/);
@@ -167,4 +167,25 @@ test("Digital Creators gallery displays a real captured homepage and opens the o
  await expect(iframe).toHaveAttribute("src","/immersive/digital-creators/index.html");
  await expect(page.frameLocator(".template-demo-viewport iframe").getByRole("link",{name:/Digital Creators - Trang chủ/})).toBeVisible();
  await expect(page.frameLocator(".template-demo-viewport iframe").locator("iframe")).toHaveCount(0);
+});
+
+test("Phase 0 immersive library thumbnails are captured from the actual corresponding websites",async({page})=>{
+ await page.goto("/services/web-development/templates");
+ for(const [slug,label] of [
+  ["creative-studio","Studio sáng tạo"],
+  ["architecture-studio","Kiến trúc & không gian"],
+  ["auto-showroom","Showroom ô tô Velar"]
+ ]){
+  const card=page.locator(".template-card").filter({hasText:label});
+  const img=card.locator(".template-thumbnail-screen img");
+  await expect(img).toHaveAttribute("src",new RegExp(slug+"\\.png"));
+  const captured=await page.request.get("/template-previews/"+slug+".png");
+  expect(captured.status()).toBe(200);
+  expect(captured.headers()["content-type"]).toContain("image/png");
+  await card.getByRole("button",{name:/Trải nghiệm website/}).click();
+  const frame=page.frameLocator(".template-demo-viewport iframe");
+  await expect(frame.locator(".ix-hero-photograph")).toBeVisible();
+  await expect(frame.locator(".immersive-stage")).toHaveAttribute("data-preset","0");
+  await page.getByRole("button",{name:"Đóng bản xem trước"}).click();
+ }
 });
