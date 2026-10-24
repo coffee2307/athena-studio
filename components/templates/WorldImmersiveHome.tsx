@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import {useEffect,useRef,useState,type PointerEvent} from "react";
+import {useState} from "react";
 import type {DemoCopy} from "@/data/demo-worlds";
 import type {WorldDetail} from "@/data/demo-world-details";
 import {ImmersiveScene} from "@/components/immersive/ImmersiveScene";
@@ -31,23 +31,6 @@ function Series({slug,world,root}:{slug:string;world:DemoCopy;root:string}){
 export function WorldImmersiveHome({slug,world,extra}:Props){
  const [mode,setMode]=useState(0);
  const [enable3D,setEnable3D]=useState(false);
- const [reduced,setReduced]=useState(false);
- const viewport=useRef<HTMLDivElement>(null);
- useEffect(()=>{
-  const media=window.matchMedia("(prefers-reduced-motion: reduce)");
-  const sync=()=>setReduced(media.matches);
-  sync();media.addEventListener("change",sync);
-  return()=>media.removeEventListener("change",sync);
- },[]);
- const track=(event:PointerEvent<HTMLDivElement>)=>{
-  if(reduced||event.pointerType==="touch"||!viewport.current)return;
-  const rect=event.currentTarget.getBoundingClientRect();
-  const x=((event.clientX-rect.left)/rect.width-.5)*2;
-  const y=((event.clientY-rect.top)/rect.height-.5)*2;
-  viewport.current.style.setProperty("--ix-x",(x*10).toFixed(1)+"px");
-  viewport.current.style.setProperty("--ix-y",(y*8).toFixed(1)+"px");
- };
- const reset=()=>{viewport.current?.style.setProperty("--ix-x","0px");viewport.current?.style.setProperty("--ix-y","0px");};
  const root="/template-demos/"+slug;
  const isStudio=slug==="creative-studio";
  const isArch=slug==="architecture-studio";
@@ -64,7 +47,7 @@ export function WorldImmersiveHome({slug,world,extra}:Props){
     <p>{world.intro}</p>
     <div className="ix-hero-links"><Link href={root+"/work"} className="ix-hero-primary">{isArch?"Khám phá công trình":slug==="auto-showroom"?"Khám phá bộ sưu tập":"Xem dự án"} <span aria-hidden="true">↗</span></Link><Link href={root+"/about"} className="ix-hero-text-link">Câu chuyện của chúng tôi <span aria-hidden="true">↗</span></Link><Link href={root+"/experience"} className="ix-journey-link">Trải nghiệm 3D <span aria-hidden="true">↗</span></Link></div>
    </div>
-   <div className="ix-hero-visual immersive-stage" ref={viewport} onPointerMove={track} onPointerLeave={reset} data-scene={slug} data-preset={mode}>
+   <div className="ix-hero-visual immersive-stage" data-scene={slug} data-preset={mode}>
     <div className="ix-hero-image" key={activeImage}><Image src={activeImage} fill priority quality={88} alt={"Ảnh concept "+world.brand+": "+caption} sizes="(max-width: 820px) 100vw, 70vw" className="ix-hero-photograph"/></div>
     <ImmersiveScene slug={slug as "creative-studio"|"architecture-studio"|"auto-showroom"} preset={mode} enabled={enable3D}/>
     <div className="ix-visual-vignette" aria-hidden="true"/>
