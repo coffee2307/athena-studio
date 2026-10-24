@@ -9,6 +9,17 @@ on:
       - "components/templates/WorldImmersiveHome.tsx"
       - "app/immersive-phase0.css"
       - "scripts/immersive-visual-qa.mjs"
+  pull_request:
+    branches:
+      - feat/athena-immersive-phase0-20261024
+    paths:
+      - ".github/workflows/athena-immersive-visual-qa.yml"
+      - "components/immersive/**"
+      - "components/templates/WorldImmersiveHome.tsx"
+      - "app/immersive-journey.css"
+      - "app/immersive-phase0.css"
+      - "app/template-demos/**/experience/**"
+      - "scripts/immersive-visual-qa.mjs"
   workflow_dispatch:
 permissions:
   contents: read
