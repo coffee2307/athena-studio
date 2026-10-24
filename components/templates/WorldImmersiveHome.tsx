@@ -4,6 +4,7 @@ import Link from "next/link";
 import {useEffect,useRef,useState,type PointerEvent} from "react";
 import type {DemoCopy} from "@/data/demo-worlds";
 import type {WorldDetail} from "@/data/demo-world-details";
+import {ImmersiveScene} from "@/components/immersive/ImmersiveScene";
 
 const scenes=new Set(["creative-studio","architecture-studio","auto-showroom"]);
 export function hasImmersiveHome(slug:string){return scenes.has(slug);}
@@ -64,8 +65,9 @@ export function WorldImmersiveHome({slug,world,extra}:Props){
    </div>
    <div className="ix-hero-visual immersive-stage" ref={viewport} onPointerMove={track} onPointerLeave={reset} data-scene={slug} data-preset={mode}>
     <div className="ix-hero-image" key={activeImage}><Image src={activeImage} fill priority quality={88} alt={"Ảnh concept "+world.brand+": "+caption} sizes="(max-width: 820px) 100vw, 70vw" className="ix-hero-photograph"/></div>
+    <ImmersiveScene slug={slug as "creative-studio"|"architecture-studio"|"auto-showroom"} preset={mode}/>
     <div className="ix-visual-vignette" aria-hidden="true"/>
-    <div className="ix-visual-coordinate"><span>EDITION / 2026</span><span>INTERACTIVE VISUAL / {String(mode+1).padStart(2,"0")}</span></div>
+    <div className="ix-visual-coordinate"><span>EDITION / 2026</span><span>LIVE 3D CONCEPT / {String(mode+1).padStart(2,"0")}</span></div>
     {isStudio&&<div className="ix-studio-overlay" aria-hidden="true"><span>01 / 03</span><strong>FORM<br/><em>&amp; FEELING.</em></strong><span>SORA © STUDIO</span></div>}
     {isArch&&<div className="ix-arch-overlay" aria-hidden="true"><span>MỘC / ARCHITECTURE</span><strong>Built around<br/><i>the way we live.</i></strong></div>}
     {!isStudio&&!isArch&&<div className="ix-auto-overlay" aria-hidden="true"><span>VELAR / MOTOR COLLECTION</span><strong>BEYOND<br/>THE <i>ORDINARY.</i></strong></div>}
