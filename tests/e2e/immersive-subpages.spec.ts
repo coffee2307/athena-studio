@@ -14,6 +14,7 @@ for(const slug of worlds){
      await expect(link).toHaveAttribute("href","/template-demos/"+slug+"/experience");
      const image=feature.locator("img");
      await expect(image).toHaveCount(1);
+     await image.scrollIntoViewIfNeeded();
      await expect.poll(async()=>image.evaluate(node=> {
        const img=node as HTMLImageElement;
        return img.complete&&img.naturalWidth>0;
