@@ -138,8 +138,12 @@ export function ImmersiveScene({slug, preset}: {slug: WorldSlug; preset: number}
       // Cap pixel cost; avoid rendering full devicePixelRatio on low-end phones.
       const cap = mobile ? 1 : 1.35;
       const scale = Math.min(window.devicePixelRatio || 1, cap);
-      const width = Math.max(1, Math.floor(rect.width * scale));
-      const height = Math.max(1, Math.floor(rect.height * scale));
+      const rawWidth = rect.width * scale;
+      const rawHeight = rect.height * scale;
+      const pixelBudget = mobile ? 130000 : 320000;
+      const fit = Math.min(1, Math.sqrt(pixelBudget / Math.max(1, rawWidth * rawHeight)));
+      const width = Math.max(1, Math.floor(rawWidth * fit));
+      const height = Math.max(1, Math.floor(rawHeight * fit));
       if (canvas.width !== width || canvas.height !== height) {
         canvas.width = width;
         canvas.height = height;
