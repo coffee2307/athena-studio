@@ -77,7 +77,7 @@ try {
         await page.waitForFunction(() => [...document.querySelectorAll(".ix-editorial img")]
           .every(image => image.complete && image.naturalWidth > 0), null, {timeout:15000});
         record.editorial = slug + "-" + viewport.name + "-editorial.png";
-        await editorial.screenshot({path:resolve(output,record.editorial),animations:"disabled"});
+        await page.screenshot({path:resolve(output,record.editorial),animations:"disabled"});
 
         // A real content page must receive the new, section-specific art direction.
         await page.goto(baseURL + "/template-demos/" + slug + "/about", {waitUntil:"domcontentloaded"});
@@ -88,7 +88,7 @@ try {
           return image && image.complete && image.naturalWidth > 0;
         },null,{timeout:15000});
         record.subpage = slug + "-" + viewport.name + "-about.png";
-        await subpage.screenshot({path:resolve(output,record.subpage),animations:"disabled"});
+        await page.screenshot({path:resolve(output,record.subpage),animations:"disabled"});
 
         const textureErrors = browserErrors.filter(message =>
           /Couldn't load texture|BLOB_CSP_FAILURE|refused to connect because it violates|asset failed|incomplete 3D render/i.test(message));
