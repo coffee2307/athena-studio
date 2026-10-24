@@ -53,7 +53,7 @@ try {
         }
 
         if (viewport.name === "desktop") {
-          await stage.locator(".ix-mode-list button").nth(2).click();
+          await page.locator(".ix-scene-rail .ix-mode-list button").nth(2).click();
           await page.waitForTimeout(950);
           const selected = await stage.getAttribute("data-preset");
           if (selected !== "2") summary.errors.push(slug + ": interactive mode selection broken");
