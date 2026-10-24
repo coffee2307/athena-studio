@@ -1,7 +1,7 @@
 import {expect,test} from "@playwright/test";
 
 test("McLaren: slow network shows honest loading state, keeps poster and allows user to skip",async({page})=>{
- await page.route("**/models/mclaren-ultimate-vision-gt.glb",async route=>{
+ await page.route("**/models/mclaren.glb",async route=>{
   await new Promise(resolve=>setTimeout(resolve,1600));
   await route.continue();
  });
@@ -21,7 +21,7 @@ test("McLaren: slow network shows honest loading state, keeps poster and allows 
 });
 
 test("McLaren: a failed GLB download offers an accessible image fallback",async({page})=>{
- await page.route("**/models/mclaren-ultimate-vision-gt.glb",route=>route.abort("failed"));
+ await page.route("**/models/mclaren.glb",route=>route.abort("failed"));
  await page.goto("/template-demos/auto-showroom");
  await page.getByRole("button",{name:"Bật chế độ 3D"}).click();
  const stage=page.locator(".immersive-stage");
