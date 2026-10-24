@@ -11,12 +11,12 @@ type Props={slug:string;world:DemoCopy;extra:WorldDetail};
 const modes:Record<string,string[]>={
  "creative-studio":["Lớp hình","Không gian","Chuyển động"],
  "architecture-studio":["Tổng thể","Chi tiết","Kết cấu"],
- "auto-showroom":["Grand Touring","Atlas SUV","RS Concept"]
+ "auto-showroom":["Ánh sáng","Thiết kế","Hiệu năng"]
 };
 const sceneDescriptions:Record<string,string[]>={
  "creative-studio":["Visual identity / 001","Spatial narrative / 002","Digital experience / 003"],
  "architecture-studio":["Ánh sáng & tỷ lệ","Những chất liệu thật","Không gian để sống"],
- "auto-showroom":["Grand Touring / 01","All-terrain / 02","Performance / 03"]
+ "auto-showroom":["NIGHT DRIVE / 01","FORM STUDY / 02","PERFORMANCE / 03"]
 };
 function Series({slug,world,root}:{slug:string;world:DemoCopy;root:string}){
  return <section className="ix-series" aria-labelledby={"ix-series-"+slug}>
@@ -51,7 +51,8 @@ export function WorldImmersiveHome({slug,world,extra}:Props){
  const isArch=slug==="architecture-studio";
  const labels=modes[slug];
  const caption=sceneDescriptions[slug][mode];
- const activeImage=root+"/image-"+(mode+1)+".jpg";
+ const orderedImages:Record<string,number[]>={"creative-studio":[1,4,5],"architecture-studio":[5,4,3],"auto-showroom":[5,1,4]};
+ const activeImage=root+"/image-"+orderedImages[slug][mode]+".jpg";
  return <main className={"ix-site ix-"+slug+" immersive-home"} id="world-main">
   <section className="ix-hero">
    {isStudio&&<div className="ix-studio-intro"><span>INDEPENDENT CREATIVE PRACTICE</span><span>EST. 2026 / VIETNAM</span></div>}
@@ -72,7 +73,7 @@ export function WorldImmersiveHome({slug,world,extra}:Props){
      <div className="immersive-mode-selector ix-mode-list" role="group" aria-label="Thay đổi góc nhìn và hình ảnh">{labels.map((label,i)=><button type="button" key={label} aria-pressed={mode===i} onClick={()=>setMode(i)}><span>{String(i+1).padStart(2,"0")}</span>{label}</button>)}</div>
     </div>
    </div>
-   <div className="ix-hero-bottom"><span>SCROLL TO DISCOVER <span aria-hidden="true">↓</span></span><span>{world.brand} / DEMONSTRATION SITE</span></div>
+   <div className="ix-hero-bottom"><span>SCROLL TO DISCOVER <span aria-hidden="true">↓</span></span><span>{slug==="auto-showroom"?"ẢNH XE MINH HỌA / CONCEPT DEMO":world.brand+" / DEMONSTRATION SITE"}</span></div>
   </section>
   <section className="ix-manifesto"><span>01 / THE STUDIO</span><h2>{extra.storyTitle}</h2><div><p>{extra.story}</p><Link href={root+"/about"}>Về chúng tôi <span aria-hidden="true">↗</span></Link></div></section>
   <Series slug={slug} world={world} root={root}/>

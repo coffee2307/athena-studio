@@ -145,7 +145,7 @@ test("immersive phase 0 worlds and local Digital Creators build are reachable",a
  await page.getByRole("button",{name:/Không gian/}).click();
  await expect(page.locator(".immersive-stage")).toHaveAttribute("data-preset","1");
  await page.goto("/template-demos/auto-showroom");
- await page.getByRole("button",{name:/Atlas SUV/}).click();
+ await page.getByRole("button",{name:/Thiết kế/}).click();
  await expect(page.locator(".immersive-stage")).toHaveAttribute("data-preset","1");
  await page.goto("/template-demos/digital-creators");
  await expect(page).toHaveURL(/\/immersive\/digital-creators\/index\.html/);
