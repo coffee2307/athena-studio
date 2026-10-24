@@ -192,7 +192,13 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    const smoothFraction=fraction*fraction*(3-2*fraction);
    const scrollOrbit=angles[lower]+(angles[lower+1]-angles[lower])*smoothFraction
     +Math.max(0,currentProgress-2/3)*.42;
-   const orbit=(scrollRootId?scrollOrbit:angles[Math.round(clamp(currentMode,0,2))]+currentProgress*.20)+turn;
+   // Preset changes should travel between camera poses, not snap halfway.
+   const modePosition=clamp(currentMode,0,2);
+   const modeLower=Math.min(1,Math.floor(modePosition));
+   const modeT=modePosition-modeLower;
+   const easedMode=modeT*modeT*(3-2*modeT);
+   const heroOrbit=angles[modeLower]+(angles[modeLower+1]-angles[modeLower])*easedMode;
+   const orbit=(scrollRootId?scrollOrbit:heroOrbit+currentProgress*.20)+turn;
    const dist=Math.max(isMobile?10.6:8.3,8.3*.94/Math.max(.52,camera.aspect));
    const y=(isMobile?3.7:2.8)+currentProgress*.35;
    const wanted=new THREE.Vector3(Math.cos(orbit)*dist,y,Math.sin(orbit)*dist);
