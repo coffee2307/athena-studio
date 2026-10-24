@@ -184,3 +184,10 @@
  .ix-scene-rail .ix-mode-list button{flex:1 1 auto;min-height:48px;font-size:11px;padding:12px}
  .ix-scene-rail .ix-render-toggle{width:100%;min-height:48px;font-size:11px}
 }
+
+/* Immersive gallery journey entry — links to a genuine scroll-driven 3D route. */
+.ix-hero-links .ix-journey-link{display:inline-flex;align-items:center;gap:18px;min-height:48px;padding:12px 17px;border:1px solid currentColor;font-size:12px;font-weight:760;text-decoration:none}
+.ix-hero-links .ix-journey-link:hover{background:#171717;color:#fff}
+.ix-architecture-studio .ix-hero-links .ix-journey-link,.ix-auto-showroom .ix-hero-links .ix-journey-link{color:#fff}
+.ix-architecture-studio .ix-hero-links .ix-journey-link:hover,.ix-auto-showroom .ix-hero-links .ix-journey-link:hover{background:#fff;color:#171717}
+.ix-hero-links .ix-journey-link:focus-visible{outline:3px solid currentColor;outline-offset:3px}
