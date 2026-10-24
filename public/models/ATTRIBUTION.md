@@ -1,14 +1,12 @@
-# McLaren Ultimate Vision GT — model attribution
+﻿# McLaren replacement model provenance
 
-This 3D asset is used **solely as a demonstrative showroom model** in the Athena Studio template preview; Athena Studio and the fictional VELAR demo have no affiliation with, endorsement from, or authorization by McLaren Automotive.
-
-- **Title:** Mclaren Ultimate Vision GT | updated + texture
-- **Author:** kevin (ケビン) (https://sketchfab.com/sohyalebret)
-- **Original:** https://sketchfab.com/3d-models/mclaren-ultimate-vision-gt-updated-texture-9356ec0503bd45debd2b4cec317ad4c6
-- **Licence indicated in the user-provided GLB asset extras:** CC BY 4.0 — https://creativecommons.org/licenses/by/4.0/
-- **Asset filename:** mclaren-ultimate-vision-gt.glb
-- **GLB SHA-256:** af5ec167526d71bbf8afd7a7494cb5694c1297d657df2bf4545cccaba64bb0b2
-- **Format:** binary glTF 2.0 with `KHR_draco_mesh_compression` and `EXT_texture_webp`.
-- **Changes:** The asset supplied by the user is placed as-is with pre-compressed geometry/textures. Runtime rendering enhances studio lighting and PBR material parameters; the GLB is not re-exported or altered.
-
-Preserve this attribution on the website and when redistributing the model. Do not describe this as an official McLaren website or sell the concept model as an original Athena asset.
+- New asset: user-provided mclaren.glb (October 25, 2026)
+- SHA-256: f9eeb7e7daae7cae0534fa0e2a021e0e9489b6b486f1b0f124e9f78e55b2f897
+- Size: 6,369,252 bytes
+- Geometry: 54 meshes; 32 materials; 13 embedded WebP images
+- glTF extensions: EXT_texture_webp required, KHR_materials_clearcoat, KHR_materials_emissive_strength, KHR_materials_specular
+- No Draco compression or Draco decoder is required.
+- GLB source colors and textures are preserved by the renderer.
+- This attachment contains no established author/license. Verify redistribution rights before public release.
+- VELAR is fictional and is not affiliated with McLaren Automotive.
+- The previous asset's CC BY attribution does not apply to this replacement.
