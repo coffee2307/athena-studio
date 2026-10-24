@@ -4,7 +4,7 @@ import Link from "next/link";
 import {useState} from "react";
 import type {DemoCopy} from "@/data/demo-worlds";
 import type {WorldDetail} from "@/data/demo-world-details";
-import {ImmersiveScene} from "@/components/immersive/ImmersiveScene";
+import {WorldScene} from "@/components/immersive/WorldScene";
 import {WorldEditorialInterlude} from "@/components/templates/WorldEditorialInterlude";
 
 const scenes=new Set(["creative-studio","architecture-studio","auto-showroom"]);
@@ -13,12 +13,12 @@ type Props={slug:string;world:DemoCopy;extra:WorldDetail};
 const modes:Record<string,string[]>={
  "creative-studio":["Lớp hình","Không gian","Chuyển động"],
  "architecture-studio":["Tổng thể","Chi tiết","Kết cấu"],
- "auto-showroom":["Ánh sáng","Thiết kế","Hiệu năng"]
+ "auto-showroom":["Studio","Đường nét","Phía sau"]
 };
 const sceneDescriptions:Record<string,string[]>={
  "creative-studio":["Visual identity / 001","Spatial narrative / 002","Digital experience / 003"],
  "architecture-studio":["Ánh sáng & tỷ lệ","Những chất liệu thật","Không gian để sống"],
- "auto-showroom":["NIGHT DRIVE / 01","FORM STUDY / 02","PERFORMANCE / 03"]
+ "auto-showroom":["McLAREN / SHOWROOM","BODYWORK / SIDE VIEW","AERODYNAMICS / REAR VIEW"]
 };
 function Series({slug,world,root}:{slug:string;world:DemoCopy;root:string}){
  return <section className="ix-series" aria-labelledby={"ix-series-"+slug}>
@@ -50,12 +50,12 @@ export function WorldImmersiveHome({slug,world,extra}:Props){
    </div>
    <div className="ix-hero-visual immersive-stage" data-scene={slug} data-preset={mode}>
     <div className="ix-hero-image" key={activeImage}><Image src={activeImage} fill priority quality={88} alt={"Ảnh concept "+world.brand+": "+caption} sizes="(max-width: 820px) 100vw, 70vw" className="ix-hero-photograph"/></div>
-    <ImmersiveScene slug={slug as "creative-studio"|"architecture-studio"|"auto-showroom"} preset={mode} enabled={enable3D}/>
+    <WorldScene slug={slug as "creative-studio"|"architecture-studio"|"auto-showroom"} preset={mode} enabled={enable3D}/>
     <div className="ix-visual-vignette" aria-hidden="true"/>
     <div className="ix-visual-coordinate"><span>EDITION / 2026</span><span>{enable3D?"3D STUDY / ACTIVE":"EDITORIAL VIEW / 3D OPTIONAL"}</span></div>
     {isStudio&&!enable3D&&<div className="ix-studio-overlay" aria-hidden="true"><span>01 / 03</span><strong>FORM<br/><em>&amp; FEELING.</em></strong><span>SORA © STUDIO</span></div>}
     {isArch&&<div className="ix-arch-overlay" aria-hidden="true"><span>MỘC / ARCHITECTURE</span><strong>Built around<br/><i>the way we live.</i></strong></div>}
-    {!isStudio&&!isArch&&<div className="ix-auto-overlay" aria-hidden="true"><span>VELAR / MOTOR COLLECTION</span><strong>BEYOND<br/>THE <i>ORDINARY.</i></strong></div>}
+    {!isStudio&&!isArch&&!enable3D&&<div className="ix-auto-overlay" aria-hidden="true"><span>VELAR / MOTOR COLLECTION</span><strong>BEYOND<br/>THE <i>ORDINARY.</i></strong></div>}
     <div className="ix-scene-footer"><div className="ix-scene-caption"><span>{String(mode+1).padStart(2,"0")} / 03</span><strong>{caption}</strong></div></div>
    </div>
    <div className="ix-hero-bottom"><span>SCROLL TO DISCOVER <span aria-hidden="true">↓</span></span><span>{slug==="auto-showroom"?"ẢNH XE MINH HỌA / CONCEPT DEMO":world.brand+" / DEMONSTRATION SITE"}</span></div>
