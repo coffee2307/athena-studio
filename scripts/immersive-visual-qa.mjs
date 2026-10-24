@@ -34,7 +34,7 @@ try {
         await page.waitForFunction(() => {
           const element = document.querySelector("canvas.ix-3d-canvas");
           return element && element.getAttribute("data-renderer") !== "loading";
-        }, {timeout: 20000});
+        }, null, {timeout: 20000});
         const renderer = await canvas.getAttribute("data-renderer");
         const caps = await canvas.evaluate(element => {
           const target = element;
