@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import {useCallback, useEffect, useRef, useState} from "react";
-import {ImmersiveScene} from "@/components/immersive/ImmersiveScene";
+import {WorldScene} from "@/components/immersive/WorldScene";
 
 type World = "creative-studio" | "architecture-studio" | "auto-showroom";
 type Chapter = {eyebrow: string; title: string; description: string; detail: string};
@@ -103,7 +103,7 @@ export function ImmersiveJourney({slug}: {slug: World}) {
     <section className="journey-scroll" ref={trackRef} id={rootId} aria-label="Hành trình 3D theo cuộn trang">
       <div className="journey-stage">
         <div className="journey-backdrop"><Image src={story.image} alt="" fill priority sizes="100vw"/></div>
-        <ImmersiveScene slug={slug} preset={chapter} enabled={enabled} scrollRootId={rootId}/>
+        <WorldScene slug={slug} preset={chapter} enabled={enabled} scrollRootId={rootId}/>
         <div className="journey-vignette" aria-hidden="true"/>
         <div className="journey-frame-corner journey-frame-corner-tl"/>
         <div className="journey-frame-corner journey-frame-corner-br"/>
