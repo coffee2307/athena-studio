@@ -188,3 +188,17 @@
   margin:0;
  }
 }
+
+/* Mobile canvas needs a predictable first-fold composition:
+   the inherited centered flex hero otherwise pushes CTA into the car stage. */
+@media(max-width:760px){
+ .ix-auto-showroom.ix-site[data-immersive="true"] .ix-hero{
+  justify-content:flex-start;
+ }
+ .ix-auto-showroom.ix-site[data-immersive="true"] .ix-hero-image{
+  background:#070b12;
+ }
+ .ix-auto-showroom.ix-site[data-immersive="true"] .ix-hero-photograph{
+  opacity:0;
+ }
+}
