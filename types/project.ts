@@ -19,6 +19,6 @@ export interface Project {
   activities: string[];
   websiteUrl?: string;
   gallery: {src:string;alt:string;caption:string;rightsVerified:boolean}[];
-  artwork: "pham"|"econith"|"qrio"|"neutral";
+  artwork: "pham"|"econith"|"qrio"|"neutral"|"digital-creators";
   updatedLabel: string;
 }

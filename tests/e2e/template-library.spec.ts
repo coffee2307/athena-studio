@@ -1,8 +1,8 @@
 import {test,expect} from "@playwright/test";
 
-test("template library presents 20 concepts, search and industry filters",async({page})=>{
+test("template library presents 21 concepts, search and industry filters",async({page})=>{
  await page.goto("/services/web-development/templates");
- await expect(page.locator(".template-card")).toHaveCount(20);
+ await expect(page.locator(".template-card")).toHaveCount(21);
  await expect(page.getByRole("heading",{name:/Chọn cảm hứng/})).toBeVisible();
  await page.getByLabel("Ngành nghề").selectOption({label:"Thời trang"});
  await expect(page.locator(".template-card")).toHaveCount(1);
@@ -50,7 +50,7 @@ test("direct demo is responsive and uses real site header",async({page})=>{
  await page.setViewportSize({width:390,height:844});
  await page.goto("/template-demos/architecture-studio");
  await expect(page.locator(".world-header")).toBeVisible();
- await expect(page.locator("img[src*='image-']").first()).toBeVisible();
+ await expect(page.locator(".immersive-stage")).toBeVisible();
  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
  expect(overflow).toBeLessThanOrEqual(2);
 });
@@ -116,7 +116,7 @@ test("empty search resets filters and templates sort by name",async({page})=>{
  await page.getByLabel("Tìm kiếm").fill("không-có-mẫu-này");
  await expect(page.locator(".template-empty")).toBeVisible();
  await page.getByRole("button",{name:/Xem tất cả mẫu/}).click();
- await expect(page.locator(".template-card")).toHaveCount(20);
+ await expect(page.locator(".template-card")).toHaveCount(21);
  await page.getByLabel("Sắp xếp").selectOption("name");
  const titles=await page.locator(".template-card h3").allTextContents();
  expect(titles).toEqual([...titles].sort((a,b)=>a.localeCompare(b,"vi")));
@@ -136,4 +136,56 @@ test("template layouts avoid horizontal overflow and support reduced motion",asy
  await page.emulateMedia({reducedMotion:"reduce"});
  await page.goto("/");
  await expect(page.locator(".athena-ticker-track")).toHaveCSS("animation-name","none");
+});
+
+
+test("immersive phase 0 worlds and local Digital Creators build are reachable",async({page})=>{
+ await page.goto("/template-demos/creative-studio");
+ await expect(page.locator(".immersive-stage")).toBeVisible();
+ await page.getByRole("button",{name:/Không gian/}).click();
+ await expect(page.locator(".immersive-stage")).toHaveAttribute("data-preset","1");
+ await page.goto("/template-demos/auto-showroom");
+ await page.getByRole("button",{name:/Thiết kế/}).click();
+ await expect(page.locator(".immersive-stage")).toHaveAttribute("data-preset","1");
+ await page.goto("/template-demos/digital-creators");
+ await expect(page).toHaveURL(/\/immersive\/digital-creators\/index\.html/);
+ await expect(page.getByRole("banner").getByRole("link",{name:/Digital Creators - Trang chủ/})).toBeVisible();
+ await expect(page.getByRole("heading",{level:1})).toContainText("Nơi ý tưởng");
+ const html=await page.request.get("/immersive/digital-creators/index.html");
+ expect(html.status()).toBe(200);
+ expect(await html.text()).toContain("assets/index-");
+});
+
+test("Digital Creators gallery displays a real captured homepage and opens the original site without nested iframe",async({page})=>{
+ await page.goto("/services/web-development/templates");
+ const card=page.locator(".template-card").filter({hasText:"Digital Creators"});
+ await expect(card.locator("img")).toHaveAttribute("src",/digital-creators.png/);
+ await card.getByRole("button",{name:/Trải nghiệm website Digital Creators/}).click();
+ const modal=page.locator("dialog.template-demo-modal");
+ await expect(modal).toBeVisible();
+ const iframe=modal.locator(".template-demo-viewport iframe");
+ await expect(iframe).toHaveAttribute("src","/immersive/digital-creators/index.html");
+ await expect(page.frameLocator(".template-demo-viewport iframe").getByRole("banner").getByRole("link",{name:/Digital Creators - Trang chủ/})).toBeVisible();
+ await expect(page.frameLocator(".template-demo-viewport iframe").locator("iframe")).toHaveCount(0);
+});
+
+test("Phase 0 immersive library thumbnails are captured from the actual corresponding websites",async({page})=>{
+ await page.goto("/services/web-development/templates");
+ for(const [slug,label] of [
+  ["creative-studio","Studio sáng tạo"],
+  ["architecture-studio","Kiến trúc & không gian"],
+  ["auto-showroom","Showroom ô tô Velar"]
+ ]){
+  const card=page.locator(".template-card").filter({hasText:label});
+  const img=card.locator(".template-thumbnail-screen img");
+  await expect(img).toHaveAttribute("src",new RegExp(slug+"\\.png"));
+  const captured=await page.request.get("/template-previews/"+slug+".png");
+  expect(captured.status()).toBe(200);
+  expect(captured.headers()["content-type"]).toContain("image/png");
+  await card.getByRole("button",{name:/Trải nghiệm website/}).click();
+  const frame=page.frameLocator(".template-demo-viewport iframe");
+  await expect(frame.locator(".ix-hero-photograph")).toBeVisible();
+  await expect(frame.locator(".immersive-stage")).toHaveAttribute("data-preset","0");
+  await page.getByRole("button",{name:"Đóng bản xem trước"}).click();
+ }
 });

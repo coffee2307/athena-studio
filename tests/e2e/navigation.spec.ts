@@ -5,12 +5,12 @@ test("Public navigation and translated case studies work",async({page})=>{
  await expect(page.getByRole("heading",{level:1})).toBeVisible();
  await page.goto("/projects");
  await expect(page.getByRole("heading",{level:1})).toBeVisible();
- await expect(page.locator(".case-card")).toHaveCount(2);
+ await expect(page.locator(".case-card")).toHaveCount(3);
  await page.getByRole("button",{name:"Nghiên cứu"}).click();
  await expect(page.locator(".case-card")).toHaveCount(1);
  await expect(page.locator(".case-card").getByRole("heading",{name:"ECONITH"})).toBeVisible();
  await page.getByRole("button",{name:"Tất cả"}).click();
- await expect(page.locator(".case-card")).toHaveCount(2);
+ await expect(page.locator(".case-card")).toHaveCount(3);
  await page.goto("/projects/qrio");
  await expect(page.locator("body")).toContainText("không tồn tại");
 });
@@ -50,7 +50,7 @@ test("Reduced motion preserves routes and disables reveal hiding",async({page})=
  expect(state.active).toBe(false);
  expect(parseFloat(state.animation)).toBeLessThanOrEqual(0.05);
  await page.goto("/projects");
- await expect(page.locator(".case-card")).toHaveCount(2);
+ await expect(page.locator(".case-card")).toHaveCount(3);
 });
 test("No fake inquiry submission; readiness reports blocked",async({page,request})=>{
  await page.goto("/contact");
