@@ -193,7 +193,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId}:WorldSce
    // Three cinematic camera presets; no model deformation or texture loss.
    const angle=[.72,2.0,4.9][Math.round(clamp(currentMode,0,2))];
    const orbit=angle+turn+currentProgress*.20;
-   const dist=isMobile?10.6:8.3;
+   const dist=Math.max(isMobile?10.6:8.3,8.3*.94/Math.max(.52,camera.aspect));
    const y=(isMobile?3.7:2.8)+currentProgress*.35;
    const wanted=new THREE.Vector3(Math.cos(orbit)*dist,y,Math.sin(orbit)*dist);
    camera.position.lerp(wanted,lerp);
@@ -207,7 +207,6 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId}:WorldSce
   }
 
   const pointerDown=(event:PointerEvent)=>{
-   if(event.pointerType==="touch")return;
    drag=true;previousX=event.clientX;
    canvas.setPointerCapture(event.pointerId);
   };
