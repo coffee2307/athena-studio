@@ -15,19 +15,19 @@ function makeStage(){
  const stage=new THREE.Group();
  // Black brushed-metal display platform, low draw-call budget.
  const platform=new THREE.Mesh(
-  new THREE.CylinderGeometry(3.25,3.31,.075,96),
-  new THREE.MeshPhysicalMaterial({color:0x0a1018,metalness:.62,roughness:.27,clearcoat:.45})
+  new THREE.CylinderGeometry(2.92,2.98,.075,96),
+  new THREE.MeshPhysicalMaterial({color:0x080a0f,metalness:.18,roughness:.56,clearcoat:.14})
  );
  platform.position.y=-.07;
  stage.add(platform);
  const ring=new THREE.Mesh(
-  new THREE.TorusGeometry(3.20,.016,8,128),
+  new THREE.TorusGeometry(2.91,.013,8,128),
   new THREE.MeshBasicMaterial({color:0xf0802b,toneMapped:false})
  );
  ring.rotation.x=Math.PI/2;ring.position.y=-.023;
  stage.add(ring);
  const outerRing=new THREE.Mesh(
-  new THREE.TorusGeometry(3.47,.009,6,128),
+  new THREE.TorusGeometry(3.15,.008,6,128),
   new THREE.MeshBasicMaterial({color:0x516277,toneMapped:false})
  );
  outerRing.rotation.x=Math.PI/2;outerRing.position.y=-.087;stage.add(outerRing);
@@ -61,16 +61,18 @@ function tuneMaterials(model:THREE.Object3D){
    if(!(mat instanceof THREE.MeshStandardMaterial))continue;
    const n=(mat.name||"").toLowerCase();
    // Preserve textures and original livery; only adjust physical lighting.
-   if(/^body_[12]$/.test(n)||n==="body_1"||n==="body_2"){
+   if(n==="body_1"||n==="body_2"){
+    // Preserve source mesh, mapping and UVs; refine clearcoat with a McLaren-orange studio palette.
+    mat.color.set(n==="body_1"?0xdc6417:0xeb7023);
     if(mat instanceof THREE.MeshPhysicalMaterial){
-     mat.metalness=.54;
-     mat.roughness=.24;
+     mat.metalness=.66;
+     mat.roughness=.22;
      mat.clearcoat=.95;
      mat.clearcoatRoughness=.085;
-     mat.envMapIntensity=1.8;
+     mat.envMapIntensity=1.16;
      mat.needsUpdate=true;
     }else{
-     mat.metalness=.48;mat.roughness=.25;mat.envMapIntensity=1.6;
+     mat.metalness=.56;mat.roughness=.24;mat.envMapIntensity=1.05;
     }
    }else if(n.includes("carbon")){
     mat.metalness=.36;mat.roughness=.29;mat.envMapIntensity=1.0;
@@ -118,22 +120,23 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId}:WorldSce
   }
   renderer.outputColorSpace=THREE.SRGBColorSpace;
   renderer.toneMapping=THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure=1.32;
+  renderer.toneMappingExposure=.77;
   renderer.shadowMap.enabled=false;
 
   const scene=new THREE.Scene();
   scene.background=new THREE.Color(0x070b12);
   const camera=new THREE.PerspectiveCamera(37,1,.1,85);
-  const target=new THREE.Vector3(0,.73,0);
+  const isMobile=window.matchMedia("(max-width:760px)").matches;
+  const target=new THREE.Vector3(isMobile?0:-.78,.72,0);
   camera.position.set(6.8,3.0,6.9);camera.lookAt(target);
 
-  const ambient=new THREE.HemisphereLight(0xb4c8ed,0x29241d,1.5);
+  const ambient=new THREE.HemisphereLight(0xb4c8ed,0x29241d,.58);
   scene.add(ambient);
-  const key=new THREE.DirectionalLight(0xfff3e4,3.6);
+  const key=new THREE.DirectionalLight(0xfff1da,2.15);
   key.position.set(-4.5,7,5);scene.add(key);
-  const rim=new THREE.DirectionalLight(0xff7c38,2.4);
+  const rim=new THREE.DirectionalLight(0xff7328,1.9);
   rim.position.set(4.5,3,-4.2);scene.add(rim);
-  const cool=new THREE.DirectionalLight(0xa8cbff,2.2);
+  const cool=new THREE.DirectionalLight(0x8baee5,.9);
   cool.position.set(-3,2.5,-5.5);scene.add(cool);
   const floor=makeStage();
   scene.add(floor.stage);
@@ -142,7 +145,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId}:WorldSce
   const generated=pmrem.fromScene(studio,.04);
   studio.dispose();
   scene.environment=generated.texture;
-  scene.environmentIntensity=1.35;
+  scene.environmentIntensity=.78;
 
   const loader=new GLTFLoader();
   const draco=new DRACOLoader();
@@ -156,7 +159,6 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId}:WorldSce
   let request=0,visible=true,frameTime=0,drawn=false;
   let drag=false,previousX=0,turn=0,dragTurn=0;
   let currentMode=modeRef.current,currentProgress=0,goalProgress=0;
-  const isMobile=window.matchMedia("(max-width:760px)").matches;
   const limit=isMobile?1000/24:1000/38;
 
   const schedule=()=>{
@@ -198,8 +200,8 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId}:WorldSce
    const wanted=new THREE.Vector3(Math.cos(orbit)*dist,y,Math.sin(orbit)*dist);
    camera.position.lerp(wanted,lerp);
    camera.lookAt(target);
-   cool.intensity=2+currentMode*.26;
-   rim.intensity=2.15+currentMode*.30;
+   cool.intensity=.85+currentMode*.18;
+   rim.intensity=1.65+currentMode*.22;
    renderer.render(scene,camera);
    if(!drawn){drawn=true;setStatus("ready");}
    const movement=Math.abs(currentMode-modeRef.current)+Math.abs(currentProgress-goalProgress)+Math.abs(turn-dragTurn)+camera.position.distanceTo(wanted);
@@ -242,7 +244,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId}:WorldSce
    const bounds=new THREE.Box3().setFromObject(model);
    const dims=bounds.getSize(new THREE.Vector3());
    const center=bounds.getCenter(new THREE.Vector3());
-   const scalar=4.9/Math.max(dims.x,dims.z,0.001);
+   const scalar=4.35/Math.max(dims.x,dims.z,0.001);
    model.scale.multiplyScalar(scalar);
    model.position.set(-center.x*scalar,.07-bounds.min.y*scalar,-center.z*scalar);
    car.add(model);
