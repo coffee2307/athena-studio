@@ -24,7 +24,7 @@ for (const slug of worlds) {
     await toggle.click();
     await expect(rail.getByRole("button", {name: "Tắt chế độ 3D"})).toHaveAttribute("aria-pressed", "true");
     await expect(canvas).toHaveAttribute("data-renderer", slug==="auto-showroom"?"ready":/^(ready|fallback)$/, {timeout: 30000});
-    if(slug==="auto-showroom")await expect(canvas).toHaveAttribute("data-geometry","gltf-draco-mclaren");
+    if(slug==="auto-showroom")await expect(canvas).toHaveAttribute("data-geometry","gltf-webp-mclaren");
     // WebGL context availability is machine-dependent. 3D must be live
     // where supported; otherwise the image fallback must remain usable.
     const state = await canvas.getAttribute("data-renderer");
