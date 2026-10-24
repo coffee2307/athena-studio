@@ -1142,5 +1142,56 @@
       "url": "https://pixelandoak.com/templates/",
       "license": "MIT"
     }
+  },
+  {
+    "slug": "digital-creators",
+    "title": "Digital Creators — Không gian sáng tạo số",
+    "category": "Immersive / Education",
+    "industry": "Sáng tạo & giáo dục",
+    "style": "Immersive 3D",
+    "purpose": "Trải nghiệm kể chuyện 3D cho dự án sáng tạo số",
+    "description": "Website đa trang có Rubik giải theo cuộn, tranh xuất hiện theo nét cọ và thành phố lắp ghép 3D. Phiên bản giới thiệu đề xuất CLB sáng tạo số, không phải website đăng ký thật.",
+    "variant": "immersive",
+    "tags": [
+      "Immersive 3D",
+      "Three.js",
+      "Interactive Storytelling",
+      "Education"
+    ],
+    "pages": [
+      "Trang chủ / Rubik 3D",
+      "Giới thiệu / Tranh nét cọ",
+      "Hoạt động / Thành phố khối 3D",
+      "Đăng ký / Demo"
+    ],
+    "features": [
+      "WebGL động theo cuộn trang",
+      "Rubik 3×3 có chuỗi bước",
+      "Tranh vẽ theo thao tác cuộn",
+      "Thành phố lắp ghép hình học 3D",
+      "Giảm chuyển động, dự phòng thiết bị yếu",
+      "Website tĩnh độc lập, không thu thập thông tin người dùng"
+    ],
+    "modules": [
+      "content"
+    ],
+    "version": "1.0.0",
+    "status": "interactive-demo",
+    "compatibility": {
+      "starter": "standalone-vite@1",
+      "next": "15.5.x",
+      "react": "19.x"
+    },
+    "estimatedPrice": "Theo phạm vi tùy biến",
+    "qualityTier": "Immersive Studio",
+    "demoPath": "/template-demos/digital-creators",
+    "images": [
+      "/template-previews/creative-studio.jpg"
+    ],
+    "reference": {
+      "name": "coffee2307/digital-creators",
+      "url": "https://github.com/coffee2307/digital-creators",
+      "license": "Owner project"
+    }
   }
 ]

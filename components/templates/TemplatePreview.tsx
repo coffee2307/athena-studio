@@ -2,6 +2,13 @@ import Image from "next/image";
 import type {Template} from "@/lib/templates";
 
 export function TemplatePreview({template,device="desktop"}:{template:Template;device?:"desktop"|"mobile"}){
+ if(template.slug==="digital-creators")return <div className="template-device-frame dc-device-frame" data-device={device}>
+  <div className="dc-thumbnail">
+   <div className="dc-thumbnail-meta"><span>digital<strong>creators</strong></span><small>THINK / CREATE / EXPLORE</small></div>
+   <div className="dc-thumbnail-cube" aria-hidden="true"><i/><i/><i/><i/><i/><i/><i/><i/><i/></div>
+   <div className="dc-thumbnail-footer"><span>THE IMMERSIVE CREATIVE SPACE</span><span>21 / ATHENA</span></div>
+  </div>
+ </div>;
  return <div className="template-device-frame" data-device={device}>
   <div className="template-thumbnail">
    <div className="template-thumbnail-browser" aria-hidden="true"><span className="template-browser-dots"><i/><i/><i/></span><span>{template.slug}.preview</span><span>↗</span></div>

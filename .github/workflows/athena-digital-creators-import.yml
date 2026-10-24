@@ -1,0 +1,55 @@
+name: Digital Creators — Import immutable immersive build
+on:
+  push:
+    branches: [feat/athena-immersive-phase0-20261024]
+    paths:
+      - .github/workflows/athena-digital-creators-import.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: athena-digital-creators-import
+  cancel-in-progress: false
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Athena
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Checkout original public Digital Creators at reviewed revision
+        uses: actions/checkout@v4
+        with:
+          repository: coffee2307/digital-creators
+          ref: e25ebc04174f2ab576e85ce3a99421b6b00a9721
+          path: _digital_creators_source
+          persist-credentials: false
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build Vite website with Athena subpath
+        working-directory: _digital_creators_source
+        run: |
+          npm install --no-audit --no-fund
+          npm run build -- --base=/immersive/digital-creators/
+      - name: Import built files
+        run: |
+          mkdir -p public/immersive/digital-creators
+          find public/immersive/digital-creators -mindepth 1 -maxdepth 1 -exec rm -rf -- {} +
+          cp -a _digital_creators_source/dist/. public/immersive/digital-creators/
+          test -s public/immersive/digital-creators/index.html
+          test -n "$(find public/immersive/digital-creators/assets -name '*.js' -print -quit)"
+          rm -rf _digital_creators_source
+      - name: Commit reviewed static build to feature branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f public/immersive/digital-creators
+          if git diff --cached --quiet; then
+            echo "No generated changes"
+            exit 0
+          fi
+          git commit -m "build(immersive): vendor Digital Creators static dist at e25ebc0"
+          git push origin HEAD:feat/athena-immersive-phase0-20261024
