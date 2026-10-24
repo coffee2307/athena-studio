@@ -16,15 +16,19 @@ for (const slug of scenes) {
     await expect(renderer).toHaveCount(1);
     await expect(journey.locator(".journey-step")).toHaveCount(3);
 
+    // Test the toggle before entering a sticky scrollytelling chapter to
+    // avoid browser scrollIntoView competing with the chapter camera motion.
+    await journey.getByRole("button",{name:"TẮT 3D"}).click();
+    await expect(journey.getByRole("button",{name:"BẬT 3D"})).toHaveAttribute("aria-pressed","false");
+    await expect(renderer).toHaveAttribute("data-renderer","fallback");
+    await journey.getByRole("button",{name:"BẬT 3D"}).click();
+    await expect(journey.getByRole("button",{name:"TẮT 3D"})).toHaveAttribute("aria-pressed","true");
     const chapters = journey.locator(".journey-chapter-nav button");
     await expect(chapters).toHaveCount(3);
     await chapters.nth(1).click();
     await expect(chapters.nth(1)).toHaveAttribute("aria-current","step",{timeout:15000});
     await expect(journey.locator(".journey-step-copy.is-current")).toContainText(/Thay đổi điểm nhìn|Lớp không gian ẩn|Hình khối có chủ đích/);
 
-    await journey.getByRole("button",{name:"TẮT 3D"}).click();
-    await expect(journey.getByRole("button",{name:"BẬT 3D"})).toHaveAttribute("aria-pressed","false");
-    await expect(renderer).toHaveAttribute("data-renderer","fallback");
     const overflow = await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
     expect(overflow).toBeLessThanOrEqual(2);
   });
