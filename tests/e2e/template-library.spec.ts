@@ -149,7 +149,7 @@ test("immersive phase 0 worlds and local Digital Creators build are reachable",a
  await expect(page.locator(".immersive-stage")).toHaveAttribute("data-preset","1");
  await page.goto("/template-demos/digital-creators");
  await expect(page).toHaveURL(/\/immersive\/digital-creators\/index\.html/);
- await expect(page.getByRole("link",{name:/Digital Creators - Trang chủ/})).toBeVisible();
+ await expect(page.getByRole("banner").getByRole("link",{name:/Digital Creators - Trang chủ/})).toBeVisible();
  await expect(page.getByRole("heading",{level:1})).toContainText("Nơi ý tưởng");
  const html=await page.request.get("/immersive/digital-creators/index.html");
  expect(html.status()).toBe(200);
@@ -165,7 +165,7 @@ test("Digital Creators gallery displays a real captured homepage and opens the o
  await expect(modal).toBeVisible();
  const iframe=modal.locator(".template-demo-viewport iframe");
  await expect(iframe).toHaveAttribute("src","/immersive/digital-creators/index.html");
- await expect(page.frameLocator(".template-demo-viewport iframe").getByRole("link",{name:/Digital Creators - Trang chủ/})).toBeVisible();
+ await expect(page.frameLocator(".template-demo-viewport iframe").getByRole("banner").getByRole("link",{name:/Digital Creators - Trang chủ/})).toBeVisible();
  await expect(page.frameLocator(".template-demo-viewport iframe").locator("iframe")).toHaveCount(0);
 });
 

@@ -136,3 +136,11 @@
 .ix-auto-showroom .ix-hero-copy .ix-hero-text-link{color:#fff!important}
 .ix-architecture-studio .ix-hero-visual .ix-hero-photograph{object-position:center 62%}
 .ix-auto-showroom .ix-hero-visual .ix-hero-photograph{object-position:center 46%}
+
+/* WCAG audit repairs: readable secondary copy on real demo pages and project directory. */
+.phase0-projects .phase0-projects-note{color:#444!important}
+.ix-creative-studio .ix-series .ix-work-meta,
+.ix-creative-studio .ix-series .ix-work-item p{color:#505050!important}
+.ix-creative-studio .ix-manifesto p{color:#505050!important}
+.ix-creative-studio .ix-hero-copy>p{color:#505050!important}
+.ix-creative-studio .ix-hero-copy .ix-hero-text-link{color:#171717!important}
