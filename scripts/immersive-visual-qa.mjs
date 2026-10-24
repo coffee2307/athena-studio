@@ -51,7 +51,9 @@ try {
         );
         const primary = slug + "-" + viewport.name + "-01.png";
         await stage.scrollIntoViewIfNeeded();
-        await stage.screenshot({path: resolve(output, primary), animations: "disabled"});
+        // The live 3D stage can remain layout-unstable to Playwright even after WebGL is ready.
+        // Capture the visible viewport instead of waiting for element-stability heuristics.
+        await page.screenshot({path: resolve(output, primary), animations: "disabled"});
         const record = {slug, viewport: viewport.name, renderer, overflow, ...caps, primary};
         if (overflow > 2) summary.errors.push(slug + ": overflow " + overflow + " px on " + viewport.name);
         if (renderer !== "ready") summary.errors.push(slug + ": WebGL not rendering on " + viewport.name);
@@ -66,7 +68,7 @@ try {
           if (selected !== "2") summary.errors.push(slug + ": interactive mode selection broken");
           const alternate = slug + "-" + viewport.name + "-03.png";
           await stage.scrollIntoViewIfNeeded();
-          await stage.screenshot({path: resolve(output, alternate), animations: "disabled"});
+          await page.screenshot({path: resolve(output, alternate), animations: "disabled"});
           record.alternate = alternate;
         }
         // Capture the actual DOM/photo composition in addition to GPU output.
