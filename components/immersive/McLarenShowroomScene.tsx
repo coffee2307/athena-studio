@@ -131,7 +131,15 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   scene.environment=generated.texture;
   scene.environmentIntensity=.78;
 
-  const loader=new GLTFLoader();
+  // A GLTFLoader can finish with a "ready" scene even when individual
+  // embedded WebP textures failed. Track those failures explicitly.
+  let assetErrors=0;
+  const manager=new THREE.LoadingManager();
+  manager.onError=url=>{
+   assetErrors+=1;
+   console.warn("Athena McLaren asset failed:",url.startsWith("blob:")?"embedded texture":url);
+  };
+  const loader=new GLTFLoader(manager);
 
   const car=new THREE.Group();
   scene.add(car);
@@ -169,16 +177,24 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    if(elapsed<limit){schedule();return;}
    frameTime=now;
    const lerp=clamp(elapsed*.007,.07,.23);
-   currentMode+= (modeRef.current-currentMode)*lerp;
-   currentProgress+=(goalProgress-currentProgress)*lerp;
+   // Scroll chapter camera is seekable: the current document position is the
+   // sole source of truth, without a second trailing animation clock.
+   currentMode=scrollRootId?modeRef.current:currentMode+(modeRef.current-currentMode)*lerp;
+   currentProgress=scrollRootId?goalProgress:currentProgress+(goalProgress-currentProgress)*lerp;
    turn+=(dragTurn-turn)*lerp;
-   // Three cinematic camera presets; no model deformation or texture loss.
-   const angle=[.72,2.0,4.9][Math.round(clamp(currentMode,0,2))];
-   const orbit=angle+turn+currentProgress*.20;
+   const angles=[.72,2.0,4.9];
+   const position=clamp(currentProgress*3,0,2);
+   const lower=Math.min(1,Math.floor(position));
+   const fraction=position-lower;
+   const smoothFraction=fraction*fraction*(3-2*fraction);
+   const scrollOrbit=angles[lower]+(angles[lower+1]-angles[lower])*smoothFraction
+    +Math.max(0,currentProgress-2/3)*.42;
+   const orbit=(scrollRootId?scrollOrbit:angles[Math.round(clamp(currentMode,0,2))]+currentProgress*.20)+turn;
    const dist=Math.max(isMobile?10.6:8.3,8.3*.94/Math.max(.52,camera.aspect));
    const y=(isMobile?3.7:2.8)+currentProgress*.35;
    const wanted=new THREE.Vector3(Math.cos(orbit)*dist,y,Math.sin(orbit)*dist);
-   camera.position.lerp(wanted,lerp);
+   if(scrollRootId)camera.position.copy(wanted);
+   else camera.position.lerp(wanted,lerp);
    camera.lookAt(target);
    cool.intensity=.85+currentMode*.18;
    rim.intensity=1.65+currentMode*.22;
@@ -221,6 +237,12 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   setPhase("Đang tải mô hình và vật liệu");
   loader.load(MODEL_PATH,gltf=>{
    if(disposed)return;
+   if(assetErrors>0){
+    finishLoading();
+    console.warn("Athena McLaren: refusing an incomplete 3D render because embedded textures did not load.");
+    setStatus("fallback");
+    return;
+   }
    setPercent(94);setPhase("Đang hoàn thiện ánh sáng và bề mặt sơn");
    model=gltf.scene;tuneMaterials(model);
    const bounds=new THREE.Box3().setFromObject(model);
