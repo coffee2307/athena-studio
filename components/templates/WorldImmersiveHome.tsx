@@ -39,7 +39,7 @@ export function WorldImmersiveHome({slug,world,extra}:Props){
  const caption=sceneDescriptions[slug][mode];
  const orderedImages:Record<string,number[]>={"creative-studio":[1,4,5],"architecture-studio":[5,4,3],"auto-showroom":[5,1,4]};
  const activeImage=root+"/image-"+orderedImages[slug][mode]+".jpg";
- return <main className={"ix-site ix-"+slug+" immersive-home"} id="world-main">
+ return <main className={"ix-site ix-"+slug+" immersive-home"} data-immersive={enable3D?"true":"false"} id="world-main">
   <section className="ix-hero">
    {isStudio&&<div className="ix-studio-intro"><span>INDEPENDENT CREATIVE PRACTICE</span><span>EST. 2026 / VIETNAM</span></div>}
    <div className="ix-hero-copy">
