@@ -107,7 +107,7 @@ export function ImmersiveJourney({slug}: {slug: World}) {
         <div className="journey-frame-corner journey-frame-corner-tl"/>
         <div className="journey-frame-corner journey-frame-corner-br"/>
         <div className="journey-stage-head"><span>IMMERSIVE STUDY / {story.brand}</span>
-          <button type="button" aria-pressed={enabled} onClick={() => setEnabled(x => !x)}>{enabled ? "TẮT 3D" : "BẬT 3D"}</button>
+          <button type="button" aria-pressed={enabled ? "true" : "false"} aria-label={enabled ? "TẮT 3D" : "BẬT 3D"} onClick={() => setEnabled(value => !value)}>{enabled ? "TẮT 3D" : "BẬT 3D"}</button>
         </div>
         <div className="journey-stage-foot" aria-hidden="true">
           <span>SCROLL / DISCOVER</span>
