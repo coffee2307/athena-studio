@@ -77,7 +77,8 @@ try {
   const reducedContext = await browser.newContext({reducedMotion: "reduce"});
   const page = await reducedContext.newPage();
   await page.goto(baseURL + "/template-demos/creative-studio");
-  await page.locator("canvas.ix-3d-canvas").waitFor();
+  // Reduced-motion deliberately hides the canvas; only DOM attachment is required.
+  await page.locator("canvas.ix-3d-canvas").waitFor({state: "attached"});
   await page.waitForFunction(() => {
     const canvas = document.querySelector("canvas.ix-3d-canvas");
     return canvas?.getAttribute("data-renderer") === "fallback";
