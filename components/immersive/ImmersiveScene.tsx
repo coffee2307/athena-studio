@@ -109,9 +109,10 @@ export function ImmersiveScene({slug, preset, enabled = true}: {slug: WorldSlug;
     let drawn = false;
     let x = 0, y = 0, targetX = 0, targetY = 0;
     let scroll = 0, targetScroll = 0;
+    let easedPreset = presetRef.current;
     let lastFrame = -1000;
     const mobile = window.matchMedia("(max-width: 760px)").matches;
-    const minInterval = mobile ? 1000 / 24 : 1000 / 40;
+    const minInterval = mobile ? 1000 / 24 : 1000 / 32;
 
     const schedule = () => {
       if (active && onScreen && !document.hidden && !frame) {
@@ -145,7 +146,7 @@ export function ImmersiveScene({slug, preset, enabled = true}: {slug: WorldSlug;
       const scale = Math.min(window.devicePixelRatio || 1, cap);
       const rawWidth = rect.width * scale;
       const rawHeight = rect.height * scale;
-      const pixelBudget = mobile ? 130000 : 320000;
+      const pixelBudget = mobile ? 90000 : 240000;
       const fit = Math.min(1, Math.sqrt(pixelBudget / Math.max(1, rawWidth * rawHeight)));
       const width = Math.max(1, Math.floor(rawWidth * fit));
       const height = Math.max(1, Math.floor(rawHeight * fit));
@@ -156,12 +157,13 @@ export function ImmersiveScene({slug, preset, enabled = true}: {slug: WorldSlug;
       x += (targetX - x) * 0.075;
       y += (targetY - y) * 0.075;
       scroll += (targetScroll - scroll) * 0.12;
+      easedPreset += (presetRef.current - easedPreset) * 0.09;
       gl!.viewport(0, 0, width, height);
       gl!.uniform2f(uniforms.resolution, width, height);
       gl!.uniform2f(uniforms.pointer, x, y);
       gl!.uniform1f(uniforms.time, now / 1000);
       gl!.uniform1f(uniforms.progress, scroll);
-      gl!.uniform1f(uniforms.preset, presetRef.current);
+      gl!.uniform1f(uniforms.preset, easedPreset);
       gl!.drawArrays(gl!.TRIANGLES, 0, 3);
       if (!drawn) {
         drawn = true;
