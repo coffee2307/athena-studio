@@ -7,6 +7,7 @@ export function ProjectArtwork({project,compact=false}:{project:Project;compact?
   <Image src={cover.src} alt={cover.alt} fill sizes={compact?"(max-width: 700px) 100vw, 46vw":"(max-width: 700px) 100vw, 1000px"} quality={85}/>
   <span className="agency-screenshot-tag">ẢNH CHỤP GIAO DIỆN THỰC TẾ</span>
  </div>;
+ if(project.artwork==="digital-creators")return <div className={"phase0-dc-art"+(compact?" is-compact":"")} role="img" aria-label="Minh họa Rubik 3D của Digital Creators, không phải screenshot"><span>DIGITAL CREATORS / INTERACTIVE</span><div className="phase0-dc-art-cube" aria-hidden="true">{Array.from({length:9},(_,i)=><i key={i}/>)}</div><strong>MAKE THINGS MOVE.</strong></div>;
  return <div className={`portfolio-art art-${project.artwork}${compact?" art-compact":""}`}
   aria-label={`Đồ họa nhận diện dự án ${project.title}; ảnh giao diện chưa được duyệt công bố`}>
   <div className="art-header"><span>ATHENA / DỰ ÁN NGHIÊN CỨU</span><span>CHƯA CÓ ẢNH GIAO DIỆN ĐƯỢC DUYỆT</span></div>

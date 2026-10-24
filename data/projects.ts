@@ -36,6 +36,17 @@ export const projects:Project[]=[
   artwork:"econith",updatedLabel:"Nghiên cứu · Chưa công bố ảnh giao diện"
  },
  {
+  slug:"digital-creators",title:"Digital Creators",kicker:"IMMERSIVE WEB / SÁNG TẠO SỐ",
+  category:"Website sáng tạo tương tác",kind:"founder",status:"đang phát triển",visibility:"published",featured:false,
+  summary:"Một website kể chuyện qua Rubik 3D, tranh nét cọ và thành phố khối lắp ghép tương tác theo cuộn.",
+  introduction:"Digital Creators là dự án website giới thiệu đề xuất câu lạc bộ sáng tạo số; không phải công việc đã bàn giao cho khách hàng hoặc câu lạc bộ đang hoạt động.",
+  challenge:"Xây trải nghiệm ba chiều có chiều sâu nhưng tương thích thiết bị yếu và di động.",
+  approach:"React, Three.js và React Three Fiber; cảnh tải riêng theo trang, WebGL theo cuộn và phương án giảm chuyển động.",
+  outcome:"Website giới thiệu mô phỏng chức năng đăng ký, không tiếp nhận thông tin cá nhân hoặc vận hành backend.",
+  technologies:["React","TypeScript","Three.js","Immersive 3D"],activities:["Rubik 3D theo cuộn","Tranh xuất hiện bằng nét cọ","Thành phố khối 3D","Mobile và reduced-motion"],
+  websiteUrl:"/template-demos/digital-creators",gallery:[],artwork:"digital-creators",updatedLabel:"Immersive interactive concept · 2026"
+ },
+ {
   slug:"qrio",title:"Qrio",kicker:"DỰ ÁN ĐANG XÁC MINH",category:"Dự án cá nhân",
   kind:"founder",status:"đang phát triển",visibility:"review",featured:false,
   summary:"Đang rà soát quyền và tài sản được phép công bố.",introduction:"Chưa đủ tư liệu đã duyệt.",
