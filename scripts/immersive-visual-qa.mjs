@@ -69,6 +69,25 @@ try {
           await stage.screenshot({path: resolve(output, alternate), animations: "disabled"});
           record.alternate = alternate;
         }
+        // Capture the actual DOM/photo composition in addition to GPU output.
+        const editorial = page.locator(".ix-editorial");
+        await editorial.scrollIntoViewIfNeeded();
+        await page.waitForFunction(() => [...document.querySelectorAll(".ix-editorial img")]
+          .every(image => image.complete && image.naturalWidth > 0), null, {timeout:15000});
+        record.editorial = slug + "-" + viewport.name + "-editorial.png";
+        await editorial.screenshot({path:resolve(output,record.editorial),animations:"disabled"});
+
+        // A real content page must receive the new, section-specific art direction.
+        await page.goto(baseURL + "/template-demos/" + slug + "/about", {waitUntil:"domcontentloaded"});
+        const subpage = page.locator(".ix-subpage-feature");
+        await subpage.waitFor({state:"visible"});
+        await page.waitForFunction(() => {
+          const image = document.querySelector(".ix-subpage-feature img");
+          return image && image.complete && image.naturalWidth > 0;
+        },null,{timeout:15000});
+        record.subpage = slug + "-" + viewport.name + "-about.png";
+        await subpage.screenshot({path:resolve(output,record.subpage),animations:"disabled"});
+
         summary.captures.push(record);
         console.log(slug, viewport.name, JSON.stringify(record));
       } catch (error) {
