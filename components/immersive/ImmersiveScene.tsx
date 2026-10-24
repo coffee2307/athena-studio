@@ -64,8 +64,9 @@ export function ImmersiveScene({slug, preset, enabled = true}: {slug: WorldSlug;
   presetRef.current = preset;
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    const candidate = canvasRef.current;
+    if (!candidate) return;
+    const canvas: HTMLCanvasElement = candidate;
     if (!enabled) {
       setStatus("fallback");
       return;
