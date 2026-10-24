@@ -1,0 +1,77 @@
+
+/* Athena Immersive Worlds — Scroll Journey 1.2. All rendering stays on-device, no CDN. */
+.athena-journey{background:#0c1015;color:#f7f6f2;overflow:clip;font-family:"Be Vietnam Pro",sans-serif}
+.journey-topline{display:flex;justify-content:space-between;align-items:center;padding:18px clamp(20px,5vw,90px);border-bottom:1px solid #ffffff2a;gap:12px;font-size:10px;font-weight:700;letter-spacing:.12em}
+.journey-topline a{color:#f7f6f2;text-decoration:none;min-height:44px;display:flex;align-items:center;gap:12px}
+.journey-topline span{color:#b4bec9}
+.journey-intro{min-height:75svh;padding:clamp(100px,12vw,160px) clamp(20px,6vw,110px) clamp(90px,8vw,130px);display:grid;grid-template-columns:minmax(0,2fr) minmax(240px,1fr);gap:30px 7vw;align-items:end;background:radial-gradient(ellipse at 80% 15%,#263c48,#0c1015 54%);position:relative}
+.journey-intro span{display:inline-block;letter-spacing:.18em;font-size:10px;font-weight:800;color:#b9c5d3}
+.journey-intro h1{font-size:clamp(54px,8vw,142px);letter-spacing:-.085em;line-height:.98;white-space:pre-line;max-width:1130px;margin:24px 0 0;font-weight:650}
+.journey-intro>p{max-width:400px;color:#d0d5da;font-size:clamp(13px,1.25vw,16px);line-height:1.9;padding-bottom:6px}
+.journey-enter{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;max-width:330px;min-height:52px;padding:0 20px;border:1px solid #d3dde6;color:#fff;font-size:11px;font-weight:750;letter-spacing:.08em;text-decoration:none}
+.journey-enter:hover,.journey-enter:focus-visible{background:#f9f9f6;color:#111}
+.journey-scroll{position:relative;isolation:isolate}
+.journey-stage{position:sticky;top:0;z-index:1;height:100svh;min-height:560px;overflow:hidden;background:#0a0f14;isolation:isolate}
+.journey-backdrop{position:absolute;inset:0;z-index:0;opacity:.78}
+.journey-backdrop img{object-fit:cover;filter:brightness(.42) saturate(.7);transform:scale(1.025)}
+.athena-journey .ix-3d-canvas{z-index:1}
+.journey-vignette{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(90deg,#03080fbd,transparent 80%),linear-gradient(0deg,#02070dd4,transparent 35%,#04090c3d)}
+.journey-frame-corner{position:absolute;width:60px;height:60px;border:1px solid #d2e1f666;z-index:3;pointer-events:none}
+.journey-frame-corner-tl{top:92px;left:clamp(18px,3vw,48px);border-right:0;border-bottom:0}
+.journey-frame-corner-br{right:clamp(18px,3vw,48px);bottom:85px;border-left:0;border-top:0}
+.journey-stage-head{position:absolute;z-index:6;left:clamp(20px,5vw,90px);right:clamp(20px,5vw,90px);top:clamp(19px,4vh,48px);display:flex;align-items:center;justify-content:space-between;gap:20px}
+.journey-stage-head span{font-size:10px;color:#f8f8f8;letter-spacing:.16em;font-weight:760;text-shadow:0 2px 12px #000b}
+.journey-stage-head button{min-width:94px;min-height:44px;padding:12px;border:1px solid #fffa;background:#131a25cf;color:#fff;cursor:pointer;font-size:11px;font-weight:760;letter-spacing:.08em}
+.journey-stage-head button:focus-visible,.journey-chapter-nav button:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.journey-stage-foot{position:absolute;z-index:4;bottom:clamp(24px,5vh,54px);left:clamp(20px,5vw,90px);right:clamp(20px,5vw,90px);display:grid;grid-template-columns:auto minmax(60px,1fr) auto;align-items:center;gap:24px;pointer-events:none}
+.journey-stage-foot span{font-size:10px;letter-spacing:.16em;color:#e0e4e9;font-weight:750}
+.journey-progress{height:2px;background:#ffffff42;overflow:hidden}
+.journey-progress>div{height:100%;background:white;transform-origin:left;transition:transform .08s linear}
+.journey-chapter-nav{z-index:7;position:absolute;top:40%;right:clamp(20px,5vw,90px);display:grid;gap:9px}
+.journey-chapter-nav button{width:46px;height:46px;border:1px solid #ffffff73;background:#121b26ab;color:#fff;cursor:pointer;font-size:11px;font-weight:800}
+.journey-chapter-nav button[aria-current=step]{color:#0c1015;background:#fff;border-color:#fff}
+.journey-steps{position:relative;z-index:4;margin-top:-100svh;pointer-events:none}
+.journey-step{min-height:100svh;display:flex;align-items:center;padding:110px clamp(24px,6vw,110px) 110px;pointer-events:none}
+.journey-step-copy{position:relative;max-width:620px;padding:38px clamp(25px,4vw,55px);border-left:1px solid #ffffffa0;background:#070b1285;backdrop-filter:blur(12px);box-shadow:0 22px 90px #0003;opacity:.78;transition:opacity .4s ease}
+.journey-step-copy.is-current{opacity:1}
+.journey-step-copy>span{font-size:11px;letter-spacing:.14em;font-weight:800;color:#c0cad7}
+.journey-step-copy h2{font-size:clamp(43px,5.4vw,88px);line-height:1.04;letter-spacing:-.075em;font-weight:630;margin:21px 0}
+.journey-step-copy p{font-size:clamp(13px,1.2vw,16px);line-height:1.95;color:#d5dce1;max-width:460px}
+.journey-step-copy small{display:block;font-size:10px;letter-spacing:.15em;color:#b6c1cd;margin-top:26px;text-transform:uppercase}
+.journey-outro{padding:clamp(110px,13vw,190px) clamp(24px,7vw,120px);background:#f4f3ef;color:#131820}
+.journey-outro>span{font-size:11px;letter-spacing:.17em;font-weight:800}
+.journey-outro h2{font-size:clamp(54px,8vw,130px);max-width:1180px;letter-spacing:-.09em;line-height:1.02;margin:30px 0}
+.journey-outro p{max-width:560px;line-height:1.9;color:#464b53;font-size:14px}
+.journey-outro>div{display:flex;flex-wrap:wrap;gap:12px;margin-top:35px}
+.journey-outro a{background:#131820;color:#fff;text-decoration:none;padding:16px 23px;font-size:12px;font-weight:750;min-height:48px}
+.journey-outro a+ a{background:transparent;color:#131820;border:1px solid #131820}
+.journey-intro h1,.journey-step-copy h2,.journey-outro h2{text-wrap:balance}
+.athena-journey-auto-showroom .journey-intro{background:radial-gradient(ellipse at 82% 12%,#192c4f,#060910 58%)}
+.athena-journey-architecture-studio .journey-intro{background:radial-gradient(ellipse at 83% 12%,#443c34,#10100f 58%)}
+.athena-journey-architecture-studio .journey-step-copy{background:#16140fc2}
+@media(max-width:760px){
+ .journey-topline>span{display:none}
+ .journey-intro{display:flex;min-height:72svh;flex-direction:column;align-items:start;justify-content:center;padding:90px 20px 70px;gap:24px}
+ .journey-intro h1{font-size:clamp(48px,13vw,78px);margin-top:20px}
+ .journey-intro>p{font-size:14px;max-width:570px}
+ .journey-stage{min-height:0;height:100svh}
+ .journey-stage-head{top:18px;left:17px;right:17px}
+ .journey-stage-head span{max-width:220px;font-size:9px}
+ .journey-chapter-nav{right:15px;top:28%;gap:7px}
+ .journey-chapter-nav button{width:44px;height:44px}
+ .journey-steps{margin-top:-100svh}
+ .journey-step{padding:0 16px 85px;align-items:end;min-height:100svh}
+ .journey-step-copy{padding:22px;max-width:calc(100% - 58px);background:#070b14df}
+ .journey-step-copy h2{font-size:clamp(32px,9vw,54px);margin:12px 0}
+ .journey-step-copy p{font-size:12px;line-height:1.75}
+ .journey-step-copy small{margin-top:14px;font-size:9px}
+ .journey-stage-foot{left:16px;right:16px;bottom:25px;gap:12px}
+ .journey-stage-foot span{font-size:8px}
+ .journey-frame-corner{display:none}
+ .journey-outro{padding:95px 20px}
+ .journey-outro h2{font-size:clamp(44px,12vw,66px)}
+}
+@media(prefers-reduced-motion:reduce){
+ .athena-journey *, .athena-journey *::before, .athena-journey *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+ .journey-backdrop{opacity:1}
+}
