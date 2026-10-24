@@ -56,3 +56,53 @@
 @media(prefers-reduced-motion:reduce){
  .ix-editorial figure img{transition:none!important;transform:none!important}
 }
+
+/* Page-specific art direction: projects, services, about, contact and detail. */
+.ix-subpage-feature{min-height:390px}
+.ix-subpage-feature-copy{gap:24px}
+.ix-subpage-statement{display:flex;flex-direction:column;align-items:flex-start;gap:17px;max-width:850px}
+.ix-subpage-feature h2{font-size:clamp(31px,3.55vw,61px);line-height:1.07;letter-spacing:-.075em;font-weight:610}
+.ix-subpage-statement>p{max-width:630px;font-size:clamp(12px,1vw,14px);line-height:1.85;color:#ccd0d6}
+.ix-subpage-discipline{font-size:10px;letter-spacing:.15em;font-weight:760;color:#c3c9d1}
+.ix-subpage-feature-art img{object-position:center;filter:saturate(.84) contrast(1.08)}
+.ix-subpage-feature-bottom a:focus-visible{outline:3px solid currentColor;outline-offset:3px}
+.ix-subpage-creative-studio{background:#f0eee8;color:#171717;border-color:#cac6be}
+.ix-subpage-creative-studio .ix-subpage-feature-kicker,
+.ix-subpage-creative-studio .ix-subpage-discipline,
+.ix-subpage-creative-studio .ix-subpage-statement>p,
+.ix-subpage-creative-studio .ix-subpage-feature-bottom{color:#5d5b57}
+.ix-subpage-creative-studio .ix-subpage-feature-bottom a{color:#191919;border-color:#333}
+.ix-subpage-creative-studio .ix-subpage-feature-bottom a:hover,
+.ix-subpage-creative-studio .ix-subpage-feature-bottom a:focus-visible{background:#191919;color:#fff}
+.ix-subpage-architecture-studio{grid-template-columns:minmax(0,.9fr) minmax(0,1.2fr);background:#282720}
+.ix-subpage-architecture-studio .ix-subpage-feature-art{grid-column:1;grid-row:1}
+.ix-subpage-architecture-studio .ix-subpage-feature-copy{grid-column:2;grid-row:1}
+.ix-subpage-architecture-studio .ix-subpage-statement>p{color:#d3cfc5}
+.ix-subpage-auto-showroom{grid-template-columns:minmax(0,1.15fr) minmax(0,1.1fr);background:#090e17}
+.ix-subpage-auto-showroom .ix-subpage-feature-art img{object-position:center 58%;filter:saturate(.72) contrast(1.1)}
+.ix-subpage-auto-showroom .ix-subpage-statement>p{color:#c9cdd6}
+.ix-site[data-immersive="true"].ix-architecture-studio .ix-hero-copy,
+.ix-site[data-immersive="true"].ix-auto-showroom .ix-hero-copy{
+ max-width:600px;padding-top:clamp(95px,9vw,140px);padding-bottom:55px
+}
+.ix-site[data-immersive="true"].ix-architecture-studio .ix-hero-copy h1,
+.ix-site[data-immersive="true"].ix-auto-showroom .ix-hero-copy h1{
+ font-size:clamp(47px,5.8vw,86px);max-width:570px
+}
+.ix-site[data-immersive="true"] .ix-hero-copy>p{max-width:380px}
+.ix-site[data-immersive="true"] .ix-visual-coordinate{opacity:.8}
+@media(max-width:760px){
+ .ix-subpage-feature{display:flex;flex-direction:column}
+ .ix-subpage-feature-copy{order:0;min-height:0;padding:33px 22px}
+ .ix-subpage-feature-art{order:1;min-height:255px;max-height:370px}
+ .ix-subpage-feature h2{font-size:clamp(35px,8vw,52px)}
+ .ix-subpage-statement>p{font-size:13px;line-height:1.75}
+ .ix-subpage-feature-kicker{gap:12px;line-height:1.6}
+ .ix-site[data-immersive="true"].ix-architecture-studio .ix-hero-copy,
+ .ix-site[data-immersive="true"].ix-auto-showroom .ix-hero-copy{padding:110px 22px 25px;max-width:100%}
+ .ix-site[data-immersive="true"].ix-architecture-studio .ix-hero-copy h1,
+ .ix-site[data-immersive="true"].ix-auto-showroom .ix-hero-copy h1{font-size:clamp(41px,11.1vw,64px)}
+ .ix-site[data-immersive="true"] .ix-hero-copy>p{font-size:12px;line-height:1.65}
+ .ix-site[data-immersive="true"].ix-architecture-studio .ix-hero-links,
+ .ix-site[data-immersive="true"].ix-auto-showroom .ix-hero-links{margin-top:22px;gap:10px}
+}
