@@ -68,15 +68,20 @@ export function WorldImmersiveHome({slug,world,extra}:Props){
     <div className="ix-hero-image" key={activeImage}><Image src={activeImage} fill priority quality={88} alt={"Ảnh concept "+world.brand+": "+caption} sizes="(max-width: 820px) 100vw, 70vw" className="ix-hero-photograph"/></div>
     <ImmersiveScene slug={slug as "creative-studio"|"architecture-studio"|"auto-showroom"} preset={mode} enabled={enable3D}/>
     <div className="ix-visual-vignette" aria-hidden="true"/>
-    <div className="ix-visual-coordinate"><span>EDITION / 2026</span><button type="button" className="ix-render-toggle" aria-pressed={enable3D} aria-label={enable3D?"Tắt chế độ 3D":"Bật chế độ 3D"} onClick={()=>setEnable3D(value=>!value)}>3D {enable3D?"ON":"OFF"}</button></div>
+    <div className="ix-visual-coordinate"><span>EDITION / 2026</span><span>REAL-TIME 3D STUDY</span></div>
     {isStudio&&<div className="ix-studio-overlay" aria-hidden="true"><span>01 / 03</span><strong>FORM<br/><em>&amp; FEELING.</em></strong><span>SORA © STUDIO</span></div>}
     {isArch&&<div className="ix-arch-overlay" aria-hidden="true"><span>MỘC / ARCHITECTURE</span><strong>Built around<br/><i>the way we live.</i></strong></div>}
     {!isStudio&&!isArch&&<div className="ix-auto-overlay" aria-hidden="true"><span>VELAR / MOTOR COLLECTION</span><strong>BEYOND<br/>THE <i>ORDINARY.</i></strong></div>}
-    <div className="ix-scene-footer"><div className="ix-scene-caption"><span>{String(mode+1).padStart(2,"0")} / 03</span><strong>{caption}</strong></div>
-     <div className="immersive-mode-selector ix-mode-list" role="group" aria-label="Thay đổi góc nhìn và hình ảnh">{labels.map((label,i)=><button type="button" key={label} aria-pressed={mode===i} onClick={()=>setMode(i)}><span>{String(i+1).padStart(2,"0")}</span>{label}</button>)}</div>
-    </div>
+    <div className="ix-scene-footer"><div className="ix-scene-caption"><span>{String(mode+1).padStart(2,"0")} / 03</span><strong>{caption}</strong></div></div>
    </div>
    <div className="ix-hero-bottom"><span>SCROLL TO DISCOVER <span aria-hidden="true">↓</span></span><span>{slug==="auto-showroom"?"ẢNH XE MINH HỌA / CONCEPT DEMO":world.brand+" / DEMONSTRATION SITE"}</span></div>
+  </section>
+  <section className="ix-scene-rail" aria-label="Điều khiển trải nghiệm 3D">
+   <div className="ix-scene-rail-copy"><span>INTERACTIVE STUDY / 0{mode+1}</span><strong aria-live="polite">{caption}</strong><p>Chọn một chế độ để biến đổi cảnh 3D. Tắt 3D để xem ảnh minh họa trên thiết bị yếu.</p></div>
+   <div className="ix-rail-actions">
+    <div className="immersive-mode-selector ix-mode-list" role="group" aria-label="Chọn chế độ 3D">{labels.map((label,i)=><button type="button" key={label} aria-pressed={mode===i} onClick={()=>setMode(i)}><span>{String(i+1).padStart(2,"0")}</span>{label}</button>)}</div>
+    <button type="button" className="ix-render-toggle" aria-pressed={enable3D} aria-label={enable3D?"Tắt chế độ 3D":"Bật chế độ 3D"} onClick={()=>setEnable3D(value=>!value)}>3D {enable3D?"ON":"OFF"}</button>
+   </div>
   </section>
   <section className="ix-manifesto"><span>01 / THE STUDIO</span><h2>{extra.storyTitle}</h2><div><p>{extra.story}</p><Link href={root+"/about"}>Về chúng tôi <span aria-hidden="true">↗</span></Link></div></section>
   <Series slug={slug} world={world} root={root}/>
