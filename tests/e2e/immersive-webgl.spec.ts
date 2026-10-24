@@ -12,7 +12,8 @@ for (const slug of worlds) {
     const stage = page.locator(".immersive-stage");
     const canvas = stage.locator("canvas.ix-3d-canvas");
     const fallback = stage.locator(".ix-hero-photograph");
-    const toggle = stage.getByRole("button", {name: "Tắt chế độ 3D"});
+    const rail = page.locator(".ix-scene-rail");
+    const toggle = rail.getByRole("button", {name: "Tắt chế độ 3D"});
 
     await expect(stage).toBeVisible();
     await expect(canvas).toHaveCount(1);
@@ -33,14 +34,14 @@ for (const slug of worlds) {
     }
 
     await toggle.click();
-    await expect(stage.getByRole("button", {name: "Bật chế độ 3D"})).toHaveAttribute("aria-pressed", "false");
+    await expect(rail.getByRole("button", {name: "Bật chế độ 3D"})).toHaveAttribute("aria-pressed", "false");
     await expect(canvas).toHaveAttribute("data-renderer", "fallback");
     await expect(fallback).toBeVisible();
 
-    await stage.locator(".ix-mode-list button").nth(2).click();
+    await rail.locator(".ix-mode-list button").nth(2).click();
     await expect(stage).toHaveAttribute("data-preset", "2");
-    await stage.getByRole("button", {name: "Bật chế độ 3D"}).click();
-    await expect(stage.getByRole("button", {name: "Tắt chế độ 3D"})).toHaveAttribute("aria-pressed", "true");
+    await rail.getByRole("button", {name: "Bật chế độ 3D"}).click();
+    await expect(rail.getByRole("button", {name: "Tắt chế độ 3D"})).toHaveAttribute("aria-pressed", "true");
   });
 }
 
