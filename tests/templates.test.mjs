@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {readFile} from "node:fs/promises";
+import {existsSync} from "node:fs";
 import {createInquiryEmailDraft} from "../lib/contact-email-draft.ts";
 
 const registry=JSON.parse(await readFile(new URL("../data/templates.json",import.meta.url),"utf8"));
@@ -28,4 +29,18 @@ test("contact email draft includes the selected template and still requires an e
  assert.match(draft.body,/Mẫu website tham khảo: Studio sáng tạo/);
  assert.match(draft.href,/mailto:/);
  assert.match(draft.body,/chưa được gửi tự động/);
+});
+
+test("Digital Creators is vendored verbatim and the gallery uses a real screenshot",()=>{
+ const dc=registry.find(item=>item.slug==="digital-creators");
+ assert.ok(dc,"Digital Creators is template 21");
+ assert.equal(dc.compatibility.starter,"standalone-vite@1");
+ for(const file of [
+  "../vendor/digital-creators/src/App.tsx",
+  "../vendor/digital-creators/src/components/RubikScrollStory.tsx",
+  "../vendor/digital-creators/src/components/PaintingAboutVisual.tsx",
+  "../vendor/digital-creators/src/components/LegoActivitiesVisual.tsx",
+  "../public/immersive/digital-creators/index.html",
+  "../public/template-previews/digital-creators.png"
+ ])assert.ok(existsSync(new URL(file,import.meta.url)),file);
 });

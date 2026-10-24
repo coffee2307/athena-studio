@@ -1,30 +1,4 @@
 
-/* Phase 0: isolated immersive showcase; Athena chrome stays monochrome. */
-.digital-creators-embed{background:#f6f5fa;min-height:100dvh;padding:0!important;display:flex;flex-direction:column}
-.digital-creators-embed iframe{display:block;border:0;width:100%;flex:1;min-height:calc(100dvh - 142px);background:#f9f8fc}
-.digital-creators-embed.is-embedded{height:100dvh;min-height:100dvh}.digital-creators-embed.is-embedded iframe{min-height:100dvh}
-.digital-creators-header{display:flex;justify-content:space-between;align-items:end;padding:20px clamp(18px,4vw,64px);background:#fff;border-bottom:1px solid #e5e5e5;gap:20px}
-.digital-creators-header span{font:700 10px/1.4 inherit;letter-spacing:.17em}
-.digital-creators-header h1{margin:5px 0;font-size:clamp(27px,3vw,42px);letter-spacing:-.07em}
-.digital-creators-header p{font-size:12px;margin:0}.digital-creators-header a{font-size:12px;color:#111;text-decoration:underline;text-underline-offset:4px;flex-shrink:0}
-.digital-creators-credit{padding:10px 4vw;font-size:11px;color:#333;background:#fff;display:flex;gap:14px;justify-content:space-between}.digital-creators-credit a{color:inherit}
-.dc-thumbnail{width:100%;height:100%;min-height:235px;overflow:hidden;position:relative;background:radial-gradient(circle at 58% 42%,#e2defb 0%,#f9f8fe 49%,#eeeef5 100%);color:#171622;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(14px,2vw,26px)}
-.dc-thumbnail-meta,.dc-thumbnail-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;position:relative;z-index:2}
-.dc-thumbnail-meta span{font-size:clamp(15px,1.7vw,24px);font-weight:400;letter-spacing:-.06em}.dc-thumbnail-meta span strong{font-weight:900}
-.dc-thumbnail-meta small,.dc-thumbnail-footer span{font-size:clamp(7px,.8vw,10px);letter-spacing:.09em;font-weight:700}
-.dc-thumbnail-cube{position:absolute;left:50%;top:50%;width:148px;height:148px;display:grid;grid-template-columns:repeat(3,1fr);gap:5px;padding:7px;border:8px solid #303049;box-shadow:18px 22px 0 #52506c,28px 32px 28px #2b255f35;transform:translate(-50%,-52%) rotate(-17deg) skew(5deg,5deg);background:#303049}
-.dc-thumbnail-cube i{display:block;background:#90d0ea;border-radius:4px;box-shadow:inset -4px -5px 0 #0002}
-.dc-thumbnail-cube i:nth-child(2n){background:#efaac0}.dc-thumbnail-cube i:nth-child(3n){background:#b6a9ef}.dc-thumbnail-cube i:nth-child(7n){background:#f7d28b}
-.dc-thumbnail-footer{margin-top:auto}
-@media(max-width:720px){.digital-creators-header{align-items:start;flex-direction:column}.digital-creators-embed iframe{min-height:calc(100dvh - 175px)}.digital-creators-credit{flex-direction:column}.dc-thumbnail-meta small{display:none}}
-
-.phase0-dc-art{background:radial-gradient(circle at 50% 45%,#deddf3,#f6f5fc 75%);position:relative;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;padding:25px;color:#25253c;aspect-ratio:1.6}
-.phase0-dc-art>span{font-size:10px;font-weight:750;letter-spacing:.13em;z-index:2}.phase0-dc-art>strong{font-size:clamp(19px,3vw,42px);letter-spacing:-.08em;z-index:2}
-.phase0-dc-art-cube{position:absolute;left:50%;top:50%;width:145px;height:145px;display:grid;grid-template-columns:repeat(3,1fr);gap:5px;padding:6px;border:7px solid #35304b;background:#35304b;transform:translate(-50%,-50%) rotate(-17deg) skew(5deg,5deg);box-shadow:20px 22px 0 #676283,29px 31px 29px #20204035;transition:transform .7s ease}
-.phase0-dc-art-cube i{background:#aed3ec;border-radius:4px;box-shadow:inset -3px -3px #0002}.phase0-dc-art-cube i:nth-child(even){background:#f2b5ce}.phase0-dc-art-cube i:nth-child(3n){background:#bba9f3}
-.phase0-dc-art:hover .phase0-dc-art-cube{transform:translate(-50%,-50%) rotate(2deg) skew(5deg,5deg)}
-@media(prefers-reduced-motion:reduce){.phase0-dc-art-cube{transition:none}}
-
 /* Athena Phase 0 editorial portfolio */
 .phase0-projects{overflow:hidden;background:#fff}
 .phase0-projects-hero{background:#101010;color:#fff;padding:26px var(--gutter) 0}
@@ -42,22 +16,7 @@
 .phase0-portfolio-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:clamp(20px,3vw,52px)!important}
 .phase0-portfolio-grid .case-card:first-child{grid-column:1/-1}
 .phase0-portfolio-grid .case-card-link{display:block;overflow:hidden;background:#f2f2f2}
-.phase0-portfolio-grid .case-card-link>.agency-real-art,.phase0-portfolio-grid .case-card-link>.portfolio-art,.phase0-portfolio-grid .case-card-link>.phase0-dc-art{aspect-ratio:1.55!important;min-height:0!important}
-.phase0-portfolio-grid .case-card:first-child .case-card-link>.agency-real-art{aspect-ratio:2.1!important}
-.phase0-portfolio-grid .case-card-info{padding:22px 0!important;background:white!important;display:flex!important;justify-content:space-between;align-items:center}
-.phase0-portfolio-grid .case-card-info h3{font-size:clamp(34px,4.8vw,66px)!important;letter-spacing:-.085em;line-height:1.12}
-.phase0-portfolio-grid .case-index{font-size:10px;letter-spacing:.12em}.phase0-portfolio-grid .case-card-summary{color:#666;font-size:13px;line-height:1.75;max-width:560px}
-.phase0-portfolio-grid .case-arrow{flex-shrink:0;background:#111;color:#fff;width:45px;height:45px;border-radius:50%;display:grid;place-items:center}
-.phase0-portfolio-grid .case-card .agency-real-art img{transition:transform .75s ease}.phase0-portfolio-grid .case-card:hover .agency-real-art img{transform:scale(1.035)}
-.phase0-projects-cta{margin:0 var(--gutter) clamp(60px,9vw,120px);padding:clamp(28px,6vw,80px);background:#161616;color:#fff;display:flex;align-items:end;justify-content:space-between;gap:32px}
-.phase0-projects-cta span{font-size:10px;letter-spacing:.13em}.phase0-projects-cta h2{font-size:clamp(40px,5.2vw,86px);line-height:1.02;letter-spacing:-.085em;margin:23px 0}.phase0-projects-cta h2 em{color:#bbb}
-.phase0-projects-cta p{font-size:13px;color:#bbb;line-height:1.8}.phase0-projects-cta a{background:#fff;color:#111;white-space:nowrap;padding:19px 23px;font-size:12px;font-weight:700}
-.phase0-projects-note{padding:0 var(--gutter) 40px;color:#666;font-size:11px;line-height:1.75}
-@media(max-width:900px){.phase0-projects-lead{grid-template-columns:1fr}.phase0-projects-work-title{grid-template-columns:1fr 2fr}.phase0-projects-work-title p{grid-column:2}.phase0-projects-cta{align-items:start;flex-direction:column}}
-@media(max-width:640px){.phase0-projects-top{align-items:start;flex-direction:column}.phase0-projects-lead h1{font-size:clamp(48px,12vw,72px)}.phase0-projects-work-title{display:block}.phase0-projects-work-title h2{margin:18px 0}.phase0-portfolio-grid{grid-template-columns:1fr!important}.phase0-portfolio-grid .case-card:first-child{grid-column:auto}.phase0-portfolio-grid .case-card-link>.agency-real-art{aspect-ratio:1.4!important}.phase0-projects-cta{margin-inline:16px}.phase0-projects-cta a{white-space:normal}}
-@media(prefers-reduced-motion:reduce){.phase0-portfolio-grid .case-card .agency-real-art img{transition:none}}
-
-/* Signature immersive experiences: intentional CSS perspective, lightweight mobile fallback. */
+.phase0-portfolio-grid .case-card-link>.agency-real-art,.phase0-portfolio-grid .case-card-link>.portfolio-art,.phase0-portfolio-grid .case-card-link>/* Signature immersive experiences: intentional CSS perspective, lightweight mobile fallback. */
 .immersive-home{--immersive-ink:#171717;background:#f3f1ed;color:var(--immersive-ink);font-family:"Be Vietnam Pro",sans-serif}
 .immersive-hero{min-height:690px;display:grid;grid-template-columns:1fr 1.08fr;overflow:hidden}
 .immersive-hero-copy{padding:clamp(48px,6vw,100px) clamp(25px,5vw,75px);display:flex;flex-direction:column;justify-content:center;position:relative}

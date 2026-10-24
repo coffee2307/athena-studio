@@ -21,3 +21,12 @@ QA:
 
 Validate on 390px mobile and 1440px desktop; check UI overflow, working navigation, modal preview, reduced-motion, CPU/RAM on low-end devices and the full Vite app interactions. CSS scene objects are conceptual geometry, not photorealistic products.
 Do not merge to main or deploy until design review and soft-launch gates are completed.
+
+## Original Digital Creators, NOT a reconstruction
+
+- `vendor/digital-creators/` now contains the original editable source checked out at e25ebc0, including app, scenes, data, docs and artwork.
+- GitHub Actions compiles this exact source unchanged to `public/immersive/digital-creators/`.
+- The template gallery thumbnail is an actual Playwright screenshot of that running website, stored as `public/template-previews/digital-creators.png` — no simulated Rubik cards.
+- The gallery modal opens `/immersive/digital-creators/index.html` directly (single iframe). Full-screen `/template-demos/digital-creators` redirects to the same original site with no Athena chrome.
+- The original website must be embeddable in Athena's own origin; route-scoped X-Frame-Options/CSP preserve the security boundary.
+- Updating upstream requires a reviewed commit pin and re-running the import workflow. Do not edit the vendored scenes to imitate a replacement design.

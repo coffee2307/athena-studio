@@ -44,7 +44,9 @@ export const projects:Project[]=[
   approach:"React, Three.js và React Three Fiber; cảnh tải riêng theo trang, WebGL theo cuộn và phương án giảm chuyển động.",
   outcome:"Website giới thiệu mô phỏng chức năng đăng ký, không tiếp nhận thông tin cá nhân hoặc vận hành backend.",
   technologies:["React","TypeScript","Three.js","Immersive 3D"],activities:["Rubik 3D theo cuộn","Tranh xuất hiện bằng nét cọ","Thành phố khối 3D","Mobile và reduced-motion"],
-  websiteUrl:"/template-demos/digital-creators",gallery:[],artwork:"digital-creators",updatedLabel:"Immersive interactive concept · 2026"
+  websiteUrl:"/template-demos/digital-creators",gallery:[{
+   src:"/template-previews/digital-creators.png",alt:"Ảnh chụp giao diện thật Digital Creators với khối Rubik 3D ở trang chủ",caption:"Ảnh chụp website Digital Creators từ mã nguồn gốc, tháng 10/2026",rightsVerified:true
+  }],artwork:"digital-creators",updatedLabel:"Immersive interactive concept · 2026"
  },
  {
   slug:"qrio",title:"Qrio",kicker:"DỰ ÁN ĐANG XÁC MINH",category:"Dự án cá nhân",
