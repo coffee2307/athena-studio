@@ -31,6 +31,9 @@ try {
         const stage = page.locator(".immersive-stage");
         const canvas = stage.locator("canvas.ix-3d-canvas");
         await stage.waitFor({state: "visible"});
+        // Hero loads as a photo; request WebGL explicitly for evidence.
+        const enable = page.locator(".ix-scene-rail").getByRole("button",{name:"Bật chế độ 3D"});
+        await enable.click();
         await page.waitForFunction(() => {
           const element = document.querySelector("canvas.ix-3d-canvas");
           return element && element.getAttribute("data-renderer") !== "loading";
