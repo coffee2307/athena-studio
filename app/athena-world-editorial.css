@@ -111,3 +111,20 @@
    than the generic .ix-render-toggle[aria-pressed] rule. */
 .ix-scene-rail .ix-render-toggle[aria-pressed="false"]{background:#fff;color:#16191d;border-color:#fff}
 .ix-scene-rail .ix-render-toggle[aria-pressed="true"]{background:#25282e;color:#fff;border-color:#b8bec5}
+
+/* McLaren GLB renderer: available only by explicit interaction.
+   Other templates keep their light-weight procedural GPU contexts. */
+.ix-auto-showroom .ix-auto-3d-canvas.is-active,
+.athena-journey-auto-showroom .ix-auto-3d-canvas.is-active{
+ pointer-events:auto;cursor:grab;touch-action:pan-y
+}
+.ix-auto-showroom .ix-auto-3d-canvas.is-active:active,
+.athena-journey-auto-showroom .ix-auto-3d-canvas.is-active:active{cursor:grabbing}
+.ix-auto-showroom .ix-glb-credit{color:#bfc7d3;font-size:10px;line-height:1.8;max-width:530px}
+.ix-auto-showroom .ix-glb-credit a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.ix-auto-showroom .ix-glb-credit a:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.ix-auto-showroom .ix-hero-visual[data-scene="auto-showroom"]{background:#070b12}
+.athena-journey-auto-showroom .journey-stage{background:#070b12}
+@media(max-width:760px){
+ .ix-auto-showroom .ix-glb-credit{font-size:10px}
+}
