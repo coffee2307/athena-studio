@@ -2,11 +2,12 @@ import {expect,test} from "@playwright/test";
 
 test("five-minute Athena invitation keeps white CTA text on dark background in desktop and mobile",async({page})=>{
  test.setTimeout(60000);
- await page.clock.install();
+ // Use a genuine elapsed session timestamp instead of mocking React/Next.js
+ // timers; this exercises the real 5-minute prompt logic without clock races.
+ await page.addInitScript(()=>{
+  sessionStorage.setItem("athena-demo-interest-start-creative-studio",String(Date.now()-5*60*1000-5000));
+ });
  await page.goto("/template-demos/creative-studio",{waitUntil:"domcontentloaded"});
- // Hydration and the invitation timer must be mounted before advancing time.
- await page.locator(".ix-scene-rail .ix-mode-list button").nth(1).click();
- await page.clock.fastForward(5*60*1000);
  const dialog=page.getByRole("dialog",{name:/Bạn có thích mẫu này/});
  await expect(dialog).toBeVisible();
  const action=dialog.getByRole("link",{name:/Trao đổi với Athena/});
