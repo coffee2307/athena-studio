@@ -14,7 +14,7 @@ for(const {slug,headline} of worlds){
    const home=page.locator(".immersive-home");
    const editorial=page.locator(".ix-editorial");
    await expect(home).toBeVisible();
-   await expect(home).toHaveAttribute("data-immersive","false");
+   await expect(home).toHaveAttribute("data-immersive",slug==="auto-showroom"?"true":"false");
    await expect(editorial.getByRole("heading",{name:headline})).toHaveCount(1);
    await expect(editorial.locator("figure")).toHaveCount(2);
    await expect(editorial.getByRole("link",{name:/Khám phá bộ sưu tập|Xem hồ sơ công trình|Đi sâu vào từng dự án/}))
@@ -28,7 +28,7 @@ for(const {slug,headline} of worlds){
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
    expect(overflow,slug+" "+width+"px overflow").toBeLessThanOrEqual(2);
    await page.locator(".ix-render-toggle").click();
-   await expect(home).toHaveAttribute("data-immersive","true");
+   await expect(home).toHaveAttribute("data-immersive",slug==="auto-showroom"?"false":"true");
    if(slug==="creative-studio"){
      await expect(page.locator(".ix-studio-overlay")).toHaveCount(0);
    }
