@@ -327,7 +327,7 @@
 .world-site[data-world="auto-showroom"] .ix-subpage-auto-showroom .ix-subpage-feature-kicker{color:var(--bv-orange)}
 .world-site[data-world="auto-showroom"] .ix-subpage-auto-showroom h2{font-size:clamp(38px,4.5vw,78px);font-weight:780;letter-spacing:-.085em}
 .world-site[data-world="auto-showroom"] .ix-subpage-auto-showroom .ix-subpage-statement>p{color:#d3d3d6}
-.world-site[data-world="auto-showroom"] .ix-subpage-auto-showroom .ix-subpage-feature-art img{filter:grayscale(.55) contrast(1.18) brightness(.7)}
+.world-site[data-world="auto-showroom"] .ix-subpage-auto-showroom .ix-subpage-feature-art img{filter:contrast(1.08) saturate(.98) brightness(1)}
 .world-site[data-world="auto-showroom"] .ix-subpage-auto-showroom .ix-subpage-feature-art:after{
  content:"";position:absolute;inset:0;pointer-events:none;border-bottom:4px solid var(--bv-orange)
 }
@@ -357,7 +357,7 @@
 .world-site[data-world="auto-showroom"] .world-service-row,
 .world-site[data-world="auto-showroom"] .world-contact-details{border-color:#454649}
 .world-site[data-world="auto-showroom"] .world-work-card img,
-.world-site[data-world="auto-showroom"] .world-service-image img{filter:grayscale(.35) contrast(1.12)}
+.world-site[data-world="auto-showroom"] .world-service-image img{filter:contrast(1.09) saturate(.95)}
 .world-site[data-world="auto-showroom"] .world-work-cover{background:#202125}
 .world-site[data-world="auto-showroom"] .world-work-topline{font-weight:760}
 .world-site[data-world="auto-showroom"] .world-work-meta p,
@@ -566,7 +566,7 @@
  background:#16181b;
 }
 .experience-automotive .bv-catalog-item:first-child .bv-catalog-shot{height:clamp(340px,42vw,680px)}
-.experience-automotive .bv-catalog-shot img{object-fit:cover;filter:grayscale(.65) contrast(1.25) brightness(.73);transition:transform .55s ease}
+.experience-automotive .bv-catalog-shot img{object-fit:cover;filter:contrast(1.08) saturate(.96) brightness(.96);transition:transform .55s ease}
 .experience-automotive .bv-catalog-item:hover img{transform:scale(1.03)}
 .experience-automotive .bv-catalog-shot>span{position:absolute;left:18px;bottom:18px;font-size:10px;letter-spacing:.16em;color:#fff;background:#101115;padding:9px 12px;border-left:3px solid #ff741c}
 .experience-automotive .bv-catalog-meta{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 25px;margin-top:21px}
@@ -610,7 +610,7 @@
  background:#151719;
 }
 .world-site[data-world="auto-showroom"] .experience-sub[data-sector="automotive"] .experience-detail-gallery img{
- filter:grayscale(.5) contrast(1.2);
+ filter:contrast(1.08) saturate(.95);
 }
 .world-site[data-world="auto-showroom"] .experience-sub[data-sector="automotive"] .experience-detail-aside,
 .world-site[data-world="auto-showroom"] .experience-sub[data-sector="automotive"] .experience-service-panels{
@@ -668,3 +668,7 @@
  background:#fff;
  border-color:#68696a;
 }
+
+/* Preserve the source car's orange pinstripes in the static GLB study photographs. */
+.ix-auto-showroom .ix-work-shot img,
+.ix-auto-showroom .ix-hero-image img{filter:contrast(1.08) saturate(.97)}
