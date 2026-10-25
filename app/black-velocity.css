@@ -638,3 +638,6 @@
 @media(prefers-reduced-motion:reduce){
  .experience-automotive .bv-catalog-shot img{transition:none!important;transform:none!important}
 }
+
+/* Never expose zoom controls when reduced motion or WebGL fallback is active. */
+.ix-auto-showroom .ix-hero-visual:has(.ix-auto-3d-canvas[data-renderer="fallback"]) .bv-zoom-controls{display:none}
