@@ -13,11 +13,11 @@ const clamp=(value:number,min:number,max:number)=>Math.max(min,Math.min(max,valu
 
 function makeStage(){
  const stage=new THREE.Group();
- // A continuous dark studio floor instead of the previous circular toy podium.
+ // A nearly-black seamless studio ground instead of a lit grey plane or toy podium.
  // One simple receiver and a very small procedural contact shadow; no SSR pass.
  const ground=new THREE.Mesh(
   new THREE.PlaneGeometry(24,24),
-  new THREE.MeshStandardMaterial({color:0x090b0d,metalness:.16,roughness:.68})
+  new THREE.MeshBasicMaterial({color:0x0b0c0f,toneMapped:false})
  );
  ground.rotation.x=-Math.PI/2;
  ground.position.y=-.06;
