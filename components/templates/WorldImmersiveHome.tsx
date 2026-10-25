@@ -31,7 +31,8 @@ function Series({slug,world,root}:{slug:string;world:DemoCopy;root:string}){
 }
 export function WorldImmersiveHome({slug,world,extra}:Props){
  const [mode,setMode]=useState(0);
- const [enable3D,setEnable3D]=useState(false);
+ // Auto showroom is a model-first experience. Other worlds remain opt-in.
+ const [enable3D,setEnable3D]=useState(slug==="auto-showroom");
  const root="/template-demos/"+slug;
  const isStudio=slug==="creative-studio";
  const isArch=slug==="architecture-studio";
@@ -49,7 +50,7 @@ export function WorldImmersiveHome({slug,world,extra}:Props){
     <div className="ix-hero-links"><Link href={root+"/work"} className="ix-hero-primary">{isArch?"Khám phá công trình":slug==="auto-showroom"?"Khám phá bộ sưu tập":"Xem dự án"} <span aria-hidden="true">↗</span></Link><Link href={root+"/about"} className="ix-hero-text-link">Câu chuyện của chúng tôi <span aria-hidden="true">↗</span></Link><Link href={root+"/experience"} className="ix-journey-link">Trải nghiệm 3D <span aria-hidden="true">↗</span></Link></div>
    </div>
    <div className="ix-hero-visual immersive-stage" data-scene={slug} data-preset={mode}>
-    <div className="ix-hero-image" key={activeImage}><Image src={activeImage} fill priority quality={88} alt={"Ảnh concept "+world.brand+": "+caption} sizes="(max-width: 820px) 100vw, 70vw" className="ix-hero-photograph"/></div>
+    <div className="ix-hero-image" key={activeImage}><Image src={activeImage} fill priority={slug!=="auto-showroom"} quality={88} alt={"Ảnh concept "+world.brand+": "+caption} sizes="(max-width: 820px) 100vw, 70vw" className="ix-hero-photograph"/></div>
     <WorldScene slug={slug as "creative-studio"|"architecture-studio"|"auto-showroom"} preset={mode} enabled={enable3D} onRequestFallback={()=>setEnable3D(false)}/>
     <div className="ix-visual-vignette" aria-hidden="true"/>
     <div className="ix-visual-coordinate"><span>EDITION / 2026</span><span>{enable3D?"3D STUDY / ACTIVE":"EDITORIAL VIEW / 3D OPTIONAL"}</span></div>
@@ -58,10 +59,10 @@ export function WorldImmersiveHome({slug,world,extra}:Props){
     {!isStudio&&!isArch&&!enable3D&&<div className="ix-auto-overlay" aria-hidden="true"><span>VELAR / MOTOR COLLECTION</span><strong>BEYOND<br/>THE <i>ORDINARY.</i></strong></div>}
     <div className="ix-scene-footer"><div className="ix-scene-caption"><span>{String(mode+1).padStart(2,"0")} / 03</span><strong>{caption}</strong></div></div>
    </div>
-   <div className="ix-hero-bottom"><span>SCROLL TO DISCOVER <span aria-hidden="true">↓</span></span><span>{slug==="auto-showroom"?"ẢNH XE MINH HỌA / CONCEPT DEMO":world.brand+" / DEMONSTRATION SITE"}</span></div>
+   <div className="ix-hero-bottom"><span>SCROLL TO DISCOVER <span aria-hidden="true">↓</span></span><span>{slug==="auto-showroom"?"MÔ HÌNH 3D / CONCEPT DEMO":world.brand+" / DEMONSTRATION SITE"}</span></div>
   </section>
   <section className="ix-scene-rail" aria-label="Điều khiển trải nghiệm 3D">
-   <div className="ix-scene-rail-copy"><span>INTERACTIVE STUDY / 0{mode+1}</span><strong aria-live="polite">{caption}</strong><p>{slug==="auto-showroom"?"Bật 3D để tải mẫu McLaren Ultimate Vision GT thật, kéo ngang để xoay xe. Chọn góc nhìn để khảo sát thân xe và khí động học.":"Ảnh editorial được ưu tiên để tải nhanh. Bật 3D khi muốn khám phá mô hình; nhấn một trong ba góc nhìn để thay đổi cấu trúc."}</p>{slug==="auto-showroom"&&<p className="ix-glb-credit">Mô hình 3D do người dùng cung cấp. Bản demo độc lập, không liên kết với McLaren Automotive.</p>}</div>
+   <div className="ix-scene-rail-copy"><span>INTERACTIVE STUDY / 0{mode+1}</span><strong aria-live="polite">{caption}</strong><p>{slug==="auto-showroom"?"Mô hình McLaren 3D được tải ngay khi mở trang. Kéo ngang để xoay xe hoặc chọn góc nhìn để khám phá thân xe và khí động học. Bạn có thể tắt 3D nếu muốn xem ảnh dự phòng.":"Ảnh editorial được ưu tiên để tải nhanh. Bật 3D khi muốn khám phá mô hình; nhấn một trong ba góc nhìn để thay đổi cấu trúc."}</p>{slug==="auto-showroom"&&<p className="ix-glb-credit">Mô hình 3D do người dùng cung cấp. Bản demo độc lập, không liên kết với McLaren Automotive.</p>}</div>
    <div className="ix-rail-actions">
     <div className="immersive-mode-selector ix-mode-list" role="group" aria-label="Chọn chế độ 3D">{labels.map((label,i)=><button type="button" key={label} aria-pressed={mode===i} onClick={()=>setMode(i)}><span>{String(i+1).padStart(2,"0")}</span>{label}</button>)}</div>
     <button type="button" className="ix-render-toggle" aria-pressed={enable3D ? "true" : "false"} aria-label={enable3D?"Tắt chế độ 3D":"Bật chế độ 3D"} onClick={()=>setEnable3D(value=>!value)}>3D {enable3D?"ON":"OFF"}</button>
