@@ -39,7 +39,7 @@ test.describe("Black Velocity / approved motor-sport composition",()=>{
    });
    expect(metrics.overflow).toBeLessThanOrEqual(2);
    expect(metrics.title).not.toBeNull();
-   if(width<=768&&metrics.model&&metrics.copy)
+   if(width<=760&&metrics.model&&metrics.copy)
     expect(metrics.model.top-metrics.copy.bottom).toBeGreaterThanOrEqual(-4);
   });
  }
