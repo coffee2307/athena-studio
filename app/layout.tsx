@@ -35,6 +35,7 @@ import "@/app/template-accessibility.css";
 import "@/app/immersive-phase0.css";
 import "@/app/immersive-journey.css";
 import "@/app/athena-world-editorial.css";
+import "@/app/black-velocity.css";
 
 export const metadata: Metadata = {
   ...createMetadata(),
