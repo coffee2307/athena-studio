@@ -13,42 +13,34 @@ const clamp=(value:number,min:number,max:number)=>Math.max(min,Math.min(max,valu
 
 function makeStage(){
  const stage=new THREE.Group();
- // Black brushed-metal display platform, low draw-call budget.
- const platform=new THREE.Mesh(
-  new THREE.CylinderGeometry(2.92,2.98,.075,96),
-  new THREE.MeshPhysicalMaterial({color:0x080a0f,metalness:.18,roughness:.56,clearcoat:.14})
+ // A continuous dark studio floor instead of the previous circular toy podium.
+ // One simple receiver and a very small procedural contact shadow; no SSR pass.
+ const ground=new THREE.Mesh(
+  new THREE.PlaneGeometry(24,24),
+  new THREE.MeshStandardMaterial({color:0x090b0d,metalness:.16,roughness:.68})
  );
- platform.position.y=-.07;
- stage.add(platform);
- const ring=new THREE.Mesh(
-  new THREE.TorusGeometry(2.91,.013,8,128),
-  new THREE.MeshBasicMaterial({color:0xf0802b,toneMapped:false})
- );
- ring.rotation.x=Math.PI/2;ring.position.y=-.023;
- stage.add(ring);
- const outerRing=new THREE.Mesh(
-  new THREE.TorusGeometry(3.15,.008,6,128),
-  new THREE.MeshBasicMaterial({color:0x516277,toneMapped:false})
- );
- outerRing.rotation.x=Math.PI/2;outerRing.position.y=-.087;stage.add(outerRing);
+ ground.rotation.x=-Math.PI/2;
+ ground.position.y=-.06;
+ stage.add(ground);
 
- // Single subtle contact shadow, not an expensive real-time shadow pass.
- const shadowCanvas=document.createElement("canvas");
- shadowCanvas.width=128;shadowCanvas.height=128;
- const ctx=shadowCanvas.getContext("2d");
+ const canvas=document.createElement("canvas");
+ canvas.width=128;canvas.height=128;
+ const ctx=canvas.getContext("2d");
  if(ctx){
-  const grad=ctx.createRadialGradient(64,64,8,64,64,64);
-  grad.addColorStop(0,"rgba(0,0,0,.74)");
-  grad.addColorStop(.57,"rgba(0,0,0,.40)");
-  grad.addColorStop(1,"rgba(0,0,0,0)");
-  ctx.fillStyle=grad;ctx.fillRect(0,0,128,128);
+  const gradient=ctx.createRadialGradient(64,64,4,64,64,64);
+  gradient.addColorStop(0,"rgba(0,0,0,.8)");
+  gradient.addColorStop(.55,"rgba(0,0,0,.35)");
+  gradient.addColorStop(1,"rgba(0,0,0,0)");
+  ctx.fillStyle=gradient;ctx.fillRect(0,0,128,128);
  }
- const tex=new THREE.CanvasTexture(shadowCanvas);
- const contact=new THREE.Mesh(
-  new THREE.PlaneGeometry(4.8,2.8),
-  new THREE.MeshBasicMaterial({map:tex,transparent:true,opacity:.7,depthWrite:false})
+ const tex=new THREE.CanvasTexture(canvas);
+ const shadow=new THREE.Mesh(
+  new THREE.PlaneGeometry(5.7,3.5),
+  new THREE.MeshBasicMaterial({map:tex,transparent:true,opacity:.85,depthWrite:false})
  );
- contact.rotation.x=-Math.PI/2;contact.position.y=.015;stage.add(contact);
+ shadow.rotation.x=-Math.PI/2;
+ shadow.position.y=-.045;
+ stage.add(shadow);
  return {stage,tex};
 }
 
@@ -73,16 +65,18 @@ function tuneMaterials(model:THREE.Object3D){
  * procedural PMREM studio. It deliberately renders on demand, not at 60 FPS
  * while idle, and keeps the editorial photo as a graceful WebGL fallback.
  */
-export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequestFallback}:WorldSceneProps){
+export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequestFallback,zoom=0}:WorldSceneProps){
  const canvasRef=useRef<HTMLCanvasElement>(null);
  const modeRef=useRef(preset);
+ const zoomRef=useRef(zoom);
  const wakeRef=useRef<()=>void>(()=>{});
  const [status,setStatus]=useState<SceneState>("loading");
  const [percent,setPercent]=useState(0);
  const [phase,setPhase]=useState("Đang chuẩn bị bộ dựng 3D");
  const [slow,setSlow]=useState(false);
  modeRef.current=preset;
- useEffect(()=>{wakeRef.current();},[preset]);
+ zoomRef.current=zoom;
+ useEffect(()=>{wakeRef.current();},[preset,zoom]);
 
  useEffect(()=>{
   const canvas=canvasRef.current;
@@ -104,23 +98,23 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   }
   renderer.outputColorSpace=THREE.SRGBColorSpace;
   renderer.toneMapping=THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure=.77;
+  renderer.toneMappingExposure=.92;
   renderer.shadowMap.enabled=false;
 
   const scene=new THREE.Scene();
-  scene.background=new THREE.Color(0x070b12);
+  scene.background=new THREE.Color(0x070809);
   const camera=new THREE.PerspectiveCamera(37,1,.1,85);
   const isMobile=window.matchMedia("(max-width:760px)").matches;
-  const target=new THREE.Vector3(isMobile?0:-.78,.72,0);
+  const target=new THREE.Vector3(scrollRootId&&!isMobile?-.64:0,.72,0);
   camera.position.set(6.8,3.0,6.9);camera.lookAt(target);
 
-  const ambient=new THREE.HemisphereLight(0xb4c8ed,0x29241d,.58);
+  const ambient=new THREE.HemisphereLight(0xe3e4e7,0x18191b,.75);
   scene.add(ambient);
-  const key=new THREE.DirectionalLight(0xfff1da,2.15);
+  const key=new THREE.DirectionalLight(0xf6f4ef,2.65);
   key.position.set(-4.5,7,5);scene.add(key);
-  const rim=new THREE.DirectionalLight(0xff7328,1.9);
+  const rim=new THREE.DirectionalLight(0xff6a18,1.45);
   rim.position.set(4.5,3,-4.2);scene.add(rim);
-  const cool=new THREE.DirectionalLight(0x8baee5,.9);
+  const cool=new THREE.DirectionalLight(0xd5dfed,1.25);
   cool.position.set(-3,2.5,-5.5);scene.add(cool);
   const floor=makeStage();
   scene.add(floor.stage);
@@ -129,7 +123,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   const generated=pmrem.fromScene(studio,.04);
   studio.dispose();
   scene.environment=generated.texture;
-  scene.environmentIntensity=.78;
+  scene.environmentIntensity=.94;
 
   // A GLTFLoader can finish with a "ready" scene even when individual
   // embedded WebP textures failed. Track those failures explicitly.
@@ -186,12 +180,18 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    currentProgress=scrollRootId?goalProgress:currentProgress+(goalProgress-currentProgress)*lerp;
    turn+=(dragTurn-turn)*lerp;
    const angles=[.72,2.0,4.9];
-   const position=clamp(currentProgress*3,0,2);
-   const lower=Math.min(1,Math.floor(position));
+   // Five signed-off narrative keyframes, sampled directly from scroll progress.
+   // Reversing the document scroll immediately produces the same camera pose.
+   const journeyAngles=[.72,1.35,2.10,3.75,5.48];
+   const journeyElevations=[2.65,2.38,3.1,2.52,2.84];
+   const journeyDistances=[1, .98, .79, .96, 1.03];
+   const position=clamp(currentProgress*4,0,4);
+   const lower=Math.min(3,Math.floor(position));
    const fraction=position-lower;
    const smoothFraction=fraction*fraction*(3-2*fraction);
-   const scrollOrbit=angles[lower]+(angles[lower+1]-angles[lower])*smoothFraction
-    +Math.max(0,currentProgress-2/3)*.42;
+   const scrollOrbit=THREE.MathUtils.lerp(journeyAngles[lower],journeyAngles[lower+1],smoothFraction);
+   const scrollHeight=THREE.MathUtils.lerp(journeyElevations[lower],journeyElevations[lower+1],smoothFraction);
+   const scrollDistance=THREE.MathUtils.lerp(journeyDistances[lower],journeyDistances[lower+1],smoothFraction);
    // Preset changes should travel between camera poses, not snap halfway.
    const modePosition=clamp(currentMode,0,2);
    const modeLower=Math.min(1,Math.floor(modePosition));
@@ -199,14 +199,15 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    const easedMode=modeT*modeT*(3-2*modeT);
    const heroOrbit=angles[modeLower]+(angles[modeLower+1]-angles[modeLower])*easedMode;
    const orbit=(scrollRootId?scrollOrbit:heroOrbit+currentProgress*.20)+turn;
-   const dist=Math.max(isMobile?10.6:8.3,8.3*.94/Math.max(.52,camera.aspect));
-   const y=(isMobile?3.7:2.8)+currentProgress*.35;
+   const baseDistance=Math.max(isMobile?7.9:7.9,7.9*.91/Math.max(.60,camera.aspect));
+   const dist=baseDistance*(scrollRootId?scrollDistance:1)*(1-clamp(zoomRef.current,-1,2)*.09);
+   const y=scrollRootId?scrollHeight:(isMobile?2.85:2.7);
    const wanted=new THREE.Vector3(Math.cos(orbit)*dist,y,Math.sin(orbit)*dist);
    if(scrollRootId)camera.position.copy(wanted);
    else camera.position.lerp(wanted,lerp);
    camera.lookAt(target);
-   cool.intensity=.85+currentMode*.18;
-   rim.intensity=1.65+currentMode*.22;
+   cool.intensity=1.18;
+   rim.intensity=1.35;
    renderer.render(scene,camera);
    if(!drawn){drawn=true;finishLoading();setPercent(100);setStatus("ready");}
    const movement=Math.abs(currentMode-modeRef.current)+Math.abs(currentProgress-goalProgress)+Math.abs(turn-dragTurn)+camera.position.distanceTo(wanted);
