@@ -10,7 +10,7 @@ for(const slug of worlds){
      await page.goto("/template-demos/"+slug+"/"+route);
      const feature=page.locator(".ix-subpage-feature");
      await expect(feature).toBeVisible();
-     const link=feature.getByRole("link",{name:/KHÁM PHÁ KHÔNG GIAN 3D/});
+     const link=feature.getByRole("link",{name:slug==="auto-showroom"?/OPEN CINEMATIC STUDY/:/KHÁM PHÁ KHÔNG GIAN 3D/});
      await expect(link).toHaveAttribute("href","/template-demos/"+slug+"/experience");
      const image=feature.locator("img");
      await expect(image).toHaveCount(1);
