@@ -13,17 +13,24 @@ for (const slug of worlds) {
     const canvas = stage.locator("canvas.ix-3d-canvas");
     const fallback = stage.locator(".ix-hero-photograph");
     const rail = page.locator(".ix-scene-rail");
-    const toggle = rail.getByRole("button", {name: "Bật chế độ 3D"});
+    const automotive = slug==="auto-showroom";
+    const toggle = rail.getByRole("button", {name: automotive?"Tắt chế độ 3D":"Bật chế độ 3D"});
 
     await expect(stage).toBeVisible();
     await expect(canvas).toHaveCount(1);
     await expect(fallback).toBeVisible();
-    await expect(canvas).toHaveAttribute("data-renderer", /^(ready|fallback)$/, {timeout: 15000});
-    await expect(toggle).toHaveAttribute("aria-pressed", "false");
+    await expect(toggle).toHaveAttribute("aria-pressed", automotive?"true":"false");
 
-    await toggle.click();
+    // McLaren must start without any visitor click; the other worlds stay opt-in.
+    if(!automotive){
+      await expect(canvas).toHaveAttribute("data-renderer", "fallback");
+      await toggle.click();
+    }
     await expect(rail.getByRole("button", {name: "Tắt chế độ 3D"})).toHaveAttribute("aria-pressed", "true");
-    await expect(canvas).toHaveAttribute("data-renderer", slug==="auto-showroom"?"ready":/^(ready|fallback)$/, {timeout: 30000});
+    await expect(canvas).toHaveAttribute("data-renderer", /^(ready|fallback)$/, {timeout: 30000});
+    if(automotive&&(await canvas.getAttribute("data-renderer"))==="ready"){
+      await expect(stage.locator(".ix-hero-image")).toHaveCSS("opacity","0");
+    }
     if(slug==="auto-showroom")await expect(canvas).toHaveAttribute("data-geometry","gltf-webp-mclaren");
     // WebGL context availability is machine-dependent. 3D must be live
     // where supported; otherwise the image fallback must remain usable.
