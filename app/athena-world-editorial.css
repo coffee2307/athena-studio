@@ -202,3 +202,22 @@
   opacity:0;
  }
 }
+
+
+/* The automotive hero presents live 3D first.
+   The editorial photo is used only after visitors disable WebGL or the
+   renderer reports a real fallback (including reduced-motion/WebGL loss). */
+.ix-auto-showroom.ix-site[data-immersive="true"] .ix-hero-image{
+ opacity:0;
+ pointer-events:none;
+}
+.ix-auto-showroom.ix-site[data-immersive="true"]
+ .ix-hero-visual:has(.ix-auto-3d-canvas[data-renderer="fallback"]) .ix-hero-image{
+ opacity:1;
+}
+@media(max-width:760px){
+ .ix-auto-showroom.ix-site[data-immersive="true"]
+ .ix-hero-visual:has(.ix-auto-3d-canvas[data-renderer="fallback"]) .ix-hero-photograph{
+  opacity:1;
+ }
+}
