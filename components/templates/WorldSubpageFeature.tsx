@@ -28,13 +28,13 @@ const directions:Record<World,Direction>={
   }
  },
  "auto-showroom":{
-  name:"VELAR / CONCEPT",discipline:"AUTOMOTIVE · DETAIL · MOTION",
+  name:"VELAR / BLACK VELOCITY",discipline:"PERFORMANCE DESIGN · MATERIAL · AERO",
   pages:{
-   work:{index:"01 / COLLECTION",title:"Khám phá thiết kế trước khi chọn một hành trình.",description:"Xem ba mẫu xe concept, hình ảnh và thông tin trình diễn. Không có giao dịch mua bán thật.",photo:5,photoLabel:"THE COLLECTION"},
-   services:{index:"02 / SHOWROOM",title:"Một showroom được thiết kế quanh trải nghiệm.",description:"Từ cách giới thiệu xe đến đặt lịch lái thử giả lập, mỗi bước cần rõ ràng và dễ thao tác.",photo:1,photoLabel:"DESIGN EXPERIENCE"},
-   about:{index:"03 / DESIGN LANGUAGE",title:"Cảm xúc bắt đầu từ một đường nét.",description:"Một ngôn ngữ hình ảnh tập trung vào tỷ lệ thân xe, ánh sáng và chuyển động.",photo:4,photoLabel:"THE DESIGN"},
-   contact:{index:"04 / ENQUIRY",title:"Hành trình tiếp theo bắt đầu bằng một câu hỏi.",description:"Các yêu cầu, thông tin xe và lịch hẹn chỉ mang tính mô phỏng của thư viện Athena.",photo:3,photoLabel:"GET IN TOUCH"},
-   detail:{index:"05 / VEHICLE STUDY",title:"Từng chi tiết đều đáng nhìn kỹ.",description:"Khám phá các góc nhìn ngoại thất và mô tả xe concept; thông số chỉ có tính minh họa.",photo:2,photoLabel:"IN FOCUS"}
+   work:{index:"01 / DESIGN STUDIES",title:"THE MACHINE. THREE PERSPECTIVES.",description:"Ba chương nhìn vào cùng một mẫu xe 3D: hình dáng, vật liệu và khí động học. Ảnh phụ trợ chỉ minh họa phong cách showroom.",photo:5,photoLabel:"FORM / MATERIAL / AERO"},
+   services:{index:"02 / INTERACTION",title:"ENGINEERED FOR EXPERIENCE.",description:"Quan sát mô hình thật với camera có chủ đích, chuyển động có thể đảo chiều và chế độ dự phòng khi không có WebGL.",photo:1,photoLabel:"INTERACTION STUDY"},
+   about:{index:"03 / DESIGN LANGUAGE",title:"PRECISION IN EVERY LINE.",description:"Đen graphite, tương phản kim loại và nhịp đường chéo tạo nên ngôn ngữ thị giác BLACK VELOCITY.",photo:4,photoLabel:"DESIGN PHILOSOPHY"},
+   contact:{index:"04 / ENQUIRY",title:"YOUR NEXT PERSPECTIVE.",description:"Trải nghiệm biểu mẫu demo về concept thiết kế. Không có giao dịch, lịch hẹn hoặc tư vấn xe thực tế.",photo:3,photoLabel:"CONCEPT ENQUIRY"},
+   detail:{index:"05 / DETAIL STUDY",title:"BEYOND THE SURFACE.",description:"Đi sâu vào đường nét, vật liệu và ngoại thất trong nghiên cứu concept, không dùng thông số hiệu năng tự tạo.",photo:2,photoLabel:"DETAIL IN FOCUS"}
   }
  }
 };
@@ -55,7 +55,7 @@ export function WorldSubpageFeature({slug,section}:{slug:string;section:WorldSec
    </div>
    <div className="ix-subpage-feature-bottom">
     <span>ATHENA / DEMONSTRATION SITE</span>
-    <Link href={root+"/experience"}>KHÁM PHÁ KHÔNG GIAN 3D <span aria-hidden="true">↗</span></Link>
+    <Link href={root+"/experience"}>{world==="auto-showroom"?"OPEN CINEMATIC STUDY":"KHÁM PHÁ KHÔNG GIAN 3D"} <span aria-hidden="true">↗</span></Link>
    </div>
   </div>
   <div className="ix-subpage-feature-art">
