@@ -59,7 +59,7 @@
  position:relative;
  z-index:3;
  padding:clamp(95px,8.5vw,145px) clamp(24px,5.2vw,92px) 95px;
- max-width:min(530px,42vw)!important;
+ max-width:min(650px,46vw)!important;
  pointer-events:none;
 }
 .ix-auto-showroom .ix-hero-copy>*{pointer-events:auto}
@@ -69,7 +69,7 @@
 .ix-auto-showroom.ix-site[data-immersive="true"] .ix-hero-copy h1{
  font-family:"Be Vietnam Pro",sans-serif!important;
  font-weight:800!important;
- font-size:clamp(54px,6.3vw,104px)!important;
+ font-size:clamp(54px,5.7vw,92px)!important;
  line-height:.99;
  letter-spacing:-.095em;
  text-wrap:balance;
