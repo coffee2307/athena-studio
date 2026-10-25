@@ -641,3 +641,30 @@
 
 /* Never expose zoom controls when reduced motion or WebGL fallback is active. */
 .ix-auto-showroom .ix-hero-visual:has(.ix-auto-3d-canvas[data-renderer="fallback"]) .bv-zoom-controls{display:none}
+
+/* Underlying demo modules consume --w-* tokens; keep all automotive pages on
+   the same palette while the contact form remains intentionally light. */
+.world-site[data-world="auto-showroom"]{
+ --w-bg:#08090a;
+ --w-paper:#101215;
+ --w-ink:#f4f4f3;
+ --w-muted:#bfc1c3;
+ --w-accent:#ff741c;
+ --w-border:rgba(235,236,237,.22);
+ --w-tint:#1a1b1f;
+}
+.world-site[data-world="auto-showroom"] .world-contact-form input,
+.world-site[data-world="auto-showroom"] .world-contact-form textarea,
+.world-site[data-world="auto-showroom"] .world-contact-form select{
+ background:#fff;
+ color:#161616;
+ border:1px solid #77797c;
+}
+.world-site[data-world="auto-showroom"] .world-contact-form input::placeholder,
+.world-site[data-world="auto-showroom"] .world-contact-form textarea::placeholder{color:#565758;opacity:1}
+.world-site[data-world="auto-showroom"] .world-contact-form .world-form-consent,
+.world-site[data-world="auto-showroom"] .world-contact-form .world-form-success{color:#353638}
+.world-site[data-world="auto-showroom"] .world-contact-form .world-form-success{
+ background:#fff;
+ border-color:#68696a;
+}
