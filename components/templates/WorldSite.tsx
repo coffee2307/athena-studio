@@ -14,7 +14,7 @@ import {WorldSubpageFeature} from "@/components/templates/WorldSubpageFeature";
 
 export type WorldSection="home"|"work"|"services"|"about"|"contact"|"detail";
 type Props={slug:string;section?:WorldSection;itemIndex?:number;embedded?:boolean};
-function picture(slug:string,n:number){return "/template-demos/"+slug+"/image-"+(n%5+1)+".jpg";}
+function picture(slug:string,n:number){return slug==="auto-showroom"?"/template-demos/auto-showroom/black-velocity-study-"+(n%3+1)+".jpg":"/template-demos/"+slug+"/image-"+(n%5+1)+".jpg";}
 function Arrow(){return <span aria-hidden="true">↗</span>;}
 
 export function WorldSite({slug,section="home",itemIndex,embedded=false}:Props){
