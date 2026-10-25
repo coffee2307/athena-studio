@@ -1,0 +1,475 @@
+/* BLACK VELOCITY — VELAR automotive concept, isolated from Athena's parent identity.
+   One live GLB, one cinematic narrative, no fake telemetry or looping shader. */
+.ix-auto-showroom,
+.world-site[data-world="auto-showroom"],
+.athena-journey-auto-showroom{
+ --bv-ink:#f5f5f3;
+ --bv-dark:#070809;
+ --bv-panel:#101215;
+ --bv-carbon:#1b1c20;
+ --bv-muted:#b6b7bb;
+ --bv-orange:#ff741c;
+ --bv-line:rgba(233,236,238,.22);
+}
+.world-site[data-world="auto-showroom"]{
+ background:var(--bv-dark);
+ color:var(--bv-ink);
+}
+.world-site[data-world="auto-showroom"] .world-announcement{
+ background:#050607;
+ color:#a9a9aa;
+ border-bottom:1px solid #2b2c2d;
+ letter-spacing:.15em;
+}
+.world-site[data-world="auto-showroom"] .world-header{
+ background:#0b0c0e;
+ color:#f5f5f5;
+ border-bottom:1px solid #2e2e32;
+}
+.world-site[data-world="auto-showroom"] .world-header a,
+.world-site[data-world="auto-showroom"] .world-header button{color:#f5f5f5}
+.world-site[data-world="auto-showroom"] .world-header .world-brand{
+ font-weight:800;
+ letter-spacing:-.055em;
+}
+.world-site[data-world="auto-showroom"] .world-header .world-header-cta{
+ background:#f4f4f3;
+ color:#111214!important;
+}
+.world-site[data-world="auto-showroom"] .world-desktop-nav a:hover,
+.world-site[data-world="auto-showroom"] .world-desktop-nav a[aria-current="page"]{
+ color:var(--bv-orange)!important;
+}
+.ix-auto-showroom .ix-hero{
+ min-height:790px;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ overflow:hidden;
+ background:
+  radial-gradient(ellipse at 73% 42%,rgba(52,55,58,.28),transparent 46%),
+  linear-gradient(115deg,#090a0c,#0b0d10 45%,#030405);
+}
+.ix-auto-showroom .ix-hero-visual{
+ inset:0;
+ min-height:790px;
+ background:transparent!important;
+}
+.ix-auto-showroom .ix-hero-copy{
+ position:relative;
+ z-index:3;
+ padding:clamp(95px,8.5vw,145px) clamp(24px,5.2vw,92px) 95px;
+ max-width:min(530px,42vw)!important;
+ pointer-events:none;
+}
+.ix-auto-showroom .ix-hero-copy>*{pointer-events:auto}
+.ix-auto-showroom .ix-kicker{color:var(--bv-orange);font-size:10px;letter-spacing:.20em}
+.ix-auto-showroom .ix-kicker-dot{background:var(--bv-orange)}
+.ix-auto-showroom .ix-hero-copy h1,
+.ix-auto-showroom.ix-site[data-immersive="true"] .ix-hero-copy h1{
+ font-family:"Be Vietnam Pro",sans-serif!important;
+ font-weight:800!important;
+ font-size:clamp(54px,6.3vw,104px)!important;
+ line-height:.99;
+ letter-spacing:-.095em;
+ text-wrap:balance;
+ color:var(--bv-ink);
+ max-width:530px;
+}
+.ix-auto-showroom .ix-hero-copy h1 em{
+ font-family:inherit!important;
+ font-weight:800!important;
+ font-style:italic;
+ color:var(--bv-orange);
+ letter-spacing:-.08em;
+}
+.ix-auto-showroom .ix-hero-copy>p{
+ max-width:385px!important;
+ line-height:1.8!important;
+ color:#d0d0d3!important;
+ font-size:13px!important;
+}
+.ix-auto-showroom .ix-hero-links{
+ align-items:center;
+ gap:14px 21px;
+ margin-top:30px;
+}
+.ix-auto-showroom .ix-hero-links a{font-size:11px}
+.ix-auto-showroom .ix-hero-copy .ix-hero-primary,
+.ix-auto-showroom .ix-hero-copy .ix-hero-primary:visited{
+ background:var(--bv-orange)!important;
+ color:#111113!important;
+ font-weight:800;
+ border:1px solid var(--bv-orange);
+ clip-path:polygon(0 0,calc(100% - 11px) 0,100% 11px,100% 100%,0 100%);
+ padding:17px 20px;
+ min-height:50px;
+}
+.ix-auto-showroom .ix-hero-copy .ix-hero-primary:hover{
+ background:#ffa061!important;
+ color:#0b0b0c!important;
+}
+.ix-auto-showroom .ix-hero-copy .ix-hero-text-link,
+.ix-auto-showroom .ix-hero-copy .ix-journey-link{color:#fafafa!important;font-weight:750}
+.ix-auto-showroom .ix-hero-copy .ix-journey-link{border-bottom:1px solid var(--bv-orange)}
+.ix-auto-showroom .ix-hero-visual .ix-auto-3d-canvas{
+ left:27%;
+ right:0;
+ top:0;
+ bottom:0;
+ width:73%;
+ height:100%;
+ cursor:grab;
+}
+.ix-auto-showroom .ix-hero-visual .ix-auto-3d-canvas:active{cursor:grabbing}
+.ix-auto-showroom .ix-visual-vignette,
+.ix-auto-showroom .ix-visual-vignette,
+.ix-auto-showroom .ix-visual-coordinate,
+.ix-auto-showroom .ix-scene-footer{pointer-events:none}
+.ix-auto-showroom .ix-visual-vignette,
+.ix-auto-showroom .ix-visual-vignette{background:linear-gradient(90deg,#050608 3%,rgba(5,6,8,.76) 30%,transparent 58%),linear-gradient(0deg,rgba(3,4,5,.78),transparent 28%);}
+.ix-auto-showroom .ix-visual-vignette{background:linear-gradient(90deg,#050608 3%,rgba(5,6,8,.76) 30%,transparent 58%),linear-gradient(0deg,rgba(3,4,5,.78),transparent 28%);}
+.ix-auto-showroom .ix-visual-coordinate{
+ top:27px;
+ left:clamp(24px,5.2vw,92px);
+ right:clamp(24px,5.2vw,92px);
+ color:#d8d8da;
+ z-index:4;
+ text-shadow:none;
+}
+.ix-auto-showroom .ix-hero-bottom{
+ position:absolute;
+ z-index:4;
+ bottom:0;
+ left:clamp(24px,5.2vw,92px);
+ right:clamp(24px,5.2vw,92px);
+ margin:0;
+ padding:18px 0;
+ border-top:1px solid var(--bv-line);
+ color:#c8c9ca;
+}
+.ix-auto-showroom .ix-hero-bottom>span:first-child{color:var(--bv-orange)}
+.ix-auto-showroom .ix-scene-footer{
+ bottom:80px;
+ right:clamp(24px,5.2vw,92px);
+ left:auto;
+ text-align:right;
+ gap:5px;
+ z-index:4;
+}
+.ix-auto-showroom .ix-scene-caption span{color:var(--bv-orange);font-weight:800}
+.ix-auto-showroom .ix-scene-caption strong{font-weight:800;letter-spacing:.09em}
+.ix-auto-showroom .ix-hero-image{background:#08090b!important}
+.ix-auto-showroom .ix-hero-image img{filter:brightness(.35) contrast(1.2)}
+.ix-auto-showroom .bv-hero-rules{
+ pointer-events:none;
+ position:absolute;
+ inset:auto 6% 29% 46%;
+ z-index:3;
+ display:flex;
+ justify-content:space-between;
+ gap:14px;
+ color:#b4b6b8;
+ font-size:9px;
+ letter-spacing:.16em;
+ font-weight:800;
+ border-top:1px solid rgba(220,223,224,.18);
+ padding-top:10px;
+ opacity:.75;
+}
+.ix-auto-showroom .ix-scene-rail{
+ background:#101115;
+ color:#f0f0f0;
+ border-top:1px solid var(--bv-line);
+ border-bottom:1px solid var(--bv-line);
+}
+.ix-auto-showroom .ix-scene-rail-copy>span{color:var(--bv-orange)}
+.ix-auto-showroom .ix-scene-rail-copy p{color:#c3c5ca}
+.ix-auto-showroom .ix-mode-list button{
+ border:1px solid #56585c;
+ background:#17191d;
+ backdrop-filter:none;
+ color:#ededee;
+ clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,0 100%);
+}
+.ix-auto-showroom .ix-mode-list button[aria-pressed=true]{
+ border-color:var(--bv-orange);
+ background:var(--bv-orange);
+ color:#0b0b0b;
+}
+.ix-auto-showroom .ix-scene-rail .ix-render-toggle[aria-pressed=true]{
+ background:#f5f5f4;color:#131313;border-color:#f5f5f4;
+}
+.ix-auto-showroom .ix-scene-rail .ix-render-toggle[aria-pressed=false]{
+ background:#303136;color:#fff;border-color:#696a70;
+}
+.ix-auto-showroom .ix-car-load{
+ right:clamp(20px,6vw,96px);
+ top:69%;
+ border:1px solid rgba(255,116,28,.55);
+ box-shadow:0 12px 50px #0008;
+ backdrop-filter:none;
+}
+.ix-auto-showroom .ix-car-load-track>span{background:var(--bv-orange)}
+.ix-auto-showroom .ix-manifesto{
+ background:#0c0d10;
+ color:#f7f6f4;
+ border-top:1px solid var(--bv-line);
+ padding-block:clamp(90px,9vw,150px);
+}
+.ix-auto-showroom .ix-manifesto>span{color:var(--bv-orange)}
+.ix-auto-showroom .ix-manifesto h2{
+ font-size:clamp(46px,6.2vw,100px);
+ font-weight:850;
+ line-height:.96;
+ letter-spacing:-.085em;
+}
+.ix-auto-showroom .ix-manifesto p{color:#c7c7cb;line-height:1.95}
+.ix-auto-showroom .ix-series{background:#0a0b0d;color:#f9f9f9}
+.ix-auto-showroom .ix-series-heading>div>span{color:var(--bv-orange)}
+.ix-auto-showroom .ix-work-shot{background:#1d1f23;clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,0 100%)}
+.ix-auto-showroom .ix-work-shot img{filter:contrast(1.14) saturate(.6)}
+.ix-auto-showroom .ix-work-number{background:#141517;color:#fff;border-left:2px solid var(--bv-orange)}
+.ix-auto-showroom .ix-work-meta{color:var(--bv-orange)!important}
+.ix-auto-showroom .ix-work-item h3{font-weight:750}
+.ix-auto-showroom .ix-ending{
+ background:#ff741c;
+ color:#151313;
+}
+.ix-auto-showroom .ix-ending>span{color:#25201d}
+.ix-auto-showroom .ix-ending h2{font-size:clamp(55px,8vw,130px);line-height:.94;font-weight:850}
+.ix-auto-showroom .ix-ending>p{color:#292321}
+.ix-auto-showroom .ix-ending>a{background:#121315;color:#fff}
+.ix-auto-showroom a:focus-visible,.ix-auto-showroom button:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.ix-auto-showroom .bv-feature-strip{
+ display:grid;
+ grid-template-columns:repeat(3,minmax(0,1fr));
+ border-bottom:1px solid var(--bv-line);
+ background:#070809;
+ padding:0 clamp(24px,5.2vw,92px);
+}
+.ix-auto-showroom .bv-feature-strip>a{
+ display:flex;
+ flex-direction:column;
+ justify-content:space-between;
+ gap:23px;
+ padding:32px clamp(16px,2vw,36px);
+ min-height:195px;
+ color:#f8f8f7;
+ border-left:1px solid var(--bv-line);
+ transition:background .2s ease;
+}
+.ix-auto-showroom .bv-feature-strip>a:last-child{border-right:1px solid var(--bv-line)}
+.ix-auto-showroom .bv-feature-strip>a:hover{background:#1d1f21}
+.ix-auto-showroom .bv-feature-index{font-size:10px;letter-spacing:.18em;color:var(--bv-orange);font-weight:800}
+.ix-auto-showroom .bv-feature-strip strong{font-weight:750;font-size:clamp(22px,2.8vw,37px);line-height:1.06;letter-spacing:-.065em}
+.ix-auto-showroom .bv-feature-strip small{font-size:11px;color:#bcbec0;line-height:1.6}
+.ix-auto-showroom .bv-feature-strip a:focus-visible{outline:2px solid var(--bv-orange);outline-offset:-5px}
+
+/* The three-page scrollytelling demo uses five observable camera/story beats. */
+.athena-journey-auto-showroom{
+ background:#070809;
+ color:#f5f5f4;
+}
+.athena-journey-auto-showroom .journey-topline{background:#090a0c;border-color:#383839}
+.athena-journey-auto-showroom .journey-intro{
+ background:linear-gradient(125deg,#070809 10%,#191b1e 65%,#050608);
+}
+.athena-journey-auto-showroom .journey-intro>div>span{color:var(--bv-orange)}
+.athena-journey-auto-showroom .journey-intro h1{
+ font-weight:840;
+ font-size:clamp(65px,8vw,145px);
+ line-height:.93;
+ letter-spacing:-.09em;
+}
+.athena-journey-auto-showroom .journey-enter{
+ background:var(--bv-orange);
+ color:#141414;
+ border:0;
+ font-weight:850;
+}
+.athena-journey-auto-showroom .journey-enter:hover{background:#ffa45a;color:#090909}
+.athena-journey-auto-showroom .journey-stage{background:#08090b}
+.athena-journey-auto-showroom .journey-backdrop{opacity:.10}
+.athena-journey-auto-showroom .journey-backdrop img{filter:grayscale(1) brightness(.2)}
+.athena-journey-auto-showroom .journey-vignette{background:linear-gradient(90deg,rgba(3,4,5,.95) 0%,rgba(3,4,5,.55) 30%,transparent 70%),linear-gradient(0deg,rgba(3,4,5,.58),transparent 26%)}
+.athena-journey-auto-showroom .journey-stage-head span{color:var(--bv-orange)}
+.athena-journey-auto-showroom .journey-stage-head button{background:#17191d;border:1px solid #737479}
+.athena-journey-auto-showroom .journey-progress>div{background:var(--bv-orange)}
+.athena-journey-auto-showroom .journey-chapter-nav button{background:#151619;color:#f6f6f6;border-color:#737477}
+.athena-journey-auto-showroom .journey-chapter-nav button[aria-current=step]{background:var(--bv-orange);border-color:var(--bv-orange);color:#111}
+.athena-journey-auto-showroom .journey-step-copy{
+ background:rgba(7,8,10,.90);
+ border-left:2px solid var(--bv-orange);
+ backdrop-filter:none;
+ box-shadow:none;
+ padding:clamp(26px,3vw,48px);
+ max-width:min(520px,42vw);
+}
+.athena-journey-auto-showroom .journey-step-copy>span{color:var(--bv-orange)}
+.athena-journey-auto-showroom .journey-step-copy h2{font-weight:790;font-size:clamp(38px,4vw,72px)}
+.athena-journey-auto-showroom .journey-step-copy p{color:#d0d1d4}
+.athena-journey-auto-showroom .journey-outro{background:#111215;color:#f6f6f5}
+.athena-journey-auto-showroom .journey-outro>span{color:var(--bv-orange)}
+.athena-journey-auto-showroom .journey-outro p{color:#c5c6c8}
+.athena-journey-auto-showroom .journey-outro a{background:var(--bv-orange);color:#111}
+.athena-journey-auto-showroom .journey-outro a+a{color:#fff;border-color:#b9b9ba;background:transparent}
+
+/* Non-WebGL pages and navigation all share the same automotive direction. */
+.world-site[data-world="auto-showroom"] .ix-subpage-auto-showroom{
+ background:#0b0d10;
+ color:#f4f4f4;
+ border-bottom:1px solid #383838;
+ min-height:470px;
+}
+.world-site[data-world="auto-showroom"] .ix-subpage-auto-showroom .ix-subpage-feature-copy{padding:clamp(36px,5vw,80px)}
+.world-site[data-world="auto-showroom"] .ix-subpage-auto-showroom .ix-subpage-discipline,
+.world-site[data-world="auto-showroom"] .ix-subpage-auto-showroom .ix-subpage-feature-kicker{color:var(--bv-orange)}
+.world-site[data-world="auto-showroom"] .ix-subpage-auto-showroom h2{font-size:clamp(38px,4.5vw,78px);font-weight:780;letter-spacing:-.085em}
+.world-site[data-world="auto-showroom"] .ix-subpage-auto-showroom .ix-subpage-statement>p{color:#d3d3d6}
+.world-site[data-world="auto-showroom"] .ix-subpage-auto-showroom .ix-subpage-feature-art img{filter:grayscale(.55) contrast(1.18) brightness(.7)}
+.world-site[data-world="auto-showroom"] .ix-subpage-auto-showroom .ix-subpage-feature-art:after{
+ content:"";position:absolute;inset:0;pointer-events:none;border-bottom:4px solid var(--bv-orange)
+}
+.world-site[data-world="auto-showroom"] .ix-subpage-auto-showroom .ix-subpage-feature-bottom a{
+ border-color:var(--bv-orange);
+ color:#fff;
+}
+.world-site[data-world="auto-showroom"] .ix-subpage-auto-showroom .ix-subpage-feature-bottom a:hover{background:var(--bv-orange);color:#111}
+.world-site[data-world="auto-showroom"] .world-page-heading,
+.world-site[data-world="auto-showroom"] .world-about-hero,
+.world-site[data-world="auto-showroom"] .world-section,
+.world-site[data-world="auto-showroom"] .world-works-grid,
+.world-site[data-world="auto-showroom"] .world-closing,
+.world-site[data-world="auto-showroom"] .world-service-list,
+.world-site[data-world="auto-showroom"] .world-visual-essay,
+.world-site[data-world="auto-showroom"] .world-contact-layout{
+ background:#0e1013;
+ color:#f6f6f6;
+}
+.world-site[data-world="auto-showroom"] .world-section-heading .world-eyebrow,
+.world-site[data-world="auto-showroom"] .world-eyebrow,
+.world-site[data-world="auto-showroom"] .world-work-topline,
+.world-site[data-world="auto-showroom"] .world-page-heading>p{color:var(--bv-orange)}
+.world-site[data-world="auto-showroom"] .world-page-heading h1,
+.world-site[data-world="auto-showroom"] .world-about-hero h1{font-weight:790}
+.world-site[data-world="auto-showroom"] .world-work-card,
+.world-site[data-world="auto-showroom"] .world-service-row,
+.world-site[data-world="auto-showroom"] .world-contact-details{border-color:#454649}
+.world-site[data-world="auto-showroom"] .world-work-card img,
+.world-site[data-world="auto-showroom"] .world-service-image img{filter:grayscale(.35) contrast(1.12)}
+.world-site[data-world="auto-showroom"] .world-work-cover{background:#202125}
+.world-site[data-world="auto-showroom"] .world-work-topline{font-weight:760}
+.world-site[data-world="auto-showroom"] .world-work-meta p,
+.world-site[data-world="auto-showroom"] .world-service-row p,
+.world-site[data-world="auto-showroom"] .world-contact-details>p,
+.world-site[data-world="auto-showroom"] .world-about-hero>div>p{color:#c9c9cc}
+.world-site[data-world="auto-showroom"] .world-contact-form{
+ background:#f2f1ed;
+ color:#151618;
+ padding:clamp(22px,3vw,46px);
+ border-top:4px solid var(--bv-orange);
+}
+.world-site[data-world="auto-showroom"] .world-contact-form label,
+.world-site[data-world="auto-showroom"] .world-contact-form input,
+.world-site[data-world="auto-showroom"] .world-contact-form textarea,
+.world-site[data-world="auto-showroom"] .world-contact-form select{color:#18191a}
+.world-site[data-world="auto-showroom"] .world-contact-form button[type=submit]{
+ background:#121313;
+ color:#fff;
+ min-height:48px;
+}
+.world-site[data-world="auto-showroom"] .world-footer{background:#08090a;color:#eee}
+.world-site[data-world="auto-showroom"] .world-footer a{color:#f3f3f3}
+.world-site[data-world="auto-showroom"] .world-footer a:focus-visible{outline:2px solid var(--bv-orange);outline-offset:4px}
+
+/* Site stays native-scrolling; keep text/CTA outside canvas on narrow viewports. */
+@media(max-width:1050px){
+ .ix-auto-showroom .ix-hero-copy,
+ .ix-auto-showroom.ix-site[data-immersive="true"] .ix-hero-copy{max-width:465px!important}
+ .ix-auto-showroom .ix-hero-copy h1,
+ .ix-auto-showroom.ix-site[data-immersive="true"] .ix-hero-copy h1{font-size:clamp(53px,6vw,83px)!important}
+ .ix-auto-showroom .ix-hero-visual .ix-auto-3d-canvas{left:25%;width:75%}
+}
+@media(max-width:760px){
+ .ix-auto-showroom.ix-site[data-immersive="true"] .ix-hero,
+ .ix-auto-showroom.ix-site[data-immersive="true"] .ix-hero-visual,
+ .ix-auto-showroom.ix-site[data-immersive="false"] .ix-hero,
+ .ix-auto-showroom.ix-site[data-immersive="false"] .ix-hero-visual{
+  min-height:880px;
+ }
+ .ix-auto-showroom .ix-hero{
+  justify-content:flex-start;
+  min-height:880px;
+ }
+ .ix-auto-showroom .ix-hero-copy,
+ .ix-auto-showroom.ix-site[data-immersive="true"] .ix-hero-copy{
+  padding:83px 20px 0!important;
+  max-width:100%!important;
+  min-height:0;
+ }
+ .ix-auto-showroom .ix-hero-copy h1,
+ .ix-auto-showroom.ix-site[data-immersive="true"] .ix-hero-copy h1{
+  font-size:clamp(45px,11vw,69px)!important;
+  line-height:.94;
+  max-width:380px;
+  margin:18px 0;
+ }
+ .ix-auto-showroom .ix-hero-copy>p,
+ .ix-auto-showroom.ix-site[data-immersive="true"] .ix-hero-copy>p{
+  font-size:12px!important;
+  max-width:360px!important;
+  line-height:1.65!important;
+ }
+ .ix-auto-showroom .ix-hero-links{gap:11px;margin-top:16px!important}
+ .ix-auto-showroom .ix-hero-links>a{font-size:10px}
+ .ix-auto-showroom .ix-hero-links>a.ix-hero-primary{min-height:44px;padding:11px 14px}
+ .ix-auto-showroom .ix-hero-visual .ix-auto-3d-canvas,
+ .ix-auto-showroom.ix-site[data-immersive="true"] .ix-hero-visual .ix-auto-3d-canvas{
+  left:0;
+  right:0;
+  top:400px;
+  bottom:auto;
+  width:100%;
+  height:365px;
+ }
+ .ix-auto-showroom .bv-hero-rules{top:385px;bottom:auto;left:20px;right:20px;inset-inline:20px}
+ .ix-auto-showroom .ix-visual-coordinate{top:17px;left:20px;right:20px;font-size:8px}
+ .ix-auto-showroom .ix-visual-coordinate span:last-child{display:inline}
+ .ix-auto-showroom .ix-visual-vignette,
+ .ix-auto-showroom .ix-visual-vignette{background:linear-gradient(180deg,rgba(5,6,8,.12),transparent 53%,rgba(5,6,8,.55))}
+ .ix-auto-showroom .ix-scene-footer,
+ .ix-auto-showroom.ix-site[data-immersive="true"] .ix-scene-footer{
+  left:20px;right:20px;bottom:65px;align-items:flex-start;
+ }
+ .ix-auto-showroom .ix-scene-caption{text-align:left}
+ .ix-auto-showroom .ix-hero-bottom,
+ .ix-auto-showroom.ix-site[data-immersive="true"] .ix-hero-bottom{
+  left:20px;right:20px;bottom:0;margin:0;
+ }
+ .ix-auto-showroom .ix-car-load{top:auto;right:16px;left:16px;bottom:110px;width:auto;transform:none}
+ .ix-auto-showroom .bv-feature-strip{grid-template-columns:1fr;padding:0 20px}
+ .ix-auto-showroom .bv-feature-strip>a{min-height:128px;border-left:0;border-bottom:1px solid var(--bv-line);padding:23px 0;gap:8px}
+ .ix-auto-showroom .bv-feature-strip>a:last-child{border-right:0}
+ .ix-auto-showroom .ix-manifesto h2{font-size:clamp(48px,11vw,70px)}
+ .athena-journey-auto-showroom .journey-intro h1{font-size:clamp(48px,11vw,76px)}
+ .athena-journey-auto-showroom .journey-step-copy{max-width:calc(100% - 58px);padding:20px}
+ .athena-journey-auto-showroom .journey-step-copy h2{font-size:clamp(32px,8.7vw,47px)}
+ .athena-journey-auto-showroom .journey-chapter-nav button{width:44px;height:44px}
+ .world-site[data-world="auto-showroom"] .world-mobile-nav{background:#101114}
+ .world-site[data-world="auto-showroom"] .ix-subpage-auto-showroom .ix-subpage-feature-copy{padding:40px 20px}
+ .world-site[data-world="auto-showroom"] .ix-subpage-auto-showroom h2{font-size:clamp(36px,9vw,56px)}
+ .world-site[data-world="auto-showroom"] .world-contact-form{padding:22px 18px}
+}
+@media(max-width:375px){
+ .ix-auto-showroom .ix-hero-copy h1,
+ .ix-auto-showroom.ix-site[data-immersive="true"] .ix-hero-copy h1{font-size:45px!important}
+ .ix-auto-showroom .ix-hero-visual .ix-auto-3d-canvas{top:424px;height:340px}
+ .ix-auto-showroom .ix-hero,
+ .ix-auto-showroom .ix-hero-visual{min-height:910px}
+}
+@media(prefers-reduced-motion:reduce){
+ .ix-auto-showroom .ix-work-shot img,
+ .ix-auto-showroom .ix-work-item,
+ .ix-auto-showroom .ix-hero-links>a{transition:none!important}
+}
