@@ -17,10 +17,10 @@ const art:Record<World,ArtDirection>={
   cta:"Xem hồ sơ công trình",theme:"architecture"
  },
  "auto-showroom":{
-  eyebrow:"VELAR / DESIGN STUDIES",title:"Thiết kế được cảm nhận từ những chi tiết nhỏ.",
-  description:"Tỷ lệ thân xe, mặt cắt vật liệu và không gian trưng bày được sắp đặt như một bộ ảnh sản phẩm. Dữ liệu xe trong mẫu chỉ mang tính minh họa.",
-  first:1,second:4,firstLabel:"EXTERIOR / 01",secondLabel:"DETAIL / 02",
-  cta:"Khám phá bộ sưu tập",theme:"automotive"
+  eyebrow:"BLACK VELOCITY / MATERIAL STUDIES",title:"EVERY SURFACE COUNTS.",
+  description:"Ánh sáng lướt qua hình khối thấp, lớp sơn graphite và những chi tiết carbon. Hai ảnh dưới đây là tư liệu minh họa ngôn ngữ thiết kế, không phải hình chụp xe McLaren trong mô hình.",
+  first:1,second:4,firstLabel:"FORM / 01",secondLabel:"MATERIAL / 02",
+  cta:"KHÁM PHÁ DESIGN STUDIES",theme:"automotive"
  }
 };
 
