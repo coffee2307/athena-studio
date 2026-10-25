@@ -59,7 +59,7 @@ export function WorldSubpageFeature({slug,section}:{slug:string;section:WorldSec
    </div>
   </div>
   <div className="ix-subpage-feature-art">
-   <Image src={root+"/image-"+moment.photo+".jpg"} alt={"Hình ảnh minh họa "+moment.photoLabel} fill
+   <Image src={world==="auto-showroom"?root+"/black-velocity-study-"+({work:1,services:2,about:1,contact:3,detail:2} as Record<Page,number>)[section as Page]+".jpg":root+"/image-"+moment.photo+".jpg"} alt={"Hình ảnh minh họa "+moment.photoLabel} fill
     sizes="(max-width:760px) 100vw, 36vw" loading="lazy" quality={78}/>
    <span>{moment.photoLabel} / 2026</span>
   </div>
