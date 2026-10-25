@@ -21,9 +21,10 @@ for(const path of ["/template-demos/auto-showroom","/template-demos/auto-showroo
   expect(policy).toContain("connect-src 'self' blob:");
   const button=path.endsWith("/experience")
    ?page.getByRole("button",{name:"TẮT 3D"})
-   :page.getByRole("button",{name:"Bật chế độ 3D"});
+   :page.getByRole("button",{name:"Tắt chế độ 3D"});
   await expect(button).toBeVisible();
-  if(!path.endsWith("/experience"))await button.click();
+  // Both McLaren routes now launch interactive 3D without a manual toggle.
+  if(!path.endsWith("/experience"))await expect(button).toHaveAttribute("aria-pressed","true");
   const stage=page.locator(path.endsWith("/experience")?".journey-stage":".immersive-stage");
   const canvas=stage.locator("canvas.ix-auto-3d-canvas");
   await expect(canvas).toHaveAttribute("data-renderer","ready",{timeout:30000});
