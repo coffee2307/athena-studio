@@ -5,7 +5,7 @@ const scenes = ["creative-studio","architecture-studio","auto-showroom"] as cons
 for (const slug of scenes) {
   test("3D scroll narrative and accessible chapters: " + slug,async({page}) => {
     await page.goto("/template-demos/" + slug);
-    const launch = page.getByRole("link",{name:/Trải nghiệm 3D/});
+    const launch = page.getByRole("link",{name:slug==="auto-showroom"?/Cinematic Experience/:/Trải nghiệm 3D/});
     await expect(launch).toHaveAttribute("href","/template-demos/" + slug + "/experience");
     await launch.click();
     await expect(page).toHaveURL(new RegExp("/template-demos/" + slug + "/experience"));
@@ -14,7 +14,7 @@ for (const slug of scenes) {
     const renderer = stage.locator("canvas.ix-3d-canvas");
     await expect(journey.locator("#journey-title")).toBeVisible();
     await expect(renderer).toHaveCount(1);
-    await expect(journey.locator(".journey-step")).toHaveCount(3);
+    await expect(journey.locator(".journey-step")).toHaveCount(slug==="auto-showroom"?5:3);
 
     // Test the toggle before entering a sticky scrollytelling chapter to
     // avoid browser scrollIntoView competing with the chapter camera motion.
@@ -24,10 +24,10 @@ for (const slug of scenes) {
     await journey.getByRole("button",{name:"BẬT 3D"}).click();
     await expect(journey.getByRole("button",{name:"TẮT 3D"})).toHaveAttribute("aria-pressed","true");
     const chapters = journey.locator(".journey-chapter-nav button");
-    await expect(chapters).toHaveCount(3);
+    await expect(chapters).toHaveCount(slug==="auto-showroom"?5:3);
     await chapters.nth(1).click();
     await expect(chapters.nth(1)).toHaveAttribute("aria-current","step",{timeout:15000});
-    await expect(journey.locator(".journey-step-copy.is-current")).toContainText(/Thay đổi điểm nhìn|Lớp không gian ẩn|Hình khối có chủ đích/);
+    await expect(journey.locator(".journey-step-copy.is-current")).toContainText(/Thay đổi điểm nhìn|Lớp không gian ẩn|A line of intent/);
 
     const overflow = await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
     expect(overflow).toBeLessThanOrEqual(2);
