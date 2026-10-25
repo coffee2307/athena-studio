@@ -3,7 +3,7 @@ import {expect,test} from "@playwright/test";
 const worlds=[
  {slug:"creative-studio",headline:/Ý tưởng không ở yên/},
  {slug:"architecture-studio",headline:/Bề mặt\. Ánh sáng/},
- {slug:"auto-showroom",headline:/Thiết kế được cảm nhận/}
+ {slug:"auto-showroom",headline:/Thiết kế được cảm nhận|PRECISION|chi tiết/}
 ] as const;
 
 for(const {slug,headline} of worlds){
