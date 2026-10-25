@@ -473,3 +473,32 @@
  .ix-auto-showroom .ix-work-item,
  .ix-auto-showroom .ix-hero-links>a{transition:none!important}
 }
+
+/* A functional three.js camera zoom control, outside the drag surface. */
+.ix-auto-showroom .bv-zoom-controls{
+ position:absolute;
+ z-index:5;
+ right:clamp(24px,5.2vw,92px);
+ top:45%;
+ display:flex;
+ flex-direction:column;
+ gap:7px;
+}
+.ix-auto-showroom .bv-zoom-controls button{
+ display:grid;
+ place-items:center;
+ background:rgba(11,12,13,.91);
+ color:#f7f7f7;
+ border:1px solid #858586;
+ width:44px;
+ height:44px;
+ font-size:24px;
+ font-weight:550;
+ cursor:pointer;
+}
+.ix-auto-showroom .bv-zoom-controls button:hover:not(:disabled){background:#ff741c;color:#121212;border-color:#ff741c}
+.ix-auto-showroom .bv-zoom-controls button:disabled{opacity:.35;cursor:not-allowed}
+@media(max-width:760px){
+ .ix-auto-showroom .bv-zoom-controls{top:605px;right:17px;gap:5px}
+ .ix-auto-showroom .bv-zoom-controls button{width:44px;height:44px}
+}
