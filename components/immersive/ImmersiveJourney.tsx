@@ -36,14 +36,16 @@ const stories: Record<World, Story> = {
   },
   "auto-showroom": {
     brand: "VELAR / CONCEPT",
-    kicker: "14 / AUTOMOTIVE MOTION",
-    title: "Chuyển động\ntrước cả bánh xe.",
-    intro: "Một mẫu xe concept nguyên bản trong phòng trưng bày kỹ thuật số.",
+    kicker: "BLACK VELOCITY / FIVE PERSPECTIVES",
+    title: "PRECISION\nIN MOTION.",
+    intro: "Năm góc nhìn về một nghiên cứu siêu xe đen–cam: bề mặt carbon, tỷ lệ thấp và khí động học. Cuộn hoặc chọn từng chương để điều khiển camera.",
     image: "/template-demos/auto-showroom/image-5.jpg",
     chapters: [
-      {eyebrow: "01 — ÁNH SÁNG", title: "Một đường nét đầu tiên.", description: "Ánh sáng di chuyển trên bề mặt thân xe trong không gian tối, nhấn mạnh hình dáng nguyên khối.", detail: "Light · Silhouette"},
-      {eyebrow: "02 — THIẾT KẾ", title: "Hình khối có chủ đích.", description: "Quan sát thân xe, các đường khí động học và vật liệu ở góc nhìn thứ hai mà không thay đổi mô hình nguyên bản.", detail: "Bodywork · Design"},
-      {eyebrow: "03 — HIỆU NĂNG", title: "Khác biệt từ chi tiết.", description: "Góc quan sát mới làm rõ phần đuôi xe, cánh gió và những chi tiết kết cấu trong mô hình GLB gốc.", detail: "Aerodynamics · Form"},
+      {eyebrow: "01 — THE REVEAL", title: "Born for the edge.", description: "Chiếc McLaren concept xuất hiện qua những vệt sáng studio tiết chế, phô bày tỷ lệ tổng thể và đường viền khí động học.", detail: "Silhouette · Studio lighting"},
+      {eyebrow: "02 — SIDE PROFILE", title: "A line of intent.", description: "Quan sát thân xe thấp và dài từ một góc nhìn mới. Kéo để xoay xe, hoặc tiếp tục cuộn để đi sâu vào hình khối.", detail: "Proportion · Motion"},
+      {eyebrow: "03 — MATERIAL STUDY", title: "Every surface counts.", description: "Camera tiến lại gần để thấy bề mặt graphite, các chi tiết carbon, bánh xe và ánh sáng phản xạ trên vật liệu gốc.", detail: "Graphite · Carbon · Detail"},
+      {eyebrow: "04 — AERODYNAMICS", title: "Built around airflow.", description: "Đổi điểm nhìn để khám phá cánh gió, những đường dẫn khí và kết cấu phần thân sau của mô hình.", detail: "Aero · Rear profile"},
+      {eyebrow: "05 — YOUR PERSPECTIVE", title: "Take another look.", description: "Trở lại góc toàn xe. Xoay để khám phá, chuyển sang trang bộ sưu tập hoặc xem trải nghiệm liên hệ giả lập.", detail: "Explore · Discover"},
     ],
   },
 };
@@ -52,6 +54,7 @@ const clamp = (x: number) => Math.max(0, Math.min(1, x));
 
 export function ImmersiveJourney({slug}: {slug: World}) {
   const story = stories[slug];
+  const chapterCount=story.chapters.length;
   const [chapter, setChapter] = useState(0);
   const [enabled, setEnabled] = useState(true);
   const progressFillRef = useRef<HTMLDivElement>(null);
@@ -69,7 +72,7 @@ export function ImmersiveJourney({slug}: {slug: World}) {
       // Avoid rerendering the entire Three.js scene / React story tree per scroll.
       // Keep the progress meter and camera anchored to the same scroll snapshot.
       if(progressFillRef.current)progressFillRef.current.style.transform = "scaleX(" + current.toFixed(5) + ")";
-      setChapter(Math.min(2, Math.floor(current * 3)));
+      setChapter(Math.min(chapterCount-1, Math.floor(current * chapterCount)));
     };
     const schedule = () => {if (!raf) raf = requestAnimationFrame(update);};
     update();
@@ -80,17 +83,17 @@ export function ImmersiveJourney({slug}: {slug: World}) {
       window.removeEventListener("scroll", schedule);
       window.removeEventListener("resize", schedule);
     };
-  }, []);
+  }, [chapterCount]);
 
   const jump = useCallback((index: number) => {
     const track = trackRef.current;
     if (!track) return;
     const target = track.getBoundingClientRect().top + window.scrollY +
-      Math.max(1, track.offsetHeight - window.innerHeight) * (index / 3 + 0.025);
+      Math.max(1, track.offsetHeight - window.innerHeight) * (index / chapterCount + 0.005);
     // Native immediate scroll removes asynchronous smooth-scroll races and
     // preserves deterministic chapter/camera state on low-end devices.
     window.scrollTo({top: target, behavior: "instant"});
-  }, []);
+  }, [chapterCount]);
 
   return <main id="main-content" className={"athena-journey athena-journey-" + slug}>
     <div className="journey-topline">
@@ -115,7 +118,7 @@ export function ImmersiveJourney({slug}: {slug: World}) {
         <div className="journey-stage-foot" aria-hidden="true">
           <span>SCROLL / DISCOVER</span>
           <div className="journey-progress"><div ref={progressFillRef} style={{transform:"scaleX(0)"}}/></div>
-          <span>{String(chapter + 1).padStart(2,"0")} / 03</span>
+          <span>{String(chapter + 1).padStart(2,"0")} / {String(chapterCount).padStart(2,"0")}</span>
         </div>
         <div className="journey-chapter-nav" role="group" aria-label="Di chuyển giữa các chương">
           {story.chapters.map((item, index) =>
@@ -133,8 +136,8 @@ export function ImmersiveJourney({slug}: {slug: World}) {
       </div>
     </section>
     <section className="journey-outro">
-      <span>END OF STUDY / 03</span>
-      <h2>Thiết kế để được trải nghiệm.</h2>
+      <span>END OF STUDY / {String(chapterCount).padStart(2,"0")}</span>
+      <h2>{slug==="auto-showroom"?"YOUR NEXT PERSPECTIVE.":"Thiết kế để được trải nghiệm."}</h2>
       <p>Đây là mô hình 3D tương tác thử nghiệm của Athena Studio. Các thành phần và chức năng thương mại chỉ mang tính minh họa.</p>
       <div><Link href={"/template-demos/" + slug}>Trở lại website mẫu ↗</Link><Link href={"/contact?service=web-development&template=" + slug}>Yêu cầu tùy biến ↗</Link></div>
     </section>
