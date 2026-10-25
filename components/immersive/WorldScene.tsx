@@ -5,7 +5,7 @@ import {ImmersiveScene} from "./ImmersiveScene";
 import {McLarenLoadingUI} from "./McLarenLoadingUI";
 
 type World="creative-studio"|"architecture-studio"|"auto-showroom";
-export type WorldSceneProps={slug:World;preset:number;enabled?:boolean;scrollRootId?:string;onRequestFallback?:()=>void};
+export type WorldSceneProps={slug:World;preset:number;enabled?:boolean;scrollRootId?:string;onRequestFallback?:()=>void;zoom?:number};
 const McLarenScene=dynamic(()=>import("./McLarenShowroomScene").then(x=>x.McLarenShowroomScene),{
  ssr:false,
  loading:()=> <><canvas className="ix-3d-canvas" data-renderer="loading" data-scene-type="auto-showroom" aria-hidden="true"/><McLarenLoadingUI/></>,
