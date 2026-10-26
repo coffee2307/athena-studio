@@ -147,6 +147,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   let loaded=false,disposed=false,model:THREE.Object3D|null=null;
   let request=0,visible=true,frameTime=0,drawn=false;
   let expensiveFrames=0,preferImmediateCamera=softwareRenderer;
+  let queuedContinuation=false;
   let drag=false,previousX=0,turn=0,dragTurn=0;
   let currentMode=modeRef.current,currentProgress=0,goalProgress=0;
   // Desktop renders on every requested RAF during active interaction, not at an
@@ -183,11 +184,12 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    // GPU submission can return quickly even when rasterization/compositing
    // stalls subsequent animation frames. Catch that signal as well as slow
    // synchronous renders, and finish each camera move without an easing loop.
-   if(!preferImmediateCamera&&frameTime>0&&elapsed>150){
+   if(!preferImmediateCamera&&queuedContinuation&&elapsed>150){
     preferImmediateCamera=true;
     renderBudget=isMobile?90000:120000;
     resize();
    }
+   queuedContinuation=false;
    frameTime=now;
    // A software WebGL renderer can spend hundreds of milliseconds on each
    // frame. Repeated camera easing would monopolize the main thread and
@@ -243,7 +245,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    }
    if(!drawn){drawn=true;finishLoading();setPercent(100);setStatus("ready");}
    const movement=Math.abs(currentMode-modeRef.current)+Math.abs(currentProgress-goalProgress)+Math.abs(turn-dragTurn)+camera.position.distanceTo(wanted);
-   if(movement>.006)schedule();
+   if(movement>.006){queuedContinuation=true;schedule();}
   }
 
   const pointerDown=(event:PointerEvent)=>{
