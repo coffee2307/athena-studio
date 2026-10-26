@@ -100,6 +100,13 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   renderer.toneMapping=THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure=.92;
   renderer.shadowMap.enabled=false;
+  // Chromium can expose a WebGL 2 context backed by a CPU rasterizer. Such a
+  // context is functional, but repeatedly easing the camera queues expensive
+  // GPU work and can make the surrounding DOM controls unresponsive.
+  const gl=renderer.getContext();
+  const rendererInfo=gl.getExtension("WEBGL_debug_renderer_info");
+  const rendererName=String(rendererInfo?gl.getParameter(rendererInfo.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER));
+  const softwareRenderer=/swiftshader|llvmpipe|softpipe|software|lavapipe/i.test(rendererName);
 
   const scene=new THREE.Scene();
   scene.background=new THREE.Color(0x070809);
@@ -139,14 +146,14 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   scene.add(car);
   let loaded=false,disposed=false,model:THREE.Object3D|null=null;
   let request=0,visible=true,frameTime=0,drawn=false;
-  let expensiveFrames=0,preferImmediateCamera=false;
+  let expensiveFrames=0,preferImmediateCamera=softwareRenderer;
   let drag=false,previousX=0,turn=0,dragTurn=0;
   let currentMode=modeRef.current,currentProgress=0,goalProgress=0;
   // Desktop renders on every requested RAF during active interaction, not at an
   // artificial 38 FPS ceiling. Mobile retains a 30 FPS cap and pixel budget.
   // Offscreen/idle rendering remains stopped by schedule()/IntersectionObserver.
-  const limit=isMobile?30:0;
-  let renderBudget=isMobile?220000:650000;
+  const limit=isMobile?30:softwareRenderer?100:0;
+  let renderBudget=softwareRenderer?(isMobile?75000:100000):isMobile?220000:650000;
 
   const schedule=()=>{
    if(!disposed&&loaded&&visible&&!document.hidden&&!request)request=requestAnimationFrame(draw);
@@ -173,6 +180,14 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    if(disposed||!loaded||!visible||document.hidden)return;
    const elapsed=now-frameTime;
    if(elapsed<limit){schedule();return;}
+   // GPU submission can return quickly even when rasterization/compositing
+   // stalls subsequent animation frames. Catch that signal as well as slow
+   // synchronous renders, and finish each camera move without an easing loop.
+   if(!preferImmediateCamera&&frameTime>0&&elapsed>150){
+    preferImmediateCamera=true;
+    renderBudget=isMobile?90000:120000;
+    resize();
+   }
    frameTime=now;
    // A software WebGL renderer can spend hundreds of milliseconds on each
    // frame. Repeated camera easing would monopolize the main thread and
