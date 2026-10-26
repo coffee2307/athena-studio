@@ -139,6 +139,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   scene.add(car);
   let loaded=false,disposed=false,model:THREE.Object3D|null=null;
   let request=0,visible=true,frameTime=0,drawn=false;
+  let expensiveFrames=0,preferImmediateCamera=false;
   let drag=false,previousX=0,turn=0,dragTurn=0;
   let currentMode=modeRef.current,currentProgress=0,goalProgress=0;
   // Desktop renders on every requested RAF during active interaction, not at an
@@ -173,7 +174,11 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    const elapsed=now-frameTime;
    if(elapsed<limit){schedule();return;}
    frameTime=now;
-   const lerp=clamp(elapsed*.007,.07,.23);
+   // A software WebGL renderer can spend hundreds of milliseconds on each
+   // frame. Repeated camera easing would monopolize the main thread and
+   // delay real controls, so settle camera moves in one frame after two
+   // consecutive slow renders. Fast GPUs keep the cinematic easing.
+   const lerp=preferImmediateCamera?1:clamp(elapsed*.007,.07,.23);
    // Scroll chapter camera is seekable: the current document position is the
    // sole source of truth, without a second trailing animation clock.
    currentMode=scrollRootId?modeRef.current:currentMode+(modeRef.current-currentMode)*lerp;
@@ -208,7 +213,12 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    camera.lookAt(target);
    cool.intensity=1.18;
    rim.intensity=1.35;
+   const renderStarted=performance.now();
    renderer.render(scene,camera);
+   if(!preferImmediateCamera){
+    expensiveFrames=performance.now()-renderStarted>120?expensiveFrames+1:0;
+    if(expensiveFrames>=2)preferImmediateCamera=true;
+   }
    if(!drawn){drawn=true;finishLoading();setPercent(100);setStatus("ready");}
    const movement=Math.abs(currentMode-modeRef.current)+Math.abs(currentProgress-goalProgress)+Math.abs(turn-dragTurn)+camera.position.distanceTo(wanted);
    if(movement>.006)schedule();
