@@ -464,7 +464,7 @@
 @media(max-width:375px){
  .ix-auto-showroom .ix-hero-copy h1,
  .ix-auto-showroom.ix-site[data-immersive="true"] .ix-hero-copy h1{font-size:45px!important}
- .ix-auto-showroom .ix-hero-visual .ix-auto-3d-canvas{top:424px;height:340px}
+ .ix-auto-showroom .ix-hero-visual .ix-auto-3d-canvas{top:464px;height:340px}
  .ix-auto-showroom .ix-hero,
  .ix-auto-showroom .ix-hero-visual{min-height:910px}
 }

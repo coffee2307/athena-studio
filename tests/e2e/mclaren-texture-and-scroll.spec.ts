@@ -1,4 +1,5 @@
 import {expect,test} from "@playwright/test";
+import {supportsWebGL2} from "./webgl-capability";
 
 // This deliberately tests a browser event, not canvas=ready alone:
 // Three GLTFLoader can report ready while silently dropping WebP maps.
@@ -27,6 +28,10 @@ for(const path of ["/template-demos/auto-showroom","/template-demos/auto-showroo
   if(!path.endsWith("/experience"))await expect(button).toHaveAttribute("aria-pressed","true");
   const stage=page.locator(path.endsWith("/experience")?".journey-stage":".immersive-stage");
   const canvas=stage.locator("canvas.ix-auto-3d-canvas");
+  if(!(await supportsWebGL2(page))){
+   await expect(canvas).toHaveAttribute("data-renderer","fallback",{timeout:30000});
+   return;
+  }
   await expect(canvas).toHaveAttribute("data-renderer","ready",{timeout:30000});
   await page.waitForTimeout(500);
   const failures=errors.filter(msg=>/Couldn't load texture|BLOB_CSP_FAILURE|refused to connect because it violates|asset failed|incomplete 3D render/i.test(msg));

@@ -1,4 +1,5 @@
 import {expect,test} from "@playwright/test";
+import {supportsWebGL2} from "./webgl-capability";
 
 test.describe("Black Velocity / approved motor-sport composition",()=>{
  test("hero model is live by default; interface gives distinct camera and zoom controls",async({page})=>{
@@ -8,6 +9,8 @@ test.describe("Black Velocity / approved motor-sport composition",()=>{
   const canvas=hero.locator(".ix-auto-3d-canvas");
   await expect(canvas).toHaveCount(1);
   await expect(page.getByRole("button",{name:"Tắt chế độ 3D"})).toHaveAttribute("aria-pressed","true");
+ await expect(canvas).toHaveAttribute("data-renderer",/^(ready|fallback)$/,{timeout:30000});
+ if(await canvas.getAttribute("data-renderer")==="ready"){
   await expect(hero.getByRole("button",{name:"Phóng to xe"})).toBeVisible();
   await expect(hero.getByRole("button",{name:"Thu nhỏ xe"})).toBeVisible();
   await hero.getByRole("button",{name:"Phóng to xe"}).click();
@@ -15,6 +18,11 @@ test.describe("Black Velocity / approved motor-sport composition",()=>{
   await expect(hero.getByRole("button",{name:"Phóng to xe"})).toBeDisabled();
   await hero.getByRole("button",{name:"Thu nhỏ xe"}).click();
   await expect(hero.getByRole("button",{name:"Phóng to xe"})).toBeEnabled();
+ }else{
+  // Do not misclassify a genuine model failure on a WebGL2-capable browser.
+  expect(await supportsWebGL2(page)).toBe(false);
+  await expect(hero.getByRole("button",{name:"Phóng to xe"})).toBeHidden();
+ }
   await page.locator(".ix-mode-list button").nth(2).click();
   await expect(hero.locator(".immersive-stage")).toHaveAttribute("data-preset","2");
   await expect(page.locator(".bv-feature-strip > a")).toHaveCount(3);

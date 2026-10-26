@@ -1,4 +1,5 @@
 import {expect,test} from "@playwright/test";
+import {supportsWebGL2} from "./webgl-capability";
 
 test("McLaren: slow network starts GLB by default and allows poster fallback",async({page})=>{
  test.setTimeout(60000);
@@ -11,10 +12,15 @@ test("McLaren: slow network starts GLB by default and allows poster fallback",as
  const photo=stage.locator(".ix-hero-photograph");
  await expect(photo).toBeVisible();
  await expect(page.getByRole("button",{name:"Tắt chế độ 3D"})).toHaveAttribute("aria-pressed","true");
+ if(!(await supportsWebGL2(page))){
+  await expect(stage.locator(".ix-auto-3d-canvas")).toHaveAttribute("data-renderer","fallback");
+  await expect(stage.locator(".ix-hero-image")).toHaveCSS("opacity","1");
+  return;
+ }
  await expect(stage.locator("[data-model-loading=loading]")).toBeVisible({timeout:12000});
  const progress=stage.getByRole("progressbar",{name:"Tiến độ tải mô hình McLaren"});
  await expect(progress).toHaveAttribute("aria-valuemin","0");
- await expect(photo).toHaveCSS("opacity","0");
+ await expect(stage.locator(".ix-hero-image")).toHaveCSS("opacity","0");
  await stage.getByRole("button",{name:/Xem ảnh thay thế/}).click();
  await expect(page.getByRole("button",{name:"Bật chế độ 3D"})).toHaveAttribute("aria-pressed","false");
  await expect(stage.locator(".ix-3d-canvas")).toHaveAttribute("data-renderer","fallback");

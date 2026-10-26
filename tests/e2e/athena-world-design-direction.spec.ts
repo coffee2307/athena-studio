@@ -19,7 +19,10 @@ for(const {slug,headline} of worlds){
    await expect(editorial.locator("figure")).toHaveCount(2);
    await expect(editorial.getByRole("link",{name:/KHÁM PHÁ DESIGN STUDIES|Xem hồ sơ công trình|Đi sâu vào từng dự án/}))
       .toHaveAttribute("href","/template-demos/"+slug+"/work");
-   await editorial.scrollIntoViewIfNeeded();
+   // The active WebGL stage can stay layout-unstable while Playwright waits
+   // for element stability. Scroll directly, then assert the actual viewport.
+   await editorial.evaluate(element=>element.scrollIntoView({block:"center",behavior:"instant"}));
+   await expect(editorial).toBeInViewport();
    // Lazy photos should only load after the image itself enters the viewport.
    await editorial.locator("figure img").first().scrollIntoViewIfNeeded();
    await expect.poll(async()=>editorial.locator("figure img").first().evaluate(node=>{
