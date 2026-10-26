@@ -8,6 +8,7 @@ const worlds = [
 
 for (const slug of worlds) {
   test(slug + ": real WebGL scene can be toggled off without losing controls", async ({page}) => {
+    if(slug==="auto-showroom")test.setTimeout(90000);
     await page.goto("/template-demos/" + slug);
     const stage = page.locator(".immersive-stage");
     const canvas = stage.locator("canvas.ix-3d-canvas");

@@ -8,6 +8,9 @@ const worlds=[
 
 for(const {slug,headline} of worlds){
  test("Athena creative direction: "+slug+" keeps its original visual identity across viewports",async({page})=>{
+  // Two full navigation/GLB cycles on the model-first showroom need a larger
+  // total test budget than the individual interaction assertions.
+  if(slug==="auto-showroom")test.setTimeout(90000);
   for(const width of [390,1440]){
    await page.setViewportSize({width,height:900});
    await page.goto("/template-demos/"+slug);

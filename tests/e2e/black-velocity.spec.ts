@@ -3,13 +3,18 @@ import {supportsWebGL2} from "./webgl-capability";
 
 test.describe("Black Velocity / approved motor-sport composition",()=>{
  test("hero model is live by default; interface gives distinct camera and zoom controls",async({page})=>{
+  // The GLB starts automatically and software-rendered CI can take longer
+  // than the default 30s test budget, even if its 30s readiness gate passes.
+  test.setTimeout(90000);
   await page.goto("/template-demos/auto-showroom",{waitUntil:"domcontentloaded"});
   const hero=page.locator(".ix-auto-showroom .ix-hero");
   await expect(hero.getByRole("heading",{name:/BORN FOR.*THE EDGE/i})).toBeVisible();
   const canvas=hero.locator(".ix-auto-3d-canvas");
+  const rendererWaitStarted=Date.now();
   await expect(canvas).toHaveCount(1);
   await expect(page.getByRole("button",{name:"Tắt chế độ 3D"})).toHaveAttribute("aria-pressed","true");
  await expect(canvas).toHaveAttribute("data-renderer",/^(ready|fallback)$/,{timeout:30000});
+  console.log("AUTO_SHOWROOM_RENDERER_MS",Date.now()-rendererWaitStarted);
  if(await canvas.getAttribute("data-renderer")==="ready"){
   await expect(hero.getByRole("button",{name:"Phóng to xe"})).toBeVisible();
   await expect(hero.getByRole("button",{name:"Thu nhỏ xe"})).toBeVisible();

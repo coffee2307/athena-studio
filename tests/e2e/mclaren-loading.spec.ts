@@ -3,10 +3,15 @@ import {supportsWebGL2} from "./webgl-capability";
 
 test("McLaren: slow network starts GLB by default and allows poster fallback",async({page})=>{
  test.setTimeout(60000);
+ let releaseRequest=()=>{};
+ const heldRequest=new Promise<void>(resolve=>{releaseRequest=resolve;});
  await page.route("**/models/mclaren.glb",async route=>{
-  await new Promise(resolve=>setTimeout(resolve,1600));
-  await route.continue();
+  // Hold the model response until the visitor chooses the poster. A fixed
+  // delay races with hydration and can make the loading button disappear.
+  await heldRequest;
+  await route.abort("failed").catch(()=>{});
  });
+ try{
  await page.goto("/template-demos/auto-showroom");
  const stage=page.locator(".immersive-stage");
  const photo=stage.locator(".ix-hero-photograph");
@@ -25,6 +30,7 @@ test("McLaren: slow network starts GLB by default and allows poster fallback",as
  await expect(page.getByRole("button",{name:"Bật chế độ 3D"})).toHaveAttribute("aria-pressed","false");
  await expect(stage.locator(".ix-3d-canvas")).toHaveAttribute("data-renderer","fallback");
  await expect(photo).toBeVisible();
+ }finally{releaseRequest();}
 });
 
 test("McLaren: auto-start download failure offers an accessible image fallback",async({page})=>{
