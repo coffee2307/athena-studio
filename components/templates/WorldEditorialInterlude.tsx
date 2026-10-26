@@ -38,7 +38,7 @@ export function WorldEditorialInterlude({slug}:{slug:World}){
   </div>
   <div className="ix-editorial-photo-grid">
    <figure className="ix-editorial-feature">
-    <Image src={slug==="auto-showroom"?root+"/black-velocity-study-1.jpg":root+"/image-"+data.first+".jpg"} alt={"Tuyển chọn hình ảnh "+data.firstLabel} fill sizes="(max-width:760px) 100vw, 58vw" loading="lazy" quality={78}/>
+    <Image src={slug==="auto-showroom"?root+"/black-velocity-study-1.jpg":root+"/image-"+data.first+".jpg"} alt={"Tuyển chọn hình ảnh "+data.firstLabel} fill sizes="(max-width:760px) 100vw, 58vw" loading="lazy" quality={slug==="creative-studio"?75:78}/>
     <figcaption><span>01 / 02</span><span>{data.firstLabel}</span></figcaption>
    </figure>
    <figure className="ix-editorial-secondary">

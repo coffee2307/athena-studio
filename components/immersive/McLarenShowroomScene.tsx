@@ -146,6 +146,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   // artificial 38 FPS ceiling. Mobile retains a 30 FPS cap and pixel budget.
   // Offscreen/idle rendering remains stopped by schedule()/IntersectionObserver.
   const limit=isMobile?30:0;
+  let renderBudget=isMobile?220000:650000;
 
   const schedule=()=>{
    if(!disposed&&loaded&&visible&&!document.hidden&&!request)request=requestAnimationFrame(draw);
@@ -161,9 +162,8 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   const resize=()=>{
    const rect=canvas.getBoundingClientRect();
    if(rect.width<5||rect.height<5)return;
-   const pixelBudget=isMobile?220000:650000;
    const natural=Math.min(window.devicePixelRatio||1,isMobile?1:1.4);
-   const fit=Math.min(1,Math.sqrt(pixelBudget/Math.max(1,rect.width*rect.height*natural*natural)));
+   const fit=Math.min(1,Math.sqrt(renderBudget/Math.max(1,rect.width*rect.height*natural*natural)));
    renderer.setPixelRatio(natural*fit);
    renderer.setSize(Math.round(rect.width),Math.round(rect.height),false);
    camera.aspect=rect.width/rect.height;camera.updateProjectionMatrix();
@@ -217,7 +217,14 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    renderer.render(scene,camera);
    if(!preferImmediateCamera){
     expensiveFrames=performance.now()-renderStarted>120?expensiveFrames+1:0;
-    if(expensiveFrames>=2)preferImmediateCamera=true;
+    if(expensiveFrames>=2){
+     preferImmediateCamera=true;
+     // Software WebGL can monopolize the main thread at the normal pixel
+     // budget. Lower only slow renderers so buttons remain responsive, while
+     // hardware-accelerated browsers retain the original full-resolution art.
+     renderBudget=isMobile?120000:180000;
+     resize();
+    }
    }
    if(!drawn){drawn=true;finishLoading();setPercent(100);setStatus("ready");}
    const movement=Math.abs(currentMode-modeRef.current)+Math.abs(currentProgress-goalProgress)+Math.abs(turn-dragTurn)+camera.position.distanceTo(wanted);
