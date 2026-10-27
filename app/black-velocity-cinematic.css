@@ -114,6 +114,10 @@
  .bv-cinematic-meter{bottom:120px;left:16px;right:16px}
  .bv-cinematic-skip{left:17px;bottom:155px;font-size:8px}
 }
+@media(max-width:375px){
+ .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas,
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas{top:440px}
+}
 @media(prefers-reduced-motion:reduce){
  .ix-auto-showroom .bv-cinematic-track .ix-hero-copy,
  .ix-auto-showroom .bv-cinematic-track .ix-scene-footer,
