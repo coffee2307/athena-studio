@@ -24,7 +24,7 @@ function Series({slug,world,root}:{slug:string;world:DemoCopy;root:string}){
  return <section className="ix-series" aria-labelledby={"ix-series-"+slug}>
   <div className="ix-series-heading"><div><span>03 / SELECTED WORK</span><h2 id={"ix-series-"+slug}>{world.section}<span className="ix-period">.</span></h2></div><Link href={root+"/work"}>Toàn bộ dự án <span aria-hidden="true">↗</span></Link></div>
   <div className="ix-series-grid">{world.cards.map((card,i)=><Link href={root+"/work/"+(i+1)} className="ix-work-item" key={card.title}>
-   <div className="ix-work-shot"><Image src={root+"/image-"+(i+3)+".jpg"} alt={"Hình ảnh minh họa cho "+card.title} fill sizes="(max-width: 760px) 100vw, 34vw" loading="lazy"/><span className="ix-work-number">{String(i+1).padStart(2,"0")} / 03</span></div>
+   <div className="ix-work-shot"><Image src={root+"/image-"+(i+3)+".jpg"} alt={"Hình ảnh minh họa cho "+card.title} fill sizes="(max-width: 760px) 100vw, 34vw" loading="lazy" unoptimized={slug==="creative-studio"}/><span className="ix-work-number">{String(i+1).padStart(2,"0")} / 03</span></div>
    <div className="ix-work-meta"><span>{card.label}</span><span aria-hidden="true">↗</span></div><h3>{card.title}</h3><p>{card.text}</p>
   </Link>)}</div>
  </section>;
@@ -53,7 +53,7 @@ export function WorldImmersiveHome({slug,world,extra}:Props){
    </div>
    <div className="ix-hero-visual immersive-stage" data-scene={slug} data-preset={mode}>
     {isAuto&&<div className="bv-hero-rules" aria-hidden="true"><span>BLACK / GRAPHITE</span><span>PRECISION IN MOTION</span></div>}
-    <div className="ix-hero-image" key={activeImage}><Image src={activeImage} fill priority={slug!=="auto-showroom"} quality={88} alt={"Ảnh concept "+world.brand+": "+caption} sizes="(max-width: 820px) 100vw, 70vw" className="ix-hero-photograph"/></div>
+    <div className="ix-hero-image" key={activeImage}><Image src={activeImage} fill priority={slug!=="auto-showroom"} quality={88} unoptimized={slug==="creative-studio"} alt={"Ảnh concept "+world.brand+": "+caption} sizes="(max-width: 820px) 100vw, 70vw" className="ix-hero-photograph"/></div>
     <WorldScene slug={slug as "creative-studio"|"architecture-studio"|"auto-showroom"} preset={mode} enabled={enable3D} zoom={isAuto?zoom:0} onRequestFallback={()=>setEnable3D(false)}/>
     {isAuto&&enable3D&&<div className="bv-zoom-controls" role="group" aria-label="Điều chỉnh mức phóng đại xe 3D"><button type="button" aria-label="Phóng to xe" disabled={zoom>=2} onClick={()=>setZoom(v=>Math.min(2,v+1))}>+</button><button type="button" aria-label="Thu nhỏ xe" disabled={zoom<=-1} onClick={()=>setZoom(v=>Math.max(-1,v-1))}>−</button></div>}
     <div className="ix-visual-vignette" aria-hidden="true"/>

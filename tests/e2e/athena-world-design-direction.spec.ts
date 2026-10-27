@@ -28,6 +28,11 @@ for(const {slug,headline} of worlds){
    await expect(editorial).toBeInViewport();
    // Lazy photos should only load after the image itself enters the viewport.
    await editorial.locator("figure img").first().scrollIntoViewIfNeeded();
+   if(slug==="creative-studio"){
+    // Use the source JPEG directly: Next's on-demand optimizer has intermittently
+    // stalled at larger widths during concurrent browser CI runs.
+    await expect(editorial.locator("figure img").first()).toHaveAttribute("src",/\/template-demos\/creative-studio\/image-2\.jpg$/);
+   }
    await expect.poll(async()=>editorial.locator("figure img").first().evaluate(node=>{
     const image=node as HTMLImageElement;return image.complete&&image.naturalWidth>0;
    })).toBe(true);
