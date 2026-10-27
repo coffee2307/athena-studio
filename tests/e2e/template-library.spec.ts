@@ -1,5 +1,11 @@
 import {test,expect} from "@playwright/test";
 
+test("homepage advertises the same complete library as the template index",async({page})=>{
+ await page.goto("/");
+ await expect(page.locator(".home-demo-facts")).toContainText("21");
+ await expect(page.getByRole("link",{name:"Khám phá đủ 21 website"})).toBeVisible();
+});
+
 test("template library presents 21 concepts, search and industry filters",async({page})=>{
  await page.goto("/services/web-development/templates");
  await expect(page.locator(".template-card")).toHaveCount(21);
