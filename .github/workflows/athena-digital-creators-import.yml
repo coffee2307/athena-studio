@@ -1,0 +1,81 @@
+name: Digital Creators — import original source and real preview
+on:
+  push:
+    branches: [feat/athena-immersive-phase0-20261024]
+    paths:
+      - .github/workflows/athena-digital-creators-import.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: athena-digital-creators-import
+  cancel-in-progress: false
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Athena
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Checkout actual Digital Creators repository at reviewed revision
+        uses: actions/checkout@v4
+        with:
+          repository: coffee2307/digital-creators
+          ref: e25ebc04174f2ab576e85ce3a99421b6b00a9721
+          path: _digital_creators_source
+          persist-credentials: false
+      - name: Vendor original editable source into Athena
+        run: |
+          rm -rf vendor/digital-creators
+          mkdir -p vendor/digital-creators
+          tar -C _digital_creators_source --exclude=.git --exclude=node_modules --exclude=dist -cf - . | tar -C vendor/digital-creators -xf -
+          test -s vendor/digital-creators/src/App.tsx
+          test -s vendor/digital-creators/src/components/RubikScrollStory.tsx
+          test -s vendor/digital-creators/src/components/PaintingAboutVisual.tsx
+          test -s vendor/digital-creators/src/components/LegoActivitiesVisual.tsx
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build original Vite / React / Three.js site without UI modifications
+        working-directory: _digital_creators_source
+        run: |
+          npm install --no-audit --no-fund
+          npm run build -- --base=/immersive/digital-creators/
+      - name: Import runnable static site into Athena
+        run: |
+          mkdir -p public/immersive/digital-creators
+          find public/immersive/digital-creators -mindepth 1 -maxdepth 1 -exec rm -rf -- {} +
+          cp -a _digital_creators_source/dist/. public/immersive/digital-creators/
+          test -s public/immersive/digital-creators/index.html
+          test -n "$(find public/immersive/digital-creators/assets -name '*.js' -print -quit)"
+          grep -q '/immersive/digital-creators/assets/' public/immersive/digital-creators/index.html
+      - name: Install browser for a real homepage screenshot
+        run: npx --yes playwright@1.64.1 install --with-deps chromium
+      - name: Capture the actual website (no fake CSS reconstruction)
+        run: |
+          set -e
+          python3 -m http.server 4173 --bind 127.0.0.1 --directory public > /tmp/athena-dc-preview.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          for i in $(seq 1 25); do
+            if curl -fsS http://127.0.0.1:4173/immersive/digital-creators/index.html >/dev/null; then break; fi
+            sleep 1
+          done
+          mkdir -p public/template-previews
+          npx --yes playwright@1.64.1 screenshot --browser chromium --viewport-size "1440,900" --wait-for-timeout 4500 http://127.0.0.1:4173/immersive/digital-creators/index.html public/template-previews/digital-creators.png
+          test -s public/template-previews/digital-creators.png
+          file public/template-previews/digital-creators.png
+          rm -rf _digital_creators_source
+      - name: Commit original source, static build and real screenshot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f vendor/digital-creators public/immersive/digital-creators public/template-previews/digital-creators.png
+          if git diff --cached --quiet; then
+            echo "No changes"
+            exit 0
+          fi
+          git commit -m "fix(digital-creators): vendor original source and real preview from e25ebc0"
+          git push origin HEAD:feat/athena-immersive-phase0-20261024

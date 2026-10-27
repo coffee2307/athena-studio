@@ -8,6 +8,7 @@ import {execFileSync} from "node:child_process";
 import {existsSync,readFileSync} from "node:fs";
 import {resolve} from "node:path";
 import {publicReleaseDecision} from "../lib/release/public.ts";
+import {modelPublicationRights} from "../lib/release/model-rights.mjs";
 
 const production=process.argv.includes("--production");
 const root=resolve(import.meta.dirname,"..");
@@ -46,6 +47,15 @@ if(production){
   "Production A must not activate unverified customer accounts");
  check("production_build_exists",existsSync(resolve(root,".next","BUILD_ID")),
   "Reviewed Next.js production build must exist");
+ const modelPath=resolve(root,"public/models/mclaren.glb");
+ const attributionPath=resolve(root,"public/models/ATTRIBUTION.md");
+ const modelRights=modelPublicationRights({
+  asset:existsSync(modelPath)?readFileSync(modelPath):null,
+  attribution:existsSync(attributionPath)?readFileSync(attributionPath,"utf8"):"",
+  ownerApproved:process.env.ATHENA_OWNER_MODEL_RIGHTS_APPROVED==="true"
+ });
+ check("immersive_model_rights",modelRights.allowed,
+  "Model hash, rights holder, public redistribution basis, evidence reference and separate owner approval are required");
  for(const [id,key] of [
   ["legal_review","ATHENA_OWNER_LEGAL_REVIEWED"],
   ["portfolio_permissions","ATHENA_OWNER_PORTFOLIO_APPROVED"],

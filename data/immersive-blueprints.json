@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "project": "Athena Immersive Worlds",
+  "sourceOfTruth": "data/templates.json",
+  "implementation": "Phase 1: original self-hosted WebGL2 shader engine; Three.js/R3F + GLB pipeline requires a separately verified dependency-lock migration.",
+  "universalRules": [
+    "Real 3D geometry, not CSS parallax marketed as WebGL.",
+    "Meaningful interaction integrated with content, never blocking links or forms.",
+    "Respect prefers-reduced-motion, WebGL loss and constrained GPU devices.",
+    "No third-party hosted assets, unlicensed logos, or invented customer outcomes.",
+    "Each website remains independently navigable and responsive.",
+    "Do not merge feature branches to main before passing CI and owner visual review."
+  ],
+  "worlds": [
+    {
+      "slug": "creative-studio",
+      "title": "Spatial Gallery",
+      "scene": "Đi qua bảo tàng số với điêu khắc chrome, typography và dự án nổi.",
+      "signatureInteraction": "Xoay góc nhìn, chuyển 3 tác phẩm 3D, camera phản hồi cuộn.",
+      "phase": 1,
+      "status": "prototype-webgl2"
+    },
+    {
+      "slug": "modern-corporate",
+      "title": "Digital Headquarters",
+      "scene": "Trụ sở doanh nghiệp kính/kim loại với tầng dịch vụ và case study.",
+      "signatureInteraction": "Chọn tầng để dịch chuyển camera đến dịch vụ, điều hướng nội dung.",
+      "phase": 3,
+      "status": "planned"
+    },
+    {
+      "slug": "commerce-standard",
+      "title": "Interactive Product Lab",
+      "scene": "Studio sản phẩm với ánh sáng vật liệu vật lý và bộ sưu tập.",
+      "signatureInteraction": "Xoay mô hình, đổi vật liệu và thêm vào giỏ mô phỏng.",
+      "phase": 2,
+      "status": "planned"
+    },
+    {
+      "slug": "fashion-archive",
+      "title": "Virtual Runway",
+      "scene": "Sàn diễn archival tối, trang phục số có chuyển động chất liệu.",
+      "signatureInteraction": "Xoay trang phục, xem từng chi tiết, chọn collection.",
+      "phase": 2,
+      "status": "planned"
+    },
+    {
+      "slug": "saas-product",
+      "title": "Living Interface",
+      "scene": "Các node dữ liệu 3D mô tả luồng xử lý sản phẩm.",
+      "signatureInteraction": "Tương tác node, nối dữ liệu, mở dashboard demo.",
+      "phase": 2,
+      "status": "planned"
+    },
+    {
+      "slug": "campaign-landing",
+      "title": "Kinetic Experience",
+      "scene": "Thế giới typography động và khối hình theo nhịp chiến dịch.",
+      "signatureInteraction": "Cuộn biến đổi bố cục, chọn nhánh trải nghiệm.",
+      "phase": 3,
+      "status": "planned"
+    },
+    {
+      "slug": "hospitality-booking",
+      "title": "Kitchen Journey",
+      "scene": "Không gian nhà hàng với bàn, bếp và món ăn dưới ánh sáng ấm.",
+      "signatureInteraction": "Di chuyển theo camera, chọn bàn và mở đặt chỗ mô phỏng.",
+      "phase": 4,
+      "status": "planned"
+    },
+    {
+      "slug": "editorial-journal",
+      "title": "Spatial Library",
+      "scene": "Thư viện số với trang in nổi, hình minh họa và bài viết.",
+      "signatureInteraction": "Chọn bìa, lật trang 3D nhưng giữ chế độ đọc HTML.",
+      "phase": 3,
+      "status": "planned"
+    },
+    {
+      "slug": "architecture-studio",
+      "title": "Architectural Study",
+      "scene": "Mặt bằng, sàn và cột của công trình tối giản trong không gian.",
+      "signatureInteraction": "Đổi góc camera, tách lớp và so sánh kết cấu.",
+      "phase": 1,
+      "status": "prototype-webgl2"
+    },
+    {
+      "slug": "wellness-clinic",
+      "title": "Calm Garden",
+      "scene": "Vườn thiền nhẹ, mặt nước và ánh sáng dịu.",
+      "signatureInteraction": "Thử thay trạng thái không gian, chọn liệu trình và đặt lịch demo.",
+      "phase": 4,
+      "status": "planned"
+    },
+    {
+      "slug": "property-showcase",
+      "title": "Dollhouse Tour",
+      "scene": "Căn hộ thu nhỏ có tầng, phòng, mặt bằng và điểm nhìn nội thất.",
+      "signatureInteraction": "Chọn tầng, tách mái, phóng camera vào từng phòng.",
+      "phase": 2,
+      "status": "planned"
+    },
+    {
+      "slug": "education-platform",
+      "title": "Knowledge Planets",
+      "scene": "Không gian học tập với các trạm kiến thức dưới dạng hành tinh.",
+      "signatureInteraction": "Chọn hành tinh để chuyển vào khóa học và bài tương tác.",
+      "phase": 4,
+      "status": "planned"
+    },
+    {
+      "slug": "pet-store",
+      "title": "Poppy Toy World",
+      "scene": "Thú cưng 3D đáng yêu trong một thế giới đồ chơi.",
+      "signatureInteraction": "Vuốt/chạm thú cưng, mở hộp sản phẩm và thêm giỏ demo.",
+      "phase": 3,
+      "status": "planned"
+    },
+    {
+      "slug": "auto-showroom",
+      "title": "Night Motion Concept",
+      "scene": "Gara 3D điện ảnh với xe concept nguyên bản, không dùng logo hãng thật.",
+      "signatureInteraction": "Xoay góc nhìn và đổi chế độ ánh sáng, thiết kế, hiệu năng.",
+      "phase": 1,
+      "status": "prototype-webgl2"
+    },
+    {
+      "slug": "engineering-industry",
+      "title": "Exploded Precision",
+      "scene": "Máy cơ khí 3D cho phép xem riêng từng chi tiết cấu tạo.",
+      "signatureInteraction": "Kéo slider tách cụm chi tiết, xem mặt cắt và thông số.",
+      "phase": 2,
+      "status": "planned"
+    },
+    {
+      "slug": "finance-trust",
+      "title": "Data Observatory",
+      "scene": "Không gian dữ liệu 3D với hình học tin cậy và biểu đồ định lượng.",
+      "signatureInteraction": "Lọc khung thời gian, xem dữ liệu minh họa không giả thành kết quả thật.",
+      "phase": 4,
+      "status": "planned"
+    },
+    {
+      "slug": "construction-firm",
+      "title": "Build in Time",
+      "scene": "Công trình 3D xuất hiện theo thứ tự thi công có chứng minh kỹ thuật.",
+      "signatureInteraction": "Kéo timeline tiến độ, bật/tắt từng lớp kết cấu.",
+      "phase": 2,
+      "status": "planned"
+    },
+    {
+      "slug": "music-label",
+      "title": "Sonic Recording Studio",
+      "scene": "Phòng thu với bàn mixer, đĩa vinyl và visualizer.",
+      "signatureInteraction": "Phát âm thanh demo khi người dùng bật, chỉnh mixer và đĩa quay.",
+      "phase": 3,
+      "status": "planned"
+    },
+    {
+      "slug": "live-concert",
+      "title": "Neon Stage",
+      "scene": "Sân khấu với đèn, màn hình visualizer và khán đài.",
+      "signatureInteraction": "Đổi ánh sáng, chọn khu ghế và thử quy trình vé không thanh toán.",
+      "phase": 3,
+      "status": "planned"
+    },
+    {
+      "slug": "team-intranet",
+      "title": "Orbit Workspace",
+      "scene": "Không gian nhóm ba chiều liên kết module lịch, dự án và tệp.",
+      "signatureInteraction": "Chọn cụm công việc để mở dashboard HTML truy cập được.",
+      "phase": 4,
+      "status": "planned"
+    },
+    {
+      "slug": "digital-creators",
+      "title": "Original Interactive Studio",
+      "scene": "Giữ nguyên trải nghiệm Rubik, LEGO, painting từ source được pin.",
+      "signatureInteraction": "Sửa jitter nét cọ/scroll trong source gốc sau QA mobile.",
+      "phase": 1,
+      "status": "existing-original"
+    }
+  ]
+}

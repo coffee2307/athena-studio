@@ -6,24 +6,24 @@ import type {DemoCopy} from "@/data/demo-worlds";
 import type {WorldDetail} from "@/data/demo-world-details";
 
 export type ExperienceSection="work"|"detail"|"services";
-type Sector="retail"|"dining"|"journal"|"live"|"realty"|"industry"|"platform"|"atelier";
+type Sector="retail"|"dining"|"journal"|"live"|"realty"|"industry"|"platform"|"atelier"|"automotive";
 type Props={slug:string;section:ExperienceSection;itemIndex?:number;world:DemoCopy;extra:WorldDetail;addToCart:(quantity?:number)=>void};
 const sectorNames:Record<Sector,string>={
  retail:"CURATED COLLECTION",dining:"FROM OUR KITCHEN",journal:"THE READING ROOM",live:"LIVE / CULTURE",
- realty:"SELECTED SPACES",industry:"OUR CAPABILITIES",platform:"PRODUCT EXPERIENCE",atelier:"SELECTED PRACTICE"
+ realty:"SELECTED SPACES",industry:"OUR CAPABILITIES",platform:"PRODUCT EXPERIENCE",atelier:"SELECTED PRACTICE",automotive:"DESIGN STUDY / BLACK VELOCITY"
 };
 const sectors:Record<string,Sector>={
  "commerce-standard":"retail","fashion-archive":"retail","pet-store":"retail",
  "hospitality-booking":"dining","editorial-journal":"journal",
  "campaign-landing":"live","live-concert":"live","music-label":"live",
- "auto-showroom":"realty","property-showcase":"realty",
+ "auto-showroom":"automotive","property-showcase":"realty",
  "modern-corporate":"industry","finance-trust":"industry","engineering-industry":"industry","construction-firm":"industry",
  "saas-product":"platform","team-intranet":"platform","education-platform":"platform",
  "creative-studio":"atelier","architecture-studio":"atelier","wellness-clinic":"atelier"
 };
 export function isExperienceSection(section:string){return section==="work"||section==="detail"||section==="services";}
 function Photo({slug,n,alt,priority=false}:{slug:string;n:number;alt:string;priority?:boolean}){
- return <Image src={`/template-demos/${slug}/image-${Math.max(1,Math.min(n,5))}.jpg`} alt={alt} fill priority={priority} sizes="(max-width: 720px) 95vw, (max-width: 1100px) 65vw, 48vw"/>;
+ return <Image src={slug==="auto-showroom"?`/template-demos/auto-showroom/black-velocity-study-${((n-1)%3+3)%3+1}.jpg`:`/template-demos/${slug}/image-${Math.max(1,Math.min(n,5))}.jpg`} alt={alt} fill priority={priority} sizes="(max-width: 720px) 95vw, (max-width: 1100px) 65vw, 48vw"/>;
 }
 function Angle(){return <span aria-hidden="true">↗</span>;}
 function MockNotice(){return <p className="experience-notice">Trải nghiệm trình diễn của Athena Studio. Không có giao dịch, đặt chỗ hoặc tư vấn thực tế.</p>}
@@ -84,6 +84,24 @@ export function WorldExperiencePages({slug,section,itemIndex=1,world,extra,addTo
    <div className="experience-live-ticker">LIVE / CULTURE / PEOPLE / MUSIC / CREATIVE FUTURES / LIVE / CULTURE / PEOPLE</div>
    <section className="experience-live-program"><div className="experience-section-head"><p>{extra.worksLabel}</p><h2>Explore every moment.</h2></div>{controls(false)}{filtered.map(card=><Link href={workLink(card.index)} key={card.index} className="experience-lineup-row"><span>0{card.index+1}</span><div><small>{card.label}</small><h3>{card.title}</h3><p>{card.text}</p></div><div className="experience-lineup-photo"><Photo slug={slug} n={card.index+2} alt={card.title}/></div><Angle/></Link>)}</section><Cta root={root} world={world} extra={extra}/>
   </main>;
+  if(sector==="automotive")return <main className="experience-sub experience-automotive" data-sector={sector} id="world-main">
+   <section className="bv-catalog-head">
+    <Crumb root={root} label={extra.navWork}/>
+    <span className="experience-kicker">BLACK VELOCITY / SELECTED STUDIES</span>
+    <h1>THE MACHINE.<br/><em>THREE PERSPECTIVES.</em></h1>
+    <p>Không phải ba mẫu xe khác nhau: đây là ba cách quan sát cùng một chiếc McLaren concept trong không gian trải nghiệm VELAR. Những ảnh phụ trợ chỉ minh họa phong cách thiết kế.</p>
+    <Link href={root+"/experience"}>OPEN THE 3D EXPERIENCE <Angle/></Link>
+   </section>
+   <section className="bv-catalog-grid" aria-label="Ba chương nghiên cứu thiết kế">
+    {filtered.map(card=><Link href={workLink(card.index)} key={card.title} className={"bv-catalog-item bv-catalog-item-"+card.index}>
+     <div className="bv-catalog-shot"><Photo slug={slug} n={card.index+2} alt={"Ảnh concept minh họa "+card.title}/>
+      <span>STUDY / 0{card.index+1}</span></div>
+     <div className="bv-catalog-meta"><small>{card.label}</small><h2>{card.title}</h2><p>{card.text}</p><span>EXPLORE STUDY <Angle/></span></div>
+    </Link>)}
+   </section>
+   <section className="bv-catalog-footer"><span>ONE ORIGINAL GLB / MULTIPLE VIEWS</span><p>Chi tiết vật liệu và hình học được minh họa bằng file 3D do người dùng cung cấp. VELAR không phải đơn vị sản xuất hoặc phân phối xe.</p></section>
+   <Cta root={root} world={world} extra={extra}/>
+  </main>;
   if(sector==="realty")return <main className="experience-sub experience-realty" data-sector={sector} id="world-main">
    <section className="experience-realty-head"><div><Crumb root={root} label={extra.navWork}/><span className="experience-kicker">{world.brand} / SELECTION</span><h1>{slug==="auto-showroom"?"CHOOSE YOUR NEXT DRIVE.":"DISCOVER WHERE YOU BELONG."}</h1><p>{world.intro}</p></div><div className="experience-realty-picture"><Photo slug={slug} n={1} alt={extra.navWork} priority/></div></section>
    <section className="experience-realty-list"><div className="experience-section-head"><p>OUR SELECTION / 01—03</p><h2>{extra.worksLabel}</h2></div>{controls()}<div className="experience-realty-grid">{filtered.map(card=><Link key={card.index} href={workLink(card.index)} className="experience-realty-card"><div><Photo slug={slug} n={card.index+2} alt={card.title}/><span>0{card.index+1} / FEATURED</span></div><section><small>{card.label}</small><h3>{card.title}</h3><p>{card.text}</p><strong>Khám phá chi tiết <Angle/></strong></section></Link>)}</div></section><Cta root={root} world={world} extra={extra}/>
@@ -108,8 +126,8 @@ export function WorldExperiencePages({slug,section,itemIndex=1,world,extra,addTo
   return <main id="world-main" className={"experience-sub experience-detail experience-detail-"+sector} data-sector={sector}>
    <section className="experience-detail-intro"><Crumb root={root} label={chosen.title}/><Link href={root+"/work"} className="experience-detail-back">← {extra.navWork}</Link><div><span className="experience-kicker">0{itemIndex} / {chosen.label} / {world.brand}</span><h1>{chosen.title}</h1><p>{chosen.text}</p>{isShop&&<span className="experience-pill">Bộ sưu tập thử nghiệm</span>}</div></section>
    <section className="experience-detail-layout"><div className="experience-detail-gallery"><div className="experience-detail-primary"><Photo slug={slug} n={index+2} alt={chosen.title} priority/></div><div className="experience-detail-secondary"><div><Photo slug={slug} n={(index+2)%5+1} alt={"Góc nhìn khác của "+chosen.title}/></div><div><Photo slug={slug} n={(index+3)%5+1} alt={"Chi tiết của "+chosen.title}/></div></div></div>
-   <aside className="experience-detail-aside"><span>ABOUT / 0{itemIndex}</span><h2>{sector==="dining"?"Một món ăn dành cho hôm nay.":sector==="journal"?"Bên trong câu chuyện.":sector==="retail"?"Chi tiết tạo nên khác biệt.":sector==="live"?"Một trải nghiệm đáng nhớ.":sector==="realty"?"Được chọn có chủ đích.":sector==="industry"?"Từ yêu cầu đến giải pháp.":sector==="platform"?"Tính năng trong thực tế.":"Một cách nhìn riêng."}</h2><p>{extra.approach}</p><div className="experience-detail-facts">{extra.principles.map((p,i)=><div key={p}><small>0{i+1}</small><span>{p}</span></div>)}</div>
-   {isShop?<div className="experience-detail-purchase"><label>Số lượng demo <select aria-label="Số lượng sản phẩm" value={qty} onChange={e=>setQty(Number(e.target.value))}>{[1,2,3,4,5].map(n=><option key={n} value={n}>{n}</option>)}</select></label><button type="button" onClick={()=>addToCart(qty)}>Thêm {qty} sản phẩm vào giỏ <Angle/></button></div>:<Link className="experience-detail-action" href={root+"/contact"}>{sector==="dining"?"Đặt bàn":sector==="realty"?"Đặt lịch xem":sector==="live"?"Gửi yêu cầu tham gia":"Trao đổi với chúng tôi"} <Angle/></Link>}
+   <aside className="experience-detail-aside"><span>ABOUT / 0{itemIndex}</span><h2>{sector==="dining"?"Một món ăn dành cho hôm nay.":sector==="journal"?"Bên trong câu chuyện.":sector==="retail"?"Chi tiết tạo nên khác biệt.":sector==="live"?"Một trải nghiệm đáng nhớ." :sector==="realty"?"Được chọn có chủ đích.":sector==="automotive"?"ANATOMY OF A CONCEPT.":sector==="industry"?"Từ yêu cầu đến giải pháp.":sector==="platform"?"Tính năng trong thực tế.":"Một cách nhìn riêng."}</h2><p>{extra.approach}</p><div className="experience-detail-facts">{extra.principles.map((p,i)=><div key={p}><small>0{i+1}</small><span>{p}</span></div>)}</div>
+   {isShop?<div className="experience-detail-purchase"><label>Số lượng demo <select aria-label="Số lượng sản phẩm" value={qty} onChange={e=>setQty(Number(e.target.value))}>{[1,2,3,4,5].map(n=><option key={n} value={n}>{n}</option>)}</select></label><button type="button" onClick={()=>addToCart(qty)}>Thêm {qty} sản phẩm vào giỏ <Angle/></button></div>:<Link className="experience-detail-action" href={root+"/contact"}>{sector==="dining"?"Đặt bàn" :sector==="realty"?"Đặt lịch xem":sector==="automotive"?"Gửi yêu cầu demo":sector==="live"?"Gửi yêu cầu tham gia":"Trao đổi với chúng tôi"} <Angle/></Link>}
    <MockNotice/></aside></section>
    {sector==="journal"&&<article className="experience-story-excerpt"><span>EDITORIAL / EXCERPT</span><h2>{extra.storyTitle}</h2><p>{extra.story}</p><p>{extra.approach}</p><p>Đây là một đoạn nội dung mẫu để thể hiện cách trình bày bài viết. Bài viết đầy đủ cần được biên tập khi triển khai cho khách hàng.</p></article>}
    <section className="experience-detail-next"><span>NEXT IN COLLECTION / 0{index+1}</span><Link href={workLink((index+1)%3)}>{cards[(index+1)%3].title}<Angle/></Link></section><Cta root={root} world={world} extra={extra}/>
@@ -118,7 +136,7 @@ export function WorldExperiencePages({slug,section,itemIndex=1,world,extra,addTo
  const services=()=>{
   return <main id="world-main" className={"experience-sub experience-services experience-services-"+sector} data-sector={sector}>
    <section className="experience-services-hero"><Crumb root={root} label={extra.navServices}/><span className="experience-kicker">OUR EXPERTISE / {world.brand}</span><h1>{extra.navServices}<span>.</span></h1><p>{extra.approach}</p><div className="experience-services-hero-photo"><Photo slug={slug} n={1} alt={extra.navServices}/></div></section>
-   <section className="experience-services-index"><div className="experience-section-head"><p>01 / {extra.servicesLabel}</p><h2>{sector==="retail"?"Hơn cả một món đồ.":sector==="industry"?"Một giải pháp có cơ sở.":sector==="dining"?"Một chiếc bàn cho mọi dịp.":sector==="live"?"Tạo nên khoảnh khắc.":sector==="realty"?"Lựa chọn có hiểu biết.":sector==="platform"?"Hệ thống phục vụ con người.":"Sự chăm chút trong từng bước."}</h2></div>
+   <section className="experience-services-index"><div className="experience-section-head"><p>01 / {extra.servicesLabel}</p><h2>{sector==="retail"?"Hơn cả một món đồ.":sector==="industry"?"Một giải pháp có cơ sở.":sector==="dining"?"Một chiếc bàn cho mọi dịp.":sector==="live"?"Tạo nên khoảnh khắc." :sector==="realty"?"Lựa chọn có hiểu biết.":sector==="automotive"?"DESIGNED TO BE EXPLORED.":sector==="platform"?"Hệ thống phục vụ con người.":"Sự chăm chút trong từng bước."}</h2></div>
    <div className="experience-service-panels">{extra.services.map((s,i)=><details key={s.number} open={i===0}><summary><span>{s.number}</span><strong>{s.title}</strong><span className="experience-expand-symbol">+</span></summary><div className="experience-service-body"><div><p>{s.detail}</p><small>{s.outcome}</small><Link href={root+"/contact"}>Hỏi về dịch vụ này <Angle/></Link></div><div className="experience-service-thumb"><Photo slug={slug} n={i+2} alt={s.title}/></div></div></details>)}</div></section>
    <section className="experience-services-method"><div><span>02 / OUR METHOD</span><h2>{extra.storyTitle}</h2></div><div><p>{extra.story}</p>{extra.principles.map((p,i)=><div className="experience-method-item" key={p}><span>0{i+1}</span><strong>{p}</strong></div>)}</div></section><Cta root={root} world={world} extra={extra}/>
   </main>;

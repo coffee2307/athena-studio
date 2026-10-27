@@ -43,6 +43,7 @@ npm run audit:runtime
 | A1 — Domain and TLS | Owner-approved real HTTPS hostname, DNS propagation, valid certificate, correct proxy headers, no preview domain | Not verified |
 | A2 — Functional intake | Test email to real inbox and reply received. If using the backend inquiry API: real spam challenge, limits, durable storage, notification and retention deletion | Only draft/email fallback verified in code |
 | A3 — Portfolio rights | Explicit authorization for images and factual claims; PHAM/ECONITH never expose private source | Owner review needed |
+| A3b — Immersive model rights | Verify the exact `public/models/mclaren.glb` SHA-256, identify the rights holder, document a valid public redistribution license or grant and a privately stored evidence reference; obtain independent owner sign-off | **BLOCKED: current asset has no established author/license** |
 | A4 — Legal | Confirm data controller/contact, collection and retention terms, applicable business/legal identity and consumer commitments | Owner/legal review needed |
 | A5 — Mobile quality | Real-device 320–428px/Android, reload/back/navigation, cached and fresh CSS, Chrome/Firefox, accessibility and keyboard checks | Automated evidence; field acceptance needed |
 | A6 — Performance | Real-host p50/p95 response/load, Lighthouse lab, field LCP/INP/CLS and network failure tests | VPS and field data absent |
@@ -51,6 +52,12 @@ npm run audit:runtime
 | A9 — Explicit GO | Owner approves release SHA, hostname, costs, live contact, SEO indexing and rollback window | NOT granted |
 
 **No automated test constitutes A3, A4, A8 or A9.** The `ATHENA_OWNER_*` environment attestations used by production-mode preflight are declarations only; preserve the external evidence separately.
+
+### McLaren model: publication hold
+
+`public/models/ATTRIBUTION.md` records the model SHA-256 but explicitly states that its author and public redistribution rights have not been established. Private QA use is not evidence of permission to ship the GLB in a publicly accessible Next.js `public/` directory. Production preflight therefore fails the `immersive_model_rights` check by design.
+
+To resolve this gate, the owner must independently confirm the relevant rights and update the attribution with `Rights holder:`, `Public redistribution basis:` and `Approval evidence reference:` lines. Keep personal contact details and the underlying license agreement in a private evidence store, not in Git. The checked SHA-256 must still match the actual file, and `ATHENA_OWNER_MODEL_RIGHTS_APPROVED=true` is set only for the specifically reviewed release. A replacement asset requires a new hash and review. A checkbox or environment variable alone does not establish a license.
 
 ## Suggested staged deployment profile (not executed)
 

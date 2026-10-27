@@ -3,7 +3,7 @@ import {useState} from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {Icon} from "@/components/ui/Icon";
-import {getTemplate} from "@/lib/templates";
+import {getTemplate,templates} from "@/lib/templates";
 const groups=[
  {id:"featured",label:"Nổi bật",slugs:["finance-trust","hospitality-booking","pet-store","creative-studio"]},
  {id:"business",label:"Doanh nghiệp",slugs:["finance-trust","modern-corporate","engineering-industry","construction-firm"]},
@@ -21,8 +21,8 @@ export function HomeTemplateShowcase(){
     <p className="section-index"><span className="index-circle">03</span> THƯ VIỆN WEBSITE MẪU</p>
     <h2 id="home-demo-title">Một thương hiệu.<br/><span>Một phong cách riêng.</span></h2>
     <p className="home-demo-lede">Từ nhà hàng ấm cúng đến tài chính cứng cáp, mỗi website được xây dựng theo một cách trình bày riêng. Xem trực tiếp trang chủ, dịch vụ, dự án và trải nghiệm trên điện thoại.</p>
-    <div className="home-demo-facts"><div><strong>20</strong><span>Mẫu đa ngành</span></div><div><strong>05</strong><span>Nhóm phong cách</span></div><div><strong>01</strong><span>Định hướng của bạn</span></div></div>
-    <Link href="/services/web-development/templates" className="home-demo-all">Khám phá đủ 20 website <Icon name="arrow-up-right" size={19}/></Link>
+    <div className="home-demo-facts"><div><strong>{templates.length}</strong><span>Mẫu đa ngành</span></div><div><strong>{String(groups.length).padStart(2,"0")}</strong><span>Nhóm phong cách</span></div><div><strong>01</strong><span>Định hướng của bạn</span></div></div>
+    <Link href="/services/web-development/templates" className="home-demo-all">Khám phá đủ {templates.length} website <Icon name="arrow-up-right" size={19}/></Link>
    </div>
    <div className="home-demo-content">
     <div className="home-demo-filters" role="group" aria-label="Lọc mẫu website">

@@ -32,6 +32,10 @@ import "@/app/athena-home-showcase-and-navigation.css";
 import "@/app/athena-products-fix.css";
 import "@/app/athena-soft-launch.css";
 import "@/app/template-accessibility.css";
+import "@/app/immersive-phase0.css";
+import "@/app/immersive-journey.css";
+import "@/app/athena-world-editorial.css";
+import "@/app/black-velocity.css";
 
 export const metadata: Metadata = {
   ...createMetadata(),
