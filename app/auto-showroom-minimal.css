@@ -174,7 +174,7 @@
  .ix-auto-showroom .bv-cinematic-track .ix-hero-text-link{display:none}
  .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas,
  .ix-auto-showroom .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas{
-  left:0;width:100%;top:clamp(250px,38svh,340px);bottom:auto;
+  left:0;width:100%;top:clamp(300px,43svh,390px);bottom:auto;
   height:clamp(210px,42svh,380px);
  }
  .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track[data-chapter]:not([data-chapter="0"]) .ix-hero-visual .ix-auto-3d-canvas,
@@ -217,4 +217,14 @@
  .ix-auto-showroom .bv-cinematic-track .ix-hero-copy>p{font-size:10px!important;max-width:260px!important}
  .ix-auto-showroom .bv-cinematic-track .ix-hero-links{margin-top:9px}
  .ix-auto-showroom .bv-cinematic-track .ix-hero-primary{min-height:38px;padding:9px 11px}
+}
+@media(max-width:760px) and (max-height:680px){
+ /* Very short phones cannot fit the whole editorial intro and a full-size
+    vehicle at once. Compact the copy and preserve a separate control band. */
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-copy>p{display:none}
+ .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas,
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas{
+  top:clamp(280px,45svh,310px);height:clamp(150px,30svh,200px);
+ }
+ .ix-auto-showroom .bv-cinematic-track .bv-zoom-controls{bottom:120px}
 }
