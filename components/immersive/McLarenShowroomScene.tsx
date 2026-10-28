@@ -135,7 +135,11 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   const scene=new THREE.Scene();
   scene.background=new THREE.Color(0x11151a);
   const camera=new THREE.PerspectiveCamera(34,1,.1,85);
-  const target=new THREE.Vector3(scrollRootId&&!isMobile?-.28:0,.68,0);
+  // Aim slightly left of the car on wide showroom screens so the model sits
+  // to the right of the editorial headline. Other journeys keep their pose.
+  const heroWide=scrollRootId==="bv-cinematic-track"&&!isMobile&&window.innerWidth>=1100;
+  const target=new THREE.Vector3(heroWide?-.68:scrollRootId&&!isMobile?-.28:0,.68,0);
+  canvas.dataset.cameraTargetX=target.x.toFixed(2);
   camera.position.set(5.6,2.5,5.8);camera.lookAt(target);
 
   const ambient=new THREE.HemisphereLight(0xf5f6fa,0x30343a,.85);
