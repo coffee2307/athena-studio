@@ -26,13 +26,13 @@ test("Missing rights, generic approval and unresolved attribution never permit r
  assert.equal(modelPublicationRights({asset,attribution:verified.replace("Artist Example","Unknown"),ownerApproved:true}).allowed,false);
 });
 
-test("Current McLaren model has a reported CC BY source but still requires binary provenance",()=>{
+test("User-supplied McLaren P1 is attributed under CC BY with recorded provenance",()=>{
  const currentAsset=readFileSync(new URL("../public/models/mclaren.glb",import.meta.url));
  const currentAttribution=readFileSync(new URL("../public/models/ATTRIBUTION.md",import.meta.url),"utf8");
  assert.match(currentAttribution,/vecarz \(@heynic\)/);
  assert.match(currentAttribution,/creativecommons\.org\/licenses\/by\/4\.0/);
  const result=modelPublicationRights({asset:currentAsset,attribution:currentAttribution,ownerApproved:true});
  assert.equal(result.hashMatches,true);
- assert.equal(result.hasRightsRecord,false);
- assert.equal(result.allowed,false);
+ assert.equal(result.hasRightsRecord,true);
+ assert.equal(result.allowed,true);
 });

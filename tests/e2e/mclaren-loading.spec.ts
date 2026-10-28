@@ -5,7 +5,7 @@ test("McLaren: slow network starts GLB by default and allows static studio fallb
  test.setTimeout(60000);
  let releaseRequest=()=>{};
  const heldRequest=new Promise<void>(resolve=>{releaseRequest=resolve;});
- await page.route("**/models/mclaren.glb",async route=>{
+ await page.route(/\/models\/mclaren\.glb(?:\?.*)?$/,async route=>{
   // Hold the model response until the visitor chooses the poster. A fixed
   // delay races with hydration and can make the loading button disappear.
   await heldRequest;
@@ -35,7 +35,7 @@ test("McLaren: slow network starts GLB by default and allows static studio fallb
 
 test("McLaren: auto-start download failure offers an accessible static backdrop",async({page})=>{
  test.setTimeout(60000);
- await page.route("**/models/mclaren.glb",route=>route.abort("failed"));
+ await page.route(/\/models\/mclaren\.glb(?:\?.*)?$/,route=>route.abort("failed"));
  await page.goto("/template-demos/auto-showroom");
  await expect(page.getByRole("button",{name:"Tắt chế độ 3D"})).toHaveAttribute("aria-pressed","true");
  const stage=page.locator(".immersive-stage");

@@ -3,11 +3,12 @@
 import {useEffect, useRef, useState} from "react";
 import * as THREE from "three";
 import {GLTFLoader} from "three/addons/loaders/GLTFLoader.js";
+import {DRACOLoader} from "three/addons/loaders/DRACOLoader.js";
 import {RoomEnvironment} from "three/addons/environments/RoomEnvironment.js";
 import type {WorldSceneProps} from "./WorldScene";
 import {McLarenLoadingUI} from "./McLarenLoadingUI";
 
-const MODEL_PATH="/models/mclaren.glb";
+const MODEL_PATH="/models/mclaren.glb?v=20261029-p1-vecarz";
 type SceneState="loading"|"ready"|"fallback";
 const clamp=(value:number,min:number,max:number)=>Math.max(min,Math.min(max,value));
 
@@ -138,7 +139,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   // Aim slightly left of the car on wide showroom screens so the model sits
   // to the right of the editorial headline. Other journeys keep their pose.
   const heroWide=scrollRootId==="bv-cinematic-track"&&!isMobile&&window.innerWidth>=1100;
-  const target=new THREE.Vector3(heroWide?-.68:scrollRootId&&!isMobile?-.28:0,.68,0);
+  const target=new THREE.Vector3(heroWide?-1.58:scrollRootId&&!isMobile?-.28:0,.68,0);
   canvas.dataset.cameraTargetX=target.x.toFixed(2);
   camera.position.set(5.6,2.5,5.8);camera.lookAt(target);
 
@@ -168,6 +169,10 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    console.warn("Athena McLaren asset failed:",url.startsWith("blob:")?"embedded texture":url);
   };
   const loader=new GLTFLoader(manager);
+  const draco=new DRACOLoader(manager);
+  draco.setDecoderPath("/draco/");
+  draco.setDecoderConfig({type:"wasm"});
+  loader.setDRACOLoader(draco);
 
   const car=new THREE.Group();
   scene.add(car);
@@ -275,7 +280,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    const easedMode=modeT*modeT*(3-2*modeT);
    const heroOrbit=angles[modeLower]+(angles[modeLower+1]-angles[modeLower])*easedMode;
    const orbit=(scrollRootId?scrollOrbit:heroOrbit+currentProgress*.20)+turn;
-   const baseDistance=Math.max(6.75,6.75*.93/Math.max(.60,camera.aspect))*(isMobile?1.58:1);
+   const baseDistance=Math.max(6.75,6.75*.93/Math.max(.60,camera.aspect))*(isMobile?1.30:1);
    const dist=baseDistance*(scrollRootId?scrollDistance:1)*(1-clamp(zoomRef.current,-1,2)*(isMobile?.04:.09));
    const y=scrollRootId?scrollHeight:(isMobile?2.6:2.42);
    const wanted=new THREE.Vector3(Math.cos(orbit)*dist,y,Math.sin(orbit)*dist);
@@ -338,7 +343,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   canvas.addEventListener("pointercancel",pointerUp);
   motion.addEventListener("change",onMotion);
 
-  // The replacement GLB is self-hosted with WebP textures; no Draco decoder is needed.
+  // This CC BY 4.0 McLaren P1 GLB uses Draco-compressed geometry and WebP textures.
   setPhase("Đang tải mô hình và vật liệu");
   loader.load(MODEL_PATH,gltf=>{
    if(disposed)return;
@@ -399,6 +404,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
     if(obj instanceof THREE.Mesh){obj.geometry.dispose();(obj.material as THREE.Material).dispose();}
    });
    floor.tex.dispose();generated.texture.dispose();pmrem.dispose();
+   draco.dispose();
    renderer.dispose();
   };
   return dispose;
