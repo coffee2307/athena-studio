@@ -14,6 +14,14 @@ test("McLaren homepage is a reversible five-scene scroll film with one canvas",a
  await expect(nav).toHaveCount(5);
  await expect(canvas).toHaveCount(1);
  await expect(track).toHaveAttribute("data-chapter","0");
+ // Wait for the client scroll owner to hydrate before clicking SSR buttons.
+ await expect.poll(()=>track.evaluate(element=>element.style.getPropertyValue("--bv-progress"))).not.toBe("");
+ // This test checks chapter state, not smooth-scroll timing under software WebGL.
+ // A separate test verifies that real navigation requests smooth scrolling.
+ await page.evaluate(()=>{
+  const nativeScrollTo=window.scrollTo.bind(window);
+  window.scrollTo=((options:ScrollToOptions)=>nativeScrollTo({...options,behavior:"instant"})) as typeof window.scrollTo;
+ });
 
  await nav.nth(1).click();
  await expect(track).toHaveAttribute("data-chapter","1");
@@ -58,6 +66,8 @@ test("McLaren chapter buttons request smooth native scrolling and respect reduce
  await page.emulateMedia({reducedMotion:"no-preference"});
  await page.setViewportSize({width:1440,height:900});
  await page.goto("/template-demos/auto-showroom",{waitUntil:"domcontentloaded"});
+ const track=page.locator("#bv-cinematic-track");
+ await expect.poll(()=>track.evaluate(element=>element.style.getPropertyValue("--bv-progress"))).not.toBe("");
  await page.evaluate(()=>{
   const original=window.scrollTo.bind(window);
   window.scrollTo=((options:ScrollToOptions)=>{
