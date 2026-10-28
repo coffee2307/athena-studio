@@ -1,0 +1,141 @@
+/* BLACK VELOCITY / quiet editorial subpages. The vehicle, not screenshots, is the hero. */
+.world-site[data-world="auto-showroom"] .velar-pages{--v-fg:#f2f3f3;--v-muted:#a2a9b0;--v-line:#34383c;--v-accent:#f58337;background:#0b0d10;color:var(--v-fg);min-height:75vh;font-family:"Be Vietnam Pro",sans-serif}
+.velar-pages *, .velar-pages *::before,.velar-pages *::after{box-sizing:border-box}
+.velar-pages a{color:inherit;text-decoration:none}
+.velar-pages a:focus-visible,.velar-pages button:focus-visible,.velar-pages summary:focus-visible{outline:2px solid var(--v-accent);outline-offset:5px}
+.velar-pages h1,.velar-pages h2,.velar-pages h3,.velar-pages p{margin-top:0}
+.velar-pages h1{font-size:clamp(56px,8.8vw,150px);line-height:.93;font-weight:750;letter-spacing:-.075em}
+.velar-pages h1 em,.velar-pages h2 em{font-style:normal;color:#858b91}
+.velar-pages p{color:var(--v-muted);line-height:1.85}
+.velar-pages .velar-index,.velar-pages .velar-crumb,.velar-pages .velar-overline{color:#abb1b7;font-size:10px;letter-spacing:.18em;font-weight:700;text-transform:uppercase}
+.velar-crumb{display:flex;gap:12px;align-items:center;margin-bottom:clamp(40px,6.2vw,94px)}
+.velar-crumb a:hover{color:#fff}
+.velar-pages .velar-primary{display:inline-flex;justify-content:space-between;align-items:center;gap:35px;background:var(--v-accent);border:1px solid var(--v-accent);padding:20px 25px;color:#0b0d10;font-size:11px;letter-spacing:.09em;font-weight:800;cursor:pointer;transition:background .2s,border-color .2s}
+.velar-pages .velar-primary:hover{background:#ffc095;border-color:#ffc095}
+.velar-pages .velar-primary>span,.velar-pages .velar-inline>span{font-size:18px;font-weight:500}
+.velar-pages .velar-inline{display:inline-flex;gap:38px;align-items:center;border-bottom:1px solid #ad663f;padding-bottom:12px;color:#f4ded0;font-size:10px;letter-spacing:.08em;font-weight:750}
+.velar-pages .velar-disclaimer{padding:24px clamp(22px,6vw,110px) 38px;margin:0;font-size:11px;max-width:1080px;color:#6f7981}
+.velar-work-head,.velar-services-head,.velar-about-head,.velar-contact-head,.velar-detail-head{padding:clamp(42px,6vw,90px) clamp(22px,6vw,110px) clamp(80px,9vw,145px)}
+.velar-work-head{min-height:78vh;background:radial-gradient(ellipse 58% 110% at 97% 100%,#252930 0%,transparent 70%)}
+.velar-work-title{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(260px,.65fr);align-items:end;gap:6vw}
+.velar-work-head h1{margin:25px 0 50px}
+.velar-work-title>p{max-width:360px;margin-bottom:55px;font-size:14px}
+.velar-work-index{padding:0 clamp(22px,6vw,110px)}
+.velar-study-row{display:grid;grid-template-columns:clamp(65px,11vw,170px) 1fr 40px;gap:25px;align-items:center;border-top:1px solid var(--v-line);padding:clamp(38px,5vw,80px) 0;transition:padding .25s,background .25s}
+.velar-study-row:last-child{border-bottom:1px solid var(--v-line)}
+.velar-study-row:hover{padding-left:15px;background:#161a1e}
+.velar-study-number{font-size:clamp(36px,5vw,82px);letter-spacing:-.08em;color:#6d737a;font-weight:750}
+.velar-study-row small{font-size:10px;color:var(--v-accent);letter-spacing:.18em;font-weight:750}
+.velar-study-row h2{font-size:clamp(24px,3.4vw,56px);margin:10px 0;letter-spacing:-.05em;line-height:1.1}
+.velar-study-row p{max-width:530px;font-size:13px;margin:0}
+.velar-row-arrow{font-size:27px;justify-self:end}
+.velar-work-end{display:flex;justify-content:space-between;color:#8c9399;font-size:10px;letter-spacing:.14em;padding:36px clamp(22px,6vw,110px)}
+.velar-detail-head{padding-bottom:70px}
+.velar-detail-back{display:flex;justify-content:space-between;font-size:10px;letter-spacing:.12em;font-weight:700;margin-bottom:clamp(90px,10vw,190px);color:#b8bdc3}
+.velar-detail-back a:hover{color:#fff}
+.velar-detail-tag{color:var(--v-accent);font-size:10px;letter-spacing:.14em}
+.velar-detail-head h1{max-width:1120px;margin:18px 0 30px;font-size:clamp(54px,9vw,148px)}
+.velar-detail-head>p{max-width:620px;font-size:16px}
+.velar-detail-body{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(320px,.82fr);min-height:590px}
+.velar-detail-poster{position:relative;overflow:hidden;background:radial-gradient(ellipse at 62% 70%,#3c4149,#15191f 48%,#090b0e 90%);padding:clamp(25px,5vw,75px);display:flex;flex-direction:column;justify-content:space-between;min-height:500px}
+.velar-detail-poster>span{font-size:10px;letter-spacing:.18em;color:#bdc3ca}
+.velar-detail-poster strong{font-size:clamp(150px,24vw,440px);letter-spacing:-.13em;line-height:.7;color:#f5833726;font-weight:800}
+.velar-detail-poster i{position:absolute;width:60%;height:43%;left:24%;top:31%;border:1px solid #e2e8ec52;border-radius:50%;transform:skewX(-28deg) rotate(-13deg);box-shadow:0 0 80px #f5833715}
+.velar-detail-poster small{color:#bfc7cf;font-size:9px;letter-spacing:.13em;line-height:1.8}
+.velar-detail-notes{padding:clamp(40px,7vw,125px) clamp(30px,6vw,100px);align-self:center}
+.velar-detail-notes h2{font-size:clamp(27px,4vw,58px);letter-spacing:-.055em;line-height:1.1;margin:28px 0}
+.velar-detail-notes p{font-size:14px}
+.velar-detail-notes .velar-inline{margin-top:40px}
+.velar-detail-next{display:grid;grid-template-columns:1fr auto auto;gap:36px;align-items:center;margin:90px clamp(22px,6vw,110px) 0;border-top:1px solid var(--v-line);border-bottom:1px solid var(--v-line);padding:50px 0}
+.velar-detail-next>span{font-size:10px;letter-spacing:.13em;color:#a7adb3}
+.velar-detail-next strong{font-size:clamp(23px,3vw,46px);letter-spacing:-.04em}
+.velar-detail-next>span:last-child{font-size:26px}
+.velar-services-head{min-height:66vh;background:linear-gradient(115deg,#0b0d10 45%,#1b2027)}
+.velar-services-head h1,.velar-about-head h1{margin:30px 0}
+.velar-services-head>p{max-width:560px;font-size:15px}
+.velar-process{padding:100px clamp(22px,6vw,110px);display:grid;grid-template-columns:1fr 1.2fr;gap:10vw;border-top:1px solid var(--v-line)}
+.velar-process-title>span,.velar-about-principles>div>span,.velar-contact-main aside>span{font-size:10px;letter-spacing:.18em;color:var(--v-accent);font-weight:700}
+.velar-process-title h2{font-size:clamp(39px,5vw,74px);line-height:1.08;letter-spacing:-.065em;margin:35px 0 70px}
+.velar-process-list details{border-bottom:1px solid var(--v-line);padding:30px 0}
+.velar-process-list details:first-child{border-top:1px solid var(--v-line)}
+.velar-process-list summary{display:flex;align-items:center;gap:25px;cursor:pointer;list-style:none}
+.velar-process-list summary::-webkit-details-marker{display:none}
+.velar-process-list summary span{font-size:12px;color:var(--v-accent)}
+.velar-process-list summary strong{font-size:clamp(18px,2vw,27px);letter-spacing:-.025em;flex:1}
+.velar-process-list details[open] summary span:last-child{transform:rotate(45deg)}
+.velar-process-list details p{font-size:13px;max-width:480px;margin:24px 0 12px 43px}
+.velar-process-list details small{font-size:11px;color:#858e96;margin-left:43px}
+.velar-process-bottom{display:flex;justify-content:space-between;align-items:center;gap:18px;background:#181c21;padding:60px clamp(22px,6vw,110px);font-size:10px;letter-spacing:.1em}
+.velar-process-bottom a{color:#ffb681}
+.velar-about-head{min-height:80vh;position:relative;display:flex;flex-direction:column;align-items:flex-start;background:radial-gradient(circle at 85% 24%,#262b32,transparent 43%)}
+.velar-about-head .velar-overline{margin-top:auto;color:var(--v-accent)}
+.velar-about-head h1{margin:20px 0 38px}
+.velar-about-head p{font-size:16px;max-width:710px}
+.velar-about-principles{padding:100px clamp(22px,6vw,110px);display:grid;grid-template-columns:1fr 1fr;gap:12vw}
+.velar-about-principles h2{font-size:clamp(35px,4.4vw,66px);letter-spacing:-.07em;line-height:1.1;margin:25px 0}
+.velar-about-principles p{max-width:510px;font-size:13px}
+.velar-about-principles ol{list-style:none;padding:0;margin:0}
+.velar-about-principles li{display:grid;grid-template-columns:60px 1fr;gap:22px;border-bottom:1px solid var(--v-line);padding:28px 0;align-items:center}
+.velar-about-principles li:first-child{border-top:1px solid var(--v-line)}
+.velar-about-principles li span{color:var(--v-accent);font-size:12px}
+.velar-about-principles li strong{font-size:clamp(18px,2vw,28px);font-weight:600}
+.velar-about-close{display:flex;align-items:center;justify-content:space-between;gap:50px;padding:65px clamp(22px,6vw,110px);background:#1b2025}
+.velar-about-close>span{max-width:480px;font-size:12px;letter-spacing:.16em;line-height:1.9}
+.velar-contact-head{padding-bottom:75px;min-height:64vh}
+.velar-contact-head h1{margin:40px 0}
+.velar-contact-head>p{max-width:620px;font-size:15px}
+.velar-contact-main{display:grid;grid-template-columns:minmax(260px,.8fr) minmax(0,1.2fr);gap:8vw;padding:80px clamp(22px,6vw,110px) 110px;background:#14181d}
+.velar-contact-main aside h2{font-size:clamp(35px,4.5vw,74px);letter-spacing:-.06em;line-height:1.08;margin:35px 0}
+.velar-contact-main aside p{font-size:13px;max-width:360px}
+.velar-contact-main aside>div{display:flex;flex-direction:column;gap:12px;border-top:1px solid var(--v-line);margin-top:95px;padding-top:24px;font-size:12px;color:#aab1b8}
+.velar-contact-main aside>div strong{font-size:10px;color:var(--v-accent);letter-spacing:.13em}
+.velar-contact-main form{display:flex;flex-direction:column;gap:28px}
+.velar-contact-main label{display:flex;flex-direction:column;gap:12px;color:#dfe2e5;font-size:11px;letter-spacing:.04em}
+.velar-form-pair{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.velar-contact-main input,.velar-contact-main select,.velar-contact-main textarea{border:1px solid #4e565d;border-radius:0;background:#0f1216;color:#f3f3f3;padding:17px 16px;width:100%;font:13px/1.5 "Be Vietnam Pro",sans-serif;outline-offset:3px}
+.velar-contact-main textarea{resize:vertical;min-height:150px}
+.velar-contact-main :is(input,select,textarea):focus{outline:1px solid var(--v-accent);border-color:var(--v-accent)}
+.velar-contact-main .velar-form-note{font-size:11px;margin:0}
+.velar-contact-main button{align-self:flex-start}
+.velar-contact-main .velar-success{color:#b8e2c7;font-size:13px;margin:0}
+.ix-auto-showroom .ix-editorial-minimal{padding:clamp(70px,9vw,150px) clamp(22px,6vw,110px);background:#0b0d10;color:#f5f5f5}
+.ix-editorial-minimal-head,.ix-editorial-minimal-foot{display:flex;justify-content:space-between;gap:16px;font-size:10px;letter-spacing:.16em;color:#a1aab0}
+.ix-editorial-minimal-body{display:grid;grid-template-columns:1.4fr .6fr;align-items:end;gap:6vw;margin:clamp(70px,10vw,160px) 0}
+.ix-editorial-minimal-body h2{font-size:clamp(50px,8.5vw,140px);line-height:.95;letter-spacing:-.085em;margin:0}
+.ix-editorial-minimal-body h2 em{font-style:normal;color:#777e86}
+.ix-editorial-minimal-body p{max-width:350px;color:#b4bac0;font-size:14px;line-height:1.8;margin-bottom:35px}
+.ix-editorial-minimal-body a{display:inline-flex;gap:30px;border-bottom:1px solid #cf8f6a;padding-bottom:12px;font-size:11px;color:#ffb58b;letter-spacing:.04em}
+.ix-editorial-minimal-foot{border-top:1px solid #343a41;padding-top:24px}
+.ix-auto-showroom .ix-hero-image.bv-studio-fallback{background:radial-gradient(ellipse at 70% 62%,#20252b 0%,#11151a 45%,#090c10 95%);filter:none}
+.ix-auto-showroom .ix-hero-image.bv-studio-fallback::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(140deg,transparent 0,transparent 190px,#f8863b0a 191px,#f8863b0a 192px);pointer-events:none}
+@media(max-width:820px){
+ .velar-work-title,.velar-detail-body,.velar-process,.velar-about-principles,.velar-contact-main,.ix-editorial-minimal-body{grid-template-columns:1fr}
+ .velar-work-head,.velar-services-head,.velar-about-head,.velar-contact-head{min-height:auto}
+ .velar-work-title>p{margin:0 0 30px}
+ .velar-study-row{grid-template-columns:42px 1fr 22px;gap:12px}
+ .velar-study-row p{font-size:12px}
+ .velar-detail-head h1{word-break:break-word}
+ .velar-detail-body{min-height:auto}
+ .velar-detail-poster{min-height:350px}
+ .velar-detail-notes{padding:55px 25px}
+ .velar-detail-next{grid-template-columns:1fr auto}
+ .velar-detail-next>span:first-child{grid-column:1/-1}
+ .velar-process,.velar-about-principles,.velar-contact-main{gap:65px;padding-top:75px;padding-bottom:75px}
+ .velar-about-close{flex-direction:column;align-items:flex-start}
+ .velar-contact-main aside>div{margin-top:30px}
+ .ix-editorial-minimal-body{gap:40px;margin:80px 0}
+}
+@media(max-width:520px){
+ .velar-pages h1{font-size:clamp(48px,13vw,82px)}
+ .velar-work-title{gap:8px}
+ .velar-form-pair{grid-template-columns:1fr}
+ .velar-detail-back{margin-bottom:70px}
+ .velar-work-end,.velar-process-bottom,.ix-editorial-minimal-head,.ix-editorial-minimal-foot{flex-wrap:wrap}
+ .velar-detail-next strong{font-size:26px}
+}
+/* The full-width stage has no internal left crop or mobile canvas rectangle. */
+.ix-auto-showroom .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas{left:0;width:100%;top:0;bottom:0;height:100%}
+@media(max-width:760px){
+ .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas,
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas{left:-12%;width:124%;top:22svh;bottom:0;height:78svh}
+}

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="VELAR Black Velocity editorial poster">
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#080a0d"/><stop offset=".7" stop-color="#171b22"/><stop offset="1" stop-color="#090b0e"/></linearGradient>
+ <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#f88037"/><stop offset="1" stop-color="#ffb478"/></linearGradient>
+ <radialGradient id="bloom"><stop stop-color="#4b2f27" stop-opacity=".52"/><stop offset="1" stop-color="#101216" stop-opacity="0"/></radialGradient>
+ <pattern id="grid" width="70" height="70" patternUnits="userSpaceOnUse"><path d="M70 0H0V70" fill="none" stroke="#fff" stroke-opacity=".04" stroke-width="1"/></pattern>
+</defs>
+<rect width="1280" height="720" fill="url(#bg)"/><rect width="1280" height="720" fill="url(#grid)"/>
+<ellipse cx="970" cy="430" rx="440" ry="330" fill="url(#bloom)"/>
+<path d="M78 85H1202" stroke="#c9cdd0" stroke-opacity=".26"/><path d="M78 637H1202" stroke="#c9cdd0" stroke-opacity=".26"/>
+<path d="M78 73V95M1202 73V95M78 626V648M1202 626V648" stroke="#e8ebed" stroke-opacity=".65" stroke-width="2"/>
+<text x="80" y="63" font-family="Arial, sans-serif" font-weight="700" font-size="20" fill="#f5f5f5" letter-spacing="2">VELAR / MOTORS</text>
+<text x="1202" y="62" text-anchor="end" font-family="Arial, sans-serif" font-size="14" fill="#a9aeb5" letter-spacing="2">INTERACTIVE CONCEPT / 2026</text>
+<text x="78" y="213" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#f4a06b" letter-spacing="4">01 / THE DESIGN EXPERIENCE</text>
+<text x="72" y="338" font-family="Arial, sans-serif" font-size="96" font-weight="800" fill="#f1f2f2" letter-spacing="-6">BLACK</text>
+<text x="72" y="435" font-family="Arial, sans-serif" font-size="96" font-weight="800" fill="url(#accent)" letter-spacing="-6">VELOCITY.</text>
+<path d="M80 477H372" stroke="#f88037" stroke-width="3"/>
+<text x="79" y="518" font-family="Arial, sans-serif" font-size="19" fill="#bec3c9" letter-spacing="1.5">FORM. MATERIAL. MOTION.</text>
+<text x="80" y="598" font-family="Arial, sans-serif" font-size="15" fill="#89919a" letter-spacing="1.5">AN IMMERSIVE DIGITAL SHOWROOM</text>
+<g fill="none" stroke-linejoin="round" stroke-linecap="round">
+ <path d="M554 515L632 474L695 424L797 408L921 409L1009 441L1086 463L1165 484L1184 502L1176 541L1137 544M1049 546H774M681 546H600L555 527" stroke="#eef0f2" stroke-opacity=".55" stroke-width="3"/>
+ <path d="M638 472L790 449L998 447M720 422L757 447L946 447L903 410M626 498L1161 502" stroke="#f88945" stroke-opacity=".66" stroke-width="2"/>
+ <path d="M573 516H1176M837 515L858 488L953 485L998 510" stroke="#ffffff" stroke-opacity=".17" stroke-width="1"/>
+ <circle cx="722" cy="542" r="48" stroke="#f78f4e" stroke-opacity=".75" stroke-width="3"/><circle cx="1078" cy="542" r="48" stroke="#f78f4e" stroke-opacity=".75" stroke-width="3"/>
+ <circle cx="722" cy="542" r="30" stroke="#b6bdc5" stroke-opacity=".55" stroke-width="2"/><circle cx="1078" cy="542" r="30" stroke="#b6bdc5" stroke-opacity=".55" stroke-width="2"/>
+ <path d="M589 580L1161 580" stroke="#e9ebed" stroke-opacity=".10" stroke-width="2"/>
+</g>
+<text x="1200" y="671" text-anchor="end" font-family="Arial, sans-serif" font-size="13" fill="#969fa8" letter-spacing="3">CONCEPT STUDY / 001</text>
+<text x="80" y="670" font-family="Arial, sans-serif" font-weight="700" font-size="14" fill="#f2aa7b" letter-spacing="2">ATHENA STUDIO</text>
+</svg>

@@ -44,9 +44,10 @@ function makeStage(){
  return {stage,tex};
 }
 
-function tuneMaterials(model:THREE.Object3D){
- // Do not repaint the user-supplied vehicle: retain original material color,
- // texture maps, roughness, metallic factor and glTF clearcoat settings.
+function tuneMaterials(model:THREE.Object3D,renderer:THREE.WebGLRenderer){
+ // Keep the supplied color and texture maps intact; tame chrome-like carbon
+ // reflections and sharpen sampled texture detail at oblique camera angles.
+ const anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());
  model.traverse(child=>{
   if(!(child instanceof THREE.Mesh))return;
   child.castShadow=false;
@@ -54,9 +55,29 @@ function tuneMaterials(model:THREE.Object3D){
   const materials=Array.isArray(child.material)?child.material:[child.material];
   for(const mat of materials){
    if(!(mat instanceof THREE.MeshStandardMaterial))continue;
-   // Black paint needs broad studio reflections to retain a readable silhouette.
-   // Leave baseColor, metalness, roughness and clearcoat from the GLB untouched.
-   mat.envMapIntensity=Math.max(1.35,Math.min((mat.envMapIntensity??1)*1.65,2));
+   const blackBase=mat.color.r<.03&&mat.color.g<.03&&mat.color.b<.03;
+   if(mat.name==="carbon_1"){
+    // glTF defaults an omitted metallicFactor to 1. Carbon is not polished metal.
+    mat.metalness=Math.min(mat.metalness,.18);
+    mat.color.multiplyScalar(.55);
+    mat.envMapIntensity=.3;
+    if(mat instanceof THREE.MeshPhysicalMaterial){
+     mat.clearcoat=Math.min(mat.clearcoat,.32);
+     mat.clearcoatRoughness=Math.max(mat.clearcoatRoughness,.38);
+    }
+   }else if(blackBase||mat.name==="plastic_gloss"){
+    mat.metalness=Math.min(mat.metalness,.22);
+    mat.envMapIntensity=.36;
+    if(mat instanceof THREE.MeshPhysicalMaterial){
+     mat.clearcoat=Math.min(mat.clearcoat,.4);
+     mat.clearcoatRoughness=Math.max(mat.clearcoatRoughness,.34);
+    }
+   }
+   for(const texture of [mat.map,mat.normalMap,mat.roughnessMap,mat.metalnessMap,mat.aoMap]){
+    if(!texture)continue;
+    texture.anisotropy=anisotropy;
+    texture.needsUpdate=true;
+   }
   }
  });
 }
@@ -101,7 +122,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   }
   renderer.outputColorSpace=THREE.SRGBColorSpace;
   renderer.toneMapping=THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure=1.32;
+  renderer.toneMappingExposure=1.02;
   renderer.shadowMap.enabled=false;
   // Chromium can expose a WebGL 2 context backed by a CPU rasterizer. Such a
   // context is functional, but repeatedly easing the camera queues expensive
@@ -117,13 +138,13 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   const target=new THREE.Vector3(scrollRootId&&!isMobile?-.28:0,.68,0);
   camera.position.set(5.6,2.5,5.8);camera.lookAt(target);
 
-  const ambient=new THREE.HemisphereLight(0xf5f6fa,0x30343a,1.45);
+  const ambient=new THREE.HemisphereLight(0xf5f6fa,0x30343a,.85);
   scene.add(ambient);
-  const key=new THREE.DirectionalLight(0xffffff,3.9);
+  const key=new THREE.DirectionalLight(0xffffff,2.55);
   key.position.set(-4.5,7,5);scene.add(key);
-  const rim=new THREE.DirectionalLight(0xff8037,2.25);
+  const rim=new THREE.DirectionalLight(0xff8037,1.3);
   rim.position.set(4.5,3,-4.2);scene.add(rim);
-  const cool=new THREE.DirectionalLight(0xe0ebff,2.1);
+  const cool=new THREE.DirectionalLight(0xe0ebff,1.15);
   cool.position.set(-3,2.5,-5.5);scene.add(cool);
   const floor=makeStage();
   scene.add(floor.stage);
@@ -132,7 +153,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   const generated=pmrem.fromScene(studio,.04);
   studio.dispose();
   scene.environment=generated.texture;
-  scene.environmentIntensity=1.55;
+  scene.environmentIntensity=.95;
 
   // A GLTFLoader can finish with a "ready" scene even when individual
   // embedded WebP textures failed. Track those failures explicitly.
@@ -159,7 +180,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   // The former 650k desktop pixel ceiling rendered a 1440x900 chapter below
   // native 1x resolution. Preserve sharp geometry on a capable GPU; on a
   // software renderer retain the bounded compatibility tier used by CI.
-  let renderBudget=softwareRenderer?(isMobile?140000:240000):isMobile?1250000:3200000;
+  let renderBudget=softwareRenderer?(isMobile?140000:240000):isMobile?1600000:4700000;
 
   const schedule=()=>{
    if(!disposed&&loaded&&visible&&!document.hidden&&!request)request=requestAnimationFrame(draw);
@@ -250,15 +271,16 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    const easedMode=modeT*modeT*(3-2*modeT);
    const heroOrbit=angles[modeLower]+(angles[modeLower+1]-angles[modeLower])*easedMode;
    const orbit=(scrollRootId?scrollOrbit:heroOrbit+currentProgress*.20)+turn;
-   const baseDistance=Math.max(6.75,6.75*.93/Math.max(.60,camera.aspect));
-   const dist=baseDistance*(scrollRootId?scrollDistance:1)*(1-clamp(zoomRef.current,-1,2)*.09);
+   const baseDistance=Math.max(6.75,6.75*.93/Math.max(.60,camera.aspect))*(isMobile?1.58:1);
+   const dist=baseDistance*(scrollRootId?scrollDistance:1)*(1-clamp(zoomRef.current,-1,2)*(isMobile?.04:.09));
    const y=scrollRootId?scrollHeight:(isMobile?2.6:2.42);
    const wanted=new THREE.Vector3(Math.cos(orbit)*dist,y,Math.sin(orbit)*dist);
    if(scrollRootId)camera.position.copy(wanted);
    else camera.position.lerp(wanted,lerp);
    camera.lookAt(target);
-   cool.intensity=1.18;
-   rim.intensity=2.2;
+   // As the camera reaches the rear, dim broad studio-panel reflections so
+   // black bodywork stays graphite instead of turning silver from that angle.
+   scene.environmentIntensity=scrollRootId?THREE.MathUtils.lerp(.95,.5,currentProgress):.95;
    const renderStarted=performance.now();
    renderer.render(scene,camera);
    if(!preferImmediateCamera){
@@ -323,7 +345,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
     return;
    }
    setPercent(94);setPhase("Đang hoàn thiện ánh sáng và bề mặt sơn");
-   model=gltf.scene;tuneMaterials(model);
+   model=gltf.scene;tuneMaterials(model,renderer);
    const bounds=new THREE.Box3().setFromObject(model);
    const dims=bounds.getSize(new THREE.Vector3());
    const center=bounds.getCenter(new THREE.Vector3());

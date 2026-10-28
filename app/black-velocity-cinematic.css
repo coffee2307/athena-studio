@@ -7,7 +7,7 @@
 }
 .ix-auto-showroom .bv-cinematic-track .ix-hero-visual{inset:0;height:100%;min-height:100%;background:#11151a}
 .ix-auto-showroom .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas{
- left:21%;width:79%;height:100%;top:0;bottom:0;
+ left:0;width:100%;height:100%;top:0;bottom:0;
 }
 .ix-auto-showroom .bv-cinematic-track .ix-hero-copy{
  max-width:min(55%,760px);transition:opacity .32s ease,visibility .32s ease;

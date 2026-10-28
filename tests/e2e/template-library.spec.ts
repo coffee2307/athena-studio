@@ -178,7 +178,7 @@ test("Digital Creators gallery displays a real captured homepage and opens the o
  await expect(page.frameLocator(".template-demo-viewport iframe").locator("iframe")).toHaveCount(0);
 });
 
-test("Phase 0 immersive library thumbnails are captured from the actual corresponding websites",async({page})=>{
+test("Phase 0 immersive library preview assets load, including the VELAR editorial poster",async({page})=>{
  await page.goto("/services/web-development/templates");
  for(const [slug,label] of [
   ["creative-studio","Studio sáng tạo"],
@@ -193,7 +193,10 @@ test("Phase 0 immersive library thumbnails are captured from the actual correspo
   expect(captured.headers()["content-type"]).toContain("image/png");
   await card.getByRole("button",{name:/Trải nghiệm website/}).click();
   const frame=page.frameLocator(".template-demo-viewport iframe");
-  await expect(frame.locator(".ix-hero-photograph")).toBeVisible();
+  if(slug==="auto-showroom"){
+   await expect(frame.locator("canvas.ix-auto-3d-canvas")).toBeAttached();
+   await expect(frame.locator(".ix-hero-photograph")).toHaveCount(0);
+  }else await expect(frame.locator(".ix-hero-photograph")).toBeVisible();
   await expect(frame.locator(".immersive-stage")).toHaveAttribute("data-preset","0");
   await page.getByRole("button",{name:"Đóng bản xem trước"}).click();
  }
