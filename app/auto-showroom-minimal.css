@@ -228,3 +228,32 @@
  }
  .ix-auto-showroom .bv-cinematic-track .bv-zoom-controls{bottom:120px}
 }
+/* One editorial credit column; the redundant auto-mode buttons are removed. */
+.ix-auto-showroom .ix-scene-rail{display:block}
+.ix-auto-showroom .ix-scene-rail-copy{max-width:800px}
+@media(max-width:760px){
+ /* Animate the model's stage position across scroll progress, independently
+    of the five discrete chapter labels. A transform avoids WebGL resizes. */
+ .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas,
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas,
+ .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track[data-chapter]:not([data-chapter="0"]) .ix-hero-visual .ix-auto-3d-canvas,
+ .ix-auto-showroom .bv-cinematic-track[data-chapter]:not([data-chapter="0"]) .ix-hero-visual .ix-auto-3d-canvas{
+  top:clamp(300px,43svh,390px);height:clamp(220px,44svh,390px);
+  transform:translate3d(0,var(--bv-stage-translate,0px),0);
+ }
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-copy,
+ .ix-auto-showroom .bv-cinematic-track[data-chapter]:not([data-chapter="0"]) .ix-hero-copy{
+  opacity:var(--bv-intro-opacity,1);visibility:visible;transition:none;
+ }
+ .ix-auto-showroom .bv-cinematic-track[data-chapter]:not([data-chapter="0"]) .ix-hero-copy{pointer-events:none}
+ /* Attribution is still permanently accessible in the editorial rail below. */
+ .ix-auto-showroom .bv-cinematic-track[data-chapter]:not([data-chapter="0"]) .bv-model-credit{opacity:0;pointer-events:none}
+}
+@media(max-width:760px) and (max-height:680px){
+ .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas,
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas,
+ .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track[data-chapter]:not([data-chapter="0"]) .ix-hero-visual .ix-auto-3d-canvas,
+ .ix-auto-showroom .bv-cinematic-track[data-chapter]:not([data-chapter="0"]) .ix-hero-visual .ix-auto-3d-canvas{
+  top:clamp(280px,45svh,310px);height:clamp(150px,30svh,200px);
+ }
+}

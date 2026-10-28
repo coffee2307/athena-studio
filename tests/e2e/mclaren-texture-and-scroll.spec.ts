@@ -20,12 +20,12 @@ for(const path of ["/template-demos/auto-showroom","/template-demos/auto-showroo
   const policy=response?.headers()["content-security-policy"]??"";
   expect(policy).toContain("img-src 'self' data: blob:");
   expect(policy).toContain("connect-src 'self' blob:");
-  const button=path.endsWith("/experience")
-   ?page.getByRole("button",{name:"TẮT 3D"})
-   :page.getByRole("button",{name:"Tắt chế độ 3D"});
-  await expect(button).toBeVisible();
-  // Both McLaren routes now launch interactive 3D without a manual toggle.
-  if(!path.endsWith("/experience"))await expect(button).toHaveAttribute("aria-pressed","true");
+  if(path.endsWith("/experience"))await expect(page.getByRole("button",{name:"TẮT 3D"})).toBeVisible();
+  else{
+   // The home showroom launches in 3D without the removed 3D ON/OFF toggle.
+   await expect(page.locator(".ix-auto-showroom .ix-render-toggle")).toHaveCount(0);
+   await expect(page.locator(".ix-auto-showroom")).toHaveAttribute("data-immersive","true");
+  }
   const stage=page.locator(path.endsWith("/experience")?".journey-stage":".immersive-stage");
   const canvas=stage.locator("canvas.ix-auto-3d-canvas");
   if(!(await supportsWebGL2(page))){

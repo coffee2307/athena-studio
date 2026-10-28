@@ -38,6 +38,16 @@ export function AutoCinematicTrack({children}:{children:ReactNode}){
    const rect=track.getBoundingClientRect();
    const p=clamp(-rect.top/Math.max(1,rect.height-window.innerHeight));
    track.style.setProperty("--bv-progress",p.toFixed(5));
+   // During the first chapter, move the mobile canvas continuously with native
+   // scroll instead of abruptly swapping its top offset at chapter 02.
+   const phase=clamp((p-.02)/.28);
+   const easedPhase=phase*phase*(3-2*phase);
+   const height=window.innerHeight;
+   const short=window.innerWidth<=760&&height<=680;
+   const startTop=short?Math.min(310,Math.max(280,height*.45)):Math.min(390,Math.max(300,height*.43));
+   const delta=startTop-height*.13;
+   track.style.setProperty("--bv-stage-translate",`${(-delta*easedPhase).toFixed(1)}px`);
+   track.style.setProperty("--bv-intro-opacity",(1-clamp(p/.18)).toFixed(4));
    const next=Math.min(4,Math.floor(p*5));
    setChapter(previous=>previous===next?previous:next);
   };

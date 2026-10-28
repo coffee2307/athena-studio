@@ -182,7 +182,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   let request=0,visible=true,frameTime=0,drawn=false;
   let expensiveFrames=0,preferImmediateCamera=softwareRenderer;
   let queuedContinuation=false;
-  let drag=false,previousX=0,dragTurn=0;
+  let drag=false,previousX=0,manualOrbit=1.02,displayOrbit=1.02,manualActive=false;
   let currentMode=modeRef.current,currentProgress=0,goalProgress=0;
   // Desktop renders on every requested RAF during active interaction, not at an
   // artificial 38 FPS ceiling. Mobile retains a 30 FPS cap and pixel budget.
@@ -268,22 +268,32 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    const scrollHeight=THREE.MathUtils.lerp(journeyElevations[lower],journeyElevations[lower+1],smoothFraction);
    const scrollDistance=THREE.MathUtils.lerp(journeyDistances[lower],journeyDistances[lower+1],smoothFraction);
    // Keep the mesh at the world origin so drag and scroll share one true pivot.
-   if(canvas){
-    canvas.dataset.scrollProgress=currentProgress.toFixed(4);
-    canvas.dataset.modelX=car.position.x.toFixed(4);
-    canvas.dataset.manualOrbit=dragTurn.toFixed(4);
-   }
    // Preset changes should travel between camera poses, not snap halfway.
    const modePosition=clamp(currentMode,0,2);
    const modeLower=Math.min(1,Math.floor(modePosition));
    const modeT=modePosition-modeLower;
    const easedMode=modeT*modeT*(3-2*modeT);
    const heroOrbit=angles[modeLower]+(angles[modeLower+1]-angles[modeLower])*easedMode;
-   const orbit=(scrollRootId?scrollOrbit:heroOrbit+currentProgress*.20)+dragTurn;
+   // Drag temporarily controls an absolute camera orbit. Any new scroll input
+   // releases it and glides to the authored chapter angle (never B + C).
+   const desiredOrbit=manualActive?manualOrbit:(scrollRootId?scrollOrbit:heroOrbit+currentProgress*.20);
+   if(!drawn)displayOrbit=wrapAngle(desiredOrbit);
+   else{
+    const angularStep=drag?1:preferImmediateCamera?1:1-Math.exp(-travelStep/175);
+    displayOrbit=wrapAngle(displayOrbit+wrapAngle(desiredOrbit-displayOrbit)*angularStep);
+   }
+   if(canvas){
+    canvas.dataset.scrollProgress=currentProgress.toFixed(4);
+    canvas.dataset.modelX=car.position.x.toFixed(4);
+    canvas.dataset.manualOrbit=manualOrbit.toFixed(4);
+    canvas.dataset.cameraOrbit=displayOrbit.toFixed(4);
+    canvas.dataset.cameraGoalOrbit=wrapAngle(desiredOrbit).toFixed(4);
+    canvas.dataset.orbitSource=manualActive?"drag":"scroll";
+   }
    const baseDistance=Math.max(6.75,6.75*.93/Math.max(.60,camera.aspect))*(isMobile?1.30:1);
    const dist=baseDistance*wideDistance*(scrollRootId?scrollDistance:1)*(1-clamp(zoomRef.current,-1,2)*(isMobile?.04:.09));
    const y=scrollRootId?scrollHeight:(isMobile?2.6:2.42);
-   const wanted=new THREE.Vector3(Math.cos(orbit)*dist,y,Math.sin(orbit)*dist);
+   const wanted=new THREE.Vector3(Math.cos(displayOrbit)*dist,y,Math.sin(displayOrbit)*dist);
    if(scrollRootId)camera.position.copy(wanted);
    else camera.position.lerp(wanted,lerp);
    camera.lookAt(target);
@@ -304,25 +314,27 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
     }
    }
    if(!drawn){drawn=true;finishLoading();setPercent(100);setStatus("ready");}
-   const movement=Math.abs(currentMode-modeRef.current)+Math.abs(currentProgress-goalProgress)+camera.position.distanceTo(wanted);
+   const movement=Math.abs(currentMode-modeRef.current)+Math.abs(currentProgress-goalProgress)+Math.abs(wrapAngle(desiredOrbit-displayOrbit))+camera.position.distanceTo(wanted);
    if(movement>.006){queuedContinuation=true;schedule();}
   }
 
   const pointerDown=(event:PointerEvent)=>{
    drag=true;previousX=event.clientX;
+   manualOrbit=displayOrbit;manualActive=true;
    canvas.setPointerCapture(event.pointerId);
   };
   const pointerMove=(event:PointerEvent)=>{
    if(!drag)return;
-   // A direct, wrapped orbit follows the pointer without accumulating turns.
-   dragTurn=wrapAngle(dragTurn+clamp(event.clientX-previousX,-45,45)*.006);
+   // Change the absolute viewing angle directly; discard complete revolutions.
+   manualOrbit=wrapAngle(manualOrbit+clamp(event.clientX-previousX,-45,45)*.006);
    previousX=event.clientX;schedule();
   };
   const pointerUp=()=>{drag=false;};
   const onScroll=()=>{
    measureProgress();
-   // Preserve the visitor’s chosen orbit; scrolling only changes the chapter
-   // camera pose and must never unwind an arbitrary number of manual turns.
+   // Scroll returns to the authored absolute angle via the shortest arc.
+   // Neither the dragged angle nor its number of turns shifts the keyframes.
+   manualActive=false;
    schedule();
   };
   const onVisibility=()=>{if(document.hidden){cancelAnimationFrame(request);request=0;}else schedule();};

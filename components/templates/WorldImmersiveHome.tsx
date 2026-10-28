@@ -78,11 +78,11 @@ export function WorldImmersiveHome({slug,world,extra}:Props){
  return <main className={"ix-site ix-"+slug+" immersive-home"} data-immersive={enable3D?"true":"false"} id="world-main">
   {isAuto?<AutoCinematicTrack>{hero}</AutoCinematicTrack>:hero}
   <section className="ix-scene-rail" id={isAuto?"bv-after-cinematic":undefined} aria-label="Điều khiển trải nghiệm 3D">
-   <div className="ix-scene-rail-copy"><span>{isAuto?"01 / INTERACTIVE MACHINE":"INTERACTIVE STUDY / 0"+(mode+1)}</span><strong aria-live="polite">{caption}</strong><p>{slug==="auto-showroom"?"Mô hình McLaren 3D được tải ngay khi mở trang. Kéo ngang để xoay xe hoặc chọn góc nhìn để khám phá thân xe và khí động học. Bạn có thể tắt 3D để xem nội dung trên nền studio tĩnh.":"Ảnh editorial được ưu tiên để tải nhanh. Bật 3D khi muốn khám phá mô hình; nhấn một trong ba góc nhìn để thay đổi cấu trúc."}</p>{isAuto&&<ModelAttribution/>}</div>
-   <div className="ix-rail-actions">
-    <div className="immersive-mode-selector ix-mode-list" role="group" aria-label="Chọn chế độ 3D">{labels.map((label,i)=><button type="button" key={label} aria-pressed={mode===i} onClick={()=>{setMode(i);if(isAuto)jumpToAutoCinematicChapter(i===0?0:i===1?1:3);}}><span>{String(i+1).padStart(2,"0")}</span>{label}</button>)}</div>
+   <div className="ix-scene-rail-copy"><span>{isAuto?"01 / INTERACTIVE MACHINE":"INTERACTIVE STUDY / 0"+(mode+1)}</span><strong aria-live="polite">{caption}</strong><p>{slug==="auto-showroom"?"Mô hình McLaren 3D được tải ngay khi mở trang. Kéo ngang để xoay xe tự do; cuộn xuống để camera chuyển mượt đến từng góc nhìn cố định của hành trình.":"Ảnh editorial được ưu tiên để tải nhanh. Bật 3D khi muốn khám phá mô hình; nhấn một trong ba góc nhìn để thay đổi cấu trúc."}</p>{isAuto&&<ModelAttribution/>}</div>
+   {!isAuto&&<div className="ix-rail-actions">
+    <div className="immersive-mode-selector ix-mode-list" role="group" aria-label="Chọn chế độ 3D">{labels.map((label,i)=><button type="button" key={label} aria-pressed={mode===i} onClick={()=>setMode(i)}><span>{String(i+1).padStart(2,"0")}</span>{label}</button>)}</div>
     <button type="button" className="ix-render-toggle" aria-pressed={enable3D ? "true" : "false"} aria-label={enable3D?"Tắt chế độ 3D":"Bật chế độ 3D"} onClick={()=>setEnable3D(value=>!value)}>3D {enable3D?"ON":"OFF"}</button>
-   </div>
+   </div>}
   </section>
   <section className="ix-manifesto"><span>{isAuto?"02 / DESIGN PHILOSOPHY":"01 / THE STUDIO"}</span><h2>{isAuto?"THE FORM OF PERFORMANCE.":extra.storyTitle}</h2><div><p>{isAuto?"VELAR là showroom concept dành cho trải nghiệm thiết kế: đặt tỷ lệ, bề mặt và thao tác khám phá lên trước. Xe McLaren trong trang là tài sản 3D trình diễn do người dùng cung cấp, không phải sản phẩm do VELAR sản xuất.":extra.story}</p><Link href={root+"/about"}>{isAuto?"Khám phá định hướng":"Về chúng tôi"} <span aria-hidden="true">↗</span></Link></div></section>
   <WorldEditorialInterlude slug={slug as "creative-studio"|"architecture-studio"|"auto-showroom"}/>

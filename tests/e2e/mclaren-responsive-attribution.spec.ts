@@ -37,6 +37,40 @@ for(const {width,height} of [{width:320,height:900},{width:390,height:844}]){
  });
 }
 
+test("auto showroom hides redundant viewpoint and 3D toggle buttons",async({page})=>{
+ await page.goto(home,{waitUntil:"domcontentloaded"});
+ await expect(page.locator(".ix-auto-showroom .ix-rail-actions")).toHaveCount(0);
+ await expect(page.locator(".ix-auto-showroom .bv-cinematic-nav button")).toHaveCount(5);
+ await expect(page.locator(".ix-auto-showroom .ix-scene-rail .ix-glb-credit")).toContainText("vecarz");
+});
+
+test("mobile model moves continuously across the chapter-one boundary",async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ await page.goto(home,{waitUntil:"domcontentloaded"});
+ const track=page.locator("#bv-cinematic-track");
+ const canvas=track.locator("canvas.ix-auto-3d-canvas");
+ await expect.poll(()=>track.evaluate(el=>el.style.getPropertyValue("--bv-progress"))).not.toBe("");
+ const sample=async(progress:number)=>{
+  await page.evaluate(value=>{
+   const el=document.getElementById("bv-cinematic-track")!;
+   const distance=el.getBoundingClientRect().height-innerHeight;
+   window.scrollTo({top:el.getBoundingClientRect().top+scrollY+distance*value,behavior:"instant"});
+  },progress);
+  await expect.poll(()=>track.evaluate(el=>Number(el.style.getPropertyValue("--bv-progress")))).toBeGreaterThan(progress-.008);
+  return (await canvas.boundingBox())!.y;
+ };
+ const start=await sample(.02);
+ const before=await sample(.18);
+ const after=await sample(.22);
+ const finish=await sample(.32);
+ expect(start).toBeGreaterThan(before);
+ expect(before).toBeGreaterThan(after);
+ expect(after).toBeGreaterThan(finish);
+ expect(before-after).toBeLessThan(80);
+ await expect(track).toHaveAttribute("data-chapter","1");
+ await expect(track.locator(".bv-model-credit")).toHaveCSS("opacity","0");
+});
+
 test("wide home camera shifts its lens while orbiting around the centered car",async({page})=>{
  await page.setViewportSize({width:1440,height:900});
  await page.goto(home,{waitUntil:"domcontentloaded"});
@@ -47,7 +81,7 @@ test("wide home camera shifts its lens while orbiting around the centered car",a
  }else await expect(canvas).toHaveAttribute("data-renderer","fallback",{timeout:15000});
 });
 
-test("dragging multiple full turns stays centered and scrolling does not unwind the camera",async({page})=>{
+test("scrolling after many manual turns reaches the authored absolute orbit",async({page})=>{
  test.setTimeout(60000);
  await page.setViewportSize({width:1440,height:900});
  await page.goto(home,{waitUntil:"domcontentloaded"});
@@ -66,13 +100,28 @@ test("dragging multiple full turns stays centered and scrolling does not unwind 
   for(let i=1;i<=140;i++)emit("pointermove",300+i*35);
   emit("pointerup",5200);
  });
- await expect.poll(async()=>Number(await canvas.getAttribute("data-manual-orbit"))).toBeLessThan(-1.5);
+ await expect(canvas).toHaveAttribute("data-orbit-source","drag");
  const before=Number(await canvas.getAttribute("data-manual-orbit"));
  expect(Math.abs(before)).toBeLessThanOrEqual(Math.PI);
  await page.evaluate(()=>{window.scrollBy(0,120);window.dispatchEvent(new Event("scroll"));});
- await page.waitForTimeout(400);
- const after=Number(await canvas.getAttribute("data-manual-orbit"));
- expect(Math.abs(after-before)).toBeLessThan(.001);
+ await expect(canvas).toHaveAttribute("data-orbit-source","scroll");
+ const wrap=(a:number)=>Math.atan2(Math.sin(a),Math.cos(a));
+ const expected=(p:number)=>{
+  const angles=[1.02,1.42,2.12,3.82,5.42];
+  const position=Math.max(0,Math.min(4,p*4));
+  const lower=Math.min(3,Math.floor(position));
+  const t=position-lower;
+  const s=t*t*(3-2*t);
+  return wrap(angles[lower]+(angles[lower+1]-angles[lower])*s);
+ };
+ await expect.poll(async()=>{
+  const p=Number(await canvas.getAttribute("data-scroll-progress"));
+  const goal=Number(await canvas.getAttribute("data-camera-goal-orbit"));
+  return Math.abs(wrap(goal-expected(p)));
+ }).toBeLessThan(.002);
+ await expect.poll(async()=>Math.abs(wrap(Number(await canvas.getAttribute("data-camera-orbit"))-Number(await canvas.getAttribute("data-camera-goal-orbit"))))).toBeLessThan(.08);
+
+
  await expect(canvas).toHaveAttribute("data-model-x","0.0000");
  await expect(canvas).toHaveAttribute("data-camera-target-x","0.00");
 });
