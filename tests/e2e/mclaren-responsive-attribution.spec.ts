@@ -1,4 +1,5 @@
 import {expect,test} from "@playwright/test";
+import {supportsWebGL2} from "./webgl-capability";
 
 const home="/template-demos/auto-showroom";
 
@@ -39,5 +40,7 @@ for(const {width,height} of [{width:320,height:900},{width:390,height:844}]){
 test("wide home camera aims left to place the car clear of editorial copy",async({page})=>{
  await page.setViewportSize({width:1440,height:900});
  await page.goto(home,{waitUntil:"domcontentloaded"});
- await expect(page.locator(".ix-auto-3d-canvas")).toHaveAttribute("data-camera-target-x","-0.68",{timeout:15000});
+ const canvas=page.locator(".ix-auto-3d-canvas");
+ if(await supportsWebGL2(page))await expect(canvas).toHaveAttribute("data-camera-target-x","-0.68",{timeout:15000});
+ else await expect(canvas).toHaveAttribute("data-renderer","fallback",{timeout:15000});
 });
