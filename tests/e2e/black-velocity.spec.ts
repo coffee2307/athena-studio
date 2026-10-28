@@ -30,7 +30,8 @@ test.describe("Black Velocity / approved motor-sport composition",()=>{
  }
   await page.locator(".ix-mode-list button").nth(2).click();
   await expect(hero.locator(".immersive-stage")).toHaveAttribute("data-preset","2");
-  await expect(page.locator(".bv-feature-strip > a")).toHaveCount(3);
+  await expect(page.locator(".bv-feature-strip > a")).toHaveCount(0);
+  await expect(page.locator(".ix-editorial-minimal")).toHaveCount(1);
   await page.getByRole("button",{name:"Tắt chế độ 3D"}).click();
   await expect(canvas).toHaveAttribute("data-renderer","fallback");
   await expect(hero.locator(".ix-hero-image")).toHaveCSS("opacity","1");
@@ -52,8 +53,12 @@ test.describe("Black Velocity / approved motor-sport composition",()=>{
    });
    expect(metrics.overflow).toBeLessThanOrEqual(2);
    expect(metrics.title).not.toBeNull();
-   if(width<=760&&metrics.model&&metrics.copy)
-    expect(metrics.model.top-metrics.copy.bottom).toBeGreaterThanOrEqual(-4);
+   // A full-bleed mobile canvas intentionally extends beneath the copy;
+   // its edges must cover the viewport rather than create an inner crop.
+   if(metrics.model){
+    expect(metrics.model.left).toBeLessThanOrEqual(1);
+    expect(metrics.model.right).toBeGreaterThanOrEqual(width-1);
+   }
   });
  }
  test("cinematic page has five reversible chapters, no fake speed telemetry",async({page})=>{
@@ -71,8 +76,12 @@ test.describe("Black Velocity / approved motor-sport composition",()=>{
  test("all five automotive subpages retain content and do not mount extra WebGL",async({page})=>{
   for(const route of ["work","work/1","services","about","contact"]){
    await page.goto("/template-demos/auto-showroom/"+route,{waitUntil:"domcontentloaded"});
-   await expect(page.locator(".ix-subpage-auto-showroom")).toBeVisible();
-   await expect(page.locator(".ix-subpage-auto-showroom a[href$='/experience']")).toBeVisible();
+   const section=route.startsWith("work/")?"detail":route;
+   const main=page.locator(".velar-pages.velar-"+section);
+   await expect(main).toBeVisible();
+   await expect(main.getByRole("heading",{level:1})).toBeVisible();
+   await expect(main.locator("img")).toHaveCount(0);
+   await expect(page.locator(".ix-subpage-feature")).toHaveCount(0);
    expect(await page.locator("canvas.ix-3d-canvas").count()).toBe(0);
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
    expect(overflow).toBeLessThanOrEqual(2);
