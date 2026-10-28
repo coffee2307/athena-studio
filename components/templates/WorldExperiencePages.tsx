@@ -23,7 +23,7 @@ const sectors:Record<string,Sector>={
 };
 export function isExperienceSection(section:string){return section==="work"||section==="detail"||section==="services";}
 function Photo({slug,n,alt,priority=false}:{slug:string;n:number;alt:string;priority?:boolean}){
- return <Image src={slug==="auto-showroom"?`/template-demos/auto-showroom/black-velocity-study-${((n-1)%3+3)%3+1}.jpg`:`/template-demos/${slug}/image-${Math.max(1,Math.min(n,5))}.jpg`} alt={alt} fill priority={priority} sizes="(max-width: 720px) 95vw, (max-width: 1100px) 65vw, 48vw"/>;
+ return <Image src={slug==="auto-showroom"?`/template-demos/auto-showroom/image-${Math.max(1,Math.min(n,5))}.jpg`:`/template-demos/${slug}/image-${Math.max(1,Math.min(n,5))}.jpg`} alt={alt} fill priority={priority} sizes="(max-width: 720px) 95vw, (max-width: 1100px) 65vw, 48vw"/>;
 }
 function Angle(){return <span aria-hidden="true">↗</span>;}
 function MockNotice(){return <p className="experience-notice">Trải nghiệm trình diễn của Athena Studio. Không có giao dịch, đặt chỗ hoặc tư vấn thực tế.</p>}

@@ -3,11 +3,11 @@ import {expect,test} from "@playwright/test";
 const worlds=[
  {slug:"creative-studio",headline:/Ý tưởng không ở yên/},
  {slug:"architecture-studio",headline:/Bề mặt\. Ánh sáng/},
- {slug:"auto-showroom",headline:/EVERY SURFACE COUNTS/}
+ {slug:"auto-showroom",headline:/LESS NOISE/}
 ] as const;
 
 for(const {slug,headline} of worlds){
- test("Athena creative direction: "+slug+" keeps its original visual identity across viewports",async({page})=>{
+ test("Athena creative direction: "+slug+" keeps its own editorial identity across viewports",async({page})=>{
   // Two full navigation/GLB cycles on the model-first showroom need a larger
   // total test budget than the individual interaction assertions.
   if(slug==="auto-showroom")test.setTimeout(90000);
@@ -19,7 +19,8 @@ for(const {slug,headline} of worlds){
    await expect(home).toBeVisible();
    await expect(home).toHaveAttribute("data-immersive",slug==="auto-showroom"?"true":"false");
    await expect(editorial.getByRole("heading",{name:headline})).toHaveCount(1);
-   await expect(editorial.locator("figure")).toHaveCount(2);
+   await expect(editorial.locator("figure")).toHaveCount(slug==="auto-showroom"?0:2);
+   if(slug==="auto-showroom")await expect(editorial.locator(".ix-editorial-minimal-foot span")).toHaveCount(3);
    await expect(editorial.getByRole("link",{name:/KHÁM PHÁ DESIGN STUDIES|Xem hồ sơ công trình|Đi sâu vào từng dự án/}))
       .toHaveAttribute("href","/template-demos/"+slug+"/work");
    // The active WebGL stage can stay layout-unstable while Playwright waits
@@ -27,7 +28,8 @@ for(const {slug,headline} of worlds){
    await editorial.evaluate(element=>element.scrollIntoView({block:"center",behavior:"instant"}));
    await expect(editorial).toBeInViewport();
    // Lazy photos should only load after the image itself enters the viewport.
-   await editorial.locator("figure img").first().scrollIntoViewIfNeeded();
+   if(slug!=="auto-showroom"){
+    await editorial.locator("figure img").first().scrollIntoViewIfNeeded();
    if(slug==="creative-studio"){
     // Use the source JPEG directly: Next's on-demand optimizer has intermittently
     // stalled at larger widths during concurrent browser CI runs.
@@ -36,6 +38,7 @@ for(const {slug,headline} of worlds){
    await expect.poll(async()=>editorial.locator("figure img").first().evaluate(node=>{
     const image=node as HTMLImageElement;return image.complete&&image.naturalWidth>0;
    })).toBe(true);
+   }
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
    expect(overflow,slug+" "+width+"px overflow").toBeLessThanOrEqual(2);
    await page.locator(".ix-render-toggle").click();

@@ -17,7 +17,7 @@ function makeStage(){
  // One simple receiver and a very small procedural contact shadow; no SSR pass.
  const ground=new THREE.Mesh(
   new THREE.PlaneGeometry(24,24),
-  new THREE.MeshBasicMaterial({color:0x0b0c0f,toneMapped:false})
+  new THREE.MeshBasicMaterial({color:0x101318,toneMapped:false})
  );
  ground.rotation.x=-Math.PI/2;
  ground.position.y=-.06;
@@ -44,9 +44,10 @@ function makeStage(){
  return {stage,tex};
 }
 
-function tuneMaterials(model:THREE.Object3D){
- // Do not repaint the user-supplied vehicle: retain original material color,
- // texture maps, roughness, metallic factor and glTF clearcoat settings.
+function tuneMaterials(model:THREE.Object3D,renderer:THREE.WebGLRenderer){
+ // Keep the supplied color and texture maps intact; tame chrome-like carbon
+ // reflections and sharpen sampled texture detail at oblique camera angles.
+ const anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());
  model.traverse(child=>{
   if(!(child instanceof THREE.Mesh))return;
   child.castShadow=false;
@@ -54,7 +55,29 @@ function tuneMaterials(model:THREE.Object3D){
   const materials=Array.isArray(child.material)?child.material:[child.material];
   for(const mat of materials){
    if(!(mat instanceof THREE.MeshStandardMaterial))continue;
-   mat.envMapIntensity=Math.min(mat.envMapIntensity??1,1.15);
+   const blackBase=mat.color.r<.03&&mat.color.g<.03&&mat.color.b<.03;
+   if(mat.name==="carbon_1"){
+    // glTF defaults an omitted metallicFactor to 1. Carbon is not polished metal.
+    mat.metalness=Math.min(mat.metalness,.18);
+    mat.color.multiplyScalar(.55);
+    mat.envMapIntensity=.3;
+    if(mat instanceof THREE.MeshPhysicalMaterial){
+     mat.clearcoat=Math.min(mat.clearcoat,.32);
+     mat.clearcoatRoughness=Math.max(mat.clearcoatRoughness,.38);
+    }
+   }else if(blackBase||mat.name==="plastic_gloss"){
+    mat.metalness=Math.min(mat.metalness,.22);
+    mat.envMapIntensity=.36;
+    if(mat instanceof THREE.MeshPhysicalMaterial){
+     mat.clearcoat=Math.min(mat.clearcoat,.4);
+     mat.clearcoatRoughness=Math.max(mat.clearcoatRoughness,.34);
+    }
+   }
+   for(const texture of [mat.map,mat.normalMap,mat.roughnessMap,mat.metalnessMap,mat.aoMap]){
+    if(!texture)continue;
+    texture.anisotropy=anisotropy;
+    texture.needsUpdate=true;
+   }
   }
  });
 }
@@ -85,12 +108,13 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   const finishLoading=()=>window.clearTimeout(slowTimer);
   const motion=window.matchMedia("(prefers-reduced-motion: reduce)");
   if(motion.matches){setStatus("fallback");finishLoading();return;}
+  const isMobile=window.matchMedia("(max-width:760px)").matches;
 
   let renderer:THREE.WebGLRenderer;
   try{
    renderer=new THREE.WebGLRenderer({
-    canvas,alpha:false,antialias:!window.matchMedia("(max-width:760px)").matches,
-    powerPreference:"low-power",preserveDrawingBuffer:false
+    canvas,alpha:false,antialias:!isMobile,
+    powerPreference:isMobile?"low-power":"high-performance",preserveDrawingBuffer:false
    });
   }catch(error){
    console.warn("Athena McLaren: WebGL unavailable",error);
@@ -98,7 +122,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   }
   renderer.outputColorSpace=THREE.SRGBColorSpace;
   renderer.toneMapping=THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure=.92;
+  renderer.toneMappingExposure=1.02;
   renderer.shadowMap.enabled=false;
   // Chromium can expose a WebGL 2 context backed by a CPU rasterizer. Such a
   // context is functional, but repeatedly easing the camera queues expensive
@@ -109,19 +133,18 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   const softwareRenderer=/swiftshader|llvmpipe|softpipe|software|lavapipe/i.test(rendererName);
 
   const scene=new THREE.Scene();
-  scene.background=new THREE.Color(0x070809);
-  const camera=new THREE.PerspectiveCamera(37,1,.1,85);
-  const isMobile=window.matchMedia("(max-width:760px)").matches;
-  const target=new THREE.Vector3(scrollRootId&&!isMobile?-.64:0,.72,0);
-  camera.position.set(6.8,3.0,6.9);camera.lookAt(target);
+  scene.background=new THREE.Color(0x11151a);
+  const camera=new THREE.PerspectiveCamera(34,1,.1,85);
+  const target=new THREE.Vector3(scrollRootId&&!isMobile?-.28:0,.68,0);
+  camera.position.set(5.6,2.5,5.8);camera.lookAt(target);
 
-  const ambient=new THREE.HemisphereLight(0xe3e4e7,0x18191b,.75);
+  const ambient=new THREE.HemisphereLight(0xf5f6fa,0x30343a,.85);
   scene.add(ambient);
-  const key=new THREE.DirectionalLight(0xf6f4ef,2.65);
+  const key=new THREE.DirectionalLight(0xffffff,2.55);
   key.position.set(-4.5,7,5);scene.add(key);
-  const rim=new THREE.DirectionalLight(0xff6a18,1.45);
+  const rim=new THREE.DirectionalLight(0xff8037,1.3);
   rim.position.set(4.5,3,-4.2);scene.add(rim);
-  const cool=new THREE.DirectionalLight(0xd5dfed,1.25);
+  const cool=new THREE.DirectionalLight(0xe0ebff,1.15);
   cool.position.set(-3,2.5,-5.5);scene.add(cool);
   const floor=makeStage();
   scene.add(floor.stage);
@@ -130,7 +153,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   const generated=pmrem.fromScene(studio,.04);
   studio.dispose();
   scene.environment=generated.texture;
-  scene.environmentIntensity=.94;
+  scene.environmentIntensity=.95;
 
   // A GLTFLoader can finish with a "ready" scene even when individual
   // embedded WebP textures failed. Track those failures explicitly.
@@ -154,7 +177,10 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   // artificial 38 FPS ceiling. Mobile retains a 30 FPS cap and pixel budget.
   // Offscreen/idle rendering remains stopped by schedule()/IntersectionObserver.
   const limit=isMobile?30:softwareRenderer?100:0;
-  let renderBudget=softwareRenderer?(isMobile?75000:100000):isMobile?220000:650000;
+  // The former 650k desktop pixel ceiling rendered a 1440x900 chapter below
+  // native 1x resolution. Preserve sharp geometry on a capable GPU; on a
+  // software renderer retain the bounded compatibility tier used by CI.
+  let renderBudget=softwareRenderer?(isMobile?140000:240000):isMobile?1600000:4700000;
 
   const schedule=()=>{
    if(!disposed&&loaded&&visible&&!document.hidden&&!request)request=requestAnimationFrame(draw);
@@ -170,10 +196,14 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   const resize=()=>{
    const rect=canvas.getBoundingClientRect();
    if(rect.width<5||rect.height<5)return;
-   const natural=Math.min(window.devicePixelRatio||1,isMobile?1:1.4);
+   const natural=Math.min(window.devicePixelRatio||1,isMobile?1.7:2);
    const fit=Math.min(1,Math.sqrt(renderBudget/Math.max(1,rect.width*rect.height*natural*natural)));
-   renderer.setPixelRatio(natural*fit);
+   const effectiveDpr=natural*fit;
+   renderer.setPixelRatio(effectiveDpr);
    renderer.setSize(Math.round(rect.width),Math.round(rect.height),false);
+   canvas.dataset.renderDpr=effectiveDpr.toFixed(3);
+   canvas.dataset.renderPixels=String(Math.round(rect.width*rect.height*effectiveDpr*effectiveDpr));
+   canvas.dataset.renderQuality=softwareRenderer?"compatibility":"adaptive-high";
    camera.aspect=rect.width/rect.height;camera.updateProjectionMatrix();
   };
   function draw(now:number){
@@ -186,7 +216,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    // synchronous renders, and finish each camera move without an easing loop.
    if(!preferImmediateCamera&&queuedContinuation&&elapsed>150){
     preferImmediateCamera=true;
-    renderBudget=isMobile?90000:120000;
+    renderBudget=isMobile?180000:300000;
     resize();
    }
    queuedContinuation=false;
@@ -196,17 +226,26 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    // delay real controls, so settle camera moves in one frame after two
    // consecutive slow renders. Fast GPUs keep the cinematic easing.
    const lerp=preferImmediateCamera?1:clamp(elapsed*.007,.07,.23);
-   // Scroll chapter camera is seekable: the current document position is the
-   // sole source of truth, without a second trailing animation clock.
+   // Follow the native scroll target with a short, frame-rate-independent
+   // camera glide. Cap idle gaps so the first frame after a wheel event cannot
+   // consume the entire transition. The initial frame starts at the true pose.
+   const travelStep=Math.min(Math.max(elapsed,0),48);
+   const scrollFollow=preferImmediateCamera?1:1-Math.exp(-travelStep/145);
    currentMode=scrollRootId?modeRef.current:currentMode+(modeRef.current-currentMode)*lerp;
-   currentProgress=scrollRootId?goalProgress:currentProgress+(goalProgress-currentProgress)*lerp;
+   currentProgress=scrollRootId
+    ?(drawn?currentProgress+(goalProgress-currentProgress)*scrollFollow:goalProgress)
+    :currentProgress+(goalProgress-currentProgress)*lerp;
+   if(Math.abs(goalProgress-currentProgress)<.0005)currentProgress=goalProgress;
    turn+=(dragTurn-turn)*lerp;
    const angles=[.72,2.0,4.9];
    // Five signed-off narrative keyframes, sampled directly from scroll progress.
-   // Reversing the document scroll immediately produces the same camera pose.
-   const journeyAngles=[.72,1.35,2.10,3.75,5.48];
-   const journeyElevations=[2.65,2.38,3.1,2.52,2.84];
-   const journeyDistances=[1, .98, .79, .96, 1.03];
+   // Reversing scroll settles on the same pose once the glide catches up.
+   const journeyAngles=[.72,1.42,2.12,3.82,5.42];
+   const journeyElevations=[2.35,1.98,2.48,2.18,2.55];
+   const journeyDistances=[1,.93,.71,.88,1.04];
+   const journeyX=[0,.55,-.12,-.44,0];
+   const journeyZ=[0,-.2,.04,.18,0];
+   const journeyYaw=[0,-.09,.06,.11,0];
    const position=clamp(currentProgress*4,0,4);
    const lower=Math.min(3,Math.floor(position));
    const fraction=position-lower;
@@ -214,6 +253,17 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    const scrollOrbit=THREE.MathUtils.lerp(journeyAngles[lower],journeyAngles[lower+1],smoothFraction);
    const scrollHeight=THREE.MathUtils.lerp(journeyElevations[lower],journeyElevations[lower+1],smoothFraction);
    const scrollDistance=THREE.MathUtils.lerp(journeyDistances[lower],journeyDistances[lower+1],smoothFraction);
+   if(scrollRootId){
+    // A small, reversible glide accompanies the dolly. No fake wheel spin:
+    // this GLB exposes no separately named wheel pivots.
+    car.position.set(THREE.MathUtils.lerp(journeyX[lower],journeyX[lower+1],smoothFraction),0,
+     THREE.MathUtils.lerp(journeyZ[lower],journeyZ[lower+1],smoothFraction));
+    car.rotation.y=THREE.MathUtils.lerp(journeyYaw[lower],journeyYaw[lower+1],smoothFraction);
+   }
+   if(canvas){
+    canvas.dataset.scrollProgress=currentProgress.toFixed(4);
+    canvas.dataset.modelX=car.position.x.toFixed(4);
+   }
    // Preset changes should travel between camera poses, not snap halfway.
    const modePosition=clamp(currentMode,0,2);
    const modeLower=Math.min(1,Math.floor(modePosition));
@@ -221,15 +271,16 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    const easedMode=modeT*modeT*(3-2*modeT);
    const heroOrbit=angles[modeLower]+(angles[modeLower+1]-angles[modeLower])*easedMode;
    const orbit=(scrollRootId?scrollOrbit:heroOrbit+currentProgress*.20)+turn;
-   const baseDistance=Math.max(isMobile?7.9:7.9,7.9*.91/Math.max(.60,camera.aspect));
-   const dist=baseDistance*(scrollRootId?scrollDistance:1)*(1-clamp(zoomRef.current,-1,2)*.09);
-   const y=scrollRootId?scrollHeight:(isMobile?2.85:2.7);
+   const baseDistance=Math.max(6.75,6.75*.93/Math.max(.60,camera.aspect))*(isMobile?1.58:1);
+   const dist=baseDistance*(scrollRootId?scrollDistance:1)*(1-clamp(zoomRef.current,-1,2)*(isMobile?.04:.09));
+   const y=scrollRootId?scrollHeight:(isMobile?2.6:2.42);
    const wanted=new THREE.Vector3(Math.cos(orbit)*dist,y,Math.sin(orbit)*dist);
    if(scrollRootId)camera.position.copy(wanted);
    else camera.position.lerp(wanted,lerp);
    camera.lookAt(target);
-   cool.intensity=1.18;
-   rim.intensity=1.35;
+   // As the camera reaches the rear, dim broad studio-panel reflections so
+   // black bodywork stays graphite instead of turning silver from that angle.
+   scene.environmentIntensity=scrollRootId?THREE.MathUtils.lerp(.95,.5,currentProgress):.95;
    const renderStarted=performance.now();
    renderer.render(scene,camera);
    if(!preferImmediateCamera){
@@ -239,7 +290,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
      // Software WebGL can monopolize the main thread at the normal pixel
      // budget. Lower only slow renderers so buttons remain responsive, while
      // hardware-accelerated browsers retain the original full-resolution art.
-     renderBudget=isMobile?120000:180000;
+     renderBudget=isMobile?220000:420000;
      resize();
     }
    }
@@ -258,7 +309,13 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    previousX=event.clientX;schedule();
   };
   const pointerUp=()=>{drag=false;};
-  const onScroll=()=>{measureProgress();schedule();};
+  const onScroll=()=>{
+   measureProgress();
+   // Return from a manual orbit gradually when scrolling resumes; clearing
+   // both values here caused an immediate visible angle snap.
+   if(scrollRootId)dragTurn=0;
+   schedule();
+  };
   const onVisibility=()=>{if(document.hidden){cancelAnimationFrame(request);request=0;}else schedule();};
   const onLost=(event:Event)=>{event.preventDefault();finishLoading();setStatus("fallback");cancelAnimationFrame(request);request=0;visible=false;};
   const onMotion=()=>{if(motion.matches){finishLoading();setStatus("fallback");visible=false;cancelAnimationFrame(request);request=0;}};
@@ -288,7 +345,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
     return;
    }
    setPercent(94);setPhase("Đang hoàn thiện ánh sáng và bề mặt sơn");
-   model=gltf.scene;tuneMaterials(model);
+   model=gltf.scene;tuneMaterials(model,renderer);
    const bounds=new THREE.Box3().setFromObject(model);
    const dims=bounds.getSize(new THREE.Vector3());
    const center=bounds.getCenter(new THREE.Vector3());
