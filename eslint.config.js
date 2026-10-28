@@ -7,7 +7,7 @@ const directory = dirname(filename);
 const compat = new FlatCompat({ baseDirectory: directory });
 
 const eslintConfig = [
-	{ ignores: [".next/**", ".next-preview/**", ".agents/**", "playwright-report/**", "test-results/**", ".qa/**", "**/.qa/**", ".wrangler/**", "**/.wrangler/**", "node_modules/**", "next-env.d.ts"] },
+	{ ignores: [".next/**", ".next-preview/**", ".agents/**", "playwright-report/**", "test-results/**", ".qa/**", "**/.qa/**", ".wrangler/**", "**/.wrangler/**", "node_modules/**", ".local-recovery/**", "**/.local-recovery/**", "public/immersive/**", "public/draco/**", "vendor/digital-creators/**", "next-env.d.ts"] },
 	...compat.extends("next/core-web-vitals", "next/typescript"),
 ];
 

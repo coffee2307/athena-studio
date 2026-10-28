@@ -1,0 +1,32 @@
+import {chromium} from "@playwright/test";
+import fs from "node:fs/promises";
+const root=process.env.ATHENA_TEST_ORIGIN||"http://127.0.0.1:3182";
+const names=JSON.parse(await fs.readFile("data/templates.json","utf8")).map(item=>item.slug);
+await fs.mkdir("public/template-previews",{recursive:true});
+await fs.mkdir(".qa",{recursive:true});
+const browser=await chromium.launch({headless:true,executablePath:process.platform==="win32"?"C:/Program Files/Google/Chrome/Application/chrome.exe":undefined});
+const page=await browser.newPage({viewport:{width:1440,height:900},deviceScaleFactor:1});
+const errors=[];
+page.on("pageerror",e=>errors.push(e.message));
+for(const slug of names){
+ const response=await page.goto(root+"/template-demos/"+slug,{waitUntil:"domcontentloaded",timeout:45000});
+ await page.locator(".world-site h1").first().waitFor({timeout:15000});
+ await page.waitForTimeout(750);
+ await page.screenshot({path:"public/template-previews/"+slug+".jpg",type:"jpeg",quality:83,animations:"disabled"});
+ console.log("PREVIEW",slug,response?.status());
+}
+await page.goto(root+"/services/web-development/templates",{waitUntil:"domcontentloaded",timeout:45000});
+await page.locator(".template-card").first().waitFor();
+console.log("CARDS",await page.locator(".template-card").count());
+await page.locator(".template-card-preview").first().click();
+await page.locator(".template-revamp-dialog[open] iframe").waitFor({timeout:10000});
+console.log("MODAL",await page.locator(".template-revamp-dialog[open] iframe").getAttribute("src"));
+await page.getByRole("button",{name:"Mobile",exact:true}).click();
+console.log("MOBILE_FRAME",await page.locator(".template-demo-viewport-mobile iframe").count());
+await page.getByRole("button",{name:"Đóng bản xem trước"}).click();
+await page.setViewportSize({width:390,height:844});
+await page.reload({waitUntil:"domcontentloaded"});
+await page.waitForTimeout(500);
+console.log("MOBILE_OVERFLOW",await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,client:document.documentElement.clientWidth})));
+console.log("JS_ERRORS",JSON.stringify(errors));
+await browser.close();

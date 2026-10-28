@@ -237,7 +237,10 @@ jobs:
           }
           trap cleanup EXIT
           for attempt in $(seq 1 30); do
-            if docker exec athena-recovery-source pg_isready -U postgres -d athena_identity >/dev/null 2>&1; then break; fi
+            # The PostgreSQL image briefly accepts connections during initdb,
+            # then restarts. Wait for the final server before creating a fixture.
+            if docker logs athena-recovery-source 2>&1 | grep -Fq "PostgreSQL init process complete; ready for start up." &&
+               docker exec athena-recovery-source pg_isready -U postgres -d athena_identity >/dev/null 2>&1; then break; fi
             [ "$attempt" -lt 30 ] || exit 1
             sleep 1
           done

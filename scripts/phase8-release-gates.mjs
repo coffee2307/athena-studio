@@ -76,7 +76,9 @@ export function assertSafeExampleEnv(raw){
   if(vars.get(name)!=="false")throw Error("Release gate requires "+name+"=false by default");
  for(const name of REQUIRED_UNSET)
   if(vars.get(name)!=="")throw Error("Release gate requires "+name+" blank");
- if(vars.get("NEXT_PUBLIC_SITE_URL")!=="http://localhost:3000")
+ // Two reviewed loopback-only profiles: the original 3000 compatibility
+ // fixture and the actual Athena local development origin at 3182.
+ if(!["http://localhost:3000","http://127.0.0.1:3182"].includes(vars.get("NEXT_PUBLIC_SITE_URL")))
   throw Error("Example site must remain local until hosting owner review");
  const unknownPublic=[...vars.keys()].filter(k=>k.startsWith("NEXT_PUBLIC_")&&
   !["NEXT_PUBLIC_SITE_URL","NEXT_PUBLIC_ATHENA_AUTH_ENABLED",

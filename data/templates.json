@@ -15,21 +15,25 @@
     ],
     "pages": [
       "Trang chủ",
-      "Giới thiệu",
       "Dự án",
+      "Chi tiết dự án",
+      "Chuyên môn",
+      "Studio",
       "Liên hệ"
     ],
     "features": [
       "Bố cục dự án bất đối xứng",
       "Typography tiêu đề lớn",
       "Trang case study theo cấu trúc bài toán và giải pháp",
-      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
+      "Website demo nhiều trang với điều hướng desktop/mobile",
+      "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+      "Trải nghiệm trong popup hoặc mở toàn màn hình"
     ],
     "modules": [
       "content",
       "contact"
     ],
-    "version": "1.0.0",
+    "version": "2.0.0",
     "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
@@ -68,22 +72,25 @@
     ],
     "pages": [
       "Trang chủ",
+      "Giải pháp",
+      "Chi tiết giải pháp",
       "Dịch vụ",
-      "Năng lực",
-      "Quy trình",
+      "Về NORTH",
       "Liên hệ"
     ],
     "features": [
       "Điều hướng theo nhu cầu",
       "Khối dịch vụ theo vấn đề",
       "Lời kêu gọi tư vấn rõ ràng",
-      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
+      "Website demo nhiều trang với điều hướng desktop/mobile",
+      "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+      "Trải nghiệm trong popup hoặc mở toàn màn hình"
     ],
     "modules": [
       "content",
       "contact"
     ],
-    "version": "1.0.0",
+    "version": "2.0.0",
     "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
@@ -122,21 +129,25 @@
     ],
     "pages": [
       "Trang chủ",
-      "Danh mục",
+      "Cửa hàng",
       "Chi tiết sản phẩm",
-      "Giỏ hàng"
+      "Bộ sưu tập",
+      "Câu chuyện",
+      "Liên hệ"
     ],
     "features": [
       "Lưới sản phẩm linh hoạt",
       "Trang chi tiết có thông tin rõ",
       "Có thể kết nối Shopify hoặc backend riêng sau khi chốt phạm vi",
-      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
+      "Website demo nhiều trang với điều hướng desktop/mobile",
+      "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+      "Trải nghiệm trong popup hoặc mở toàn màn hình"
     ],
     "modules": [
       "catalog",
       "commerce"
     ],
-    "version": "1.0.0",
+    "version": "2.0.0",
     "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
@@ -175,22 +186,26 @@
     ],
     "pages": [
       "Trang chủ",
-      "Bộ sưu tập",
-      "Sản phẩm",
-      "Về thương hiệu"
+      "Collection",
+      "Chi tiết sản phẩm",
+      "Atelier",
+      "Manifesto",
+      "Liên hệ"
     ],
     "features": [
       "Mở đầu kiểu campaign",
       "Trang bộ sưu tập biên tập",
       "Tùy biến theo quy trình ra mắt",
-      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
+      "Website demo nhiều trang với điều hướng desktop/mobile",
+      "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+      "Trải nghiệm trong popup hoặc mở toàn màn hình"
     ],
     "modules": [
       "catalog",
       "commerce",
       "content"
     ],
-    "version": "1.0.0",
+    "version": "2.0.0",
     "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
@@ -229,21 +244,25 @@
     ],
     "pages": [
       "Trang chủ",
+      "Nền tảng",
+      "Chi tiết tính năng",
       "Tính năng",
-      "Bảng giá",
-      "Tài liệu"
+      "Về LUMA",
+      "Liên hệ"
     ],
     "features": [
       "Trình bày sản phẩm bằng giao diện",
       "Tách tính năng theo công việc",
       "Có thể tích hợp xác thực sau khi có yêu cầu vận hành",
-      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
+      "Website demo nhiều trang với điều hướng desktop/mobile",
+      "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+      "Trải nghiệm trong popup hoặc mở toàn màn hình"
     ],
     "modules": [
       "content",
       "auth"
     ],
-    "version": "1.0.0",
+    "version": "2.0.0",
     "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
@@ -281,21 +300,26 @@
       "Campaign"
     ],
     "pages": [
-      "Trang chiến dịch",
-      "Thông tin",
-      "Đăng ký / Liên hệ"
+      "Trang chủ",
+      "Chương trình",
+      "Chi tiết hoạt động",
+      "Trải nghiệm",
+      "Về MỞ",
+      "Liên hệ"
     ],
     "features": [
       "Một luồng nội dung xuyên suốt",
       "Điểm nhấn chữ lớn",
       "Có thể kết nối biểu mẫu theo cấu hình dự án",
-      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
+      "Website demo nhiều trang với điều hướng desktop/mobile",
+      "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+      "Trải nghiệm trong popup hoặc mở toàn màn hình"
     ],
     "modules": [
       "content",
       "contact"
     ],
-    "version": "1.0.0",
+    "version": "2.0.0",
     "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
@@ -334,22 +358,26 @@
     ],
     "pages": [
       "Trang chủ",
-      "Thực đơn / Dịch vụ",
-      "Không gian",
-      "Đặt chỗ"
+      "Thực đơn",
+      "Chi tiết món",
+      "Trải nghiệm",
+      "Câu chuyện căn bếp",
+      "Đặt bàn"
     ],
     "features": [
       "Thông tin giờ mở cửa và địa điểm",
       "Nội dung phục vụ lựa chọn dịch vụ",
       "Module booking chỉ bật khi có backend đã kiểm thử",
-      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
+      "Website demo nhiều trang với điều hướng desktop/mobile",
+      "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+      "Trải nghiệm trong popup hoặc mở toàn màn hình"
     ],
     "modules": [
       "content",
       "contact",
       "booking"
     ],
-    "version": "1.0.0",
+    "version": "2.0.0",
     "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
@@ -388,20 +416,24 @@
     ],
     "pages": [
       "Trang chủ",
-      "Chuyên mục",
       "Bài viết",
-      "Tìm kiếm"
+      "Chi tiết bài viết",
+      "Chuyên mục",
+      "Tòa soạn",
+      "Liên hệ"
     ],
     "features": [
       "Trang bài viết ưu tiên khả năng đọc",
       "Chuyên mục và nội dung liên quan",
       "Sẵn sàng nối CMS sau khi chọn quy trình biên tập",
-      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
+      "Website demo nhiều trang với điều hướng desktop/mobile",
+      "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+      "Trải nghiệm trong popup hoặc mở toàn màn hình"
     ],
     "modules": [
       "content"
     ],
-    "version": "1.0.0",
+    "version": "2.0.0",
     "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
@@ -441,7 +473,8 @@
     "pages": [
       "Trang chủ",
       "Công trình",
-      "Chi tiết dự án",
+      "Chi tiết công trình",
+      "Dịch vụ",
       "Studio",
       "Liên hệ"
     ],
@@ -449,13 +482,15 @@
       "Bộ lọc công trình theo loại hình",
       "Thư viện ảnh toàn màn hình",
       "Trang dự án theo giai đoạn",
-      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
+      "Website demo nhiều trang với điều hướng desktop/mobile",
+      "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+      "Trải nghiệm trong popup hoặc mở toàn màn hình"
     ],
     "modules": [
       "content",
       "contact"
     ],
-    "version": "1.0.0",
+    "version": "2.0.0",
     "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
@@ -494,23 +529,26 @@
     ],
     "pages": [
       "Trang chủ",
+      "Liệu trình",
+      "Chi tiết liệu trình",
       "Dịch vụ",
-      "Đội ngũ",
-      "Bảng giá",
+      "Về chúng tôi",
       "Đặt lịch"
     ],
     "features": [
       "Danh mục liệu trình",
       "Hồ sơ đội ngũ",
       "Biểu mẫu đặt lịch mô phỏng",
-      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
+      "Website demo nhiều trang với điều hướng desktop/mobile",
+      "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+      "Trải nghiệm trong popup hoặc mở toàn màn hình"
     ],
     "modules": [
       "content",
       "contact",
       "booking"
     ],
-    "version": "1.0.0",
+    "version": "2.0.0",
     "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
@@ -549,23 +587,26 @@
     ],
     "pages": [
       "Trang chủ",
-      "Danh sách căn",
-      "Chi tiết dự án",
-      "Tiện ích",
+      "Bất động sản",
+      "Chi tiết căn",
+      "Dịch vụ",
+      "Về NEST",
       "Liên hệ"
     ],
     "features": [
       "Lọc căn theo diện tích và mức giá",
       "Thư viện ảnh công trình",
       "Đăng ký lịch tham quan mô phỏng",
-      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
+      "Website demo nhiều trang với điều hướng desktop/mobile",
+      "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+      "Trải nghiệm trong popup hoặc mở toàn màn hình"
     ],
     "modules": [
       "content",
       "catalog",
       "contact"
     ],
-    "version": "1.0.0",
+    "version": "2.0.0",
     "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
@@ -606,21 +647,24 @@
       "Trang chủ",
       "Khóa học",
       "Chi tiết khóa học",
-      "Giảng viên",
+      "Lộ trình",
+      "Về MỞ",
       "Tư vấn"
     ],
     "features": [
       "Lọc khóa theo cấp độ",
       "Thẻ chương trình học",
       "Biểu mẫu tư vấn mô phỏng",
-      "Demo tương tác có ảnh thật, responsive và kiểm thử giao diện"
+      "Website demo nhiều trang với điều hướng desktop/mobile",
+      "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+      "Trải nghiệm trong popup hoặc mở toàn màn hình"
     ],
     "modules": [
       "content",
       "catalog",
       "contact"
     ],
-    "version": "1.0.0",
+    "version": "2.0.0",
     "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
@@ -641,6 +685,511 @@
       "name": "startbootstrap-landing-page",
       "url": "https://github.com/StartBootstrap/startbootstrap-landing-page",
       "license": "MIT"
+    }
+  },
+  {
+    "slug": "pet-store",
+    "title": "Cửa hàng thú cưng Poppy",
+    "category": "Lifestyle / Retail",
+    "industry": "Thú cưng",
+    "style": "Playful Soft",
+    "purpose": "Website trình diễn với trải nghiệm theo ngành",
+    "description": "Poppy chọn đồ chơi, thức ăn và phụ kiện đáng yêu để mỗi ngày cùng thú cưng đều thú vị.",
+    "variant": "petshop",
+    "tags": [
+      "Thú cưng",
+      "Playful Soft",
+      "Interactive multi-page"
+    ],
+    "pages": [
+      "Trang chủ",
+      "Danh mục / Dự án",
+      "3 trang chi tiết",
+      "Dịch vụ / Giải pháp",
+      "Về chúng tôi",
+      "Liên hệ"
+    ],
+    "features": [
+      "Bố cục chuyên biệt theo ngành",
+      "Header, footer và menu điện thoại",
+      "Trang chi tiết & lọc nội dung",
+      "Biểu mẫu demo, không gửi dữ liệu thật",
+      "Hiệu ứng phản hồi và xem trước trực tiếp"
+    ],
+    "modules": [
+      "content",
+      "contact",
+      "catalog"
+    ],
+    "version": "3.0.0",
+    "status": "interactive-demo",
+    "compatibility": {
+      "starter": "web-foundation@2",
+      "next": "15.5.x",
+      "react": "19.x"
+    },
+    "estimatedPrice": "12–24 triệu đồng",
+    "qualityTier": "Tailored Concept",
+    "demoPath": "/template-demos/pet-store",
+    "images": [
+      "/template-demos/pet-store/image-1.jpg",
+      "/template-demos/pet-store/image-2.jpg",
+      "/template-demos/pet-store/image-3.jpg",
+      "/template-demos/pet-store/image-4.jpg",
+      "/template-demos/pet-store/image-5.jpg"
+    ],
+    "reference": {
+      "name": "Original Athena demo; inspiration: MIT templates",
+      "url": "https://pixelandoak.com/templates/",
+      "license": "MIT"
+    }
+  },
+  {
+    "slug": "auto-showroom",
+    "title": "Showroom ô tô Velar",
+    "category": "Automotive",
+    "industry": "Ô tô",
+    "style": "Performance Luxury",
+    "purpose": "Website trình diễn với trải nghiệm theo ngành",
+    "description": "Không gian chọn xe cao cấp với thông tin cấu hình, chi tiết thiết kế và lịch trải nghiệm rõ ràng.",
+    "variant": "automotive",
+    "tags": [
+      "Ô tô",
+      "Performance Luxury",
+      "Interactive multi-page"
+    ],
+    "pages": [
+      "Trang chủ",
+      "Danh mục / Dự án",
+      "3 trang chi tiết",
+      "Dịch vụ / Giải pháp",
+      "Về chúng tôi",
+      "Liên hệ"
+    ],
+    "features": [
+      "Bố cục chuyên biệt theo ngành",
+      "Header, footer và menu điện thoại",
+      "Trang chi tiết & lọc nội dung",
+      "Biểu mẫu demo, không gửi dữ liệu thật",
+      "Hiệu ứng phản hồi và xem trước trực tiếp"
+    ],
+    "modules": [
+      "content",
+      "contact",
+      "catalog"
+    ],
+    "version": "3.0.0",
+    "status": "interactive-demo",
+    "compatibility": {
+      "starter": "web-foundation@2",
+      "next": "15.5.x",
+      "react": "19.x"
+    },
+    "estimatedPrice": "25–48 triệu đồng",
+    "qualityTier": "Tailored Concept",
+    "demoPath": "/template-demos/auto-showroom",
+    "images": [
+      "/template-demos/auto-showroom/image-1.jpg",
+      "/template-demos/auto-showroom/image-2.jpg",
+      "/template-demos/auto-showroom/image-3.jpg",
+      "/template-demos/auto-showroom/image-4.jpg",
+      "/template-demos/auto-showroom/image-5.jpg"
+    ],
+    "reference": {
+      "name": "Original Athena demo; inspiration: MIT templates",
+      "url": "https://pixelandoak.com/templates/",
+      "license": "MIT"
+    }
+  },
+  {
+    "slug": "engineering-industry",
+    "title": "Cơ khí chính xác Forge",
+    "category": "Industrial / B2B",
+    "industry": "Cơ khí",
+    "style": "Industrial Technical",
+    "purpose": "Website trình diễn với trải nghiệm theo ngành",
+    "description": "Giải pháp gia công CNC, tích hợp thiết bị và kỹ thuật công nghiệp theo tiêu chuẩn được kiểm soát.",
+    "variant": "industrial",
+    "tags": [
+      "Cơ khí",
+      "Industrial Technical",
+      "Interactive multi-page"
+    ],
+    "pages": [
+      "Trang chủ",
+      "Danh mục / Dự án",
+      "3 trang chi tiết",
+      "Dịch vụ / Giải pháp",
+      "Về chúng tôi",
+      "Liên hệ"
+    ],
+    "features": [
+      "Bố cục chuyên biệt theo ngành",
+      "Header, footer và menu điện thoại",
+      "Trang chi tiết & lọc nội dung",
+      "Biểu mẫu demo, không gửi dữ liệu thật",
+      "Hiệu ứng phản hồi và xem trước trực tiếp"
+    ],
+    "modules": [
+      "content",
+      "contact",
+      "catalog"
+    ],
+    "version": "3.0.0",
+    "status": "interactive-demo",
+    "compatibility": {
+      "starter": "web-foundation@2",
+      "next": "15.5.x",
+      "react": "19.x"
+    },
+    "estimatedPrice": "22–42 triệu đồng",
+    "qualityTier": "Tailored Concept",
+    "demoPath": "/template-demos/engineering-industry",
+    "images": [
+      "/template-demos/engineering-industry/image-1.jpg",
+      "/template-demos/engineering-industry/image-2.jpg",
+      "/template-demos/engineering-industry/image-3.jpg",
+      "/template-demos/engineering-industry/image-4.jpg",
+      "/template-demos/engineering-industry/image-5.jpg"
+    ],
+    "reference": {
+      "name": "Original Athena demo; inspiration: MIT templates",
+      "url": "https://pixelandoak.com/templates/",
+      "license": "MIT"
+    }
+  },
+  {
+    "slug": "finance-trust",
+    "title": "Tài chính Atlas Capital",
+    "category": "Financial Services",
+    "industry": "Tài chính",
+    "style": "Institutional Finance",
+    "purpose": "Website trình diễn với trải nghiệm theo ngành",
+    "description": "Giải pháp tài chính được thiết kế dựa trên dữ liệu, kỷ luật rủi ro và sự minh bạch.",
+    "variant": "finance",
+    "tags": [
+      "Tài chính",
+      "Institutional Finance",
+      "Interactive multi-page"
+    ],
+    "pages": [
+      "Trang chủ",
+      "Danh mục / Dự án",
+      "3 trang chi tiết",
+      "Dịch vụ / Giải pháp",
+      "Về chúng tôi",
+      "Liên hệ"
+    ],
+    "features": [
+      "Bố cục chuyên biệt theo ngành",
+      "Header, footer và menu điện thoại",
+      "Trang chi tiết & lọc nội dung",
+      "Biểu mẫu demo, không gửi dữ liệu thật",
+      "Hiệu ứng phản hồi và xem trước trực tiếp"
+    ],
+    "modules": [
+      "content",
+      "contact",
+      "catalog"
+    ],
+    "version": "3.0.0",
+    "status": "interactive-demo",
+    "compatibility": {
+      "starter": "web-foundation@2",
+      "next": "15.5.x",
+      "react": "19.x"
+    },
+    "estimatedPrice": "28–55 triệu đồng",
+    "qualityTier": "Tailored Concept",
+    "demoPath": "/template-demos/finance-trust",
+    "images": [
+      "/template-demos/finance-trust/image-1.jpg",
+      "/template-demos/finance-trust/image-2.jpg",
+      "/template-demos/finance-trust/image-3.jpg",
+      "/template-demos/finance-trust/image-4.jpg",
+      "/template-demos/finance-trust/image-5.jpg"
+    ],
+    "reference": {
+      "name": "Original Athena demo; inspiration: MIT templates",
+      "url": "https://pixelandoak.com/templates/",
+      "license": "MIT"
+    }
+  },
+  {
+    "slug": "construction-firm",
+    "title": "Xây dựng Terracon",
+    "category": "Construction / Real Estate",
+    "industry": "Xây dựng",
+    "style": "Structural Minimalism",
+    "purpose": "Website trình diễn với trải nghiệm theo ngành",
+    "description": "Đối tác xây dựng với quy trình thi công rõ ràng, quản lý chất lượng và trách nhiệm trong từng giai đoạn.",
+    "variant": "construction",
+    "tags": [
+      "Xây dựng",
+      "Structural Minimalism",
+      "Interactive multi-page"
+    ],
+    "pages": [
+      "Trang chủ",
+      "Danh mục / Dự án",
+      "3 trang chi tiết",
+      "Dịch vụ / Giải pháp",
+      "Về chúng tôi",
+      "Liên hệ"
+    ],
+    "features": [
+      "Bố cục chuyên biệt theo ngành",
+      "Header, footer và menu điện thoại",
+      "Trang chi tiết & lọc nội dung",
+      "Biểu mẫu demo, không gửi dữ liệu thật",
+      "Hiệu ứng phản hồi và xem trước trực tiếp"
+    ],
+    "modules": [
+      "content",
+      "contact",
+      "catalog"
+    ],
+    "version": "3.0.0",
+    "status": "interactive-demo",
+    "compatibility": {
+      "starter": "web-foundation@2",
+      "next": "15.5.x",
+      "react": "19.x"
+    },
+    "estimatedPrice": "22–45 triệu đồng",
+    "qualityTier": "Tailored Concept",
+    "demoPath": "/template-demos/construction-firm",
+    "images": [
+      "/template-demos/construction-firm/image-1.jpg",
+      "/template-demos/construction-firm/image-2.jpg",
+      "/template-demos/construction-firm/image-3.jpg",
+      "/template-demos/construction-firm/image-4.jpg",
+      "/template-demos/construction-firm/image-5.jpg"
+    ],
+    "reference": {
+      "name": "Original Athena demo; inspiration: MIT templates",
+      "url": "https://pixelandoak.com/templates/",
+      "license": "MIT"
+    }
+  },
+  {
+    "slug": "music-label",
+    "title": "Hãng thu âm Echo Records",
+    "category": "Music / Media",
+    "industry": "Âm nhạc",
+    "style": "Sonic Editorial",
+    "purpose": "Website trình diễn với trải nghiệm theo ngành",
+    "description": "Nơi nghệ sĩ, những bản thu và hình ảnh gặp nhau trong một ngôn ngữ giàu cảm xúc.",
+    "variant": "music",
+    "tags": [
+      "Âm nhạc",
+      "Sonic Editorial",
+      "Interactive multi-page"
+    ],
+    "pages": [
+      "Trang chủ",
+      "Danh mục / Dự án",
+      "3 trang chi tiết",
+      "Dịch vụ / Giải pháp",
+      "Về chúng tôi",
+      "Liên hệ"
+    ],
+    "features": [
+      "Bố cục chuyên biệt theo ngành",
+      "Header, footer và menu điện thoại",
+      "Trang chi tiết & lọc nội dung",
+      "Biểu mẫu demo, không gửi dữ liệu thật",
+      "Hiệu ứng phản hồi và xem trước trực tiếp"
+    ],
+    "modules": [
+      "content",
+      "contact",
+      "catalog"
+    ],
+    "version": "3.0.0",
+    "status": "interactive-demo",
+    "compatibility": {
+      "starter": "web-foundation@2",
+      "next": "15.5.x",
+      "react": "19.x"
+    },
+    "estimatedPrice": "18–35 triệu đồng",
+    "qualityTier": "Tailored Concept",
+    "demoPath": "/template-demos/music-label",
+    "images": [
+      "/template-demos/music-label/image-1.jpg",
+      "/template-demos/music-label/image-2.jpg",
+      "/template-demos/music-label/image-3.jpg",
+      "/template-demos/music-label/image-4.jpg",
+      "/template-demos/music-label/image-5.jpg"
+    ],
+    "reference": {
+      "name": "Original Athena demo; inspiration: MIT templates",
+      "url": "https://pixelandoak.com/templates/",
+      "license": "MIT"
+    }
+  },
+  {
+    "slug": "live-concert",
+    "title": "Sự kiện âm nhạc NEON LIVE",
+    "category": "Event / Ticketing",
+    "industry": "Concert",
+    "style": "Neon Maximalist",
+    "purpose": "Website trình diễn với trải nghiệm theo ngành",
+    "description": "Sân khấu âm nhạc, nghệ sĩ và những khoảnh khắc không thể phát lại. Trải nghiệm lịch diễn và vé mô phỏng.",
+    "variant": "concert",
+    "tags": [
+      "Concert",
+      "Neon Maximalist",
+      "Interactive multi-page"
+    ],
+    "pages": [
+      "Trang chủ",
+      "Danh mục / Dự án",
+      "3 trang chi tiết",
+      "Dịch vụ / Giải pháp",
+      "Về chúng tôi",
+      "Liên hệ"
+    ],
+    "features": [
+      "Bố cục chuyên biệt theo ngành",
+      "Header, footer và menu điện thoại",
+      "Trang chi tiết & lọc nội dung",
+      "Biểu mẫu demo, không gửi dữ liệu thật",
+      "Hiệu ứng phản hồi và xem trước trực tiếp"
+    ],
+    "modules": [
+      "content",
+      "contact",
+      "catalog"
+    ],
+    "version": "3.0.0",
+    "status": "interactive-demo",
+    "compatibility": {
+      "starter": "web-foundation@2",
+      "next": "15.5.x",
+      "react": "19.x"
+    },
+    "estimatedPrice": "20–42 triệu đồng",
+    "qualityTier": "Tailored Concept",
+    "demoPath": "/template-demos/live-concert",
+    "images": [
+      "/template-demos/live-concert/image-1.jpg",
+      "/template-demos/live-concert/image-2.jpg",
+      "/template-demos/live-concert/image-3.jpg",
+      "/template-demos/live-concert/image-4.jpg",
+      "/template-demos/live-concert/image-5.jpg"
+    ],
+    "reference": {
+      "name": "Original Athena demo; inspiration: MIT templates",
+      "url": "https://pixelandoak.com/templates/",
+      "license": "MIT"
+    }
+  },
+  {
+    "slug": "team-intranet",
+    "title": "Cổng thông tin nội bộ Orbit",
+    "category": "Internal Tools",
+    "industry": "Doanh nghiệp",
+    "style": "Productive Workspace",
+    "purpose": "Website trình diễn với trải nghiệm theo ngành",
+    "description": "Không gian làm việc chung giúp đội ngũ theo dõi thông báo, lịch biểu, tài liệu và tiến độ dự án.",
+    "variant": "intranet",
+    "tags": [
+      "Doanh nghiệp",
+      "Productive Workspace",
+      "Interactive multi-page"
+    ],
+    "pages": [
+      "Trang chủ",
+      "Danh mục / Dự án",
+      "3 trang chi tiết",
+      "Dịch vụ / Giải pháp",
+      "Về chúng tôi",
+      "Liên hệ"
+    ],
+    "features": [
+      "Bố cục chuyên biệt theo ngành",
+      "Header, footer và menu điện thoại",
+      "Trang chi tiết & lọc nội dung",
+      "Biểu mẫu demo, không gửi dữ liệu thật",
+      "Hiệu ứng phản hồi và xem trước trực tiếp"
+    ],
+    "modules": [
+      "content",
+      "contact",
+      "catalog"
+    ],
+    "version": "3.0.0",
+    "status": "interactive-demo",
+    "compatibility": {
+      "starter": "web-foundation@2",
+      "next": "15.5.x",
+      "react": "19.x"
+    },
+    "estimatedPrice": "35–75 triệu đồng",
+    "qualityTier": "Tailored Concept",
+    "demoPath": "/template-demos/team-intranet",
+    "images": [
+      "/template-demos/team-intranet/image-1.jpg",
+      "/template-demos/team-intranet/image-2.jpg",
+      "/template-demos/team-intranet/image-3.jpg",
+      "/template-demos/team-intranet/image-4.jpg",
+      "/template-demos/team-intranet/image-5.jpg"
+    ],
+    "reference": {
+      "name": "Original Athena demo; inspiration: MIT templates",
+      "url": "https://pixelandoak.com/templates/",
+      "license": "MIT"
+    }
+  },
+  {
+    "slug": "digital-creators",
+    "title": "Digital Creators — Không gian sáng tạo số",
+    "category": "Immersive / Education",
+    "industry": "Sáng tạo & giáo dục",
+    "style": "Immersive 3D",
+    "purpose": "Trải nghiệm kể chuyện 3D cho dự án sáng tạo số",
+    "description": "Website đa trang có Rubik giải theo cuộn, tranh xuất hiện theo nét cọ và thành phố lắp ghép 3D. Phiên bản giới thiệu đề xuất CLB sáng tạo số, không phải website đăng ký thật.",
+    "variant": "immersive",
+    "tags": [
+      "Immersive 3D",
+      "Three.js",
+      "Interactive Storytelling",
+      "Education"
+    ],
+    "pages": [
+      "Trang chủ",
+      "Giới thiệu / Tranh nét cọ",
+      "Hoạt động / Thành phố khối 3D",
+      "Đăng ký / Demo"
+    ],
+    "features": [
+      "WebGL động theo cuộn trang",
+      "Rubik 3×3 có chuỗi bước",
+      "Tranh vẽ theo thao tác cuộn",
+      "Thành phố lắp ghép hình học 3D",
+      "Giảm chuyển động, dự phòng thiết bị yếu",
+      "Website tĩnh độc lập, không thu thập thông tin người dùng"
+    ],
+    "modules": [
+      "content"
+    ],
+    "version": "1.0.0",
+    "status": "interactive-demo",
+    "compatibility": {
+      "starter": "standalone-vite@1",
+      "next": "15.5.x",
+      "react": "19.x"
+    },
+    "estimatedPrice": "Theo phạm vi tùy biến",
+    "qualityTier": "Immersive Studio",
+    "demoPath": "/template-demos/digital-creators",
+    "images": [],
+    "reference": {
+      "name": "coffee2307/digital-creators",
+      "url": "https://github.com/coffee2307/digital-creators",
+      "license": "Owner project"
     }
   }
 ]

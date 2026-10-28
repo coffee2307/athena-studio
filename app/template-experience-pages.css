@@ -1,0 +1,400 @@
+/* Athena subpages V4 — sector-led layouts: editorial, commerce, menu, event, enterprise & product. */
+.experience-sub{width:100%;min-height:55vh;overflow:hidden;background:var(--w-bg);color:var(--w-ink)}
+.experience-sub *{box-sizing:border-box}
+.experience-sub :where(h1,h2,h3,p){margin-top:0}
+.experience-sub :where(h1,h2,h3){letter-spacing:-.065em}
+.experience-sub :where(a){color:inherit;text-decoration:none}
+.experience-sub button,.experience-sub select,.experience-sub input{font:inherit;color:inherit}
+.experience-sub button{cursor:pointer}
+.experience-sub img{object-fit:cover}
+.experience-sub :where(button,a,input,select,summary):focus-visible{outline:2px solid var(--w-accent);outline-offset:4px}
+.experience-kicker{font-size:10px;font-weight:850;letter-spacing:.17em;text-transform:uppercase;color:var(--w-accent)}
+.experience-crumb{display:flex;align-items:center;gap:12px;font-size:10px;color:var(--w-muted);letter-spacing:.04em;margin-bottom:55px}
+.experience-crumb a{text-decoration:underline;text-underline-offset:5px}
+.experience-crumb span:last-child{color:var(--w-ink)}
+.experience-sub h1{font-size:clamp(52px,8vw,128px);line-height:1.01;letter-spacing:-.09em;font-weight:600}
+.experience-sub h2{font-size:clamp(36px,5vw,74px);line-height:1.1;font-weight:520}
+.experience-sub h3{font-weight:570}
+.experience-section-head{display:flex;align-items:end;justify-content:space-between;gap:35px;margin-bottom:35px}
+.experience-section-head p{font-size:10px;letter-spacing:.15em;color:var(--w-accent);font-weight:800}
+.experience-section-head h2{max-width:780px;margin:0}
+.experience-controls{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;padding:19px 0 30px;border-top:1px solid var(--w-border)}
+.experience-chips,.experience-tools{display:flex;align-items:center;flex-wrap:wrap;gap:9px}
+.experience-chips button{background:transparent;border:1px solid var(--w-border);padding:11px 17px;font-size:11px;transition:background .2s}
+.experience-chips button[aria-pressed="true"]{background:var(--w-ink);color:var(--w-bg);border-color:var(--w-ink)}
+.experience-tools input,.experience-tools select{min-width:0;border:1px solid var(--w-border);background:var(--w-paper);padding:11px 14px;font-size:11px;height:42px}
+.experience-tools input{width:205px}
+.experience-pill{font-size:10px;border:1px solid var(--w-border);border-radius:99px;padding:10px 13px;display:inline-block}
+.experience-notice{font-size:10px!important;line-height:1.8;color:var(--w-muted);margin:25px 0}
+.experience-empty{color:var(--w-muted);font-size:14px;padding:55px 0}
+.experience-close{display:flex;justify-content:space-between;align-items:end;gap:35px;background:var(--w-ink);color:var(--w-bg);padding:clamp(70px,8vw,130px) clamp(22px,7vw,110px)}
+.experience-close>div{max-width:880px}
+.experience-close>div>span{font-size:10px;letter-spacing:.14em;color:var(--w-accent);font-weight:700}
+.experience-close h2{font-size:clamp(45px,7vw,105px);margin:18px 0 25px;font-weight:530}
+.experience-close p{font-size:13px;color:color-mix(in srgb,var(--w-bg) 75%,transparent);line-height:1.9}
+.experience-close>a{white-space:nowrap;display:flex;gap:24px;align-items:center;background:var(--w-bg);color:var(--w-ink);padding:17px 20px;font-size:12px;font-weight:750}
+.experience-image{position:relative;overflow:hidden;height:100%;min-height:150px;background:var(--w-tint)}
+.experience-image img{transition:transform .6s}
+.experience-card-picture:hover img,.experience-realty-card:hover img,.experience-atelier-row:hover img{transform:scale(1.045)}
+.experience-image-arrow{position:absolute;top:16px;right:16px;width:36px;height:36px;display:grid;place-items:center;background:var(--w-bg);color:var(--w-ink);font-size:20px}
+.experience-card-picture{position:relative;display:block;height:clamp(270px,31vw,520px);overflow:hidden}
+.experience-card-index{position:absolute;left:15px;bottom:15px;font-size:9px;letter-spacing:.12em;background:var(--w-bg);color:var(--w-ink);padding:10px}
+.experience-card-meta{padding:20px 3px 5px}
+.experience-card-meta small{font-size:10px;letter-spacing:.12em;color:var(--w-accent)}
+.experience-card-meta h3{font-size:clamp(22px,2.4vw,36px);margin:13px 0 10px}
+.experience-card-meta p{font-size:12px;color:var(--w-muted);line-height:1.8}
+.experience-card-meta button,.experience-card-more{display:flex;justify-content:space-between;align-items:center;gap:24px;background:transparent;border:0;border-bottom:1px solid var(--w-border);width:100%;max-width:310px;padding:16px 0;font-size:11px;font-weight:800;margin-top:20px}
+.experience-card-meta button:hover,.experience-card-more:hover{color:var(--w-accent)}
+/* Retail: open storefront, tactile full-size products */
+.experience-retail-hero{display:grid;grid-template-columns:1fr .9fr;min-height:670px;gap:5%;padding:65px 6% 65px 7%;align-items:center}
+.experience-retail-hero h1{margin:30px 0;max-width:840px}
+.experience-retail-hero p{color:var(--w-muted);font-size:15px;line-height:1.85;max-width:600px}
+.experience-hero-small{display:flex;gap:19px;align-items:center;font-size:10px;letter-spacing:.12em;margin-top:55px;color:var(--w-muted)}
+.experience-retail-photo{height:550px;position:relative;background:var(--w-paper);overflow:hidden}
+.experience-products{padding:95px 7% 120px;background:var(--w-paper)}
+.experience-product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.experience-retail-statement{padding:115px 7%;display:grid;grid-template-columns:1fr 2fr;gap:9%;align-items:start;background:var(--w-tint)}
+.experience-retail-statement>span{font-size:10px;letter-spacing:.12em;font-weight:700}
+.experience-retail-statement h2{font-family:var(--w-serif);font-style:italic;font-weight:400;margin:0}
+.experience-retail-statement a{grid-column:2;justify-self:start;font-size:11px;border-bottom:1px solid currentColor;padding:12px 0;font-weight:800}
+.world-site[data-world="pet-store"] .experience-retail{background:#fff4ef}
+.world-site[data-world="pet-store"] .experience-retail-hero{background:#fff0e7}
+.world-site[data-world="pet-store"] .experience-retail-hero h1{font-family:var(--w-serif);font-style:italic;color:#d2739c}
+.world-site[data-world="pet-store"] .experience-retail-photo{border-radius:48% 48% 18% 18%;border:9px solid white}
+.world-site[data-world="pet-store"] .experience-products{background:#fffaf6}
+.world-site[data-world="pet-store"] .experience-catalog-card{background:white;border-radius:25px;padding:13px;box-shadow:0 10px 30px #da94a51f}
+.world-site[data-world="pet-store"] .experience-card-picture{border-radius:20px}
+.world-site[data-world="pet-store"] .experience-chips button,.world-site[data-world="pet-store"] .experience-card-meta button{border-radius:99px}
+.world-site[data-world="pet-store"] .experience-card-meta button{padding:12px 16px;background:#f9e4ec;color:#653746;border:0}
+.world-site[data-world="fashion-archive"] .experience-retail-hero{position:relative;min-height:750px;display:flex;color:#fff}
+.world-site[data-world="fashion-archive"] .experience-retail-photo{position:absolute;inset:0;width:100%;height:100%;z-index:0;filter:brightness(.42)}
+.world-site[data-world="fashion-archive"] .experience-retail-hero>div:first-child{position:relative;z-index:2;max-width:900px}
+.world-site[data-world="fashion-archive"] .experience-retail-hero h1{font-family:var(--w-serif);font-weight:400;font-style:italic}
+.world-site[data-world="fashion-archive"] .experience-retail-hero p{color:#eee}
+.world-site[data-world="fashion-archive"] .experience-retail-hero .experience-crumb{color:#eee}
+/* Restaurant: centered menu and individual food rows */
+.experience-dining{background:#efe8d9;color:#334333}
+.experience-dining-intro{padding:90px 7% 95px;max-width:1190px;margin:auto;text-align:center;display:flex;flex-direction:column;align-items:center}
+.experience-dining-intro h1{font-family:var(--w-serif);font-weight:400;line-height:1.1;margin:35px auto}
+.experience-dining-intro h1 em{font-weight:400;color:#a97556}
+.experience-dining-intro p{font-size:14px;color:#778077;line-height:1.9;max-width:580px}
+.experience-dining-intro>a{background:#324735;color:#fff;padding:16px 24px;font-size:11px;font-weight:800;margin-top:25px}
+.experience-dining-menu{padding:95px 7%;background:#f8f3e9;display:grid;grid-template-columns:.65fr 1fr;gap:8%}
+.experience-dining-menu>div:first-child>h2{font-family:var(--w-serif);font-size:clamp(45px,5vw,77px);font-weight:400;line-height:1.14;margin:30px 0}
+.experience-dining-menu>div:first-child>p{font-size:13px;line-height:1.9;color:#7b7e72}
+.experience-dining-menu .experience-controls{border:0}
+.experience-dining-menu .experience-tools{display:none}
+.experience-dining-menu .experience-chips button{border-radius:40px}
+.experience-dish{display:grid;grid-template-columns:140px 1fr 24px;gap:25px;align-items:center;padding:21px 0;border-bottom:1px solid #c8c8bb}
+.experience-dish:first-child{border-top:1px solid #c8c8bb}
+.experience-dish-photo{height:140px;position:relative}
+.experience-dish small{font-size:10px;color:#a57555;letter-spacing:.13em}
+.experience-dish h3{font-family:var(--w-serif);font-size:clamp(23px,2.7vw,40px);font-weight:400;margin:12px 0}
+.experience-dish p{font-size:12px;color:#7b7e72}
+.experience-dining-banner{height:490px;position:relative;color:white;text-align:center;display:grid;place-items:center}
+.experience-dining-banner:after{content:"";position:absolute;inset:0;background:#162b1e83}
+.experience-dining-banner>div{position:relative;z-index:2;max-width:830px;padding:30px}
+.experience-dining-banner span{font-size:10px;letter-spacing:.16em}
+.experience-dining-banner h2{font:400 clamp(55px,7vw,102px)/1.1 var(--w-serif);margin:22px 0}
+/* Editorial magazine: high-contrast serif columns */
+.experience-journal{background:#f6f0e6;color:#332822}
+.experience-journal-top{padding:75px 7% 90px;border-bottom:3px double #4b4339}
+.experience-journal-top>span{font-size:11px;letter-spacing:.14em;color:#a44935}
+.experience-journal-top h1{font:400 clamp(85px,12vw,180px)/.93 var(--w-serif);margin:35px 0;letter-spacing:-.07em}
+.experience-journal-top h1 em{color:#a44935}
+.experience-journal-top>p{font-size:15px;line-height:1.85;color:#85766a;max-width:600px}
+.experience-journal-edition{display:grid;grid-template-columns:1fr 1fr;gap:5%;align-items:center;padding:70px 7% 100px}
+.experience-journal-edition>div:first-child>span{font-size:10px;color:#a44935;letter-spacing:.13em}
+.experience-journal-edition h2{font:400 clamp(48px,5.6vw,85px)/1.1 var(--w-serif);margin:27px 0}
+.experience-journal-edition p{font-size:14px;line-height:1.9;color:#88796c}
+.experience-journal-edition a{display:inline-flex;gap:45px;border-bottom:1px solid currentColor;font-size:11px;padding:13px 0;margin-top:20px}
+.experience-journal-image{height:620px;position:relative}
+.experience-journal-list{background:#f0e8de;padding:85px 7%}
+.experience-article-row{display:grid;grid-template-columns:60px 1fr 185px 18px;gap:30px;align-items:center;padding:29px 0;border-top:1px solid #ac9e91}
+.experience-article-row>span:first-child{font-size:14px;color:#a44935}
+.experience-article-row small{font-size:10px;letter-spacing:.14em;color:#aa715f}
+.experience-article-row h3{font:400 clamp(27px,3.2vw,48px)/1.12 var(--w-serif);margin:13px 0}
+.experience-article-row p{font-size:12px;color:#887b71}
+.experience-article-photo{height:140px;position:relative}
+/* Event: posters & lineup columns */
+.experience-live{background:#19122c;color:#fff6ed}
+.world-site[data-world="campaign-landing"] .experience-live{background:#e8fc4a;color:#18210e}
+.world-site[data-world="music-label"] .experience-live{background:#f2d9d5;color:#35252c}
+.experience-live-head{padding:90px 7% 100px;position:relative}
+.experience-live-head h1{font-size:clamp(79px,13.5vw,216px);font-weight:950;line-height:.9;max-width:1300px;margin:45px 0;text-transform:uppercase}
+.experience-live-head p{font-size:15px;max-width:640px;color:var(--w-muted);line-height:1.85}
+.experience-live-head>a{display:inline-block;margin-top:23px;padding:18px 24px;background:var(--w-accent);color:#151515;font-size:12px;font-weight:850}
+.experience-live-ticker{background:var(--w-accent);color:#18151d;font-size:clamp(12px,1.8vw,25px);letter-spacing:.12em;white-space:nowrap;overflow:hidden;padding:21px 0;font-weight:950;text-align:center}
+.experience-live-program{padding:100px 7%}
+.experience-lineup-row{display:grid;grid-template-columns:65px 1fr 185px 25px;align-items:center;gap:23px;padding:28px 0;border-top:1px solid var(--w-border)}
+.experience-lineup-row>span:first-child{font-size:28px;color:var(--w-accent)}
+.experience-lineup-row small{font-size:10px;color:var(--w-accent);letter-spacing:.14em}
+.experience-lineup-row h3{font-size:clamp(30px,5vw,75px);font-weight:750;line-height:1.05;margin:14px 0}
+.experience-lineup-row p{font-size:12px;color:var(--w-muted)}
+.experience-lineup-photo{position:relative;height:145px;overflow:hidden;transform:rotate(-3deg)}
+.experience-live-program .experience-tools{display:none}
+/* Auto & property: image-driven comparison catalogue */
+.experience-realty-head{display:grid;grid-template-columns:1fr 1fr;gap:30px;min-height:750px}
+.experience-realty-head>div:first-child{padding:90px 7vw;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
+.experience-realty-head h1{font-size:clamp(51px,6.5vw,100px);margin:28px 0 35px}
+.experience-realty-head p{font-size:15px;color:var(--w-muted);line-height:1.9;max-width:530px}
+.experience-realty-picture{position:relative;min-height:600px}
+.experience-realty-list{padding:100px 7%;background:var(--w-paper)}
+.experience-realty-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.experience-realty-card{display:block;min-width:0}
+.experience-realty-card:nth-child(3){grid-column:1/-1;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:30px}
+.experience-realty-card>div{position:relative;height:430px;overflow:hidden}
+.experience-realty-card:nth-child(3)>div{height:520px}
+.experience-realty-card img{transition:transform .65s}
+.experience-realty-card>div span{position:absolute;left:16px;bottom:17px;background:var(--w-bg);color:var(--w-ink);padding:9px;font-size:10px}
+.experience-realty-card section{padding:27px 0}
+.experience-realty-card small{color:var(--w-accent);font-size:10px;letter-spacing:.13em}
+.experience-realty-card h3{font-size:clamp(29px,3.8vw,58px);margin:16px 0}
+.experience-realty-card p{font-size:13px;color:var(--w-muted);line-height:1.9}
+.experience-realty-card strong{display:block;font-size:11px;margin-top:22px}
+/* Finance/engineering/corporate/construction: technical documentation */
+.experience-industry{background:#f0f1ee;color:#1c2d33}
+.world-site[data-world="finance-trust"] .experience-industry{background:#eff4f6}
+.world-site[data-world="construction-firm"] .experience-industry{background:#e5e2da}
+.experience-industry-head{padding:70px 7% 115px;border-bottom:3px solid #24343a;display:grid;grid-template-columns:1.5fr .5fr;gap:8%}
+.experience-industry-head>nav{grid-column:1/-1}
+.experience-industry-head h1{font-size:clamp(63px,8.5vw,141px);margin:30px 0 0;font-weight:800;letter-spacing:-.085em}
+.experience-industry-head>p{align-self:end;font-size:14px;color:#617077;line-height:1.9}
+.experience-industrial-list{padding:100px 7%}
+.experience-industrial-list header{display:flex;align-items:end;justify-content:space-between;gap:30px;border-bottom:2px solid #34444a;padding-bottom:30px}
+.experience-industrial-list header span{font-size:10px;letter-spacing:.14em}
+.experience-industrial-list header h2{margin:0;max-width:750px}
+.experience-industrial-row{display:grid;grid-template-columns:65px 1fr 250px 25px;gap:25px;align-items:center;padding:28px 0;border-bottom:1px solid #aeb9b9}
+.experience-industrial-row>span:first-child{font-size:18px;color:#c66b45}
+.experience-industrial-row small{font-size:10px;letter-spacing:.13em;color:#6f8086}
+.experience-industrial-row h3{font-size:clamp(30px,4.1vw,62px);margin:12px 0}
+.experience-industrial-row p{font-size:13px;color:#768386}
+.experience-industrial-photo{height:160px;position:relative;overflow:hidden}
+.experience-industrial-manifesto{padding:95px 7%;background:#263a40;color:#f3f5f1;display:grid;grid-template-columns:1fr 1.7fr;gap:20px}
+.experience-industrial-manifesto>span{font-size:10px;letter-spacing:.14em}
+.experience-industrial-manifesto h2{font-size:clamp(43px,6.5vw,92px);margin:0}
+.experience-industrial-manifesto p{grid-column:2;font-size:14px;line-height:1.9;color:#cfdbd6}
+.experience-industrial-manifesto a{grid-column:2;justify-self:start;border-bottom:1px solid currentColor;font-size:11px;padding:12px 0}
+/* Software, intranet, education: actual tabbed product tour. */
+.experience-platform-head{padding:80px 7% 80px;text-align:center;display:flex;flex-direction:column;align-items:center}
+.experience-platform-head h1{max-width:1100px;margin:27px auto}
+.experience-platform-head>p{max-width:670px;color:var(--w-muted);line-height:1.9;font-size:15px}
+.experience-platform-shell{display:grid;grid-template-columns:260px 1fr;max-width:1450px;margin:0 auto 100px;min-height:620px;border:8px solid var(--w-border);background:var(--w-paper);box-shadow:0 25px 80px #1112;border-radius:12px;overflow:hidden}
+.experience-platform-shell aside{padding:26px 16px;background:var(--w-tint);border-right:1px solid var(--w-border);display:flex;flex-direction:column;gap:15px}
+.experience-platform-shell aside>strong{font-size:18px;letter-spacing:-.06em}
+.experience-platform-shell aside>span{font-size:9px;letter-spacing:.13em;color:var(--w-muted);margin-bottom:28px}
+.experience-platform-shell aside button{display:flex;gap:15px;align-items:center;text-align:left;width:100%;padding:15px 12px;border:1px solid transparent;background:transparent;font-size:12px}
+.experience-platform-shell aside button span{font-size:10px;color:var(--w-muted)}
+.experience-platform-shell aside button[aria-pressed="true"]{background:var(--w-paper);border-color:var(--w-border);color:var(--w-ink)}
+.experience-platform-shell>div:last-child{padding:35px 4%}
+.experience-platform-top{display:flex;justify-content:space-between;gap:20px;color:var(--w-muted);font-size:10px;letter-spacing:.1em}
+.experience-platform-shell>div:last-child>h2{font-size:clamp(32px,4.5vw,67px);margin:45px 0 12px}
+.experience-platform-shell>div:last-child>p{font-size:13px;color:var(--w-muted)}
+.experience-platform-feature{display:grid;grid-template-columns:1.1fr .9fr;gap:25px;align-items:center;margin-top:40px}
+.experience-platform-visual{height:350px;position:relative}
+.experience-platform-feature>div:last-child{padding:15px}
+.experience-platform-feature small{font-size:9px;letter-spacing:.15em;color:var(--w-accent)}
+.experience-platform-feature h3{font-size:clamp(25px,3vw,47px);margin:18px 0}
+.experience-platform-feature p{font-size:13px;line-height:1.85;color:var(--w-muted)}
+.experience-platform-feature a{display:inline-block;font-size:11px;border-bottom:1px solid currentColor;margin-top:24px;padding:11px 0}
+.experience-platform-more{padding:90px 7%;background:var(--w-tint)}
+.experience-platform-more>a{display:grid;grid-template-columns:65px 1fr 23px;gap:20px;align-items:center;border-top:1px solid var(--w-border);padding:25px 0}
+.experience-platform-more>a strong{font-size:clamp(24px,3vw,44px);letter-spacing:-.05em}
+.experience-platform-more>a span{font-size:11px;color:var(--w-muted)}
+/* Architecture, creative and wellness: large staggered editorial projects */
+.experience-atelier-head{display:grid;grid-template-columns:1.1fr .9fr;min-height:730px}
+.experience-atelier-head>div:first-child{padding:85px 7vw;display:flex;flex-direction:column;justify-content:center}
+.experience-atelier-head h1{margin:30px 0;font-family:var(--w-serif);font-weight:400}
+.experience-atelier-head p{max-width:600px;color:var(--w-muted);font-size:15px;line-height:1.9}
+.experience-atelier-cover{position:relative;min-height:600px}
+.experience-atelier-list{padding:110px 7%}
+.experience-atelier-row{display:grid;grid-template-columns:1.3fr .7fr;gap:7%;align-items:center;margin:0 0 100px}
+.experience-atelier-row:nth-child(even){direction:rtl;grid-template-columns:1fr 1fr}
+.experience-atelier-row:nth-child(even)>*{direction:ltr}
+.experience-atelier-image{height:clamp(410px,48vw,700px);position:relative;overflow:hidden}
+.experience-atelier-row>div:last-child small{font-size:10px;letter-spacing:.15em;color:var(--w-accent)}
+.experience-atelier-row h2{font-size:clamp(36px,5vw,79px);margin:26px 0 20px}
+.experience-atelier-row p{font-size:14px;color:var(--w-muted);line-height:1.8}
+.experience-atelier-row strong{display:block;margin-top:35px;font-size:11px;border-bottom:1px solid var(--w-border);padding:14px 0;max-width:240px}
+/* Detail pages: magazine spread / product dossier rather than generic hero. */
+.experience-detail-intro{padding:70px 7% 65px}
+.experience-detail-back{display:inline-block;border-bottom:1px solid var(--w-border);padding:10px 0;font-size:12px;margin-bottom:48px}
+.experience-detail-intro>div:last-child{max-width:1190px}
+.experience-detail-intro h1{font-size:clamp(59px,9vw,139px);line-height:1.05;margin:22px 0}
+.experience-detail-intro>div:last-child>p{font-size:16px;color:var(--w-muted);line-height:1.8;max-width:690px}
+.experience-detail-layout{display:grid;grid-template-columns:1.3fr .7fr;gap:6%;padding:0 7% 110px}
+.experience-detail-gallery{min-width:0}
+.experience-detail-primary{position:relative;height:clamp(430px,58vw,800px);overflow:hidden;background:var(--w-tint)}
+.experience-detail-secondary{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:15px}
+.experience-detail-secondary>div{position:relative;height:290px;overflow:hidden}
+.experience-detail-aside{border-top:1px solid var(--w-border);padding-top:35px}
+.experience-detail-aside>span{font-size:10px;letter-spacing:.14em;color:var(--w-accent)}
+.experience-detail-aside>h2{font-size:clamp(36px,4.1vw,60px);margin:22px 0;line-height:1.12}
+.experience-detail-aside>p{font-size:14px;color:var(--w-muted);line-height:1.9}
+.experience-detail-facts{margin:40px 0}
+.experience-detail-facts>div{display:flex;gap:15px;align-items:center;padding:20px 0;border-bottom:1px solid var(--w-border);font-size:12px}
+.experience-detail-facts>div:first-child{border-top:1px solid var(--w-border)}
+.experience-detail-facts small{font-size:10px;color:var(--w-accent);width:30px}
+.experience-detail-purchase{display:grid;gap:15px}
+.experience-detail-purchase label{font-size:11px;display:flex;align-items:center;justify-content:space-between}
+.experience-detail-purchase select{padding:9px 18px;border:1px solid var(--w-border);background:var(--w-bg)}
+.experience-detail-purchase button,.experience-detail-action{display:flex;justify-content:space-between;gap:20px;background:var(--w-ink);color:var(--w-bg)!important;padding:19px 22px;border:1px solid var(--w-ink);font-size:12px;font-weight:800}
+.experience-detail-next{padding:45px 7%;border-block:1px solid var(--w-border);display:flex;justify-content:space-between;align-items:center;gap:20px}
+.experience-detail-next>span{font-size:10px;color:var(--w-accent);letter-spacing:.1em}
+.experience-detail-next a{display:flex;gap:30px;font-size:clamp(24px,3.4vw,52px);max-width:850px}
+.experience-story-excerpt{padding:120px clamp(25px,17vw,300px);background:var(--w-paper)}
+.experience-story-excerpt>span{font-size:10px;letter-spacing:.12em;color:var(--w-accent)}
+.experience-story-excerpt h2{font:400 clamp(49px,7vw,93px)/1.1 var(--w-serif);margin:30px 0}
+.experience-story-excerpt p{font:400 17px/2 var(--w-serif);margin-bottom:30px}
+.experience-detail-journal h1,.experience-detail-dining h1,.experience-detail-atelier h1{font-family:var(--w-serif);font-weight:400}
+.experience-detail-live .experience-detail-intro h1{font-weight:950;text-transform:uppercase}
+/* Services become solution index, native disclosure interaction and approach. */
+.experience-services-hero{padding:75px 7% 0}
+.experience-services-hero h1{font-size:clamp(65px,11vw,175px);margin:22px 0}
+.experience-services-hero h1 span{color:var(--w-accent)}
+.experience-services-hero>p{font-size:15px;color:var(--w-muted);line-height:1.9;max-width:780px;margin-bottom:50px}
+.experience-services-hero-photo{height:clamp(340px,50vw,630px);position:relative;overflow:hidden}
+.experience-services-index{padding:100px 7%;background:var(--w-paper)}
+.experience-service-panels{border-top:1px solid var(--w-border)}
+.experience-service-panels details{border-bottom:1px solid var(--w-border)}
+.experience-service-panels summary{display:grid;grid-template-columns:80px 1fr 35px;gap:23px;align-items:center;cursor:pointer;list-style:none;padding:31px 0}
+.experience-service-panels summary::-webkit-details-marker{display:none}
+.experience-service-panels summary>span:first-child{font-size:12px;color:var(--w-accent)}
+.experience-service-panels summary strong{font-size:clamp(26px,4vw,59px);line-height:1.1;letter-spacing:-.06em;font-weight:550}
+.experience-expand-symbol{font-size:33px;color:var(--w-accent);font-weight:300}
+.experience-service-panels details[open] .experience-expand-symbol{transform:rotate(45deg)}
+.experience-service-body{display:grid;grid-template-columns:1fr .65fr;gap:8%;padding:0 0 35px 100px}
+.experience-service-body>div:first-child>p{font-size:14px;color:var(--w-muted);line-height:1.9}
+.experience-service-body small{display:block;font-size:10px;color:var(--w-accent);letter-spacing:.12em;margin:30px 0}
+.experience-service-body a{display:inline-flex;gap:20px;border-bottom:1px solid currentColor;padding:10px 0;font-size:11px;font-weight:800}
+.experience-service-thumb{position:relative;height:230px}
+.experience-services-method{display:grid;grid-template-columns:1fr 1fr;gap:9%;padding:95px 7%;background:var(--w-tint)}
+.experience-services-method>div:first-child>span{font-size:10px;letter-spacing:.13em;color:var(--w-accent)}
+.experience-services-method h2{margin:24px 0}
+.experience-services-method>div:last-child>p{font-size:14px;line-height:1.9;color:var(--w-muted)}
+.experience-method-item{display:flex;gap:25px;align-items:center;padding:21px 0;border-bottom:1px solid var(--w-border)}
+.experience-method-item>span{font-size:11px;color:var(--w-accent)}
+.experience-method-item strong{font-size:clamp(17px,2.4vw,29px);font-weight:550}
+.experience-services-industry .experience-services-hero{background:#e6ebed;color:#243840}
+.experience-services-platform .experience-services-hero{background:var(--w-tint)}
+.experience-services-dining .experience-services-hero h1,.experience-services-atelier .experience-services-hero h1{font-family:var(--w-serif);font-weight:400}
+.experience-services-live .experience-services-hero h1{font-weight:950;text-transform:uppercase}
+/* Responsive */
+@media(max-width:1050px){
+ .experience-controls{align-items:start}
+ .experience-section-head{align-items:start;flex-direction:column}
+ .experience-platform-shell{margin-inline:22px}
+ .experience-dining-menu{gap:4%}
+ .experience-industrial-row{grid-template-columns:45px 1fr 170px 18px}
+ .experience-article-row{grid-template-columns:30px 1fr 130px 18px}
+}
+@media(max-width:760px){
+ .experience-sub h1{font-size:clamp(47px,10vw,82px)}
+ .experience-sub h2{font-size:clamp(35px,7vw,60px)}
+ .experience-close{display:block;padding:70px 23px}
+ .experience-close>a{max-width:max-content;margin-top:27px}
+ .experience-crumb{margin-bottom:35px}
+ .experience-controls{flex-direction:column;align-items:start}
+ .experience-tools{width:100%}
+ .experience-tools input{width:min(100%,320px)}
+ .experience-retail-hero,.experience-realty-head,.experience-atelier-head{grid-template-columns:1fr;gap:25px}
+ .experience-retail-hero{padding:55px 22px}
+ .experience-retail-photo{height:410px}
+ .world-site[data-world="fashion-archive"] .experience-retail-hero{min-height:590px}
+ .experience-products,.experience-realty-list,.experience-industrial-list,.experience-atelier-list{padding:70px 23px}
+ .experience-product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:25px}
+ .experience-card-picture{height:320px}
+ .experience-retail-statement{grid-template-columns:1fr;padding:70px 23px;gap:25px}
+ .experience-retail-statement a{grid-column:1}
+ .experience-dining-intro{padding:75px 23px}
+ .experience-dining-menu{grid-template-columns:1fr;padding:70px 23px}
+ .experience-dining-menu>div:first-child{margin-bottom:25px}
+ .experience-dining-banner{height:340px}
+ .experience-journal-top{padding:65px 23px}
+ .experience-journal-top h1{font-size:clamp(66px,11vw,100px)}
+ .experience-journal-edition{grid-template-columns:1fr;padding:70px 23px}
+ .experience-journal-image{height:420px;margin-top:30px}
+ .experience-journal-list{padding:70px 23px}
+ .experience-article-row{grid-template-columns:35px 1fr 90px 16px;gap:12px}
+ .experience-article-photo{height:100px}
+ .experience-live-head{padding:70px 23px}
+ .experience-live-head h1{font-size:clamp(68px,11vw,120px)}
+ .experience-live-program{padding:70px 23px}
+ .experience-lineup-row{grid-template-columns:30px 1fr 110px 18px;gap:12px}
+ .experience-lineup-photo{height:105px}
+ .experience-lineup-row h3{font-size:clamp(27px,5vw,50px)}
+ .experience-realty-head>div:first-child{padding:70px 23px}
+ .experience-realty-picture{min-height:420px}
+ .experience-realty-card>div{height:330px}
+ .experience-realty-card:nth-child(3)>div{height:370px}
+ .experience-industry-head{grid-template-columns:1fr;padding:70px 23px}
+ .experience-industry-head h1{font-size:clamp(55px,9vw,90px)}
+ .experience-industrial-row{grid-template-columns:35px 1fr 120px 15px;gap:13px}
+ .experience-industrial-row h3{font-size:29px}
+ .experience-industrial-photo{height:125px}
+ .experience-industrial-manifesto{grid-template-columns:1fr;padding:75px 23px}
+ .experience-industrial-manifesto p,.experience-industrial-manifesto a{grid-column:1}
+ .experience-platform-head{padding:75px 23px}
+ .experience-platform-shell{grid-template-columns:1fr;min-height:0}
+ .experience-platform-shell aside{display:flex;flex-direction:row;align-items:center;flex-wrap:wrap}
+ .experience-platform-shell aside>span{display:none}
+ .experience-platform-shell aside>strong{flex-basis:100%}
+ .experience-platform-shell aside button{width:auto}
+ .experience-platform-feature{grid-template-columns:1fr}
+ .experience-platform-visual{height:330px}
+ .experience-platform-more{padding:75px 23px}
+ .experience-atelier-head>div:first-child{padding:70px 23px}
+ .experience-atelier-cover{min-height:440px}
+ .experience-atelier-row,.experience-atelier-row:nth-child(even){grid-template-columns:1fr;direction:ltr;gap:28px;margin-bottom:75px}
+ .experience-atelier-image{height:390px}
+ .experience-atelier-row>div:last-child{padding:0 8px}
+ .experience-detail-intro{padding:65px 23px}
+ .experience-detail-layout{grid-template-columns:1fr;padding:0 23px 80px;gap:35px}
+ .experience-detail-primary{height:500px}
+ .experience-detail-secondary>div{height:240px}
+ .experience-detail-next{padding:35px 23px;flex-direction:column;align-items:start}
+ .experience-story-excerpt{padding:75px 23px}
+ .experience-services-hero{padding:65px 23px 0}
+ .experience-services-index{padding:75px 23px}
+ .experience-service-body{padding-left:0;gap:25px}
+ .experience-services-method{grid-template-columns:1fr;padding:75px 23px}
+}
+@media(max-width:520px){
+ .experience-product-grid,.experience-realty-grid{grid-template-columns:1fr}
+ .experience-retail-photo{height:320px}
+ .experience-card-picture{height:350px}
+ .experience-dish{grid-template-columns:92px 1fr 15px;gap:11px}
+ .experience-dish-photo{height:99px}
+ .experience-dish h3{font-size:25px}
+ .experience-dining-intro h1{font-size:49px}
+ .experience-journal-top h1{font-size:61px}
+ .experience-journal-edition h2{font-size:51px}
+ .experience-article-row{grid-template-columns:21px 1fr 15px;gap:8px}
+ .experience-article-photo{display:none}
+ .experience-article-row h3{font-size:26px}
+ .experience-lineup-row{grid-template-columns:21px 1fr 15px;gap:8px}
+ .experience-lineup-photo{display:none}
+ .experience-lineup-row h3{font-size:30px}
+ .experience-realty-card:nth-child(3){grid-column:1;grid-template-columns:1fr}
+ .experience-realty-card:nth-child(3)>div{height:340px}
+ .experience-industrial-row{grid-template-columns:28px 1fr 15px;gap:10px}
+ .experience-industrial-photo{display:none}
+ .experience-industrial-row h3{font-size:29px}
+ .experience-platform-shell{margin-inline:12px;border-width:5px}
+ .experience-platform-shell aside{padding:18px 8px}
+ .experience-platform-shell aside button{font-size:10px;padding:11px 7px}
+ .experience-platform-shell>div:last-child{padding:18px}
+ .experience-platform-top{font-size:9px}
+ .experience-platform-top span:last-child{display:none}
+ .experience-platform-visual{height:240px}
+ .experience-atelier-image{height:320px}
+ .experience-detail-intro h1{font-size:49px}
+ .experience-detail-primary{height:390px}
+ .experience-detail-secondary>div{height:160px}
+ .experience-service-panels summary{grid-template-columns:30px 1fr 25px;gap:9px;padding:25px 0}
+ .experience-service-panels summary strong{font-size:26px}
+ .experience-service-body{grid-template-columns:1fr}
+ .experience-service-thumb{height:240px}
+ .experience-close h2{font-size:42px}
+}
+@media(prefers-reduced-motion:reduce){.experience-sub *, .experience-sub *:before,.experience-sub *:after{transition:none!important;animation:none!important}}

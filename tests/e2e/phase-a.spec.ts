@@ -3,14 +3,13 @@ import {test,expect} from "@playwright/test";
 test("CTA dẫn đến hành động khác nhau theo ngữ cảnh, không quay lại trang hiện tại",async({page})=>{
  await page.goto("/");
  const footer=page.locator(".agency-footer-cta-button");
- await expect(footer).toHaveAttribute("href","/contact");
+ await expect(footer).toHaveAttribute("href","/start");
  await footer.click();
- await expect(page).toHaveURL(/\/contact$/);
- const newAction=page.locator(".agency-footer-cta-button");
- await expect(newAction).toHaveText(/Soạn email tư vấn/);
- await newAction.click();
- await expect(page.getByRole("dialog",{name:"Soạn yêu cầu tư vấn"})).toBeVisible();
+ await expect(page).toHaveURL(/\/start$/);
+ await expect(page.locator(".launch-flow-progress>div")).toHaveCount(3);
+ await expect(page.locator(".launch-service-grid button")).toHaveCount(4);
  await expect(page.locator(".agency-header .agency-primary-cta")).toHaveCount(1);
+ await page.goto("/contact");
  await expect(page.locator(".form-offline button")).toHaveText(/Soạn email mô tả nhu cầu/);
 });
 

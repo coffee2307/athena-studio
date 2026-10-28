@@ -10,5 +10,5 @@ export function ConsultationCTA({className,label,contactLabel="Soạn email tư 
  const content=<>{isContact?contactLabel:label} <Icon name="arrow-up-right" size={iconSize}/></>;
  return isContact
   ? <button type="button" onClick={()=>showContactDialog("email")} className={className}>{content}</button>
-  : <Link href="/contact" className={className}>{content}</Link>;
+  : <Link href="/start" className={className}>{content}</Link>;
 }

@@ -1,0 +1,214 @@
+/* Four pre-existing concepts receive independent information architecture and landing layouts. */
+.secondary-special{background:var(--w-bg);color:var(--w-ink);overflow:hidden}
+.secondary-special *{box-sizing:border-box}
+.secondary-special a{color:inherit;text-decoration:none}
+.secondary-special button{font:inherit}
+.secondary-special-cta{padding:95px 8%;background:var(--w-ink);color:var(--w-bg);display:flex;align-items:end;justify-content:space-between;flex-wrap:wrap;gap:30px}
+.secondary-special-cta small{font-size:10px;letter-spacing:.12em}
+.secondary-special-cta h2{font-size:clamp(40px,6vw,86px);line-height:1.06;max-width:850px;margin:0}
+.secondary-special-cta a{padding:18px 22px;background:var(--w-bg);color:var(--w-ink)!important;font-size:11px;font-weight:800}
+/* Mộc Bếp: intimate restaurant story, menu, warm serif and reservations. */
+.secondary-restaurant{background:#efe6d7;color:#2f4233}
+.restaurant-opening{text-align:center;display:flex;flex-direction:column;align-items:center;padding:88px 7% 0}
+.restaurant-opening>p{font-size:10px;letter-spacing:.16em;font-weight:800;color:#8c6650}
+.restaurant-opening h1{max-width:1150px;font-family:var(--w-serif);font-size:clamp(56px,8vw,126px);font-weight:400;line-height:1.1;letter-spacing:-.065em;margin:25px 0 25px}
+.restaurant-opening h1 em{font-weight:400;color:#ad7555}
+.restaurant-opening>span{max-width:570px;font-size:15px;line-height:1.9;color:#6b776b}
+.restaurant-opening>a{display:inline-flex;padding:17px 23px;background:#304437;color:#fff;font-size:11px;font-weight:800;letter-spacing:.1em;margin:29px 0 65px}
+.restaurant-opening-image{position:relative;height:clamp(350px,53vw,740px);width:100%;overflow:hidden}
+.restaurant-opening-image img{height:100%;width:100%;object-fit:cover}
+.restaurant-philosophy{background:#354436;color:#f0e8d8;text-align:center;padding:100px 10%}
+.restaurant-philosophy>span{font-size:10px;letter-spacing:.15em;color:#d6b996}
+.restaurant-philosophy h2{font-family:var(--w-serif);font-size:clamp(48px,7vw,102px);font-weight:400;letter-spacing:-.05em;margin:25px 0}
+.restaurant-philosophy p{max-width:730px;margin:0 auto 28px;font-size:16px;line-height:2;color:#ddd8c9}
+.restaurant-philosophy a{display:inline-block;padding:13px 0;border-bottom:1px solid #f2e6d6;font-size:12px}
+.restaurant-menu{padding:105px 7%}
+.restaurant-menu-heading{text-align:center;max-width:770px;margin:0 auto 53px}
+.restaurant-menu-heading span{font-size:10px;letter-spacing:.16em;color:#a47e61}
+.restaurant-menu-heading h2{font-family:var(--w-serif);font-size:clamp(45px,6.4vw,95px);font-weight:400;letter-spacing:-.055em;margin:15px 0}
+.restaurant-menu-heading a{display:inline-block;padding:12px 0;border-bottom:1px solid currentColor;font-size:12px}
+.restaurant-dishes{display:grid;grid-template-columns:repeat(3,1fr);gap:25px}
+.restaurant-dishes a>div{height:410px;position:relative;overflow:hidden;background:#d6cabb}
+.restaurant-dishes img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.restaurant-dishes a:hover img{transform:scale(1.05)}
+.restaurant-dishes a small{display:block;color:#9b775e;font-size:10px;letter-spacing:.1em;font-weight:800;margin-top:23px}
+.restaurant-dishes h3{font-family:var(--w-serif);font-size:clamp(25px,3vw,42px);font-weight:400;letter-spacing:-.035em;margin:10px 0 8px}
+.restaurant-dishes p{font-size:13px;color:#73756e}
+.restaurant-reserve{display:grid;grid-template-columns:1fr 1fr;background:#dbcebb}
+.restaurant-reserve-photo{min-height:590px;position:relative}
+.restaurant-reserve>div:last-child{padding:80px 11%;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
+.restaurant-reserve>div:last-child>span{font-size:10px;letter-spacing:.15em;color:#8d6f55}
+.restaurant-reserve h2{font-family:var(--w-serif);font-size:clamp(44px,5vw,79px);line-height:1.13;letter-spacing:-.045em;margin:25px 0}
+.restaurant-reserve p{font-size:14px;color:#596c5d;line-height:1.9}
+.restaurant-reserve a{padding:15px 0;border-bottom:1px solid currentColor;font-size:11px;font-weight:750;margin-top:20px}
+/* Fieldnotes: an actual newspaper front page and editorial news feed. */
+.secondary-journal{background:#f4eee4;color:#2c2723}
+.journal-masthead{padding:25px 6% 0;text-align:center;border-bottom:4px double #2c2723}
+.journal-masthead>span{display:block;font-size:10px;letter-spacing:.15em;font-weight:750}
+.journal-masthead>strong{display:block;font-family:var(--w-serif);font-size:clamp(90px,15vw,235px);letter-spacing:-.09em;line-height:1.25;font-weight:700;white-space:nowrap}
+.journal-masthead>div{display:flex;justify-content:space-between;padding:16px 0;border-top:1px solid #6c655d;font-size:10px;letter-spacing:.12em}
+.journal-cover{display:grid;grid-template-columns:1fr .94fr;gap:3%;padding:45px 6% 75px}
+.journal-cover>div:first-child{padding:34px 3% 10px 0}
+.journal-cover>div:first-child>span{font-size:10px;letter-spacing:.17em;font-weight:800}
+.journal-cover h1{font-family:var(--w-serif);font-size:clamp(58px,8vw,124px);line-height:1.07;font-weight:400;letter-spacing:-.055em;margin:34px 0 26px}
+.journal-cover h1 em{color:#ae483a;font-weight:400}
+.journal-cover p{font-size:15px;line-height:1.95;max-width:570px;color:#786c61}
+.journal-cover a{display:inline-block;border-bottom:2px solid #2c2723;padding:12px 0;margin-top:32px;font-size:11px;font-weight:800}
+.journal-cover-image{min-height:660px;position:relative}
+.journal-articles{padding:95px 6%;border-top:1px solid #a8a094;display:grid;grid-template-columns:.65fr 1fr;gap:7%}
+.journal-category>span{font-size:10px;letter-spacing:.16em}
+.journal-category h2{font-family:var(--w-serif);font-size:clamp(45px,6vw,88px);letter-spacing:-.055em;line-height:1.1;font-weight:400;margin:25px 0}
+.journal-article-list>a{display:grid;grid-template-columns:130px 1fr 15px;gap:25px;padding:26px 0;border-bottom:1px solid #afa395;align-items:center}
+.journal-article-list>a:first-child{border-top:1px solid #afa395}
+.journal-story-thumbnail{height:130px;position:relative}
+.journal-article-list>a>div:nth-child(2)>span{font-size:10px;letter-spacing:.12em;color:#a84c38}
+.journal-article-list h3{font-family:var(--w-serif);font-weight:450;font-size:clamp(25px,2.8vw,43px);margin:13px 0 8px;letter-spacing:-.025em}
+.journal-article-list p{font-size:12px;color:#857b70;line-height:1.65}
+.journal-quote{padding:100px 7%;background:#e7ded0;text-align:center}
+.journal-quote span{font-size:10px;letter-spacing:.16em}
+.journal-quote p{font-family:var(--w-serif);font-size:clamp(45px,7vw,105px);font-style:italic;letter-spacing:-.035em;max-width:1100px;margin:30px auto 0;line-height:1.17}
+/* Mộc Objects: calm high-end commerce and catalogue. */
+.secondary-commerce{background:#f0eee8;color:#292824}
+.commerce-banner{padding:0 5%;display:grid;grid-template-columns:.9fr 1.1fr;min-height:710px;gap:5%;align-items:stretch}
+.commerce-banner>div:first-child{padding:95px 4% 80px 0;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
+.commerce-banner>div:first-child>span{font-size:10px;letter-spacing:.14em}
+.commerce-banner h1{font-family:var(--w-serif);font-size:clamp(55px,7vw,113px);line-height:1.12;font-weight:400;letter-spacing:-.055em;margin:30px 0}
+.commerce-banner h1 em{font-weight:400;color:#a77d5b}
+.commerce-banner p{font-size:15px;line-height:1.85;color:#77736a}
+.commerce-banner a{display:inline-flex;padding:16px 0;border-bottom:1px solid #292824;font-size:12px;font-weight:800;margin-top:23px}
+.commerce-banner-image{position:relative;min-height:580px;overflow:hidden;margin:35px 0}
+.commerce-trust{display:grid;grid-template-columns:repeat(3,1fr);border-block:1px solid #c2bdb1;padding:23px 5%;gap:20px}
+.commerce-trust span{text-align:center;border-right:1px solid #bbb5aa;font-size:10px;font-weight:850;letter-spacing:.12em}
+.commerce-trust span:last-child{border:0}
+.commerce-products{padding:105px 6%}
+.commerce-products header{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:44px}
+.commerce-products header>span{font-size:10px;letter-spacing:.15em}
+.commerce-products h2{font-family:var(--w-serif);font-weight:400;font-size:clamp(44px,5vw,78px);line-height:1.1;max-width:700px;margin:0}
+.commerce-products header a{font-size:10px;font-weight:750;white-space:nowrap;border-bottom:1px solid #292824;padding:12px 0}
+.commerce-product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:23px}
+.commerce-product-grid article>a>div{height:410px;position:relative;overflow:hidden;background:#e1dbd2}
+.commerce-product-grid article img{width:100%;height:100%;transition:transform .4s}
+.commerce-product-grid article>a:hover img{transform:scale(1.04)}
+.commerce-product-grid small{display:block;font-size:10px;letter-spacing:.12em;color:#8c806f;margin:19px 0 10px}
+.commerce-product-grid h3{font-family:var(--w-serif);font-weight:400;letter-spacing:-.03em;font-size:clamp(22px,2.5vw,35px);margin:0 0 10px}
+.commerce-product-grid p{font-size:13px;color:#7e7a72}
+.commerce-product-grid button{border:1px solid #aaa49a;background:transparent;width:100%;display:flex;justify-content:space-between;align-items:center;padding:14px;font-size:12px;font-weight:750;margin-top:23px}
+.commerce-product-grid button:hover{background:#282824;color:#fff}
+.commerce-story{display:grid;grid-template-columns:1fr 1fr;background:#dcd3c6}
+.commerce-story-photo{min-height:650px;position:relative}
+.commerce-story>div:last-child{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:80px 9%}
+.commerce-story>div:last-child>span{font-size:10px;letter-spacing:.15em}
+.commerce-story h2{font-family:var(--w-serif);font-weight:400;font-size:clamp(45px,6vw,92px);line-height:1.1;letter-spacing:-.05em;margin:22px 0}
+.commerce-story p{font-size:14px;line-height:1.9;color:#796d60}
+.commerce-story a{padding:13px 0;border-bottom:1px solid #292824;font-size:11px;font-weight:750;margin-top:19px}
+/* Mở Learning: bright educational path and course-based landing layout. */
+.secondary-education{background:#f2edff;color:#322858}
+.education-hero{display:grid;grid-template-columns:1fr 1fr;min-height:730px}
+.education-hero-copy{padding:90px 7vw 50px;background:#e6dbff;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
+.education-hero-copy>span{font-size:10px;letter-spacing:.16em;font-weight:750}
+.education-hero h1{font-size:clamp(57px,7vw,110px);font-weight:750;line-height:1.05;margin:32px 0 25px}
+.education-hero h1 em{color:#c86f65;font-style:normal}
+.education-hero p{font-size:14px;line-height:1.8;max-width:530px;color:#746b91}
+.education-hero-copy>div:nth-last-child(2){display:flex;flex-wrap:wrap;gap:22px;align-items:center;margin-top:24px}
+.education-hero-copy>div:nth-last-child(2) a:first-child{padding:16px 20px;background:#332b57;color:white;font-size:10px;font-weight:750}
+.education-hero-copy>div:nth-last-child(2) a:last-child{font-size:11px;border-bottom:1px solid currentColor;padding:10px 0}
+.education-hero-stats{display:flex;gap:30px;border-top:1px solid #bba5e1;width:100%;margin-top:auto;padding-top:25px}
+.education-hero-stats span{display:grid;gap:5px;font-size:9px;color:#877aa6}
+.education-hero-stats b{font-size:32px;font-weight:750;color:#4b3c7b}
+.education-hero-photo{position:relative;overflow:hidden;background:#fffbf3}
+.education-floating-card{position:absolute;bottom:7%;right:6%;left:10%;max-width:490px;background:white;box-shadow:0 25px 80px #251c463b;padding:26px;border-radius:14px;display:grid;gap:15px}
+.education-floating-card span,.education-floating-card small{font-size:9px;letter-spacing:.1em;color:#9089a7}
+.education-floating-card strong{font-size:22px;letter-spacing:-.02em}
+.education-floating-card>div{display:flex;gap:7px}
+.education-floating-card>div i{display:block;flex:1;height:9px;background:#ddccfd;border-radius:7px}
+.education-floating-card>div i:first-child,.education-floating-card>div i:nth-child(2){background:#6864ce}
+.education-courses{padding:105px 7%;background:#f8f5ff}
+.education-courses header{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:45px}
+.education-courses header span{font-size:10px;letter-spacing:.14em;color:#8a7bb0}
+.education-courses h2{font-size:clamp(42px,5vw,76px);max-width:730px;line-height:1.1;margin:0}
+.education-courses>div{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.education-courses>div>a{min-height:330px;padding:30px;background:white;border:1px solid #e0d7f2;border-radius:16px;display:flex;flex-direction:column}
+.education-courses>div>a:nth-child(2){background:#efedff}.education-courses>div>a:nth-child(3){background:#fff1e3}
+.education-courses a small{font-size:10px;font-weight:750;letter-spacing:.13em;color:#a68acb}
+.education-courses h3{font-size:clamp(24px,3vw,41px);line-height:1.15;margin:55px 0 20px}
+.education-courses p{font-size:12px;color:#8f83a7}
+.education-courses a>span{margin-top:auto;display:block;padding-top:30px;font-size:11px;font-weight:750}
+.education-how{display:grid;grid-template-columns:.7fr 1fr;gap:7%;align-items:start;padding:90px 7%;background:#dcd6ff}
+.education-how h2{font-size:clamp(45px,5vw,73px);line-height:1.1}
+.education-how>div article{display:grid;grid-template-columns:50px 1fr;padding:23px 0;border-bottom:1px solid #a9a0ce;gap:17px}
+.education-how>div article span{font-size:13px;color:#8378ac}
+.education-how strong{font-size:clamp(21px,2.4vw,34px);font-weight:600}
+@media(max-width:850px){
+ .journal-cover{grid-template-columns:1fr 1fr}
+ .journal-masthead>strong{font-size:14vw}
+ .restaurant-dishes a>div,.commerce-product-grid article>a>div{height:260px}
+ .education-hero-copy{padding-left:35px}
+ .education-hero h1{font-size:clamp(48px,7vw,77px)}
+}
+@media(max-width:760px){
+ .restaurant-opening{padding:65px 24px 0}
+ .restaurant-opening h1{font-size:clamp(47px,9vw,79px)}
+ .restaurant-opening-image{height:380px}
+ .restaurant-philosophy{padding:75px 24px}
+ .restaurant-menu{padding:65px 24px}
+ .restaurant-dishes{grid-template-columns:repeat(2,1fr)}
+ .restaurant-reserve{grid-template-columns:1fr}
+ .restaurant-reserve-photo{min-height:360px}
+ .restaurant-reserve>div:last-child{padding:60px 25px}
+ .journal-cover{grid-template-columns:1fr;padding:35px 24px 60px}
+ .journal-cover h1{font-size:clamp(56px,9vw,85px)}
+ .journal-cover-image{min-height:470px}
+ .journal-masthead{padding-inline:23px}
+ .journal-masthead>strong{font-size:14.5vw}
+ .journal-articles{grid-template-columns:1fr;padding:65px 24px}
+ .journal-category h2{margin:17px 0}
+ .journal-article-list{margin-top:35px}
+ .journal-quote{padding:75px 25px}
+ .commerce-banner{grid-template-columns:1fr;padding:0 24px;gap:0}
+ .commerce-banner>div:first-child{padding:80px 0 45px}
+ .commerce-banner h1{font-size:clamp(55px,9vw,85px)}
+ .commerce-banner-image{margin:0 0 28px;min-height:390px}
+ .commerce-products{padding:70px 24px}
+ .commerce-products header{display:block}
+ .commerce-products header h2{margin:19px 0}
+ .commerce-product-grid{grid-template-columns:repeat(2,1fr)}
+ .commerce-story{grid-template-columns:1fr}
+ .commerce-story-photo{min-height:420px}
+ .commerce-story>div:last-child{padding:65px 25px}
+ .education-hero{grid-template-columns:1fr}
+ .education-hero-copy{padding:80px 24px 45px}
+ .education-hero h1{font-size:clamp(52px,9vw,76px)}
+ .education-hero-stats{margin-top:46px}
+ .education-hero-photo{min-height:430px}
+ .education-courses{padding:70px 24px}
+ .education-courses header{display:block}
+ .education-courses header h2{margin-top:15px}
+ .education-courses>div{grid-template-columns:repeat(2,1fr)}
+ .education-how{grid-template-columns:1fr;padding:65px 25px}
+}
+@media(max-width:510px){
+ .restaurant-opening h1{font-size:49px}
+ .restaurant-opening-image{height:280px}
+ .restaurant-dishes{grid-template-columns:1fr}
+ .restaurant-dishes a>div{height:340px}
+ .journal-masthead>strong{font-size:14vw}
+ .journal-masthead>div{font-size:8px}
+ .journal-cover-image{min-height:320px}
+ .journal-article-list>a{grid-template-columns:80px 1fr 15px;gap:10px}
+ .journal-story-thumbnail{height:90px}
+ .journal-article-list h3{font-size:23px}
+ .journal-article-list p{font-size:11px}
+ .commerce-banner h1{font-size:57px}
+ .commerce-banner-image{min-height:310px}
+ .commerce-trust{gap:4px}
+ .commerce-trust span{font-size:8px}
+ .commerce-product-grid{grid-template-columns:1fr}
+ .commerce-product-grid article>a>div{height:340px}
+ .education-hero-copy>div:nth-last-child(2){align-items:flex-start}
+ .education-hero-stats{gap:17px}
+ .education-hero-photo{min-height:345px}
+ .education-floating-card{padding:17px}
+ .education-courses>div{grid-template-columns:1fr}
+ .education-courses>div>a{min-height:260px}
+ .education-courses h3{margin-top:35px}
+}

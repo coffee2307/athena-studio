@@ -1,0 +1,72 @@
+import {chromium} from "@playwright/test";
+import {strict as assert} from "node:assert";
+import fs from "node:fs/promises";
+const root=process.env.ATHENA_TEST_ORIGIN||"http://127.0.0.1:3182";
+const data=JSON.parse(await fs.readFile("data/templates.json","utf8"));
+assert.equal(data.length,20);
+await fs.mkdir(".qa/template-v3",{recursive:true});
+const browser=await chromium.launch({headless:true,executablePath:process.platform==="win32"?"C:/Program Files/Google/Chrome/Application/chrome.exe":undefined});
+const page=await browser.newPage({viewport:{width:1440,height:900},deviceScaleFactor:1});
+const errors=[];
+page.on("pageerror",e=>errors.push(e.message));
+const sections=["","work","services","about","contact","work/1","work/2","work/3"];
+let routes=0;
+if(process.env.QA_SKIP_DESKTOP!=="1")for(const item of data){
+ for(const path of sections){
+  const u=root+item.demoPath+(path?"/"+path:"");
+  const res=await page.goto(u,{waitUntil:"domcontentloaded",timeout:45000});
+  assert.equal(res?.status(),200,u+" status");
+  await page.locator(".world-site h1").first().waitFor({timeout:14000});
+  assert.equal(await page.locator(".world-desktop-nav a").count(),5,u+" nav");
+  assert.equal(await page.locator(".world-footer").count(),1,u+" footer");
+  routes++;
+ }
+ await page.goto(root+item.demoPath,{waitUntil:"domcontentloaded",timeout:45000});
+ await page.screenshot({path:".qa/template-v3/"+item.slug+"-desktop.png",animations:"disabled"});
+ const size=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,client:document.documentElement.clientWidth}));
+ assert.ok(size.scroll<=size.client+2,item.slug+" desktop overflow "+JSON.stringify(size));
+ console.log("DESKTOP",item.slug,"OK");
+}
+await page.setViewportSize({width:390,height:844});
+if(process.env.QA_SKIP_MOBILE!=="1")for(const item of data){
+ await page.goto(root+item.demoPath,{waitUntil:"load",timeout:45000});
+ await page.waitForTimeout(500);
+ let size=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,client:document.documentElement.clientWidth}));
+ assert.ok(size.scroll<=size.client+2,item.slug+" mobile overflow "+JSON.stringify(size));
+ await page.locator(".world-menu-toggle").click();
+ await page.locator(".world-mobile-nav.is-open").waitFor({timeout:7000});
+ await page.locator(".world-mobile-nav.is-open a").last().click();
+ await page.waitForURL("**"+item.demoPath+"/contact",{timeout:10000});
+ await page.locator(".world-contact-form").waitFor({timeout:5000});
+ await page.goto(root+item.demoPath,{waitUntil:"domcontentloaded",timeout:45000});
+ await page.screenshot({path:".qa/template-v3/"+item.slug+"-mobile.png",animations:"disabled"});
+ console.log("MOBILE",item.slug,"OK");
+}
+await page.setViewportSize({width:1440,height:900});
+await page.goto(root+"/services/web-development/templates",{waitUntil:"domcontentloaded"});
+assert.equal(await page.locator(".template-card").count(),20,"gallery count");
+await page.locator(".template-card-preview").first().click();
+const f=page.frameLocator(".template-revamp-dialog iframe");
+await f.locator(".world-site").waitFor({timeout:15000});
+await f.locator('.world-desktop-nav a[href$="/work"]').click();
+await f.locator(".world-work-filter").waitFor({timeout:12000});
+await f.locator('.world-desktop-nav a[href$="/services"]').click();
+await f.locator(".world-services-page").waitFor({timeout:12000});
+await f.locator('.world-desktop-nav a[href="/template-demos/creative-studio"]').click();
+await f.locator(".legacy-creative h1").waitFor({timeout:12000});
+await f.locator("body").evaluate(()=>document.readyState);
+await f.locator(".world-footer").scrollIntoViewIfNeeded();
+const before=await f.locator("body").evaluate(()=>window.scrollY);
+await page.waitForTimeout(11000);
+const after=await f.locator("body").evaluate(()=>window.scrollY);
+assert.ok(before>500,"iframe did not scroll: "+before);
+assert.ok(after>500,"iframe unexpected reset "+before+" => "+after);
+console.log("MODAL navigation and 11-second scroll preservation",before,after);
+await page.getByRole("button",{name:"Mobile",exact:true}).click();
+await f.locator(".world-menu-toggle").click();
+await f.locator(".world-mobile-nav.is-open a").last().click();
+await f.locator(".world-contact-form").waitFor({timeout:12000});
+console.log("MODAL mobile navigation OK");
+assert.equal(errors.length,0,errors.join("\n"));
+console.log("V3 PASS",routes,"routes",data.length,"templates",errors.length,"page errors");
+await browser.close();

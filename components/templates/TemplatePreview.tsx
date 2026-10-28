@@ -1,14 +1,14 @@
 import Image from "next/image";
 import type {Template} from "@/lib/templates";
 
+const capturedHomepages=new Set(["digital-creators","creative-studio","architecture-studio","auto-showroom"]);
 export function TemplatePreview({template,device="desktop"}:{template:Template;device?:"desktop"|"mobile"}){
+ const extension=capturedHomepages.has(template.slug)?".png":".jpg";
+ const screenshot="/template-previews/"+template.slug+extension;
  return <div className="template-device-frame" data-device={device}>
-  <div className={"template-thumbnail template-thumbnail-"+template.variant}>
-   <Image className="template-thumbnail-image" src={template.images[0]} alt="" fill sizes="(max-width: 600px) 100vw, 40vw"/>
-   <span className="template-thumbnail-shade"/>
-   <span className="template-thumbnail-brand">{template.industry.toLocaleUpperCase("vi")} / ATHENA</span>
-   <span className="template-thumbnail-copy"><small>{template.style}</small><strong>{template.title}</strong><em>{template.purpose}</em></span>
-   <span className="template-thumbnail-open">TRẢI NGHIỆM ↗</span>
+  <div className="template-thumbnail">
+   <div className="template-thumbnail-browser" aria-hidden="true"><span className="template-browser-dots"><i/><i/><i/></span><span>{template.slug}.preview</span><span>↗</span></div>
+   <div className="template-thumbnail-screen"><Image className="template-thumbnail-image" src={screenshot} alt={"Ảnh chụp giao diện website "+template.title} fill sizes="(max-width: 640px) 100vw, (max-width: 1050px) 50vw, 33vw" priority={false}/></div>
   </div>
  </div>;
 }
