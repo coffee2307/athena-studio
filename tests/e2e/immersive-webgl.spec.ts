@@ -12,14 +12,15 @@ for (const slug of worlds) {
     await page.goto("/template-demos/" + slug);
     const stage = page.locator(".immersive-stage");
     const canvas = stage.locator("canvas.ix-3d-canvas");
-    const fallback = stage.locator(".ix-hero-photograph");
+    const fallback = stage.locator(slug==="auto-showroom"?".bv-studio-fallback":".ix-hero-photograph");
     const rail = page.locator(".ix-scene-rail");
     const automotive = slug==="auto-showroom";
     const toggle = rail.getByRole("button", {name: automotive?"Tắt chế độ 3D":"Bật chế độ 3D"});
 
     await expect(stage).toBeVisible();
     await expect(canvas).toHaveCount(1);
-    await expect(fallback).toBeVisible();
+    if(automotive)await expect(fallback).toHaveCount(1);
+    else await expect(fallback).toBeVisible();
     await expect(toggle).toHaveAttribute("aria-pressed", automotive?"true":"false");
 
     // McLaren must start without any visitor click; the other worlds stay opt-in.
