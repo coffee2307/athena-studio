@@ -205,14 +205,20 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    // delay real controls, so settle camera moves in one frame after two
    // consecutive slow renders. Fast GPUs keep the cinematic easing.
    const lerp=preferImmediateCamera?1:clamp(elapsed*.007,.07,.23);
-   // Scroll chapter camera is seekable: the current document position is the
-   // sole source of truth, without a second trailing animation clock.
+   // Follow the native scroll target with a short, frame-rate-independent
+   // camera glide. Cap idle gaps so the first frame after a wheel event cannot
+   // consume the entire transition. The initial frame starts at the true pose.
+   const travelStep=Math.min(Math.max(elapsed,0),48);
+   const scrollFollow=preferImmediateCamera?1:1-Math.exp(-travelStep/145);
    currentMode=scrollRootId?modeRef.current:currentMode+(modeRef.current-currentMode)*lerp;
-   currentProgress=scrollRootId?goalProgress:currentProgress+(goalProgress-currentProgress)*lerp;
+   currentProgress=scrollRootId
+    ?(drawn?currentProgress+(goalProgress-currentProgress)*scrollFollow:goalProgress)
+    :currentProgress+(goalProgress-currentProgress)*lerp;
+   if(Math.abs(goalProgress-currentProgress)<.0005)currentProgress=goalProgress;
    turn+=(dragTurn-turn)*lerp;
    const angles=[.72,2.0,4.9];
    // Five signed-off narrative keyframes, sampled directly from scroll progress.
-   // Reversing the document scroll immediately produces the same camera pose.
+   // Reversing scroll settles on the same pose once the glide catches up.
    const journeyAngles=[.72,1.42,2.12,3.82,5.42];
    const journeyElevations=[2.35,1.98,2.48,2.18,2.55];
    const journeyDistances=[1,.93,.71,.88,1.04];
@@ -283,9 +289,9 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   const pointerUp=()=>{drag=false;};
   const onScroll=()=>{
    measureProgress();
-   // Scroll owns the narrative camera; manual drag is a temporary exploration
-   // offset and must not alter the pose when scrolling back to the same p.
-   if(scrollRootId){turn=0;dragTurn=0;}
+   // Return from a manual orbit gradually when scrolling resumes; clearing
+   // both values here caused an immediate visible angle snap.
+   if(scrollRootId)dragTurn=0;
    schedule();
   };
   const onVisibility=()=>{if(document.hidden){cancelAnimationFrame(request);request=0;}else schedule();};

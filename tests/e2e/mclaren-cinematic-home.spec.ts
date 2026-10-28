@@ -53,3 +53,23 @@ test("McLaren mobile story preserves native scroll and a skip link",async({page}
  await track.getByRole("link",{name:/BỎ QUA HÀNH TRÌNH/}).click();
  await expect(page.locator("#bv-after-cinematic")).toBeInViewport();
 });
+
+test("McLaren chapter buttons request smooth native scrolling and respect reduced motion",async({page})=>{
+ await page.emulateMedia({reducedMotion:"no-preference"});
+ await page.setViewportSize({width:1440,height:900});
+ await page.goto("/template-demos/auto-showroom",{waitUntil:"domcontentloaded"});
+ await page.evaluate(()=>{
+  const original=window.scrollTo.bind(window);
+  window.scrollTo=((options:ScrollToOptions)=>{
+   document.documentElement.dataset.cinematicScrollBehavior=options.behavior??"auto";
+   original(options);
+  }) as typeof window.scrollTo;
+ });
+ const nav=page.locator("#bv-cinematic-track .bv-cinematic-nav button");
+ await nav.nth(3).click();
+ await expect(page.locator("html")).toHaveAttribute("data-cinematic-scroll-behavior","smooth");
+ await expect(page.locator("#bv-cinematic-track")).toHaveAttribute("data-chapter","3");
+ await page.emulateMedia({reducedMotion:"reduce"});
+ await nav.nth(0).click();
+ await expect(page.locator("html")).toHaveAttribute("data-cinematic-scroll-behavior","instant");
+});

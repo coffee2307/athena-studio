@@ -20,7 +20,8 @@ export function jumpToAutoCinematicChapter(index:number){
  if(!track)return;
  const extent=Math.max(1,track.getBoundingClientRect().height-window.innerHeight);
  const top=track.getBoundingClientRect().top+window.scrollY+extent*clamp(index/4);
- window.scrollTo({top,behavior:"instant"});
+ const reducedMotion=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+ window.scrollTo({top,behavior:reducedMotion?"instant":"smooth"});
 }
 
 /** One native-scroll owner updates visible chapters and the progress meter.
