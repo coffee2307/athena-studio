@@ -1,62 +1,79 @@
 import {expect,test} from "@playwright/test";
 
 const route="/template-demos/auto-showroom";
-const sizes=[320,390] as const;
+const sizes=[{width:320,height:680},{width:390,height:760},{width:390,height:844}] as const;
 
-for(const width of sizes){
- test.describe(`VELAR mobile continuity at ${width}px`,()=>{
-  test.use({viewport:{width,height:844},reducedMotion:"no-preference"});
+for(const {width,height} of sizes){
+ test.describe(`VELAR mobile stage at ${width}x${height}`,()=>{
+  test.use({viewport:{width,height},reducedMotion:"no-preference"});
 
-  test("transparent studio backdrop and smoothly interpolated chapter copy",async({page})=>{
+  test("one seamless stage, mobile captions pinned below the car and continuous scroll fades",async({page})=>{
    await page.goto(route);
    const canvas=page.locator("canvas.ix-auto-3d-canvas");
    await expect(canvas).toHaveAttribute("data-renderer","ready",{timeout:30000});
+   const track=page.locator("#bv-cinematic-track");
    const backdrop=await page.evaluate(()=>{
-    const el=document.querySelector(".bv-cinematic-track .ix-hero-visual")!;
+    const visual=document.querySelector(".bv-cinematic-track .ix-hero-visual")!;
+    const card=document.querySelector(".bv-mobile-story-card")!;
     const canvas=document.querySelector("canvas.ix-auto-3d-canvas") as HTMLCanvasElement;
     return {
      track:getComputedStyle(document.querySelector(".bv-cinematic-track")!).backgroundColor,
-     visual:getComputedStyle(el).backgroundColor,
+     visual:getComputedStyle(visual).backgroundColor,
+     gradient:getComputedStyle(visual).backgroundImage,
+     cardBackground:getComputedStyle(card).backgroundColor,
+     cardBorder:getComputedStyle(card).borderTopWidth,
+     mask:getComputedStyle(canvas).maskImage,
      alpha:canvas.getContext("webgl2")?.getContextAttributes()?.alpha,
      horizontalOverflow:document.documentElement.scrollWidth>window.innerWidth+1
     };
    });
    expect(backdrop.visual).toBe(backdrop.track);
+   expect(backdrop.gradient).toContain("radial-gradient");
+   expect(backdrop.cardBackground).toBe("rgba(0, 0, 0, 0)");
+   expect(backdrop.cardBorder).toBe("0px");
+   expect(backdrop.mask).toContain("linear-gradient");
    expect(backdrop.alpha).toBe(true);
    expect(backdrop.horizontalOverflow).toBe(false);
-   const track=page.locator("#bv-cinematic-track");
+
    const seek=async(p:number)=>{
     await page.evaluate(progress=>{
      const track=document.getElementById("bv-cinematic-track")!;
      const extent=track.getBoundingClientRect().height-innerHeight;
      window.scrollTo({top:track.getBoundingClientRect().top+scrollY+extent*progress,behavior:"instant"});
     },p);
-    await page.waitForTimeout(180);
+    await page.waitForFunction(progress=>{
+     const track=document.getElementById("bv-cinematic-track")!;
+     return Math.abs(Number(track.style.getPropertyValue("--bv-progress"))-progress)<.01;
+    },p,{timeout:10000});
    };
+   const card=track.locator('[data-story-index="1"]');
    await seek(.20);
-   const initial=await track.locator('[data-scene-index="1"]').evaluate(el=>Number(getComputedStyle(el).getPropertyValue("--bv-copy-opacity")));
+   const initial=Number(await card.evaluate(el=>getComputedStyle(el).opacity));
    await seek(.22);
-   const next=await track.locator('[data-scene-index="1"]').evaluate(el=>Number(getComputedStyle(el).getPropertyValue("--bv-copy-opacity")));
+   const next=Number(await card.evaluate(el=>getComputedStyle(el).opacity));
    expect(next).toBeGreaterThan(initial);
    expect(next-initial).toBeLessThan(.5);
    await seek(.28);
-   const fullyVisible=await track.locator('[data-scene-index="1"]').evaluate(el=>Number(getComputedStyle(el).getPropertyValue("--bv-copy-opacity")));
-   expect(fullyVisible).toBeGreaterThan(.95);
-   for(const p of [.27,.52,.77]){
+   expect(Number(await card.evaluate(el=>getComputedStyle(el).opacity))).toBeGreaterThan(.95);
+
+   for(const p of [.27,.34,.52,.77]){
     await seek(p);
     const safe=await page.evaluate(()=>{
-     const track=document.querySelector("#bv-cinematic-track")!;
-     const stage=track.querySelector(".ix-hero")!.getBoundingClientRect();
+     const track=document.getElementById("bv-cinematic-track")!;
      const nav=track.querySelector(".bv-cinematic-nav")!.getBoundingClientRect();
-     const copies=Array.from(track.querySelectorAll<HTMLElement>(".bv-cinematic-copy"))
-       .filter(el=>Number(getComputedStyle(el).opacity)>.8)
-       .map(el=>el.getBoundingClientRect())
-       .filter(rect=>rect.bottom>0&&rect.top<innerHeight);
-     return {stageBottom:stage.bottom,navTop:nav.top,copies:copies.map(rect=>({top:rect.top,bottom:rect.bottom}))};
+     const captions=Array.from(track.querySelectorAll<HTMLElement>(".bv-mobile-story-card"))
+      .filter(el=>Number(getComputedStyle(el).opacity)>.6)
+      .map(el=>el.getBoundingClientRect());
+     const scrollCopies=Array.from(track.querySelectorAll<HTMLElement>(".bv-cinematic-step .bv-cinematic-copy"))
+      .map(el=>Number(getComputedStyle(el).opacity));
+     return {navTop:nav.top, captions:captions.map(r=>({top:r.top,bottom:r.bottom})), scrollCopies};
     });
-    for(const box of safe.copies){
-     expect(box.bottom).toBeLessThanOrEqual(safe.navTop-6);
+    expect(safe.captions).toHaveLength(1);
+    for(const box of safe.captions){
+     expect(box.top).toBeGreaterThan(height*.46);
+     expect(box.bottom).toBeLessThanOrEqual(safe.navTop-30);
     }
+    expect(safe.scrollCopies.every(v=>v===0)).toBe(true);
    }
   });
  });
