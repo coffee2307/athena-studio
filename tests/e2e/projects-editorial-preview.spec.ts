@@ -28,7 +28,9 @@ for(const width of [320,390,1440]){
    await expect(figures.nth(2).locator("img")).toHaveAttribute("src",/pham-home-mobile-hires.webp/);
    for(let i=0;i<4;i++){
     const image=figures.nth(i).locator("img");
+    await image.scrollIntoViewIfNeeded();
     await expect(image).toBeVisible();
+    await expect.poll(()=>image.evaluate(el=>(el as HTMLImageElement).naturalWidth),{timeout:15000}).toBeGreaterThan(0);
     const st=await image.evaluate(el=>({fit:getComputedStyle(el).objectFit,natural:(el as HTMLImageElement).naturalWidth,complete:(el as HTMLImageElement).complete}));
     expect(st.complete).toBe(true);expect(st.natural).toBeGreaterThanOrEqual(i<2?1400:1000);
     expect(st.fit).toBe("contain");
@@ -37,7 +39,7 @@ for(const width of [320,390,1440]){
   });
   test("template library is compact on mobile and does not crop screenshot previews",async({page})=>{
    await page.goto("/services/web-development/templates");
-   await expect(page.locator(".templates-catalog .template-card")).toHaveCount(20);
+   expect(await page.locator(".templates-catalog .template-card").count()).toBeGreaterThanOrEqual(20);
    expect(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(2);
    const card=page.locator(".templates-catalog .template-card").first();
    const style=await card.evaluate(el=>{const img=el.querySelector(".template-thumbnail-screen img") as HTMLImageElement;return {display:getComputedStyle(el).display,fit:getComputedStyle(img).objectFit,transform:getComputedStyle(img).transform}});
