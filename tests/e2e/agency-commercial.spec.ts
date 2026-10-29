@@ -57,12 +57,18 @@ test("Portfolio presents real PHAM screenshots but never public repository links
  expect(await page.locator("main a[href*='github.com']").count()).toBe(0);
 });
 
-test("Footer and contact shortcuts expose phone, email, WhatsApp and Zalo links",async({page})=>{
+test("Footer and contact shortcuts expose phone, email, WhatsApp and Zalo links",async({page,isMobile})=>{
  await page.goto("/");
  await expect(page.locator(".agency-footer-contact a[href='tel:+84965747147']")).toBeVisible();
  await expect(page.locator(".agency-footer-contact a[href='mailto:coffee2307@gmail.com']")).toBeVisible();
  await expect(page.locator(".agency-footer-column a[href='/legal/service-policy']")).toBeVisible();
  const dock=page.getByRole("navigation",{name:"Liên hệ nhanh"});
+ if(isMobile){
+  const toggle=dock.getByRole("button",{name:/Liên hệ/});
+  await expect(toggle).toHaveAttribute("aria-expanded","false");
+  await toggle.click();
+  await expect(toggle).toHaveAttribute("aria-expanded","true");
+ }
  await expect(dock.getByRole("link",{name:/Gọi điện/})).toHaveAttribute("href","tel:+84965747147");
  await expect(dock.getByRole("link",{name:/WhatsApp/})).toHaveAttribute("href","https://wa.me/84965747147");
  await expect(dock.getByRole("link",{name:/Zalo/})).toHaveAttribute("href","https://zalo.me/0965747147");
