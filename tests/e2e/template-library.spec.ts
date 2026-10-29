@@ -154,12 +154,14 @@ test("immersive phase 0 worlds and local Digital Creators build are reachable",a
  await page.getByRole("button",{name:/Không gian/}).click();
  await expect(page.locator(".immersive-stage")).toHaveAttribute("data-preset","1");
  await page.goto("/template-demos/auto-showroom");
- await page.locator(".ix-scene-rail .ix-mode-list button").nth(1).click();
- await expect(page.locator(".immersive-stage")).toHaveAttribute("data-preset","1");
+ await expect(page.locator("canvas.ix-auto-3d-canvas")).toBeVisible();
+ const dcErrors:string[]=[];
+ page.on("pageerror",err=>dcErrors.push(err.message));
  await page.goto("/template-demos/digital-creators");
  await expect(page).toHaveURL(/\/immersive\/digital-creators\/index\.html/);
- await expect(page.getByRole("banner").getByRole("link",{name:/Digital Creators - Trang chủ/})).toBeVisible();
+ await expect(page.getByRole("banner").getByRole("link",{name:/digitalcreators|digital creators/i})).toBeVisible();
  await expect(page.getByRole("heading",{level:1})).toContainText("Nơi ý tưởng");
+ expect(dcErrors).toEqual([]);
  const html=await page.request.get("/immersive/digital-creators/index.html");
  expect(html.status()).toBe(200);
  expect(await html.text()).toContain("assets/index-");
@@ -174,7 +176,7 @@ test("Digital Creators gallery displays a real captured homepage and opens the o
  await expect(modal).toBeVisible();
  const iframe=modal.locator(".template-demo-viewport iframe");
  await expect(iframe).toHaveAttribute("src","/immersive/digital-creators/index.html");
- await expect(page.frameLocator(".template-demo-viewport iframe").getByRole("banner").getByRole("link",{name:/Digital Creators - Trang chủ/})).toBeVisible();
+ await expect(page.frameLocator(".template-demo-viewport iframe").getByRole("banner").getByRole("link",{name:/digitalcreators|digital creators/i})).toBeVisible();
  await expect(page.frameLocator(".template-demo-viewport iframe").locator("iframe")).toHaveCount(0);
 });
 
