@@ -84,3 +84,7 @@
  .ae-article-related li span{grid-column:1;grid-row:2}
  .ae-article-related li span:last-child{grid-column:2;grid-row:1/3}
 }
+
+/* Accessibility: reference metadata is small text; maintain WCAG AA contrast. */
+.ae-article-navigation nav li small,.ae-article-breadcrumb,.ae-article-breadcrumb>span,.ae-article-meta,.ae-article-meta span,.ae-article-info dt{color:#475447}
+.ae-article-figure figcaption{color:#475447}
