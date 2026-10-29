@@ -4,7 +4,6 @@ import {AthenaHeroStage} from "@/components/home/AthenaHeroStage";
 import {AthenaServiceShowcase} from "@/components/home/AthenaServiceShowcase";
 import {ServiceTicker} from "@/components/experience/ServiceTicker";
 import Link from "next/link";
-import {offerings} from "@/lib/offerings";
 import {createMetadata} from "@/lib/metadata";
 
 export const metadata=createMetadata(
