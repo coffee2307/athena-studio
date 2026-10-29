@@ -74,7 +74,7 @@ export function WorldSite({slug,section="home",itemIndex,embedded=false}:Props){
   <p className="world-eyebrow">TIẾP THEO / {world.brand}</p>
   <h2>{heading??extra.contactTitle}</h2><p>{extra.contactIntro}</p>
   <Link href={root+"/contact"} className="world-btn world-btn-inverse">Bắt đầu trao đổi <Arrow/></Link>
-  <span className="world-closing-deco" aria-hidden="true">✳</span>
+  
  </section>;
  const home=()=> <main id="world-main">
   <section className="world-hero">
@@ -85,7 +85,7 @@ export function WorldSite({slug,section="home",itemIndex,embedded=false}:Props){
    <div className="world-hero-visual"><Image src={img(0)} alt={"Hình ảnh đại diện "+world.brand} fill priority sizes="(max-width:700px) 100vw, 55vw"/><div className="world-hero-photo-caption"><span>01 / 05</span><span>{world.eyebrow}</span></div></div>
    {slug==="saas-product"&&<div className="world-dashboard" aria-label="Minh họa giao diện quản lý công việc"><div className="world-dashboard-head"><span>◉ LUMA / OVERVIEW</span><span>● SYSTEM ACTIVE</span></div><div className="world-dashboard-grid"><div><small>THIS WEEK</small><strong>84%</strong><span>Project progress</span></div><div><small>IN PROGRESS</small><strong>12</strong><span>Active tasks</span></div><div><small>UP NEXT</small><strong>03</strong><span>Team priorities</span></div></div><div className="world-dashboard-bars"><i/><i/><i/><i/><i/><i/><i/></div></div>}
   </section>
-  <div className="world-ticker"><div><span>{extra.slogan}</span><b>✳</b><span>{world.brand}</span><b>✳</b><span>{extra.slogan}</span><b>✳</b><span>{world.brand}</span></div></div>
+  <div className="world-ticker"><div><span>{extra.slogan}</span><b>·</b><span>{world.brand}</span><b>·</b><span>{extra.slogan}</span><b>·</b><span>{world.brand}</span></div></div>
   <section className="world-section world-home-intro"><div className="world-section-label">01 / THE IDEA</div><div className="world-home-intro-text"><p className="world-eyebrow">{extra.aboutLabel}</p><h2>{extra.storyTitle}</h2><p>{extra.story}</p><Link className="world-inline-link" href={root+"/about"}>Khám phá câu chuyện <Arrow/></Link></div></section>
   <section className="world-section world-section-work"><div className="world-section-heading"><div><p className="world-eyebrow">02 / {extra.worksLabel}</p><h2>{world.section}</h2></div><Link className="world-inline-link" href={root+"/work"}>Xem tất cả <Arrow/></Link></div>{cards(true)}</section>
   <section className="world-section world-home-services"><div className="world-section-heading"><div><p className="world-eyebrow">03 / {extra.servicesLabel}</p><h2>Điều chúng tôi mang lại<span className="world-highlight">.</span></h2></div><p>{extra.approach}</p></div>{servicePreview()}</section>
