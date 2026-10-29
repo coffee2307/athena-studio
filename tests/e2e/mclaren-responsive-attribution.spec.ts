@@ -38,7 +38,9 @@ for(const {width,height} of [{width:320,height:900},{width:390,height:844}]){
    });
    return box.every(r=>r.width>30&&r.height>30)?box:null;
   },undefined,{timeout:24000});
-  const [linksBox,canvasBox,navBox]=await frame.jsonValue();
+  const boxes=await frame.jsonValue();
+  if(!boxes)throw new Error("McLaren canvas, copy or HUD failed to settle into a measurable frame");
+  const [linksBox,canvasBox,navBox]=boxes;
   expect(linksBox!.y+linksBox!.height).toBeLessThanOrEqual(canvasBox!.y+10);
   // The WebGL rectangle includes a transparent fade at its bottom. Measure the
   // fully opaque vehicle region, not the invisible GPU surface under the HUD.
