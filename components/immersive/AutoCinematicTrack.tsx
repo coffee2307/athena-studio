@@ -5,7 +5,7 @@ import type {ReactNode} from "react";
 
 export const AUTO_CINEMATIC_ID="bv-cinematic-track";
 
-const chapters=[
+export const autoCinematicChapters=[
  {eyebrow:"01 / THE REVEAL",title:"MCLAREN P1.",description:"Tỷ lệ và bề mặt chiếc McLaren P1 hiện ra dưới ánh sáng studio. Cuộn xuống để khám phá các góc nhìn được dàn dựng.",detail:"SILHOUETTE / LIGHT"},
  {eyebrow:"02 / SIDE PROFILE",title:"A LINE OF INTENT.",description:"Chiếc xe lướt ngang sân khấu. Camera đi cùng thân xe để bộc lộ tỷ lệ thấp, dáng dài và đường cắt dứt khoát.",detail:"PROPORTION / MOVEMENT"},
  {eyebrow:"03 / MATERIAL STUDY",title:"EVERY SURFACE COUNTS.",description:"Đến gần bề mặt sơn graphite, mâm xe và các mảng carbon. Không cần làm nhòe hình để tạo chiều sâu.",detail:"GRAPHITE / DETAIL"},
@@ -60,15 +60,18 @@ export function AutoCinematicTrack({children}:{children:ReactNode}){
    // Never toggle visibility when an integer chapter index changes: that
    // caused abrupt disappearances and stacked cards on short phones.
    track.style.setProperty("--bv-intro-opacity",(1-clamp((p-.04)/.19)).toFixed(4));
-   track.querySelectorAll<HTMLElement>(".bv-cinematic-step").forEach((step,index)=>{
-    if(index===0)return;
-    const start=(index-1)/4+.17;
-    const end=index/4+.24;
-    const fadeIn=clamp((p-start)/.075);
-    const fadeOut=clamp((end-p)/.075);
+   // Mobile chapter copy lives in the sticky stage, not inside scrolling
+   // section boxes. Animate its fixed safe-zone overlay from canonical p.
+   // Original section copy remains in the document for accessibility.
+   track.querySelectorAll<HTMLElement>(".bv-mobile-story-card").forEach((card,index)=>{
+    const chapter=index+1;
+    const start=chapter===1?.18:(chapter-.5)/4-.045;
+    const end=chapter===4?1.05:(chapter+.5)/4+.045;
+    const fadeIn=clamp((p-start)/.09);
+    const fadeOut=clamp((end-p)/.09);
     const opacity=fadeIn*fadeOut;
-    step.style.setProperty("--bv-copy-opacity",opacity.toFixed(4));
-    step.style.setProperty("--bv-copy-shift",`${Math.round((1-opacity)*13)}px`);
+    card.style.setProperty("--bv-card-opacity",opacity.toFixed(4));
+    card.style.setProperty("--bv-card-shift",`${Math.round((1-opacity)*10)}px`);
    });
    const next=Math.min(4,Math.floor(p*5));
    setChapter(previous=>previous===next?previous:next);
@@ -86,7 +89,7 @@ export function AutoCinematicTrack({children}:{children:ReactNode}){
  return <div ref={trackRef} id={AUTO_CINEMATIC_ID} className="bv-cinematic-track" data-chapter={chapter}>
   {children}
   <div className="bv-cinematic-steps">
-   {chapters.map((item,index)=><section key={item.eyebrow} className="bv-cinematic-step"
+   {autoCinematicChapters.map((item,index)=><section key={item.eyebrow} className="bv-cinematic-step"
     aria-label={item.eyebrow} data-scene-index={index}>
     {index>0&&<div className={"bv-cinematic-copy"+(chapter===index?" is-current":"")}>
      <span>{item.eyebrow}</span><h2>{item.title}</h2><p>{item.description}</p><small>{item.detail}</small>
