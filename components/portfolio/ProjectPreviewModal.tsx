@@ -1,6 +1,7 @@
 "use client";
 
 import {useEffect,useRef,useState} from "react";
+import {createPortal} from "react-dom";
 import Image from "next/image";
 import type {Project} from "@/types/project";
 
@@ -39,7 +40,7 @@ export function ProjectPreviewModal({project,onClose}:{project:Project;onClose:(
   return gallery[0];
  };
  const shot=chooseImage();
- return <div className="ae-preview-backdrop" onMouseDown={e=>{if(e.target===e.currentTarget)onClose();}}>
+ return createPortal(<div className="ae-preview-backdrop" onMouseDown={e=>{if(e.target===e.currentTarget)onClose();}}>
   <div className="ae-preview-dialog" role="dialog" aria-modal="true" aria-labelledby="ae-preview-title" ref={panel}>
    <header className="ae-preview-topbar"><div><span className="ae-micro">ATHENA / PROJECT PREVIEW</span><strong id="ae-preview-title">{project.title}</strong></div>
     <button ref={closeRef} className="ae-preview-close" onClick={onClose} aria-label="Đóng cửa sổ xem trước">Đóng <span aria-hidden="true">×</span></button>
@@ -78,7 +79,7 @@ export function ProjectPreviewModal({project,onClose}:{project:Project;onClose:(
     </aside>
    </div>
   </div>
- </div>;
+ </div>,document.body);
 }
 export function ProjectPreviewButton({project,className="",children}:{project:Project;className?:string;children:React.ReactNode}){
  const [open,setOpen]=useState(false);
