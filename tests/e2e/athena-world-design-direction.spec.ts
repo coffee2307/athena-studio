@@ -41,8 +41,14 @@ for(const {slug,headline} of worlds){
    }
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
    expect(overflow,slug+" "+width+"px overflow").toBeLessThanOrEqual(2);
-   await page.locator(".ix-render-toggle").click();
-   await expect(home).toHaveAttribute("data-immersive",slug==="auto-showroom"?"false":"true");
+   if(slug==="auto-showroom"){
+    await expect(page.locator(".ix-render-toggle")).toHaveCount(0);
+    await expect(page.locator(".bv-cinematic-nav button")).toHaveCount(5);
+    await expect(home).toHaveAttribute("data-immersive","true");
+   }else{
+    await page.locator(".ix-render-toggle").click();
+    await expect(home).toHaveAttribute("data-immersive","true");
+   }
    if(slug==="creative-studio"){
      await expect(page.locator(".ix-studio-overlay")).toHaveCount(0);
    }

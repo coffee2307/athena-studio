@@ -9,11 +9,11 @@ for (const slug of slugs) {
       await page.goto(`/template-demos/${slug}`);
 
       const scene = page.locator(".immersive-stage");
-      const buttons = page.locator(".ix-mode-list button");
+      const buttons = page.locator(slug==="auto-showroom"?".bv-cinematic-nav button":".ix-mode-list button");
       await expect(scene).toBeVisible();
-      await expect(buttons).toHaveCount(3);
+      await expect(buttons).toHaveCount(slug==="auto-showroom"?5:3);
 
-      for (let index = 0; index < 3; index++) {
+      for (let index = 0; index < (slug==="auto-showroom"?5:3); index++) {
         const size = await buttons.nth(index).evaluate((element) => {
           const rect = element.getBoundingClientRect();
           return {width: rect.width, height: rect.height};
@@ -22,9 +22,13 @@ for (const slug of slugs) {
         expect(size.width, `${slug} mode ${index} at ${width}px`).toBeGreaterThanOrEqual(44);
       }
 
-      await buttons.nth(1).click();
-      await expect(buttons.nth(1)).toHaveAttribute("aria-pressed", "true");
-      await expect(scene).toHaveAttribute("data-preset", "1");
+      if(slug==="auto-showroom"){
+        await expect(page.locator(".ix-render-toggle, .ix-mode-list button")).toHaveCount(0);
+      }else{
+        await buttons.nth(1).click();
+        await expect(buttons.nth(1)).toHaveAttribute("aria-pressed", "true");
+        await expect(scene).toHaveAttribute("data-preset", "1");
+      }
 
       const overflow = await page.evaluate(
         () => document.documentElement.scrollWidth - document.documentElement.clientWidth

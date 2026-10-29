@@ -154,8 +154,8 @@ test("immersive phase 0 worlds and local Digital Creators build are reachable",a
  await page.getByRole("button",{name:/Không gian/}).click();
  await expect(page.locator(".immersive-stage")).toHaveAttribute("data-preset","1");
  await page.goto("/template-demos/auto-showroom");
- await page.locator(".ix-scene-rail .ix-mode-list button").nth(1).click();
- await expect(page.locator(".immersive-stage")).toHaveAttribute("data-preset","1");
+ await expect(page.locator(".bv-cinematic-nav button")).toHaveCount(5);
+ await expect(page.locator(".ix-scene-rail .ix-mode-list button")).toHaveCount(0);
  await page.goto("/template-demos/digital-creators");
  await expect(page).toHaveURL(/\/immersive\/digital-creators\/index\.html/);
  await expect(page.getByRole("banner").getByRole("link",{name:/Digital Creators - Trang chủ/})).toBeVisible();

@@ -11,44 +11,79 @@ import {McLarenLoadingUI} from "./McLarenLoadingUI";
 const MODEL_PATH="/models/mclaren.glb?v=20261029-p1-vecarz";
 type SceneState="loading"|"ready"|"fallback";
 const clamp=(value:number,min:number,max:number)=>Math.max(min,Math.min(max,value));
+const wrapAngle=(angle:number)=>Math.atan2(Math.sin(angle),Math.cos(angle));
 
 function makeStage(){
  const stage=new THREE.Group();
- // A nearly-black seamless studio ground instead of a lit grey plane or toy podium.
- // One simple receiver and a very small procedural contact shadow; no SSR pass.
+ // A broad, low-contrast floor gradient suggests a real cyclorama without a
+ // hard horizon line or an expensive screen-space reflection pass.
+ const groundCanvas=document.createElement("canvas");
+ groundCanvas.width=512;groundCanvas.height=512;
+ const groundCtx=groundCanvas.getContext("2d");
+ if(groundCtx){
+  // Fade the cyclorama into the canvas instead of drawing a square backdrop.
+   const spill=groundCtx.createRadialGradient(256,256,10,256,256,252);
+   spill.addColorStop(0,"rgba(66,71,77,.36)");
+   spill.addColorStop(.44,"rgba(39,44,51,.19)");
+   spill.addColorStop(.8,"rgba(22,26,30,.045)");
+   spill.addColorStop(1,"rgba(12,14,18,0)");
+   groundCtx.fillStyle=spill;groundCtx.fillRect(0,0,512,512);
+ }
+ const groundTexture=new THREE.CanvasTexture(groundCanvas);
+ groundTexture.colorSpace=THREE.SRGBColorSpace;
  const ground=new THREE.Mesh(
   new THREE.PlaneGeometry(24,24),
-  new THREE.MeshBasicMaterial({color:0x101318,toneMapped:false})
+  new THREE.MeshBasicMaterial({map:groundTexture,transparent:true,depthWrite:false,toneMapped:false})
  );
  ground.rotation.x=-Math.PI/2;
  ground.position.y=-.06;
  stage.add(ground);
 
  const canvas=document.createElement("canvas");
- canvas.width=128;canvas.height=128;
+ canvas.width=256;canvas.height=256;
  const ctx=canvas.getContext("2d");
  if(ctx){
-  const gradient=ctx.createRadialGradient(64,64,4,64,64,64);
-  gradient.addColorStop(0,"rgba(0,0,0,.8)");
-  gradient.addColorStop(.55,"rgba(0,0,0,.35)");
+  const gradient=ctx.createRadialGradient(128,128,8,128,128,128);
+  gradient.addColorStop(0,"rgba(0,0,0,.94)");
+  gradient.addColorStop(.36,"rgba(0,0,0,.72)");
+  gradient.addColorStop(.72,"rgba(0,0,0,.20)");
   gradient.addColorStop(1,"rgba(0,0,0,0)");
-  ctx.fillStyle=gradient;ctx.fillRect(0,0,128,128);
+  ctx.fillStyle=gradient;ctx.fillRect(0,0,256,256);
  }
  const tex=new THREE.CanvasTexture(canvas);
  const shadow=new THREE.Mesh(
-  new THREE.PlaneGeometry(5.7,3.5),
-  new THREE.MeshBasicMaterial({map:tex,transparent:true,opacity:.85,depthWrite:false})
+  new THREE.PlaneGeometry(5.5,3.1),
+  new THREE.MeshBasicMaterial({map:tex,transparent:true,opacity:.43,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-1})
  );
  shadow.rotation.x=-Math.PI/2;
  shadow.position.y=-.045;
  stage.add(shadow);
- return {stage,tex};
+ // A single underbody shadow replaces the four dark contact blobs.
+  return {stage,tex,groundTexture};
+}
+
+function addStudioReflectionPanels(studio:THREE.Scene){
+ // Long softboxes make the shape of the painted surfaces readable without a
+ // white hotspot on every curved panel. These exist only in the PMREM scene.
+ const specs:[number,number,number,number,number,number,number][]=[
+  [7.2,1.1,-4.8,5.5,2.8,1.7,0xf0f5ff],
+  [5.1,.75,2.8,5.8,-3.5,1.5,0xffffff],
+  [1.1,5.3,5.8,3.0,1.5,1.15,0xcbd9ef],
+  [2.5,.85,-3.3,2.8,-5.2,.85,0xffdec9]
+ ];
+ return specs.map(([w,h,x,y,z,strength,color])=>{
+  const material=new THREE.MeshBasicMaterial({color:new THREE.Color(color).multiplyScalar(strength),side:THREE.DoubleSide,toneMapped:false});
+  const panel=new THREE.Mesh(new THREE.PlaneGeometry(w,h),material);
+  panel.position.set(x,y,z);panel.lookAt(0,0,0);
+  studio.add(panel);
+  return panel;
+ });
 }
 
 function tuneMaterials(model:THREE.Object3D,renderer:THREE.WebGLRenderer){
  // Keep the supplied color and texture maps intact; tame chrome-like carbon
  // reflections and sharpen sampled texture detail at oblique camera angles.
- const anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());
+ const anisotropy=Math.min(16,renderer.capabilities.getMaxAnisotropy());
  model.traverse(child=>{
   if(!(child instanceof THREE.Mesh))return;
   child.castShadow=false;
@@ -57,18 +92,38 @@ function tuneMaterials(model:THREE.Object3D,renderer:THREE.WebGLRenderer){
   for(const mat of materials){
    if(!(mat instanceof THREE.MeshStandardMaterial))continue;
    const blackBase=mat.color.r<.03&&mat.color.g<.03&&mat.color.b<.03;
-   if(mat.name==="carbon_1"){
+   if(mat.name==="Carpaint"){
+    // The source GLB combines extremely rough orange basecoat with an almost
+    // mirror-smooth clearcoat. Balance the layers for automotive lacquer.
+    mat.roughness=.34;mat.metalness=.28;mat.envMapIntensity=.8;
+    if(mat instanceof THREE.MeshPhysicalMaterial){
+     mat.clearcoat=.82;mat.clearcoatRoughness=.16;
+    }
+   }else if(mat.name==="Carpaint_Black"){
+    mat.roughness=.36;mat.metalness=.48;mat.envMapIntensity=.66;
+    if(mat instanceof THREE.MeshPhysicalMaterial){
+     mat.clearcoat=.65;mat.clearcoatRoughness=.2;
+    }
+   }else if(["carbon_1","INT_carbon","Carbon_Mult50"].includes(mat.name)){
     // glTF defaults an omitted metallicFactor to 1. Carbon is not polished metal.
     mat.metalness=Math.min(mat.metalness,.18);
-    mat.color.multiplyScalar(.55);
-    mat.envMapIntensity=.3;
+    mat.roughness=Math.max(mat.roughness,.42);
+    mat.envMapIntensity=.38;
     if(mat instanceof THREE.MeshPhysicalMaterial){
-     mat.clearcoat=Math.min(mat.clearcoat,.32);
-     mat.clearcoatRoughness=Math.max(mat.clearcoatRoughness,.38);
+     mat.clearcoat=Math.min(mat.clearcoat,.35);
+     mat.clearcoatRoughness=Math.max(mat.clearcoatRoughness,.3);
     }
+   }else if(["Windows","Windows_alpha","Clear_Glass"].includes(mat.name)){
+    mat.roughness=Math.max(mat.roughness,.16);
+    mat.envMapIntensity=.55;
+    if(mat instanceof THREE.MeshPhysicalMaterial)mat.clearcoatRoughness=Math.max(mat.clearcoatRoughness,.12);
+   }else if(["Plastics","Brake_Disk","Chrome"].includes(mat.name)){
+    mat.roughness=Math.max(mat.roughness,mat.name==="Brake_Disk"?.34:.24);
+    mat.envMapIntensity=.55;
    }else if(blackBase||mat.name==="plastic_gloss"){
     mat.metalness=Math.min(mat.metalness,.22);
-    mat.envMapIntensity=.36;
+    mat.roughness=Math.max(mat.roughness,.34);
+    mat.envMapIntensity=.4;
     if(mat instanceof THREE.MeshPhysicalMaterial){
      mat.clearcoat=Math.min(mat.clearcoat,.4);
      mat.clearcoatRoughness=Math.max(mat.clearcoatRoughness,.34);
@@ -79,6 +134,7 @@ function tuneMaterials(model:THREE.Object3D,renderer:THREE.WebGLRenderer){
     texture.anisotropy=anisotropy;
     texture.needsUpdate=true;
    }
+   mat.needsUpdate=true;
   }
  });
 }
@@ -114,7 +170,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   let renderer:THREE.WebGLRenderer;
   try{
    renderer=new THREE.WebGLRenderer({
-    canvas,alpha:false,antialias:!isMobile,
+    canvas,alpha:true,antialias:true,
     powerPreference:isMobile?"low-power":"high-performance",preserveDrawingBuffer:false
    });
   }catch(error){
@@ -123,7 +179,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   }
   renderer.outputColorSpace=THREE.SRGBColorSpace;
   renderer.toneMapping=THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure=1.02;
+  renderer.toneMappingExposure=.94;
   renderer.shadowMap.enabled=false;
   // Chromium can expose a WebGL 2 context backed by a CPU rasterizer. Such a
   // context is functional, but repeatedly easing the camera queues expensive
@@ -134,31 +190,44 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   const softwareRenderer=/swiftshader|llvmpipe|softpipe|software|lavapipe/i.test(rendererName);
 
   const scene=new THREE.Scene();
-  scene.background=new THREE.Color(0x11151a);
+  // One CSS stage background covers the whole viewport behind transparent WebGL.
+  scene.background=null;
+  renderer.setClearColor(0x0c0e12,0);
   const camera=new THREE.PerspectiveCamera(34,1,.1,85);
-  // Aim slightly left of the car on wide showroom screens so the model sits
-  // to the right of the editorial headline. Other journeys keep their pose.
-  const heroWide=scrollRootId==="bv-cinematic-track"&&!isMobile&&window.innerWidth>=1100;
-  const target=new THREE.Vector3(heroWide?-1.58:scrollRootId&&!isMobile?-.28:0,.68,0);
+  // Orbit around the actual model center. Use a lens shift for desktop copy
+  // clearance; moving the look-at point instead makes the car orbit off-axis.
+  const isWideHero=()=>scrollRootId==="bv-cinematic-track"&&window.innerWidth>820;
+  const target=new THREE.Vector3(0,isWideHero()?.47:.68,0);
+  let wideDistance=1;
   canvas.dataset.cameraTargetX=target.x.toFixed(2);
   camera.position.set(5.6,2.5,5.8);camera.lookAt(target);
 
-  const ambient=new THREE.HemisphereLight(0xf5f6fa,0x30343a,.85);
+  const ambient=new THREE.HemisphereLight(0xf4f6fc,0x272e35,.62);
   scene.add(ambient);
-  const key=new THREE.DirectionalLight(0xffffff,2.55);
+  const key=new THREE.DirectionalLight(0xf9fbff,2.15);
   key.position.set(-4.5,7,5);scene.add(key);
-  const rim=new THREE.DirectionalLight(0xff8037,1.3);
+  const rim=new THREE.DirectionalLight(0xffdfcc,.85);
   rim.position.set(4.5,3,-4.2);scene.add(rim);
-  const cool=new THREE.DirectionalLight(0xe0ebff,1.15);
+  const cool=new THREE.DirectionalLight(0xd8e6ff,.95);
   cool.position.set(-3,2.5,-5.5);scene.add(cool);
   const floor=makeStage();
+  // On small screens the finite ground plane causes a hard horizontal stripe
+  // wherever the moving WebGL canvas ends. The shared CSS studio background
+  // replaces it; retain only the smooth underbody shadow inside transparent WebGL.
+  if(isMobile)floor.stage.children[0].visible=false;
   scene.add(floor.stage);
   const pmrem=new THREE.PMREMGenerator(renderer);
   const studio=new RoomEnvironment();
+  const panels=addStudioReflectionPanels(studio);
   const generated=pmrem.fromScene(studio,.04);
+  for(const panel of panels){
+   studio.remove(panel);
+   panel.geometry.dispose();
+   (panel.material as THREE.Material).dispose();
+  }
   studio.dispose();
   scene.environment=generated.texture;
-  scene.environmentIntensity=.95;
+  scene.environmentIntensity=.78;
 
   // A GLTFLoader can finish with a "ready" scene even when individual
   // embedded WebP textures failed. Track those failures explicitly.
@@ -180,7 +249,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   let request=0,visible=true,frameTime=0,drawn=false;
   let expensiveFrames=0,preferImmediateCamera=softwareRenderer;
   let queuedContinuation=false;
-  let drag=false,previousX=0,turn=0,dragTurn=0;
+  let drag=false,previousX=0,manualOrbit=1.02,displayOrbit=1.02,manualActive=false;
   let currentMode=modeRef.current,currentProgress=0,goalProgress=0;
   // Desktop renders on every requested RAF during active interaction, not at an
   // artificial 38 FPS ceiling. Mobile retains a 30 FPS cap and pixel budget.
@@ -189,7 +258,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   // The former 650k desktop pixel ceiling rendered a 1440x900 chapter below
   // native 1x resolution. Preserve sharp geometry on a capable GPU; on a
   // software renderer retain the bounded compatibility tier used by CI.
-  let renderBudget=softwareRenderer?(isMobile?140000:240000):isMobile?1600000:4700000;
+  let renderBudget=softwareRenderer?(isMobile?140000:240000):isMobile?2100000:5200000;
 
   const schedule=()=>{
    if(!disposed&&loaded&&visible&&!document.hidden&&!request)request=requestAnimationFrame(draw);
@@ -205,7 +274,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   const resize=()=>{
    const rect=canvas.getBoundingClientRect();
    if(rect.width<5||rect.height<5)return;
-   const natural=Math.min(window.devicePixelRatio||1,isMobile?1.7:2);
+   const natural=Math.min(window.devicePixelRatio||1,2);
    const fit=Math.min(1,Math.sqrt(renderBudget/Math.max(1,rect.width*rect.height*natural*natural)));
    const effectiveDpr=natural*fit;
    renderer.setPixelRatio(effectiveDpr);
@@ -213,6 +282,12 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    canvas.dataset.renderDpr=effectiveDpr.toFixed(3);
    canvas.dataset.renderPixels=String(Math.round(rect.width*rect.height*effectiveDpr*effectiveDpr));
    canvas.dataset.renderQuality=softwareRenderer?"compatibility":"adaptive-high";
+   const widthProgress=clamp((window.innerWidth-820)/780,0,1);
+   const wide=isWideHero();
+   wideDistance=wide?1.6-.6*widthProgress:1;
+   camera.filmOffset=wide?-3-4*widthProgress:scrollRootId&&!isMobile?-1:0;
+   target.y=wide?.47:.68;
+   canvas.dataset.cameraFilmOffset=camera.filmOffset.toFixed(2);
    camera.aspect=rect.width/rect.height;camera.updateProjectionMatrix();
   };
   function draw(now:number){
@@ -245,16 +320,14 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
     ?(drawn?currentProgress+(goalProgress-currentProgress)*scrollFollow:goalProgress)
     :currentProgress+(goalProgress-currentProgress)*lerp;
    if(Math.abs(goalProgress-currentProgress)<.0005)currentProgress=goalProgress;
-   turn+=(dragTurn-turn)*lerp;
-   const angles=[.72,2.0,4.9];
+   const angles=[1.02,2.0,4.9];
    // Five signed-off narrative keyframes, sampled directly from scroll progress.
    // Reversing scroll settles on the same pose once the glide catches up.
-   const journeyAngles=[.72,1.42,2.12,3.82,5.42];
+   const journeyAngles=[1.02,1.42,2.12,3.82,5.42];
    const journeyElevations=[2.35,1.98,2.48,2.18,2.55];
-   const journeyDistances=[1,.93,.71,.88,1.04];
-   const journeyX=[0,.55,-.12,-.44,0];
-   const journeyZ=[0,-.2,.04,.18,0];
-   const journeyYaw=[0,-.09,.06,.11,0];
+   // Narrow mobile views need more camera clearance at every chapter.
+    const journeyDistances=isMobile?[.94,1,.98,1,1]:[1,.93,.71,.88,1.04];
+   // The camera performs the chapter motion. Keep the physical car pivot fixed.
    const position=clamp(currentProgress*4,0,4);
    const lower=Math.min(3,Math.floor(position));
    const fraction=position-lower;
@@ -262,34 +335,39 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    const scrollOrbit=THREE.MathUtils.lerp(journeyAngles[lower],journeyAngles[lower+1],smoothFraction);
    const scrollHeight=THREE.MathUtils.lerp(journeyElevations[lower],journeyElevations[lower+1],smoothFraction);
    const scrollDistance=THREE.MathUtils.lerp(journeyDistances[lower],journeyDistances[lower+1],smoothFraction);
-   if(scrollRootId){
-    // A small, reversible glide accompanies the dolly. No fake wheel spin:
-    // this GLB exposes no separately named wheel pivots.
-    car.position.set(THREE.MathUtils.lerp(journeyX[lower],journeyX[lower+1],smoothFraction),0,
-     THREE.MathUtils.lerp(journeyZ[lower],journeyZ[lower+1],smoothFraction));
-    car.rotation.y=THREE.MathUtils.lerp(journeyYaw[lower],journeyYaw[lower+1],smoothFraction);
-   }
-   if(canvas){
-    canvas.dataset.scrollProgress=currentProgress.toFixed(4);
-    canvas.dataset.modelX=car.position.x.toFixed(4);
-   }
+   // Keep the mesh at the world origin so drag and scroll share one true pivot.
    // Preset changes should travel between camera poses, not snap halfway.
    const modePosition=clamp(currentMode,0,2);
    const modeLower=Math.min(1,Math.floor(modePosition));
    const modeT=modePosition-modeLower;
    const easedMode=modeT*modeT*(3-2*modeT);
    const heroOrbit=angles[modeLower]+(angles[modeLower+1]-angles[modeLower])*easedMode;
-   const orbit=(scrollRootId?scrollOrbit:heroOrbit+currentProgress*.20)+turn;
-   const baseDistance=Math.max(6.75,6.75*.93/Math.max(.60,camera.aspect))*(isMobile?1.30:1);
-   const dist=baseDistance*(scrollRootId?scrollDistance:1)*(1-clamp(zoomRef.current,-1,2)*(isMobile?.04:.09));
+   // Drag temporarily controls an absolute camera orbit. Any new scroll input
+   // releases it and glides to the authored chapter angle (never B + C).
+   const desiredOrbit=manualActive?manualOrbit:(scrollRootId?scrollOrbit:heroOrbit+currentProgress*.20);
+   if(!drawn)displayOrbit=wrapAngle(desiredOrbit);
+   else{
+    const angularStep=drag?1:preferImmediateCamera?1:1-Math.exp(-travelStep/175);
+    displayOrbit=wrapAngle(displayOrbit+wrapAngle(desiredOrbit-displayOrbit)*angularStep);
+   }
+   if(canvas){
+    canvas.dataset.scrollProgress=currentProgress.toFixed(4);
+    canvas.dataset.modelX=car.position.x.toFixed(4);
+    canvas.dataset.manualOrbit=manualOrbit.toFixed(4);
+    canvas.dataset.cameraOrbit=displayOrbit.toFixed(4);
+    canvas.dataset.cameraGoalOrbit=wrapAngle(desiredOrbit).toFixed(4);
+    canvas.dataset.orbitSource=manualActive?"drag":"scroll";
+   }
+   const baseDistance=Math.max(6.75,6.75*.93/Math.max(.60,camera.aspect))*(isMobile?1.05:1);
+   const dist=baseDistance*wideDistance*(scrollRootId?scrollDistance:1)*(1-clamp(zoomRef.current,-1,2)*(isMobile?.04:.09));
    const y=scrollRootId?scrollHeight:(isMobile?2.6:2.42);
-   const wanted=new THREE.Vector3(Math.cos(orbit)*dist,y,Math.sin(orbit)*dist);
+   const wanted=new THREE.Vector3(Math.cos(displayOrbit)*dist,y,Math.sin(displayOrbit)*dist);
    if(scrollRootId)camera.position.copy(wanted);
    else camera.position.lerp(wanted,lerp);
    camera.lookAt(target);
    // As the camera reaches the rear, dim broad studio-panel reflections so
    // black bodywork stays graphite instead of turning silver from that angle.
-   scene.environmentIntensity=scrollRootId?THREE.MathUtils.lerp(.95,.5,currentProgress):.95;
+   scene.environmentIntensity=scrollRootId?THREE.MathUtils.lerp(.78,.56,currentProgress):.78;
    const renderStarted=performance.now();
    renderer.render(scene,camera);
    if(!preferImmediateCamera){
@@ -304,25 +382,27 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
     }
    }
    if(!drawn){drawn=true;finishLoading();setPercent(100);setStatus("ready");}
-   const movement=Math.abs(currentMode-modeRef.current)+Math.abs(currentProgress-goalProgress)+Math.abs(turn-dragTurn)+camera.position.distanceTo(wanted);
+   const movement=Math.abs(currentMode-modeRef.current)+Math.abs(currentProgress-goalProgress)+Math.abs(wrapAngle(desiredOrbit-displayOrbit))+camera.position.distanceTo(wanted);
    if(movement>.006){queuedContinuation=true;schedule();}
   }
 
   const pointerDown=(event:PointerEvent)=>{
    drag=true;previousX=event.clientX;
+   manualOrbit=displayOrbit;manualActive=true;
    canvas.setPointerCapture(event.pointerId);
   };
   const pointerMove=(event:PointerEvent)=>{
    if(!drag)return;
-   dragTurn+=clamp(event.clientX-previousX,-45,45)*.006;
+   // Change the absolute viewing angle directly; discard complete revolutions.
+   manualOrbit=wrapAngle(manualOrbit+clamp(event.clientX-previousX,-45,45)*.006);
    previousX=event.clientX;schedule();
   };
   const pointerUp=()=>{drag=false;};
   const onScroll=()=>{
    measureProgress();
-   // Return from a manual orbit gradually when scrolling resumes; clearing
-   // both values here caused an immediate visible angle snap.
-   if(scrollRootId)dragTurn=0;
+   // Scroll returns to the authored absolute angle via the shortest arc.
+   // Neither the dragged angle nor its number of turns shifts the keyframes.
+   manualActive=false;
    schedule();
   };
   const onVisibility=()=>{if(document.hidden){cancelAnimationFrame(request);request=0;}else schedule();};
@@ -362,6 +442,8 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    model.scale.multiplyScalar(scalar);
    model.position.set(-center.x*scalar,.07-bounds.min.y*scalar,-center.z*scalar);
    car.add(model);
+   car.updateMatrixWorld(true);
+   // The original car pivot is untouched; contact reads as one soft footprint.
    loaded=true;resize();measureProgress();schedule();
   },event=>{
    if(disposed||!event.total)return;
@@ -403,7 +485,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    floor.stage.traverse(obj=>{
     if(obj instanceof THREE.Mesh){obj.geometry.dispose();(obj.material as THREE.Material).dispose();}
    });
-   floor.tex.dispose();generated.texture.dispose();pmrem.dispose();
+   floor.tex.dispose();floor.groundTexture.dispose();generated.texture.dispose();pmrem.dispose();
    draco.dispose();
    renderer.dispose();
   };

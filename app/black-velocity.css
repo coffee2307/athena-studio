@@ -68,26 +68,26 @@
 .ix-auto-showroom .ix-hero-copy h1,
 .ix-auto-showroom.ix-site[data-immersive="true"] .ix-hero-copy h1{
  font-family:"Be Vietnam Pro",sans-serif!important;
- font-weight:800!important;
- font-size:clamp(54px,5.7vw,92px)!important;
- line-height:.99;
- letter-spacing:-.095em;
+ font-weight:750!important;
+ font-size:clamp(59px,5.55vw,98px)!important;
+ line-height:.97;
+ letter-spacing:-.075em;
  text-wrap:balance;
  color:var(--bv-ink);
  max-width:530px;
 }
 .ix-auto-showroom .ix-hero-copy h1 em{
  font-family:inherit!important;
- font-weight:800!important;
- font-style:italic;
+ font-weight:650!important;
+ font-style:normal;
  color:var(--bv-orange);
- letter-spacing:-.08em;
+ letter-spacing:-.065em;
 }
 .ix-auto-showroom .ix-hero-copy>p{
- max-width:385px!important;
- line-height:1.8!important;
+ max-width:410px!important;
+ line-height:1.72!important;
  color:#d0d0d3!important;
- font-size:13px!important;
+ font-size:14px!important;
 }
 .ix-auto-showroom .ix-hero-links{
  align-items:center;
@@ -101,9 +101,10 @@
  color:#111113!important;
  font-weight:800;
  border:1px solid var(--bv-orange);
- clip-path:polygon(0 0,calc(100% - 11px) 0,100% 11px,100% 100%,0 100%);
- padding:17px 20px;
- min-height:50px;
+ clip-path:none;
+ padding:16px 22px;
+ min-height:52px;
+ transition:background-color .2s ease,border-color .2s ease;
 }
 .ix-auto-showroom .ix-hero-copy .ix-hero-primary:hover{
  background:#ffa061!important;
@@ -111,7 +112,7 @@
 }
 .ix-auto-showroom .ix-hero-copy .ix-hero-text-link,
 .ix-auto-showroom .ix-hero-copy .ix-journey-link{color:#fafafa!important;font-weight:750}
-.ix-auto-showroom .ix-hero-copy .ix-journey-link{border-bottom:1px solid var(--bv-orange)}
+.ix-auto-showroom .ix-hero-copy .ix-journey-link{border-bottom:1px solid #ffffff72;padding-bottom:8px}
 .ix-auto-showroom .ix-hero-visual .ix-auto-3d-canvas{
  left:27%;
  right:0;
