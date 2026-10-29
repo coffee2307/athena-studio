@@ -257,3 +257,31 @@
   top:clamp(280px,45svh,310px);height:clamp(150px,30svh,200px);
  }
 }
+
+/* VELAR V2: crisp automotive editorial hierarchy and restrained controls. */
+.ix-auto-showroom .bv-cinematic-track .ix-visual-vignette{
+ background:linear-gradient(90deg,#050608ee 0%,#050608d0 18%,#05060879 38%,transparent 67%),
+  linear-gradient(0deg,#050608a0,transparent 22%,transparent 88%,#0506082e);
+}
+@media(max-width:760px){
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-copy h1{
+  font-size:clamp(42px,11vw,58px)!important;
+  letter-spacing:-.065em;
+ }
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-copy>p{
+  font-size:12px!important;line-height:1.58!important;max-width:320px!important;
+ }
+ .ix-auto-showroom .bv-cinematic-track .ix-kicker{letter-spacing:.17em;font-size:9px}
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-links{gap:12px 19px}
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-primary{font-size:11px;min-height:44px;padding:11px 15px}
+ .ix-auto-showroom .bv-cinematic-track .ix-journey-link{font-size:11px;min-height:36px}
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-copy{
+  background:linear-gradient(90deg,#07090cf4 0%,#07090cdb 80%,#07090cb8);
+  border-top:1px solid #ffffff70;
+ }
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-nav button{
+  background:#0a0c0fc4;border-color:#ffffff30;
+  letter-spacing:.035em;
+ }
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-meter{height:2px;background:#ffffff24}
+}

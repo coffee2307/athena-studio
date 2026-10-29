@@ -15,41 +15,85 @@ const wrapAngle=(angle:number)=>Math.atan2(Math.sin(angle),Math.cos(angle));
 
 function makeStage(){
  const stage=new THREE.Group();
- // A nearly-black seamless studio ground instead of a lit grey plane or toy podium.
- // One simple receiver and a very small procedural contact shadow; no SSR pass.
+ // A broad, low-contrast floor gradient suggests a real cyclorama without a
+ // hard horizon line or an expensive screen-space reflection pass.
+ const groundCanvas=document.createElement("canvas");
+ groundCanvas.width=512;groundCanvas.height=512;
+ const groundCtx=groundCanvas.getContext("2d");
+ if(groundCtx){
+  const spill=groundCtx.createRadialGradient(256,256,12,256,256,245);
+  spill.addColorStop(0,"#2a2e33");
+  spill.addColorStop(.48,"#171b20");
+  spill.addColorStop(1,"#101318");
+  groundCtx.fillStyle=spill;groundCtx.fillRect(0,0,512,512);
+ }
+ const groundTexture=new THREE.CanvasTexture(groundCanvas);
+ groundTexture.colorSpace=THREE.SRGBColorSpace;
  const ground=new THREE.Mesh(
   new THREE.PlaneGeometry(24,24),
-  new THREE.MeshBasicMaterial({color:0x101318,toneMapped:false})
+  new THREE.MeshBasicMaterial({map:groundTexture,toneMapped:false})
  );
  ground.rotation.x=-Math.PI/2;
  ground.position.y=-.06;
  stage.add(ground);
 
  const canvas=document.createElement("canvas");
- canvas.width=128;canvas.height=128;
+ canvas.width=256;canvas.height=256;
  const ctx=canvas.getContext("2d");
  if(ctx){
-  const gradient=ctx.createRadialGradient(64,64,4,64,64,64);
-  gradient.addColorStop(0,"rgba(0,0,0,.8)");
-  gradient.addColorStop(.55,"rgba(0,0,0,.35)");
+  const gradient=ctx.createRadialGradient(128,128,8,128,128,128);
+  gradient.addColorStop(0,"rgba(0,0,0,.94)");
+  gradient.addColorStop(.36,"rgba(0,0,0,.72)");
+  gradient.addColorStop(.72,"rgba(0,0,0,.20)");
   gradient.addColorStop(1,"rgba(0,0,0,0)");
-  ctx.fillStyle=gradient;ctx.fillRect(0,0,128,128);
+  ctx.fillStyle=gradient;ctx.fillRect(0,0,256,256);
  }
  const tex=new THREE.CanvasTexture(canvas);
  const shadow=new THREE.Mesh(
   new THREE.PlaneGeometry(5.7,3.5),
-  new THREE.MeshBasicMaterial({map:tex,transparent:true,opacity:.85,depthWrite:false})
+  new THREE.MeshBasicMaterial({map:tex,transparent:true,opacity:.72,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-1})
  );
  shadow.rotation.x=-Math.PI/2;
  shadow.position.y=-.045;
  stage.add(shadow);
- return {stage,tex};
+ // Each wheel receives a denser contact patch; their positions come from the
+ // actual GLB wheel pivots after the model has been centered and scaled.
+ const wheelShadows=Array.from({length:4},()=>{
+  const patch=new THREE.Mesh(
+   new THREE.PlaneGeometry(.78,1.05),
+   new THREE.MeshBasicMaterial({map:tex,transparent:true,opacity:.9,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-2})
+  );
+  patch.rotation.x=-Math.PI/2;
+  patch.position.y=-.039;
+  patch.visible=false;
+  stage.add(patch);
+  return patch;
+ });
+ return {stage,tex,groundTexture,wheelShadows};
+}
+
+function addStudioReflectionPanels(studio:THREE.Scene){
+ // Long softboxes make the shape of the painted surfaces readable without a
+ // white hotspot on every curved panel. These exist only in the PMREM scene.
+ const specs:[number,number,number,number,number,number,number][]=[
+  [7.2,1.1,-4.8,5.5,2.8,1.7,0xf0f5ff],
+  [5.1,.75,2.8,5.8,-3.5,1.5,0xffffff],
+  [1.1,5.3,5.8,3.0,1.5,1.15,0xcbd9ef],
+  [2.5,.85,-3.3,2.8,-5.2,.85,0xffdec9]
+ ];
+ return specs.map(([w,h,x,y,z,strength,color])=>{
+  const material=new THREE.MeshBasicMaterial({color:new THREE.Color(color).multiplyScalar(strength),side:THREE.DoubleSide,toneMapped:false});
+  const panel=new THREE.Mesh(new THREE.PlaneGeometry(w,h),material);
+  panel.position.set(x,y,z);panel.lookAt(0,0,0);
+  studio.add(panel);
+  return panel;
+ });
 }
 
 function tuneMaterials(model:THREE.Object3D,renderer:THREE.WebGLRenderer){
  // Keep the supplied color and texture maps intact; tame chrome-like carbon
  // reflections and sharpen sampled texture detail at oblique camera angles.
- const anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());
+ const anisotropy=Math.min(16,renderer.capabilities.getMaxAnisotropy());
  model.traverse(child=>{
   if(!(child instanceof THREE.Mesh))return;
   child.castShadow=false;
@@ -58,18 +102,38 @@ function tuneMaterials(model:THREE.Object3D,renderer:THREE.WebGLRenderer){
   for(const mat of materials){
    if(!(mat instanceof THREE.MeshStandardMaterial))continue;
    const blackBase=mat.color.r<.03&&mat.color.g<.03&&mat.color.b<.03;
-   if(mat.name==="carbon_1"){
+   if(mat.name==="Carpaint"){
+    // The source GLB combines extremely rough orange basecoat with an almost
+    // mirror-smooth clearcoat. Balance the layers for automotive lacquer.
+    mat.roughness=.34;mat.metalness=.28;mat.envMapIntensity=.8;
+    if(mat instanceof THREE.MeshPhysicalMaterial){
+     mat.clearcoat=.82;mat.clearcoatRoughness=.16;
+    }
+   }else if(mat.name==="Carpaint_Black"){
+    mat.roughness=.36;mat.metalness=.48;mat.envMapIntensity=.66;
+    if(mat instanceof THREE.MeshPhysicalMaterial){
+     mat.clearcoat=.65;mat.clearcoatRoughness=.2;
+    }
+   }else if(["carbon_1","INT_carbon","Carbon_Mult50"].includes(mat.name)){
     // glTF defaults an omitted metallicFactor to 1. Carbon is not polished metal.
     mat.metalness=Math.min(mat.metalness,.18);
-    mat.color.multiplyScalar(.55);
-    mat.envMapIntensity=.3;
+    mat.roughness=Math.max(mat.roughness,.42);
+    mat.envMapIntensity=.38;
     if(mat instanceof THREE.MeshPhysicalMaterial){
-     mat.clearcoat=Math.min(mat.clearcoat,.32);
-     mat.clearcoatRoughness=Math.max(mat.clearcoatRoughness,.38);
+     mat.clearcoat=Math.min(mat.clearcoat,.35);
+     mat.clearcoatRoughness=Math.max(mat.clearcoatRoughness,.3);
     }
+   }else if(["Windows","Windows_alpha","Clear_Glass"].includes(mat.name)){
+    mat.roughness=Math.max(mat.roughness,.16);
+    mat.envMapIntensity=.55;
+    if(mat instanceof THREE.MeshPhysicalMaterial)mat.clearcoatRoughness=Math.max(mat.clearcoatRoughness,.12);
+   }else if(["Plastics","Brake_Disk","Chrome"].includes(mat.name)){
+    mat.roughness=Math.max(mat.roughness,mat.name==="Brake_Disk"?.34:.24);
+    mat.envMapIntensity=.55;
    }else if(blackBase||mat.name==="plastic_gloss"){
     mat.metalness=Math.min(mat.metalness,.22);
-    mat.envMapIntensity=.36;
+    mat.roughness=Math.max(mat.roughness,.34);
+    mat.envMapIntensity=.4;
     if(mat instanceof THREE.MeshPhysicalMaterial){
      mat.clearcoat=Math.min(mat.clearcoat,.4);
      mat.clearcoatRoughness=Math.max(mat.clearcoatRoughness,.34);
@@ -80,6 +144,7 @@ function tuneMaterials(model:THREE.Object3D,renderer:THREE.WebGLRenderer){
     texture.anisotropy=anisotropy;
     texture.needsUpdate=true;
    }
+   mat.needsUpdate=true;
   }
  });
 }
@@ -115,7 +180,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   let renderer:THREE.WebGLRenderer;
   try{
    renderer=new THREE.WebGLRenderer({
-    canvas,alpha:false,antialias:!isMobile,
+    canvas,alpha:false,antialias:true,
     powerPreference:isMobile?"low-power":"high-performance",preserveDrawingBuffer:false
    });
   }catch(error){
@@ -124,7 +189,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   }
   renderer.outputColorSpace=THREE.SRGBColorSpace;
   renderer.toneMapping=THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure=1.02;
+  renderer.toneMappingExposure=.94;
   renderer.shadowMap.enabled=false;
   // Chromium can expose a WebGL 2 context backed by a CPU rasterizer. Such a
   // context is functional, but repeatedly easing the camera queues expensive
@@ -135,7 +200,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   const softwareRenderer=/swiftshader|llvmpipe|softpipe|software|lavapipe/i.test(rendererName);
 
   const scene=new THREE.Scene();
-  scene.background=new THREE.Color(0x11151a);
+  scene.background=new THREE.Color(0x101318);
   const camera=new THREE.PerspectiveCamera(34,1,.1,85);
   // Orbit around the actual model center. Use a lens shift for desktop copy
   // clearance; moving the look-at point instead makes the car orbit off-axis.
@@ -145,22 +210,28 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   canvas.dataset.cameraTargetX=target.x.toFixed(2);
   camera.position.set(5.6,2.5,5.8);camera.lookAt(target);
 
-  const ambient=new THREE.HemisphereLight(0xf5f6fa,0x30343a,.85);
+  const ambient=new THREE.HemisphereLight(0xf4f6fc,0x272e35,.62);
   scene.add(ambient);
-  const key=new THREE.DirectionalLight(0xffffff,2.55);
+  const key=new THREE.DirectionalLight(0xf9fbff,2.15);
   key.position.set(-4.5,7,5);scene.add(key);
-  const rim=new THREE.DirectionalLight(0xff8037,1.3);
+  const rim=new THREE.DirectionalLight(0xffdfcc,.85);
   rim.position.set(4.5,3,-4.2);scene.add(rim);
-  const cool=new THREE.DirectionalLight(0xe0ebff,1.15);
+  const cool=new THREE.DirectionalLight(0xd8e6ff,.95);
   cool.position.set(-3,2.5,-5.5);scene.add(cool);
   const floor=makeStage();
   scene.add(floor.stage);
   const pmrem=new THREE.PMREMGenerator(renderer);
   const studio=new RoomEnvironment();
+  const panels=addStudioReflectionPanels(studio);
   const generated=pmrem.fromScene(studio,.04);
+  for(const panel of panels){
+   studio.remove(panel);
+   panel.geometry.dispose();
+   (panel.material as THREE.Material).dispose();
+  }
   studio.dispose();
   scene.environment=generated.texture;
-  scene.environmentIntensity=.95;
+  scene.environmentIntensity=.78;
 
   // A GLTFLoader can finish with a "ready" scene even when individual
   // embedded WebP textures failed. Track those failures explicitly.
@@ -191,7 +262,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   // The former 650k desktop pixel ceiling rendered a 1440x900 chapter below
   // native 1x resolution. Preserve sharp geometry on a capable GPU; on a
   // software renderer retain the bounded compatibility tier used by CI.
-  let renderBudget=softwareRenderer?(isMobile?140000:240000):isMobile?1600000:4700000;
+  let renderBudget=softwareRenderer?(isMobile?140000:240000):isMobile?2100000:5200000;
 
   const schedule=()=>{
    if(!disposed&&loaded&&visible&&!document.hidden&&!request)request=requestAnimationFrame(draw);
@@ -207,7 +278,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   const resize=()=>{
    const rect=canvas.getBoundingClientRect();
    if(rect.width<5||rect.height<5)return;
-   const natural=Math.min(window.devicePixelRatio||1,isMobile?1.7:2);
+   const natural=Math.min(window.devicePixelRatio||1,2);
    const fit=Math.min(1,Math.sqrt(renderBudget/Math.max(1,rect.width*rect.height*natural*natural)));
    const effectiveDpr=natural*fit;
    renderer.setPixelRatio(effectiveDpr);
@@ -290,7 +361,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
     canvas.dataset.cameraGoalOrbit=wrapAngle(desiredOrbit).toFixed(4);
     canvas.dataset.orbitSource=manualActive?"drag":"scroll";
    }
-   const baseDistance=Math.max(6.75,6.75*.93/Math.max(.60,camera.aspect))*(isMobile?1.30:1);
+   const baseDistance=Math.max(6.75,6.75*.93/Math.max(.60,camera.aspect))*(isMobile?1.22:1);
    const dist=baseDistance*wideDistance*(scrollRootId?scrollDistance:1)*(1-clamp(zoomRef.current,-1,2)*(isMobile?.04:.09));
    const y=scrollRootId?scrollHeight:(isMobile?2.6:2.42);
    const wanted=new THREE.Vector3(Math.cos(displayOrbit)*dist,y,Math.sin(displayOrbit)*dist);
@@ -299,7 +370,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    camera.lookAt(target);
    // As the camera reaches the rear, dim broad studio-panel reflections so
    // black bodywork stays graphite instead of turning silver from that angle.
-   scene.environmentIntensity=scrollRootId?THREE.MathUtils.lerp(.95,.5,currentProgress):.95;
+   scene.environmentIntensity=scrollRootId?THREE.MathUtils.lerp(.78,.56,currentProgress):.78;
    const renderStarted=performance.now();
    renderer.render(scene,camera);
    if(!preferImmediateCamera){
@@ -374,6 +445,15 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    model.scale.multiplyScalar(scalar);
    model.position.set(-center.x*scalar,.07-bounds.min.y*scalar,-center.z*scalar);
    car.add(model);
+   car.updateMatrixWorld(true);
+   for(const [index,name] of ["WHEEL_LF","WHEEL_RF","WHEEL_LR","WHEEL_RR"].entries()){
+    const wheel=model.getObjectByName(name);
+    if(!wheel)continue;
+    const worldPosition=wheel.getWorldPosition(new THREE.Vector3());
+    const localPosition=car.worldToLocal(worldPosition);
+    floor.wheelShadows[index].position.set(localPosition.x,-.039,localPosition.z);
+    floor.wheelShadows[index].visible=true;
+   }
    loaded=true;resize();measureProgress();schedule();
   },event=>{
    if(disposed||!event.total)return;
@@ -415,7 +495,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    floor.stage.traverse(obj=>{
     if(obj instanceof THREE.Mesh){obj.geometry.dispose();(obj.material as THREE.Material).dispose();}
    });
-   floor.tex.dispose();generated.texture.dispose();pmrem.dispose();
+   floor.tex.dispose();floor.groundTexture.dispose();generated.texture.dispose();pmrem.dispose();
    draco.dispose();
    renderer.dispose();
   };

@@ -47,10 +47,10 @@ export function WorldImmersiveHome({slug,world,extra}:Props){
  const hero=<section className="ix-hero">
    {isStudio&&<div className="ix-studio-intro"><span>INDEPENDENT CREATIVE PRACTICE</span><span>EST. 2026 / VIETNAM</span></div>}
    <div className="ix-hero-copy">
-    <div className="ix-kicker"><span className="ix-kicker-dot"/>{isAuto?"BLACK VELOCITY / CONCEPT STUDY":world.eyebrow}</div>
-    <h1>{isStudio?<>Đủ khác biệt<br/>để <em>được nhớ.</em></>:isArch?<>Không gian<br/><em>biết lắng nghe.</em></>:<>BORN FOR<br/><em>THE EDGE.</em></>}</h1>
-    <p>{isAuto?"Một nghiên cứu thiết kế siêu xe: bề mặt graphite, chi tiết carbon và những đường cắt khí động học. Khám phá trực tiếp mô hình 3D.":world.intro}</p>
-    <div className="ix-hero-links"><Link href={root+"/work"} className="ix-hero-primary">{isArch?"Khám phá công trình":slug==="auto-showroom"?"Khám phá thiết kế":"Xem dự án"} <span aria-hidden="true">↗</span></Link><Link href={root+"/about"} className="ix-hero-text-link">{isAuto?"Về concept VELAR":"Câu chuyện của chúng tôi"} <span aria-hidden="true">↗</span></Link><Link href={root+"/experience"} className="ix-journey-link">{isAuto?"Cinematic Experience":"Trải nghiệm 3D"} <span aria-hidden="true">↗</span></Link></div>
+    <div className="ix-kicker"><span className="ix-kicker-dot"/>{isAuto?"VELAR / AUTOMOTIVE STUDY 001":world.eyebrow}</div>
+    <h1>{isStudio?<>Đủ khác biệt<br/>để <em>được nhớ.</em></>:isArch?<>Không gian<br/><em>biết lắng nghe.</em></>:<>MCLAREN<br/><em>P1.</em></>}</h1>
+    <p>{isAuto?"McLaren P1 dưới ánh sáng studio. Khám phá tỷ lệ, lớp sơn và cấu trúc khí động học qua mô hình 3D tương tác.":world.intro}</p>
+    <div className="ix-hero-links">{isAuto?<><Link href={root+"/experience"} className="ix-hero-primary">Cinematic Experience <span aria-hidden="true">↗</span></Link><Link href={root+"/work"} className="ix-journey-link">Design Studies <span aria-hidden="true">↗</span></Link></>:<><Link href={root+"/work"} className="ix-hero-primary">{isArch?"Khám phá công trình":"Xem dự án"} <span aria-hidden="true">↗</span></Link><Link href={root+"/about"} className="ix-hero-text-link">Câu chuyện của chúng tôi <span aria-hidden="true">↗</span></Link><Link href={root+"/experience"} className="ix-journey-link">Trải nghiệm 3D <span aria-hidden="true">↗</span></Link></>}</div>
    </div>
    <div className="ix-hero-visual immersive-stage" data-scene={slug} data-preset={mode}>
     {isAuto?<div className="ix-hero-image bv-studio-fallback" aria-hidden="true"/>:<div className="ix-hero-image" key={activeImage}><Image src={activeImage} fill priority quality={88} unoptimized={slug==="creative-studio"} alt={"Ảnh concept "+world.brand+": "+caption} sizes="(max-width: 820px) 100vw, 70vw" className="ix-hero-photograph"/></div>}

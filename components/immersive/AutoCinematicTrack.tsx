@@ -6,7 +6,7 @@ import type {ReactNode} from "react";
 export const AUTO_CINEMATIC_ID="bv-cinematic-track";
 
 const chapters=[
- {eyebrow:"01 / THE REVEAL",title:"BORN FOR THE EDGE.",description:"Một đường nét xuất hiện từ bóng tối. Cuộn xuống để đưa chiếc xe từ ánh sáng studio vào hành trình khám phá.",detail:"SILHOUETTE / LIGHT"},
+ {eyebrow:"01 / THE REVEAL",title:"MCLAREN P1.",description:"Tỷ lệ và bề mặt chiếc McLaren P1 hiện ra dưới ánh sáng studio. Cuộn xuống để khám phá các góc nhìn được dàn dựng.",detail:"SILHOUETTE / LIGHT"},
  {eyebrow:"02 / SIDE PROFILE",title:"A LINE OF INTENT.",description:"Chiếc xe lướt ngang sân khấu. Camera đi cùng thân xe để bộc lộ tỷ lệ thấp, dáng dài và đường cắt dứt khoát.",detail:"PROPORTION / MOVEMENT"},
  {eyebrow:"03 / MATERIAL STUDY",title:"EVERY SURFACE COUNTS.",description:"Đến gần bề mặt sơn graphite, mâm xe và các mảng carbon. Không cần làm nhòe hình để tạo chiều sâu.",detail:"GRAPHITE / DETAIL"},
  {eyebrow:"04 / AERODYNAMICS",title:"SHAPED BY AIR.",description:"Góc máy dịch chuyển về phía đuôi xe, phơi bày các đường dẫn khí và cấu trúc phía sau của concept.",detail:"FORM / AERODYNAMICS"},
@@ -46,7 +46,11 @@ export function AutoCinematicTrack({children}:{children:ReactNode}){
    const short=window.innerWidth<=760&&height<=680;
    const startTop=short?Math.min(310,Math.max(280,height*.45)):Math.min(390,Math.max(300,height*.43));
    const delta=startTop-height*.13;
-   track.style.setProperty("--bv-stage-translate",`${(-delta*easedPhase).toFixed(1)}px`);
+   // Align the translated WebGL surface to device pixels to avoid softening
+   // its edges during the chapter-one camera move on high-DPR phones.
+   const dpr=Math.min(window.devicePixelRatio||1,2);
+   const aligned=Math.round(-delta*easedPhase*dpr)/dpr;
+   track.style.setProperty("--bv-stage-translate",`${aligned}px`);
    track.style.setProperty("--bv-intro-opacity",(1-clamp(p/.18)).toFixed(4));
    const next=Math.min(4,Math.floor(p*5));
    setChapter(previous=>previous===next?previous:next);
