@@ -1,0 +1,264 @@
+/* Athena / Selected Projects — editorial portfolio v2.
+   Scoped to public project pages; does not alter customer templates or admin UI. */
+.ae-projects,.ae-case{--ae-black:#111210;--ae-paper:#f5f5f1;--ae-line:#d8d9d3;--ae-muted:#595e59;color:var(--ae-black);background:var(--ae-paper);font-family:"Be Vietnam Pro",sans-serif;overflow:clip}
+.ae-projects *, .ae-case *{box-sizing:border-box}
+.ae-projects h1,.ae-projects h2,.ae-projects h3,.ae-case h1,.ae-case h2,.ae-case h3{font-family:"Be Vietnam Pro",sans-serif;line-height:1.02;letter-spacing:-.075em}
+.ae-projects h1,.ae-projects h2,.ae-projects h3,.ae-case h1,.ae-case h2,.ae-case h3,.ae-projects p,.ae-case p{margin:0}
+.ae-projects :is(button,a):focus-visible,.ae-case :is(button,a):focus-visible,.ae-preview-backdrop :is(button,a):focus-visible{outline:3px solid #828682;outline-offset:3px}
+.ae-micro{font-size:10px;letter-spacing:.13em;font-weight:750;text-transform:uppercase}
+.ae-projects-hero{color:#f7f7f3;background:#141513;padding:0 clamp(20px,5vw,84px);position:relative;overflow:hidden}
+.ae-projects-hero::after{content:"";position:absolute;right:-11%;top:8%;width:min(47vw,680px);aspect-ratio:1;border:1px solid #494b482c;border-radius:50%;box-shadow:0 0 0 9vw #ffffff04,0 0 0 18vw #ffffff02;pointer-events:none}
+.ae-projects-hero-top,.ae-projects-hero-bottom{display:flex;justify-content:space-between;align-items:center;gap:18px;font-size:10px;font-weight:700;letter-spacing:.13em;color:#b3b5b0}
+.ae-projects-hero-top{padding:23px 0;border-bottom:1px solid #555951}
+.ae-projects-hero-bottom{border-top:1px solid #555951;padding:23px 0}
+.ae-projects-hero-body{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(250px,.65fr);align-items:end;gap:clamp(36px,6vw,110px);padding:clamp(105px,12vw,182px) 0 clamp(100px,11vw,152px);position:relative;z-index:1}
+.ae-projects-headline .ae-micro{color:#aeb1ab}
+.ae-projects-headline h1{font-size:clamp(67px,9.5vw,164px);font-weight:750;line-height:.94;max-width:1100px;margin-top:30px}
+.ae-projects-headline h1 em,.ae-work-intro h2 em,.ae-projects-outro h2 em,.ae-case h2 em{font-family:"Noto Serif",serif;font-style:italic;font-weight:400;letter-spacing:-.085em}
+.ae-projects-hero-aside{display:flex;flex-direction:column;align-items:flex-start;gap:25px;padding-bottom:5px}
+.ae-asterisk{font-family:Georgia,serif;font-size:70px;line-height:1;color:#a5ada5}
+.ae-projects-hero-aside p{max-width:330px;color:#d5d7d2;font-size:14px;line-height:1.85}
+.ae-projects-hero-aside a{display:flex;justify-content:space-between;gap:50px;padding:14px 0;border-bottom:1px solid #777a72;color:#fff;font-size:11px;font-weight:700}
+.ae-projects-hero-aside a:hover{color:#c8cfca}
+.ae-projects-work{padding:clamp(70px,8vw,125px) clamp(20px,5vw,84px) clamp(95px,11vw,180px);background:var(--ae-paper)}
+.ae-work-intro{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(250px,.55fr);gap:35px;align-items:end;margin-bottom:55px}
+.ae-work-intro h2{font-size:clamp(45px,6.5vw,105px);margin:25px 0 0}
+.ae-work-intro>p{font-size:14px;line-height:1.85;color:var(--ae-muted);max-width:360px;padding-bottom:5px}
+.ae-directory-toolbar{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:18px 0;border-top:1px solid #9ca09a;border-bottom:1px solid var(--ae-line);margin-bottom:35px}
+.ae-directory-filters{display:flex;align-items:center;flex-wrap:wrap;gap:7px}
+.ae-directory-filters button{border:1px solid transparent;padding:11px 16px;background:transparent;color:#5b5e59;font:700 11px "Be Vietnam Pro",sans-serif;min-height:44px;cursor:pointer;transition:background .2s,color .2s}
+.ae-directory-filters button:hover{border-color:#c8c9c3}
+.ae-directory-filters button[aria-pressed="true"]{color:#fff;background:#151613}
+.ae-directory-counter{color:#737872;font-size:10px;letter-spacing:.14em;font-weight:800;white-space:nowrap}
+.ae-project-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(36px,5vw,88px) 30px}
+.ae-project-tile{min-width:0}
+.ae-project-pham{grid-column:1/-1}
+.ae-project-poster{position:relative;overflow:hidden;background:#20221e}
+.ae-project-visual-action{display:block;position:relative;appearance:none;width:100%;padding:0;border:0;background:transparent;text-align:inherit;cursor:pointer;color:inherit;overflow:hidden}
+.ae-project-visual-action :is(.agency-real-art,.portfolio-art,.phase0-dc-art){position:relative;width:100%;height:auto;min-height:0;aspect-ratio:1.48!important;overflow:hidden;display:block}
+.ae-project-pham .ae-project-visual-action :is(.agency-real-art,.portfolio-art){aspect-ratio:2.16!important}
+.ae-project-tile .ae-project-visual-action img{object-fit:cover;transition:transform .85s cubic-bezier(.2,.8,.2,1)}
+.ae-project-tile .ae-project-visual-action:hover img{transform:scale(1.038)}
+.ae-project-tile .ae-project-visual-action .agency-screenshot-tag{position:absolute;bottom:18px;left:18px;right:auto;z-index:2}
+.ae-project-visual-label{position:absolute;right:22px;bottom:22px;display:flex;align-items:center;gap:24px;z-index:4;background:#f5f5f0;color:#171814;padding:15px 18px;font-size:10px;letter-spacing:.07em;font-weight:800}
+.ae-project-visual-label span{font-size:18px}
+.ae-project-tile-foot{padding-top:24px;border-top:1px solid var(--ae-line)}
+.ae-project-tile-top{display:flex;justify-content:space-between;gap:20px;color:#696d67;font-size:9px;letter-spacing:.09em;font-weight:800}
+.ae-project-tile-copy{display:flex;justify-content:space-between;align-items:end;gap:28px;margin-top:18px}
+.ae-project-tile-copy h3{font-size:clamp(36px,4vw,70px);margin:0 0 13px}
+.ae-project-pham .ae-project-tile-copy h3{font-size:clamp(52px,6vw,94px)}
+.ae-project-tile-copy p{color:#575c57;font-size:13px;max-width:590px;line-height:1.75}
+.ae-project-tile-actions{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0}
+.ae-project-tile-actions :is(a,button){background:transparent;border:0;border-bottom:1px solid #868a83;display:inline-flex;align-items:center;justify-content:space-between;gap:25px;padding:10px 0;min-height:44px;color:#161815;font:700 11px "Be Vietnam Pro",sans-serif;white-space:nowrap;cursor:pointer}
+.ae-project-tile-actions :is(a,button):hover{color:#646c65}
+.ae-directory-empty{padding:60px 0;color:#737872}
+.ae-projects-outro{background:#e8e9e3;display:grid;grid-template-columns:1.3fr .7fr;gap:55px;padding:clamp(55px,8vw,130px) clamp(20px,5vw,84px);align-items:end}
+.ae-projects-outro h2{font-size:clamp(45px,6.4vw,103px);margin-top:25px}
+.ae-projects-outro>div:last-child{max-width:390px;justify-self:end}
+.ae-projects-outro p{color:#535852;font-size:14px;line-height:1.8}
+.ae-projects-outro a{display:flex;justify-content:space-between;gap:20px;border-bottom:1px solid #161815;padding:18px 0;margin-top:30px;font-size:12px;font-weight:800}
+.ae-projects-disclosure{background:#e8e9e3;border-top:1px solid #c3c7bf;padding:23px clamp(20px,5vw,84px) 45px;color:#696d66;font-size:11px;line-height:1.75}
+
+/* Case studies: restrained typography with changing reading widths and rhythm. */
+.ae-case-hero{padding:28px clamp(20px,5vw,84px) 0}
+.ae-case-breadcrumb{border-bottom:1px solid #cbd0c8;padding:0 0 23px;display:flex;align-items:center;justify-content:space-between;gap:20px;color:#686c65;font-size:10px;font-weight:700;letter-spacing:.08em}
+.ae-case-breadcrumb a{color:#1a1d19;min-height:32px;display:inline-flex;align-items:center}
+.ae-case-intro{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(280px,.55fr);align-items:end;gap:38px;padding:clamp(65px,8vw,130px) 0 52px}
+.ae-case-intro h1{font-size:clamp(75px,10vw,178px);overflow-wrap:break-word;margin:20px 0 0}
+.ae-case-period{color:#b9c0b5}
+.ae-case-lead{padding-bottom:7px}
+.ae-case-number{font-size:10px;letter-spacing:.13em;color:#6f756e;font-weight:800}
+.ae-case-lead>p{max-width:420px;font-size:clamp(14px,1.3vw,17px);line-height:1.8;color:#454b45;margin:19px 0 28px}
+.ae-case-action-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px 23px}
+.ae-case-primary{background:#151714;color:#fff;border:0;min-height:47px;padding:13px 16px;display:inline-flex;align-items:center;gap:26px;justify-content:space-between;font:750 11px "Be Vietnam Pro",sans-serif;cursor:pointer}
+.ae-case-primary:hover{background:#414941}
+.ae-case-text-link{font-size:11px;font-weight:800;border-bottom:1px solid #777e74;padding:12px 0;white-space:nowrap}
+.ae-case-hero-image{position:relative;background:#222420;overflow:hidden}
+.ae-case-hero-image>.agency-real-art,.ae-case-hero-image>.portfolio-art{width:100%;aspect-ratio:2.22;position:relative;min-height:0;overflow:hidden}
+.ae-case-hero-image img{object-fit:cover}
+.ae-case-image-credit{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:13px 16px;background:#161714;color:#dedfdb;font-size:9px;letter-spacing:.08em;font-weight:700}
+.ae-case-facts{padding:35px clamp(20px,5vw,84px) 65px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:25px}
+.ae-case-facts>div{display:flex;flex-direction:column;gap:12px;padding-top:13px;border-top:1px solid #bec3bb;min-width:0}
+.ae-case-facts span{font-size:9px;letter-spacing:.1em;color:#717771;font-weight:800}
+.ae-case-facts strong{font-size:13px;font-weight:750;line-height:1.5}
+.ae-case-narrative{background:#1a1c19;color:#f6f7f2;padding:clamp(70px,8vw,135px) clamp(20px,5vw,84px)}
+.ae-case-section-heading{display:flex;justify-content:space-between;align-items:start;gap:35px;margin-bottom:clamp(60px,8vw,125px)}
+.ae-case-section-heading h2{font-size:clamp(43px,6.2vw,102px);max-width:1100px;margin:0}
+.ae-case-narrative .ae-micro{color:#b7bdb5;white-space:nowrap}
+.ae-case-story-grid{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:clamp(26px,4vw,65px)}
+.ae-case-story-grid article{border-top:1px solid #60645d;padding-top:19px}
+.ae-case-story-grid article>span{font-size:9px;font-weight:800;letter-spacing:.13em;color:#afb3ab}
+.ae-case-story-grid h3{font-size:25px;line-height:1.22;letter-spacing:-.055em;margin:24px 0 12px}
+.ae-case-story-grid p{font-size:13px;line-height:1.9;color:#c8cbc5;margin-top:21px}
+.ae-case-story-grid .ae-case-story-lead p{font-size:clamp(17px,1.7vw,23px);line-height:1.75;color:#fff}
+.ae-case-capabilities{padding:clamp(75px,9vw,140px) clamp(20px,5vw,84px);display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.ae-case-capabilities h2{font-size:clamp(43px,5.5vw,88px);margin:26px 0 0}
+.ae-case-capability-list{border-top:1px solid #b7bdb6}
+.ae-case-capability-list>div{display:grid;grid-template-columns:36px 1fr;gap:20px;align-items:start;border-bottom:1px solid #ccd0c8;padding:23px 0}
+.ae-case-capability-list span{font-size:10px;font-weight:800;color:#878d85}
+.ae-case-capability-list strong{font-size:clamp(17px,1.8vw,26px);line-height:1.4;letter-spacing:-.04em}
+.ae-case-visuals{padding:clamp(70px,8vw,130px) clamp(20px,5vw,84px);background:#e9ebe5}
+.ae-case-visuals-head{display:grid;grid-template-columns:1fr 1.3fr .65fr;gap:35px;align-items:start;margin-bottom:55px}
+.ae-case-visuals-head h2{font-size:clamp(35px,4.6vw,76px);margin:0}
+.ae-case-visuals-head>p{font-size:13px;line-height:1.8;color:#535a52}
+.ae-case-visuals .agency-project-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:34px}
+.ae-case-visuals .agency-gallery-item{min-width:0;margin:0}
+.ae-case-visuals .agency-gallery-item.is-featured{grid-column:1/-1}
+.ae-case-visuals .agency-gallery-image{position:relative;aspect-ratio:1.55;overflow:hidden}
+.ae-case-visuals .agency-gallery-item.is-featured .agency-gallery-image{aspect-ratio:2.1}
+.ae-case-visuals .agency-gallery-image img{object-fit:cover}
+.ae-case-visuals .agency-gallery-item figcaption{padding:16px 0;display:flex;gap:16px;justify-content:space-between;border-bottom:1px solid #c6cbc2;font-size:11px;line-height:1.6}
+.ae-case-visuals .agency-gallery-awaiting{background:#dddeda;border:1px solid #cbd0c8;max-width:900px}
+.ae-case-result{padding:clamp(80px,8vw,145px) clamp(20px,5vw,84px);display:grid;grid-template-columns:1fr 1fr;gap:20px 90px;background:#f5f5f1}
+.ae-case-result .ae-micro{grid-column:1/-1}
+.ae-case-result h2{font-size:clamp(45px,6vw,98px);margin:26px 0 0}
+.ae-case-result>p{font-size:clamp(15px,1.6vw,21px);line-height:1.9;max-width:650px;align-self:end;color:#454a44}
+.ae-case-technology{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px;margin-top:38px}
+.ae-case-technology span{border:1px solid #afb5ad;padding:10px 13px;font-size:10px;font-weight:800}
+.ae-case-next{display:grid;grid-template-columns:.85fr 1.15fr;gap:50px;background:#191b18;color:#f7f7f4;padding:clamp(60px,8vw,125px) clamp(20px,5vw,84px)}
+.ae-case-next h2{font-size:clamp(38px,5.5vw,85px);margin:23px 0}
+.ae-case-next-links{border-top:1px solid #5b5f59}
+.ae-case-next-links a{display:grid;grid-template-columns:1fr .8fr 32px;gap:20px;align-items:center;padding:26px 0;border-bottom:1px solid #5b5f59}
+.ae-case-next-links a span{font-size:clamp(23px,3vw,45px);font-weight:750;letter-spacing:-.07em}
+.ae-case-next-links a small{font-size:11px;color:#aeb5aa}
+.ae-case-next-links a strong{font-size:24px;font-weight:400;text-align:right}
+.ae-case-footer{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:29px clamp(20px,5vw,84px);font-size:12px;font-weight:800;background:#eceee9}
+
+/* Preview: PHAM screenshots honour Shopify's frame-ancestors restriction.
+   Only Athena-hosted demo routes are embedded in an iframe. */
+.ae-preview-backdrop{position:fixed;inset:0;z-index:11000;display:flex;align-items:center;justify-content:center;background:#080a09df;padding:clamp(8px,2vw,24px);overscroll-behavior:contain}
+.ae-preview-dialog{width:min(100%,1600px);height:min(94dvh,980px);display:flex;flex-direction:column;background:#f6f6f2;color:#171916;box-shadow:0 30px 140px #0008;overflow:hidden;font-family:"Be Vietnam Pro",sans-serif}
+.ae-preview-topbar{display:flex;justify-content:space-between;align-items:center;padding:17px 24px;border-bottom:1px solid #d5d8d0;gap:18px;flex-shrink:0}
+.ae-preview-topbar>div{display:flex;align-items:baseline;gap:24px}
+.ae-preview-topbar strong{font-size:25px;letter-spacing:-.06em}
+.ae-preview-topbar .ae-micro{color:#71776f}
+.ae-preview-close{border:1px solid #a5aaa1;background:transparent;min-height:44px;padding:9px 14px;display:flex;align-items:center;gap:20px;font:750 11px "Be Vietnam Pro",sans-serif;cursor:pointer}
+.ae-preview-close span{font-size:26px;font-weight:400;line-height:1}
+.ae-preview-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(270px,23%);min-height:0;flex:1}
+.ae-preview-stage{display:flex;flex-direction:column;min-width:0;min-height:0;background:#252825}
+.ae-preview-toolbar{height:54px;min-height:54px;background:#e9ebe6;display:flex;justify-content:space-between;gap:12px;align-items:center;padding:0 18px;border-bottom:1px solid #c6cbc3}
+.ae-preview-url{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#4e534d;font-size:10px}
+.ae-preview-device{display:flex;gap:3px;border:1px solid #c4c8c0;padding:3px}
+.ae-preview-device button{background:transparent;border:0;cursor:pointer;padding:8px 11px;font:750 10px "Be Vietnam Pro",sans-serif;min-height:33px}
+.ae-preview-device button.is-active{background:#1c201b;color:#fff}
+.ae-preview-surface{flex:1;min-height:0;overflow:auto;display:flex;justify-content:center;align-items:flex-start;padding:clamp(10px,2vw,25px);background:#242724;scrollbar-color:#777a75 #242724}
+.ae-preview-device-shell{width:100%;height:100%;position:relative;overflow:auto;background:#fff;box-shadow:0 16px 50px #0005}
+.ae-preview-device-shell iframe{width:100%;height:100%;border:0;display:block;background:#fff}
+.ae-preview-surface.is-mobile .ae-preview-device-shell{width:min(390px,100%);flex-shrink:0;height:100%;min-height:0}
+.ae-preview-surface.is-mobile .ae-preview-device-shell iframe{width:100%;height:100%}
+.ae-preview-screenshot img{display:block;max-width:100%;height:auto}
+.ae-preview-caption{padding:8px 16px;background:#20231f;color:#b5bcb0;font-size:10px;text-align:center;line-height:1.6}
+.ae-preview-unavailable{padding:60px 25px;color:#fafafa}
+.ae-preview-aside{display:flex;flex-direction:column;min-height:0;overflow:auto;padding:clamp(20px,3vw,42px);border-left:1px solid #d8dad5}
+.ae-preview-aside>.ae-micro{color:#72776f}
+.ae-preview-aside h2{font-size:clamp(35px,4vw,67px);line-height:1;letter-spacing:-.08em;margin:22px 0}
+.ae-preview-aside>p{font-size:13px;line-height:1.8;color:#525850}
+.ae-preview-tabs{display:flex;flex-direction:column;gap:0;border-top:1px solid #d1d4cb;margin-top:32px}
+.ae-preview-tabs button{font:750 12px "Be Vietnam Pro",sans-serif;text-align:left;background:transparent;padding:16px 0;border:0;border-bottom:1px solid #d1d4cb;cursor:pointer;color:#747a71}
+.ae-preview-tabs button[aria-pressed="true"]{color:#171916}
+.ae-preview-aside-bottom{margin-top:auto;padding-top:35px}
+.ae-preview-truth{font-size:11px;line-height:1.8;color:#697067;margin-bottom:25px}
+.ae-preview-visit,.ae-preview-detail{display:flex;justify-content:space-between;gap:20px;align-items:center;min-height:48px;font-size:11px;font-weight:800}
+.ae-preview-visit{background:#161915;color:#fff;padding:14px 15px}
+.ae-preview-detail{border-bottom:1px solid #c0c6bb;padding:10px 0}
+@media(max-width:1000px){
+ .ae-projects-hero-body{grid-template-columns:1fr;gap:35px;padding-block:100px}
+ .ae-projects-hero-aside{display:grid;grid-template-columns:70px minmax(0,1fr);gap:12px 20px}
+ .ae-projects-hero-aside a{grid-column:2;width:max-content}
+ .ae-work-intro{grid-template-columns:1fr .75fr}
+ .ae-case-intro{grid-template-columns:1fr;gap:22px}
+ .ae-case-lead{max-width:680px}
+ .ae-case-section-heading{flex-direction:column}
+ .ae-case-story-grid{grid-template-columns:1fr 1fr}
+ .ae-case-story-lead{grid-column:1/-1}
+ .ae-case-visuals-head{grid-template-columns:1fr 1fr}
+ .ae-case-visuals-head>p{grid-column:2}
+ .ae-preview-grid{grid-template-columns:minmax(0,1fr) minmax(230px,30%)}
+}
+@media(max-width:700px){
+ .ae-projects-hero-top>span:last-child,.ae-projects-hero-bottom>span:last-child,.ae-case-breadcrumb>span{display:none}
+ .ae-projects-hero-top,.ae-projects-hero-bottom{padding-block:18px}
+ .ae-projects-hero-body{padding:82px 0 88px}
+ .ae-projects-headline h1{font-size:clamp(56px,13vw,92px);margin-top:19px}
+ .ae-projects-hero-aside{grid-template-columns:1fr;gap:17px}
+ .ae-asterisk{font-size:48px}
+ .ae-projects-hero-aside a{grid-column:1}
+ .ae-work-intro{grid-template-columns:1fr;gap:15px;margin-bottom:36px}
+ .ae-work-intro h2{font-size:clamp(45px,11vw,67px)}
+ .ae-projects-work{padding-block:65px 90px}
+ .ae-directory-toolbar{align-items:flex-start;gap:10px}
+ .ae-directory-filters{gap:2px}
+ .ae-directory-filters button{font-size:10px;padding:10px 9px}
+ .ae-directory-counter{margin-top:16px;font-size:9px}
+ .ae-project-grid{grid-template-columns:1fr;gap:45px}
+ .ae-project-pham{grid-column:auto}
+ .ae-project-visual-action :is(.agency-real-art,.portfolio-art,.phase0-dc-art),.ae-project-pham .ae-project-visual-action :is(.agency-real-art,.portfolio-art){aspect-ratio:1.18!important}
+ .ae-project-visual-label{right:12px;bottom:12px;padding:11px 12px;font-size:9px}
+ .ae-project-tile-top{font-size:8px}
+ .ae-project-tile-copy{align-items:flex-start;flex-direction:column;gap:10px}
+ .ae-project-tile-copy h3,.ae-project-pham .ae-project-tile-copy h3{font-size:clamp(37px,10vw,58px)}
+ .ae-project-tile-actions{align-items:center;flex-direction:row;gap:20px}
+ .ae-projects-outro{grid-template-columns:1fr;gap:35px}
+ .ae-projects-outro h2{font-size:clamp(42px,10vw,68px)}
+ .ae-projects-outro>div:last-child{justify-self:start}
+ .ae-case-hero{padding-top:20px}
+ .ae-case-intro{padding:68px 0 33px}
+ .ae-case-intro h1{font-size:clamp(62px,15vw,105px)}
+ .ae-case-lead>p{font-size:14px}
+ .ae-case-hero-image>.agency-real-art,.ae-case-hero-image>.portfolio-art{aspect-ratio:1.2}
+ .ae-case-image-credit{flex-wrap:wrap;font-size:8px}
+ .ae-case-facts{grid-template-columns:1fr 1fr;gap:21px;padding-bottom:60px}
+ .ae-case-facts>div:last-child{grid-column:1/-1}
+ .ae-case-narrative{padding-block:80px}
+ .ae-case-section-heading{margin-bottom:55px}
+ .ae-case-section-heading h2{font-size:clamp(44px,10vw,67px)}
+ .ae-case-story-grid{grid-template-columns:1fr;gap:35px}
+ .ae-case-story-lead{grid-column:auto}
+ .ae-case-capabilities{grid-template-columns:1fr;gap:45px;padding-block:78px}
+ .ae-case-capabilities h2{font-size:clamp(46px,11vw,68px)}
+ .ae-case-visuals-head{grid-template-columns:1fr;gap:18px;margin-bottom:35px}
+ .ae-case-visuals-head>p{grid-column:1}
+ .ae-case-visuals .agency-project-gallery{grid-template-columns:1fr;gap:30px}
+ .ae-case-visuals .agency-gallery-item.is-featured{grid-column:auto}
+ .ae-case-visuals .agency-gallery-image,.ae-case-visuals .agency-gallery-item.is-featured .agency-gallery-image{aspect-ratio:1.2}
+ .ae-case-result{grid-template-columns:1fr;gap:20px;padding-block:75px}
+ .ae-case-result h2{font-size:clamp(44px,10vw,68px)}
+ .ae-case-result>p{align-self:start}
+ .ae-case-technology{grid-column:1;margin-top:12px}
+ .ae-case-next{grid-template-columns:1fr;gap:35px}
+ .ae-case-next-links a{grid-template-columns:1fr 22px}
+ .ae-case-next-links a small{grid-column:1;grid-row:2}
+ .ae-case-next-links a strong{grid-column:2;grid-row:1/3}
+ .ae-preview-backdrop{padding:0}
+ .ae-preview-dialog{height:100dvh;max-height:none;width:100%;border-radius:0}
+ .ae-preview-grid{display:flex;flex-direction:column;overflow:hidden}
+ .ae-preview-topbar{padding:9px 14px}
+ .ae-preview-topbar>div{gap:8px;flex-direction:column}
+ .ae-preview-topbar strong{font-size:19px}
+ .ae-preview-topbar .ae-micro{font-size:8px}
+ .ae-preview-stage{flex:1;min-height:50%;height:100%}
+ .ae-preview-toolbar{padding:0 9px;gap:8px;height:47px;min-height:47px}
+ .ae-preview-device button{padding:7px 8px}
+ .ae-preview-url{font-size:8px}
+ .ae-preview-surface{padding:10px}
+ .ae-preview-caption{font-size:9px}
+ .ae-preview-aside{min-height:0;flex:0 0 auto;max-height:32dvh;padding:16px 20px 20px;border-left:0;border-top:1px solid #ccd0c9;display:grid;grid-template-columns:1fr 1fr;gap:6px 15px;align-content:start}
+ .ae-preview-aside>.ae-micro{grid-column:1/-1;font-size:8px}
+ .ae-preview-aside h2{font-size:30px;margin:5px 0}
+ .ae-preview-aside>p{font-size:10px;line-height:1.5}
+ .ae-preview-tabs{margin-top:6px;grid-column:1/-1;display:flex;flex-direction:row;gap:18px}
+ .ae-preview-tabs button{font-size:10px;padding:10px 0}
+ .ae-preview-aside-bottom{grid-column:1/-1;padding:0;margin-top:0;display:flex;gap:10px;flex-wrap:wrap}
+ .ae-preview-truth{font-size:9px;margin:0;line-height:1.5;width:100%}
+ .ae-preview-visit,.ae-preview-detail{font-size:10px;min-height:38px;flex:1}
+}
+@media(max-width:370px){
+ .ae-projects-headline h1{font-size:50px}
+ .ae-directory-filters button{font-size:9px;padding-inline:7px}
+ .ae-project-tile-top{flex-direction:column;gap:6px}
+ .ae-preview-aside{max-height:35dvh}
+}
+@media(prefers-reduced-motion:reduce){
+ .ae-project-tile .ae-project-visual-action img{transition:none}
+ .ae-projects *,.ae-case *,.ae-preview-backdrop *{scroll-behavior:auto!important}
+}
