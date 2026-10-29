@@ -33,7 +33,11 @@ for(const {width,height} of [{width:320,height:900},{width:390,height:844}]){
   const [linksBox,canvasBox,navBox]=await Promise.all([links.boundingBox(),canvas.boundingBox(),nav.boundingBox()]);
   expect(linksBox).not.toBeNull();expect(canvasBox).not.toBeNull();expect(navBox).not.toBeNull();
   expect(linksBox!.y+linksBox!.height).toBeLessThanOrEqual(canvasBox!.y+10);
-  expect(canvasBox!.y+canvasBox!.height).toBeLessThanOrEqual(navBox!.y-18);
+  // The WebGL rectangle includes a transparent fade at its bottom. Measure the
+  // fully opaque vehicle region, not the invisible GPU surface under the HUD.
+  const mask=await canvas.evaluate(el=>getComputedStyle(el).maskImage);
+  const visiblePaintEnd=canvasBox!.y+canvasBox!.height*(mask.includes("gradient")?0.76:1);
+  expect(visiblePaintEnd).toBeLessThanOrEqual(navBox!.y-18);
   expect(navBox!.x).toBeGreaterThanOrEqual(0);
   expect(navBox!.x+navBox!.width).toBeLessThanOrEqual(width);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(2);
