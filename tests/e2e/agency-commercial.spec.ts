@@ -97,9 +97,13 @@ test("Realistic legal disclosure covers providers, ownership, retention uncertai
  await expect(page.locator(".legal-content")).toContainText("bàn giao");
 });
 
-test("Sign-in and sign-up routes stay honest and closed until secure identity release",async({page})=>{
+test("Authentication routes explain availability and expose an accessible form",async({page})=>{
  await page.goto("/login");
- await expect(page.locator("body")).toContainText(/chưa|tạm|khả dụng|kích hoạt|chưa sẵn sàng/i);
+ await expect(page.locator('input[type="email"]')).toBeVisible();
+ await expect(page.locator("h1")).toBeVisible();
  await page.goto("/signup");
- await expect(page.locator("body")).toContainText(/chưa|tạm|khả dụng|kích hoạt|chưa sẵn sàng/i);
+ await expect(page.locator('input[type="email"]')).toBeVisible();
+ await expect(page.locator("h1")).toContainText("Tạo tài khoản");
+ await expect(page.locator("body")).toContainText("Bản thử nghiệm cục bộ");
+ // Do not submit signup credentials or assume production identity is enabled.
 });
