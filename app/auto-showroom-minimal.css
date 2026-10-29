@@ -406,8 +406,9 @@
   overflow:hidden;
   padding:14px 16px;
   color:#f4f4f4;
-  background:linear-gradient(90deg,#090b0edb,#0b0d10ba);
-  border-top:1px solid #ffffff65;
+  background:transparent;
+  border-top:0;
+  text-shadow:0 1px 8px #050609aa;
   opacity:var(--bv-card-opacity,0);
   transform:translate3d(0,var(--bv-card-shift,10px),0);
   transition:none;
@@ -434,7 +435,7 @@
  .ix-auto-showroom .bv-cinematic-track .bv-mobile-story-card>small{
   font-size:8px;
   color:#bfc3c8;
-  margin-top:auto;
+  margin-top:5px;
  }
  /* Keep readable copy separate from the native chapter navigation and skip. */
  .ix-auto-showroom .bv-cinematic-track .bv-cinematic-skip,
