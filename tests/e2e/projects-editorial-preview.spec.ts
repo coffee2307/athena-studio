@@ -71,7 +71,7 @@ for(const width of [320,390,1440]){
     const st=await image.evaluate(el=>({fit:getComputedStyle(el).objectFit,natural:(el as HTMLImageElement).naturalWidth,complete:(el as HTMLImageElement).complete}));
     expect(st.complete).toBe(true);expect(st.natural).toBeGreaterThanOrEqual(i<2?1400:1000);
     expect(st.fit).toBe("contain");
-    await expect(figures.nth(i).locator("a")).toHaveAttribute("href",/\.webp$/);
+    await expect(figures.nth(i).locator("a.ae-article-image-link")).toHaveAttribute("href",/\.webp$/);
    }
   });
   test("template library is compact on mobile and does not crop screenshot previews",async({page})=>{
