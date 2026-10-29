@@ -22,8 +22,8 @@ export function TemplateGallery({templates,industries,styles}:{templates:Templat
   return sort==="name"?[...filtered].sort((a,b)=>a.title.localeCompare(b.title,"vi")):filtered;
  },[templates,query,industry,style,sort]);
  const clear=()=>{setQuery("");setIndustry("Tất cả ngành");setStyle("Tất cả phong cách");setSort("recommended");};
- return <section className="templates-catalog" aria-label="Danh sách các mẫu website">
-  <div className="templates-catalog-heading"><div><span>01 — THƯ VIỆN WEBSITE</span><h2>Khám phá mẫu thiết kế<span>.</span></h2></div><p>Nhấn vào bản xem trước để trải nghiệm website thực tế ngay trong Athena.</p></div>
+ return <section id="template-collection" className="templates-catalog" aria-label="Danh sách các mẫu website">
+  <div className="templates-catalog-heading"><div><span>01 — THƯ VIỆN WEBSITE</span><h2>Tìm mẫu phù hợp<span>.</span></h2></div><p>Nhấn vào bản xem trước để trải nghiệm website thực tế ngay trong Athena.</p></div>
   <div className="template-filters" aria-label="Lọc mẫu website">
    <label className="template-search-label">Tìm kiếm<input type="search" placeholder="Tìm theo ngành, tên mẫu..." value={query} onChange={event=>setQuery(event.target.value)}/></label>
    <label>Ngành nghề<select value={industry} onChange={event=>setIndustry(event.target.value)}><option>Tất cả ngành</option>{industries.map(item=><option key={item}>{item}</option>)}</select></label>
