@@ -211,6 +211,10 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   const cool=new THREE.DirectionalLight(0xd8e6ff,.95);
   cool.position.set(-3,2.5,-5.5);scene.add(cool);
   const floor=makeStage();
+  // On small screens the finite ground plane causes a hard horizontal stripe
+  // wherever the moving WebGL canvas ends. The shared CSS studio background
+  // replaces it; retain only the smooth underbody shadow inside transparent WebGL.
+  if(isMobile)floor.stage.children[0].visible=false;
   scene.add(floor.stage);
   const pmrem=new THREE.PMREMGenerator(renderer);
   const studio=new RoomEnvironment();
