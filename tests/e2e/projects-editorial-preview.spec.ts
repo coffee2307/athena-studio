@@ -17,7 +17,6 @@ for(const width of [320,390,1440]){
    const bounds=await page.locator(".ae-project-tile").evaluateAll(nodes=>nodes.map(el=>{
     const card=el.getBoundingClientRect();
     const poster=el.querySelector(".ae-project-poster")!.getBoundingClientRect();
-    const heading=el.querySelector("h3")!.getBoundingClientRect();
     return {width:Math.round(card.width),height:Math.round(card.height),
       posterHeight:Math.round(poster.height),headingSize:Math.round(Number.parseFloat(getComputedStyle(el.querySelector("h3")!).fontSize)),
       posterRatio:poster.width/poster.height,
