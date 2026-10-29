@@ -322,7 +322,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    const journeyAngles=[1.02,1.42,2.12,3.82,5.42];
    const journeyElevations=[2.35,1.98,2.48,2.18,2.55];
    // Narrow mobile views need more camera clearance at every chapter.
-    const journeyDistances=isMobile?[1.08,1.12,1.17,1.13,1.12]:[1,.93,.71,.88,1.04];
+    const journeyDistances=isMobile?[.94,1,.98,1,1]:[1,.93,.71,.88,1.04];
    // The camera performs the chapter motion. Keep the physical car pivot fixed.
    const position=clamp(currentProgress*4,0,4);
    const lower=Math.min(3,Math.floor(position));
@@ -354,7 +354,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
     canvas.dataset.cameraGoalOrbit=wrapAngle(desiredOrbit).toFixed(4);
     canvas.dataset.orbitSource=manualActive?"drag":"scroll";
    }
-   const baseDistance=Math.max(6.75,6.75*.93/Math.max(.60,camera.aspect))*(isMobile?1.29:1);
+   const baseDistance=Math.max(6.75,6.75*.93/Math.max(.60,camera.aspect))*(isMobile?1.05:1);
    const dist=baseDistance*wideDistance*(scrollRootId?scrollDistance:1)*(1-clamp(zoomRef.current,-1,2)*(isMobile?.04:.09));
    const y=scrollRootId?scrollHeight:(isMobile?2.6:2.42);
    const wanted=new THREE.Vector3(Math.cos(displayOrbit)*dist,y,Math.sin(displayOrbit)*dist);
