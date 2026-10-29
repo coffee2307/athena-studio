@@ -126,7 +126,7 @@
 
 /* Preview: PHAM screenshots honour Shopify's frame-ancestors restriction.
    Only Athena-hosted demo routes are embedded in an iframe. */
-.ae-preview-backdrop{position:fixed;inset:0;z-index:11000;display:flex;align-items:center;justify-content:center;background:#080a09df;padding:clamp(8px,2vw,24px);overscroll-behavior:contain}
+.ae-preview-backdrop{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;background:#080a09df;padding:clamp(8px,2vw,24px);overscroll-behavior:contain}
 .ae-preview-dialog{width:min(100%,1600px);height:min(94dvh,980px);display:flex;flex-direction:column;background:#f6f6f2;color:#171916;box-shadow:0 30px 140px #0008;overflow:hidden;font-family:"Be Vietnam Pro",sans-serif}
 .ae-preview-topbar{display:flex;justify-content:space-between;align-items:center;padding:17px 24px;border-bottom:1px solid #d5d8d0;gap:18px;flex-shrink:0}
 .ae-preview-topbar>div{display:flex;align-items:baseline;gap:24px}
