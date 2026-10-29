@@ -262,3 +262,7 @@
  .ae-project-tile .ae-project-visual-action img{transition:none}
  .ae-projects *,.ae-case *,.ae-preview-backdrop *{scroll-behavior:auto!important}
 }
+
+/* Accessible editorial metadata and research illustration on dark ink. */
+.ae-projects .ae-directory-counter,.ae-projects .ae-project-tile-top,.ae-projects .ae-project-tile-copy p,.ae-projects .ae-projects-disclosure{color:#485148}
+.ae-projects .portfolio-art .art-header,.ae-projects .portfolio-art .art-header span,.ae-projects .portfolio-art .art-bottom,.ae-projects .portfolio-art .art-bottom span,.ae-projects .portfolio-art .econith-large,.ae-projects .portfolio-art .art-project-caption{color:#f1f3ef!important}
