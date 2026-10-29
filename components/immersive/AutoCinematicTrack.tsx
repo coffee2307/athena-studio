@@ -56,7 +56,20 @@ export function AutoCinematicTrack({children}:{children:ReactNode}){
    const dpr=Math.min(window.devicePixelRatio||1,2);
    const aligned=Math.round(-delta*easedPhase*dpr)/dpr;
    track.style.setProperty("--bv-stage-translate",`${aligned}px`);
-   track.style.setProperty("--bv-intro-opacity",(1-clamp(p/.18)).toFixed(4));
+   // Use one continuous native-scroll progress for both the canvas and copy.
+   // Never toggle visibility when an integer chapter index changes: that
+   // caused abrupt disappearances and stacked cards on short phones.
+   track.style.setProperty("--bv-intro-opacity",(1-clamp((p-.04)/.19)).toFixed(4));
+   track.querySelectorAll<HTMLElement>(".bv-cinematic-step").forEach((step,index)=>{
+    if(index===0)return;
+    const start=(index-1)/4+.17;
+    const end=index/4+.24;
+    const fadeIn=clamp((p-start)/.075);
+    const fadeOut=clamp((end-p)/.075);
+    const opacity=fadeIn*fadeOut;
+    step.style.setProperty("--bv-copy-opacity",opacity.toFixed(4));
+    step.style.setProperty("--bv-copy-shift",`${Math.round((1-opacity)*13)}px`);
+   });
    const next=Math.min(4,Math.floor(p*5));
    setChapter(previous=>previous===next?previous:next);
   };
