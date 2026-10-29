@@ -32,16 +32,15 @@ for(const width of [320,375,390,428]){
   await expect(page.locator(".agency-footer-main")).toHaveCSS("flex-direction","column");
  });
 }
-test("Main site visual palette is grayscale",async({page})=>{
+test("Approved creative studio palette uses restrained warm neutral and one meaningful accent",async({page})=>{
  await page.goto("/");
- const selectors=[".client-hero",".client-quick-nav",".client-solution-row",".client-solution-row:nth-child(2)",".client-solution-row:nth-child(3)",".athena-editorial-seam",".agency-footer-cta"];
- for(const selector of selectors){
-  const el=page.locator(selector).first();
-  await expect(el).toBeVisible();
-  const c=await el.evaluate(element=>getComputedStyle(element).backgroundColor);
-  const parts=c.match(/[\d.]+/g)?.map(Number)||[];
-  expect(Math.max(...parts.slice(0,3))-Math.min(...parts.slice(0,3)),selector+" "+c).toBeLessThanOrEqual(4);
- }
+ const hero=page.locator(".dna-home-hero");
+ await expect(hero).toBeVisible();
+ await expect(hero).toHaveCSS("background-color","rgb(246, 245, 241)");
+ const primary=page.locator(".dna-home-hero .dna-button-primary");
+ await expect(primary).toBeVisible();
+ await expect(primary).toHaveCSS("background-color","rgb(217, 95, 66)");
+ await expect(page.locator(".dna-services-grid-home .dna-service-card")).toHaveCount(3);
 });
 test("Reduced-motion mobile menu locks and restores background scroll",async({page})=>{
  await page.setViewportSize({width:390,height:700});
