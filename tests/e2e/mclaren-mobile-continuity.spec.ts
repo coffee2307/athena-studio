@@ -58,6 +58,9 @@ for(const {width,height} of sizes){
 
    for(const p of [.27,.34,.52,.77]){
     await seek(p);
+    // The chapter highlight must follow the same scroll snapshot as the
+    // text even when the WebGL renderer delays a React render.
+    await expect(track).toHaveAttribute("data-chapter",String(Math.min(4,Math.floor(p*5))));
     const safe=await page.evaluate(()=>{
      const track=document.getElementById("bv-cinematic-track")!;
      const nav=track.querySelector(".bv-cinematic-nav")!.getBoundingClientRect();
