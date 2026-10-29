@@ -27,7 +27,7 @@ export default async function ProjectArticle({params}:Props){
  if(!p)notFound();
  const others=publicProjects.filter(item=>item.slug!==p.slug);
  const hasScreenshots=p.gallery.some(item=>item.rightsVerified);
- return <main className="ae-article">
+ return <div className="ae-article">
   <div className="ae-article-shell">
    <aside className="ae-article-navigation" aria-label="Mục lục hồ sơ dự án">
     <div className="ae-article-sticky">
@@ -77,7 +77,7 @@ export default async function ProjectArticle({params}:Props){
     <span className="ae-article-info-label">THÔNG TIN DỰ ÁN</span>
     <dl>
      <div><dt>Tên</dt><dd>{p.title}</dd></div>
-     <div><dt>Phân loại</dt><dd>{p.category}</dd></div>
+     <div><dt>Lĩnh vực</dt><dd>{p.category}</dd></div>
      <div><dt>Thực hiện</dt><dd>Người sáng lập Athena</dd></div>
      <div><dt>Tình trạng</dt><dd>{p.status}</dd></div>
      <div><dt>Minh họa</dt><dd>{hasScreenshots?"Ảnh giao diện đã duyệt":"Chưa công bố ảnh giao diện"}</dd></div>
@@ -85,5 +85,5 @@ export default async function ProjectArticle({params}:Props){
     {p.websiteUrl&&<a href={p.websiteUrl} target="_blank" rel="noopener noreferrer">Website chính thức ↗</a>}
    </div></aside>
   </div>
- </main>;
+ </div>;
 }
