@@ -2,26 +2,35 @@ import Link from "next/link";
 import {PortfolioDirectory} from "@/components/portfolio/PortfolioDirectory";
 import {publicProjects} from "@/data/projects";
 
-export const metadata={title:"Dự án tuyển chọn | Athena Studio",description:"Những dự án của người sáng lập Athena Studio: PHAM, ECONITH và Digital Creators. Xem giao diện thật, khám phá trải nghiệm tương tác và đọc hồ sơ."};
+export const metadata={title:"Dự án đã xây dựng | Athena Studio",description:"Khám phá PHAM, ECONITH và Digital Creators: các dự án do người sáng lập Athena Studio phát triển. Hình ảnh công khai và hồ sơ từng dự án."};
 
 export default function ProjectsPage(){
- return <div className="ae-projects">
-  <header className="ae-projects-hero">
-   <div className="ae-projects-hero-top"><span>ATHENA / SELECTED WORK</span><span>INDEPENDENT PROJECTS — 2026</span></div>
-   <div className="ae-projects-hero-body">
-    <div className="ae-projects-headline"><span className="ae-micro">DESIGN × TECHNOLOGY × EXPERIMENT</span><h1>Đằng sau<br/><em>mỗi dự án.</em></h1></div>
-    <div className="ae-projects-hero-aside"><p>Ba hướng thực hành: xây dựng thương hiệu thời trang, nghiên cứu định lượng và kể chuyện bằng website tương tác.</p><a href="#selected-projects">Xem các dự án <span aria-hidden="true">↓</span></a></div>
+ return <div className="ae-projects dna-work-page">
+  <header className="dna-work-hero">
+   <div className="container dna-work-hero-grid">
+    <div className="dna-work-heading"><p className="dna-eyebrow">SELECTED PROJECTS / 2026</p>
+     <h1>Ý tưởng thật.<br/><em>Thế giới riêng.</em></h1>
+     <p>Ba dự án, ba hướng sáng tạo — từ thời trang đến công nghệ và trải nghiệm tương tác. Mỗi dự án đều có câu chuyện riêng.</p>
+     <a className="dna-button dna-button-primary" href="#selected-projects">Khám phá dự án</a>
+    </div>
+    <div className="dna-work-art" aria-label="Ba lĩnh vực sáng tạo của các dự án founder">
+      <div className="dna-work-art-card dna-work-art-one"><span>01 / PHAM</span><strong>Form.<br/>Identity.</strong><small>Independent fashion</small></div>
+      <div className="dna-work-art-card dna-work-art-two"><span>02 / ECONITH</span><strong>Data.<br/>Thinking.</strong><small>Quantitative research</small></div>
+      <div className="dna-work-art-card dna-work-art-three"><span>03 / DIGITAL CREATORS</span><strong>Play.<br/>Create.</strong><small>Creative digital club</small></div>
+    </div>
    </div>
-   <div className="ae-projects-hero-bottom"><span>THỰC HIỆN BỞI NGƯỜI SÁNG LẬP ATHENA</span><span>SCROLL TO EXPLORE / 01—03</span></div>
   </header>
-  <section id="selected-projects" className="ae-projects-work">
-   <div className="ae-work-intro"><div><span className="ae-micro">01 / SELECTED PROJECTS</span><h2>Những thế giới<br/><em>đang thành hình.</em></h2></div><p>Chọn một dự án để xem bối cảnh, quyết định thiết kế, phạm vi triển khai và ảnh giao diện được phép công bố.</p></div>
-   <PortfolioDirectory items={publicProjects}/>
+  <section id="selected-projects" className="ae-projects-work dna-work-list">
+   <div className="container">
+    <div className="dna-section-intro"><div><p className="dna-eyebrow">THỰC HIỆN BỞI NGƯỜI SÁNG LẬP ATHENA</p><h2>Chọn một dự án.<br/><em>Đi sâu vào câu chuyện.</em></h2></div>
+     <p>Hình ảnh và nội dung được phép công bố, kèm phạm vi công việc và tình trạng triển khai.</p></div>
+    <PortfolioDirectory items={publicProjects}/>
+   </div>
   </section>
-  <section className="ae-projects-outro">
-   <div><span className="ae-micro">02 / EXPLORE THE LIBRARY</span><h2>Một thư viện.<br/><em>Nhiều phong cách.</em></h2></div>
-   <div><p>Thư viện website mẫu của Athena là nơi trải nghiệm nhiều phong cách thiết kế theo từng ngành — độc lập với những dự án founder phía trên.</p><Link href="/services/web-development/templates">Xem thư viện template <span aria-hidden="true">↗</span></Link></div>
-  </section>
-  <footer className="ae-projects-disclosure">Các dự án PHAM, ECONITH và Digital Creators là sản phẩm/dự án nghiên cứu của người sáng lập, không phải hợp đồng khách hàng. Mã nguồn riêng PHAM và ECONITH không được công bố.</footer>
+  <section className="dna-work-closer"><div className="container">
+   <div><p className="dna-eyebrow">THƯ VIỆN WEBSITE</p><h2>Cảm hứng mới<br/>bắt đầu từ một bản demo.</h2></div>
+   <Link className="dna-button dna-button-secondary" href="/services/web-development/templates">Khám phá các template</Link>
+  </div></section>
+  <footer className="ae-projects-disclosure">PHAM, ECONITH và Digital Creators là các dự án do người sáng lập thực hiện, không phải hợp đồng khách hàng. Mã nguồn riêng tư và dữ liệu nghiên cứu không được công bố.</footer>
  </div>;
 }
