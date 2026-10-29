@@ -1,0 +1,52 @@
+/* Athena template gallery — mobile editorial refinement, 2026-10-29.
+   Preserve each demo world's industry palette and layout identity. */
+@media (max-width: 760px) {
+  .world-site { overflow-x: clip; }
+  .world-site .world-header { min-height: 64px; gap: 12px; padding-inline: 18px; }
+  .world-site .world-brand { max-width: min(56vw, 240px); overflow: hidden; text-overflow: ellipsis; }
+  .world-site .world-menu-toggle { flex: 0 0 44px; touch-action: manipulation; }
+  .world-site .world-mobile-nav a { min-height: 44px; display: flex; align-items: center; }
+  .world-site :is(.world-header-cta,.world-btn,.world-inline-link,.world-text-link) { min-height: 44px; }
+  .world-site :is(input,textarea,select) { font-size: max(16px, 1rem); }
+  /* Creative, corporate, SaaS, finance and construction retain distinct visual systems. */
+  .legacy-creative-hero { min-height: 0; padding: 70px 6% 80px; }
+  .legacy-creative-hero h1 { font-size: clamp(58px, 15vw, 100px); margin: 30px 0 25px; }
+  .legacy-creative-intro { width: min(100%, 440px); margin-left: 0; }
+  .legacy-creative-hero-image { position: relative; right: auto; top: auto; width: 92%; height: min(90vw, 430px); margin: 40px 0 0 auto; }
+  .legacy-creative-side { display: none; }
+  .legacy-creative-work { padding: 70px 6%; }
+  .legacy-creative-work>div:last-child { grid-template-columns: 1fr; gap: 30px; }
+  .legacy-creative-work a:first-child { grid-row: auto; }
+  .legacy-creative-work a:nth-child(2) { margin-top: 0; }
+  .legacy-creative-work a:first-child>div, .legacy-creative-work a>div { height: min(110vw, 430px); }
+  .legacy-corporate-hero { grid-template-columns: 1fr; min-height: 0; }
+  .legacy-corporate-hero>div:first-child { padding: 65px 7% 55px; }
+  .legacy-corporate-hero h1 { font-size: clamp(44px, 11vw, 72px); margin: 22px 0; }
+  .legacy-corporate-picture { min-height: min(84vw, 440px); }
+  .legacy-corporate-trust { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 24px; padding-block: 30px; }
+  .legacy-corporate-trust>div { padding-left: 12px; }
+  .legacy-corporate-trust strong { font-size: clamp(30px, 9vw, 48px); }
+  .legacy-corporate-solutions { padding: 65px 7%; }
+  .legacy-corporate-solutions header { grid-template-columns: 1fr; gap: 20px; }
+  .legacy-corporate-solutions>div>a { grid-template-columns: 36px 1fr 24px; gap: 12px; padding: 25px 0; }
+  .legacy-corporate-case { grid-template-columns: 1fr; }
+  .legacy-corporate-case>div:first-child { min-height: 300px; }
+  .legacy-corporate-case>div:last-child { padding: 50px 7%; }
+  .signature-finance-hero { grid-template-columns: 1fr; min-height: 0; }
+  .signature-finance-lead { padding: 60px 6% 50px; }
+  .signature-finance-lead h1 { font-size: clamp(40px, 11vw, 66px); margin: 25px 0 18px; }
+  .signature-regulated-note { padding-top: 25px; }
+  .signature-finance-large { padding: 32px 7%; }
+  .signature-finance-large strong { font-size: clamp(50px, 13vw, 80px); }
+  .signature-finance-matrix { grid-template-columns: 1fr; padding: 65px 7%; }
+  .signature-finance-matrix article, .signature-finance-matrix article+article { border-right: 0; border-bottom: 1px solid #c1ccd4; padding: 25px 0; }
+  .signature-finance-proof { grid-template-columns: repeat(3, minmax(0,1fr)); }
+  .signature-finance-proof strong { font-size: 28px; }
+}
+@media(max-width: 380px) {
+  .legacy-corporate-trust { gap: 14px; }
+  .legacy-corporate-trust>div { padding-left: 8px; }
+}
+@media(prefers-reduced-motion: reduce) {
+  .world-site :is(.world-btn,.world-header-cta,.world-inline-link,.world-text-link) { transition-duration: 0.01ms; }
+}
