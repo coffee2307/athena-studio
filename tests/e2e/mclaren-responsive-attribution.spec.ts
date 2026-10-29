@@ -24,6 +24,12 @@ for(const {width,height} of [{width:320,height:900},{width:390,height:844}]){
   await expect(links).toBeVisible();
   await expect(canvas).toBeVisible();
   await expect(hero.locator(".bv-model-credit")).toContainText("vecarz");
+  // WebGL can remount its canvas when the renderer becomes ready on CI emulated phones.
+  // Poll the *same frame* for valid geometry rather than sampling a transient canvas.
+  await expect.poll(async()=>page.evaluate(()=>{
+   const c=document.querySelector(".ix-auto-showroom .bv-cinematic-track>.ix-hero .ix-auto-3d-canvas");
+   return c?c.getBoundingClientRect().height:0;
+  }),{timeout:18000}).toBeGreaterThan(30);
   const [linksBox,canvasBox,navBox]=await Promise.all([links.boundingBox(),canvas.boundingBox(),nav.boundingBox()]);
   expect(linksBox).not.toBeNull();expect(canvasBox).not.toBeNull();expect(navBox).not.toBeNull();
   expect(linksBox!.y+linksBox!.height).toBeLessThanOrEqual(canvasBox!.y+10);
