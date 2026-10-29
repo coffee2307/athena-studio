@@ -2,7 +2,6 @@
 import {useState} from "react";
 import Link from "next/link";
 import Image from "next/image";
-import {Icon} from "@/components/ui/Icon";
 import {getTemplate,templates} from "@/lib/templates";
 const groups=[
  {id:"featured",label:"Nổi bật",slugs:["finance-trust","hospitality-booking","pet-store","creative-studio"]},
@@ -22,7 +21,7 @@ export function HomeTemplateShowcase(){
     <h2 id="home-demo-title">Một thương hiệu.<br/><span>Một phong cách riêng.</span></h2>
     <p className="home-demo-lede">Từ nhà hàng ấm cúng đến tài chính cứng cáp, mỗi website được xây dựng theo một cách trình bày riêng. Xem trực tiếp trang chủ, dịch vụ, dự án và trải nghiệm trên điện thoại.</p>
     <div className="home-demo-facts"><div><strong>{templates.length}</strong><span>Mẫu đa ngành</span></div><div><strong>{String(groups.length).padStart(2,"0")}</strong><span>Nhóm phong cách</span></div><div><strong>01</strong><span>Định hướng của bạn</span></div></div>
-    <Link href="/services/web-development/templates" className="home-demo-all">Khám phá đủ {templates.length} website <Icon name="arrow-up-right" size={19}/></Link>
+    <Link href="/services/web-development/templates" className="home-demo-all">Xem toàn bộ {templates.length} mẫu <span aria-hidden="true">→</span></Link>
    </div>
    <div className="home-demo-content">
     <div className="home-demo-filters" role="group" aria-label="Lọc mẫu website">
@@ -31,14 +30,14 @@ export function HomeTemplateShowcase(){
     <div className="home-demo-cards" aria-live="polite">{items.map((item,i)=><article className="home-demo-card" key={item.slug}>
       <Link href={item.demoPath} className="home-demo-picture" aria-label={"Xem demo "+item.title}>
        <Image src={"/template-previews/"+item.slug+".jpg"+(item.slug==="auto-showroom"?"?v=20261029-p1-3d-cover":"")} alt={"Xem trước website "+item.title} fill sizes="(max-width:600px) 100vw, (max-width:1100px) 50vw, 33vw" />
-       <span className="home-demo-open"><Icon name="arrow-up-right" size={19}/></span>
+       <span className="home-demo-open" aria-hidden="true">Xem mẫu</span>
       </Link>
       <div className="home-demo-meta"><span>{String(i+1).padStart(2,"0")} / {item.industry}</span><span>{item.style}</span></div>
       <h3><Link href={item.demoPath}>{item.title}</Link></h3>
       <p>{item.description}</p>
-      <Link className="home-demo-visit" href={item.demoPath}>Xem website demo <Icon name="arrow-up-right" size={15}/></Link>
+      <Link className="home-demo-visit" href={item.demoPath}>Xem demo</Link>
      </article>)}</div>
-    <div className="home-demo-footer"><span>Muốn tạo một thiết kế riêng theo thương hiệu?</span><Link href="/contact">Trao đổi cùng Athena <Icon name="arrow-up-right" size={15}/></Link></div>
+    <div className="home-demo-footer"><span>Muốn tạo một thiết kế riêng theo thương hiệu?</span><Link href="/contact">Thiết kế cho thương hiệu của bạn</Link></div>
    </div>
   </div>
  </section>;
