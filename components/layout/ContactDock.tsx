@@ -77,7 +77,7 @@ export function ContactDock(){
  return <>
   <nav className={footerVisible?"agency-contact-dock is-footer-visible":"agency-contact-dock"} aria-label="Liên hệ nhanh">
    <button className="agency-contact-toggle" type="button" aria-expanded={mobileExpanded} aria-controls="athena-contact-shortcuts" onClick={()=>setMobileExpanded(v=>!v)}>
-    <Icon name={mobileExpanded?"x":"message-circle"} size={19}/><span>{mobileExpanded?"Đóng":"Liên hệ"}</span>
+    <Icon name={mobileExpanded?"x":"message"} size={19}/><span>{mobileExpanded?"Đóng":"Liên hệ"}</span>
    </button>
    <div className={"agency-contact-shortcuts"+(mobileExpanded?" is-open":"")} id="athena-contact-shortcuts">
     {channels.filter(c=>c.id!=="email").map(c=><a key={c.id} href={c.href}
