@@ -18,7 +18,7 @@ export default class SceneErrorBoundary extends Component<Props, State> {
   render() {
     if (this.state.failed) {
       return <div className="scene-fallback-art" role="img" aria-label={this.props.label}>
-        <div className="scene-fallback-symbol">✳</div>
+        <div className="scene-fallback-symbol">·</div>
         <strong>{this.props.label}</strong>
         <span>Phiên bản tối giản dành cho thiết bị này</span>
       </div>
