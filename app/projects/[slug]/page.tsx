@@ -2,6 +2,7 @@ import Link from "next/link";
 import {notFound} from "next/navigation";
 import {publicProjects,getProjectBySlug} from "@/data/projects";
 import {ProjectGallery} from "@/components/portfolio/ProjectGallery";
+import {ProjectArtwork} from "@/components/portfolio/ProjectArtwork";
 import {createMetadata} from "@/lib/metadata";
 
 type Props={params:Promise<{slug:string}>};
@@ -45,6 +46,10 @@ export default async function ProjectArticle({params}:Props){
      <p className="ae-article-summary">{p.summary}</p>
      <div className="ae-article-meta"><span>Hồ sơ dự án do người sáng lập thực hiện</span><span>{p.updatedLabel}</span></div>
     </header>
+    <figure className="ae-article-feature">
+     <ProjectArtwork project={p}/>
+     <figcaption>{hasScreenshots?"Hình đại diện: giao diện dự án đã được phép công bố.":"Đồ họa nhận diện dự án; không phải ảnh chụp sản phẩm."}<span>ATHENA / {p.slug.toUpperCase()}</span></figcaption>
+    </figure>
     <details className="ae-article-mobile-toc"><summary>Mục lục bài viết <span aria-hidden="true">⌄</span></summary><nav aria-label="Mục lục trên điện thoại">{sections.map((s,i)=><a key={s.id} href={"#"+s.id}>{String(i+1).padStart(2,"0")} — {s.label}</a>)}</nav></details>
     <section id="tong-quan" className="ae-article-section">
      <h2>Tổng quan</h2>
