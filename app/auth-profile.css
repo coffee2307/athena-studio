@@ -32,3 +32,6 @@
 .athena-profile-contact-link{margin-top:24px;display:inline-flex;gap:12px;font-size:13px;font-weight:700;text-decoration:underline;text-underline-offset:6px}
 @media(max-width:850px){.athena-profile-grid{grid-template-columns:1fr}}
 @media(max-width:600px){.athena-profile-hero{align-items:flex-start;flex-direction:column;padding:38px 0 34px}.athena-profile-top{flex-wrap:wrap}.athena-profile-top .auth-submit{padding:10px 16px}.athena-profile-card{padding:23px}}
+
+/* Do not dim meaningful loading/status text in the mobile footer. */
+.agency-footer-column .agency-auth-loading.mobile{opacity:1;background:transparent;color:#455047;width:auto;height:auto;font-size:12px;line-height:1.5}
