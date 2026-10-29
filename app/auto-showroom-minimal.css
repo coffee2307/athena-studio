@@ -294,3 +294,66 @@
  }
  .ix-auto-showroom .bv-cinematic-track .bv-cinematic-meter{height:2px;background:#ffffff24}
 }
+
+/* VELAR mobile studio continuity — full-frame background, smooth text and
+   independent safe zones for the car, navigation and chapter description. */
+@media(max-width:760px){
+ .ix-auto-showroom .bv-cinematic-track,
+ .ix-auto-showroom .bv-cinematic-track>.ix-hero,
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-visual,
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-image.bv-studio-fallback{
+  background-color:#0c0e12!important;
+ }
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-image.bv-studio-fallback{
+  background-image:none!important;
+ }
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-image.bv-studio-fallback::after{display:none}
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas{
+  background:transparent!important;
+ }
+ /* Gradient belongs to the entire viewport, never to the smaller canvas. */
+ .ix-auto-showroom .bv-cinematic-track .ix-visual-vignette,
+ .ix-auto-showroom .bv-cinematic-track[data-chapter]:not([data-chapter="0"]) .ix-visual-vignette{
+  background:linear-gradient(180deg,#050609a8 0%,#05060938 23%,transparent 43%,transparent 70%,#0506097a 100%);
+ }
+ /* No index-gated visibility: each card fades at its real scroll coordinate. */
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-copy,
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-copy.is-current{
+  opacity:var(--bv-copy-opacity,0);
+  visibility:visible;
+  transform:translate3d(0,var(--bv-copy-shift,13px),0);
+  transition:none;
+ }
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-step{
+  padding-bottom:clamp(152px,20svh,190px);
+ }
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-copy{
+  max-height:min(27svh,220px);
+  width:100%;
+  max-width:calc(100% - 16px);
+  border-top-color:#ffffff55;
+ }
+ /* Zoom follows the model's scroll translation rather than covering copy. */
+ .ix-auto-showroom .bv-cinematic-track .bv-zoom-controls{
+  top:calc(clamp(300px,43svh,390px) + var(--bv-stage-translate,0px) + 10px);
+  bottom:auto;
+  right:12px;
+  transform:none;
+  z-index:7;
+ }
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-nav{
+  z-index:9;
+ }
+}
+@media(max-width:760px) and (max-height:680px){
+ .ix-auto-showroom .bv-cinematic-track .bv-zoom-controls{
+  top:calc(clamp(280px,45svh,310px) + var(--bv-stage-translate,0px) + 8px);
+ }
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-copy{max-height:27svh}
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-step{padding-bottom:144px}
+}
+@media(prefers-reduced-motion:reduce){
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-copy{
+  transform:none;
+ }
+}
