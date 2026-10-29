@@ -51,7 +51,7 @@ for(const width of [320,390,428,768,1440]){
    const cards=page.locator(".template-card");
    expect(await cards.count()).toBeGreaterThanOrEqual(20);
    if(width>760){
-    const tops=await cards.evaluateAll(nodes=>nodes.slice(0,3).map(n=>{const a=n.querySelector(".template-card-footer")!.getBoundingClientRect();return Math.round(a.top)}));
+    const tops=await cards.evaluateAll((nodes,wide)=>nodes.slice(0,wide?3:2).map(n=>{const a=n.querySelector(".template-card-footer")!.getBoundingClientRect();return Math.round(a.top)}),width>=1200);
     expect(Math.max(...tops)-Math.min(...tops)).toBeLessThanOrEqual(3);
    }
   });
