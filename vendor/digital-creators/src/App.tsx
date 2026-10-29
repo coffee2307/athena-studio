@@ -81,7 +81,7 @@ function FieldCards() {
       const Icon = fieldIcons[i]
       return <article className={'field-card theme-' + field.tone} key={field.id}>
         <div className="field-meta"><span>/{field.id}</span><ArrowUpRight size={21}/></div>
-        <div className="field-art"><Icon size={48} strokeWidth={1.35}/><i>✳</i></div>
+        <div className="field-art"><Icon size={48} strokeWidth={1.35}/><i>·</i></div>
         <span className="field-english">{field.label}</span><h3>{field.title}</h3><p>{field.description}</p>
       </article>
     })}
@@ -93,7 +93,7 @@ function ActivityCards() {
     {plannedActivities.map((activity, i) => {
       const Icon = icons[i]
       return <article className={'activity theme-' + activity.tone} key={activity.number}>
-        <div className="activity-art"><span className="activity-counter">{activity.number} / DỰ KIẾN</span><div className="activity-icon"><Icon size={62} strokeWidth={1.1}/></div><span className="star star-left">✳</span><span className="star star-right">✦</span></div>
+        <div className="activity-art"><span className="activity-counter">{activity.number} / DỰ KIẾN</span><div className="activity-icon"><Icon size={62} strokeWidth={1.1}/></div><span className="star star-left">·</span><span className="star star-right">✦</span></div>
         <div className="activity-text"><span className="activity-kind">{activity.category}</span><h3>{activity.title}</h3><p>{activity.description}</p><div className="tags">{activity.tags.map(tag => <span key={tag}>{tag}</span>)}</div></div>
       </article>
     })}
@@ -103,14 +103,14 @@ function ActivityCards() {
 function Home() {
   return <>
     <section className="wrap hero"><div className="hero-text">
-      <div className="hero-caption"><span className="asterisk">✳</span> A SPACE FOR YOUNG CREATORS <span className="caption-rule"/></div>
+      <div className="hero-caption"><span className="asterisk">·</span> A SPACE FOR YOUNG CREATORS <span className="caption-rule"/></div>
       <h1>Nơi ý tưởng <em>được tự do</em> bay xa<span className="period">.</span></h1>
       <p>Chào mừng bạn đến với <strong>Digital Creators</strong> — không gian để học sinh khám phá công nghệ, kết nối những người yêu sáng tạo và biến ý tưởng thành sản phẩm số.</p>
       <div className="hero-buttons"><Link className="btn btn-ink" to="/gioi-thieu">Tìm hiểu câu lạc bộ <ArrowUpRight size={18}/></Link><Link className="btn btn-white" to="/hoat-dong">Khám phá hoạt động <ArrowRight size={18}/></Link></div>
       <div className="hero-foot"><div className="triple-circles"><i/><i/><i/></div>SÁNG TẠO <b>·</b> KẾT NỐI <b>·</b> PHÁT TRIỂN</div>
       <button type="button" className="hero-scroll-story" onClick={() => document.getElementById('hanh-trinh')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })}>CUỘN ĐỂ KHÁM PHÁ KHÔNG GIAN CHUYỂN ĐỘNG <ArrowDownRight size={18}/></button>
     </div><HeroRubikCard/></section>
-    <div className="marquee" aria-label="Sáng tạo, kết nối, phát triển"><div className="marquee-rail">{[0,1].map(i=><span key={i}>DESIGN <b>✳</b> CODE <b>✳</b> CREATE <b>✳</b> EXPLORE <b>✳</b> CONNECT <b>✳</b> </span>)}</div></div>
+    <div className="marquee" aria-label="Sáng tạo, kết nối, phát triển"><div className="marquee-rail">{[0,1].map(i=><span key={i}>DESIGN <b>·</b> CODE <b>·</b> CREATE <b>·</b> EXPLORE <b>·</b> CONNECT <b>·</b> </span>)}</div></div>
     <Suspense fallback={<div className="visual-scene-loading">Đang tải không gian Rubik…</div>}><RubikScrollStory/></Suspense>
     <section className="section wrap"><div className="section-heading"><Intro code="01 / KHÁM PHÁ" title="Có rất nhiều cách để sáng tạo." desc="Không cần giỏi sẵn từ đầu. Chỉ cần tò mò, dám thử và sẵn sàng cùng nhau học hỏi."/><span className="side-note">FIND YOUR THING ↗</span></div><FieldCards/></section>
     <CreativeLab/>
@@ -123,23 +123,23 @@ function Home() {
 }
 
 function CallToAction() {
-  return <div className="cta"><div className="cta-copy"><Eyebrow>YOUR NEXT IDEA STARTS HERE</Eyebrow><h2>Ý tưởng tiếp theo có thể đến từ <em>bạn.</em></h2><p>Bạn không cần kinh nghiệm trước đó. Hãy bắt đầu với sự tò mò và tinh thần muốn khám phá.</p><Link to="/dang-ky" className="btn btn-ink">Đăng ký tham gia <ArrowUpRight size={18}/></Link></div><div className="cta-orb" aria-hidden="true"><span>LET'S</span><strong>CREATE!</strong><small>✳ ✳ ✳</small></div></div>
+  return <div className="cta"><div className="cta-copy"><Eyebrow>YOUR NEXT IDEA STARTS HERE</Eyebrow><h2>Ý tưởng tiếp theo có thể đến từ <em>bạn.</em></h2><p>Bạn không cần kinh nghiệm trước đó. Hãy bắt đầu với sự tò mò và tinh thần muốn khám phá.</p><Link to="/dang-ky" className="btn btn-ink">Đăng ký tham gia <ArrowUpRight size={18}/></Link></div><div className="cta-orb" aria-hidden="true"><span>LET'S</span><strong>CREATE!</strong><small>· · ·</small></div></div>
 }
 function PageHeader({number, eyebrow, title, desc, clean = false}: {number: string; eyebrow: string; title: string; desc: string; clean?: boolean}) {
-  return <div className={"page-header wrap" + (clean ? " page-header-clean" : "")}><div className="page-header-text"><Eyebrow>{number} / {eyebrow}</Eyebrow><h1>{title}</h1><p>{desc}</p></div>{!clean && <div className="page-decoration"><span>✳</span><i>✦</i></div>}</div>
+  return <div className={"page-header wrap" + (clean ? " page-header-clean" : "")}><div className="page-header-text"><Eyebrow>{number} / {eyebrow}</Eyebrow><h1>{title}</h1><p>{desc}</p></div>{!clean && <div className="page-decoration"><span>·</span><i>✦</i></div>}</div>
 }
 function About() {
   return <>
     <PageHeader number="01" eyebrow="GIỚI THIỆU" title="Một nơi dành cho những tâm trí tò mò." desc="Nơi những ý tưởng được lắng nghe, những kỹ năng được khám phá và những kết nối mới có cơ hội hình thành." clean/>
     <Suspense fallback={<div className="visual-scene-loading">Đang chuẩn bị không gian hội họa…</div>}><PaintingAboutVisual/></Suspense>
-    <section className="wrap section about-content"><div className="about-main"><Eyebrow>VÌ SAO CÓ DIGITAL CREATORS?</Eyebrow><h2>Vì sáng tạo không nên chỉ nằm trong trí tưởng tượng.</h2><p>Trong thời đại công nghệ số, các kỹ năng như thiết kế đồ họa, chỉnh sửa video, lập trình và sáng tạo nội dung ngày càng hữu ích đối với học sinh. CLB được đề xuất nhằm tạo môi trường để các bạn tiếp cận những kỹ năng này, phát huy ý tưởng và học hỏi lẫn nhau.</p><div className="about-highlight"><Sparkles size={32}/><span>Học từ trải nghiệm. Lớn lên cùng ý tưởng.</span></div></div><div className="about-aside"><div className="about-sticker"><span>✳</span><strong>THINK.<br/>CREATE.<br/>SHARE.</strong></div></div></section>
+    <section className="wrap section about-content"><div className="about-main"><Eyebrow>VÌ SAO CÓ DIGITAL CREATORS?</Eyebrow><h2>Vì sáng tạo không nên chỉ nằm trong trí tưởng tượng.</h2><p>Trong thời đại công nghệ số, các kỹ năng như thiết kế đồ họa, chỉnh sửa video, lập trình và sáng tạo nội dung ngày càng hữu ích đối với học sinh. CLB được đề xuất nhằm tạo môi trường để các bạn tiếp cận những kỹ năng này, phát huy ý tưởng và học hỏi lẫn nhau.</p><div className="about-highlight"><Sparkles size={32}/><span>Học từ trải nghiệm. Lớn lên cùng ý tưởng.</span></div></div><div className="about-aside"><div className="about-sticker"><span>·</span><strong>THINK.<br/>CREATE.<br/>SHARE.</strong></div></div></section>
     <section className="section wrap"><Intro code="NHỮNG ĐIỀU HƯỚNG TỚI" title="Mục tiêu của chúng mình." desc="Bốn định hướng để mỗi thành viên có cơ hội học hỏi và phát triển theo cách của riêng mình."/><div className="goal-grid">{[
       {icon: Palette, title:'Phát triển kỹ năng số', desc:'Sử dụng các công cụ thiết kế và công nghệ để tạo sản phẩm thực tế.'},
       {icon: Lightbulb, title:'Nuôi dưỡng tư duy sáng tạo', desc:'Khuyến khích đặt câu hỏi, thử nghiệm và tìm giải pháp cho vấn đề.'},
       {icon: UsersRound, title:'Làm việc cùng nhau', desc:'Rèn kỹ năng giao tiếp, hợp tác, trình bày và phản hồi ý tưởng.'},
       {icon: Rocket, title:'Biến ý tưởng thành sản phẩm', desc:'Thực hiện, chia sẻ, đánh giá và hoàn thiện các sản phẩm số.'},
     ].map((g,i)=><div className="goal" key={g.title}><div className="goal-icon"><g.icon size={25}/></div><span>0{i+1}</span><h3>{g.title}</h3><p>{g.desc}</p></div>)}</div></section>
-    <section className="wrap section"><div className="audience"><div><Eyebrow>AI CÓ THỂ THAM GIA?</Eyebrow><h2>Không quan trọng bạn đang ở vạch xuất phát nào.</h2><p>CLB hướng đến tất cả học sinh trong trường quan tâm tới công nghệ, thiết kế, video, lập trình hoặc sáng tạo nội dung. <strong>Chưa có kinh nghiệm? Không sao cả.</strong> Sẵn sàng học hỏi chính là điều quan trọng.</p><Link className="btn btn-ink" to="/dang-ky">Đăng ký khám phá <ArrowUpRight size={17}/></Link></div><div className="audience-visual"><UsersRound size={102} strokeWidth={1}/><span>YOU BELONG HERE ✳</span></div></div></section>
+    <section className="wrap section"><div className="audience"><div><Eyebrow>AI CÓ THỂ THAM GIA?</Eyebrow><h2>Không quan trọng bạn đang ở vạch xuất phát nào.</h2><p>CLB hướng đến tất cả học sinh trong trường quan tâm tới công nghệ, thiết kế, video, lập trình hoặc sáng tạo nội dung. <strong>Chưa có kinh nghiệm? Không sao cả.</strong> Sẵn sàng học hỏi chính là điều quan trọng.</p><Link className="btn btn-ink" to="/dang-ky">Đăng ký khám phá <ArrowUpRight size={17}/></Link></div><div className="audience-visual"><UsersRound size={102} strokeWidth={1}/><span>YOU BELONG HERE ·</span></div></div></section>
   </>
 }
 function Activities() {
