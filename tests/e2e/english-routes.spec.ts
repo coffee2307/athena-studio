@@ -26,7 +26,7 @@ test("Canonical English paths render content and localized text remains Vietname
  await page.goto("/projects");
  await expect(page.locator("html")).toHaveAttribute("lang","vi");
  await expect(page.getByRole("heading",{level:1})).toBeVisible();
- await page.locator(".case-card a").first().click();
+ await page.locator(".ae-project-grid .ae-project-visual-action").first().click();
  await expect(page).toHaveURL(/\/projects\/(?:pham|econith)$/);
 });
 test("All previous Vietnamese URLs redirect one-way to English canonical paths",async({request})=>{
