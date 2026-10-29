@@ -69,6 +69,6 @@ test("Solutions and service detail show concrete deliverables, not unverified ou
  await expect(page.locator(".dna-services-grid-catalog .dna-service-card")).toHaveCount(3);
  await expect(page.locator(".dna-services-grid-catalog")).toContainText("Thiết kế website");
  await expect(page.locator(".dna-lab-notice")).toContainText("chưa mở bán");
- await page.getByRole("link",{name:"Gửi yêu cầu"}).click();
+ await page.getByRole("link",{name:"Gửi yêu cầu",exact:true}).click();
  await expect(page).toHaveURL(/\/start$/);
 });
