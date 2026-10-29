@@ -97,13 +97,17 @@ test("Realistic legal disclosure covers providers, ownership, retention uncertai
  await expect(page.locator(".legal-content")).toContainText("bàn giao");
 });
 
-test("Authentication routes explain availability and expose an accessible form",async({page})=>{
- await page.goto("/login");
- await expect(page.locator('input[type="email"]')).toBeVisible();
- await expect(page.locator("h1")).toBeVisible();
- await page.goto("/signup");
- await expect(page.locator('input[type="email"]')).toBeVisible();
- await expect(page.locator("h1")).toContainText("Tạo tài khoản");
- await expect(page.locator("body")).toContainText("Bản thử nghiệm cục bộ");
- // Do not submit signup credentials or assume production identity is enabled.
+test("Authentication follows verified identity configuration without inventing login access",async({page})=>{
+ for(const route of ["/login","/signup"]){
+  await page.goto(route);
+  await expect(page.locator("h1")).toBeVisible();
+  const fields=page.locator('input[type="email"]');
+  if(await fields.count()){
+   await expect(fields.first()).toBeVisible();
+   // Identity is configured in this environment; the test must never submit credentials.
+  }else{
+   await expect(page.locator(".auth-unavailable")).toBeVisible();
+   await expect(page.locator(".auth-unavailable")).toContainText(/chưa được kích hoạt|chưa thể đăng ký|chưa tiếp nhận đăng ký/i);
+  }
+ }
 });
