@@ -10,7 +10,7 @@ export default function ProjectsPage(){
    <div className="ae-projects-hero-top"><span>ATHENA / SELECTED WORK</span><span>INDEPENDENT PROJECTS — 2026</span></div>
    <div className="ae-projects-hero-body">
     <div className="ae-projects-headline"><span className="ae-micro">DESIGN × TECHNOLOGY × EXPERIMENT</span><h1>Không chỉ<br/>là một <em>giao diện.</em></h1></div>
-    <div className="ae-projects-hero-aside"><span className="ae-asterisk" aria-hidden="true">✳</span><p>Từ thời trang độc lập đến nghiên cứu định lượng và website tương tác. Mỗi dự án là một cách giải quyết vấn đề bằng thiết kế và công nghệ.</p><a href="#selected-projects">Khám phá dự án <span aria-hidden="true">↓</span></a></div>
+    <div className="ae-projects-hero-aside"><p>Từ thời trang độc lập đến nghiên cứu định lượng và website tương tác. Mỗi dự án là một cách giải quyết vấn đề bằng thiết kế và công nghệ.</p><a href="#selected-projects">Khám phá dự án <span aria-hidden="true">↓</span></a></div>
    </div>
    <div className="ae-projects-hero-bottom"><span>THỰC HIỆN BỞI NGƯỜI SÁNG LẬP ATHENA</span><span>SCROLL TO EXPLORE / 01—03</span></div>
   </header>
