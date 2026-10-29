@@ -24,14 +24,21 @@ for(const {width,height} of [{width:320,height:900},{width:390,height:844}]){
   await expect(links).toBeVisible();
   await expect(canvas).toBeVisible();
   await expect(hero.locator(".bv-model-credit")).toContainText("vecarz");
-  // WebGL can remount its canvas when the renderer becomes ready on CI emulated phones.
-  // Poll the *same frame* for valid geometry rather than sampling a transient canvas.
-  await expect.poll(async()=>page.evaluate(()=>{
-   const c=document.querySelector(".ix-auto-showroom .bv-cinematic-track>.ix-hero .ix-auto-3d-canvas");
-   return c?c.getBoundingClientRect().height:0;
-  }),{timeout:18000}).toBeGreaterThan(30);
-  const [linksBox,canvasBox,navBox]=await Promise.all([links.boundingBox(),canvas.boundingBox(),nav.boundingBox()]);
-  expect(linksBox).not.toBeNull();expect(canvasBox).not.toBeNull();expect(navBox).not.toBeNull();
+  // The 3D canvas can briefly unmount while WebGL initializes or swaps fallback.
+  // Obtain one atomic DOM frame after the actual renderer has settled; a stale
+  // Playwright element handle must not turn a healthy WebGL transition into a fail.
+  const frame=await page.waitForFunction(()=>{
+   const hero=document.querySelector(".ix-auto-showroom .bv-cinematic-track>.ix-hero");
+   if(!hero)return null;
+   const nodes=[".ix-hero-links",".ix-auto-3d-canvas",".bv-cinematic-nav"].map(selector=>hero.querySelector(selector));
+   if(nodes.some(node=>!node))return null;
+   const box=nodes.map(node=>{
+    const r=(node as Element).getBoundingClientRect();
+    return {x:r.x,y:r.y,width:r.width,height:r.height};
+   });
+   return box.every(r=>r.width>30&&r.height>30)?box:null;
+  },undefined,{timeout:24000});
+  const [linksBox,canvasBox,navBox]=await frame.jsonValue();
   expect(linksBox!.y+linksBox!.height).toBeLessThanOrEqual(canvasBox!.y+10);
   // The WebGL rectangle includes a transparent fade at its bottom. Measure the
   // fully opaque vehicle region, not the invisible GPU surface under the HUD.
