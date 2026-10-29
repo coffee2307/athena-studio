@@ -357,3 +357,105 @@
   transform:none;
  }
 }
+
+/* VELAR mobile visual stage: finite WebGL rectangles may never define a
+   second painted background. Story captions live in the pinned stage instead
+   of scrolling across the car. This is scoped to the auto showroom only. */
+.ix-auto-showroom .bv-mobile-story{display:none}
+@media(max-width:760px){
+ .ix-auto-showroom .bv-cinematic-track,
+ .ix-auto-showroom .bv-cinematic-track>.ix-hero,
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-visual{
+  background-color:#0c0e12!important;
+ }
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-visual{
+  background-image:radial-gradient(ellipse 70% 54% at 52% 38%,#1a1e22 0%,#11151a 46%,#0c0e12 84%)!important;
+ }
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas{
+  background:transparent!important;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0%,black 13%,black 76%,transparent 100%);
+  mask-image:linear-gradient(180deg,transparent 0%,black 13%,black 76%,transparent 100%);
+ }
+ /* Keep the original caption in semantic document order, but remove its
+    visual layer: a scrolling chapter can no longer cross the vehicle. */
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-step .bv-cinematic-copy,
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-step .bv-cinematic-copy.is-current{
+  opacity:0!important;
+  pointer-events:none!important;
+  visibility:visible!important;
+ }
+ .ix-auto-showroom .bv-cinematic-track .bv-mobile-story{
+  position:absolute;
+  z-index:8;
+  display:block;
+  top:clamp(350px,54svh,470px);
+  bottom:clamp(112px,17svh,165px);
+  left:16px;
+  right:16px;
+  min-height:0;
+  pointer-events:none;
+ }
+ .ix-auto-showroom .bv-cinematic-track .bv-mobile-story-card{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:flex-start;
+  min-height:0;
+  overflow:hidden;
+  padding:14px 16px;
+  color:#f4f4f4;
+  background:linear-gradient(90deg,#090b0edb,#0b0d10ba);
+  border-top:1px solid #ffffff65;
+  opacity:var(--bv-card-opacity,0);
+  transform:translate3d(0,var(--bv-card-shift,10px),0);
+  transition:none;
+ }
+ .ix-auto-showroom .bv-cinematic-track .bv-mobile-story-card>span,
+ .ix-auto-showroom .bv-cinematic-track .bv-mobile-story-card>small{
+  font-size:9px;
+  letter-spacing:.11em;
+  font-weight:800;
+  color:#ff8a37;
+  line-height:1.35;
+ }
+ .ix-auto-showroom .bv-cinematic-track .bv-mobile-story-card h2{
+  font:800 clamp(23px,6.9vw,32px)/1.04 "Be Vietnam Pro",sans-serif;
+  letter-spacing:-.055em;
+  margin:9px 0 8px;
+ }
+ .ix-auto-showroom .bv-cinematic-track .bv-mobile-story-card p{
+  font-size:11px;
+  line-height:1.48;
+  margin:0 0 8px;
+  color:#ededed;
+ }
+ .ix-auto-showroom .bv-cinematic-track .bv-mobile-story-card>small{
+  font-size:8px;
+  color:#bfc3c8;
+  margin-top:auto;
+ }
+ /* Keep readable copy separate from the native chapter navigation and skip. */
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-skip,
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-meter,
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-nav{z-index:9}
+}
+@media(max-width:760px) and (max-height:700px){
+ .ix-auto-showroom .bv-cinematic-track .bv-mobile-story{
+  top:clamp(325px,52svh,385px);
+  bottom:120px;
+ }
+ .ix-auto-showroom .bv-cinematic-track .bv-mobile-story-card{
+  padding:10px 13px;
+ }
+ .ix-auto-showroom .bv-cinematic-track .bv-mobile-story-card h2{
+  font-size:clamp(21px,6.5vw,27px);
+  margin:5px 0 6px;
+ }
+ .ix-auto-showroom .bv-cinematic-track .bv-mobile-story-card p{
+  font-size:10px;
+  line-height:1.4;
+  margin-bottom:5px;
+ }
+}
