@@ -42,7 +42,6 @@ for(const path of ["/template-demos/auto-showroom","/template-demos/auto-showroo
 test("Auto journey progress and chapters agree with document scroll after fast reverse",async({page})=>{
  await page.goto("/template-demos/auto-showroom/experience");
  const track=page.locator("#athena-journey-auto-showroom");
- const bar=page.locator(".athena-journey-auto-showroom .journey-progress > div");
  await track.scrollIntoViewIfNeeded();
  await page.getByRole("button",{name:"Đến chương 3"}).click();
  await expect(page.getByRole("button",{name:"Đến chương 3"})).toHaveAttribute("aria-current","step");
