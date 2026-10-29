@@ -22,7 +22,7 @@ export default function CreativeLab() {
           <div className="lab-design-screen" style={{'--lab-main': chosen.color,'--lab-accent': chosen.contrast,'--lab-soft': chosen.soft} as React.CSSProperties}>
             <div className="lab-windowbar"><span/><span/><span/><small>creative-canvas.fig</small></div>
             <div className="lab-canvas">
-              <div className="lab-orbital-shape"><div className="lab-orbital-inner">DC<span>✳</span></div></div>
+              <div className="lab-orbital-shape"><div className="lab-orbital-inner">DC<span>·</span></div></div>
               <div className="lab-stamp lab-stamp-one">THINK<br/>DIFFERENT</div>
               <div className="lab-stamp lab-stamp-two"><MousePointer2 size={13}/> DRAG TO CREATE</div>
               <span className="lab-ruler lab-ruler-top">0 1 2 3 4 5 6 7 8 9</span>
