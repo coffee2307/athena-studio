@@ -23,7 +23,7 @@ export default async function ServiceDetail({params}:PageProps){
   <section className="page-hero"><div className="container">
    <p className="page-kicker"><span className="eyebrow-dot"/> {research?"NGHIÊN CỨU · CHƯA MỞ BÁN":"DỊCH VỤ ATHENA / "+item.index}</p>
    <h1>{item.shortTitle}<br/><em>{research?"đang nghiên cứu.":"cho nhu cầu thực tế."}</em></h1>
-   <div className="page-hero-lede"><p>{item.challenge}</p><Link href={research?"/products":"/contact?service="+encodeURIComponent(item.slug)} className="pill-link pill-dark">{research?"Xem trạng thái nghiên cứu":"Trao đổi nhu cầu"} <Icon name="arrow-up-right" size={18}/></Link></div>
+   <div className="page-hero-lede"><p>{item.challenge}</p><Link href={research?"/products":"/contact?service="+encodeURIComponent(item.slug)} className="dna-button dna-button-primary">{research?"Xem trạng thái nghiên cứu":"Trao đổi nhu cầu"}</Link></div>
   </div></section>
 
   <section className="page-section"><div className="container">
@@ -34,7 +34,7 @@ export default async function ServiceDetail({params}:PageProps){
    <div className="detail-tile-grid">{item.features.map((feature,i)=><div className="detail-tile" key={feature}><span>{String(i+1).padStart(2,"0")} / {research?"HƯỚNG NGHIÊN CỨU":"HẠNG MỤC"}</span><h3>{feature}</h3></div>)}</div>
   </div></section>
 
-  {item.slug==="web-development"&&<section className="page-section template-service-band"><div className="container template-personalize-note"><div><strong>Muốn xem các hướng giao diện trước?</strong><span>Khám phá thư viện mẫu theo ngành và phong cách, rồi chọn mẫu làm định hướng ban đầu.</span></div><Link className="pill-link pill-dark" href="/services/web-development/templates">Khám phá mẫu website <Icon name="arrow-up-right" size={18}/></Link></div></section>}
+  {item.slug==="web-development"&&<section className="page-section template-service-band"><div className="container template-personalize-note"><div><strong>Muốn xem các hướng giao diện trước?</strong><span>Khám phá thư viện mẫu theo ngành và phong cách, rồi chọn mẫu làm định hướng ban đầu.</span></div><Link className="pill-link pill-dark" href="/services/web-development/templates">Khám phá mẫu website</Link></div></section>}
 
   <section className="page-section detail-dark"><div className="container">
    <p className="section-index"><span className="index-circle">02</span> {research?"TRẠNG THÁI NGHIÊN CỨU":"PHẠM VI CÔNG VIỆC"}</p>
@@ -44,7 +44,7 @@ export default async function ServiceDetail({params}:PageProps){
    </div>
    <div className="delivery-grid">{item.deliverables.map((deliverable,i)=><div className="delivery-item" key={deliverable}><span>{String(i+1).padStart(2,"0")}</span>{deliverable}</div>)}</div>
    <div className="detail-price"><div><p>{research?"TRẠNG THÁI":"HÌNH THỨC CHI PHÍ"}</p><strong>{item.startingAt}</strong></div>
-    <Link href={research?"/products":"/contact?service="+encodeURIComponent(item.slug)} className="pill-link pill-light">{research?"Xem Product Lab":"Trình bày yêu cầu để báo giá"} <Icon name="arrow-up-right" size={18}/></Link></div>
+    <Link href={research?"/products":"/contact?service="+encodeURIComponent(item.slug)} className="dna-button dna-button-secondary">{research?"Xem Product Lab":"Trình bày yêu cầu để báo giá"}</Link></div>
   </div></section>
 
   {!research&&<section className="page-section agency-section-muted"><div className="container">
