@@ -130,3 +130,55 @@
 @media(prefers-reduced-motion:reduce){
  .ae-projects .ae-project-visual-action img{transition:none!important}
 }
+
+/* ATHENA-DNA-01: new portfolio composition without fighting legacy .ae-projects-hero rules. */
+.ae-projects .dna-work-hero{background:#f6f5f1;color:#1b241d;overflow:clip}
+.ae-projects .dna-work-hero-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(25px,5vw,90px);align-items:center;padding-block:clamp(54px,7vw,108px)}
+.ae-projects .dna-work-heading{position:relative;z-index:1}
+.ae-projects .dna-work-heading h1{font-size:clamp(58px,7vw,112px);line-height:1.07;letter-spacing:-.07em;margin:18px 0 19px;font-weight:720}
+.ae-projects .dna-work-heading h1 em{font-family:"Noto Serif",Georgia,serif;font-style:italic;font-weight:400;letter-spacing:-.06em}
+.ae-projects .dna-work-heading>p:not(.dna-eyebrow){max-width:490px;color:#505b51;font-size:15px;line-height:1.78;margin:0 0 25px}
+.ae-projects .dna-work-art{position:relative;min-width:0;aspect-ratio:1.11}
+.ae-projects .dna-work-art-card{position:absolute;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(17px,2.4vw,35px);min-width:0;border:1px solid #0001;border-radius:19px;box-shadow:0 18px 45px #2a2f2a18;overflow:hidden}
+.ae-projects .dna-work-art-card span{font-size:9px;font-weight:800;letter-spacing:.1em;white-space:nowrap}
+.ae-projects .dna-work-art-card strong{font-size:clamp(23px,3vw,45px);line-height:1.1;letter-spacing:-.06em;font-weight:740}
+.ae-projects .dna-work-art-card small{font-size:10px;opacity:.85}
+.ae-projects .dna-work-art-one{inset:8% 29% 25% 2%;z-index:1;background:#1d2420;color:#fff;transform:rotate(-8deg)}
+.ae-projects .dna-work-art-two{inset:0 7% 39% 39%;z-index:2;background:#b8c9ba;color:#182a1d;transform:rotate(8deg)}
+.ae-projects .dna-work-art-three{inset:42% 4% 5% 37%;z-index:3;background:#df785c;color:#22251e;transform:rotate(-4deg)}
+.ae-projects .dna-work-list{background:#fff;padding:clamp(60px,7vw,100px) 0 clamp(80px,8vw,128px)}
+.ae-projects .dna-work-list .dna-section-intro h2{font-size:clamp(37px,4.5vw,68px)}
+.ae-projects .dna-work-list .dna-section-intro>p{max-width:380px}
+.ae-projects .dna-work-closer{background:#e6ebe3;padding:clamp(55px,6vw,96px) 0}
+.ae-projects .dna-work-closer .container{display:flex;align-items:end;justify-content:space-between;gap:28px}
+.ae-projects .dna-work-closer h2{font-size:clamp(33px,4.2vw,65px);line-height:1.17;letter-spacing:-.065em;margin:13px 0 0}
+.ae-projects .dna-work-closer .dna-button{flex-shrink:0}
+.ae-projects .ae-project-tile-actions a span{font-size:17px}
+.ae-projects .ae-project-tile .ae-project-tile-actions a{border-bottom:0;border-radius:10px;background:#e9eee7;padding:12px 16px;min-height:46px}
+.ae-projects .ae-project-tile .ae-project-tile-actions a:hover{background:#d8e6d8;color:#202c23}
+.ae-article .dna-gallery-stage{display:block;width:100%;background:#e9ede8;border:1px solid #d4ded3;border-radius:15px;padding:12px;overflow:hidden}
+.ae-article .dna-gallery-phone{width:min(100%,420px);margin-inline:auto;max-height:min(72vh,630px);overflow-y:auto;overscroll-behavior:contain;scrollbar-color:#9ca99d #e9ede8}
+.ae-article .dna-gallery-desktop{width:100%;margin:0}
+.ae-article .dna-gallery-stage .ae-article-image-link{width:100%;max-width:100%;height:auto;padding:0;box-shadow:none;background:#fff;display:block}
+.ae-article .dna-gallery-phone .ae-article-image-link{max-width:none}
+.ae-article .dna-gallery-stage .ae-article-image-link img{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;object-position:center top;border-radius:5px;border:0}
+.ae-article .ae-article-figure.is-portrait{display:flex;flex-direction:column;align-items:center}
+.ae-article .ae-article-figure.is-portrait figcaption{width:min(100%,420px)}
+.ae-article .ae-article-figure figcaption{display:flex;justify-content:space-between;align-items:start;gap:12px 20px;flex-wrap:wrap;font-size:11px;line-height:1.7;color:#526052}
+.ae-article .dna-gallery-original{display:inline-flex;align-items:center;flex-shrink:0;min-height:33px;padding:6px 0;color:#294d33;font-weight:760;text-decoration:underline;text-underline-offset:4px}
+@media(max-width:760px){
+ .ae-projects .dna-work-hero-grid{grid-template-columns:1fr;gap:20px;padding-block:42px 57px}
+ .ae-projects .dna-work-heading h1{font-size:clamp(48px,11.5vw,67px);margin:11px 0 15px}
+ .ae-projects .dna-work-heading>p:not(.dna-eyebrow){font-size:13px;line-height:1.65;margin-bottom:20px}
+ .ae-projects .dna-work-art{width:min(100%,440px);aspect-ratio:1.65;margin:auto}
+ .ae-projects .dna-work-art-card{padding:14px;border-radius:13px}
+ .ae-projects .dna-work-art-card strong{font-size:clamp(17px,6vw,27px)}
+ .ae-projects .dna-work-art-card span{font-size:7px}
+ .ae-projects .dna-work-art-card small{font-size:8px}
+ .ae-projects .dna-work-list{padding-block:54px 78px}
+ .ae-projects .dna-work-closer .container{align-items:start;flex-direction:column}
+ .ae-projects .dna-work-closer h2{font-size:clamp(35px,8vw,52px)}
+ .ae-article .dna-gallery-stage{padding:9px}
+ .ae-article .dna-gallery-phone{width:min(100%,350px);max-height:min(67vh,520px)}
+ .ae-article .ae-article-figure figcaption{font-size:10px}
+}
