@@ -21,17 +21,19 @@ function makeStage(){
  groundCanvas.width=512;groundCanvas.height=512;
  const groundCtx=groundCanvas.getContext("2d");
  if(groundCtx){
-  const spill=groundCtx.createRadialGradient(256,256,12,256,256,245);
-  spill.addColorStop(0,"#2a2e33");
-  spill.addColorStop(.48,"#171b20");
-  spill.addColorStop(1,"#101318");
-  groundCtx.fillStyle=spill;groundCtx.fillRect(0,0,512,512);
+  // Fade the cyclorama into the canvas instead of drawing a square backdrop.
+   const spill=groundCtx.createRadialGradient(256,256,10,256,256,252);
+   spill.addColorStop(0,"rgba(66,71,77,.36)");
+   spill.addColorStop(.44,"rgba(39,44,51,.19)");
+   spill.addColorStop(.8,"rgba(22,26,30,.045)");
+   spill.addColorStop(1,"rgba(12,14,18,0)");
+   groundCtx.fillStyle=spill;groundCtx.fillRect(0,0,512,512);
  }
  const groundTexture=new THREE.CanvasTexture(groundCanvas);
  groundTexture.colorSpace=THREE.SRGBColorSpace;
  const ground=new THREE.Mesh(
   new THREE.PlaneGeometry(24,24),
-  new THREE.MeshBasicMaterial({map:groundTexture,toneMapped:false})
+  new THREE.MeshBasicMaterial({map:groundTexture,transparent:true,depthWrite:false,toneMapped:false})
  );
  ground.rotation.x=-Math.PI/2;
  ground.position.y=-.06;
@@ -50,26 +52,14 @@ function makeStage(){
  }
  const tex=new THREE.CanvasTexture(canvas);
  const shadow=new THREE.Mesh(
-  new THREE.PlaneGeometry(5.7,3.5),
-  new THREE.MeshBasicMaterial({map:tex,transparent:true,opacity:.72,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-1})
+  new THREE.PlaneGeometry(5.5,3.1),
+  new THREE.MeshBasicMaterial({map:tex,transparent:true,opacity:.43,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-1})
  );
  shadow.rotation.x=-Math.PI/2;
  shadow.position.y=-.045;
  stage.add(shadow);
- // Each wheel receives a denser contact patch; their positions come from the
- // actual GLB wheel pivots after the model has been centered and scaled.
- const wheelShadows=Array.from({length:4},()=>{
-  const patch=new THREE.Mesh(
-   new THREE.PlaneGeometry(.78,1.05),
-   new THREE.MeshBasicMaterial({map:tex,transparent:true,opacity:.9,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-2})
-  );
-  patch.rotation.x=-Math.PI/2;
-  patch.position.y=-.039;
-  patch.visible=false;
-  stage.add(patch);
-  return patch;
- });
- return {stage,tex,groundTexture,wheelShadows};
+ // A single underbody shadow replaces the four dark contact blobs.
+  return {stage,tex,groundTexture};
 }
 
 function addStudioReflectionPanels(studio:THREE.Scene){
@@ -180,7 +170,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   let renderer:THREE.WebGLRenderer;
   try{
    renderer=new THREE.WebGLRenderer({
-    canvas,alpha:false,antialias:true,
+    canvas,alpha:true,antialias:true,
     powerPreference:isMobile?"low-power":"high-performance",preserveDrawingBuffer:false
    });
   }catch(error){
@@ -200,7 +190,9 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   const softwareRenderer=/swiftshader|llvmpipe|softpipe|software|lavapipe/i.test(rendererName);
 
   const scene=new THREE.Scene();
-  scene.background=new THREE.Color(0x101318);
+  // One CSS stage background covers the whole viewport behind transparent WebGL.
+  scene.background=null;
+  renderer.setClearColor(0x0c0e12,0);
   const camera=new THREE.PerspectiveCamera(34,1,.1,85);
   // Orbit around the actual model center. Use a lens shift for desktop copy
   // clearance; moving the look-at point instead makes the car orbit off-axis.
@@ -329,7 +321,8 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    // Reversing scroll settles on the same pose once the glide catches up.
    const journeyAngles=[1.02,1.42,2.12,3.82,5.42];
    const journeyElevations=[2.35,1.98,2.48,2.18,2.55];
-   const journeyDistances=[1,.93,.71,.88,1.04];
+   // Narrow mobile views need more camera clearance at every chapter.
+    const journeyDistances=isMobile?[1.08,1.12,1.17,1.13,1.12]:[1,.93,.71,.88,1.04];
    // The camera performs the chapter motion. Keep the physical car pivot fixed.
    const position=clamp(currentProgress*4,0,4);
    const lower=Math.min(3,Math.floor(position));
@@ -361,7 +354,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
     canvas.dataset.cameraGoalOrbit=wrapAngle(desiredOrbit).toFixed(4);
     canvas.dataset.orbitSource=manualActive?"drag":"scroll";
    }
-   const baseDistance=Math.max(6.75,6.75*.93/Math.max(.60,camera.aspect))*(isMobile?1.22:1);
+   const baseDistance=Math.max(6.75,6.75*.93/Math.max(.60,camera.aspect))*(isMobile?1.29:1);
    const dist=baseDistance*wideDistance*(scrollRootId?scrollDistance:1)*(1-clamp(zoomRef.current,-1,2)*(isMobile?.04:.09));
    const y=scrollRootId?scrollHeight:(isMobile?2.6:2.42);
    const wanted=new THREE.Vector3(Math.cos(displayOrbit)*dist,y,Math.sin(displayOrbit)*dist);
@@ -446,14 +439,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    model.position.set(-center.x*scalar,.07-bounds.min.y*scalar,-center.z*scalar);
    car.add(model);
    car.updateMatrixWorld(true);
-   for(const [index,name] of ["WHEEL_LF","WHEEL_RF","WHEEL_LR","WHEEL_RR"].entries()){
-    const wheel=model.getObjectByName(name);
-    if(!wheel)continue;
-    const worldPosition=wheel.getWorldPosition(new THREE.Vector3());
-    const localPosition=car.worldToLocal(worldPosition);
-    floor.wheelShadows[index].position.set(localPosition.x,-.039,localPosition.z);
-    floor.wheelShadows[index].visible=true;
-   }
+   // The original car pivot is untouched; contact reads as one soft footprint.
    loaded=true;resize();measureProgress();schedule();
   },event=>{
    if(disposed||!event.total)return;
