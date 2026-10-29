@@ -74,6 +74,10 @@ export function AutoCinematicTrack({children}:{children:ReactNode}){
     card.style.setProperty("--bv-card-shift",`${Math.round((1-opacity)*10)}px`);
    });
    const next=Math.min(4,Math.floor(p*5));
+   // The mobile WebGL renderer can monopolize a frame on software GPUs.
+   // Keep chapter styling / active nav in sync with the same scroll snapshot
+   // as the sticky story instead of waiting for a React render.
+   track.dataset.chapter=String(next);
    setChapter(previous=>previous===next?previous:next);
   };
   const schedule=()=>{if(!raf)raf=requestAnimationFrame(update);};
