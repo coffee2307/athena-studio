@@ -17,10 +17,10 @@ export function PortfolioDirectory({items}:{items:Project[]}){
   <div className="ae-project-grid">
    {visible.map((project,index)=><article key={project.slug} className={"ae-project-tile ae-project-"+project.slug}>
     <div className="ae-project-poster"><Link href={"/projects/"+project.slug} className="ae-project-visual-action" aria-label={"Đọc hồ sơ dự án "+project.title}>
-     <ProjectArtwork project={project} compact/><span className="ae-project-visual-label">XEM BÀI VIẾT <span aria-hidden="true">↗</span></span>
+     <ProjectArtwork project={project} compact/>
     </Link></div>
-    <div className="ae-project-tile-foot"><div className="ae-project-tile-top"><span>{String(index+1).padStart(2,"0")} / {project.category}</span><span>{project.kind==="research"?"RESEARCH":"FOUNDER PROJECT"}</span></div>
-     <div className="ae-project-tile-copy"><div><h3>{project.title}</h3><p>{project.summary}</p></div><div className="ae-project-tile-actions"><Link href={"/projects/"+project.slug}>Đọc hồ sơ <span aria-hidden="true">→</span></Link></div></div>
+    <div className="ae-project-tile-foot"><div className="ae-project-tile-top"><span>{String(index+1).padStart(2,"0")} / {project.category}</span><span>{project.kind==="research"?"NGHIÊN CỨU":"DỰ ÁN SÁNG LẬP"}</span></div>
+     <div className="ae-project-tile-copy"><div><h3>{project.title}</h3><p>{project.summary}</p></div><div className="ae-project-tile-actions"><Link href={"/projects/"+project.slug}>Khám phá dự án <span aria-hidden="true">↗</span></Link></div></div>
     </div>
    </article>)}
   </div>
