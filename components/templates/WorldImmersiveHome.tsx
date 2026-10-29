@@ -6,7 +6,7 @@ import type {DemoCopy} from "@/data/demo-worlds";
 import type {WorldDetail} from "@/data/demo-world-details";
 import {WorldScene} from "@/components/immersive/WorldScene";
 import {ModelAttribution} from "@/components/immersive/ModelAttribution";
-import {AUTO_CINEMATIC_ID,AutoCinematicTrack,jumpToAutoCinematicChapter} from "@/components/immersive/AutoCinematicTrack";
+import {AUTO_CINEMATIC_ID,autoCinematicChapters,AutoCinematicTrack,jumpToAutoCinematicChapter} from "@/components/immersive/AutoCinematicTrack";
 import {WorldEditorialInterlude} from "@/components/templates/WorldEditorialInterlude";
 
 const scenes=new Set(["creative-studio","architecture-studio","auto-showroom"]);
@@ -66,6 +66,11 @@ export function WorldImmersiveHome({slug,world,extra}:Props){
      <div className="bv-cinematic-meter" aria-hidden="true"><span/></div>
      <a className="bv-cinematic-skip" href="#bv-after-cinematic">BỎ QUA HÀNH TRÌNH ↓</a>
      <div className="bv-model-credit"><ModelAttribution compact/></div>
+    </div>}
+    {isAuto&&<div className="bv-mobile-story" aria-hidden="true">
+     {autoCinematicChapters.slice(1).map((chapter,index)=><div className="bv-mobile-story-card" key={chapter.eyebrow} data-story-index={index+1}>
+      <span>{chapter.eyebrow}</span><h2>{chapter.title}</h2><p>{chapter.description}</p><small>{chapter.detail}</small>
+     </div>)}
     </div>}
     {!isAuto&&<div className="ix-visual-coordinate"><span>EDITION / 2026</span><span>{enable3D?"3D STUDY / ACTIVE":"EDITORIAL VIEW / 3D OPTIONAL"}</span></div>}
     {isStudio&&!enable3D&&<div className="ix-studio-overlay" aria-hidden="true"><span>01 / 03</span><strong>FORM<br/><em>&amp; FEELING.</em></strong><span>SORA © STUDIO</span></div>}
