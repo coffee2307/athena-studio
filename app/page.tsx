@@ -1,4 +1,3 @@
-import {Icon} from "@/components/ui/Icon";
 import {HomeTemplateShowcase} from "@/components/home/HomeTemplateShowcase";
 import {AthenaHeroStage} from "@/components/home/AthenaHeroStage";
 import {AthenaServiceShowcase} from "@/components/home/AthenaServiceShowcase";
@@ -43,7 +42,7 @@ export default function HomePage(){
     <div className="dna-after-services"><p>Không chắc mình cần gì? Chỉ cần mô tả vấn đề hiện tại.</p><Link className="dna-button dna-button-secondary" href="/contact">Trao đổi với Athena</Link></div>
    </div>
   </section>
-  <section className="section-space method-block" aria-labelledby="method-title"><div className="container">
+  <section className="section-space method-block dna-method-section" aria-labelledby="method-title"><div className="container">
    <div className="client-section-heading reveal">
     <div><p className="section-index"><span className="index-circle">02</span> CÁCH HỢP TÁC</p>
      <h2 id="method-title">Bạn biết trước<br/><span>mình sẽ nhận gì.</span></h2></div>
@@ -58,18 +57,20 @@ export default function HomePage(){
 
   <HomeTemplateShowcase/>
 
-  <section className="client-lab-band" aria-label="Phòng nghiên cứu sản phẩm"><div className="container client-lab-inner">
-   <div><p className="section-index"><span className="index-circle">04</span> PHÒNG NGHIÊN CỨU</p>
-    <h2>Phần mềm chuyên biệt <span>đang được nghiên cứu.</span></h2>
-    <p>Product Lab và SitePulse chưa được mở bán. Đây là hướng nghiên cứu, không phải dịch vụ có thể đặt mua ngay.</p></div>
-   <Link href="/products" className="dna-button dna-button-secondary">Khám phá Product Lab</Link>
-  </div></section>
-
+  <section className="dna-product-lab" aria-label="Product Lab đang nghiên cứu">
+   <div className="container dna-product-lab-inner">
+    <div className="dna-product-lab-mark" aria-hidden="true"><span>P</span><i/><span>L</span></div>
+    <div><p className="dna-eyebrow">PRODUCT LAB / RESEARCH</p><h2>Những ý tưởng<br/><em>chưa ngừng lớn lên.</em></h2>
+     <p>Product Lab và SitePulse hiện ở giai đoạn nghiên cứu, chưa mở bán. Khám phá định hướng và trạng thái của từng dự án.</p>
+    </div>
+    <Link href="/products" className="dna-button dna-button-quiet">Tìm hiểu Product Lab</Link>
+   </div>
+  </section>
   <section className="closing-block"><div className="container closing-inner">
    <p className="eyebrow"><span className="eyebrow-dot"/> TRAO ĐỔI NHU CẦU THỰC TẾ</p>
    <h2>Đang gặp vấn đề<br/><span>với website hoặc quy trình?</span></h2>
    <p className="client-closing-copy">Hãy mô tả ngắn gọn điều đang gây khó khăn. Athena sẽ xem xét để trao đổi phạm vi và hướng xử lý phù hợp, không yêu cầu bạn phải chuẩn bị tài liệu kỹ thuật.</p>
-   <Link href="/start" className="pill-link pill-light">Chuẩn bị yêu cầu tư vấn <Icon name="arrow-up-right" size={18}/></Link>
+   <Link href="/start" className="pill-link pill-light">Bắt đầu trao đổi</Link>
    <span className="closing-watermark" aria-hidden="true">ATHENA</span>
   </div></section>
  </>;
