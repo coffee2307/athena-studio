@@ -32,7 +32,10 @@
 .ix-auto-showroom .bv-cinematic-track .ix-hero-bottom{transition:opacity .18s ease,visibility .18s ease}
 .ix-auto-showroom .bv-cinematic-track .ix-scene-footer{display:none}
 .ix-auto-showroom .bv-cinematic-track .bv-zoom-controls{
- top:auto;right:clamp(24px,5.2vw,92px);bottom:220px;flex-direction:row;
+ top:auto;right:calc(clamp(24px,5.2vw,92px) + 32px);bottom:220px;flex-direction:row;
+}
+@media(min-width:761px){
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-copy{transform:translateY(calc(0px - clamp(25px,4svh,45px)))}
 }
 
 .bv-cinematic-steps{position:relative;z-index:4;margin-top:-100svh;pointer-events:none}

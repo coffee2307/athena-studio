@@ -38,6 +38,11 @@ export function AutoCinematicTrack({children}:{children:ReactNode}){
    const rect=track.getBoundingClientRect();
    const p=clamp(-rect.top/Math.max(1,rect.height-window.innerHeight));
    track.style.setProperty("--bv-progress",p.toFixed(5));
+   // The site header precedes the sticky cinematic stage in document flow.
+   // Pin the mobile HUD to the visible viewport from the very first frame,
+   // including the short interval before the stage itself reaches top: 0.
+   const hudOffset=window.innerWidth<=760?-Math.max(0,rect.top):0;
+   track.style.setProperty("--bv-hud-offset",`${Math.round(hudOffset)}px`);
    // During the first chapter, move the mobile canvas continuously with native
    // scroll instead of abruptly swapping its top offset at chapter 02.
    const phase=clamp((p-.02)/.28);
