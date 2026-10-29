@@ -3,62 +3,61 @@ import {notFound} from "next/navigation";
 import {publicProjects,getProjectBySlug} from "@/data/projects";
 import {ProjectArtwork} from "@/components/portfolio/ProjectArtwork";
 import {ProjectGallery} from "@/components/portfolio/ProjectGallery";
-import {ProjectCard} from "@/components/portfolio/ProjectCard";
-import {Icon} from "@/components/ui/Icon";
+import {ProjectPreviewButton} from "@/components/portfolio/ProjectPreviewModal";
 import {createMetadata} from "@/lib/metadata";
 
 type Props={params:Promise<{slug:string}>};
 export function generateStaticParams(){return publicProjects.map(p=>({slug:p.slug}));}
 export async function generateMetadata({params}:Props){
- const {slug}=await params;const p=getProjectBySlug(slug);
- return p?createMetadata(p.title+" — Giao diện và tính năng",p.summary,`/projects/${p.slug}`):createMetadata("Không tìm thấy dự án");
+ const {slug}=await params;
+ const p=getProjectBySlug(slug);
+ return p?createMetadata(p.title+" — Dự án của người sáng lập Athena",p.summary,`/projects/${p.slug}`):createMetadata("Không tìm thấy dự án");
 }
+
 export default async function CaseStudy({params}:Props){
  const {slug}=await params;
  const p=getProjectBySlug(slug);
  if(!p)notFound();
  const others=publicProjects.filter(x=>x.slug!==p.slug);
- return <div className="page-shell case-detail agency-case-detail">
-  <section className="case-detail-hero"><div className="container">
-   <Link href="/projects" className="case-back"><Icon name="arrow-right" size={17} className="agency-back-icon"/> Tất cả dự án</Link>
-   <div className="case-detail-title"><div><p className="page-kicker"><span className="eyebrow-dot"/> {p.kicker}</p>
-    <h1>{p.title}<span>.</span></h1><p>{p.summary}</p></div>
-    <div className="case-detail-number">{p.kind==="research"?"NGHIÊN CỨU CÔNG NGHỆ":"THIẾT KẾ SẢN PHẨM"}</div>
+ const previewable=p.slug==="pham"||p.slug==="digital-creators";
+ const hasScreenshots=p.gallery.some(item=>item.rightsVerified);
+ return <div className={"ae-case ae-case-"+p.slug}>
+  <header className="ae-case-hero">
+   <div className="ae-case-breadcrumb"><Link href="/projects">← Trở về dự án</Link><span>ATHENA / PROJECTS / {p.slug.toUpperCase()}</span></div>
+   <div className="ae-case-intro">
+    <div><span className="ae-micro">{p.kicker}</span><h1>{p.title}<span className="ae-case-period">.</span></h1></div>
+    <div className="ae-case-lead"><span className="ae-case-number">PROJECT / {String(publicProjects.indexOf(p)+1).padStart(2,"0")}</span><p>{p.summary}</p><div className="ae-case-action-row">
+      {previewable&&<ProjectPreviewButton project={p} className="ae-case-primary">Trải nghiệm dự án <span aria-hidden="true">↗</span></ProjectPreviewButton>}
+      {p.websiteUrl&&<a className="ae-case-text-link" href={p.websiteUrl} target="_blank" rel="noopener noreferrer">Mở website <span aria-hidden="true">↗</span></a>}
+      {!previewable&&!p.websiteUrl&&<a className="ae-case-text-link" href="#case-story">Khám phá nghiên cứu <span aria-hidden="true">↓</span></a>}
+     </div>
+    </div>
    </div>
-   <ProjectArtwork project={p}/>
-   {!p.gallery.length&&<p className="art-disclaimer">Hình minh họa định hướng thiết kế.</p>}
-  </div></section>
-  <section className="page-section agency-case-story"><div className="container">
-   <div className="case-facts">
-    <div><span>LĨNH VỰC</span><strong>{p.category}</strong></div>
-    <div><span>CHUYÊN MÔN</span><strong>{p.technologies.slice(0,2).join(" · ")}</strong></div>
+   <div className="ae-case-hero-image"><ProjectArtwork project={p}/><div className="ae-case-image-credit"><span>{p.updatedLabel}</span><span>{hasScreenshots?"ẢNH GIAO DIỆN ĐƯỢC PHÉP CÔNG BỐ":"ĐỒ HỌA NHẬN DIỆN / KHÔNG PHẢI SCREENSHOT"}</span></div></div>
+  </header>
+  <div className="ae-case-facts">
+   <div><span>01 / LĨNH VỰC</span><strong>{p.category}</strong></div>
+   <div><span>02 / PHẠM VI</span><strong>{p.kind==="research"?"Nghiên cứu đang kiểm định":"Dự án do người sáng lập phát triển"}</strong></div>
+   <div><span>03 / HIỆN TRẠNG</span><strong>{p.status}</strong></div>
+  </div>
+  <section id="case-story" className="ae-case-narrative">
+   <div className="ae-case-section-heading"><span className="ae-micro">01 / THE CONTEXT</span><h2>Mỗi dự án bắt đầu<br/>từ <em>một câu hỏi.</em></h2></div>
+   <div className="ae-case-story-grid">
+    <article className="ae-case-story-lead"><span>KHỞI ĐẦU</span><p>{p.introduction}</p></article>
+    <article><span>THÁCH THỨC</span><h3>Điều cần giải quyết.</h3><p>{p.challenge}</p></article>
+    <article><span>HƯỚNG TIẾP CẬN</span><h3>Cách chúng mình xây dựng.</h3><p>{p.approach}</p></article>
    </div>
-   <div className="agency-case-section-title">
-    <p className="section-index"><span className="index-circle">01</span> TRẢI NGHIỆM KHÁCH HÀNG CÓ THỂ XEM</p>
-    <h2>Khám phá sản phẩm.<br/><span>Từ bài toán đến trải nghiệm.</span></h2>
-    <p>{p.gallery.length?"Những màn hình và thành phần trải nghiệm được lựa chọn để giới thiệu dự án.":"Các hướng thiết kế và năng lực đang được xây dựng trong dự án."}</p>
-   </div>
+  </section>
+  <section className="ae-case-capabilities">
+   <div><span className="ae-micro">02 / WHAT WAS BUILT</span><h2>Từ định hướng<br/><em>đến thực thi.</em></h2></div>
+   <div className="ae-case-capability-list">{p.activities.map((activity,index)=><div key={activity}><span>{String(index+1).padStart(2,"0")}</span><strong>{activity}</strong></div>)}</div>
+  </section>
+  <section className="ae-case-visuals">
+   <div className="ae-case-visuals-head"><span className="ae-micro">03 / DESIGN RECORD</span><h2>{hasScreenshots?"Nhìn gần hơn.":"Về những gì được phép chia sẻ."}</h2><p>{hasScreenshots?"Một số màn hình thực tế đã được lựa chọn để giới thiệu trải nghiệm và chi tiết thiết kế.":"Dự án chưa có ảnh giao diện được duyệt công bố; phần giới thiệu chỉ nêu phạm vi và mục tiêu nghiên cứu."}</p></div>
    <ProjectGallery project={p}/>
-   <div className="agency-case-section-title agency-case-functional">
-    <p className="section-index"><span className="index-circle">02</span> HẠNG MỤC VÀ CHỨC NĂNG</p>
-    <h2>Những gì dự án <span>tập trung xây dựng.</span></h2>
-   </div>
-   <div className="agency-case-feature-grid">{p.activities.map((a,i)=><div key={a}><span>{String(i+1).padStart(2,"0")}</span><h3>{a}</h3></div>)}</div>
-   <div className="case-story">
-    <div className="case-story-row"><p>03 / BỐI CẢNH</p><div><h2>Bài toán ban đầu.</h2><p>{p.introduction}</p></div></div>
-    <div className="case-story-row"><p>04 / THÁCH THỨC</p><div><h2>Vấn đề cần giải quyết.</h2><p>{p.challenge}</p></div></div>
-    <div className="case-story-row"><p>05 / GIẢI PHÁP</p><div><h2>Hướng triển khai.</h2><p>{p.approach}</p><div className="case-tags">{p.technologies.map(t=><span key={t}>{t}</span>)}</div></div></div>
-    <div className="case-story-row"><p>06 / TÌNH TRẠNG</p><div><h2>Đã có gì để xem?</h2><p>{p.outcome}</p></div></div>
-   </div>
-   <div className="agency-case-actions">
-    {p.websiteUrl&&<a href={p.websiteUrl} target="_blank" rel="noopener noreferrer" className="agency-outline-cta">Xem website dự án <Icon name="arrow-up-right" size={18}/></a>}
-    <Link className="agency-outline-cta" href="/contact">Thảo luận một dự án tương tự <Icon name="arrow-right" size={18}/></Link>
-   </div>
-  </div></section>
-  {others.length>0&&<section className="page-section more-cases"><div className="container">
-   <div className="case-section-head"><div><p className="section-index"><span className="index-circle">07</span> DỰ ÁN KHÁC</p>
-    <h2>Khám phá <span>thêm công việc.</span></h2></div></div>
-   <div className="portfolio-grid">{others.map((item,i)=><ProjectCard key={item.slug} project={item} index={i}/>)}</div>
-  </div></section>}
+  </section>
+  <section className="ae-case-result"><span className="ae-micro">04 / CURRENT STATE</span><h2>Không chỉ là<br/><em>bản trình bày.</em></h2><p>{p.outcome}</p><div className="ae-case-technology">{p.technologies.map(t=><span key={t}>{t}</span>)}</div></section>
+  <nav className="ae-case-next" aria-label="Dự án khác"><div><span className="ae-micro">MORE SELECTED WORK</span><h2>Tiếp tục khám phá.</h2></div><div className="ae-case-next-links">{others.map(item=><Link href={"/projects/"+item.slug} key={item.slug}><span>{item.title}</span><small>{item.category}</small><strong aria-hidden="true">↗</strong></Link>)}</div></nav>
+  <div className="ae-case-footer"><Link href="/projects">← Tất cả dự án</Link><Link href="/contact">Trao đổi với Athena ↗</Link></div>
  </div>;
 }
