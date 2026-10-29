@@ -9,7 +9,7 @@ export function ProjectGallery({project}:{project:Project}){
  </div>;
  return <div className="ae-article-gallery">
   {items.map((item,i)=>{
-   const mobile=/(?:-mobile\.webp|mobile\.)/.test(item.src);
+   const mobile=/-mobile(?:-hires)?\./.test(item.src);
    const landscape=mobile?false:true;
    const dimensions=mobile?{width:390,height:844}:{width:1440,height:900};
    return <figure className={"ae-article-figure "+(landscape?"is-landscape":"is-portrait")} key={item.src}>
