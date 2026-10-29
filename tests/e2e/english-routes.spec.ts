@@ -19,6 +19,7 @@ const redirects=[
 ] as const;
 
 test("Canonical English paths render content and localized text remains Vietnamese",async({request,page})=>{
+ test.setTimeout(120000); // Multi-route smoke test may trigger fresh Next.js dev compilations.
  for(const path of canonical){
   const res=await request.get(path,{maxRedirects:0});
   expect(res.status(),path).toBe(200);
