@@ -27,6 +27,13 @@
 .ae-projects .ae-project-visual-action :is(.agency-real-art,.portfolio-art,.phase0-dc-art),
 .ae-projects .ae-project-pham .ae-project-visual-action :is(.agency-real-art,.portfolio-art){width:100%;height:100%!important;min-height:0;aspect-ratio:auto!important;position:relative;overflow:hidden}
 .ae-projects .ae-project-tile .ae-project-visual-action img{object-fit:contain!important;object-position:center!important;transform:none!important}
+/* Research artwork must preserve its original flex-centred identity inside narrow cards. */
+.ae-projects .ae-project-visual-action .portfolio-art{display:flex!important;flex-direction:column;justify-content:space-between;padding:clamp(12px,1.5vw,21px)}
+.ae-projects .ae-project-visual-action .portfolio-art .art-center{display:flex;flex:1;justify-content:center;align-items:center;min-width:0;gap:clamp(6px,1vw,14px)}
+.ae-projects .ae-project-visual-action .portfolio-art .econith-large{font-size:clamp(33px,3.6vw,56px)!important;letter-spacing:-.07em;line-height:1.02;white-space:nowrap;max-width:100%}
+.ae-projects .ae-project-visual-action .portfolio-art .art-project-caption{font-size:clamp(7px,.8vw,10px);letter-spacing:.12em}
+.ae-projects .ae-project-visual-action .portfolio-art :is(.art-header,.art-bottom){font-size:clamp(7px,.66vw,9px);gap:8px;line-height:1.4}
+.ae-article .ae-article-feature .portfolio-art .econith-large{font-size:clamp(36px,6.5vw,84px)!important;white-space:nowrap}
 .ae-projects .ae-project-visual-action .agency-screenshot-tag,
 .ae-projects .ae-project-visual-label{display:none!important}
 .ae-projects .ae-project-tile-foot{display:flex;flex:1;flex-direction:column;min-height:238px;padding:18px clamp(15px,1.5vw,23px) 19px;border-top:0}
