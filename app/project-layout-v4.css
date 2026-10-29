@@ -165,6 +165,7 @@
 .ae-article .ae-article-figure.is-portrait{display:flex;flex-direction:column;align-items:center}
 .ae-article .ae-article-figure.is-portrait figcaption{width:min(100%,420px)}
 .ae-article .ae-article-figure figcaption{display:flex;justify-content:space-between;align-items:start;gap:12px 20px;flex-wrap:wrap;font-size:11px;line-height:1.7;color:#526052}
+.ae-article .ae-article-figure figcaption>span{white-space:normal;overflow-wrap:anywhere;flex:1 1 210px;min-width:0}
 .ae-article .dna-gallery-original{display:inline-flex;align-items:center;flex-shrink:0;min-height:33px;padding:6px 0;color:#294d33;font-weight:760;text-decoration:underline;text-underline-offset:4px}
 @media(max-width:760px){
  .ae-projects .dna-work-hero-grid{grid-template-columns:1fr;gap:20px;padding-block:42px 57px}
