@@ -1,43 +1,48 @@
 import {expect,test} from "@playwright/test";
-
+const projects=["/projects","/projects/pham","/projects/econith","/projects/digital-creators"];
 for(const width of [320,390,1440]){
- test.describe(`portfolio editorial ${width}px`,()=>{
+ test.describe(`documentation-style projects ${width}px`,()=>{
   test.use({viewport:{width,height:width===1440?900:844}});
-
-  test("routes have one heading and no horizontal overflow",async({page})=>{
-   for(const route of ["/projects","/projects/pham","/projects/econith","/projects/digital-creators"]){
+  test("project routes are readable with no horizontal overflow or decorative asterisk",async({page})=>{
+   for(const route of projects){
     await page.goto(route);
     await expect(page.locator("h1")).toHaveCount(1);
-    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
-    expect(overflow,route).toBeLessThanOrEqual(2);
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth),route).toBeLessThanOrEqual(2);
+    expect(await page.locator("body").innerText()).not.toContain("✳");
    }
   });
-
-  test("PHAM preview uses approved screenshots, never an iframe",async({page})=>{
+  test("directory goes straight to article; no popup or iframe",async({page})=>{
    await page.goto("/projects");
    await page.locator(".ae-project-pham .ae-project-visual-action").click();
-   const dialog=page.getByRole("dialog");
-   await expect(dialog).toBeVisible();
-   expect(await page.evaluate(()=>document.querySelector(".ae-preview-backdrop")?.parentElement===document.body)).toBe(true);
-   const top=await page.locator(".ae-preview-backdrop").evaluate(node=>node.getBoundingClientRect().top);
-   expect(top).toBe(0);
-   await expect(dialog.locator("iframe")).toHaveCount(0);
-   await dialog.locator(".ae-preview-device button").nth(1).click();
-   await dialog.locator(".ae-preview-tabs button").nth(1).click();
-   await expect(dialog.locator(".ae-preview-device-shell img")).toHaveAttribute("src",/pham-product-mobile/);
-   await expect(dialog.locator("a.ae-preview-visit")).toHaveAttribute("href","https://phamofficial.com/");
-   await page.keyboard.press("Escape");
-   await expect(dialog).toHaveCount(0);
+   await expect(page).toHaveURL(/\/projects\/pham\/?$/);
+   await expect(page.locator(".ae-preview-dialog")).toHaveCount(0);
+   await expect(page.locator(".ae-article-section")).toHaveCount(7);
+   if(width<761){await page.locator(".ae-article-mobile-toc summary").click();await expect(page.locator(".ae-article-mobile-toc nav a")).toHaveCount(7);}
+   else{await expect(page.locator(".ae-article-navigation nav a")).toHaveCount(7);}
   });
-
-  test("Digital Creators preview embeds same-origin demo",async({page})=>{
-   await page.goto("/projects");
-   await page.locator(".ae-project-digital-creators .ae-project-visual-action").click();
-   const frame=page.locator(".ae-preview-dialog iframe");
-   await expect(frame).toHaveAttribute("src","/template-demos/digital-creators");
-   await expect(page.frameLocator(".ae-preview-dialog iframe").locator("body")).toBeVisible();
-   await page.locator(".ae-preview-close").click();
-   await expect(page.getByRole("dialog")).toHaveCount(0);
+  test("PHAM screenshots show full, sharp captures and original links",async({page})=>{
+   await page.goto("/projects/pham");
+   const figures=page.locator(".ae-article-figure");
+   await expect(figures).toHaveCount(4);
+   await expect(figures.nth(0).locator("img")).toHaveAttribute("src",/pham-home-hires.webp/);
+   await expect(figures.nth(2).locator("img")).toHaveAttribute("src",/pham-home-mobile-hires.webp/);
+   for(let i=0;i<4;i++){
+    const image=figures.nth(i).locator("img");
+    await expect(image).toBeVisible();
+    const st=await image.evaluate(el=>({fit:getComputedStyle(el).objectFit,natural:(el as HTMLImageElement).naturalWidth,complete:(el as HTMLImageElement).complete}));
+    expect(st.complete).toBe(true);expect(st.natural).toBeGreaterThanOrEqual(i<2?1400:1000);
+    expect(st.fit).toBe("contain");
+    await expect(figures.nth(i).locator("a")).toHaveAttribute("href",/\.webp$/);
+   }
+  });
+  test("template library is compact on mobile and does not crop screenshot previews",async({page})=>{
+   await page.goto("/services/web-development/templates");
+   await expect(page.locator(".templates-catalog .template-card")).toHaveCount(20);
+   expect(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(2);
+   const card=page.locator(".templates-catalog .template-card").first();
+   const style=await card.evaluate(el=>{const img=el.querySelector(".template-thumbnail-screen img") as HTMLImageElement;return {display:getComputedStyle(el).display,fit:getComputedStyle(img).objectFit,transform:getComputedStyle(img).transform}});
+   expect(style.fit).toBe("contain");expect(style.transform).toBe("none");
+   if(width<761)expect(style.display).toBe("grid");
   });
  });
 }
