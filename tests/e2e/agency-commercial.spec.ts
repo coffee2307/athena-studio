@@ -46,14 +46,14 @@ test("Animated mobile navigation traps focus, locks document scroll, closes with
 
 test("Portfolio presents real PHAM screenshots but never public repository links",async({page})=>{
  await page.goto("/projects/pham");
- await expect(page.locator(".agency-project-gallery .agency-gallery-item")).toHaveCount(4);
- await expect(page.locator(".agency-project-gallery img").first()).toHaveAttribute("src",/pham-desktop/);
- await expect(page.getByRole("link",{name:/Xem website dự án/})).toHaveAttribute("href","https://phamofficial.com/");
+ await expect(page.locator(".ae-article-gallery .ae-article-figure")).toHaveCount(4);
+ await expect(page.locator(".ae-article-gallery img").first()).toHaveAttribute("src",/pham-home-hires/);
+ await expect(page.getByRole("link",{name:/Truy cập website dự án/})).toHaveAttribute("href","https://phamofficial.com/");
  await expect(page.locator("main")).not.toContainText("Mở repository gốc");
  expect(await page.locator("main a[href*='github.com']").count()).toBe(0);
  await page.goto("/projects/econith");
- await expect(page.locator(".agency-gallery-awaiting")).toBeVisible();
- await expect(page.locator(".agency-project-gallery")).toHaveCount(0);
+ await expect(page.locator(".ae-article-no-image")).toBeVisible();
+ await expect(page.locator(".ae-article-gallery")).toHaveCount(0);
  expect(await page.locator("main a[href*='github.com']").count()).toBe(0);
 });
 
