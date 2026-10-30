@@ -1,0 +1,111 @@
+/* BLACK VELOCITY / MOBILE COMPOSITION 02
+ * A single, stable stage: narrative occupies the upper third,
+ * the fully visible McLaren occupies the middle, HUD occupies the lower edge.
+ * This stylesheet supersedes legacy mobile viewport overrides; camera orbit
+ * math and GLB materials are intentionally unchanged. */
+.bv-mobile-story,.bv-mobile-gesture-hint{display:none}
+@media(max-width:760px){
+ .ix-auto-showroom .bv-cinematic-steps .bv-cinematic-copy{display:none!important}
+ .ix-auto-showroom .bv-cinematic-track>.ix-hero{
+  min-height:0!important;
+  height:calc(100svh - 90px)!important;
+  justify-content:flex-start;
+ }
+ .ix-auto-showroom .bv-mobile-story{
+  display:block;
+  position:absolute;
+  top:clamp(108px,15svh,138px);
+  left:20px;right:20px;
+  max-width:470px;
+  color:#f4f6f5;
+  pointer-events:none;
+ }
+ .ix-auto-showroom .bv-mobile-scene{
+  display:none;
+  padding:0 4px 0 18px;
+  border-left:2px solid #ff741c;
+  background:linear-gradient(90deg,#0c1014b5 0%,#0c101478 70%,transparent 100%);
+ }
+ .ix-auto-showroom .bv-cinematic-track[data-chapter="1"] .bv-mobile-scene[data-mobile-chapter="1"],
+ .ix-auto-showroom .bv-cinematic-track[data-chapter="2"] .bv-mobile-scene[data-mobile-chapter="2"],
+ .ix-auto-showroom .bv-cinematic-track[data-chapter="3"] .bv-mobile-scene[data-mobile-chapter="3"],
+ .ix-auto-showroom .bv-cinematic-track[data-chapter="4"] .bv-mobile-scene[data-mobile-chapter="4"]{
+  display:block;
+  animation:bv-story-appear .44s cubic-bezier(.18,.8,.25,1) both;
+ }
+ .ix-auto-showroom .bv-mobile-eyebrow{
+  color:#ff8234;
+  font-size:9px;line-height:1.5;
+  font-weight:800;letter-spacing:.13em;
+ }
+ .ix-auto-showroom .bv-mobile-scene h2{
+  font-size:clamp(25px,6.4vw,34px);
+  letter-spacing:-.057em;
+  line-height:1.09;
+  margin:7px 0 9px;
+  font-weight:800;
+ }
+ .ix-auto-showroom .bv-mobile-scene p{
+  font-size:clamp(10px,2.6vw,12px);
+  line-height:1.5;
+  color:#cfd4d4;
+  max-width:41ch;
+  margin:0;
+ }
+ .ix-auto-showroom .bv-mobile-scene small{
+  display:block;
+  color:#9faba9;
+  font-size:9px;line-height:1.5;
+  font-weight:750;
+  letter-spacing:.12em;
+  margin-top:7px;
+ }
+ /* One stage rectangle across ALL five chapters. No top/bottom interpolation. */
+ .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas,
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas,
+ .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track[data-chapter]:not([data-chapter="0"]) .ix-hero-visual .ix-auto-3d-canvas,
+ .ix-auto-showroom .bv-cinematic-track[data-chapter]:not([data-chapter="0"]) .ix-hero-visual .ix-auto-3d-canvas{
+  left:0!important;right:0!important;bottom:auto!important;
+  width:100%!important;
+  top:clamp(235px,30svh,280px)!important;
+  height:clamp(350px,52svh,465px)!important;
+  transform:none!important;transition:none!important;
+ }
+ /* Avoid lowering the contrast of the vehicle with a foreground dark veil. */
+ .ix-auto-showroom .bv-cinematic-track .ix-visual-vignette,
+ .ix-auto-showroom .bv-cinematic-track[data-chapter]:not([data-chapter="0"]) .ix-visual-vignette{
+  background:linear-gradient(180deg,#05070b6b 0%,#05070b00 36%,#05070b00 70%,#05070ba8 100%)!important;
+  pointer-events:none;
+ }
+ .ix-auto-showroom .bv-mobile-gesture-hint{
+  display:block;
+  position:absolute;
+  left:10px;right:10px;
+  bottom:clamp(154px,24svh,210px);
+  text-align:center;
+  color:#bec9c7;
+  font-size:9px;line-height:1.45;
+  letter-spacing:.09em;
+  font-weight:750;
+  pointer-events:none;
+ }
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-nav{
+  top:auto!important;
+  bottom:clamp(120px,15svh,148px)!important;
+ }
+ .ix-auto-showroom .bv-cinematic-track .bv-model-credit{
+  bottom:91px!important;
+ }
+}
+@media(max-width:360px){
+ .ix-auto-showroom .bv-mobile-story{left:16px;right:16px;top:108px}
+ .ix-auto-showroom .bv-mobile-scene h2{font-size:25px}
+ .ix-auto-showroom .bv-mobile-gesture-hint{font-size:8px}
+}
+@media(prefers-reduced-motion:reduce){
+ .ix-auto-showroom .bv-mobile-scene{animation:none!important}
+}
+@keyframes bv-story-appear{
+ from{opacity:0;transform:translate3d(0,11px,0)}
+ to{opacity:1;transform:translate3d(0,0,0)}
+}
