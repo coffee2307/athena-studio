@@ -1,6 +1,6 @@
 /** Canonical camera chapter angles and angular interpolation for BLACK VELOCITY.
  * Invariant: drag revolutions never enter scroll state. */
-export const CHAPTER_YAWS=[.72,1.42,2.12,3.82,5.42] as const;
+export const CHAPTER_YAWS=[.72,-.16,2.12,3.82,5.42] as const;
 export const CHAPTER_ELEVATIONS=[2.35,1.98,2.48,2.18,2.55] as const;
 export const CHAPTER_DISTANCES=[1,1.04,.99,1.02,1.08] as const;
 export const clamp01=(x:number)=>Math.max(0,Math.min(1,x));
