@@ -253,3 +253,21 @@
   top:125px;height:clamp(305px,51svh,360px);
  }
 }
+
+/* FINAL VIEWPORT CONTRACT / mobile hero fits beneath its site header so
+   chapter controls, legal attribution and car are visible without extra scroll. */
+@media(max-width:760px){
+ .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track>.ix-hero,
+ .ix-auto-showroom.ix-site[data-immersive="false"] .bv-cinematic-track>.ix-hero{
+  height:calc(100svh - 90px);min-height:0;max-height:none;
+ }
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-nav{
+  bottom:16px;top:auto;
+ }
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-meter{bottom:70px}
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-skip{display:none}
+ .ix-auto-showroom .bv-cinematic-track .bv-model-credit{
+  bottom:91px;left:16px;right:16px;max-width:calc(100% - 32px);
+  text-align:center;
+ }
+}
