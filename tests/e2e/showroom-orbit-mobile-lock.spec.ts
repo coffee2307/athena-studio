@@ -21,7 +21,7 @@ for(const {width,height,minStage} of [
    if(r.width<100||r.height<minimum)return null;
    return {width:r.width,height:r.height,renderer:el.getAttribute("data-renderer")};
   },minStage,{timeout:30000});
-  expect((await stage.jsonValue()).height).toBeGreaterThanOrEqual(minStage);
+  expect((await stage.jsonValue())?.height??0).toBeGreaterThanOrEqual(minStage);
   await expect(page.locator(".bv-zoom-controls")).toBeHidden();
   const nav=page.locator(".bv-cinematic-nav").getByRole("button");
   await expect(nav).toHaveCount(5);
