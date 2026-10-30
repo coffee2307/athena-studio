@@ -1,3 +1,4 @@
+import {AboutPrinciples} from "@/components/experience/AboutPrinciples";
 import Link from "next/link";
 import {createMetadata} from "@/lib/metadata";
 import {Icon} from "@/components/ui/Icon";
@@ -27,8 +28,7 @@ export default function StudioPage(){return <div className="page-shell agency-ab
  <section className="page-section agency-section-muted"><div className="container">
   <p className="section-index"><span className="index-circle">02</span> NGUYÊN TẮC LÀM VIỆC</p>
   <h2 className="agency-faq-title">Cách Athena <span>ra quyết định.</span></h2>
-  <div className="agency-about-principles">{principles.map((item,i)=><article key={item.title}>
-   <span>{String(i+1).padStart(2,"0")}</span><h3>{item.title}</h3><p>{item.text}</p></article>)}</div>
+  <AboutPrinciples principles={principles}/>
  </div></section>
  <section className="page-section"><div className="container">
   <div className="agency-process-head"><div><p className="section-index"><span className="index-circle">03</span> NĂNG LỰC MINH HỌA</p>
