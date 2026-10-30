@@ -22,7 +22,30 @@ const REVEAL_SELECTORS=[
  ".contact-box",
  ".studio-values > article",
  ".footer-statement",
- ".closing-inner > h2"
+ ".closing-inner > h2",
+ ".dna-home-hero-copy",
+ ".dna-home-hero .dna-hero-art",
+ ".dna-home-services .dna-section-intro",
+ ".dna-home-services .dna-service-card",
+ ".home-demo-intro",
+ ".home-demo-card",
+ ".dna-work-heading",
+ ".dna02-work-playground",
+ ".dna-work-list .dna-section-intro",
+ ".ae-project-tile",
+ ".agency-process-page .page-hero .container",
+ ".agency-process-page .agency-process-head",
+ ".dna02-journey",
+ ".agency-process-page .agency-section-muted .container",
+ ".agency-about-page .page-hero .container",
+ ".agency-about-page .agency-price-card",
+ ".agency-about-page .agency-process-head",
+ ".dna02-about-system",
+ ".agency-faq-list > details",
+ ".athena-products-heading",
+ ".athena-product-card",
+ ".athena-product-cap-list > article",
+ ".dna-product-lab-inner"
 ].join(",");
 
 export function ExperienceEffects(){
