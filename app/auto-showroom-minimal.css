@@ -228,3 +228,28 @@
  }
  .ix-auto-showroom .bv-cinematic-track .bv-zoom-controls{bottom:120px}
 }
+
+/* BLACK VELOCITY / mobile rendering contract. Keep the 3D stage large across
+   every chapter; short screens get a compact headline rather than a 200px car. */
+@media(max-width:760px){
+ .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas,
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas{
+  top:clamp(320px,42svh,375px);height:clamp(345px,50svh,448px);
+  width:100%;left:0;right:0;bottom:auto;
+ }
+ .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track[data-chapter]:not([data-chapter="0"]) .ix-hero-visual .ix-auto-3d-canvas,
+ .ix-auto-showroom .bv-cinematic-track[data-chapter]:not([data-chapter="0"]) .ix-hero-visual .ix-auto-3d-canvas{
+  top:clamp(165px,24svh,228px);height:clamp(350px,52svh,460px);
+ }
+ .ix-auto-showroom .bv-cinematic-track .bv-zoom-controls{display:none!important}
+}
+@media(max-width:760px) and (max-height:680px){
+ .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas,
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas{
+  top:clamp(245px,40svh,305px);height:clamp(275px,46svh,340px);
+ }
+ .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track[data-chapter]:not([data-chapter="0"]) .ix-hero-visual .ix-auto-3d-canvas,
+ .ix-auto-showroom .bv-cinematic-track[data-chapter]:not([data-chapter="0"]) .ix-hero-visual .ix-auto-3d-canvas{
+  top:125px;height:clamp(305px,51svh,360px);
+ }
+}
