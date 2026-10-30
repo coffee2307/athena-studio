@@ -3,7 +3,7 @@ import {test,expect} from "@playwright/test";
 test("homepage advertises the same complete library as the template index",async({page})=>{
  await page.goto("/");
  await expect(page.locator(".home-demo-facts")).toContainText("21");
- await expect(page.getByRole("link",{name:"Khám phá đủ 21 website"})).toBeVisible();
+ await expect(page.getByRole("link",{name:"Xem toàn bộ 21 mẫu"})).toBeVisible();
 });
 
 test("template library presents 21 concepts, search and industry filters",async({page})=>{
@@ -124,7 +124,7 @@ test("empty search resets filters and templates sort by name",async({page})=>{
  await page.goto("/services/web-development/templates");
  await page.getByLabel("Tìm kiếm").fill("không-có-mẫu-này");
  await expect(page.locator(".template-empty")).toBeVisible();
- await page.getByRole("button",{name:/Xem tất cả mẫu/}).click();
+ await page.getByRole("button",{name:/Hiển thị tất cả/}).click();
  await expect(page.locator(".template-card")).toHaveCount(21);
  await page.getByLabel("Sắp xếp").selectOption("name");
  const titles=await page.locator(".template-card h3").allTextContents();
