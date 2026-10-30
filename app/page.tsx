@@ -59,7 +59,7 @@ export default function HomePage(){
 
   <section className="dna-product-lab" aria-label="Product Lab đang nghiên cứu">
    <div className="container dna-product-lab-inner">
-    <div className="dna-product-lab-mark" aria-hidden="true"><span>P</span><i/><span>L</span></div>
+    <div className="dna-product-lab-art" aria-hidden="true"><div className="dna-lab-orbit dna-lab-orbit-back"/><div className="dna-lab-core"><span className="dna-lab-core-plus">+</span><span>IDEA</span><span className="dna-lab-core-star">✳</span></div><div className="dna-lab-orbit dna-lab-orbit-front"/><span className="dna-lab-tag dna-lab-tag-one">EXPLORE</span><span className="dna-lab-tag dna-lab-tag-two">BUILD / TEST</span></div>
     <div><p className="dna-eyebrow">PRODUCT LAB / RESEARCH</p><h2>Những ý tưởng<br/><em>chưa ngừng lớn lên.</em></h2>
      <p>Product Lab và SitePulse hiện ở giai đoạn nghiên cứu, chưa mở bán. Khám phá định hướng và trạng thái của từng dự án.</p>
     </div>
