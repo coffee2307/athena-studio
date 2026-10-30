@@ -7,13 +7,14 @@ import {DRACOLoader} from "three/addons/loaders/DRACOLoader.js";
 import {RoomEnvironment} from "three/addons/environments/RoomEnvironment.js";
 import type {WorldSceneProps} from "./WorldScene";
 import {McLarenLoadingUI} from "./McLarenLoadingUI";
+import {CHAPTER_YAWS,CHAPTER_ELEVATIONS,CHAPTER_DISTANCES,narrativeOrbit,wrapOrbit,nextScrollChapter,scrollTransition,clamp01,smooth} from "@/lib/showroom-orbit";
 
 const MODEL_PATH="/models/mclaren.glb?v=20261029-p1-vecarz";
 type SceneState="loading"|"ready"|"fallback";
 const clamp=(value:number,min:number,max:number)=>Math.max(min,Math.min(max,value));
 // Never store accumulated revolutions. The camera only needs the signed
 // orientation within one turn; otherwise scrolling can unwind three rotations.
-const wrapOrbit=(angle:number)=>Math.atan2(Math.sin(angle),Math.cos(angle));
+// Chapter yaw state and shortest-path math live in lib/showroom-orbit.ts.
 
 function makeStage(){
  const stage=new THREE.Group();
@@ -185,7 +186,9 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   let request=0,visible=true,frameTime=0,drawn=false;
   let expensiveFrames=0,preferImmediateCamera=softwareRenderer;
   let queuedContinuation=false;
-  let drag=false,dragPointer:number|null=null,previousX=0,turn=0;
+  let drag=false,dragPointer:number|null=null,previousX=0;
+  let cameraYaw=.72,manualMode=false,manualRadius=0,manualHeight=0;
+  let yawTransition:{start:number;end:number;startP:number;endP:number;direction:1|-1;radius:number;height:number}|null=null;
   let currentMode=modeRef.current,currentProgress=0,goalProgress=0;
   // Desktop renders on every requested RAF during active interaction, not at an
   // artificial 38 FPS ceiling. Mobile retains a 30 FPS cap and pixel budget.
@@ -253,13 +256,12 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
     ?(drawn?currentProgress+(goalProgress-currentProgress)*scrollFollow:goalProgress)
     :currentProgress+(goalProgress-currentProgress)*lerp;
    if(Math.abs(goalProgress-currentProgress)<.0005)currentProgress=goalProgress;
-   // Pointer updates the orbit directly. No delayed animation queue and no scroll reset.
+   // Stable authored keyframes. Manual orbit is a separate camera state.
    const angles=[.72,2.0,4.9];
    // Five signed-off narrative keyframes, sampled directly from scroll progress.
    // Reversing scroll settles on the same pose once the glide catches up.
-   const journeyAngles=[.72,1.42,2.12,3.82,5.42];
-   const journeyElevations=[2.35,1.98,2.48,2.18,2.55];
-   const journeyDistances=[1,1.04,.94,1.02,1.08];
+   const journeyElevations=CHAPTER_ELEVATIONS;
+   const journeyDistances=CHAPTER_DISTANCES;
    const journeyX=[0,.12,-.08,-.12,0];
    const journeyZ=[0,-.08,.02,.08,0];
    const journeyYaw=[0,-.09,.06,.11,0];
@@ -267,7 +269,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    const lower=Math.min(3,Math.floor(position));
    const fraction=position-lower;
    const smoothFraction=fraction*fraction*(3-2*fraction);
-   const scrollOrbit=THREE.MathUtils.lerp(journeyAngles[lower],journeyAngles[lower+1],smoothFraction);
+   const scrollOrbit=narrativeOrbit(currentProgress);
    const scrollHeight=THREE.MathUtils.lerp(journeyElevations[lower],journeyElevations[lower+1],smoothFraction);
    const scrollDistance=THREE.MathUtils.lerp(journeyDistances[lower],journeyDistances[lower+1],smoothFraction);
    if(scrollRootId){
@@ -287,44 +289,45 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    const modeT=modePosition-modeLower;
    const easedMode=modeT*modeT*(3-2*modeT);
    const heroOrbit=angles[modeLower]+(angles[modeLower+1]-angles[modeLower])*easedMode;
-   const orbit=(scrollRootId?scrollOrbit:heroOrbit+currentProgress*.20)+turn;
-   const baseDistance=Math.max(isMobile?4.65:6.75,(isMobile?4.65:6.75)*.93/Math.max(.60,camera.aspect))*(isMobile?1.01:1);
-   const dist=baseDistance*(scrollRootId?scrollDistance:1)*(1-clamp(zoomRef.current,-1,2)*(isMobile?.04:.09));
-   const y=scrollRootId?scrollHeight:(isMobile?2.6:2.42);
-   const wanted=new THREE.Vector3(Math.cos(orbit)*dist,y,Math.sin(orbit)*dist);
+   const baseDistance=Math.max(isMobile?3.55:6.75,(isMobile?3.55:6.75)*.93/Math.max(.60,camera.aspect))*(isMobile?1.01:1);
+   const authoredRadius=baseDistance*(scrollRootId?scrollDistance:1)*(1-clamp(zoomRef.current,-1,2)*(isMobile?.04:.09));
+   let radius=authoredRadius;
+   let height=scrollRootId?scrollHeight:(isMobile?2.6:2.42);
+   if(scrollRootId){
+    if(manualMode){
+     radius=manualRadius;height=manualHeight;
+    }else if(yawTransition){
+     const tx=yawTransition;
+     const phase=clamp01((currentProgress-tx.startP)/Math.max(.00001,Math.abs(tx.endP-tx.startP))*(tx.direction));
+     const fraction=smooth(phase);
+     cameraYaw=scrollTransition(tx.start,tx.end,tx.startP,tx.endP,currentProgress);
+     radius=THREE.MathUtils.lerp(tx.radius,authoredRadius,fraction);
+     height=THREE.MathUtils.lerp(tx.height,scrollHeight,fraction);
+     if(phase>=.9999)yawTransition=null;
+    }else cameraYaw=scrollOrbit;
+   }else cameraYaw=wrapOrbit(heroOrbit+currentProgress*.20+(manualMode?cameraYaw-heroOrbit:0));
+   const wanted=new THREE.Vector3(Math.cos(cameraYaw)*radius,height,Math.sin(cameraYaw)*radius);
    if(scrollRootId)camera.position.copy(wanted);
    else camera.position.lerp(wanted,lerp);
    camera.lookAt(target);
-   // Fit the normalized car into an explicit viewport-safe frame at every pose.
-   let frameFitted=false;
+   // The camera radius is fixed during dragging. No per-frame auto-fit/dolly.
+   canvas.dataset.cameraRadius=radius.toFixed(4);
+   canvas.dataset.cameraYaw=cameraYaw.toFixed(5);
+   canvas.dataset.cameraMode=manualMode?"manual":yawTransition?"transition":"scroll";
+   canvas.dataset.cameraTargetYaw=scrollOrbit.toFixed(5);
+   // Projection is diagnostic, never a hidden second camera controller.
    if(frameCorners.length){
-    car.updateMatrixWorld(true);
-    const projectFrame=()=>{
-     camera.updateMatrixWorld();
-     let left=Infinity,right=-Infinity,bottom=Infinity,top=-Infinity;
-     for(const corner of frameCorners){
-      const p=corner.clone().applyMatrix4(car.matrixWorld).project(camera);
-      left=Math.min(left,p.x);right=Math.max(right,p.x);
-      bottom=Math.min(bottom,p.y);top=Math.max(top,p.y);
-     }
-     return {left,right,bottom,top};
-    };
-    const safeX=isMobile?.94:.88,safeTop=isMobile?.78:.84,safeBottom=isMobile?.76:.82;
-    for(let attempt=0;attempt<3;attempt++){
-     const f=projectFrame();
-     const ratio=Math.max(1,-f.left/safeX,f.right/safeX,-f.bottom/safeBottom,f.top/safeTop);
-     if(!Number.isFinite(ratio)||ratio<1.005)break;
-     frameFitted=true;
-     camera.position.sub(target).multiplyScalar(Math.min(1.9,ratio*1.035)).add(target);
-     camera.lookAt(target);
+    car.updateMatrixWorld(true);camera.updateMatrixWorld(true);
+    let left=Infinity,right=-Infinity,bottom=Infinity,top=-Infinity;
+    for(const corner of frameCorners){
+     const p=corner.clone().applyMatrix4(car.matrixWorld).project(camera);
+     left=Math.min(left,p.x);right=Math.max(right,p.x);
+     bottom=Math.min(bottom,p.y);top=Math.max(top,p.y);
     }
-    const frame=projectFrame();
-    if(canvas){
-    canvas.dataset.modelFrame=[frame.left,frame.right,frame.bottom,frame.top].map(v=>v.toFixed(4)).join(",");
-    canvas.dataset.modelSafe=String(frame.left>=-safeX-.02&&frame.right<=safeX+.02&&frame.bottom>=-safeBottom-.02&&frame.top<=safeTop+.02);
-    canvas.dataset.modelCenterX=((frame.left+frame.right)/2).toFixed(4);
+    const safeX=isMobile?.96:.90,safeTop=isMobile?.82:.87,safeBottom=isMobile?.80:.85;
+    canvas.dataset.modelFrame=[left,right,bottom,top].map(v=>v.toFixed(4)).join(",");
+    canvas.dataset.modelSafe=String(left>=-safeX&&right<=safeX&&bottom>=-safeBottom&&top<=safeTop);
     canvas.dataset.modelPivot="car-bounds-center";
-    }
    }
    // As the camera reaches the rear, dim broad studio-panel reflections so
    // black bodywork stays graphite instead of turning silver from that angle.
@@ -343,13 +346,17 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
     }
    }
    if(!drawn){drawn=true;finishLoading();setPercent(100);setStatus("ready");}
-   const movement=Math.abs(currentMode-modeRef.current)+Math.abs(currentProgress-goalProgress)+(frameFitted?0:camera.position.distanceTo(wanted));
+   const movement=Math.abs(currentMode-modeRef.current)+Math.abs(currentProgress-goalProgress)+(scrollRootId?0:camera.position.distanceTo(wanted));
    if(movement>.006){queuedContinuation=true;schedule();}
   }
 
   const pointerDown=(event:PointerEvent)=>{
    if(event.pointerType==="mouse"&&event.button!==0)return;
    drag=true;dragPointer=event.pointerId;previousX=event.clientX;
+   manualMode=true;yawTransition=null;
+   cameraYaw=wrapOrbit(Math.atan2(camera.position.z,camera.position.x));
+   manualRadius=Math.hypot(camera.position.x,camera.position.z);
+   manualHeight=camera.position.y;
    canvas.setPointerCapture(event.pointerId);
   };
   const pointerMove=(event:PointerEvent)=>{
@@ -359,8 +366,8 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    if(Math.abs(delta)<.01)return;
    // Rotate immediately around the true model pivot. Normalizing at every
    // move guarantees three complete turns still have a bounded angle.
-   turn=wrapOrbit(turn+delta*(isMobile?.0075:.0065));
-   canvas.dataset.orbitOffset=turn.toFixed(5);
+   cameraYaw=wrapOrbit(cameraYaw+delta*(isMobile?.0075:.0065));
+   canvas.dataset.orbitOffset=cameraYaw.toFixed(5);
    schedule();
   };
   const pointerUp=(event:PointerEvent)=>{
@@ -369,8 +376,22 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    if(canvas.hasPointerCapture(event.pointerId))canvas.releasePointerCapture(event.pointerId);
   };
   const onScroll=()=>{
+   const previous=goalProgress;
    measureProgress();
-   // Scroll changes only the cinematic chapter. Never unwind a user drag.
+   if(scrollRootId&&!drag&&Math.abs(goalProgress-previous)>.00015){
+    const direction:1|-1=goalProgress>previous?1:-1;
+    if(manualMode||yawTransition&&yawTransition.direction!==direction){
+     const destination=nextScrollChapter(previous,direction);
+     const endpoint=destination/4;
+     yawTransition={
+      start:cameraYaw,end:CHAPTER_YAWS[destination],
+      startP:previous,endP:endpoint,direction,
+      radius:Math.hypot(camera.position.x,camera.position.z),
+      height:camera.position.y
+     };
+     manualMode=false;
+    }
+   }
    schedule();
   };
   const onVisibility=()=>{if(document.hidden){cancelAnimationFrame(request);request=0;}else schedule();};
