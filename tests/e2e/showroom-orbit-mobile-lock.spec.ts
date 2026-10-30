@@ -12,9 +12,16 @@ for(const {width,height,minStage} of [
   await page.setViewportSize({width,height});
   await page.goto(route,{waitUntil:"domcontentloaded"});
   const canvas=page.locator(".ix-auto-3d-canvas");
-  await expect(canvas).toBeVisible();
-  const box=await canvas.boundingBox();
-  expect(box?.height||0).toBeGreaterThanOrEqual(minStage);
+  // React may replace the canvas as the GLB renderer changes loading state.
+  // Measure the real live node and its dimensions in a single DOM frame.
+  const stage=await page.waitForFunction((minimum:number)=>{
+   const el=document.querySelector(".ix-auto-3d-canvas");
+   if(!el)return null;
+   const r=el.getBoundingClientRect();
+   if(r.width<100||r.height<minimum)return null;
+   return {width:r.width,height:r.height,renderer:el.getAttribute("data-renderer")};
+  },minStage,{timeout:30000});
+  expect((await stage.jsonValue()).height).toBeGreaterThanOrEqual(minStage);
   await expect(page.locator(".bv-zoom-controls")).toBeHidden();
   const nav=page.locator(".bv-cinematic-nav").getByRole("button");
   await expect(nav).toHaveCount(5);
