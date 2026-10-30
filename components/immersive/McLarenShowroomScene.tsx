@@ -230,7 +230,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
     camera.filmOffset=heroWide?-4:0;
    }else{
     // Constant horizontal world-space framing across portrait phone sizes.
-    const halfWidth=2.95,halfHeight=halfWidth*rect.height/rect.width;
+    const halfWidth=2.74,halfHeight=halfWidth*rect.height/rect.width;
     camera.left=-halfWidth;camera.right=halfWidth;
     camera.top=halfHeight;camera.bottom=-halfHeight;
    }
