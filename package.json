@@ -7,7 +7,7 @@
     "dev": "next dev --hostname 127.0.0.1 --port 3182",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint .",
+    "lint": "eslint . && node scripts/dna03-symbol-gate.mjs",
     "typecheck": "tsc --noEmit",
     "test:unit": "node --test tests/*.test.mjs",
     "test:smoke": "node scripts/smoke.mjs",
