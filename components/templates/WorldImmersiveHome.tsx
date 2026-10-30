@@ -6,7 +6,7 @@ import type {DemoCopy} from "@/data/demo-worlds";
 import type {WorldDetail} from "@/data/demo-world-details";
 import {WorldScene} from "@/components/immersive/WorldScene";
 import {ModelAttribution} from "@/components/immersive/ModelAttribution";
-import {AUTO_CINEMATIC_ID,AutoCinematicTrack,jumpToAutoCinematicChapter} from "@/components/immersive/AutoCinematicTrack";
+import {AUTO_CINEMATIC_ID,AutoCinematicTrack,chapters,jumpToAutoCinematicChapter} from "@/components/immersive/AutoCinematicTrack";
 import {WorldEditorialInterlude} from "@/components/templates/WorldEditorialInterlude";
 
 const scenes=new Set(["creative-studio","architecture-studio","auto-showroom"]);
@@ -58,6 +58,15 @@ export function WorldImmersiveHome({slug,world,extra}:Props){
     {isAuto&&enable3D&&<div className="bv-zoom-controls" role="group" aria-label="Điều chỉnh mức phóng đại xe 3D"><button type="button" aria-label="Phóng to xe" disabled={zoom>=2} onClick={()=>setZoom(v=>Math.min(2,v+1))}>+</button><button type="button" aria-label="Thu nhỏ xe" disabled={zoom<=-1} onClick={()=>setZoom(v=>Math.max(-1,v-1))}>−</button></div>}
     <div className="ix-visual-vignette" aria-hidden="true"/>
     {isAuto&&<div className="bv-cinematic-hud">
+      <div className="bv-mobile-story" aria-label="Thông tin góc nhìn hiện tại">
+       {chapters.slice(1).map((entry,index)=><section className="bv-mobile-scene" data-mobile-chapter={index+1} key={entry.eyebrow}>
+        <span className="bv-mobile-eyebrow">{entry.eyebrow}</span>
+        <h2>{entry.title}</h2>
+        <p>{entry.description}</p>
+        <small>{entry.detail}</small>
+       </section>)}
+      </div>
+      <p className="bv-mobile-gesture-hint">KÉO NGANG ĐỂ XOAY · CUỘN ĐỂ KHÁM PHÁ</p>
      <nav className="bv-cinematic-nav" aria-label="Chọn cảnh cinematic">
       {["The Reveal","Side Profile","Material Study","Aerodynamics","Your Perspective"].map((name,index)=><button
        type="button" key={name} aria-label={"Đến cảnh "+(index+1)+": "+name}
