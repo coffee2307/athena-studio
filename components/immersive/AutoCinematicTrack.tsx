@@ -38,7 +38,8 @@ export function AutoCinematicTrack({children}:{children:ReactNode}){
    const rect=track.getBoundingClientRect();
    const p=clamp(-rect.top/Math.max(1,rect.height-window.innerHeight));
    track.style.setProperty("--bv-progress",p.toFixed(5));
-   const next=Math.min(4,Math.floor(p*5));
+   // Chapter labels switch at the midpoint between the five authored camera poses.
+   const next=Math.min(4,Math.round(p*4));
    setChapter(previous=>previous===next?previous:next);
   };
   const schedule=()=>{if(!raf)raf=requestAnimationFrame(update);};
