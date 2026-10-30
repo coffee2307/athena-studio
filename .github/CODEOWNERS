@@ -10,3 +10,5 @@
 /public/models/mclaren.glb @coffee2307
 /config/showroom-protection.json @coffee2307
 /tests/showroom-protection.test.mjs @coffee2307
+
+/lib/showroom-orbit.ts @coffee2307
