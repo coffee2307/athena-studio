@@ -1,0 +1,14 @@
+{
+  "slug": "team-intranet",
+  "name": "Cổng thông tin nội bộ Orbit",
+  "layout": "structured",
+  "originalDemo": "/template-demos/team-intranet",
+  "status": "standalone-baseline-extraction",
+  "fidelity": "original bespoke demos require visual parity review",
+  "license": {
+    "name": "Original Athena demo; inspiration: MIT templates",
+    "url": "https://pixelandoak.com/templates/",
+    "license": "MIT"
+  },
+  "version": "0.1.0"
+}

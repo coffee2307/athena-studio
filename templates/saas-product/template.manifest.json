@@ -1,0 +1,14 @@
+{
+  "slug": "saas-product",
+  "name": "Sản phẩm công nghệ",
+  "layout": "structured",
+  "originalDemo": "/template-demos/saas-product",
+  "status": "standalone-baseline-extraction",
+  "fidelity": "original bespoke demos require visual parity review",
+  "license": {
+    "name": "startbootstrap-new-age",
+    "url": "https://github.com/StartBootstrap/startbootstrap-new-age",
+    "license": "MIT"
+  },
+  "version": "0.1.0"
+}

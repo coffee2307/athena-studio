@@ -1,0 +1,14 @@
+{
+  "slug": "modern-corporate",
+  "name": "Doanh nghiệp hiện đại",
+  "layout": "structured",
+  "originalDemo": "/template-demos/modern-corporate",
+  "status": "standalone-baseline-extraction",
+  "fidelity": "original bespoke demos require visual parity review",
+  "license": {
+    "name": "startbootstrap-agency",
+    "url": "https://github.com/StartBootstrap/startbootstrap-agency",
+    "license": "MIT"
+  },
+  "version": "0.1.0"
+}

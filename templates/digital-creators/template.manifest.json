@@ -1,0 +1,14 @@
+{
+  "slug": "digital-creators",
+  "name": "Digital Creators — Không gian sáng tạo số",
+  "layout": "playful",
+  "originalDemo": "/template-demos/digital-creators",
+  "status": "standalone-baseline-extraction",
+  "fidelity": "original bespoke demos require visual parity review",
+  "license": {
+    "name": "coffee2307/digital-creators",
+    "url": "https://github.com/coffee2307/digital-creators",
+    "license": "Owner project"
+  },
+  "version": "0.1.0"
+}

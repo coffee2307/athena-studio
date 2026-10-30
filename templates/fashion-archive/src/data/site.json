@@ -1,0 +1,36 @@
+{
+  "slug": "fashion-archive",
+  "title": "Thương hiệu thời trang",
+  "industry": "Thời trang",
+  "style": "Luxury",
+  "purpose": "Kể câu chuyện bộ sưu tập và bán sản phẩm",
+  "description": "Giao diện thời trang giàu khoảng trống, hình ảnh biên tập và thông tin sản phẩm có chủ đích.",
+  "variant": "fashion",
+  "features": [
+    "Mở đầu kiểu campaign",
+    "Trang bộ sưu tập biên tập",
+    "Tùy biến theo quy trình ra mắt",
+    "Website demo nhiều trang với điều hướng desktop/mobile",
+    "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+    "Trải nghiệm trong popup hoặc mở toàn màn hình"
+  ],
+  "modules": [
+    "catalog",
+    "commerce",
+    "content"
+  ],
+  "reference": {
+    "name": "startbootstrap-creative",
+    "url": "https://github.com/StartBootstrap/startbootstrap-creative",
+    "license": "MIT"
+  },
+  "brand": "Thương hiệu thời trang",
+  "layout": "editorial",
+  "images": [
+    "/images/image-1.jpg",
+    "/images/image-2.jpg",
+    "/images/image-3.jpg",
+    "/images/image-4.jpg",
+    "/images/image-5.jpg"
+  ]
+}

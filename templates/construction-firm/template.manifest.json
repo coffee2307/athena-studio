@@ -1,0 +1,14 @@
+{
+  "slug": "construction-firm",
+  "name": "Xây dựng Terracon",
+  "layout": "structured",
+  "originalDemo": "/template-demos/construction-firm",
+  "status": "standalone-baseline-extraction",
+  "fidelity": "original bespoke demos require visual parity review",
+  "license": {
+    "name": "Original Athena demo; inspiration: MIT templates",
+    "url": "https://pixelandoak.com/templates/",
+    "license": "MIT"
+  },
+  "version": "0.1.0"
+}

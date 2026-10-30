@@ -1,0 +1,35 @@
+{
+  "slug": "commerce-standard",
+  "title": "Cửa hàng trực tuyến",
+  "industry": "Bán lẻ",
+  "style": "Minimalist",
+  "purpose": "Trưng bày sản phẩm và dẫn tới nền tảng thanh toán",
+  "description": "Một mặt tiền thương mại gọn, ưu tiên danh mục, hình ảnh sản phẩm và khả năng khám phá.",
+  "variant": "commerce",
+  "features": [
+    "Lưới sản phẩm linh hoạt",
+    "Trang chi tiết có thông tin rõ",
+    "Có thể kết nối Shopify hoặc backend riêng sau khi chốt phạm vi",
+    "Website demo nhiều trang với điều hướng desktop/mobile",
+    "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+    "Trải nghiệm trong popup hoặc mở toàn màn hình"
+  ],
+  "modules": [
+    "catalog",
+    "commerce"
+  ],
+  "reference": {
+    "name": "startbootstrap-shop-homepage",
+    "url": "https://github.com/StartBootstrap/startbootstrap-shop-homepage",
+    "license": "MIT"
+  },
+  "brand": "Cửa hàng trực tuyến",
+  "layout": "catalog",
+  "images": [
+    "/images/image-1.jpg",
+    "/images/image-2.jpg",
+    "/images/image-3.jpg",
+    "/images/image-4.jpg",
+    "/images/image-5.jpg"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "slug": "engineering-industry",
+  "name": "Cơ khí chính xác Forge",
+  "layout": "structured",
+  "originalDemo": "/template-demos/engineering-industry",
+  "status": "standalone-baseline-extraction",
+  "fidelity": "original bespoke demos require visual parity review",
+  "license": {
+    "name": "Original Athena demo; inspiration: MIT templates",
+    "url": "https://pixelandoak.com/templates/",
+    "license": "MIT"
+  },
+  "version": "0.1.0"
+}

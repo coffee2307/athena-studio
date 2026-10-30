@@ -1,0 +1,36 @@
+{
+  "slug": "wellness-clinic",
+  "title": "Chăm sóc sức khỏe",
+  "industry": "Sức khỏe",
+  "style": "Organic Calm",
+  "purpose": "Giới thiệu liệu trình và giúp khách đặt lịch tư vấn",
+  "description": "Trải nghiệm nhẹ nhàng, thông tin dịch vụ rõ ràng và hành trình đặt lịch phù hợp trên điện thoại.",
+  "variant": "wellness",
+  "features": [
+    "Danh mục liệu trình",
+    "Hồ sơ đội ngũ",
+    "Biểu mẫu đặt lịch mô phỏng",
+    "Website demo nhiều trang với điều hướng desktop/mobile",
+    "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+    "Trải nghiệm trong popup hoặc mở toàn màn hình"
+  ],
+  "modules": [
+    "content",
+    "contact",
+    "booking"
+  ],
+  "reference": {
+    "name": "startbootstrap-freelancer",
+    "url": "https://github.com/StartBootstrap/startbootstrap-freelancer",
+    "license": "MIT"
+  },
+  "brand": "Chăm sóc sức khỏe",
+  "layout": "organic",
+  "images": [
+    "/images/image-1.jpg",
+    "/images/image-2.jpg",
+    "/images/image-3.jpg",
+    "/images/image-4.jpg",
+    "/images/image-5.jpg"
+  ]
+}

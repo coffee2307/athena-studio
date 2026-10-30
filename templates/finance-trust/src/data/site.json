@@ -1,0 +1,35 @@
+{
+  "slug": "finance-trust",
+  "title": "Tài chính Atlas Capital",
+  "industry": "Tài chính",
+  "style": "Institutional Finance",
+  "purpose": "Website trình diễn với trải nghiệm theo ngành",
+  "description": "Giải pháp tài chính được thiết kế dựa trên dữ liệu, kỷ luật rủi ro và sự minh bạch.",
+  "variant": "finance",
+  "features": [
+    "Bố cục chuyên biệt theo ngành",
+    "Header, footer và menu điện thoại",
+    "Trang chi tiết & lọc nội dung",
+    "Biểu mẫu demo, không gửi dữ liệu thật",
+    "Hiệu ứng phản hồi và xem trước trực tiếp"
+  ],
+  "modules": [
+    "content",
+    "contact",
+    "catalog"
+  ],
+  "reference": {
+    "name": "Original Athena demo; inspiration: MIT templates",
+    "url": "https://pixelandoak.com/templates/",
+    "license": "MIT"
+  },
+  "brand": "Tài chính Atlas Capital",
+  "layout": "structured",
+  "images": [
+    "/images/image-1.jpg",
+    "/images/image-2.jpg",
+    "/images/image-3.jpg",
+    "/images/image-4.jpg",
+    "/images/image-5.jpg"
+  ]
+}

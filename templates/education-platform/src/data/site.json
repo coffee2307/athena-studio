@@ -1,0 +1,36 @@
+{
+  "slug": "education-platform",
+  "title": "Nền tảng giáo dục",
+  "industry": "Giáo dục",
+  "style": "Bright Learning",
+  "purpose": "Giới thiệu khóa học, lộ trình và đăng ký tư vấn",
+  "description": "Bố cục sáng rõ để người học khám phá chương trình, giảng viên và cách học trước khi đăng ký.",
+  "variant": "education",
+  "features": [
+    "Lọc khóa theo cấp độ",
+    "Thẻ chương trình học",
+    "Biểu mẫu tư vấn mô phỏng",
+    "Website demo nhiều trang với điều hướng desktop/mobile",
+    "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+    "Trải nghiệm trong popup hoặc mở toàn màn hình"
+  ],
+  "modules": [
+    "content",
+    "catalog",
+    "contact"
+  ],
+  "reference": {
+    "name": "startbootstrap-landing-page",
+    "url": "https://github.com/StartBootstrap/startbootstrap-landing-page",
+    "license": "MIT"
+  },
+  "brand": "Nền tảng giáo dục",
+  "layout": "organic",
+  "images": [
+    "/images/image-1.jpg",
+    "/images/image-2.jpg",
+    "/images/image-3.jpg",
+    "/images/image-4.jpg",
+    "/images/image-5.jpg"
+  ]
+}

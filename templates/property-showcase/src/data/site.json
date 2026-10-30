@@ -1,0 +1,36 @@
+{
+  "slug": "property-showcase",
+  "title": "Bất động sản cao cấp",
+  "industry": "Bất động sản",
+  "style": "Quiet Luxury",
+  "purpose": "Giới thiệu dự án, tiện ích và nhận yêu cầu xem nhà",
+  "description": "Cách trình bày bất động sản theo từng không gian, bản đồ tiện ích và thông tin có thể so sánh.",
+  "variant": "property",
+  "features": [
+    "Lọc căn theo diện tích và mức giá",
+    "Thư viện ảnh công trình",
+    "Đăng ký lịch tham quan mô phỏng",
+    "Website demo nhiều trang với điều hướng desktop/mobile",
+    "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+    "Trải nghiệm trong popup hoặc mở toàn màn hình"
+  ],
+  "modules": [
+    "content",
+    "catalog",
+    "contact"
+  ],
+  "reference": {
+    "name": "startbootstrap-business-casual",
+    "url": "https://github.com/StartBootstrap/startbootstrap-business-casual",
+    "license": "MIT"
+  },
+  "brand": "Bất động sản cao cấp",
+  "layout": "structured",
+  "images": [
+    "/images/image-1.jpg",
+    "/images/image-2.jpg",
+    "/images/image-3.jpg",
+    "/images/image-4.jpg",
+    "/images/image-5.jpg"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "slug": "campaign-landing",
+  "title": "Landing page chiến dịch",
+  "industry": "Marketing",
+  "style": "Brutalist",
+  "purpose": "Tập trung một chiến dịch hoặc sự kiện",
+  "description": "Một trang đơn có điểm nhấn mạnh, nội dung ngắn và CTA không bị phân tán.",
+  "variant": "campaign",
+  "features": [
+    "Một luồng nội dung xuyên suốt",
+    "Điểm nhấn chữ lớn",
+    "Có thể kết nối biểu mẫu theo cấu hình dự án",
+    "Website demo nhiều trang với điều hướng desktop/mobile",
+    "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+    "Trải nghiệm trong popup hoặc mở toàn màn hình"
+  ],
+  "modules": [
+    "content",
+    "contact"
+  ],
+  "reference": {
+    "name": "startbootstrap-landing-page",
+    "url": "https://github.com/StartBootstrap/startbootstrap-landing-page",
+    "license": "MIT"
+  },
+  "brand": "Landing page chiến dịch",
+  "layout": "statement",
+  "images": [
+    "/images/image-1.jpg",
+    "/images/image-2.jpg",
+    "/images/image-3.jpg",
+    "/images/image-4.jpg",
+    "/images/image-5.jpg"
+  ]
+}

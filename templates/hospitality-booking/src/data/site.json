@@ -1,0 +1,36 @@
+{
+  "slug": "hospitality-booking",
+  "title": "Nhà hàng và đặt lịch",
+  "industry": "Nhà hàng",
+  "style": "Warm Minimal",
+  "purpose": "Giới thiệu địa điểm và nhận đặt chỗ",
+  "description": "Thông tin địa điểm, thực đơn và hành động đặt chỗ được ưu tiên trên điện thoại.",
+  "variant": "hospitality",
+  "features": [
+    "Thông tin giờ mở cửa và địa điểm",
+    "Nội dung phục vụ lựa chọn dịch vụ",
+    "Module booking chỉ bật khi có backend đã kiểm thử",
+    "Website demo nhiều trang với điều hướng desktop/mobile",
+    "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+    "Trải nghiệm trong popup hoặc mở toàn màn hình"
+  ],
+  "modules": [
+    "content",
+    "contact",
+    "booking"
+  ],
+  "reference": {
+    "name": "startbootstrap-business-casual",
+    "url": "https://github.com/StartBootstrap/startbootstrap-business-casual",
+    "license": "MIT"
+  },
+  "brand": "Nhà hàng và đặt lịch",
+  "layout": "organic",
+  "images": [
+    "/images/image-1.jpg",
+    "/images/image-2.jpg",
+    "/images/image-3.jpg",
+    "/images/image-4.jpg",
+    "/images/image-5.jpg"
+  ]
+}

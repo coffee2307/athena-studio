@@ -1,0 +1,35 @@
+{
+  "slug": "saas-product",
+  "title": "Sản phẩm công nghệ",
+  "industry": "Phần mềm",
+  "style": "Futuristic",
+  "purpose": "Giải thích sản phẩm và chuyển đổi đăng ký",
+  "description": "Bố cục sản phẩm số có màn hình giao diện, lợi ích và lộ trình dùng thử.",
+  "variant": "saas",
+  "features": [
+    "Trình bày sản phẩm bằng giao diện",
+    "Tách tính năng theo công việc",
+    "Có thể tích hợp xác thực sau khi có yêu cầu vận hành",
+    "Website demo nhiều trang với điều hướng desktop/mobile",
+    "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+    "Trải nghiệm trong popup hoặc mở toàn màn hình"
+  ],
+  "modules": [
+    "content",
+    "auth"
+  ],
+  "reference": {
+    "name": "startbootstrap-new-age",
+    "url": "https://github.com/StartBootstrap/startbootstrap-new-age",
+    "license": "MIT"
+  },
+  "brand": "Sản phẩm công nghệ",
+  "layout": "structured",
+  "images": [
+    "/images/image-1.jpg",
+    "/images/image-2.jpg",
+    "/images/image-3.jpg",
+    "/images/image-4.jpg",
+    "/images/image-5.jpg"
+  ]
+}
