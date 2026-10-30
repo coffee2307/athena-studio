@@ -9,10 +9,10 @@ test("Production public pages load styled CSS and JS assets",async({page})=>{
   if(/\/_next\/static\//.test(request.url()))failures.push(`${request.failure()?.errorText} ${request.url()}`);
  });
  await page.goto("/",{waitUntil:"load"});
- await expect(page.locator(".client-hero")).toBeVisible();
+ await expect(page.locator(".dna-home-hero")).toBeVisible();
  const state=await page.evaluate(()=>{
-  const hero=document.querySelector(".client-hero")!;
-  const card=document.querySelector(".client-quick-nav")!;
+  const hero=document.querySelector(".dna-home-hero")!;
+  const card=document.querySelector(".dna-hero-art")!;
   return {
    bodyFont:getComputedStyle(document.body).fontFamily,
    heroBackground:getComputedStyle(hero).backgroundColor,
