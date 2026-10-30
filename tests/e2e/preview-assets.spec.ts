@@ -12,7 +12,7 @@ test("Production public pages load styled CSS and JS assets",async({page})=>{
  await expect(page.locator(".dna-home-hero")).toBeVisible();
  const state=await page.evaluate(()=>{
   const hero=document.querySelector(".dna-home-hero")!;
-  const card=document.querySelector(".dna-hero-window-primary")!;
+  const card=document.querySelector(".dna02-preview-window.is-front")!;
   return {
    bodyFont:getComputedStyle(document.body).fontFamily,
    heroBackground:getComputedStyle(hero).backgroundColor,
