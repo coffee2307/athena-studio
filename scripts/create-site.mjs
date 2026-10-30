@@ -10,7 +10,6 @@ function usage(){return "Usage: node scripts/create-site.mjs --template <slug> -
 function args(argv){const result={};const allowed=new Set(["template","name","brand","out","modules","email"]);for(let i=0;i<argv.length;i+=2){const key=argv[i].slice(2);if(!argv[i].startsWith("--")||!argv[i+1]||!allowed.has(key)||Object.hasOwn(result,key))throw Error(usage());result[key]=argv[i+1];}return result;}
 function safeSlug(value){return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value);}
 async function canonical(path){try{return await realpath(path);}catch(error){if(error?.code!=="ENOENT")throw error;return join(await canonical(dirname(path)),basename(path));}}
-async function walk(folder){const entries=await readdir(folder,{withFileTypes:true});const result=[];for(const entry of entries){const path=join(folder,entry.name);if(entry.isDirectory())result.push(...await walk(path));else result.push(path);}return result;}
 
 if(process.argv.includes("--help")){console.log(usage());process.exit(0);}
 const input=args(process.argv.slice(2));
