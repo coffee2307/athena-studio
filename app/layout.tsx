@@ -44,6 +44,7 @@ import "@/app/template-compact-v3.css";
 import "@/app/project-layout-v4.css";
 import "@/app/athena-dna02.css";
 import "@/app/athena-dna03.css";
+import "@/app/black-velocity-mobile-showcase.css";
 
 export const metadata: Metadata = {
   ...createMetadata(),
