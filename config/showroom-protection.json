@@ -3,7 +3,7 @@
   "status": "protected",
   "approved_on": "2026-10-30",
   "scope": "/template-demos/auto-showroom — cinematic McLaren P1",
-  "policy": "BLACK VELOCITY camera rebuild approved and locked: mobile fixed orthographic framing; manual orbit with no zoom; next cinematic chapter via shortest path; stable canvas rect. Do not alter showroom source, assets, CSS, camera, motion, keyframes or protected routes without a NEW explicit user request.",
+  "policy": "Protected BLACK VELOCITY showroom: explicit 2026-10-31 user request authorized mobile visual composition correction only. All future changes to covered files, 3D asset, camera, scroll, overlay, layout require new explicit user approval; integrity test and CODEOWNERS required.",
   "verified": [
     "6/6 WebGL interaction tests Chromium Windows",
     "4/4 pure camera math tests",
@@ -11,18 +11,20 @@
     "No camera-radius change during drag or mobile chapter scroll",
     "No drag revolution unwind; absolute next chapter target",
     "GLB credit vecarz CC BY preserved",
-    "Real iPhone Safari performance remains UNVERIFIED"
+    "Real iPhone Safari performance remains UNVERIFIED",
+    "Mobile composition: chapter copy appears above the full vehicle without overlap; 3D canvas fixed across scenes; chapter 02 uses genuine side-profile yaw. Await browser regression before final signoff."
   ],
   "file_blobs": {
-    "components/immersive/McLarenShowroomScene.tsx": "69b2497b7145c13993b28c100d72c7484cfb054b",
-    "components/immersive/AutoCinematicTrack.tsx": "7ef6de537241353cdf1c2747d059e31b1f258cea",
+    "components/immersive/McLarenShowroomScene.tsx": "189838d56346089750ca349aedc04fd0d403ef8f",
+    "components/immersive/AutoCinematicTrack.tsx": "56cd30b34fd3d44e44d4962a6e48a453cd72954a",
     "components/immersive/WorldScene.tsx": "fc03a3697c95ffa5bd3338abee6a08f79ec7cb70",
-    "components/templates/WorldImmersiveHome.tsx": "38cc81ef07350ae3ec3e9ec13eb943eacc3dda62",
+    "components/templates/WorldImmersiveHome.tsx": "cc1536de1894f2e6dfa0c4d7c7ec9a69d76aa466",
     "components/immersive/McLarenLoadingUI.tsx": "af519307a1bb3879491b5e1c639f2407c3343271",
     "app/black-velocity-cinematic.css": "716a71292bfe3f49fdf35b3e53ca9a1e1d5db38f",
     "app/black-velocity.css": "6741c818651ada85c4f1108e43e63cfcaf3e8fa2",
     "app/auto-showroom-minimal.css": "3408859ce809bdac49a1912f1c45c5d721e7c7d1",
     "public/models/mclaren.glb": "b2a0e4fa38b928afdcebd01e3b31ab2dd0558e73",
-    "lib/showroom-orbit.ts": "b8ac71472a4bd73752e621b6e8c6677ad9894400"
+    "lib/showroom-orbit.ts": "1cebf096a745005be050dc30c917290fcc658f67",
+    "app/black-velocity-mobile-showcase.css": "cd64916fa70aefe6f145a36ab7a17713d71d02df"
   }
 }
