@@ -1,6 +1,6 @@
 import {test,expect} from "@playwright/test";
 function contrast(a:string,b:string){
- const parse=(s:string)=>{const m=s.match(/rgba?\\(([^)]+)\\)/);if(!m)return null;const p=m[1].split(",").map(Number);return p.length>=3?{rgb:p.slice(0,3),alpha:p.length>3?p[3]:1}:null;};
+ const parse=(s:string)=>{const m=s.match(/rgba?\(([^)]+)\)/);if(!m)return null;const p=m[1].split(",").map(Number);return p.length>=3?{rgb:p.slice(0,3),alpha:p.length>3?p[3]:1}:null;};
  const c=parse(a),d=parse(b);if(!c||!d||c.alpha<0.99||d.alpha<0.99)return null;
  const lum=(rgb:number[])=>{const n=rgb.map(x=>{const v=x/255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4});return .2126*n[0]+.7152*n[1]+.0722*n[2]};
  const x=lum(c.rgb),y=lum(d.rgb);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);
