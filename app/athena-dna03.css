@@ -72,3 +72,9 @@
  .dna03-browser,.dna03-monitor,.dna03-ai-flow,.dna02-work-art .dna-work-art-card,.dna02-preview-stage .dna02-preview-window{animation:none!important}
  .dna03-stage-choices button,.home-demo-picture .home-demo-open{transition:none!important}
 }
+
+/* DNA-03 measured contrast repair: template CTA was dark-on-dark. */
+.template-service-band .pill-link.pill-dark,
+.template-service-band .pill-link.pill-dark:visited{background:#111213!important;color:#fff!important;border-color:#111213!important}
+.template-service-band .pill-link.pill-dark:hover,
+.template-service-band .pill-link.pill-dark:focus-visible{background:#e76a4b!important;color:#171916!important;border-color:#e76a4b!important}
