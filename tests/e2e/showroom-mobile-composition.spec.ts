@@ -24,8 +24,8 @@ for(const {width,height} of [{width:320,height:680},{width:390,height:844},{widt
    },positions[i],{timeout:20000});
    const layout=await page.evaluate(i=>{
     const c=document.querySelector(".ix-auto-3d-canvas");
-    const r=c?.getBoundingClientRect();
-    if(!r)throw Error("Missing canvas");
+    if(!c)throw Error("Missing canvas");
+    const r=c.getBoundingClientRect();
     const f=(c.getAttribute("data-model-frame")||"").split(",").map(Number);
     const vehicleTop=r.top+(1-f[3])*r.height/2;
     const vehicleBottom=r.top+(1-f[2])*r.height/2;
