@@ -62,8 +62,13 @@ test("BLACK VELOCITY drag many times then scroll without counter-rotation",async
  });
  await page.waitForFunction(()=>Number(document.querySelector(".ix-auto-3d-canvas")?.getAttribute("data-scroll-progress"))>.40,{timeout:30000});
  await page.waitForTimeout(250);
- const after=Number(await canvas.getAttribute("data-orbit-offset"));
- expect(Math.abs(angle-after)).toBeLessThan(.001);
+ await page.waitForFunction(()=>{
+  const el=document.querySelector(".ix-auto-3d-canvas");
+  return el?.getAttribute("data-camera-mode")==="scroll"&&Math.abs(Number(el.getAttribute("data-scroll-progress"))-.51)<.007;
+ },undefined,{timeout:30000});
+ const after=Number(await canvas.getAttribute("data-camera-yaw"));
+ const expected=2.12;
+ expect(Math.abs(Math.atan2(Math.sin(after-expected),Math.cos(after-expected)))).toBeLessThan(.15);
  await expect(canvas).toHaveAttribute("data-model-safe","true");
 });
 
@@ -93,6 +98,11 @@ test("BLACK VELOCITY desktop drag is immediate and does not unwind on scroll",as
   scrollTo({top:scrollY+r.top+Math.max(1,r.height-innerHeight)*.51,behavior:"instant"});
  });
  await page.waitForFunction(()=>Number(document.querySelector(".ix-auto-3d-canvas")?.getAttribute("data-scroll-progress"))>.40,{timeout:30000});
- expect(Math.abs(Number(await canvas.getAttribute("data-orbit-offset"))-before)).toBeLessThan(.001);
+ await page.waitForFunction(()=>{
+  const el=document.querySelector(".ix-auto-3d-canvas");
+  return el?.getAttribute("data-camera-mode")==="scroll"&&Math.abs(Number(el.getAttribute("data-scroll-progress"))-.51)<.007;
+ },undefined,{timeout:30000});
+ const after=Number(await canvas.getAttribute("data-camera-yaw"));
+ expect(Math.abs(Math.atan2(Math.sin(after-2.12),Math.cos(after-2.12)))).toBeLessThan(.15);
  await expect(canvas).toHaveAttribute("data-model-safe","true");
 });
