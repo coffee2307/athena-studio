@@ -42,6 +42,7 @@ import "@/app/project-editorial-v2.css";
 import "@/app/project-article-v3.css";
 import "@/app/template-compact-v3.css";
 import "@/app/project-layout-v4.css";
+import "@/app/athena-dna02.css";
 
 export const metadata: Metadata = {
   ...createMetadata(),
