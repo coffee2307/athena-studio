@@ -11,6 +11,9 @@ import {McLarenLoadingUI} from "./McLarenLoadingUI";
 const MODEL_PATH="/models/mclaren.glb?v=20261029-p1-vecarz";
 type SceneState="loading"|"ready"|"fallback";
 const clamp=(value:number,min:number,max:number)=>Math.max(min,Math.min(max,value));
+// Never store accumulated revolutions. The camera only needs the signed
+// orientation within one turn; otherwise scrolling can unwind three rotations.
+const wrapOrbit=(angle:number)=>Math.atan2(Math.sin(angle),Math.cos(angle));
 
 function makeStage(){
  const stage=new THREE.Group();
@@ -182,7 +185,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   let request=0,visible=true,frameTime=0,drawn=false;
   let expensiveFrames=0,preferImmediateCamera=softwareRenderer;
   let queuedContinuation=false;
-  let drag=false,previousX=0,turn=0,dragTurn=0;
+  let drag=false,dragPointer:number|null=null,previousX=0,turn=0;
   let currentMode=modeRef.current,currentProgress=0,goalProgress=0;
   // Desktop renders on every requested RAF during active interaction, not at an
   // artificial 38 FPS ceiling. Mobile retains a 30 FPS cap and pixel budget.
@@ -250,7 +253,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
     ?(drawn?currentProgress+(goalProgress-currentProgress)*scrollFollow:goalProgress)
     :currentProgress+(goalProgress-currentProgress)*lerp;
    if(Math.abs(goalProgress-currentProgress)<.0005)currentProgress=goalProgress;
-   turn+=(dragTurn-turn)*lerp;
+   // Pointer updates the orbit directly. No delayed animation queue and no scroll reset.
    const angles=[.72,2.0,4.9];
    // Five signed-off narrative keyframes, sampled directly from scroll progress.
    // Reversing scroll settles on the same pose once the glide catches up.
@@ -285,7 +288,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    const easedMode=modeT*modeT*(3-2*modeT);
    const heroOrbit=angles[modeLower]+(angles[modeLower+1]-angles[modeLower])*easedMode;
    const orbit=(scrollRootId?scrollOrbit:heroOrbit+currentProgress*.20)+turn;
-   const baseDistance=Math.max(6.75,6.75*.93/Math.max(.60,camera.aspect))*(isMobile?1.30:1);
+   const baseDistance=Math.max(isMobile?5.25:6.75,(isMobile?5.25:6.75)*.93/Math.max(.60,camera.aspect))*(isMobile?1.04:1);
    const dist=baseDistance*(scrollRootId?scrollDistance:1)*(1-clamp(zoomRef.current,-1,2)*(isMobile?.04:.09));
    const y=scrollRootId?scrollHeight:(isMobile?2.6:2.42);
    const wanted=new THREE.Vector3(Math.cos(orbit)*dist,y,Math.sin(orbit)*dist);
@@ -306,7 +309,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
      }
      return {left,right,bottom,top};
     };
-    const safeX=.88,safeTop=.84,safeBottom=isMobile?.49:.82;
+    const safeX=isMobile?.94:.88,safeTop=isMobile?.78:.84,safeBottom=isMobile?.76:.82;
     for(let attempt=0;attempt<3;attempt++){
      const f=projectFrame();
      const ratio=Math.max(1,-f.left/safeX,f.right/safeX,-f.bottom/safeBottom,f.top/safeTop);
@@ -340,25 +343,34 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
     }
    }
    if(!drawn){drawn=true;finishLoading();setPercent(100);setStatus("ready");}
-   const movement=Math.abs(currentMode-modeRef.current)+Math.abs(currentProgress-goalProgress)+Math.abs(turn-dragTurn)+(frameFitted?0:camera.position.distanceTo(wanted));
+   const movement=Math.abs(currentMode-modeRef.current)+Math.abs(currentProgress-goalProgress)+(frameFitted?0:camera.position.distanceTo(wanted));
    if(movement>.006){queuedContinuation=true;schedule();}
   }
 
   const pointerDown=(event:PointerEvent)=>{
-   drag=true;previousX=event.clientX;
+   if(event.pointerType==="mouse"&&event.button!==0)return;
+   drag=true;dragPointer=event.pointerId;previousX=event.clientX;
    canvas.setPointerCapture(event.pointerId);
   };
   const pointerMove=(event:PointerEvent)=>{
-   if(!drag)return;
-   dragTurn+=clamp(event.clientX-previousX,-45,45)*.006;
-   previousX=event.clientX;schedule();
+   if(!drag||dragPointer!==event.pointerId)return;
+   const delta=clamp(event.clientX-previousX,-45,45);
+   previousX=event.clientX;
+   if(Math.abs(delta)<.01)return;
+   // Rotate immediately around the true model pivot. Normalizing at every
+   // move guarantees three complete turns still have a bounded angle.
+   turn=wrapOrbit(turn+delta*(isMobile?.0075:.0065));
+   canvas.dataset.orbitOffset=turn.toFixed(5);
+   schedule();
   };
-  const pointerUp=()=>{drag=false;};
+  const pointerUp=(event:PointerEvent)=>{
+   if(dragPointer!==event.pointerId)return;
+   drag=false;dragPointer=null;
+   if(canvas.hasPointerCapture(event.pointerId))canvas.releasePointerCapture(event.pointerId);
+  };
   const onScroll=()=>{
    measureProgress();
-   // Return from a manual orbit gradually when scrolling resumes; clearing
-   // both values here caused an immediate visible angle snap.
-   if(scrollRootId)dragTurn=0;
+   // Scroll changes only the cinematic chapter. Never unwind a user drag.
    schedule();
   };
   const onVisibility=()=>{if(document.hidden){cancelAnimationFrame(request);request=0;}else schedule();};
