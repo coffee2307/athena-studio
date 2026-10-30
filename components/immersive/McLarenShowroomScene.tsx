@@ -176,6 +176,8 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
 
   const car=new THREE.Group();
   scene.add(car);
+  // Cached local-space geometry bounds follow the car pivot at each camera pose.
+  let frameCorners:THREE.Vector3[]=[];
   let loaded=false,disposed=false,model:THREE.Object3D|null=null;
   let request=0,visible=true,frameTime=0,drawn=false;
   let expensiveFrames=0,preferImmediateCamera=softwareRenderer;
@@ -290,6 +292,33 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    if(scrollRootId)camera.position.copy(wanted);
    else camera.position.lerp(wanted,lerp);
    camera.lookAt(target);
+   // Fit the normalized car into an explicit viewport-safe frame at every pose.
+   if(frameCorners.length){
+    car.updateMatrixWorld(true);
+    const projectFrame=()=>{
+     camera.updateMatrixWorld();
+     let left=Infinity,right=-Infinity,bottom=Infinity,top=-Infinity;
+     for(const corner of frameCorners){
+      const p=corner.clone().applyMatrix4(car.matrixWorld).project(camera);
+      left=Math.min(left,p.x);right=Math.max(right,p.x);
+      bottom=Math.min(bottom,p.y);top=Math.max(top,p.y);
+     }
+     return {left,right,bottom,top};
+    };
+    const safeX=.88,safeTop=.84,safeBottom=isMobile?.49:.82;
+    for(let attempt=0;attempt<3;attempt++){
+     const f=projectFrame();
+     const ratio=Math.max(1,-f.left/safeX,f.right/safeX,-f.bottom/safeBottom,f.top/safeTop);
+     if(!Number.isFinite(ratio)||ratio<1.005)break;
+     camera.position.sub(target).multiplyScalar(Math.min(1.9,ratio*1.035)).add(target);
+     camera.lookAt(target);
+    }
+    const frame=projectFrame();
+    canvas.dataset.modelFrame=[frame.left,frame.right,frame.bottom,frame.top].map(v=>v.toFixed(4)).join(",");
+    canvas.dataset.modelSafe=String(frame.left>=-safeX-.02&&frame.right<=safeX+.02&&frame.bottom>=-safeBottom-.02&&frame.top<=safeTop+.02);
+    canvas.dataset.modelCenterX=((frame.left+frame.right)/2).toFixed(4);
+    canvas.dataset.modelPivot="car-bounds-center";
+   }
    // As the camera reaches the rear, dim broad studio-panel reflections so
    // black bodywork stays graphite instead of turning silver from that angle.
    scene.environmentIntensity=scrollRootId?THREE.MathUtils.lerp(.95,.5,currentProgress):.95;
@@ -365,6 +394,11 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    model.scale.multiplyScalar(scalar);
    model.position.set(-center.x*scalar,.07-bounds.min.y*scalar,-center.z*scalar);
    car.add(model);
+   car.updateMatrixWorld(true);
+   const box=new THREE.Box3().setFromObject(car,true);
+   frameCorners=[];
+   for(const x of [box.min.x,box.max.x])for(const y of [box.min.y,box.max.y])for(const z of [box.min.z,box.max.z])
+    frameCorners.push(new THREE.Vector3(x,y,z));
    loaded=true;resize();measureProgress();schedule();
   },event=>{
    if(disposed||!event.total)return;
