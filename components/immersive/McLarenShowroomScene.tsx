@@ -285,9 +285,17 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    if(scrollRootId){
     // A small, reversible glide accompanies the dolly. No fake wheel spin:
     // this GLB exposes no separately named wheel pivots.
-    car.position.set(THREE.MathUtils.lerp(journeyX[lower],journeyX[lower+1],smoothFraction),0,
-     THREE.MathUtils.lerp(journeyZ[lower],journeyZ[lower+1],smoothFraction));
-    car.rotation.y=THREE.MathUtils.lerp(journeyYaw[lower],journeyYaw[lower+1],smoothFraction);
+    if(isMobile){
+     // Mobile is a centered product stage, not the asymmetric desktop editorial rig.
+     // Chapter direction is controlled by camera yaw only, never by the desktop
+     // camera-track translation or mesh spin.
+     car.position.set(0,0,0);
+     car.rotation.y=0;
+    }else{
+     car.position.set(THREE.MathUtils.lerp(journeyX[lower],journeyX[lower+1],smoothFraction),0,
+      THREE.MathUtils.lerp(journeyZ[lower],journeyZ[lower+1],smoothFraction));
+     car.rotation.y=THREE.MathUtils.lerp(journeyYaw[lower],journeyYaw[lower+1],smoothFraction);
+    }
    }
    if(canvas){
     canvas.dataset.scrollProgress=currentProgress.toFixed(4);
@@ -330,6 +338,12 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    }
    // Projection is diagnostic, never a hidden second camera controller.
    if(frameCorners.length){
+    // Optical framing is a MOBILE-ONLY lens correction. Reset on each frame
+    // before projection so prior drag/scroll frames cannot accumulate offsets.
+    if(isMobile&&camera instanceof THREE.OrthographicCamera){
+     camera.projectionMatrix.elements[12]=0;
+     camera.projectionMatrixInverse.copy(camera.projectionMatrix).invert();
+    }
     car.updateMatrixWorld(true);camera.updateMatrixWorld(true);
     let left=Infinity,right=-Infinity,bottom=Infinity,top=-Infinity;
     for(const corner of frameCorners){
@@ -337,8 +351,20 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
      left=Math.min(left,p.x);right=Math.max(right,p.x);
      bottom=Math.min(bottom,p.y);top=Math.max(top,p.y);
     }
+    if(isMobile&&camera instanceof THREE.OrthographicCamera){
+     // The GLB's actual projected bounds, not its origin or the desktop hero
+     // alignment, define the visible horizontal midpoint on small screens.
+     // Translation in the projection matrix does not affect orbit yaw/radius.
+     const opticalCenter=(left+right)/2;
+     camera.projectionMatrix.elements[12]=-opticalCenter;
+     camera.projectionMatrixInverse.copy(camera.projectionMatrix).invert();
+     left-=opticalCenter;
+     right-=opticalCenter;
+    }
     const safeX=isMobile?.96:.90,safeTop=isMobile?.82:.87,safeBottom=isMobile?.80:.85;
     if(canvas){
+     canvas.dataset.layoutRig=isMobile?"mobile-centered":"desktop-editorial";
+     canvas.dataset.modelCenterX=((left+right)/2).toFixed(5);
      canvas.dataset.modelFrame=[left,right,bottom,top].map(v=>v.toFixed(4)).join(",");
      canvas.dataset.modelSafe=String(left>=-safeX&&right<=safeX&&bottom>=-safeBottom&&top<=safeTop);
      canvas.dataset.modelPivot="car-bounds-center";
