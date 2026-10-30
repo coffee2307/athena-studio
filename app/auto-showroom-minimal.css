@@ -293,3 +293,15 @@
   top:clamp(240px,37svh,290px);height:clamp(310px,49svh,375px);
  }
 }
+
+/* Camera rebuild visual QA: place chapter controls INSIDE first phone viewport.
+   Earlier absolute nav was 34px below the sticky stage (390x844). */
+@media(max-width:760px){
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-nav{
+  top:auto!important;bottom:clamp(120px,15svh,148px)!important;
+  z-index:15;
+ }
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-meter{
+  bottom:clamp(177px,21svh,205px)!important;
+ }
+}
