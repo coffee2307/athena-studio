@@ -1,3 +1,4 @@
+import {StudioHeroScene} from "@/components/experience/StudioHeroScene";
 import {AboutPrinciples} from "@/components/experience/AboutPrinciples";
 import Link from "next/link";
 import {createMetadata} from "@/lib/metadata";
@@ -13,8 +14,9 @@ export default function StudioPage(){return <div className="page-shell agency-ab
  <section className="page-hero"><div className="container">
   <p className="page-kicker"><span className="eyebrow-dot"/> ATHENA STUDIO / THIẾT KẾ & CÔNG NGHỆ</p>
   <h1>Đối tác cho những<br/><em>vấn đề số cụ thể.</em></h1>
-  <div className="page-hero-lede"><p>Athena là studio độc lập do founder xây dựng, tập trung vào thiết kế website, cải thiện hệ thống đang dùng và nghiên cứu những ứng dụng AI hữu ích. Quy mô và năng lực thực hiện được trao đổi phù hợp từng dự án, không dựa trên số liệu khách hàng hoặc thành tích chưa xác minh.</p>
+  <div className="page-hero-lede"><div className="dna02-hero-lede"><p>Studio sáng tạo độc lập. Thiết kế có bản sắc, công nghệ hữu ích và kết quả có thể kiểm chứng.</p><details><summary>Đọc thêm về cách làm</summary><p>Athena là studio độc lập do founder xây dựng, tập trung vào thiết kế website, cải thiện hệ thống đang dùng và nghiên cứu những ứng dụng AI hữu ích. Quy mô và năng lực thực hiện được trao đổi phù hợp từng dự án, không dựa trên số liệu khách hàng hoặc thành tích chưa xác minh.</p></details></div>
    <Link className="pill-link pill-dark" href="/contact">Gửi nhu cầu <Icon name="arrow-up-right" size={18}/></Link></div>
+ <StudioHeroScene mode="about"/>
  </div></section>
  <section className="page-section"><div className="container">
   <div className="agency-process-head"><p className="section-index"><span className="index-circle">01</span> CHÚNG TÔI GIÚP ĐƯỢC GÌ?</p>
