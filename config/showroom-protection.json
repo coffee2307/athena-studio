@@ -3,7 +3,7 @@
   "status": "protected",
   "approved_on": "2026-10-30",
   "scope": "/template-demos/auto-showroom — cinematic McLaren P1",
-  "policy": "Protected BLACK VELOCITY showroom: explicit 2026-10-31 user request authorized mobile visual composition correction only. All future changes to covered files, 3D asset, camera, scroll, overlay, layout require new explicit user approval; integrity test and CODEOWNERS required.",
+  "policy": "BLACK VELOCITY showroom protected. Mobile-only independent centered rig and orthographic optical recentering explicitly approved on 2026-10-31; desktop remains intentionally asymmetric. Do not change this showroom's camera, 3D assets, styles, controls or source outside a new explicit user request.",
   "verified": [
     "6/6 WebGL interaction tests Chromium Windows",
     "4/4 pure camera math tests",
@@ -12,10 +12,11 @@
     "No drag revolution unwind; absolute next chapter target",
     "GLB credit vecarz CC BY preserved",
     "Real iPhone Safari performance remains UNVERIFIED",
-    "Mobile composition: chapter copy appears above the full vehicle without overlap; 3D canvas fixed across scenes; chapter 02 uses genuine side-profile yaw. Await browser regression before final signoff."
+    "Mobile composition: chapter copy appears above the full vehicle without overlap; 3D canvas fixed across scenes; chapter 02 uses genuine side-profile yaw. Await browser regression before final signoff.",
+    "Mobile 3D optical midpoint exactly centered within NDC ±0.005 at 320,390,428 px × 5 chapters (Chromium Windows). Desktop asymmetric scene unchanged."
   ],
   "file_blobs": {
-    "components/immersive/McLarenShowroomScene.tsx": "189838d56346089750ca349aedc04fd0d403ef8f",
+    "components/immersive/McLarenShowroomScene.tsx": "d705115967e9c78ceaf5a55b15adef5fcfa5a588",
     "components/immersive/AutoCinematicTrack.tsx": "56cd30b34fd3d44e44d4962a6e48a453cd72954a",
     "components/immersive/WorldScene.tsx": "fc03a3697c95ffa5bd3338abee6a08f79ec7cb70",
     "components/templates/WorldImmersiveHome.tsx": "cc1536de1894f2e6dfa0c4d7c7ec9a69d76aa466",
