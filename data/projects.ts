@@ -15,12 +15,12 @@ export const projects:Project[]=[
   activities:["Thiết kế trải nghiệm thương hiệu","Trang sản phẩm PHAM-001","Điều hướng và trình bày sản phẩm","Thiết kế trải nghiệm mobile"],
   websiteUrl:"https://phamofficial.com/",
   gallery:[
-   {src:"/portfolio/pham-desktop.webp",alt:"Ảnh chụp trang chủ PHAM trên desktop với giao diện thời trang đen trắng và sản phẩm PHAM-001",caption:"Trang chủ PHAM — desktop, chụp từ website công khai ngày 21/10/2026",rightsVerified:true},
-   {src:"/portfolio/pham-product.webp",alt:"Ảnh chụp trang PHAM-001 với hình áo khoác và trải nghiệm Inspect the Form",caption:"Giao diện khám phá sản phẩm PHAM-001 — desktop",rightsVerified:true},
-   {src:"/portfolio/pham-mobile.webp",alt:"Ảnh chụp trang chủ PHAM trên màn hình điện thoại",caption:"Trang chủ PHAM — giao diện điện thoại",rightsVerified:true},
-   {src:"/portfolio/pham-product-mobile.webp",alt:"Ảnh chụp trang PHAM-001 trên điện thoại",caption:"Trang sản phẩm PHAM-001 — giao diện điện thoại",rightsVerified:true}
+   {src:"/portfolio/pham-home-hires.webp",alt:"Ảnh chụp trang chủ PHAM trên desktop với giao diện thời trang đen trắng và sản phẩm PHAM-001",caption:"Trang chủ PHAM — desktop, chụp trực tiếp từ phamofficial.com ngày 29/10/2026",rightsVerified:true},
+   {src:"/portfolio/pham-product-hires.webp",alt:"Ảnh chụp trang PHAM-001 với hình áo khoác và trải nghiệm Inspect the Form",caption:"Giao diện khám phá sản phẩm PHAM-001 — desktop",rightsVerified:true},
+   {src:"/portfolio/pham-home-mobile-hires.webp",alt:"Ảnh chụp trang chủ PHAM trên màn hình điện thoại",caption:"Trang chủ PHAM — giao diện điện thoại",rightsVerified:true},
+   {src:"/portfolio/pham-product-mobile-hires.webp",alt:"Ảnh chụp trang PHAM-001 trên điện thoại",caption:"Trang sản phẩm PHAM-001 — giao diện điện thoại",rightsVerified:true}
   ],
-  artwork:"pham",updatedLabel:"Giao diện thực tế · 21/10/2026"
+  artwork:"pham",updatedLabel:"Giao diện thực tế · 29/10/2026"
  },
  {
   slug:"econith",title:"ECONITH",kicker:"NGHIÊN CỨU / PHÂN TÍCH ĐỊNH LƯỢNG",category:"Nghiên cứu công nghệ",

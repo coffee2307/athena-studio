@@ -38,6 +38,10 @@ import "@/app/athena-world-editorial.css";
 import "@/app/black-velocity.css";
 import "@/app/black-velocity-cinematic.css";
 import "@/app/auto-showroom-minimal.css";
+import "@/app/project-editorial-v2.css";
+import "@/app/project-article-v3.css";
+import "@/app/template-compact-v3.css";
+import "@/app/project-layout-v4.css";
 
 export const metadata: Metadata = {
   ...createMetadata(),

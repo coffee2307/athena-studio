@@ -46,23 +46,29 @@ test("Animated mobile navigation traps focus, locks document scroll, closes with
 
 test("Portfolio presents real PHAM screenshots but never public repository links",async({page})=>{
  await page.goto("/projects/pham");
- await expect(page.locator(".agency-project-gallery .agency-gallery-item")).toHaveCount(4);
- await expect(page.locator(".agency-project-gallery img").first()).toHaveAttribute("src",/pham-desktop/);
- await expect(page.getByRole("link",{name:/Xem website dự án/})).toHaveAttribute("href","https://phamofficial.com/");
+ await expect(page.locator(".ae-article-gallery .ae-article-figure")).toHaveCount(4);
+ await expect(page.locator(".ae-article-gallery img").first()).toHaveAttribute("src",/pham-home-hires/);
+ await expect(page.getByRole("link",{name:/Truy cập website dự án/})).toHaveAttribute("href","https://phamofficial.com/");
  await expect(page.locator("main")).not.toContainText("Mở repository gốc");
  expect(await page.locator("main a[href*='github.com']").count()).toBe(0);
  await page.goto("/projects/econith");
- await expect(page.locator(".agency-gallery-awaiting")).toBeVisible();
- await expect(page.locator(".agency-project-gallery")).toHaveCount(0);
+ await expect(page.locator(".ae-article-no-image")).toBeVisible();
+ await expect(page.locator(".ae-article-gallery")).toHaveCount(0);
  expect(await page.locator("main a[href*='github.com']").count()).toBe(0);
 });
 
-test("Footer and contact shortcuts expose phone, email, WhatsApp and Zalo links",async({page})=>{
+test("Footer and contact shortcuts expose phone, email, WhatsApp and Zalo links",async({page,isMobile})=>{
  await page.goto("/");
  await expect(page.locator(".agency-footer-contact a[href='tel:+84965747147']")).toBeVisible();
  await expect(page.locator(".agency-footer-contact a[href='mailto:coffee2307@gmail.com']")).toBeVisible();
  await expect(page.locator(".agency-footer-column a[href='/legal/service-policy']")).toBeVisible();
  const dock=page.getByRole("navigation",{name:"Liên hệ nhanh"});
+ if(isMobile){
+  const toggle=dock.locator(".agency-contact-toggle");
+  await expect(toggle).toHaveAttribute("aria-expanded","false");
+  await toggle.click();
+  await expect(toggle).toHaveAttribute("aria-expanded","true");
+ }
  await expect(dock.getByRole("link",{name:/Gọi điện/})).toHaveAttribute("href","tel:+84965747147");
  await expect(dock.getByRole("link",{name:/WhatsApp/})).toHaveAttribute("href","https://wa.me/84965747147");
  await expect(dock.getByRole("link",{name:/Zalo/})).toHaveAttribute("href","https://zalo.me/0965747147");
@@ -97,9 +103,17 @@ test("Realistic legal disclosure covers providers, ownership, retention uncertai
  await expect(page.locator(".legal-content")).toContainText("bàn giao");
 });
 
-test("Sign-in and sign-up routes stay honest and closed until secure identity release",async({page})=>{
- await page.goto("/login");
- await expect(page.locator("body")).toContainText(/chưa|tạm|khả dụng|kích hoạt|chưa sẵn sàng/i);
- await page.goto("/signup");
- await expect(page.locator("body")).toContainText(/chưa|tạm|khả dụng|kích hoạt|chưa sẵn sàng/i);
+test("Authentication follows verified identity configuration without inventing login access",async({page})=>{
+ for(const route of ["/login","/signup"]){
+  await page.goto(route);
+  await expect(page.locator("h1")).toBeVisible();
+  const fields=page.locator('input[type="email"]');
+  if(await fields.count()){
+   await expect(fields.first()).toBeVisible();
+   // Identity is configured in this environment; the test must never submit credentials.
+  }else{
+   await expect(page.locator(".auth-unavailable")).toBeVisible();
+   await expect(page.locator(".auth-unavailable")).toContainText(/chưa được kích hoạt|chưa thể đăng ký|chưa tiếp nhận đăng ký/i);
+  }
+ }
 });

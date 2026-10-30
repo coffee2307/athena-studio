@@ -57,7 +57,7 @@ export function WorldSpecialHome({slug,world,extra,addToCart}:Props){
  </main>;
  if(slug==="live-concert")return <main className="signature-site signature-concert" id="world-main">
   <section className="signature-concert-hero"><div className="signature-concert-noise"><Shot slug={slug} n={1} alt="Sân khấu âm nhạc đêm" priority/></div><div className="signature-concert-poster"><span>THE SOUND IS LIVE / THE NIGHT IS OURS</span><h1>NEON<br/><em>LIVE!</em></h1><div className="signature-concert-headline"><span>ONE NIGHT.<br/>ALL ENERGY.</span><Link href={root+"/contact"}>ĐĂNG KÝ QUAN TÂM VÉ ↗</Link></div></div><span className="signature-concert-side">LOUDER / FASTER / TOGETHER</span></section>
-  <div className="signature-concert-ticker"><span>LIVE MUSIC</span><span>✳</span><span>NEW SOUND</span><span>✳</span><span>ALL NIGHT</span><span>✳</span><span>LIVE MUSIC</span></div>
+  <div className="signature-concert-ticker"><span>LIVE MUSIC</span><span>·</span><span>NEW SOUND</span><span>·</span><span>ALL NIGHT</span><span>·</span><span>LIVE MUSIC</span></div>
   <section className="signature-concert-lineup"><div className="signature-concert-intro"><small>01 / THE PROGRAM</small><h2>THE<br/>LINE-UP.</h2></div><div>{work.map((s,i)=><Link href={root+"/work/"+(i+1)} key={s.title}><span>0{i+1}</span><strong>{s.title}</strong><small>{s.text}</small><span>↗</span></Link>)}</div></section><section className="signature-concert-cta"><div><span>THIS IS A CONCEPT EVENT</span><h2>ARE YOU<br/>IN?</h2></div><Link href={root+"/contact"}>XEM LUỒNG ĐẶT VÉ MẪU ↗</Link></section><Endcap slug={slug} world={world} extra={extra}/>
  </main>;
  if(slug==="team-intranet")return <main className="signature-site signature-intranet" id="world-main">

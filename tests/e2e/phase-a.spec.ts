@@ -17,6 +17,12 @@ test("Các nút liên hệ luôn là đường dẫn thật và header có số 
  await page.goto("/");
  const dock=page.getByRole("navigation",{name:"Liên hệ nhanh"});
  await expect(dock.locator("a")).toHaveCount(3);
+ if(isMobile){
+  const toggle=dock.locator(".agency-contact-toggle");
+  await expect(toggle).toHaveAttribute("aria-expanded","false");
+  await toggle.click();
+  await expect(toggle).toHaveAttribute("aria-expanded","true");
+ }
  for(const [pattern,target] of [[/Gọi điện/,"tel:+84965747147"],[/WhatsApp/,"https://wa.me/84965747147"],[/Zalo/,"https://zalo.me/0965747147"]] as const){
   const link=dock.getByRole("link",{name:pattern});
   await expect(link).toBeVisible();

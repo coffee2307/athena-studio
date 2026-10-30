@@ -1,22 +1,28 @@
+import Image from "next/image";
 import Link from "next/link";
 import {TemplateGallery} from "@/components/templates/TemplateGallery";
 import {templates,templateIndustries,templateStyles} from "@/lib/templates";
 
 export const metadata={
  title:"Thư viện mẫu website | Athena Studio",
- description:"Trải nghiệm các mẫu website tương tác do Athena thiết kế, xem trước trên nhiều thiết bị và chọn hướng phù hợp cho thương hiệu."
+ description:"Khám phá các website mẫu tương tác theo ngành nghề, phong cách và trải nghiệm. Xem trước trực tiếp trước khi thiết kế riêng."
 };
 
 export default function TemplatesPage(){
- return <div className="templates-page">
-  <section className="templates-intro">
-   <div className="templates-intro-top"><span>ATHENA STUDIO / WEB DESIGN</span><span>THE DESIGN LIBRARY — 2026</span></div>
-   <div className="templates-intro-grid">
-    <div><p className="templates-intro-label"><span aria-hidden="true">✳</span> BỘ SƯU TẬP GIAO DIỆN</p><h1>Chọn cảm hứng.<br/><em>Tạo bản sắc riêng.</em></h1></div>
-    <div className="templates-intro-aside"><span className="templates-intro-number">{String(templates.length).padStart(2,"0")}<small>WEBSITE CONCEPTS</small></span><p>Mỗi mẫu là một website demo có thể truy cập, cuộn trang và thử tương tác. Khám phá phong cách, xem phạm vi triển khai và hình dung phiên bản dành riêng cho doanh nghiệp của bạn.</p><Link href="/contact?service=web-development">Trao đổi về dự án <span aria-hidden="true">↗</span></Link></div>
-   </div>
-   <div className="templates-intro-bottom"><span>KHÁM PHÁ THEO LĨNH VỰC & PHONG CÁCH</span><span>CUỘN ĐỂ XEM BỘ SƯU TẬP ↓</span></div>
-  </section>
+ return <div className="templates-page dna-library-page">
+  <section className="dna-library-hero"><div className="container dna-library-intro">
+    <div className="dna-library-copy">
+     <p className="dna-eyebrow">ATHENA / WEBSITE COLLECTION</p>
+     <h1>Chọn cảm hứng.<br/><em>Tạo chất riêng.</em></h1>
+     <p>Khám phá {templates.length} hướng thiết kế có website demo thật. Mỗi mẫu là điểm xuất phát — giao diện cuối cùng được tạo theo bản sắc của bạn.</p>
+     <div className="dna-library-actions"><a className="dna-button dna-button-primary" href="#template-collection">Khám phá mẫu</a><Link className="dna-button dna-button-quiet" href="/contact?service=web-development">Trao đổi ý tưởng</Link></div>
+    </div>
+    <div className="dna-library-gallery" aria-label="Ảnh giao diện từ hai website mẫu của Athena">
+     <div className="dna-library-frame dna-library-frame-main"><div className="dna-library-frame-top"><i/><i/><i/><span>creative / preview</span></div><div className="dna-library-frame-media"><Image src="/template-previews/creative-studio.jpg" alt="Ảnh chụp website mẫu Creative Studio" fill priority sizes="(max-width:760px) 82vw, 45vw" style={{objectFit:"contain",objectPosition:"center top"}}/></div></div>
+     <div className="dna-library-frame dna-library-frame-side"><div className="dna-library-frame-top"><i/><i/><i/><span>pet / preview</span></div><div className="dna-library-frame-media"><Image src="/template-previews/pet-store.jpg" alt="Ảnh chụp website mẫu Pet Store" fill sizes="(max-width:760px) 35vw, 20vw" style={{objectFit:"contain",objectPosition:"center top"}}/></div></div>
+     <div className="dna-library-stamp">{String(templates.length).padStart(2,"0")} <span>WEBSITE<br/>CONCEPTS</span></div>
+    </div>
+  </div></section>
   <TemplateGallery templates={templates} industries={templateIndustries} styles={templateStyles}/>
- </div>
+ </div>;
 }

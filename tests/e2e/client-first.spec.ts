@@ -1,19 +1,18 @@
 import {test,expect} from "@playwright/test";
 
-test("A customer can identify a need and find the matching service without reading the company story",async({page})=>{
+test("A customer can identify a need and explore three authentic services without a text wall",async({page})=>{
  await page.goto("/");
- await expect(page.getByRole("heading",{level:1})).toContainText("Website chưa hiệu quả?");
- const shortcuts=page.locator(".client-quick-nav a");
- await expect(shortcuts).toHaveCount(3);
- await expect(shortcuts.nth(0)).toHaveAttribute("href","/services/web-development");
- await expect(shortcuts.nth(1)).toHaveAttribute("href","/services/website-care");
- await expect(shortcuts.nth(2)).toHaveAttribute("href","/services/ai-integration");
- await expect(page.locator(".client-solution-row")).toHaveCount(3);
- await expect(page.getByRole("link",{name:/Bắt đầu dự án/})).toHaveAttribute("href","/start");
- await expect(page.locator(".client-lab-band")).toContainText("chưa được mở bán");
+ await expect(page.getByRole("heading",{level:1})).toContainText("Ý tưởng của bạn");
+ const cards=page.locator(".dna-services-grid-home .dna-service-card");
+ await expect(cards).toHaveCount(3);
+ await expect(cards.nth(0)).toContainText("Thiết kế website");
+ await expect(cards.nth(1)).toContainText("Chăm sóc website");
+ await expect(cards.nth(2)).toContainText("Tích hợp AI");
+ await expect(page.locator(".dna-home-hero a[href='/start']")).toBeVisible();
+ await expect(page.locator(".dna-product-lab")).toContainText("chưa mở bán");
  await expect(page.locator("#website-mau")).toContainText("Một phong cách riêng");
  await expect(page.locator("#website-mau .home-demo-card")).toHaveCount(4);
- await page.locator(".client-quick-nav a").nth(1).click();
+ await cards.nth(1).locator(".dna-service-cta").click();
  await expect(page).toHaveURL(/\/services\/website-care$/);
 });
 
@@ -39,7 +38,7 @@ test("Vietnamese display typography uses a single locally bundled family without
   await document.fonts.load('italic 400 36px "Be Vietnam Pro"','Đặng Nguyễn ễ ệ ứ ự');
   const footer=document.querySelector(".agency-footer-cta h2 span");
   const italics=document.querySelector(".page-hero h1 em");
-  const h1=document.querySelector(".client-hero-copy h1");
+  const h1=document.querySelector(".dna-home-hero-copy h1");
   const footerStyle=footer?getComputedStyle(footer):null;
   const h1Style=h1?getComputedStyle(h1):null;
   const chars="Hãy cùng tạo điều khác biệt. Đặng Nguyễn ễ ệ ứ ự";
@@ -66,10 +65,10 @@ test("Vietnamese display typography uses a single locally bundled family without
 
 test("Solutions and service detail show concrete deliverables, not unverified outcomes",async({page})=>{
  await page.goto("/services");
- await expect(page.getByRole("heading",{level:1})).toContainText("Bạn cần giải quyết");
- await expect(page.locator(".service-solution-grid .client-solution-card")).toHaveCount(3);
- await expect(page.locator(".service-solution-grid")).toContainText("PHẠM VI CÓ THỂ BÀN GIAO");
- await expect(page.locator(".client-lab-band")).toContainText("NGHIÊN CỨU, CHƯA MỞ BÁN");
- await page.getByRole("link",{name:/Trình bày nhu cầu/}).click();
- await expect(page).toHaveURL(/\/contact$/);
+ await expect(page.getByRole("heading",{level:1})).toContainText("Chọn điều bạn");
+ await expect(page.locator(".dna-services-grid-catalog .dna-service-card")).toHaveCount(3);
+ await expect(page.locator(".dna-services-grid-catalog")).toContainText("Thiết kế website");
+ await expect(page.locator(".dna-lab-notice")).toContainText("chưa mở bán");
+ await page.getByRole("link",{name:"Gửi yêu cầu",exact:true}).click();
+ await expect(page).toHaveURL(/\/start$/);
 });

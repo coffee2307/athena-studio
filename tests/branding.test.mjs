@@ -26,14 +26,14 @@ test("generated favicon preserves official owl path vectors",async()=>{
 test("core UI copy and accessibility language are Vietnamese",async()=>{
  const home=await readFile(src("app/page.tsx"),"utf8");
  const layout=await readFile(src("app/layout.tsx"),"utf8");
- assert.match(home,/Website chưa hiệu quả/);
+ assert.match(home,/Ý tưởng của bạn/);
  assert.match(layout,/html lang="vi"/);
- assert.match(home,/DỊCH VỤ CHO DOANH NGHIỆP/);
- assert.match(home,/Hướng xử lý cụ thể/);
- assert.match(home,/className="client-solution-list"/);
- assert.match(home,/PHÙ HỢP KHI/);
- assert.match(home,/ĐẦU RA DỰ KIẾN/);
- assert.match(home,/Product Lab và SitePulse chưa được mở bán/);
+ assert.match(home,/CREATIVE ENGINEERING STUDIO/);
+ assert.match(home,/Ba hướng giải quyết/);
+ assert.match(home,/AthenaServiceShowcase/);
+ assert.match(home,/dna-services-grid|AthenaServiceShowcase/);
+ assert.match(home,/Bắt đầu dự án/);
+ assert.match(home,/Product Lab và SitePulse hiện ở giai đoạn nghiên cứu, chưa mở bán/);
  assert.match(home,/HomeTemplateShowcase/);
  assert.doesNotMatch(home,/không phải danh sách hợp đồng khách hàng Athena/);
 });

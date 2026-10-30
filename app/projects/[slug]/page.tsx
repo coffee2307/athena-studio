@@ -1,64 +1,94 @@
 import Link from "next/link";
 import {notFound} from "next/navigation";
 import {publicProjects,getProjectBySlug} from "@/data/projects";
-import {ProjectArtwork} from "@/components/portfolio/ProjectArtwork";
 import {ProjectGallery} from "@/components/portfolio/ProjectGallery";
-import {ProjectCard} from "@/components/portfolio/ProjectCard";
-import {Icon} from "@/components/ui/Icon";
+import {ProjectArtwork} from "@/components/portfolio/ProjectArtwork";
 import {createMetadata} from "@/lib/metadata";
 
 type Props={params:Promise<{slug:string}>};
+const sections=[
+ {id:"tong-quan",label:"Tổng quan"},
+ {id:"boi-canh",label:"Bối cảnh & mục tiêu"},
+ {id:"huong-giai-quyet",label:"Hướng triển khai"},
+ {id:"chuc-nang",label:"Phạm vi thực hiện"},
+ {id:"giao-dien",label:"Hình ảnh giao diện"},
+ {id:"hien-trang",label:"Hiện trạng & giới hạn"},
+ {id:"du-an-khac",label:"Dự án liên quan"}
+] as const;
 export function generateStaticParams(){return publicProjects.map(p=>({slug:p.slug}));}
 export async function generateMetadata({params}:Props){
- const {slug}=await params;const p=getProjectBySlug(slug);
- return p?createMetadata(p.title+" — Giao diện và tính năng",p.summary,`/projects/${p.slug}`):createMetadata("Không tìm thấy dự án");
+ const {slug}=await params;
+ const p=getProjectBySlug(slug);
+ return p?createMetadata(p.title+" | Hồ sơ dự án Athena",p.summary,`/projects/${p.slug}`):createMetadata("Không tìm thấy dự án");
 }
-export default async function CaseStudy({params}:Props){
+
+export default async function ProjectArticle({params}:Props){
  const {slug}=await params;
  const p=getProjectBySlug(slug);
  if(!p)notFound();
- const others=publicProjects.filter(x=>x.slug!==p.slug);
- return <div className="page-shell case-detail agency-case-detail">
-  <section className="case-detail-hero"><div className="container">
-   <Link href="/projects" className="case-back"><Icon name="arrow-right" size={17} className="agency-back-icon"/> Tất cả dự án</Link>
-   <div className="case-detail-title"><div><p className="page-kicker"><span className="eyebrow-dot"/> {p.kicker}</p>
-    <h1>{p.title}<span>.</span></h1><p>{p.summary}</p></div>
-    <div className="case-detail-number">{p.kind==="research"?"NGHIÊN CỨU CÔNG NGHỆ":"THIẾT KẾ SẢN PHẨM"}</div>
-   </div>
-   <ProjectArtwork project={p}/>
-   {!p.gallery.length&&<p className="art-disclaimer">Hình minh họa định hướng thiết kế.</p>}
-  </div></section>
-  <section className="page-section agency-case-story"><div className="container">
-   <div className="case-facts">
-    <div><span>LĨNH VỰC</span><strong>{p.category}</strong></div>
-    <div><span>CHUYÊN MÔN</span><strong>{p.technologies.slice(0,2).join(" · ")}</strong></div>
-   </div>
-   <div className="agency-case-section-title">
-    <p className="section-index"><span className="index-circle">01</span> TRẢI NGHIỆM KHÁCH HÀNG CÓ THỂ XEM</p>
-    <h2>Khám phá sản phẩm.<br/><span>Từ bài toán đến trải nghiệm.</span></h2>
-    <p>{p.gallery.length?"Những màn hình và thành phần trải nghiệm được lựa chọn để giới thiệu dự án.":"Các hướng thiết kế và năng lực đang được xây dựng trong dự án."}</p>
-   </div>
-   <ProjectGallery project={p}/>
-   <div className="agency-case-section-title agency-case-functional">
-    <p className="section-index"><span className="index-circle">02</span> HẠNG MỤC VÀ CHỨC NĂNG</p>
-    <h2>Những gì dự án <span>tập trung xây dựng.</span></h2>
-   </div>
-   <div className="agency-case-feature-grid">{p.activities.map((a,i)=><div key={a}><span>{String(i+1).padStart(2,"0")}</span><h3>{a}</h3></div>)}</div>
-   <div className="case-story">
-    <div className="case-story-row"><p>03 / BỐI CẢNH</p><div><h2>Bài toán ban đầu.</h2><p>{p.introduction}</p></div></div>
-    <div className="case-story-row"><p>04 / THÁCH THỨC</p><div><h2>Vấn đề cần giải quyết.</h2><p>{p.challenge}</p></div></div>
-    <div className="case-story-row"><p>05 / GIẢI PHÁP</p><div><h2>Hướng triển khai.</h2><p>{p.approach}</p><div className="case-tags">{p.technologies.map(t=><span key={t}>{t}</span>)}</div></div></div>
-    <div className="case-story-row"><p>06 / TÌNH TRẠNG</p><div><h2>Đã có gì để xem?</h2><p>{p.outcome}</p></div></div>
-   </div>
-   <div className="agency-case-actions">
-    {p.websiteUrl&&<a href={p.websiteUrl} target="_blank" rel="noopener noreferrer" className="agency-outline-cta">Xem website dự án <Icon name="arrow-up-right" size={18}/></a>}
-    <Link className="agency-outline-cta" href="/contact">Thảo luận một dự án tương tự <Icon name="arrow-right" size={18}/></Link>
-   </div>
-  </div></section>
-  {others.length>0&&<section className="page-section more-cases"><div className="container">
-   <div className="case-section-head"><div><p className="section-index"><span className="index-circle">07</span> DỰ ÁN KHÁC</p>
-    <h2>Khám phá <span>thêm công việc.</span></h2></div></div>
-   <div className="portfolio-grid">{others.map((item,i)=><ProjectCard key={item.slug} project={item} index={i}/>)}</div>
-  </div></section>}
+ const others=publicProjects.filter(item=>item.slug!==p.slug);
+ const hasScreenshots=p.gallery.some(item=>item.rightsVerified);
+ return <div className="ae-article">
+  <div className="ae-article-shell">
+   <aside className="ae-article-navigation" aria-label="Mục lục hồ sơ dự án">
+    <div className="ae-article-sticky">
+     <Link className="ae-article-back" href="/projects">← Tất cả dự án</Link>
+     <span className="ae-article-nav-title">Mục lục</span>
+     <nav aria-label="Đi đến từng mục"><ol>{sections.map((s,i)=><li key={s.id}><a href={"#"+s.id}><small>{String(i+1).padStart(2,"0")}</small>{s.label}</a></li>)}</ol></nav>
+     <p className="ae-article-nav-note">Hồ sơ công khai. Không bao gồm mã nguồn hay thông tin nội bộ của dự án.</p>
+    </div>
+   </aside>
+   <article className="ae-article-body">
+    <div className="ae-article-breadcrumb"><Link href="/projects">Dự án</Link><span aria-hidden="true">/</span><span>{p.title}</span></div>
+    <header className="ae-article-header">
+     <span className="ae-article-eyebrow">{p.kicker}</span>
+     <h1>{p.title}</h1>
+     <p className="ae-article-summary">{p.summary}</p>
+     <div className="ae-article-meta"><span>Hồ sơ dự án do người sáng lập thực hiện</span><span>{p.updatedLabel}</span></div>
+    </header>
+    <figure className="ae-article-feature">
+     <ProjectArtwork project={p}/>
+     <figcaption>{hasScreenshots?"Hình đại diện: giao diện dự án đã được phép công bố.":"Đồ họa nhận diện dự án; không phải ảnh chụp sản phẩm."}<span>ATHENA / {p.slug.toUpperCase()}</span></figcaption>
+    </figure>
+    <details className="ae-article-mobile-toc"><summary>Mục lục bài viết <span aria-hidden="true">⌄</span></summary><nav aria-label="Mục lục trên điện thoại">{sections.map((s,i)=><a key={s.id} href={"#"+s.id}>{String(i+1).padStart(2,"0")} — {s.label}</a>)}</nav></details>
+    <section id="tong-quan" className="ae-article-section">
+     <h2>Tổng quan</h2>
+     <p>{p.introduction}</p>
+     <p className="ae-article-notice">Dự án được thực hiện bởi người sáng lập Athena Studio. Không phải dự án hợp đồng hoặc sản phẩm đã bàn giao cho khách hàng.</p>
+    </section>
+    <section id="boi-canh" className="ae-article-section"><h2>Bối cảnh & mục tiêu</h2><p>{p.challenge}</p></section>
+    <section id="huong-giai-quyet" className="ae-article-section"><h2>Hướng triển khai</h2><p>{p.approach}</p></section>
+    <section id="chuc-nang" className="ae-article-section">
+     <h2>Phạm vi thực hiện</h2>
+     <p>Những hạng mục và trải nghiệm được mô tả trong hồ sơ công khai:</p>
+     <ul className="ae-article-activity-list">{p.activities.map(a=><li key={a}>{a}</li>)}</ul>
+     <h3>Công nghệ và lĩnh vực</h3>
+     <div className="ae-article-tech">{p.technologies.map(t=><span key={t}>{t}</span>)}</div>
+    </section>
+    <section id="giao-dien" className="ae-article-section ae-article-images">
+     <h2>Hình ảnh giao diện</h2>
+     <p>{hasScreenshots?"Các ảnh chụp từ giao diện đã được phép công bố, giữ nguyên tỷ lệ để không che khuất chữ, điều hướng hoặc sản phẩm. Chọn ảnh để mở ở kích thước gốc.":"Dự án chưa có ảnh giao diện được xác minh và duyệt công khai. Không sử dụng hình ảnh minh họa thay cho kết quả giao diện thực tế."}</p>
+     <ProjectGallery project={p}/>
+    </section>
+    <section id="hien-trang" className="ae-article-section">
+     <h2>Hiện trạng & giới hạn</h2><p>{p.outcome}</p>
+     <p className="ae-article-notice">Các mô tả được cập nhật theo tiến độ dự án; không ngụ ý đã có hợp đồng, doanh thu hoặc hiệu quả kinh doanh/đầu tư được kiểm chứng.</p>
+     {p.websiteUrl&&<a className="ae-article-website" href={p.websiteUrl} target="_blank" rel="noopener noreferrer">Truy cập website dự án <span aria-hidden="true">↗</span></a>}
+    </section>
+    <section id="du-an-khac" className="ae-article-section ae-article-related"><h2>Dự án liên quan</h2><ul>{others.map(item=><li key={item.slug}><Link href={"/projects/"+item.slug}><strong>{item.title}</strong><span>{item.category}</span><span aria-hidden="true">↗</span></Link></li>)}</ul></section>
+    <footer className="ae-article-end"><Link href="/projects">← Quay lại thư viện dự án</Link><Link href="/contact">Liên hệ Athena ↗</Link></footer>
+   </article>
+   <aside className="ae-article-info" aria-label="Thông tin nhanh"><div className="ae-article-sticky">
+    <span className="ae-article-info-label">THÔNG TIN DỰ ÁN</span>
+    <dl>
+     <div><dt>Tên</dt><dd>{p.title}</dd></div>
+     <div><dt>Lĩnh vực</dt><dd>{p.category}</dd></div>
+     <div><dt>Thực hiện</dt><dd>Người sáng lập Athena</dd></div>
+     <div><dt>Tình trạng</dt><dd>{p.status}</dd></div>
+     <div><dt>Minh họa</dt><dd>{hasScreenshots?"Ảnh giao diện đã duyệt":"Chưa công bố ảnh giao diện"}</dd></div>
+    </dl>
+    {p.websiteUrl&&<a href={p.websiteUrl} target="_blank" rel="noopener noreferrer">Website chính thức ↗</a>}
+   </div></aside>
+  </div>
  </div>;
 }

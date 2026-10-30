@@ -1,12 +1,13 @@
 import {test,expect} from "@playwright/test";
 
-test("Zalo and WhatsApp use white icon surfaces without changing their SVG colors",async({page})=>{
+test("Zalo and WhatsApp preserve branded icons and accessible surfaces",async({page,isMobile})=>{
  await page.goto("/");
  const nav=page.getByRole("navigation",{name:"Liên hệ nhanh"});
+ if(isMobile)await nav.getByRole("button",{name:/Liên hệ/}).click();
  for(const name of [/Zalo/,/WhatsApp/]){
   const link=nav.getByRole("link",{name});
   await expect(link).toBeVisible();
-  await expect(link).toHaveCSS("background-color","rgb(255, 255, 255)");
+  await expect(link).toHaveCSS("background-color",isMobile?"rgb(244, 247, 241)":"rgb(255, 255, 255)");
   await expect(link.locator("img")).toBeVisible();
  }
 });
@@ -44,9 +45,9 @@ test("Desktop services dropdown closes on outside click, Escape, and navigation"
 
 test("Home hierarchy remains usable without horizontal overflow at mobile width",async({page})=>{
  await page.goto("/");
- await expect(page.locator(".client-quick-nav")).toBeVisible();
+ await expect(page.locator(".dna-home-hero")).toBeVisible();
  await expect(page.locator(".athena-editorial-seam")).toContainText("Kiểm thử trước bàn giao");
- await expect(page.locator(".client-solution-row")).toHaveCount(3);
+ await expect(page.locator(".dna-services-grid-home .dna-service-card")).toHaveCount(3);
  const width=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,client:document.documentElement.clientWidth}));
  expect(width.scroll).toBeLessThanOrEqual(width.client+1);
 });

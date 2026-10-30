@@ -1,0 +1,90 @@
+/* Athena case study articles: documentation-first, no popups */
+.ae-article{--article-ink:#242825;--article-line:#dfe3db;--article-paper:#fff;--article-muted:#5f665e;background:var(--article-paper);color:var(--article-ink);font-family:"Be Vietnam Pro",sans-serif;min-height:100vh}
+.ae-article *{box-sizing:border-box}
+.ae-article-shell{max-width:1540px;margin:0 auto;padding:clamp(22px,3vw,45px) clamp(18px,3vw,46px) 115px;display:grid;grid-template-columns:minmax(172px,205px) minmax(0,790px) minmax(155px,205px);justify-content:center;column-gap:clamp(22px,3.4vw,62px);align-items:start}
+.ae-article a:focus-visible,.ae-article summary:focus-visible{outline:3px solid #647c67;outline-offset:4px}
+.ae-article-sticky{position:sticky;top:96px}
+.ae-article-navigation,.ae-article-info{font-size:12px;line-height:1.6}
+.ae-article-back{display:block;padding-bottom:22px;margin-bottom:21px;border-bottom:1px solid var(--article-line);font-weight:750;text-decoration:none}
+.ae-article-nav-title,.ae-article-info-label{font-size:11px;font-weight:800;letter-spacing:.06em;display:block;margin-bottom:17px;color:#313932}
+.ae-article-navigation nav ol{list-style:none;margin:0;padding:0;border-left:1px solid var(--article-line)}
+.ae-article-navigation nav li a{display:flex;align-items:baseline;gap:10px;margin:0;padding:10px 8px 10px 15px;color:#536056;font-size:12px;line-height:1.5;text-decoration:none;border-left:2px solid transparent;transform:translateX(-1px)}
+.ae-article-navigation nav li a:hover,.ae-article-navigation nav li a:focus-visible{color:#121a13;border-left-color:#242825;background:#f5f7f3}
+.ae-article-navigation nav li small{font-size:10px;color:#7d877b}
+.ae-article-nav-note{padding-top:23px;margin:25px 0 0;border-top:1px solid var(--article-line);font-size:11px;line-height:1.8;color:#6d756a}
+.ae-article-body{min-width:0}
+.ae-article-breadcrumb{display:flex;gap:11px;color:#717b70;font-size:11px;align-items:center;padding-bottom:19px;border-bottom:1px solid var(--article-line)}
+.ae-article-breadcrumb a{color:#35563c;text-decoration:underline;text-underline-offset:4px}
+.ae-article-header{padding:45px 0 28px;border-bottom:1px solid var(--article-line)}
+.ae-article-eyebrow{font-size:10px;font-weight:750;letter-spacing:.13em;color:#657464;text-transform:uppercase}
+.ae-article h1{font-family:"Be Vietnam Pro",sans-serif;font-size:clamp(46px,6vw,80px);font-weight:750;letter-spacing:-.065em;line-height:1.12;margin:16px 0 24px;overflow-wrap:anywhere}
+.ae-article-summary{font-size:clamp(16px,1.6vw,19px);line-height:1.8;color:#424c42;margin:0;max-width:760px}
+.ae-article-meta{display:flex;gap:15px 23px;flex-wrap:wrap;font-size:11px;color:#798177;padding-top:24px;line-height:1.7}
+.ae-article-info dl{margin:0;border-top:1px solid var(--article-line)}
+.ae-article-info dl div{border-bottom:1px solid var(--article-line);padding:12px 0}
+.ae-article-info dt{color:#7a8379;font-size:10px;margin:0 0 5px}
+.ae-article-info dd{margin:0;font-size:12px;color:#313a32;font-weight:700;line-height:1.55}
+.ae-article-info a{display:inline-flex;justify-content:space-between;border-bottom:1px solid #627166;padding:16px 0;margin-top:18px;text-decoration:none;font-weight:750}
+.ae-article-section{padding:48px 0 38px;border-bottom:1px solid var(--article-line);scroll-margin-top:96px}
+.ae-article-section h2{font-family:"Be Vietnam Pro",sans-serif;font-size:clamp(25px,3vw,34px);font-weight:730;line-height:1.28;letter-spacing:-.045em;margin:0 0 24px;color:#242b24}
+.ae-article-section h3{font-size:18px;letter-spacing:-.025em;margin:27px 0 12px}
+.ae-article-section p{font-size:14px;line-height:2.02;letter-spacing:0;color:#424d44;margin:0 0 20px}
+.ae-article-section p:last-child{margin-bottom:0}
+.ae-article-section .ae-article-notice{background:#f4f6f1;padding:15px 19px;border-left:3px solid #9aa998;color:#59645a;font-size:12px;line-height:1.85;margin-top:22px}
+.ae-article-activity-list{margin:22px 0 0;padding:0;list-style:none;border-top:1px solid var(--article-line)}
+.ae-article-activity-list li{font-size:14px;line-height:1.75;padding:15px 15px 15px 30px;border-bottom:1px solid var(--article-line);position:relative}
+.ae-article-activity-list li:before{content:"";width:6px;height:6px;background:#698271;position:absolute;left:10px;top:25px}
+.ae-article-tech{display:flex;flex-wrap:wrap;gap:9px}
+.ae-article-tech span{background:#f3f5f0;border:1px solid #dce2d9;padding:8px 12px;font-size:11px}
+.ae-article-gallery{display:grid;grid-template-columns:1fr;gap:36px;margin-top:29px}
+.ae-article-figure{margin:0;min-width:0}
+.ae-article-image-link{display:flex;justify-content:center;align-items:flex-start;position:relative;max-width:100%;width:100%;background:#eff1ed;padding:12px;box-shadow:inset 0 0 0 1px #e0e3db}
+.ae-article-figure.is-portrait .ae-article-image-link{max-width:440px}
+.ae-article-image-link img{display:block;width:auto;max-width:100%;height:auto;object-fit:contain;border:1px solid #d9ddd5;image-rendering:auto}
+.ae-article-figure.is-landscape .ae-article-image-link img{width:100%;height:auto}
+.ae-article-figure figcaption{margin-top:12px;font-size:11px;line-height:1.75;color:#626b61}
+.ae-article-figure figcaption strong{color:#303a31;margin-right:5px}
+.ae-article-figure figcaption span{white-space:nowrap;color:#315b3e;text-decoration:underline;text-underline-offset:3px}
+.ae-article-no-image{display:flex;align-items:flex-start;gap:17px;padding:20px;border:1px solid #d9e1d8;background:#f4f7f2}
+.ae-article-no-image h3{margin:0 0 5px;font-size:15px}
+.ae-article-no-image p{font-size:12px;margin:0;line-height:1.9}
+.ae-article-website{display:flex;justify-content:space-between;gap:15px;width:max-content;max-width:100%;color:#244d32;font-size:13px;border-bottom:1px solid #657b6c;padding:15px 0;text-decoration:none}
+.ae-article-related ul{margin:0;padding:0;list-style:none}
+.ae-article-related li{border-top:1px solid var(--article-line)}
+.ae-article-related li:last-child{border-bottom:1px solid var(--article-line)}
+.ae-article-related li a{display:grid;grid-template-columns:1fr 1fr 24px;gap:16px;padding:19px 0;align-items:center;text-decoration:none}
+.ae-article-related li strong{font-size:15px}.ae-article-related li span{font-size:11px;color:#6f766d}
+.ae-article-end{display:flex;gap:16px;justify-content:space-between;font-size:12px;font-weight:750;padding-top:28px}
+.ae-article-mobile-toc{display:none}
+@media(max-width:1170px){
+ .ae-article-shell{grid-template-columns:minmax(145px,190px) minmax(0,820px);column-gap:clamp(22px,4vw,52px)}
+ .ae-article-info{display:none}
+}
+@media(max-width:760px){
+ .ae-article-shell{display:block;padding:22px 20px 76px}
+ .ae-article-navigation,.ae-article-info{display:none}
+ .ae-article-header{padding:29px 0 25px}
+ .ae-article h1{font-size:clamp(43px,12vw,64px)}
+ .ae-article-summary{font-size:15px;line-height:1.8}
+ .ae-article-meta{font-size:10px;padding-top:16px}
+ .ae-article-mobile-toc{display:block;margin:22px 0 4px;border:1px solid #d7ddd4;background:#f8faf6}
+ .ae-article-mobile-toc summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:14px 16px;font-size:12px;font-weight:750}
+ .ae-article-mobile-toc summary::-webkit-details-marker{display:none}
+ .ae-article-mobile-toc summary span{font-size:18px;line-height:1}
+ .ae-article-mobile-toc nav{padding:4px 15px 14px;display:grid;gap:0}
+ .ae-article-mobile-toc nav a{font-size:12px;display:block;padding:11px 0;color:#3d5540;border-top:1px solid #dde4db;text-decoration:none}
+ .ae-article-section{padding:37px 0 31px;scroll-margin-top:80px}
+ .ae-article-section h2{font-size:25px;margin-bottom:16px}
+ .ae-article-section p{font-size:13px;line-height:1.92}
+ .ae-article-gallery{gap:28px}
+ .ae-article-image-link{padding:7px}
+ .ae-article-figure.is-portrait .ae-article-image-link{max-width:320px}
+ .ae-article-figure figcaption{font-size:10px}
+ .ae-article-related li a{grid-template-columns:1fr 22px;gap:5px 15px}
+ .ae-article-related li span{grid-column:1;grid-row:2}
+ .ae-article-related li span:last-child{grid-column:2;grid-row:1/3}
+}
+
+/* Accessibility: reference metadata is small text; maintain WCAG AA contrast. */
+.ae-article-navigation nav li small,.ae-article-breadcrumb,.ae-article-breadcrumb>span,.ae-article-meta,.ae-article-meta span,.ae-article-info dt{color:#475447}
+.ae-article-figure figcaption{color:#475447}
