@@ -316,10 +316,12 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
      camera.lookAt(target);
     }
     const frame=projectFrame();
+    if(canvas){
     canvas.dataset.modelFrame=[frame.left,frame.right,frame.bottom,frame.top].map(v=>v.toFixed(4)).join(",");
     canvas.dataset.modelSafe=String(frame.left>=-safeX-.02&&frame.right<=safeX+.02&&frame.bottom>=-safeBottom-.02&&frame.top<=safeTop+.02);
     canvas.dataset.modelCenterX=((frame.left+frame.right)/2).toFixed(4);
     canvas.dataset.modelPivot="car-bounds-center";
+    }
    }
    // As the camera reaches the rear, dim broad studio-panel reflections so
    // black bodywork stays graphite instead of turning silver from that angle.
