@@ -26,7 +26,7 @@ const output=resolve(process.cwd(),input.out);
 const rel=relative(await realpath(root),await canonical(output));
 if(rel===""||(!isAbsolute(rel)&&rel!==".."&&!rel.startsWith(".."+sep)))throw Error("Đường dẫn --out phải nằm ngoài repository Athena.");
 try{const existing=await lstat(output);if(existing.isSymbolicLink()||!existing.isDirectory()||(await readdir(output)).length)throw Error("Thư mục đích đã tồn tại, là symlink hoặc không trống.");}catch(error){if(error?.code!=="ENOENT")throw error;}
-await mawait mkdir(dirname(output),{recursive:true});
+await mkdir(dirname(output),{recursive:true});
 const source=join(templatesRoot,template.slug);
 await cp(source,output,{recursive:true,errorOnExist:true,force:false,filter:path=>!/(^|[\\/])(?:node_modules|\.next|\.git|test-results|\.qa)(?:[\\/]|$)/.test(path)});
 const sitePath=join(output,"src/data/site.json");
