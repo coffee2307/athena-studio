@@ -103,14 +103,14 @@
 .dna-eyebrow{display:flex;gap:9px;align-items:center;font-size:10px!important;line-height:1.5;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:#555e53}
 .dna-dot{width:9px;height:9px;background:var(--dna-coral);border-radius:50%}
 .dna-home-hero-copy{position:relative;z-index:1}
-.dna-home-hero h1,.dna-services-hero h1{font-weight:700;letter-spacing:-.075em;line-height:1.045;font-size:clamp(49px,5.7vw,92px);margin:27px 0 25px}
+.dna-home-hero h1,.dna-services-hero h1{font-weight:700;letter-spacing:-.045em;line-height:1.13;font-size:clamp(49px,5.7vw,92px);margin:27px 0 25px}
 .dna-home-hero h1 em,.dna-services-hero h1 em,.dna-section-intro h2 em{font-family:"Noto Serif",Georgia,serif;font-weight:400;font-style:italic;letter-spacing:-.067em}
 .dna-home-hero-copy>p:not(.dna-eyebrow){max-width:500px;line-height:1.78;color:#465047;font-size:clamp(14px,1.13vw,17px);margin:0}
 .dna-hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin:32px 0 18px}
 .dna-button{display:inline-flex;align-items:center;justify-content:center;gap:18px;text-decoration:none;font:700 12px "Be Vietnam Pro",sans-serif;line-height:1.4;min-height:49px;padding:14px 22px;border:1px solid transparent;border-radius:15px;transition:transform .22s ease,background-color .22s ease,color .22s ease,box-shadow .22s ease}
 .dna-button:hover{transform:translateY(-2px)}
 .dna-button:focus-visible,.dna-service-cta:focus-visible,.dna-hero-art a:focus-visible{outline:3px solid var(--dna-coral);outline-offset:3px}
-.dna-button-primary{background:var(--dna-coral);color:#fff;box-shadow:0 8px 22px #d95f422b}
+.dna-button-primary{background:var(--dna-coral);color:#121412;box-shadow:0 8px 22px #d95f422b}
 .dna-button-primary:hover{background:#b8442a;color:#fff;box-shadow:0 12px 30px #d95f4236}
 .dna-button-secondary{background:#191b1b;color:#fff}
 .dna-button-secondary:hover{background:#414743;color:#fff}
@@ -150,7 +150,7 @@
 .dna-care-pulse{width:8px;height:8px;background:#709b79;border-radius:50%;box-shadow:0 0 0 5px #86b39321}
 .dna-care-lines{margin:15px 0 12px;border-top:1px solid #e2e7df}
 .dna-care-lines>div{display:grid;grid-template-columns:29px 1fr 24px;align-items:center;gap:9px;padding:9px 0;border-bottom:1px solid #e2e7df}
-.dna-care-index{color:#8d988d;font:700 10px "Be Vietnam Pro",sans-serif}
+.dna-care-index{color:#4d6050;font:700 10px "Be Vietnam Pro",sans-serif}
 .dna-care-lines strong{font-size:13px;font-weight:700;color:#263629}
 .dna-care-mark{color:#54835e;font-size:15px;font-weight:800;text-align:center}
 .dna-care-pending{color:#ab8062}
@@ -160,8 +160,8 @@
 .dna-ai-node{flex:1 1 0;min-width:0;max-width:110px;display:flex;flex-direction:column;justify-content:center;gap:9px;aspect-ratio:.86;padding:10px;border:1px solid #7b99915b;border-radius:16px;background:#f3f5ef10;color:#e9f2ed;text-align:center}
 .dna-ai-node small{font-size:8px;letter-spacing:.06em;color:#cbd9d3;white-space:nowrap}
 .dna-ai-node strong{font-size:clamp(11px,1vw,15px);line-height:1.35}
-.dna-ai-node-focus{background:#d95f42;color:#fff;border-color:#e68e77;transform:translateY(-9px);box-shadow:0 13px 30px #0003}
-.dna-ai-node-focus small{color:#fff}
+.dna-ai-node-focus{background:#d95f42;color:#121412;border-color:#e68e77;transform:translateY(-9px);box-shadow:0 13px 30px #0003}
+.dna-ai-node-focus small{color:#121412}
 .dna-ai-graph>span{color:#c1d2c9;font-size:18px}
 .dna-scene-ai .dna-scene-tag{background:#f4f7f1;color:#304039}
 .dna-service-body{display:flex;flex-direction:column;flex:1;padding:clamp(18px,2vw,28px)}
