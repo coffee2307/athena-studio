@@ -1,0 +1,25 @@
+{
+  "title": "BLACK VELOCITY / AUTO SHOWROOM — FROZEN",
+  "status": "protected",
+  "approved_on": "2026-10-30",
+  "scope": "/template-demos/auto-showroom — cinematic McLaren P1",
+  "policy": "No future visual, performance, 3D, scroll, camera, asset or layout edits without explicit new user approval. Changes are blocked by the integrity unit test until a formally approved unlock.",
+  "verified": [
+    "Mobile 320/390/428 responsive smoke",
+    "Drag→scroll does not unwind yaw",
+    "Model bounded in safe frame",
+    "No mobile +/- zoom controls",
+    "CC BY vecarz attribution retained"
+  ],
+  "file_blobs": {
+    "components/immersive/McLarenShowroomScene.tsx": "965ad855aebdb6a9addf3a7d6f307772a62b4055",
+    "components/immersive/AutoCinematicTrack.tsx": "96737e5a6c7651a204f17c9b028302e50c6986a6",
+    "components/immersive/WorldScene.tsx": "fc03a3697c95ffa5bd3338abee6a08f79ec7cb70",
+    "components/templates/WorldImmersiveHome.tsx": "38cc81ef07350ae3ec3e9ec13eb943eacc3dda62",
+    "components/immersive/McLarenLoadingUI.tsx": "af519307a1bb3879491b5e1c639f2407c3343271",
+    "app/black-velocity-cinematic.css": "716a71292bfe3f49fdf35b3e53ca9a1e1d5db38f",
+    "app/black-velocity.css": "6741c818651ada85c4f1108e43e63cfcaf3e8fa2",
+    "app/auto-showroom-minimal.css": "ac552a141cf3b2992b52cda29a59bd4df13acbd5",
+    "public/models/mclaren.glb": "b2a0e4fa38b928afdcebd01e3b31ab2dd0558e73"
+  }
+}
