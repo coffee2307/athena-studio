@@ -43,6 +43,11 @@ for(const {width,height} of [{width:320,height:680},{width:390,height:844},{widt
    expect(layout.navBottom).toBeLessThan(height-12);
    expect(layout.safe).toBe("true");
    expect(layout.overflow).toBeLessThanOrEqual(2);
+   await expect(canvas).toHaveAttribute("data-layout-rig","mobile-centered");
+   const modelCenter=Number(await canvas.getAttribute("data-model-center-x"));
+   expect(Math.abs(modelCenter)).toBeLessThanOrEqual(.005);
+   const [minX,maxX]=(await canvas.getAttribute("data-model-frame")||"").split(",").map(Number);
+   expect(Math.abs((minX+maxX)/2)).toBeLessThanOrEqual(.005);
   }
  });
 }
