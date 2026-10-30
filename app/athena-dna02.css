@@ -132,3 +132,52 @@
  .dna02-preview-window,.ae-projects .dna02-work-art .dna-work-art-card,.dna02-journey-stop,.dna02-about-options button,.dna02-journey-progress span{transition:none!important}
  .dna02-journey-scene,.dna02-about-focus,.dna02-pulse .athena-product-window-body{animation:none!important}
 }
+
+/* Editorial first folds / process and about: meaningful playable visual in the viewport. */
+.agency-process-page .page-hero,.agency-about-page .page-hero{padding:clamp(50px,5.5vw,95px) 0;background:#f5f4ef}
+.agency-process-page .page-hero:after,.agency-about-page .page-hero:after{display:none}
+.agency-process-page .page-hero>.container,.agency-about-page .page-hero>.container{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.92fr);gap:14px clamp(22px,5vw,78px);align-items:start}
+.agency-process-page .page-hero .page-kicker,.agency-about-page .page-hero .page-kicker{grid-column:1}
+.agency-process-page .page-hero h1,.agency-about-page .page-hero h1{grid-column:1;font-size:clamp(48px,5.4vw,84px);line-height:1.11;letter-spacing:-.065em;margin:12px 0 19px}
+.agency-process-page .page-hero .page-hero-lede,.agency-about-page .page-hero .page-hero-lede{grid-column:1;display:flex;flex-direction:column;align-items:flex-start;gap:19px;margin:0}
+.agency-process-page .page-hero .page-hero-lede>.dna02-hero-lede,.agency-about-page .page-hero .page-hero-lede>.dna02-hero-lede{width:100%}
+.dna02-hero-lede>p{font-size:clamp(14px,1.35vw,17px)!important;line-height:1.7!important;color:#48534b!important;max-width:45ch}
+.dna02-hero-lede details{margin-top:10px;border-top:1px solid #d1d7cf;padding-top:4px;max-width:550px}
+.dna02-hero-lede summary{display:inline-flex;align-items:center;min-height:40px;font-size:12px;font-weight:750;color:#35513d;cursor:pointer}
+.dna02-hero-lede details p{font-size:12px!important;line-height:1.8!important;color:#59635a!important;margin:6px 0 12px!important}
+.dna02-page-hero-scene{grid-column:2;grid-row:1/span 3;align-self:center;background:#dbe2d8;color:#233029;border-radius:22px;padding:clamp(19px,2.7vw,32px);min-height:340px;display:flex;flex-direction:column;position:relative;isolation:isolate;overflow:hidden}
+.dna02-page-hero-about{background:#e9dcd0}
+.dna02-page-scene-head{display:flex;justify-content:space-between;gap:12px;font-size:9px;letter-spacing:.12em;font-weight:800;color:#495d4d}
+.dna02-page-scene-art{position:relative;flex:1;min-height:175px;display:grid;place-items:center;isolation:isolate}
+.dna02-page-scene-art i{position:absolute;border:1px solid #708875;width:180px;height:155px;border-radius:49%;transform:rotate(-34deg);box-shadow:0 0 0 32px #7088751c,0 0 0 73px #70887513}
+.dna02-page-scene-art strong{position:relative;z-index:2;letter-spacing:-.09em;font:600 clamp(64px,8.2vw,120px)/1 "Noto Serif",serif;white-space:nowrap}
+.dna02-page-scene-art>span{position:absolute;top:13%;right:23%;font-size:36px;color:#d95f42;transform:rotate(-18deg)}
+.dna02-page-hero-about .dna02-page-scene-art strong{font-size:clamp(40px,5.6vw,83px);font-family:"Be Vietnam Pro",sans-serif;text-transform:uppercase;font-weight:800}
+.dna02-page-scene-options{display:flex;gap:7px;position:relative;z-index:2}
+.dna02-page-scene-options button{min-width:0;flex:1 1 0;min-height:44px;border:1px solid #aab8a6;background:#f7f8f4;border-radius:10px;color:#253a29;cursor:pointer;font:750 clamp(9px,.9vw,12px)/1.4 "Be Vietnam Pro",sans-serif;padding:7px 6px;transition:background .24s,transform .24s}
+.dna02-page-scene-options button[aria-pressed=true]{background:#232e27;color:#fff;border-color:#232e27}
+.dna02-page-scene-options button:hover{transform:translateY(-2px)}
+.dna02-page-scene-options button:focus-visible{outline:3px solid #d95f42;outline-offset:3px}
+.dna02-page-scene-caption{font-size:11px!important;line-height:1.5!important;color:#46584a!important;font-weight:650!important;margin:12px 0 0!important}
+@media(max-width:760px){
+ .agency-process-page .page-hero,.agency-about-page .page-hero{padding:30px 0 32px}
+ .agency-process-page .page-hero>.container,.agency-about-page .page-hero>.container{display:flex;flex-direction:column;gap:13px}
+ .agency-process-page .page-hero h1,.agency-about-page .page-hero h1{font-size:clamp(37px,9.1vw,52px);line-height:1.15;letter-spacing:-.06em;margin:0}
+ .agency-process-page .page-hero .page-hero-lede,.agency-about-page .page-hero .page-hero-lede{gap:10px}
+ .dna02-hero-lede>p{font-size:13px!important;line-height:1.6!important}
+ .dna02-hero-lede details{margin-top:3px}
+ .dna02-hero-lede summary{font-size:11px;min-height:37px}
+ .agency-process-page .page-hero .pill-link,.agency-about-page .page-hero .pill-link{min-height:44px;padding:12px 18px;font-size:11px}
+ .dna02-page-hero-scene{width:100%;min-height:0;height:245px;flex:none;padding:14px 17px;border-radius:16px}
+ .dna02-page-scene-art{min-height:100px}
+ .dna02-page-scene-art i{width:100px;height:90px;box-shadow:0 0 0 17px #7088751c,0 0 0 32px #70887512}
+ .dna02-page-scene-art strong{font-size:67px}
+ .dna02-page-hero-about .dna02-page-scene-art strong{font-size:52px}
+ .dna02-page-scene-art>span{font-size:21px;right:28%}
+ .dna02-page-scene-head{font-size:8px}
+ .dna02-page-scene-caption{font-size:10px!important;margin-top:9px!important}
+ .dna02-preview-stage .dna-hero-art-bottom{padding-right:91px;bottom:0}
+ .dna02-preview-stage .dna-hero-art-bottom a{white-space:normal;text-align:left;line-height:1.5}
+}
+@media(max-width:355px){.dna02-page-hero-scene{height:235px}.dna02-page-scene-options button{font-size:9px;padding:5px}}
+@media(prefers-reduced-motion:reduce){.dna02-page-scene-options button{transition:none!important}}
