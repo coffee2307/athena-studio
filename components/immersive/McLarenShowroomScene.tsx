@@ -312,10 +312,12 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    else camera.position.lerp(wanted,lerp);
    camera.lookAt(target);
    // The camera radius is fixed during dragging. No per-frame auto-fit/dolly.
-   canvas.dataset.cameraRadius=radius.toFixed(4);
-   canvas.dataset.cameraYaw=cameraYaw.toFixed(5);
-   canvas.dataset.cameraMode=manualMode?"manual":yawTransition?"transition":"scroll";
-   canvas.dataset.cameraTargetYaw=scrollOrbit.toFixed(5);
+   if(canvas){
+    canvas.dataset.cameraRadius=radius.toFixed(4);
+    canvas.dataset.cameraYaw=cameraYaw.toFixed(5);
+    canvas.dataset.cameraMode=manualMode?"manual":yawTransition?"transition":"scroll";
+    canvas.dataset.cameraTargetYaw=scrollOrbit.toFixed(5);
+   }
    // Projection is diagnostic, never a hidden second camera controller.
    if(frameCorners.length){
     car.updateMatrixWorld(true);camera.updateMatrixWorld(true);
@@ -326,9 +328,11 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
      bottom=Math.min(bottom,p.y);top=Math.max(top,p.y);
     }
     const safeX=isMobile?.96:.90,safeTop=isMobile?.82:.87,safeBottom=isMobile?.80:.85;
-    canvas.dataset.modelFrame=[left,right,bottom,top].map(v=>v.toFixed(4)).join(",");
-    canvas.dataset.modelSafe=String(left>=-safeX&&right<=safeX&&bottom>=-safeBottom&&top<=safeTop);
-    canvas.dataset.modelPivot="car-bounds-center";
+    if(canvas){
+     canvas.dataset.modelFrame=[left,right,bottom,top].map(v=>v.toFixed(4)).join(",");
+     canvas.dataset.modelSafe=String(left>=-safeX&&right<=safeX&&bottom>=-safeBottom&&top<=safeTop);
+     canvas.dataset.modelPivot="car-bounds-center";
+    }
    }
    // As the camera reaches the rear, dim broad studio-panel reflections so
    // black bodywork stays graphite instead of turning silver from that angle.
