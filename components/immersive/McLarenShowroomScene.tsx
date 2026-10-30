@@ -188,7 +188,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   let queuedContinuation=false;
   let drag=false,dragPointer:number|null=null,previousX=0;
   let cameraYaw=.72,manualMode=false,manualRadius=0,manualHeight=0;
-  let yawTransition:{start:number;end:number;startP:number;endP:number;direction:1|-1;radius:number;height:number}|null=null;
+  let yawTransition:{start:number;end:number;startP:number;endP:number;direction:1|-1;radius:number;height:number;startedAt:number}|null=null;
   let currentMode=modeRef.current,currentProgress=0,goalProgress=0;
   // Desktop renders on every requested RAF during active interaction, not at an
   // artificial 38 FPS ceiling. Mobile retains a 30 FPS cap and pixel budget.
@@ -299,13 +299,14 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
     }else if(yawTransition){
      const tx=yawTransition;
      const phase=clamp01((currentProgress-tx.startP)/Math.max(.00001,Math.abs(tx.endP-tx.startP))*(tx.direction));
-     const fraction=smooth(phase);
+     // Prevent an oversized wheel delta from completing an orbit in one GPU frame.
+     const fraction=smooth(Math.min(phase,clamp01((now-tx.startedAt)/420)));
      cameraYaw=scrollTransition(tx.start,tx.end,tx.startP,tx.endP,currentProgress);
      radius=THREE.MathUtils.lerp(tx.radius,authoredRadius,fraction);
      height=THREE.MathUtils.lerp(tx.height,scrollHeight,fraction);
-     if(phase>=.9999)yawTransition=null;
+     if(fraction>=.9999)yawTransition=null;
     }else cameraYaw=scrollOrbit;
-   }else cameraYaw=wrapOrbit(heroOrbit+currentProgress*.20+(manualMode?cameraYaw-heroOrbit:0));
+   }else if(!manualMode)cameraYaw=wrapOrbit(heroOrbit+currentProgress*.20);
    const wanted=new THREE.Vector3(Math.cos(cameraYaw)*radius,height,Math.sin(cameraYaw)*radius);
    if(scrollRootId)camera.position.copy(wanted);
    else camera.position.lerp(wanted,lerp);
@@ -347,7 +348,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    }
    if(!drawn){drawn=true;finishLoading();setPercent(100);setStatus("ready");}
    const movement=Math.abs(currentMode-modeRef.current)+Math.abs(currentProgress-goalProgress)+(scrollRootId?0:camera.position.distanceTo(wanted));
-   if(movement>.006){queuedContinuation=true;schedule();}
+   if(movement>.006||yawTransition){queuedContinuation=true;schedule();}
   }
 
   const pointerDown=(event:PointerEvent)=>{
@@ -387,7 +388,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
       start:cameraYaw,end:CHAPTER_YAWS[destination],
       startP:previous,endP:endpoint,direction,
       radius:Math.hypot(camera.position.x,camera.position.z),
-      height:camera.position.y
+      height:camera.position.y,startedAt:performance.now()
      };
      manualMode=false;
     }
