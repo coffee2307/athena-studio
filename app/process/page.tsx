@@ -1,3 +1,4 @@
+import {StudioHeroScene} from "@/components/experience/StudioHeroScene";
 import {ProcessJourney} from "@/components/experience/ProcessJourney";
 import Link from "next/link";
 import {Icon} from "@/components/ui/Icon";
@@ -29,9 +30,10 @@ export default function WorkflowPage(){
   <section className="page-hero"><div className="container">
    <p className="page-kicker"><span className="eyebrow-dot"/> CÁCH ATHENA HỢP TÁC</p>
    <h1>Làm rõ đầu ra<br/><em>trước khi bắt đầu.</em></h1>
-   <div className="page-hero-lede"><p>Để khách biết mình cần chuẩn bị gì, nhận gì ở từng bước và khi nào cần đưa ra quyết định. Quy trình thực tế sẽ được điều chỉnh theo quy mô dự án và thỏa thuận.</p>
+   <div className="page-hero-lede"><div className="dna02-hero-lede"><p>Từ yêu cầu đến bàn giao: sáu bước rõ ràng, luôn biết điều gì diễn ra tiếp theo.</p><details><summary>Đọc thêm về cách làm</summary><p>Để khách biết mình cần chuẩn bị gì, nhận gì ở từng bước và khi nào cần đưa ra quyết định. Quy trình thực tế sẽ được điều chỉnh theo quy mô dự án và thỏa thuận.</p></details></div>
     <Link className="pill-link pill-dark" href="/contact">Mô tả nhu cầu <Icon name="arrow-up-right" size={19}/></Link></div>
-  </div></section>
+  <StudioHeroScene mode="process"/>
+ </div></section>
   <section className="page-section"><div className="container">
    <div className="agency-process-head"><p className="section-index"><span className="index-circle">01</span> TỪ YÊU CẦU ĐẾN BÀN GIAO</p>
     <h2>Sáu bước để công việc <span>có thể kiểm soát.</span></h2></div>
