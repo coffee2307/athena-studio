@@ -64,7 +64,7 @@ test("Footer and contact shortcuts expose phone, email, WhatsApp and Zalo links"
  await expect(page.locator(".agency-footer-column a[href='/legal/service-policy']")).toBeVisible();
  const dock=page.getByRole("navigation",{name:"Liên hệ nhanh"});
  if(isMobile){
-  const toggle=dock.getByRole("button",{name:/Liên hệ/});
+  const toggle=dock.locator(".agency-contact-toggle");
   await expect(toggle).toHaveAttribute("aria-expanded","false");
   await toggle.click();
   await expect(toggle).toHaveAttribute("aria-expanded","true");
