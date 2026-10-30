@@ -126,7 +126,8 @@ test("BLACK VELOCITY mobile camera radius and stage remain fixed during drag and
   samples.push(Number(await canvas.getAttribute("data-camera-radius")));
  }
  for(const recorded of samples)expect(Math.abs(recorded-radius)).toBeLessThan(.001);
- for(const [index,expected] of [.72,1.42,2.12,3.82,5.42].entries()){
+ for(const index of [1,2,3,4,0]){
+  const expected=[.72,1.42,2.12,3.82,5.42][index];
   await page.evaluate(p=>{
    const track=document.getElementById("bv-cinematic-track");
    if(!track)return;const rect=track.getBoundingClientRect();
