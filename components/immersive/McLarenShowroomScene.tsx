@@ -139,7 +139,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   // Aim slightly left of the car on wide showroom screens so the model sits
   // to the right of the editorial headline. Other journeys keep their pose.
   const heroWide=scrollRootId==="bv-cinematic-track"&&!isMobile&&window.innerWidth>=1100;
-  const target=new THREE.Vector3(heroWide?-1.58:scrollRootId&&!isMobile?-.28:0,.68,0);
+  const target=new THREE.Vector3(0,.68,0);
   canvas.dataset.cameraTargetX=target.x.toFixed(2);
   camera.position.set(5.6,2.5,5.8);camera.lookAt(target);
 
@@ -213,7 +213,10 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    canvas.dataset.renderDpr=effectiveDpr.toFixed(3);
    canvas.dataset.renderPixels=String(Math.round(rect.width*rect.height*effectiveDpr*effectiveDpr));
    canvas.dataset.renderQuality=softwareRenderer?"compatibility":"adaptive-high";
-   camera.aspect=rect.width/rect.height;camera.updateProjectionMatrix();
+   camera.aspect=rect.width/rect.height;
+   // Editorial lens shift, not an off-axis physical orbit target.
+   camera.filmOffset=heroWide?-4:0;
+   camera.updateProjectionMatrix();
   };
   function draw(now:number){
    request=0;
@@ -251,9 +254,9 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    // Reversing scroll settles on the same pose once the glide catches up.
    const journeyAngles=[.72,1.42,2.12,3.82,5.42];
    const journeyElevations=[2.35,1.98,2.48,2.18,2.55];
-   const journeyDistances=[1,.93,.71,.88,1.04];
-   const journeyX=[0,.55,-.12,-.44,0];
-   const journeyZ=[0,-.2,.04,.18,0];
+   const journeyDistances=[1,1.04,.94,1.02,1.08];
+   const journeyX=[0,.12,-.08,-.12,0];
+   const journeyZ=[0,-.08,.02,.08,0];
    const journeyYaw=[0,-.09,.06,.11,0];
    const position=clamp(currentProgress*4,0,4);
    const lower=Math.min(3,Math.floor(position));
