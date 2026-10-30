@@ -13,7 +13,7 @@ export function ProcessJourney({stages}:{stages:Stage[]}){
   </div>
   <div className="dna02-journey-scene" key={item.n} aria-live="polite" aria-atomic="true">
    <div className="dna02-journey-top"><span>ATHENA / WORKFLOW</span><span>{item.n} — 06</span></div>
-   <div className="dna02-journey-visual" aria-hidden="true"><span className="dna02-journey-halo"/><strong>{item.n}</strong><span className="dna02-journey-spark">✳</span></div>
+   <div className="dna02-journey-visual" aria-hidden="true"><span className="dna02-journey-halo"/><strong>{item.n}</strong><span className="dna02-journey-spark">+</span></div>
    <p className="dna02-overline">BƯỚC {item.n} / ĐẦU RA RÕ RÀNG</p>
    <h3>{item.title}</h3><p className="dna02-journey-summary">{item.description}</p>
    <div className="dna02-journey-deliverable"><span>KHÁCH HÀNG NHẬN</span><strong>{item.deliverable}</strong></div>
