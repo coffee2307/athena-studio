@@ -293,6 +293,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    else camera.position.lerp(wanted,lerp);
    camera.lookAt(target);
    // Fit the normalized car into an explicit viewport-safe frame at every pose.
+   let frameFitted=false;
    if(frameCorners.length){
     car.updateMatrixWorld(true);
     const projectFrame=()=>{
@@ -310,6 +311,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
      const f=projectFrame();
      const ratio=Math.max(1,-f.left/safeX,f.right/safeX,-f.bottom/safeBottom,f.top/safeTop);
      if(!Number.isFinite(ratio)||ratio<1.005)break;
+     frameFitted=true;
      camera.position.sub(target).multiplyScalar(Math.min(1.9,ratio*1.035)).add(target);
      camera.lookAt(target);
     }
@@ -336,7 +338,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
     }
    }
    if(!drawn){drawn=true;finishLoading();setPercent(100);setStatus("ready");}
-   const movement=Math.abs(currentMode-modeRef.current)+Math.abs(currentProgress-goalProgress)+Math.abs(turn-dragTurn)+camera.position.distanceTo(wanted);
+   const movement=Math.abs(currentMode-modeRef.current)+Math.abs(currentProgress-goalProgress)+Math.abs(turn-dragTurn)+(frameFitted?0:camera.position.distanceTo(wanted));
    if(movement>.006){queuedContinuation=true;schedule();}
   }
 
