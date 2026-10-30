@@ -66,3 +66,33 @@ test("BLACK VELOCITY drag many times then scroll without counter-rotation",async
  expect(Math.abs(angle-after)).toBeLessThan(.001);
  await expect(canvas).toHaveAttribute("data-model-safe","true");
 });
+
+
+test("BLACK VELOCITY desktop drag is immediate and does not unwind on scroll",async({page})=>{
+ test.setTimeout(110000);
+ await page.setViewportSize({width:1440,height:900});
+ await page.goto(route,{waitUntil:"domcontentloaded"});
+ if(!(await supportsWebGL2(page)))return;
+ const canvas=page.locator(".ix-auto-3d-canvas");
+ await expect(canvas).toHaveAttribute("data-renderer","ready",{timeout:55000});
+ const b=await canvas.boundingBox();
+ if(!b)throw Error("No desktop WebGL surface");
+ const y=b.y+b.height*.52,start=b.x+b.width*.66,end=b.x+b.width*.90;
+ for(let i=0;i<9;i++){
+  await page.mouse.move(start,y);await page.mouse.down();
+  for(let j=1;j<=10;j++)await page.mouse.move(start+(end-start)*j/10,y);
+  await page.mouse.up();
+ }
+ const before=Number(await canvas.getAttribute("data-orbit-offset"));
+ expect(Math.abs(before)).toBeGreaterThan(.01);
+ expect(Math.abs(before)).toBeLessThanOrEqual(Math.PI+.001);
+ await page.evaluate(()=>{
+  const track=document.getElementById("bv-cinematic-track");
+  if(!track)return;
+  const r=track.getBoundingClientRect();
+  scrollTo({top:scrollY+r.top+Math.max(1,r.height-innerHeight)*.51,behavior:"instant"});
+ });
+ await page.waitForFunction(()=>Number(document.querySelector(".ix-auto-3d-canvas")?.getAttribute("data-scroll-progress"))>.40,{timeout:30000});
+ expect(Math.abs(Number(await canvas.getAttribute("data-orbit-offset"))-before)).toBeLessThan(.001);
+ await expect(canvas).toHaveAttribute("data-model-safe","true");
+});
