@@ -106,3 +106,41 @@ test("BLACK VELOCITY desktop drag is immediate and does not unwind on scroll",as
  expect(Math.abs(Math.atan2(Math.sin(after-2.12),Math.cos(after-2.12)))).toBeLessThan(.15);
  await expect(canvas).toHaveAttribute("data-model-safe","true");
 });
+
+test("BLACK VELOCITY mobile camera radius and stage remain fixed during drag and across all chapters",async({page})=>{
+ test.setTimeout(110000);
+ await page.setViewportSize({width:390,height:844});
+ await page.goto(route,{waitUntil:"domcontentloaded"});
+ if(!(await supportsWebGL2(page)))return;
+ const canvas=page.locator(".ix-auto-3d-canvas");
+ await expect(canvas).toHaveAttribute("data-renderer","ready",{timeout:55000});
+ const first=await canvas.boundingBox();
+ if(!first)throw Error("Missing stage");
+ const radius=Number(await canvas.getAttribute("data-camera-radius"));
+ const cx=first.x+first.width*.47,cy=first.y+first.height*.5;
+ const samples:number[]=[];
+ for(let i=0;i<9;i++){
+  await page.mouse.move(cx-110,cy);await page.mouse.down();
+  for(let j=1;j<=10;j++)await page.mouse.move(cx-110+j*22,cy);
+  await page.mouse.up();
+  samples.push(Number(await canvas.getAttribute("data-camera-radius")));
+ }
+ for(const recorded of samples)expect(Math.abs(recorded-radius)).toBeLessThan(.001);
+ for(const [index,expected] of [.72,1.42,2.12,3.82,5.42].entries()){
+  await page.evaluate(p=>{
+   const track=document.getElementById("bv-cinematic-track");
+   if(!track)return;const rect=track.getBoundingClientRect();
+   scrollTo({top:scrollY+rect.top+Math.max(1,rect.height-innerHeight)*p,behavior:"instant"});
+  },index/4);
+  await page.waitForFunction(p=>{
+   const el=document.querySelector(".ix-auto-3d-canvas");
+   return el?.getAttribute("data-camera-mode")==="scroll"&&Math.abs(Number(el.getAttribute("data-scroll-progress"))-p)<.007;
+  },index/4,{timeout:30000});
+  const yaw=Number(await canvas.getAttribute("data-camera-yaw"));
+  expect(Math.abs(Math.atan2(Math.sin(yaw-expected),Math.cos(yaw-expected)))).toBeLessThan(.12);
+  expect(Math.abs(Number(await canvas.getAttribute("data-camera-radius"))-radius)).toBeLessThan(.002);
+  const current=await canvas.boundingBox();
+  expect(Math.abs((current?.height||0)-first.height)).toBeLessThan(1.2);
+  await expect(canvas).toHaveAttribute("data-model-safe","true");
+ }
+});
