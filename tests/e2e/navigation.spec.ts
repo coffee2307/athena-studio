@@ -46,7 +46,7 @@ test("Reduced motion preserves routes and disables reveal hiding",async({page})=
  await page.emulateMedia({reducedMotion:"reduce"});
  await page.goto("/");
  const state=await page.evaluate(()=>({active:document.documentElement.classList.contains("reveal-ready"),
-  animation:getComputedStyle(document.querySelector(".client-hero-copy h1")!).animationDuration}));
+  animation:getComputedStyle(document.querySelector(".dna-home-hero-copy h1")!).animationDuration}));
  expect(state.active).toBe(false);
  expect(parseFloat(state.animation)).toBeLessThanOrEqual(0.05);
  await page.goto("/projects");
