@@ -139,7 +139,11 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
 
   const scene=new THREE.Scene();
   scene.background=new THREE.Color(0x11151a);
-  const camera=new THREE.PerspectiveCamera(34,1,.1,85);
+  // Orthographic mobile product stage: constant apparent size at every yaw.
+  // No perspective dolly or per-frame zoom can be triggered by finger dragging.
+  const camera=isMobile
+   ?new THREE.OrthographicCamera(-2.85,2.85,3.2,-3.2,.1,85)
+   :new THREE.PerspectiveCamera(34,1,.1,85);
   // Aim slightly left of the car on wide showroom screens so the model sits
   // to the right of the editorial headline. Other journeys keep their pose.
   const heroWide=scrollRootId==="bv-cinematic-track"&&!isMobile&&window.innerWidth>=1100;
@@ -221,9 +225,15 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    canvas.dataset.renderDpr=effectiveDpr.toFixed(3);
    canvas.dataset.renderPixels=String(Math.round(rect.width*rect.height*effectiveDpr*effectiveDpr));
    canvas.dataset.renderQuality=softwareRenderer?"compatibility":"adaptive-high";
-   camera.aspect=rect.width/rect.height;
-   // Editorial lens shift, not an off-axis physical orbit target.
-   camera.filmOffset=heroWide?-4:0;
+   if(camera instanceof THREE.PerspectiveCamera){
+    camera.aspect=rect.width/rect.height;
+    camera.filmOffset=heroWide?-4:0;
+   }else{
+    // Constant horizontal world-space framing across portrait phone sizes.
+    const halfWidth=2.95,halfHeight=halfWidth*rect.height/rect.width;
+    camera.left=-halfWidth;camera.right=halfWidth;
+    camera.top=halfHeight;camera.bottom=-halfHeight;
+   }
    camera.updateProjectionMatrix();
   };
   function draw(now:number){
@@ -289,8 +299,8 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    const modeT=modePosition-modeLower;
    const easedMode=modeT*modeT*(3-2*modeT);
    const heroOrbit=angles[modeLower]+(angles[modeLower+1]-angles[modeLower])*easedMode;
-   const baseDistance=Math.max(isMobile?3.55:6.75,(isMobile?3.55:6.75)*.93/Math.max(.60,camera.aspect))*(isMobile?1.01:1);
-   const authoredRadius=baseDistance*(scrollRootId?scrollDistance:1)*(1-clamp(zoomRef.current,-1,2)*(isMobile?.04:.09));
+   const baseDistance=isMobile?8:Math.max(7.0,7.0*.93/Math.max(.60,(camera as THREE.PerspectiveCamera).aspect));
+   const authoredRadius=isMobile?baseDistance:baseDistance*(scrollRootId?scrollDistance:1)*(1-clamp(zoomRef.current,-1,2)*.09);
    let radius=authoredRadius;
    let height=scrollRootId?scrollHeight:(isMobile?2.6:2.42);
    if(scrollRootId){
