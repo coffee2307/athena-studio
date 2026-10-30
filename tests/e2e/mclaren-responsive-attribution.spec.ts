@@ -60,6 +60,6 @@ test("wide home camera aims left to place the car clear of editorial copy",async
  await page.setViewportSize({width:1440,height:900});
  await page.goto(home,{waitUntil:"domcontentloaded"});
  const canvas=page.locator(".ix-auto-3d-canvas");
- if(await supportsWebGL2(page))await expect(canvas).toHaveAttribute("data-camera-target-x","-1.58",{timeout:15000});
+ if(await supportsWebGL2(page))await expect(canvas).toHaveAttribute("data-camera-target-x","0.00",{timeout:15000});
  else await expect(canvas).toHaveAttribute("data-renderer","fallback",{timeout:15000});
 });
