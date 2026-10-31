@@ -1,5 +1,5 @@
 import {notFound} from "next/navigation";
-import {WorldSite} from "@/components/templates/WorldSite";
+import {SovereignDemoRoute} from "@/components/sovereign/SovereignDemoRoute";
 import {getTemplate,templates} from "@/lib/templates";
 import type {Metadata} from "next";
 
@@ -14,5 +14,5 @@ export async function generateMetadata({params}:Props):Promise<Metadata>{
 export default async function TemplateDemoPage({params,searchParams}:Props){
  const [{slug},{embed}]=await Promise.all([params,searchParams]);
  if(!getTemplate(slug))notFound();
- return <WorldSite slug={slug} section="home" embedded={embed==="1"}/>;
+ return <SovereignDemoRoute slug={slug} section="home" embedded={embed==="1"}/>;
 }
