@@ -1,29 +1,12 @@
 "use client";
 
-type Props={
- progress?:number;
- phase?:string;
- slow?:boolean;
- failed?:boolean;
- onFallback?:()=>void;
-};
+type Props={progress?:number;phase?:string;slow?:boolean;failed?:boolean;onFallback?:()=>void;};
 
-/** Lightweight UI that does not import Three.js or initialize WebGL.
- * A static studio backdrop stays available beneath the panel until the first frame. */
-export function McLarenLoadingUI({
- progress=0,phase="Đang chuẩn bị không gian 3D",slow=false,failed=false,onFallback
-}:Props){
+/** Loader visibility follows actual first WebGL frame, not a fabricated percent. */
+export function McLarenLoadingUI({progress=0,slow=false,failed=false,onFallback}:Props){
  const value=Math.max(0,Math.min(99,Math.round(progress)));
- return <div className={"ix-car-load"+(failed?" is-failed":"")} data-model-loading={failed?"failed":"loading"} role="status" aria-live="polite">
-  <div className="ix-car-load-head">
-   <span>McLAREN / VISION GT</span><span>{failed?"CHẾ ĐỘ TĨNH":String(value).padStart(2,"0")+"%"}</span>
-  </div>
-  <div className="ix-car-load-track" role="progressbar" aria-label="Tiến độ tải mô hình McLaren"
-    aria-valuemin={0} aria-valuemax={100} aria-valuenow={failed?0:value}>
-   <span style={{transform:"scaleX("+value/100+")"}}/>
-  </div>
-  <p>{failed?"Không thể mở mô hình 3D trên thiết bị này. Bạn vẫn có thể xem nội dung trên nền studio tĩnh.":phase}</p>
-  {slow&&!failed&&<small>Đang xử lý mô hình và các bề mặt phản chiếu. Bạn vẫn có thể chuyển sang nền tĩnh hoặc xem trang khác.</small>}
-  {onFallback&&<button type="button" onClick={onFallback}>Dùng nền tĩnh <span aria-hidden="true"></span></button>}
+ return <div className={"ix-car-load bv-load-spinner"+(failed?" is-failed":"")} data-model-loading={failed?"failed":"loading"} role="status" aria-live="polite" aria-atomic="true">
+  {!failed?<><span className="bv-spinner-ring" aria-hidden="true"/><strong>Đang tải mô hình McLaren</strong><span className="bv-spinner-description">{slow?"Đang hoàn thiện vật liệu và ánh sáng 3D…":"Đang chuẩn bị trải nghiệm 3D…"}</span><span className="bv-spinner-a11y" role="progressbar" aria-label="Tiến độ tải mô hình McLaren" aria-valuemin={0} aria-valuemax={100} aria-valuenow={value}/></>:
+  <><strong>Không thể hiển thị mô hình 3D</strong><p>Bạn có thể thử tải lại hoặc chuyển sang nền studio tĩnh.</p><div className="bv-spinner-actions"><button type="button" onClick={()=>window.location.reload()}>Thử lại</button>{onFallback&&<button type="button" onClick={onFallback}>Dùng nền tĩnh</button>}</div></>}
  </div>;
 }
