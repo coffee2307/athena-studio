@@ -28,7 +28,7 @@ for(const size of [{name:"mobile",width:390,height:844},{name:"desktop",width:14
    if(meta.images.length===0||meta.images.some(x=>!x.loaded))throw Error("Missing media "+JSON.stringify(meta.images));
    await page.screenshot({path:".qa/athena-21-sovereign/p2-p3/"+slug+"-"+size.name+"-home.png",animations:"disabled",timeout:25000});
    if(size.name==="mobile"){
-    const button=page.getByRole("button",{name:/Mở điều hướng|Mở mục lục|Mở danh mục/i}).first();
+    const button=page.locator("header button[aria-expanded]").first();
     await button.click({timeout:10000});
     if(await button.getAttribute("aria-expanded")!=="true")throw Error("Mobile menu did not open");
     await page.keyboard.press("Escape");
