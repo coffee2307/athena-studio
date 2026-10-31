@@ -12,6 +12,7 @@ import {WorldExperiencePages,isExperienceSection,type ExperienceSection} from "@
 import {WorldImmersiveHome,hasImmersiveHome} from "@/components/templates/WorldImmersiveHome";
 import {WorldSubpageFeature} from "@/components/templates/WorldSubpageFeature";
 import {AutoShowroomSubpages} from "@/components/templates/AutoShowroomSubpages";
+import {WORLD_NAV_IDENTITIES} from "@/data/world-navigation-identities";
 
 export type WorldSection="home"|"work"|"services"|"about"|"contact"|"detail";
 type Props={slug:string;section?:WorldSection;itemIndex?:number;embedded?:boolean};
@@ -20,6 +21,7 @@ function Arrow(){return <span aria-hidden="true">↗</span>;}
 
 export function WorldSite({slug,section="home",itemIndex,embedded=false}:Props){
  const world=copies[slug],extra=worldDetails[slug];
+ const navIdentity=WORLD_NAV_IDENTITIES[slug];
  const [menuOpen,setMenuOpen]=useState(false);
  const [isFramed,setIsFramed]=useState(false);
  const [cart,setCart]=useState(0);
@@ -39,6 +41,12 @@ export function WorldSite({slug,section="home",itemIndex,embedded=false}:Props){
   {id:"contact",label:"Liên hệ",href:root+"/contact"}
  ];
  useEffect(()=>{setMenuOpen(false);setFormState("idle");},[slug,section,itemIndex]);
+ useEffect(()=>{
+  if(!menuOpen)return;
+  const previous=document.body.style.overflow;
+  document.body.style.overflow="hidden";
+  return()=>{document.body.style.overflow=previous;};
+ },[menuOpen]);
  useEffect(()=>{try{setIsFramed(window.self!==window.top)}catch{setIsFramed(true)}},[]);
  useEffect(()=>{try{setCart(Number(window.sessionStorage.getItem("athena-demo-cart-"+slug)||0));}catch{}},[slug]);
  useEffect(()=>{const close=(event:KeyboardEvent)=>{if(event.key==="Escape"){setLightbox(null);setCartOpen(false);setMenuOpen(false);}};window.addEventListener("keydown",close);return()=>window.removeEventListener("keydown",close);},[]);
@@ -113,14 +121,19 @@ export function WorldSite({slug,section="home",itemIndex,embedded=false}:Props){
   </form></section>
   <section className="world-contact-photo"><Image src={img(4)} alt={world.brand+" — không gian minh họa"} fill sizes="100vw"/><div><span>WE WOULD LOVE TO HEAR FROM YOU.</span><strong>{world.brand}</strong></div></section>
  </main>;
- return <div className="world-site" data-world={slug} data-page={section} id="world-top">
+ return <div className="world-site" data-world={slug} data-nav-style={navIdentity?.name??"gallery"} data-nav-open={menuOpen?"true":"false"} data-page={section} id="world-top">
   <div className="world-announcement"><span>{world.eyebrow}</span><span>EXPERIENCE CONCEPT / 2026</span></div>
   <header className="world-header">
    <Link className="world-brand" href={root} aria-label={world.brand+" — Trang chủ"}>{world.brand}</Link>
    <nav className="world-desktop-nav" aria-label={"Điều hướng "+world.brand}>{pages.map(p=><Link key={p.id} href={p.href} scroll={false} onClick={()=>window.scrollTo({top:0,left:0,behavior:"auto"})} aria-current={(section==="detail"?"work":section)===p.id?"page":undefined}>{p.label}</Link>)}</nav>
-   <div className="world-header-actions">{isShop&&<button className="world-cart-button" type="button" onClick={()=>setCartOpen(true)} aria-label={"Mở giỏ hàng với "+cart+" sản phẩm"}>BAG ({cart})</button>}<Link className="world-header-cta" href={root+"/contact"}>{isBooking?"Đặt lịch":"Bắt đầu"} <Arrow/></Link><button className="world-menu-toggle" type="button" aria-expanded={menuOpen} aria-controls={"world-menu-"+slug} aria-label={menuOpen?"Đóng menu":"Mở menu"} onClick={()=>setMenuOpen(!menuOpen)}><span/><span/></button></div>
+   <div className="world-header-actions">{isShop&&<button className="world-cart-button" type="button" onClick={()=>setCartOpen(true)} aria-label={"Mở giỏ hàng với "+cart+" sản phẩm"}>BAG ({cart})</button>}<Link className="world-header-cta" href={root+"/contact"}>{isBooking?"Đặt lịch":"Bắt đầu"}</Link><button className="world-menu-toggle" type="button" aria-expanded={menuOpen} aria-controls={"world-menu-"+slug} aria-label={menuOpen?"Đóng menu "+world.brand:"Mở menu "+world.brand} onClick={()=>setMenuOpen(value=>!value)}><span className="world-toggle-glyph" aria-hidden="true">{navIdentity?.glyph}</span><span className="world-toggle-label">{menuOpen?navIdentity?.closing:navIdentity?.opener}</span></button></div>
   </header>
-  <div className={"world-mobile-nav"+(menuOpen?" is-open":"")} id={"world-menu-"+slug} aria-hidden={!menuOpen}>{pages.map((p,i)=><Link tabIndex={menuOpen?0:-1} key={p.id} href={p.href} scroll={false} onClick={()=>{setMenuOpen(false);window.scrollTo({top:0,left:0,behavior:"auto"});}}><span>0{i+1}</span>{p.label}<Arrow/></Link>)}<div className="world-mobile-nav-bottom"><strong>{world.brand}</strong><span>{extra.slogan}</span></div></div>
+  <button className={"world-nav-scrim"+(menuOpen?" is-open":"")} type="button" tabIndex={menuOpen?0:-1} disabled={!menuOpen} aria-label={"Đóng điều hướng "+world.brand} onClick={()=>setMenuOpen(false)}/>
+  <nav className={"world-mobile-nav"+(menuOpen?" is-open":"")} id={"world-menu-"+slug} aria-label={"Điều hướng mở rộng "+world.brand} aria-hidden={!menuOpen} inert={!menuOpen}>
+   <div className="world-mobile-nav-intro"><span>{navIdentity?.subtitle}</span><strong>{navIdentity?.headline}</strong></div>
+   <div className="world-mobile-nav-links">{pages.map((p,i)=><Link aria-current={(section==="detail"?"work":section)===p.id?"page":undefined} key={p.id} href={p.href} scroll={false} onClick={()=>{setMenuOpen(false);window.scrollTo({top:0,left:0,behavior:"auto"});}}><span className="world-nav-index">0{i+1}</span><span className="world-nav-label">{p.label}</span><span className="world-nav-decoration" aria-hidden="true"/></Link>)}</div>
+   <div className="world-mobile-nav-bottom"><strong>{world.brand}</strong><span>{extra.slogan}</span></div>
+  </nav>
   {section!=="home"&&slug!=="auto-showroom"&&hasImmersiveHome(slug)&&<WorldSubpageFeature slug={slug} section={section}/>}
   {section==="home"?(hasImmersiveHome(slug)?<WorldImmersiveHome slug={slug} world={world} extra={extra}/>:hasSpecializedHomepage(slug)?<WorldSpecialHome slug={slug} world={world} extra={extra} addToCart={addToCart}/>:hasExistingSpecialHome(slug)?<WorldExistingSpecialHome slug={slug} world={world} extra={extra} addToCart={addToCart}/>:hasLegacySpecialHome(slug)?<WorldLegacySpecialHome slug={slug} world={world} extra={extra}/>:home()):slug==="auto-showroom"?<AutoShowroomSubpages section={section} itemIndex={itemIndex} world={world} extra={extra}/>:isExperienceSection(section)?<WorldExperiencePages slug={slug} section={section as ExperienceSection} itemIndex={itemIndex} world={world} extra={extra} addToCart={addToCart}/>:section==="about"?about():contact()}
   <footer className="world-footer"><div className="world-footer-main"><div className="world-footer-identity"><Link href={root}>{world.brand}</Link><p>{extra.slogan}</p></div><div className="world-footer-column"><span>KHÁM PHÁ</span>{pages.slice(0,3).map(p=><Link key={p.id} href={p.href}>{p.label}</Link>)}</div><div className="world-footer-column"><span>THÔNG TIN</span>{pages.slice(3).map(p=><Link key={p.id} href={p.href}>{p.label}</Link>)}<Link href={root+"/work"}>Khám phá nội dung</Link></div><div className="world-footer-column"><span>TRẢI NGHIỆM</span><Link href={root+"/contact"}>Gửi yêu cầu ↗</Link><p>Một dự án website mẫu của Athena Studio. Tất cả chức năng giao dịch chỉ mang tính mô phỏng.</p></div></div><div className="world-footer-bottom"><span>© 2026 {world.brand} — {extra.footerLine}</span><Link href="#world-top">TRỞ LÊN ĐẦU ↑</Link><span>CREATED FOR ATHENA DEMO LIBRARY</span></div></footer>
