@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import {config as fontAwesomeConfig} from "@fortawesome/fontawesome-svg-core";
 import {SiteChrome} from "@/components/layout/SiteChrome";
 import { createMetadata } from "@/lib/metadata";
 // Self-hosted fonts with explicit Vietnamese Unicode coverage (no external font CDN).
@@ -56,6 +57,8 @@ import "@/app/athena-dna03.css";
 import "@/app/black-velocity-mobile-showcase.css";
 import "@/app/template-navigation-identities.css";
 import "@/app/template-world-directions-v2.css";
+
+fontAwesomeConfig.autoAddCss = false;
 
 export const metadata: Metadata = {
   ...createMetadata(),
