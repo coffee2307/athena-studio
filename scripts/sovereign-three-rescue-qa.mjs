@@ -72,6 +72,17 @@ for(const slug of slugs)for(const size of sizes){
     const key=slug==="creative-studio"?"data-sora-visible":slug==="modern-corporate"?"data-north-visible":"data-moc-visible";
     if(await target.getAttribute(key)!=="true")throw Error("IntersectionObserver scroll reveal failed");
    }
+   const prefix=slug==="creative-studio"?"sora":slug==="modern-corporate"?"north":"moc";
+   const ambient=page.locator("[data-"+prefix+"-ambient]").first();
+   if(await ambient.count()){
+    await ambient.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(240);
+    const active=await ambient.getAttribute("data-"+prefix+"-active");
+    if(active!=="true")throw Error("Ambient scene not activated in view: "+prefix);
+    await page.evaluate(()=>window.scrollTo(0,document.body.scrollHeight));
+    await page.waitForTimeout(270);
+    if(await ambient.getAttribute("data-"+prefix+"-active")!=="false")throw Error("Ambient animation not paused offscreen: "+prefix);
+   }
    if(slug==="modern-corporate"){
     await page.locator('button[aria-pressed]').nth(1).click();
     if(await page.locator('button[aria-pressed]').nth(1).getAttribute("aria-pressed")!=="true")throw Error("NORTH topology interaction");
