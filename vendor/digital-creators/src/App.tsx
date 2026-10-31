@@ -2,8 +2,8 @@ import { lazy, Suspense, useEffect, useState, type FormEvent, type ReactNode } f
 import { HashRouter, Link, NavLink, Route, Routes, useLocation } from 'react-router-dom'
 import {
   ArrowDownRight, ArrowRight, ArrowUpRight, BookOpen, Check, Code2, Compass, Film,
-  Globe2, Heart, Lightbulb, Menu, MousePointer2, Palette, Rocket, Send,
-  Shapes, Sparkles, UsersRound, WandSparkles, X, type LucideIcon,
+  Globe2, Heart, Lightbulb, MousePointer2, Palette, Rocket, Send,
+  Shapes, Sparkles, UsersRound, WandSparkles, type LucideIcon,
 } from 'lucide-react'
 import { focusAreas, interests, plannedActivities } from './data/site'
 const RubikScrollStory = lazy(() => import('./components/RubikScrollStory'))
@@ -37,6 +37,12 @@ function Header() {
     document.body.style.overflow = opened ? 'hidden' : before
     return () => { document.body.style.overflow = before }
   }, [opened])
+  useEffect(() => {
+    if(!opened)return
+    const onKey=(event:KeyboardEvent)=>{if(event.key==='Escape')setOpened(false)}
+    window.addEventListener('keydown',onKey)
+    return()=>window.removeEventListener('keydown',onKey)
+  },[opened])
   return <>
     <header className="site-header"><div className="wrap nav-bar">
       <Logo/>
@@ -46,13 +52,14 @@ function Header() {
       <div className="nav-actions">
         <ThemeToggle/>
         <Link className="btn btn-ink header-join" to="/dang-ky">Tham gia CLB <ArrowUpRight size={17}/></Link>
-        <button className="menu-toggle" aria-label={opened ? 'Đóng menu' : 'Mở menu'} aria-controls="mobile-navigation" aria-expanded={opened} onClick={() => setOpened(v => !v)}>{opened ? <X size={24}/> : <Menu size={24}/>}</button>
+        <button className="menu-toggle dc-constellation-toggle" aria-label={opened ? 'Đóng bản đồ điều hướng' : 'Mở bản đồ điều hướng'} aria-controls="mobile-navigation" aria-expanded={opened} onClick={() => setOpened(v => !v)}><span aria-hidden="true" className="dc-constellation-glyph">✧</span><span className="dc-constellation-label">{opened?'THU BẢN ĐỒ':'BẢN ĐỒ'}</span></button>
       </div>
     </div></header>
     <div className={'menu-shade' + (opened ? ' show' : '')} onClick={() => setOpened(false)} aria-hidden="true"/>
-    <nav id="mobile-navigation" className={'mobile-navigation' + (opened ? ' show' : '')} aria-label="Điều hướng trên điện thoại" aria-hidden={!opened}>
-      {menu.map((item, i) => <Link key={item.path} to={item.path} tabIndex={opened ? 0 : -1}><small>0{i+1}</small>{item.label}<ArrowUpRight size={20}/></Link>)}
-      <Link className="mobile-register" tabIndex={opened ? 0 : -1} to="/dang-ky">Đăng ký tham gia <ArrowRight size={20}/></Link>
+    <nav id="mobile-navigation" className={'mobile-navigation dc-constellation-nav' + (opened ? ' show' : '')} aria-label="Bản đồ khám phá Digital Creators" aria-hidden={!opened} inert={!opened}>
+      <div className="dc-map-intro"><span>CREATIVE ATLAS / 2026</span><strong>CHỌN QUỸ ĐẠO.</strong><small>Ba cách bắt đầu một hành trình sáng tạo.</small></div>
+      <div className="dc-orbit-grid">{menu.map((item,i)=><Link className={'dc-orbit-card dc-orbit-card-'+(i+1)} key={item.path} to={item.path} tabIndex={opened?0:-1}><span className="dc-orbit-number">0{i+1}</span><strong>{item.label}</strong><span className="dc-orbit-description">{['Khởi đầu từ sự tò mò','Tìm hiểu về chúng mình','Khám phá những điều sẽ làm'][i]}</span></Link>)}</div>
+      <Link className="mobile-register dc-constellation-register" tabIndex={opened ? 0 : -1} to="/dang-ky">Trở thành một phần của CLB <ArrowRight size={18}/></Link>
       <p>SÁNG TẠO — KẾT NỐI — PHÁT TRIỂN</p>
     </nav>
   </>
