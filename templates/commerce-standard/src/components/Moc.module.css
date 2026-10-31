@@ -2,3 +2,127 @@
 @media(max-width:900px){.showcase{min-height:540px}.showcaseCopy{padding:6vw}.showcase h1{font-size:7.9vw}.collection header{grid-template-columns:1fr 2fr}.collection header a{grid-column:2}.productWall{grid-template-columns:repeat(2,minmax(0,1fr));gap:35px 15px}.material{min-height:470px}.secondary{gap:25px}}
 @media(max-width:650px){.shippingNote{font-size:8px}.storeHead{height:68px;grid-template-columns:1fr auto 1fr;padding:0 4vw}.leftNav,.support,.secondary{display:none}.menuToggle{display:flex;width:45px;height:45px;border:0;background:transparent;flex-direction:column;justify-content:center;align-items:flex-start;gap:6px}.menuToggle i{background:#362c23;width:25px;height:2px}.menuToggle i:nth-child(2){width:18px}.wordmark{font-size:37px}.wordmark small{font-size:7px}.actions{gap:0}.cartTrigger{padding:0}.showcase{display:flex;flex-direction:column;max-height:none}.showcase figure{height:60vh;min-height:360px}.showcase figcaption{font-size:8px;left:13px;bottom:15px}.showcaseCopy{padding:55px 7vw 70px}.showcase h1{font-size:clamp(59px,14vw,89px);margin:32px 0}.showcase p{font-size:15px}.ticker{gap:9px}.ticker span{font-size:8px;text-align:center}.collection{padding:70px 5vw}.collection header{display:block}.collection header h2{font-size:47px;margin:20px 0}.collection header a{display:inline-block;margin:10px 0}.productWall{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 10px}.tileFoot h3{font-size:19px}.tileImage>span{display:none}.material{display:flex;flex-direction:column}.material>div{padding:65px 7vw}.material h2{font-size:57px}.material>img{height:370px}.shopFooter{padding:65px 6vw 20px}.footerIntro{display:block}.footerIntro p{margin:26px 0;font-size:48px}.footerRows{grid-template-columns:1fr 1fr;gap:30px}.footerRows>div:last-child{grid-column:1/-1}.bottom{flex-wrap:wrap}.shop{padding:50px 5vw 70px}.shopHeading{display:block}.shopHeading h1{font-size:58px}.catalogTools{align-items:flex-start;flex-direction:column}.catalogTools button{padding:11px 15px}.productDetail{display:block;padding:25px 5vw 80px}.detailForm{position:static;padding:40px 0}.detailForm>span{margin-top:45px}.detailForm h1{font-size:52px}.careHero{padding:75px 6vw}.careHero h1{font-size:62px}.careGrid{grid-template-columns:1fr;padding:45px 6vw}.careGrid img{aspect-ratio:5/4}.brandStory{display:block;padding:70px 6vw}.storyWords h1{font-size:59px}.storyWords p{font-size:18px}.storyImages{margin-top:40px}.storyImages img{height:270px}.supportPage{display:block;padding:60px 6vw}.supportPage h1{font-size:64px}.supportPage img{width:100%;height:250px;aspect-ratio:auto}.supportPage form{padding:30px 22px;margin-top:30px}.browsePanel nav{grid-template-columns:1fr}.browsePanel nav a{font-size:29px;padding:16px 0}.quick{display:flex;flex-direction:column}.quick>img{height:32vh;min-height:180px}.quick h2{font-size:32px}.quick>div{gap:10px;padding:20px}.cartDrawer{padding:22px}}
 @media(prefers-reduced-motion:reduce){.moc *, .moc *::before{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* MỘC 02 — Tactile objects, slow looking, hand-made commerce, fully independent. */
+.moc{font-family:"Be Vietnam Pro","Segoe UI",Arial,sans-serif;background:#f4eee4;overflow-x:clip}
+.moc :is(h1,h2,h3){font-family:"Times New Roman",Georgia,serif;letter-spacing:-.04em;line-height:1.12;overflow-wrap:break-word}
+.moc :where(p,small,label,button,a){line-height:1.55}
+.shippingNote{background:#5d4334;color:#f8ead9;padding:9px 7px;font:700 10px/1.5 "Be Vietnam Pro","Segoe UI",sans-serif;letter-spacing:.055em}
+.storeHead{min-height:101px;background:#faf4eb;box-shadow:0 4px 0 #dfd2be}
+.wordmark{font-family:"Times New Roman",Georgia,serif;font-weight:700;letter-spacing:-.04em;line-height:1.05}
+.wordmark small{font:700 8px/1.4 "Be Vietnam Pro","Segoe UI",sans-serif;letter-spacing:.07em}
+.leftNav,.actions{gap:30px}
+.leftNav a,.support{font:750 11px/1.6 "Be Vietnam Pro","Segoe UI",sans-serif;letter-spacing:.04em;position:relative;min-height:44px;display:flex;align-items:center}
+.leftNav a:after{content:"";position:absolute;left:0;bottom:8px;width:0;height:1px;background:currentColor;transition:width .24s}
+.leftNav a:hover:after{width:100%}
+.cartTrigger{position:relative;min-width:50px;min-height:50px;display:flex;justify-content:center;border:1px solid #aa9785;border-radius:50%;transition:transform .2s}
+.cartTrigger:hover{transform:translateY(-3px)}
+.cartTrigger svg{width:23px;height:23px}
+.cartTrigger strong{position:absolute;right:-7px;top:-6px;display:grid;place-items:center;min-width:21px;height:21px;border-radius:50%;background:#8a503c;color:#fff;font-size:10px}
+.secondary{background:#e9ded0;min-height:49px;gap:clamp(22px,4vw,65px)}
+.secondary a{min-height:45px;display:flex;align-items:center;font:700 11px "Be Vietnam Pro","Segoe UI",sans-serif;letter-spacing:.035em;transition:color .2s}
+.secondary a:hover{color:#a45b3d}
+.menuOverlay{position:fixed;inset:0;z-index:69;border:0;background:#30241ec4;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.menuOverlay[data-open="true"]{opacity:1;pointer-events:auto}
+.browsePanel{border-radius:36px 36px 0 0;visibility:hidden;transform:translateY(108%);transition:transform .5s cubic-bezier(.22,1,.36,1),visibility 0s linear .5s;box-shadow:0 -12px 35px #2f231c35;max-height:88dvh;padding:36px 7vw;background:#efe3d2}
+.browsePanel[aria-hidden="false"]{visibility:visible;transform:translateY(0);transition:transform .5s cubic-bezier(.22,1,.36,1),visibility 0s}
+.browseTop{display:flex;justify-content:space-between;align-items:center;gap:16px;border-bottom:1px solid #c9b6a5;padding-bottom:25px}
+.browseTop>small{font:750 11px "Be Vietnam Pro","Segoe UI",sans-serif;letter-spacing:.04em}
+.browseClose{border:1px solid #a58d78;background:transparent;min-height:48px;padding:9px 15px;display:flex;align-items:center;gap:13px;font:750 12px "Be Vietnam Pro",sans-serif}
+.browseClose span{font:300 28px/1 "Segoe UI",sans-serif}
+.browsePanel nav{margin:20px 0 30px;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 4vw}
+.browsePanel nav a{font:500 clamp(25px,3.5vw,47px)/1.3 "Times New Roman",Georgia,serif;min-height:74px;display:flex;justify-content:space-between;gap:15px;align-items:center;transition:padding-left .2s,background .2s}
+.browsePanel nav a:hover{padding-left:15px;background:#d9c6ad}
+.browsePanel nav a span{font:300 25px Arial,sans-serif}
+.browseFoot{padding:25px 0 5px;font:italic 23px "Times New Roman",serif}
+.showcase{grid-template-columns:1.15fr .85fr;min-height:700px;background:#eee4d5}
+.showcase figure{min-height:700px;overflow:hidden;position:relative}
+.showcase figure img{object-fit:cover;transition:transform 1.2s cubic-bezier(.2,1,.3,1);animation:mocOpening 1.2s both}
+.showcase:hover figure img{transform:scale(1.025)}
+.heroLabel{position:absolute;right:clamp(18px,5vw,90px);top:8%;height:160px;width:160px;border-radius:50%;background:#f6e9d4d9;border:1px solid #977f68;box-shadow:0 0 0 13px #f6e9d431;display:flex;flex-direction:column;justify-content:center;align-items:center;transform:rotate(9deg);animation:mocBreathe 6s ease-in-out infinite alternate;pointer-events:none}
+.heroLabel span{font:italic 24px "Times New Roman",serif}
+.heroLabel strong{font:italic 700 37px/.9 "Times New Roman",serif}
+.showcase figcaption{letter-spacing:.05em}
+.showcaseCopy{position:relative;padding-inline:6vw;background:radial-gradient(ellipse at 88% 10%,#f5ead9 0%,#ece1d1 67%)}
+.showcaseCopy:before{content:"";height:1px;width:95px;background:#ad8b69;display:block;margin-bottom:32px}
+.showcase h1{font-family:"Times New Roman",serif;font-size:clamp(70px,7.5vw,116px);letter-spacing:-.045em;line-height:1.11}
+.showcase h1 em{color:#a06546}
+.showcaseCopy a{min-height:52px;background:#614838;color:#fff;font:700 11px "Be Vietnam Pro","Segoe UI",sans-serif;letter-spacing:.06em;transition:transform .2s,background .2s}
+.showcaseCopy a:hover{transform:translateY(-4px);background:#8a563b}
+.ticker{display:flex;align-items:center;height:68px;overflow:hidden;padding:0;background:#d4bda4;border-block:1px solid #bba388}
+.ticker>div{font:italic 500 35px "Times New Roman",serif;white-space:nowrap;min-width:max-content;animation:mocTicker 30s linear infinite}
+.collection{background:#f6efe5}
+.collection header h2,.material h2,.materialGallery h2,.shopHeading h1,.careHero h1,.brandStory h1,.supportPage h1{font-family:"Times New Roman",serif;letter-spacing:-.045em;line-height:1.12}
+.collection header h2{font-size:clamp(48px,5.5vw,81px)}
+.tile{background:#fcf9f4;border:1px solid #d3c5b4;padding:9px 9px 21px;transition:transform .3s,box-shadow .3s}
+.tile:nth-child(even){transform:translateY(26px)}
+.tile:hover{transform:translateY(-6px);box-shadow:0 17px 30px #50382821}
+.tile:nth-child(even):hover{transform:translateY(16px)}
+.tileImage{aspect-ratio:4/5}
+.tileImage img{transition:transform .65s cubic-bezier(.2,.8,.2,1)}
+.tileImage:after{content:"";position:absolute;inset:9px;border:1px solid #fff9;pointer-events:none}
+.tileFoot h3{font-family:"Times New Roman",serif;font-size:clamp(17px,1.75vw,27px);letter-spacing:-.02em}
+.tileAdd{border:1px solid #95745c;transition:background .2s,transform .2s}
+.tileAdd:hover{transform:rotate(90deg)}
+.material{background:#dfd0bb;min-height:620px}
+.material>img{filter:saturate(.82) contrast(1.03);object-fit:cover}
+.materialGallery{padding:100px 6vw;background:#eee6db}
+.materialGalleryHeader{display:grid;grid-template-columns:1fr 2fr 1fr;gap:30px;align-items:end;border-top:1px solid #9d8a78;padding-top:24px}
+.materialGalleryHeader small{font:750 11px "Be Vietnam Pro",sans-serif}
+.materialGalleryHeader h2{font:500 clamp(43px,5.5vw,84px)/1.1 "Times New Roman",serif;margin:0}
+.materialGalleryHeader h2 em{color:#976243}
+.materialGalleryHeader p{margin:0;font:14px/1.75 "Be Vietnam Pro","Segoe UI",sans-serif}
+.materialStory{display:grid;grid-template-columns:.8fr 1.2fr;gap:6vw;margin-top:50px}
+.materialSelectors{display:flex;flex-direction:column;align-self:center}
+.materialSelectors button{display:grid;grid-template-columns:40px 1fr;gap:5px 15px;text-align:left;padding:24px 15px;border:0;border-bottom:1px solid #bbaa96;background:transparent;transition:padding-left .25s,background .25s}
+.materialSelectors button[aria-pressed="true"]{background:#dac6ad;padding-left:26px}
+.materialSelectors button span{font:750 10px "Be Vietnam Pro",sans-serif;grid-row:1/3}
+.materialSelectors button strong{font:500 32px/1.2 "Times New Roman",serif}
+.materialSelectors button small{font:13px "Be Vietnam Pro","Segoe UI",sans-serif}
+.materialPreview{margin:0;position:relative;aspect-ratio:6/5;overflow:hidden;background:#d2c1ad}
+.materialPreview img{width:100%;height:100%;object-fit:cover;animation:mocReveal .5s cubic-bezier(.2,1,.3,1) both}
+.materialPreview figcaption{position:absolute;right:18px;bottom:18px;background:#f3e8d7;padding:10px 19px;font:500 24px "Times New Roman",serif}
+.materialGallery:after{content:"";display:block;border-bottom:1px solid #b6a492;margin-top:60px}
+.shop{background:#f7f0e6}
+.catalogTools button{transition:background .2s,transform .2s}
+.catalogTools button:hover{transform:translateY(-2px)}
+.shopFooter{background:#dfceb9}
+.footerIntro p{font-family:"Times New Roman",serif;line-height:1.16}
+.footerRows a{min-height:30px}
+.footerRows a:hover{text-decoration:underline}
+.moc [data-moc-reveal]{transition:opacity .7s ease,transform .7s cubic-bezier(.2,1,.3,1)}
+.moc [data-moc-reveal]:not([data-moc-visible="true"]){opacity:.65;transform:translateY(23px)}
+.moc [data-moc-visible="true"]{opacity:1;transform:translateY(0)}
+@keyframes mocOpening{from{filter:brightness(.84);transform:scale(1.06)}to{filter:brightness(1);transform:scale(1)}}
+@keyframes mocBreathe{from{transform:rotate(9deg) translateY(0)}to{transform:rotate(5deg) translateY(-15px)}}
+@keyframes mocTicker{to{transform:translateX(-47%)}}
+@keyframes mocReveal{from{opacity:.5;transform:scale(1.04)}to{opacity:1;transform:scale(1)}}
+@media(max-width:900px){.materialGalleryHeader{grid-template-columns:1fr 2fr}.materialGalleryHeader p{grid-column:2}.materialStory{gap:3vw}.materialSelectors button strong{font-size:25px}}
+@media(max-width:650px){
+.storeHead{grid-template-columns:1fr auto 1fr;height:77px;min-height:77px}
+.menuToggle{display:flex}
+.wordmark{font-size:37px}.wordmark small{font-size:7px}
+.showcase{display:flex;flex-direction:column;min-height:0}
+.showcase figure{height:61vh;min-height:360px;max-height:550px}
+.showcase figure img{height:100%}
+.showcaseCopy{padding:65px 7vw 74px}
+.showcase h1{font-size:clamp(65px,13vw,82px);line-height:1.1;margin:33px 0}
+.heroLabel{width:108px;height:108px;right:7%;top:9%}
+.heroLabel strong{font-size:27px}.heroLabel span{font-size:17px}
+.ticker{height:54px}.ticker>div{font-size:28px}
+.collection{padding:65px 5vw 95px}
+.tile{padding:5px 5px 16px}.tile:nth-child(even){transform:translateY(17px)}.tile:nth-child(even):hover{transform:translateY(12px)}
+.material{display:flex;flex-direction:column}
+.material h2{font-size:clamp(54px,12vw,73px);line-height:1.14}
+.materialGallery{padding:70px 6vw}
+.materialGalleryHeader{display:block}.materialGalleryHeader h2{font-size:clamp(52px,10vw,69px);margin:17px 0}
+.materialStory{display:flex;flex-direction:column;gap:25px}
+.materialSelectors button{padding:17px 11px}.materialSelectors button strong{font-size:28px}
+.materialPreview{aspect-ratio:4/3}
+.browsePanel{border-radius:26px 26px 0 0;padding:26px 6vw;max-height:91dvh}
+.browseTop{padding-bottom:17px}.browseTop>small{font-size:9px}
+.browsePanel nav{grid-template-columns:1fr;margin:20px 0}
+.browsePanel nav a{font-size:30px;min-height:69px;padding:12px 0}
+.browseFoot{font-size:18px;padding-top:5px}
+}
+@media(prefers-reduced-motion:reduce){.moc :is(.heroLabel,.ticker>div,.showcase figure img,.materialPreview img){animation:none!important}.moc [data-moc-reveal],.menuOverlay,.browsePanel{transition:none!important}.moc [data-moc-reveal]{opacity:1!important;transform:none!important}}
