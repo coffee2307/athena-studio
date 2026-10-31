@@ -15,7 +15,7 @@ for(const site of sites){
  if(/Georgia|Times New Roman/.test(css))failures.push({site,route:"source",error:"Forbidden font family in sovereign CSS"});
  for(const vp of viewports){
   const page=await browser.newPage({viewport:{width:vp.width,height:vp.height},reducedMotion:"reduce"});
-  const routes=["","work","contact"];
+  const routes=["","work","services","about","work/1","contact"];
   try{
    for(const route of routes){
     const url=ORIGIN+"/template-demos/"+site+(route?"/"+route:"");
@@ -83,7 +83,7 @@ for(const site of sites){
    }
    // 200% browser zoom approximation for the two high-risk surfaces
    if(vp.width===390){
-    for(const route of ["contact","work"]){
+    for(const route of ["contact","work","services","about"]){
      await page.goto(ORIGIN+"/template-demos/"+site+"/"+route,{waitUntil:"load"});
      await page.evaluate(()=>{document.documentElement.style.zoom="2"});
      const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
