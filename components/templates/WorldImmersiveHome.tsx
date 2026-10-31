@@ -49,13 +49,13 @@ export function WorldImmersiveHome({slug,world,extra}:Props){
    <div className="ix-hero-copy">
     <div className="ix-kicker"><span className="ix-kicker-dot"/>{isAuto?"BLACK VELOCITY / CONCEPT STUDY":world.eyebrow}</div>
     <h1>{isStudio?<>Đủ khác biệt<br/>để <em>được nhớ.</em></>:isArch?<>Không gian<br/><em>biết lắng nghe.</em></>:<>BORN FOR<br/><em>THE EDGE.</em></>}</h1>
-    <p>{isAuto?"Một nghiên cứu thiết kế siêu xe: bề mặt graphite, chi tiết carbon và những đường cắt khí động học. Khám phá trực tiếp mô hình 3D.":world.intro}</p>
-    <div className="ix-hero-links"><Link href={root+"/work"} className="ix-hero-primary">{isArch?"Khám phá công trình":slug==="auto-showroom"?"Khám phá thiết kế":"Xem dự án"} <span aria-hidden="true"></span></Link><Link href={root+"/about"} className="ix-hero-text-link">{isAuto?"Về concept VELAR":"Câu chuyện của chúng tôi"} <span aria-hidden="true"></span></Link><Link href={root+"/experience"} className="ix-journey-link">{isAuto?"Cinematic Experience":"Trải nghiệm 3D"} <span aria-hidden="true"></span></Link></div>
+    <p>{isAuto?"Khám phá thiết kế McLaren P1 qua mô hình 3D tương tác: từ dáng xe thấp, đường dẫn khí đến bề mặt và các chi tiết hoàn thiện. Đây là trải nghiệm showroom minh họa, không phải trang bán xe.":world.intro}</p>
+    <div className="ix-hero-links"><Link href={root+"/work"} className="ix-hero-primary">{isArch?"Khám phá công trình":slug==="auto-showroom"?"Khám phá thiết kế":"Xem dự án"} <span aria-hidden="true"></span></Link><Link href={root+"/about"} className="ix-hero-text-link">{isAuto?"Về BLACK VELOCITY":"Câu chuyện của chúng tôi"} <span aria-hidden="true"></span></Link><Link href={root+"/experience"} className="ix-journey-link">{isAuto?"Cinematic Experience":"Trải nghiệm 3D"} <span aria-hidden="true"></span></Link></div>
    </div>
    <div className="ix-hero-visual immersive-stage" data-scene={slug} data-preset={mode}>
     {isAuto?<div className="ix-hero-image bv-studio-fallback" aria-hidden="true"/>:<div className="ix-hero-image" key={activeImage}><Image src={activeImage} fill priority quality={88} unoptimized={slug==="creative-studio"} alt={"Ảnh concept "+world.brand+": "+caption} sizes="(max-width: 820px) 100vw, 70vw" className="ix-hero-photograph"/></div>}
     <WorldScene slug={slug as "creative-studio"|"architecture-studio"|"auto-showroom"} preset={mode} enabled={enable3D} zoom={isAuto?zoom:0} scrollRootId={isAuto?AUTO_CINEMATIC_ID:undefined} onRequestFallback={()=>setEnable3D(false)}/>
-    {isAuto&&enable3D&&<div className="bv-zoom-controls" role="group" aria-label="Điều chỉnh mức phóng đại xe 3D"><button type="button" aria-label="Phóng to xe" disabled={zoom>=2} onClick={()=>setZoom(v=>Math.min(2,v+1))}>+</button><button type="button" aria-label="Thu nhỏ xe" disabled={zoom<=-1} onClick={()=>setZoom(v=>Math.max(-1,v-1))}>−</button></div>}
+    {isAuto&&enable3D&&<div className="bv-zoom-controls" role="group" aria-label="Điều chỉnh mức phóng đại xe 3D"><button type="button" aria-label="Phóng to xe" disabled={zoom>=2} onClick={()=>setZoom(v=>Math.min(2,v+1))}>+</button><button type="button" aria-label="Thu nhỏ xe" disabled={zoom<=-2} onClick={()=>setZoom(v=>Math.max(-2,v-1))}>−</button></div>}
     <div className="ix-visual-vignette" aria-hidden="true"/>
     {isAuto&&<div className="bv-cinematic-hud">
       <div className="bv-mobile-story" aria-label="Thông tin góc nhìn hiện tại">
@@ -74,7 +74,6 @@ export function WorldImmersiveHome({slug,world,extra}:Props){
      </nav>
      <div className="bv-cinematic-meter" aria-hidden="true"><span/></div>
      <a className="bv-cinematic-skip" href="#bv-after-cinematic">BỎ QUA HÀNH TRÌNH ↓</a>
-     <div className="bv-model-credit"><ModelAttribution compact/></div>
     </div>}
     {!isAuto&&<div className="ix-visual-coordinate"><span>EDITION / 2026</span><span>{enable3D?"3D STUDY / ACTIVE":"EDITORIAL VIEW / 3D OPTIONAL"}</span></div>}
     {isStudio&&!enable3D&&<div className="ix-studio-overlay" aria-hidden="true"><span>01 / 03</span><strong>FORM<br/><em>&amp; FEELING.</em></strong><span>SORA © STUDIO</span></div>}
@@ -87,16 +86,16 @@ export function WorldImmersiveHome({slug,world,extra}:Props){
  return <main className={"ix-site ix-"+slug+" immersive-home"} data-immersive={enable3D?"true":"false"} id="world-main">
   {isAuto?<AutoCinematicTrack>{hero}</AutoCinematicTrack>:hero}
   {!isAuto&&<section className="ix-scene-rail" aria-label="Điều khiển trải nghiệm 3D">
-   <div className="ix-scene-rail-copy"><span>{isAuto?"01 / INTERACTIVE MACHINE":"INTERACTIVE STUDY / 0"+(mode+1)}</span><strong aria-live="polite">{caption}</strong><p>{slug==="auto-showroom"?"Mô hình McLaren 3D được tải ngay khi mở trang. Kéo ngang để xoay xe hoặc chọn góc nhìn để khám phá thân xe và khí động học. Bạn có thể tắt 3D để xem nội dung trên nền studio tĩnh.":"Ảnh editorial được ưu tiên để tải nhanh. Bật 3D khi muốn khám phá mô hình; nhấn một trong ba góc nhìn để thay đổi cấu trúc."}</p>{isAuto&&<ModelAttribution/>}</div>
+   <div className="ix-scene-rail-copy"><span>{isAuto?"01 / INTERACTIVE MACHINE":"INTERACTIVE STUDY / 0"+(mode+1)}</span><strong aria-live="polite">{caption}</strong><p>{slug==="auto-showroom"?"Khám phá mô hình McLaren P1 trong không gian tương tác: kéo ngang để xoay, dùng nút + và − để thay đổi góc nhìn cận cảnh, hoặc chọn một trong năm cảnh để quan sát từng chi tiết.":"Ảnh editorial được ưu tiên để tải nhanh. Bật 3D khi muốn khám phá mô hình; nhấn một trong ba góc nhìn để thay đổi cấu trúc."}</p>{isAuto&&<ModelAttribution/>}</div>
    <div className="ix-rail-actions">
     <div className="immersive-mode-selector ix-mode-list" role="group" aria-label="Chọn chế độ 3D">{labels.map((label,i)=><button type="button" key={label} aria-pressed={mode===i} onClick={()=>{setMode(i);if(isAuto)jumpToAutoCinematicChapter(i===0?0:i===1?1:3);}}><span>{String(i+1).padStart(2,"0")}</span>{label}</button>)}</div>
     <button type="button" className="ix-render-toggle" aria-pressed={enable3D ? "true" : "false"} aria-label={enable3D?"Tắt chế độ 3D":"Bật chế độ 3D"} onClick={()=>setEnable3D(value=>!value)}>3D {enable3D?"ON":"OFF"}</button>
    </div>
   </section>}
   {isAuto&&<div className="bv-after-cinematic" id="bv-after-cinematic"><span>TIẾP TỤC KHÁM PHÁ</span><ModelAttribution compact/></div>}
-  <section className="ix-manifesto"><span>{isAuto?"02 / DESIGN PHILOSOPHY":"01 / THE STUDIO"}</span><h2>{isAuto?"THE FORM OF PERFORMANCE.":extra.storyTitle}</h2><div><p>{isAuto?"VELAR là showroom concept dành cho trải nghiệm thiết kế: đặt tỷ lệ, bề mặt và thao tác khám phá lên trước. Xe McLaren trong trang là tài sản 3D trình diễn do người dùng cung cấp, không phải sản phẩm do VELAR sản xuất.":extra.story}</p><Link href={root+"/about"}>{isAuto?"Khám phá định hướng":"Về chúng tôi"} <span aria-hidden="true"></span></Link></div></section>
+  <section className="ix-manifesto"><span>{isAuto?"02 / DESIGN PHILOSOPHY":"01 / THE STUDIO"}</span><h2>{isAuto?"THE FORM OF PERFORMANCE.":extra.storyTitle}</h2><div><p>{isAuto?"BLACK VELOCITY là website showroom mẫu của Athena Studio. Trọng tâm là trải nghiệm xem McLaren P1 ở nhiều góc độ, quan sát bề mặt thân xe và chuyển cảnh mượt mà. Mô hình 3D được cấp phép CC BY 4.0; đây không phải website chính thức của McLaren hoặc dịch vụ bán xe.":extra.story}</p><Link href={root+"/about"}>{isAuto?"Khám phá định hướng":"Về chúng tôi"} <span aria-hidden="true"></span></Link></div></section>
   <WorldEditorialInterlude slug={slug as "creative-studio"|"architecture-studio"|"auto-showroom"}/>
   {!isAuto&&<Series slug={slug} world={world} root={root}/>}
-  <section className="ix-ending"><span>{isAuto?"05 / NEXT EXPERIENCE":"04 / GET IN TOUCH"}</span><h2>{isAuto?"YOUR NEXT PERSPECTIVE.":extra.contactTitle}</h2><p>{isAuto?"Tiếp tục khám phá thiết kế, xem bộ sưu tập concept hoặc trải nghiệm luồng yêu cầu tư vấn mô phỏng.":extra.contactIntro}</p><Link href={root+"/contact"}>{isAuto?"Yêu cầu tư vấn demo":"Bắt đầu một cuộc trò chuyện"} <span aria-hidden="true"></span></Link></section>
+  <section className="ix-ending"><span>{isAuto?"05 / NEXT EXPERIENCE":"04 / GET IN TOUCH"}</span><h2>{isAuto?"YOUR NEXT PERSPECTIVE.":extra.contactTitle}</h2><p>{isAuto?"Tiếp tục xem các góc nhìn thiết kế và trang giới thiệu concept, hoặc mở biểu mẫu yêu cầu tùy biến website mẫu.":extra.contactIntro}</p><Link href={root+"/contact"}>{isAuto?"Yêu cầu tùy biến website":"Bắt đầu một cuộc trò chuyện"} <span aria-hidden="true"></span></Link></section>
  </main>;
 }

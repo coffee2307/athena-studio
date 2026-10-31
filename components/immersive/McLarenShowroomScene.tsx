@@ -319,7 +319,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    const easedMode=modeT*modeT*(3-2*modeT);
    const heroOrbit=angles[modeLower]+(angles[modeLower+1]-angles[modeLower])*easedMode;
    const baseDistance=isMobile?8:Math.max(8.2,10*.93/Math.max(.72,(camera as THREE.PerspectiveCamera).aspect));
-   const authoredRadius=isMobile?baseDistance:baseDistance*(scrollRootId?scrollDistance:1)*(1-clamp(zoomRef.current,-1,2)*.09);
+   const authoredRadius=isMobile?baseDistance:baseDistance*(scrollRootId?scrollDistance:1);
    let radius=authoredRadius;
    let height=scrollRootId?scrollHeight:(isMobile?2.6:2.42);
    if(scrollRootId){
@@ -336,6 +336,9 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
      if(fraction>=.9999)yawTransition=null;
     }else cameraYaw=scrollOrbit;
    }else if(!manualMode)cameraYaw=wrapOrbit(heroOrbit+currentProgress*.20);
+   // Apply zoom after chapter/manual camera decisions, so it still works after a drag.
+   // Each click moves the camera by ~18%; the default view remains unchanged.
+   if(!isMobile)radius*=1-clamp(zoomRef.current,-2,2)*.18;
    const wanted=new THREE.Vector3(Math.cos(cameraYaw)*radius,height,Math.sin(cameraYaw)*radius);
    if(scrollRootId)camera.position.copy(wanted);
    else camera.position.lerp(wanted,lerp);
@@ -343,6 +346,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    // The camera radius is fixed during dragging. No per-frame auto-fit/dolly.
    if(canvas){
     canvas.dataset.cameraRadius=radius.toFixed(4);
+    canvas.dataset.zoomLevel=String(zoomRef.current);
     canvas.dataset.cameraYaw=cameraYaw.toFixed(5);
     canvas.dataset.cameraMode=manualMode?"manual":yawTransition?"transition":"scroll";
     canvas.dataset.cameraTargetYaw=scrollOrbit.toFixed(5);
