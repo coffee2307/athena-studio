@@ -9,6 +9,15 @@ import "@fontsource/be-vietnam-pro/600.css";
 import "@fontsource/be-vietnam-pro/700.css";
 import "@fontsource/noto-serif/400.css";
 import "@fontsource/noto-serif/400-italic.css";
+import "@fontsource/outfit/400.css";
+import "@fontsource/outfit/700.css";
+import "@fontsource/space-grotesk/400.css";
+import "@fontsource/space-grotesk/700.css";
+import "@fontsource/dm-sans/400.css";
+import "@fontsource/dm-sans/700.css";
+import "@fontsource/fraunces/400.css";
+import "@fontsource/fraunces/700.css";
+import "@fortawesome/fontawesome-svg-core/styles.css";
 import "@/app/globals.css";
 import "@/app/agency-relaunch.css";
 import "@/app/contact-experience.css";
@@ -46,6 +55,7 @@ import "@/app/athena-dna02.css";
 import "@/app/athena-dna03.css";
 import "@/app/black-velocity-mobile-showcase.css";
 import "@/app/template-navigation-identities.css";
+import "@/app/template-world-directions-v2.css";
 
 export const metadata: Metadata = {
   ...createMetadata(),
