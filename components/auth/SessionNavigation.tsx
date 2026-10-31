@@ -13,6 +13,6 @@ export function SessionNavigation({mobile=false}:{mobile?:boolean}){
   </Link>;
  }
  return mobile
-  ? <><Link className="agency-mobile-signin" href="/login"><Icon name="user" size={17}/> Đăng nhập</Link><Link className="agency-mobile-signup" href="/signup">Đăng ký <Icon name="arrow-up-right" size={16}/></Link></>
+  ? <><Link className="agency-mobile-signin" href="/login"><Icon name="user" size={17}/> Đăng nhập</Link><Link className="agency-mobile-signup" href="/signup">Đăng ký <Icon name="arrow-right" size={16}/></Link></>
   : <><Link className="agency-auth-link" href="/login"><Icon name="user" size={17}/> Đăng nhập</Link><Link className="agency-register-link" href="/signup">Đăng ký</Link></>;
 }

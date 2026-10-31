@@ -62,7 +62,7 @@ export default async function ServiceDetail({params}:PageProps){
    <div className="offer-list">{related.map(o=><Link className="offer-card" href={"/services/"+o.slug} key={o.slug}>
     <div className="service-meta"><span>{o.index} / ATHENA</span><span>{o.eyebrow}</span></div>
     <h3>{o.shortTitle}</h3><p>{o.challenge}</p>
-    <div className="card-bottom"><span>Xem dịch vụ</span><Icon name="arrow-up-right" size={18}/></div>
+    <div className="card-bottom"><span>Xem dịch vụ</span><Icon name="arrow-right" size={18}/></div>
    </Link>)}</div>
   </div></section>
  </div>;

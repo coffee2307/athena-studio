@@ -49,14 +49,14 @@ export function ContactForm({configured,siteKey}:Props){
    <div className="trap-field" aria-hidden="true"><label>Trang web<input name="website" tabIndex={-1} autoComplete="off"/></label></div>
    <label className="privacy-consent"><input type="checkbox" name="consent" required value="yes"/><span>Tôi đồng ý để Athena sử dụng thông tin này nhằm phản hồi yêu cầu. Xem <Link href="/legal/privacy" target="_blank" rel="noopener noreferrer">thông tin quyền riêng tư</Link>.</span></label>
    <TurnstileField siteKey={siteKey} onToken={updateCaptcha}/>
-   <button className="pill-link pill-dark form-submit" type="submit" disabled={status==="sending"||!captcha}>{status==="sending"?"Đang ghi nhận…":"Gửi yêu cầu"} <Icon name="arrow-up-right" size={18}/></button>
+   <button className="pill-link pill-dark form-submit" type="submit" disabled={status==="sending"||!captcha}>{status==="sending"?"Đang ghi nhận…":"Gửi yêu cầu"} <Icon name="arrow-right" size={18}/></button>
    {message&&<div className={status==="error"?"form-status form-error":"form-status"} role={status==="error"?"alert":"status"}><p>{message}</p>{reference&&<p>Mã tham chiếu: <strong>{reference}</strong></p>}</div>}
    <p className="form-privacy">Dữ liệu chỉ được nhận khi việc lưu trữ và chống spam đã cấu hình đầy đủ.</p>
   </form>:<>
   <div className="form-offline" role="status">
    <strong>Hiện nhận yêu cầu trực tiếp qua email.</strong>
    <p>Biểu mẫu trực tuyến chưa được kích hoạt. Bạn vẫn có thể gửi thông tin để trao đổi qua email; nút bên dưới mở một thư mẫu để bạn điền nhanh.</p>
-   <button type="button" onClick={()=>showContactDialog("email")} className="pill-link pill-dark">Soạn email mô tả nhu cầu <Icon name="arrow-up-right" size={18}/></button>
+   <button type="button" onClick={()=>showContactDialog("email")} className="pill-link pill-dark">Soạn email mô tả nhu cầu <Icon name="arrow-right" size={18}/></button>
   </div>
    <details className="athena-email-brief-details" open={Boolean(selectedTemplate)}><summary>Hoặc chuẩn bị email theo nhu cầu cụ thể <Icon name="chevron-down" size={18}/></summary><ContactEmailBrief key={selectedTemplate||"default"} template={getTemplate(selectedTemplate)} defaultService={service}/></details>
   </>}

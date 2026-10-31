@@ -16,7 +16,7 @@ export default function StartProjectPage(){
      <div className="launch-assurance"><span>01</span><div><h3>Khảo sát trước khi báo giá</h3><p>Không cam kết thời hạn hoặc kết quả khi chưa thống nhất phạm vi.</p></div></div>
      <div className="launch-assurance"><span>02</span><div><h3>Không bắt buộc tạo tài khoản</h3><p>Gửi yêu cầu qua ứng dụng email của bạn, không cần mở hệ thống thành viên.</p></div></div>
      <div className="launch-assurance"><span>03</span><div><h3>Không thu tiền tự động</h3><p>Bất kỳ khoản thanh toán nào cũng cần đề xuất và điều khoản được xác nhận riêng.</p></div></div>
-     <p className="launch-aside-help">Bạn muốn liên hệ trực tiếp? <Link href="/contact">Xem thông tin liên hệ <Icon name="arrow-up-right" size={15}/></Link></p>
+     <p className="launch-aside-help">Bạn muốn liên hệ trực tiếp? <Link href="/contact">Xem thông tin liên hệ <Icon name="arrow-right" size={15}/></Link></p>
     </div>
    </aside>
   </div></section>

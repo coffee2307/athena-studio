@@ -2,7 +2,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { RoundedBox } from '@react-three/drei'
 import { useMemo, useRef } from 'react'
 import { Quaternion, Vector3, type Group } from 'three'
-import { ArrowDown, ArrowUpRight, Lightbulb, Sparkles } from 'lucide-react'
+import { ArrowDown, ArrowRight, Lightbulb, Sparkles } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useScrollScene } from '../hooks/useScrollScene'
 import SceneErrorBoundary from './SceneErrorBoundary'
@@ -122,7 +122,7 @@ export default function RubikScrollStory(){
         {copy.map((part,i)=><div key={part.tag} className={'motion-copy-panel'+(step===i?' selected':'')} aria-hidden={!reducedMotion&&step!==i}>
           <span className="motion-tag"><Lightbulb size={15}/>{part.tag}</span>
           <h2>{part.title}</h2><p>{part.detail}</p>
-          {i===2 && <Link className="motion-cta" to="/gioi-thieu" tabIndex={reducedMotion||step===i?0:-1}>Khám phá CLB <ArrowUpRight size={17}/></Link>}
+          {i===2 && <Link className="motion-cta" to="/gioi-thieu" tabIndex={reducedMotion||step===i?0:-1}>Khám phá CLB <ArrowRight size={17}/></Link>}
         </div>)}
       </div>
       <div className="motion-visual rubik-visual"><div className="rubik-ambient"/><div className="rubik-halo"/>

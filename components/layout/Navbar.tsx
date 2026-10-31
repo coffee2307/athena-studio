@@ -79,7 +79,7 @@ export function Navbar(){
      <summary className={pathname.startsWith("/services")?"agency-nav-current":""}>Dịch vụ <Icon name="chevron-down" size={15}/></summary>
      <div className="agency-dropdown" onClick={e=>{if((e.target as HTMLElement).closest("a")&&desktopServices.current)desktopServices.current.open=false;}}>
       <p>CHỌN GIẢI PHÁP THEO NHU CẦU</p>
-      {solutions.map(s=><Link href={s.href} key={s.href}><span><strong>{s.title}</strong><small>{s.detail}</small></span><Icon name="arrow-up-right" size={17}/></Link>)}
+      {solutions.map(s=><Link href={s.href} key={s.href}><span><strong>{s.title}</strong><small>{s.detail}</small></span><Icon name="arrow-right" size={17}/></Link>)}
       <Link href="/services" className="agency-dropdown-all">Xem tất cả dịch vụ <Icon name="arrow-right" size={16}/></Link>
      </div>
     </details>
@@ -103,13 +103,13 @@ export function Navbar(){
     <div className="agency-mobile-menu-heading"><span>KHÁM PHÁ ATHENA</span><span className="agency-mobile-menu-counter">01 / {String(navigation.length).padStart(2,"0")}</span></div>
     <p className="agency-mobile-section-label">ĐIỀU HƯỚNG</p>
     <div className="agency-mobile-main-links">
-     <Link href="/services" className="agency-mobile-primary"><span>Dịch vụ</span><Icon name="arrow-up-right" size={19}/></Link>
-     {navigation.filter(i=>i.href!=="/services").map(i=><Link href={i.href} key={i.href} className="agency-mobile-primary"><span>{i.label}</span><Icon name="arrow-up-right" size={19}/></Link>)}
+     <Link href="/services" className="agency-mobile-primary"><span>Dịch vụ</span><Icon name="arrow-right" size={19}/></Link>
+     {navigation.filter(i=>i.href!=="/services").map(i=><Link href={i.href} key={i.href} className="agency-mobile-primary"><span>{i.label}</span><Icon name="arrow-right" size={19}/></Link>)}
     </div>
     <div className="agency-mobile-service-group">
      <p className="agency-mobile-section-label">GIẢI PHÁP NỔI BẬT</p>
      <div className="agency-mobile-services">
-      {solutions.map((solution,index)=><Link href={solution.href} key={solution.href}><span className="agency-mobile-service-index">0{index+1}</span><span>{solution.title}</span><Icon name="arrow-up-right" size={15}/></Link>)}
+      {solutions.map((solution,index)=><Link href={solution.href} key={solution.href}><span className="agency-mobile-service-index">0{index+1}</span><span>{solution.title}</span><Icon name="arrow-right" size={15}/></Link>)}
      </div>
     </div>
     <div className="agency-mobile-account"><SessionNavigation mobile/></div>

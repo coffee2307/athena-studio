@@ -32,8 +32,8 @@ export default function ContactPage(){
     <div className="contact-social agency-contact-links">
      <a href={contactChannels.phone}><Icon name="phone" size={18}/> Gọi điện</a>
      <a href={contactChannels.email}><Icon name="mail" size={18}/> Gửi email</a>
-     {contactChannels.zalo&&<a href={contactChannels.zalo} target="_blank" rel="noopener noreferrer">Nhắn Zalo <Icon name="arrow-up-right" size={16}/></a>}
-     {contactChannels.whatsapp&&<a href={contactChannels.whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp <Icon name="arrow-up-right" size={16}/></a>}
+     {contactChannels.zalo&&<a href={contactChannels.zalo} target="_blank" rel="noopener noreferrer">Nhắn Zalo <Icon name="arrow-right" size={16}/></a>}
+     {contactChannels.whatsapp&&<a href={contactChannels.whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp <Icon name="arrow-right" size={16}/></a>}
     </div>
 
    </div>

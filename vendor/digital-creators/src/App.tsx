@@ -1,10 +1,6 @@
 import { lazy, Suspense, useEffect, useState, type FormEvent, type ReactNode } from 'react'
 import { HashRouter, Link, NavLink, Route, Routes, useLocation } from 'react-router-dom'
-import {
-  ArrowDownRight, ArrowRight, ArrowUpRight, BookOpen, Check, Code2, Compass, Film,
-  Globe2, Heart, Lightbulb, MousePointer2, Palette, Rocket, Send,
-  Shapes, Sparkles, UsersRound, WandSparkles, type LucideIcon,
-} from 'lucide-react'
+import { ArrowDownRight, ArrowRight, BookOpen, Check, Code2, Compass, Film, Globe2, Heart, Lightbulb, MousePointer2, Palette, Rocket, Send, Shapes, Sparkles, UsersRound, WandSparkles, type LucideIcon } from 'lucide-react'
 import { focusAreas, interests, plannedActivities } from './data/site'
 const RubikScrollStory = lazy(() => import('./components/RubikScrollStory'))
 const PaintingAboutVisual = lazy(() => import('./components/PaintingAboutVisual'))
@@ -51,7 +47,7 @@ function Header() {
       </nav>
       <div className="nav-actions">
         <ThemeToggle/>
-        <Link className="btn btn-ink header-join" to="/dang-ky">Tham gia CLB <ArrowUpRight size={17}/></Link>
+        <Link className="btn btn-ink header-join" to="/dang-ky">Tham gia CLB <ArrowRight size={17}/></Link>
         <button className="menu-toggle dc-constellation-toggle" aria-label={opened ? 'Đóng bản đồ điều hướng' : 'Mở bản đồ điều hướng'} aria-controls="mobile-navigation" aria-expanded={opened} onClick={() => setOpened(v => !v)}><span aria-hidden="true" className="dc-constellation-glyph">✧</span><span className="dc-constellation-label">{opened?'THU BẢN ĐỒ':'BẢN ĐỒ'}</span></button>
       </div>
     </div></header>
@@ -87,7 +83,7 @@ function FieldCards() {
     {focusAreas.map((field, i) => {
       const Icon = fieldIcons[i]
       return <article className={'field-card theme-' + field.tone} key={field.id}>
-        <div className="field-meta"><span>/{field.id}</span><ArrowUpRight size={21}/></div>
+        <div className="field-meta"><span>/{field.id}</span><ArrowRight size={21}/></div>
         <div className="field-art"><Icon size={48} strokeWidth={1.35}/><i>·</i></div>
         <span className="field-english">{field.label}</span><h3>{field.title}</h3><p>{field.description}</p>
       </article>
@@ -113,7 +109,7 @@ function Home() {
       <div className="hero-caption"><span className="asterisk">·</span> A SPACE FOR YOUNG CREATORS <span className="caption-rule"/></div>
       <h1>Nơi ý tưởng <em>được tự do</em> bay xa<span className="period">.</span></h1>
       <p>Chào mừng bạn đến với <strong>Digital Creators</strong> — không gian để học sinh khám phá công nghệ, kết nối những người yêu sáng tạo và biến ý tưởng thành sản phẩm số.</p>
-      <div className="hero-buttons"><Link className="btn btn-ink" to="/gioi-thieu">Tìm hiểu câu lạc bộ <ArrowUpRight size={18}/></Link><Link className="btn btn-white" to="/hoat-dong">Khám phá hoạt động <ArrowRight size={18}/></Link></div>
+      <div className="hero-buttons"><Link className="btn btn-ink" to="/gioi-thieu">Tìm hiểu câu lạc bộ <ArrowRight size={18}/></Link><Link className="btn btn-white" to="/hoat-dong">Khám phá hoạt động <ArrowRight size={18}/></Link></div>
       <div className="hero-foot"><div className="triple-circles"><i/><i/><i/></div>SÁNG TẠO <b>·</b> KẾT NỐI <b>·</b> PHÁT TRIỂN</div>
       <button type="button" className="hero-scroll-story" onClick={() => document.getElementById('hanh-trinh')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })}>CUỘN ĐỂ KHÁM PHÁ KHÔNG GIAN CHUYỂN ĐỘNG <ArrowDownRight size={18}/></button>
     </div><HeroRubikCard/></section>
@@ -121,16 +117,16 @@ function Home() {
     <Suspense fallback={<div className="visual-scene-loading">Đang tải không gian Rubik…</div>}><RubikScrollStory/></Suspense>
     <section className="section wrap"><div className="section-heading"><Intro code="01 / KHÁM PHÁ" title="Có rất nhiều cách để sáng tạo." desc="Không cần giỏi sẵn từ đầu. Chỉ cần tò mò, dám thử và sẵn sàng cùng nhau học hỏi."/><span className="side-note">FIND YOUR THING </span></div><FieldCards/></section>
     <CreativeLab/>
-    <section className="section story"><div className="wrap story-grid"><div className="story-art"><div className="orbit orbit-outer"/><div className="orbit orbit-inner"/><div className="idea-center"><Lightbulb size={78} strokeWidth={1.2}/></div><span className="idea-pill idea-top">IDEAS <Sparkles size={15}/></span><span className="idea-pill idea-bottom">MAKE IT REAL <ArrowUpRight size={15}/></span></div>
-      <div className="story-content"><Eyebrow>02 / CÂU CHUYỆN</Eyebrow><h2>Từ một ý tưởng nhỏ, <em>có thể bắt đầu</em> điều lớn lao.</h2><p>Digital Creators được đề xuất nhằm tạo một môi trường học sinh cùng khám phá thiết kế, công nghệ và sáng tạo nội dung, học qua trải nghiệm và phát triển kỹ năng cùng nhau.</p><div className="story-values"><span><Check size={17}/> Học hỏi cùng nhau</span><span><Check size={17}/> Trân trọng mọi ý tưởng</span><span><Check size={17}/> Cùng tạo nên sản phẩm số</span></div><Link className="text-link" to="/gioi-thieu">Khám phá câu chuyện <ArrowUpRight size={18}/></Link></div>
+    <section className="section story"><div className="wrap story-grid"><div className="story-art"><div className="orbit orbit-outer"/><div className="orbit orbit-inner"/><div className="idea-center"><Lightbulb size={78} strokeWidth={1.2}/></div><span className="idea-pill idea-top">IDEAS <Sparkles size={15}/></span><span className="idea-pill idea-bottom">MAKE IT REAL <ArrowRight size={15}/></span></div>
+      <div className="story-content"><Eyebrow>02 / CÂU CHUYỆN</Eyebrow><h2>Từ một ý tưởng nhỏ, <em>có thể bắt đầu</em> điều lớn lao.</h2><p>Digital Creators được đề xuất nhằm tạo một môi trường học sinh cùng khám phá thiết kế, công nghệ và sáng tạo nội dung, học qua trải nghiệm và phát triển kỹ năng cùng nhau.</p><div className="story-values"><span><Check size={17}/> Học hỏi cùng nhau</span><span><Check size={17}/> Trân trọng mọi ý tưởng</span><span><Check size={17}/> Cùng tạo nên sản phẩm số</span></div><Link className="text-link" to="/gioi-thieu">Khám phá câu chuyện <ArrowRight size={18}/></Link></div>
     </div></section>
-    <section className="section wrap"><div className="section-heading"><Intro code="04 / CÙNG THỰC HIỆN" title="Không chỉ học. Chúng mình còn tạo ra." desc="Các nội dung sau là những hoạt động dự kiến tổ chức sau khi câu lạc bộ được thành lập."/><Link className="text-link" to="/hoat-dong">Xem tất cả <ArrowUpRight size={18}/></Link></div><ActivityCards/></section>
+    <section className="section wrap"><div className="section-heading"><Intro code="04 / CÙNG THỰC HIỆN" title="Không chỉ học. Chúng mình còn tạo ra." desc="Các nội dung sau là những hoạt động dự kiến tổ chức sau khi câu lạc bộ được thành lập."/><Link className="text-link" to="/hoat-dong">Xem tất cả <ArrowRight size={18}/></Link></div><ActivityCards/></section>
     <section className="section wrap"><CallToAction/></section>
   </>
 }
 
 function CallToAction() {
-  return <div className="cta"><div className="cta-copy"><Eyebrow>YOUR NEXT IDEA STARTS HERE</Eyebrow><h2>Ý tưởng tiếp theo có thể đến từ <em>bạn.</em></h2><p>Bạn không cần kinh nghiệm trước đó. Hãy bắt đầu với sự tò mò và tinh thần muốn khám phá.</p><Link to="/dang-ky" className="btn btn-ink">Đăng ký tham gia <ArrowUpRight size={18}/></Link></div><div className="cta-orb" aria-hidden="true"><span>LET'S</span><strong>CREATE!</strong><small>· · ·</small></div></div>
+  return <div className="cta"><div className="cta-copy"><Eyebrow>YOUR NEXT IDEA STARTS HERE</Eyebrow><h2>Ý tưởng tiếp theo có thể đến từ <em>bạn.</em></h2><p>Bạn không cần kinh nghiệm trước đó. Hãy bắt đầu với sự tò mò và tinh thần muốn khám phá.</p><Link to="/dang-ky" className="btn btn-ink">Đăng ký tham gia <ArrowRight size={18}/></Link></div><div className="cta-orb" aria-hidden="true"><span>LET'S</span><strong>CREATE!</strong><small>· · ·</small></div></div>
 }
 function PageHeader({number, eyebrow, title, desc, clean = false}: {number: string; eyebrow: string; title: string; desc: string; clean?: boolean}) {
   return <div className={"page-header wrap" + (clean ? " page-header-clean" : "")}><div className="page-header-text"><Eyebrow>{number} / {eyebrow}</Eyebrow><h1>{title}</h1><p>{desc}</p></div>{!clean && <div className="page-decoration"><span>·</span><i>✦</i></div>}</div>
@@ -146,7 +142,7 @@ function About() {
       {icon: UsersRound, title:'Làm việc cùng nhau', desc:'Rèn kỹ năng giao tiếp, hợp tác, trình bày và phản hồi ý tưởng.'},
       {icon: Rocket, title:'Biến ý tưởng thành sản phẩm', desc:'Thực hiện, chia sẻ, đánh giá và hoàn thiện các sản phẩm số.'},
     ].map((g,i)=><div className="goal" key={g.title}><div className="goal-icon"><g.icon size={25}/></div><span>0{i+1}</span><h3>{g.title}</h3><p>{g.desc}</p></div>)}</div></section>
-    <section className="wrap section"><div className="audience"><div><Eyebrow>AI CÓ THỂ THAM GIA?</Eyebrow><h2>Không quan trọng bạn đang ở vạch xuất phát nào.</h2><p>CLB hướng đến tất cả học sinh trong trường quan tâm tới công nghệ, thiết kế, video, lập trình hoặc sáng tạo nội dung. <strong>Chưa có kinh nghiệm? Không sao cả.</strong> Sẵn sàng học hỏi chính là điều quan trọng.</p><Link className="btn btn-ink" to="/dang-ky">Đăng ký khám phá <ArrowUpRight size={17}/></Link></div><div className="audience-visual"><UsersRound size={102} strokeWidth={1}/><span>YOU BELONG HERE ·</span></div></div></section>
+    <section className="wrap section"><div className="audience"><div><Eyebrow>AI CÓ THỂ THAM GIA?</Eyebrow><h2>Không quan trọng bạn đang ở vạch xuất phát nào.</h2><p>CLB hướng đến tất cả học sinh trong trường quan tâm tới công nghệ, thiết kế, video, lập trình hoặc sáng tạo nội dung. <strong>Chưa có kinh nghiệm? Không sao cả.</strong> Sẵn sàng học hỏi chính là điều quan trọng.</p><Link className="btn btn-ink" to="/dang-ky">Đăng ký khám phá <ArrowRight size={17}/></Link></div><div className="audience-visual"><UsersRound size={102} strokeWidth={1}/><span>YOU BELONG HERE ·</span></div></div></section>
   </>
 }
 function Activities() {
@@ -184,7 +180,7 @@ function Register() {
       <div className="form-row"><div className="form-field"><label htmlFor="classroom">Lớp <b>*</b></label><input required maxLength={30} id="classroom" name="classroom" placeholder="Ví dụ: 12A1"/></div><div className="form-field"><label htmlFor="contact">Email / liên hệ <b>*</b></label><input required maxLength={120} id="contact" name="contact" placeholder="Thông tin liên hệ"/></div></div>
       <fieldset className="form-field interest-field"><legend>Bạn quan tâm lĩnh vực nào? <b>*</b></legend><p>Có thể chọn nhiều lĩnh vực</p><div className="choices">{interests.map((interest, i) => {const Icon = fieldIcons[i];const active=chosen.includes(interest);return <label key={interest} className={'choice'+(active?' checked':'')}><input type="checkbox" name="interest" value={interest} checked={active} onChange={()=>toggle(interest)}/><Icon size={17}/><span>{interest}</span><span className="checkbox-indicator">{active && <Check size={13}/>}</span></label>})}</div>{error&&<span className="field-error" role="alert">Vui lòng chọn ít nhất một lĩnh vực.</span>}</fieldset>
       <div className="form-field"><label htmlFor="motivation">Lý do muốn tham gia CLB <b>*</b></label><textarea required maxLength={1000} minLength={5} rows={4} id="motivation" name="motivation" placeholder="Điều gì khiến bạn hào hứng với sáng tạo số?"/></div>
-      <div className="form-disclaimer">Đây là website minh họa. Nút gửi chỉ hiển thị xác nhận, không thu thập dữ liệu thật.</div><button className="btn btn-ink submit" type="submit">Gửi đăng ký mô phỏng <ArrowUpRight size={18}/></button></form>}
+      <div className="form-disclaimer">Đây là website minh họa. Nút gửi chỉ hiển thị xác nhận, không thu thập dữ liệu thật.</div><button className="btn btn-ink submit" type="submit">Gửi đăng ký mô phỏng <ArrowRight size={18}/></button></form>}
       </div>
     </section>
   </>

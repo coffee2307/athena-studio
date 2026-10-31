@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ArrowDown, ArrowUpRight, Brush, Paintbrush } from 'lucide-react'
+import { ArrowDown, ArrowRight, Brush, Paintbrush } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useScrollScene } from '../hooks/useScrollScene'
 import MobilePaintingCanvas from './MobilePaintingCanvas'
@@ -43,7 +43,7 @@ export default function PaintingAboutVisual() {
           <h2>{item.headline}</h2><p>{item.desc}</p>
           {i === 2 && <Link to="/dang-ky" className="motion-cta"
             tabIndex={reducedMotion || step === i ? 0 : -1}>
-            Khám phá cùng CLB <ArrowUpRight size={17}/>
+            Khám phá cùng CLB <ArrowRight size={17}/>
           </Link>}
         </div>)}
       </div>
