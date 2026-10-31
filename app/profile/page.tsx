@@ -46,8 +46,8 @@ export default async function Profile(){
     </div>
    </section>
    <nav className="athena-profile-tabs" aria-label="Mục hồ sơ">
-    <a href="#personal-information">Thông tin cá nhân <span aria-hidden="true">↗</span></a>
-    <a href="#account-security">Tài khoản & bảo mật <span aria-hidden="true">↗</span></a>
+    <a href="#personal-information">Thông tin cá nhân <span aria-hidden="true"></span></a>
+    <a href="#account-security">Tài khoản & bảo mật <span aria-hidden="true"></span></a>
    </nav>
    <div className="athena-profile-grid">
     <section className="athena-profile-card" id="personal-information" aria-labelledby="personal-heading">
@@ -65,11 +65,11 @@ export default async function Profile(){
      </section>
      <GitHubRepositoryPanel/>
       <section className="athena-profile-support" aria-labelledby="project-heading">
-      <div className="athena-profile-support-icon" aria-hidden="true">↗</div>
+      <div className="athena-profile-support-icon" aria-hidden="true"></div>
       <p className="athena-profile-section-number">03 / DỰ ÁN VÀ HỖ TRỢ</p>
       <h2 id="project-heading">Bắt đầu một<br/>dự án mới?</h2>
       <p>Không gian dự án khách hàng chưa được kích hoạt trên bản thử nghiệm. Bạn vẫn có thể trao đổi trực tiếp với Athena về nhu cầu của mình.</p>
-      <Link href="/contact">Trao đổi với Athena <span aria-hidden="true">↗</span></Link>
+      <Link href="/contact">Trao đổi với Athena <span aria-hidden="true"></span></Link>
      </section>
    </div>
    <div className="athena-profile-disclaimer"><span aria-hidden="true">●</span> Môi trường thử nghiệm nội bộ · Chưa mở quyền truy cập dự án khách hàng</div>
