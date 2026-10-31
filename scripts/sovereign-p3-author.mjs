@@ -573,6 +573,10 @@ return (css.join("\n")+"\n"+perIndustryDetails[st.layout]+"\n"+subpageSignatures
 }
 for(const st of entries){
  const dir="templates/"+st.slug+"/src/";
+ const dataFile=join(root,dir+"data/site.json");
+ const siteData=JSON.parse(readFileSync(dataFile,"utf8"));
+ siteData.brand=st.brand;
+ write(dir+"data/site.json",JSON.stringify(siteData,null,2)+"\n");
  write(dir+"components/Site.tsx",makeSite(st));
  write(dir+"components/"+st.variant+"-sovereign.module.css",cssFor(st));
  const path=join(root,dir+"app/layout.tsx");const old=readFileSync(path,"utf8");
