@@ -48,7 +48,7 @@ function Header() {
       <div className="nav-actions">
         <ThemeToggle/>
         <Link className="btn btn-ink header-join" to="/dang-ky">Tham gia CLB <ArrowRight size={17}/></Link>
-        <button className="menu-toggle dc-constellation-toggle" aria-label={opened ? 'Đóng bản đồ điều hướng' : 'Mở bản đồ điều hướng'} aria-controls="mobile-navigation" aria-expanded={opened} onClick={() => setOpened(v => !v)}><span aria-hidden="true" className="dc-constellation-glyph">✧</span><span className="dc-constellation-label">{opened?'THU BẢN ĐỒ':'BẢN ĐỒ'}</span></button>
+        <button className="menu-toggle dc-constellation-toggle" aria-label={opened ? 'Đóng bản đồ điều hướng' : 'Mở bản đồ điều hướng'} aria-controls="mobile-navigation" aria-expanded={opened} onClick={() => setOpened(v => !v)}><span aria-hidden="true" className="dc-menu-bars"><i/><i/><i/></span></button>
       </div>
     </div></header>
     <div className={'menu-shade' + (opened ? ' show' : '')} onClick={() => setOpened(false)} aria-hidden="true"/>
