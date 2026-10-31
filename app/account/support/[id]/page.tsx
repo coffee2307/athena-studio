@@ -30,10 +30,10 @@ export default async function TicketDetail({params,searchParams}:Props){
   </article>)}</div>:<EmptyState title="Chưa có phản hồi." description="Hội thoại chưa có tin nhắn tiếp theo."/>}
   {ticket.status!=="closed"&&<form className="ops-admin-form ops-form" action={addTicketMessage}>
    <input type="hidden" name="ticket_id" value={id}/><label>Viết phản hồi<textarea name="body" rows={5} required minLength={1} maxLength={4000} placeholder="Nội dung trao đổi"/></label>
-   <button className="pill-link pill-dark" type="submit">Gửi phản hồi ↗</button></form>}
+   <button className="pill-link pill-dark" type="submit">Gửi phản hồi </button></form>}
   {isAdmin&&<div className="ops-admin-form"><h3>Cập nhật trạng thái yêu cầu</h3><form action={changeTicketStatus} className="ops-form">
    <input name="ticket_id" type="hidden" value={id}/><label>Trạng thái<select name="status" defaultValue={ticket.status}>{Object.entries(ticketStatus).map(([k,v])=><option key={k} value={k}>{v}</option>)}</select></label>
-   <button className="pill-link pill-dark" type="submit">Lưu trạng thái ↗</button>
+   <button className="pill-link pill-dark" type="submit">Lưu trạng thái </button>
   </form></div>}
  </OperationsShell>;
 }
