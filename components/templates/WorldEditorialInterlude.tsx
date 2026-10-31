@@ -29,7 +29,7 @@ export function WorldEditorialInterlude({slug}:{slug:World}){
  const root="/template-demos/"+slug;
  if(slug==="auto-showroom")return <section className="ix-editorial ix-editorial-automotive ix-editorial-minimal" aria-labelledby="ix-editorial-title-auto-showroom">
   <div className="ix-editorial-minimal-head"><span>02 / DESIGN LANGUAGE</span><span>FORM — MATERIAL — MOTION</span></div>
-  <div className="ix-editorial-minimal-body"><h2 id="ix-editorial-title-auto-showroom">LESS NOISE.<br/><em>MORE FORM.</em></h2><div><p>Ba góc nhìn về cùng một hình khối. Không cần thêm ảnh chụp xe khi chính mô hình 3D đã có thể xoay và khám phá.</p><Link href={root+"/work"}>KHÁM PHÁ DESIGN STUDIES <span aria-hidden="true">↗</span></Link></div></div>
+  <div className="ix-editorial-minimal-body"><h2 id="ix-editorial-title-auto-showroom">LESS NOISE.<br/><em>MORE FORM.</em></h2><div><p>Ba góc nhìn về cùng một hình khối. Không cần thêm ảnh chụp xe khi chính mô hình 3D đã có thể xoay và khám phá.</p><Link href={root+"/work"}>KHÁM PHÁ DESIGN STUDIES <span aria-hidden="true"></span></Link></div></div>
   <div className="ix-editorial-minimal-foot"><span>01 / SILHOUETTE</span><span>02 / MATERIAL</span><span>03 / AERODYNAMICS</span></div>
  </section>;
  return <section className={"ix-editorial ix-editorial-"+data.theme} aria-labelledby={"ix-editorial-title-"+slug}>
@@ -38,7 +38,7 @@ export function WorldEditorialInterlude({slug}:{slug:World}){
    <h2 id={"ix-editorial-title-"+slug}>{data.title}</h2>
    <div className="ix-editorial-intro">
     <p>{data.description}</p>
-    <Link href={root+"/work"}>{data.cta}<span aria-hidden="true">↗</span></Link>
+    <Link href={root+"/work"}>{data.cta}<span aria-hidden="true"></span></Link>
    </div>
   </div>
   <div className="ix-editorial-photo-grid">
