@@ -129,3 +129,7 @@
 
 /* Bring meaningful shop headline into the first mobile fold without losing photo-led identity. */
 @media(max-width:650px){.showcase figure{height:44svh;min-height:310px;max-height:430px}.showcaseCopy{padding-top:35px;padding-bottom:62px}.showcase h1{margin:19px 0 24px}.heroLabel{height:96px;width:96px;top:9%;right:6%}}
+
+/* Kinetic shop details stop when their artwork leaves the screen. */
+.moc .heroLabel,.moc .ticker>div{animation-play-state:paused}
+.moc [data-moc-ambient][data-moc-active="true"] .heroLabel,.moc [data-moc-ambient][data-moc-active="true"]>div{animation-play-state:running}
