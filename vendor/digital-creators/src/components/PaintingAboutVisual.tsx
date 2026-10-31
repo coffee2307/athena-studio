@@ -54,7 +54,7 @@ export default function PaintingAboutVisual() {
         onClick={() => sectionRef.current?.nextElementSibling?.scrollIntoView({
           behavior: reducedMotion ? 'auto' : 'smooth', block: 'start',
         })}>
-        BỎ QUA HIỆU ỨNG ↗
+        BỎ QUA HIỆU ỨNG 
       </button>
       <div className="motion-footer">
         <span>IMAGINE / PAINT / CREATE</span>
