@@ -80,6 +80,11 @@ test("FASHION preview generator fails closed until real GLB is ready",()=>{
 test("FASHION hero is unframed, larger, and has no STUDIO / 3D OBJECT badge or 01 / 03 overlay",()=>{
  assert.doesNotMatch(hero,/STUDIO \/ 3D OBJECT/);
  assert.doesNotMatch(hero,/s\.stageBackdrop|s\.stageCorner|s\.stageCounter/);
- assert.match(hero,/currentRadius\*1\.04/);
+ assert.match(hero,/activeModelIndex===2\?1\.04:\.91/);
  assert.match(heroCss,/\.modelStage\{background:transparent;border:0;overflow:visible\}/);
+});
+
+test("FASHION first two figures larger than third by per-model camera framing",()=>{
+ assert.match(hero,/activeModelIndex===2\?1\.04:\.91/);
+ assert.match(hero,/activeModelIndex=index/);
 });

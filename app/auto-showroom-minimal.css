@@ -315,3 +315,12 @@
 .world-site[data-world="auto-showroom"] .bv-after-cinematic .ix-glb-credit{text-align:left;max-width:100%}
 }
 @media(prefers-reduced-motion:reduce){.world-site[data-world="auto-showroom"] .bv-load-spinner .bv-spinner-ring{animation:none;border-color:#f58b43 #647582 #647582 #647582}}
+
+
+/* Desktop loader follows the vehicle's right-of-center visual anchor.
+   The car remains on its current camera path; mobile stays at 50%. */
+@media(min-width:761px){
+ .world-site[data-world="auto-showroom"] .ix-auto-showroom .bv-cinematic-track .ix-car-load.bv-load-spinner{
+  left:68%;right:auto;transform:translate3d(-50%,-50%,0);
+ }
+}

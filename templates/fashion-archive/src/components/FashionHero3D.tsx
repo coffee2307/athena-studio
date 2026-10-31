@@ -75,6 +75,7 @@ export default function FashionHero3D({modelBase,collectionUrl}:Props){
    gltfLoader.setDRACOLoader(draco);
    const cache=new Map<number,{group:THREE.Group;radius:number}>();
    let requestId=0,frameBefore=0,currentRadius=1.8,objectLoaded=false;
+   let activeModelIndex=activeRef.current;
    let dragging=false,freezeUntil=0;
 
    function fit(){
@@ -87,7 +88,7 @@ export default function FashionHero3D({modelBase,collectionUrl}:Props){
     camera.updateProjectionMatrix();
     const vfov=T.MathUtils.degToRad(camera.fov);
     const hfov=2*Math.atan(Math.tan(vfov/2)*camera.aspect);
-    const distance=Math.max(4.5,currentRadius*1.04/Math.sin(Math.min(vfov,hfov)/2));
+    const distance=Math.max(4.5,currentRadius*(activeModelIndex===2?1.04:.91)/Math.sin(Math.min(vfov,hfov)/2));
     camera.position.set(0,-distance,distance*.16);
     camera.lookAt(0,0,0);
     gl.render(scene,camera);
@@ -114,6 +115,7 @@ export default function FashionHero3D({modelBase,collectionUrl}:Props){
     if(!destroyed&&!document.hidden&&isVisible)raf=requestAnimationFrame(render);
    };
    function show(index:number){
+    activeModelIndex=index;
     const serial=++requestId;
     setStatus("loading");
     function present(item:{group:THREE.Group;radius:number}){
