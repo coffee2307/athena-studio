@@ -365,13 +365,15 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
     const framed=isMobile?projectCarSilhouette(silhouetteSupports,car,camera):raw;
     // NDC 0.84 reserves an 8% safe margin on both sides.
     const safeX=isMobile?.84:.90,safeTop=isMobile?.82:.87,safeBottom=isMobile?.82:.85;
-    canvas.dataset.layoutRig=isMobile?"mobile-mesh-optical":"desktop-editorial";
-    canvas.dataset.modelCenterRawX=raw.centerX.toFixed(5);
-    canvas.dataset.modelCenterX=framed.centerX.toFixed(5);
-    canvas.dataset.modelFrame=[framed.left,framed.right,framed.bottom,framed.top].map(v=>v.toFixed(4)).join(",");
-    canvas.dataset.modelSafe=String(framed.left>=-safeX&&framed.right<=safeX&&framed.bottom>=-safeBottom&&framed.top<=safeTop);
-    canvas.dataset.modelPivot="mesh-silhouette-supports";
-    canvas.dataset.modelSupportCount=String(silhouetteSupports.length);
+    if(canvas){
+     canvas.dataset.layoutRig=isMobile?"mobile-mesh-optical":"desktop-editorial";
+     canvas.dataset.modelCenterRawX=raw.centerX.toFixed(5);
+     canvas.dataset.modelCenterX=framed.centerX.toFixed(5);
+     canvas.dataset.modelFrame=[framed.left,framed.right,framed.bottom,framed.top].map(v=>v.toFixed(4)).join(",");
+     canvas.dataset.modelSafe=String(framed.left>=-safeX&&framed.right<=safeX&&framed.bottom>=-safeBottom&&framed.top<=safeTop);
+     canvas.dataset.modelPivot="mesh-silhouette-supports";
+     canvas.dataset.modelSupportCount=String(silhouetteSupports.length);
+    }
    }
    // As the camera reaches the rear, dim broad studio-panel reflections so
    // black bodywork stays graphite instead of turning silver from that angle.
