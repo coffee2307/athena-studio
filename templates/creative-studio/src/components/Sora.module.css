@@ -91,3 +91,7 @@
 }
 @media(max-width:390px){.opening h1{font-size:clamp(51px,12.4vw,68px)}.editorialSeal{top:27%}.typeRibbon>div{font-size:26px}.drawerTitle{font-size:57px}}
 @media(prefers-reduced-motion:reduce){.sora :is(.floatingCutout,.editorialSeal,.typeRibbon>div,.scrollGuide span){animation:none!important}.sora [data-sora-reveal],.drawer,.menuBackdrop{transition:none!important}.sora [data-sora-reveal]{opacity:1!important;transform:none!important}}
+
+/* Mobile composition correction from actual 390px screenshot: stamp must never cover copy. */
+@media(max-width:760px){.editorialSeal{top:auto;bottom:27%;right:4vw;left:auto;z-index:7}.openingWords{z-index:9}.openingImage{z-index:2}.floatingCutout{z-index:5}}
+@media(max-width:390px){.editorialSeal{top:auto;bottom:29%;right:2vw}}
