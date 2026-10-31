@@ -13,6 +13,7 @@ try{
    await page.goto(base+"/template-demos/"+slug,{waitUntil:"domcontentloaded",timeout:45000});
    const root=page.locator(".world-site");
    await root.waitFor();
+   await page.waitForFunction(()=>document.querySelectorAll("[data-world-reveal]").length>0,null,{timeout:16000});
    const initial=await page.evaluate(()=>{
     const header=document.querySelector(".world-header"),footer=document.querySelector(".world-footer");
     return {bodyOverflow:document.body.style.overflow,clientWidth:document.documentElement.clientWidth,scrollWidth:document.documentElement.scrollWidth,headerWidth:header.getBoundingClientRect().width,footerBg:getComputedStyle(footer).backgroundColor,displayFont:getComputedStyle(footer.querySelector(".world-footer-identity>a")).fontFamily,reveal:document.querySelectorAll("[data-world-reveal]").length};
