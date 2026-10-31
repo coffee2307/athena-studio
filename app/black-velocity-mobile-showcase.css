@@ -5,10 +5,14 @@
  * math and GLB materials are intentionally unchanged. */
 .bv-mobile-story,.bv-mobile-gesture-hint{display:none}
 @media(max-width:760px){
+ .ix-auto-showroom .bv-cinematic-track{
+  --bv-stage-top:clamp(200px,29svh,280px);
+  --bv-stage-bottom:clamp(152px,20svh,180px);
+ }
  .ix-auto-showroom .bv-cinematic-steps .bv-cinematic-copy{display:none!important}
  .ix-auto-showroom .bv-cinematic-track>.ix-hero{
   min-height:0!important;
-  height:calc(100svh - 90px)!important;
+  height:100svh!important;
   justify-content:flex-start;
  }
  .ix-auto-showroom .bv-mobile-story{
@@ -67,8 +71,8 @@
  .ix-auto-showroom .bv-cinematic-track[data-chapter]:not([data-chapter="0"]) .ix-hero-visual .ix-auto-3d-canvas{
   left:0!important;right:0!important;bottom:auto!important;
   width:100%!important;
-  top:clamp(235px,30svh,280px)!important;
-  height:clamp(350px,52svh,465px)!important;
+  top:var(--bv-stage-top)!important;
+  height:max(160px,calc(100svh - var(--bv-stage-top) - var(--bv-stage-bottom)))!important;
   transform:none!important;transition:none!important;
  }
  /* Avoid lowering the contrast of the vehicle with a foreground dark veil. */
