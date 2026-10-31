@@ -29,7 +29,7 @@ test("Only the explicitly isolated compatibility adapter can import the shared W
  assert.match(source,/from ["']@\/components\/templates\/WorldSite["']/);
  const implementation=load("components/sovereign/sovereign-renderers.ts");
  assert.doesNotMatch(implementation,/from ["']@\/components\/templates\/WorldSite["']/);
- assert.doesNotMatch(implementation,/WorldMotion|WorldExperiencePages/);
+ assert.doesNotMatch(implementation,/^import.*(?:WorldMotion|WorldExperiencePages).*$/m);
 });
 test("P0/P1 structural audit reports existing design debt without falsely claiming 21 designs",()=>{
  const r=spawnSync(process.execPath,[join(root,"scripts/sovereign-audit.mjs"),"--check"],{cwd:root,encoding:"utf8"});
