@@ -33,7 +33,7 @@ test("FASHION 3D hero: no lamp/poster, real Z rotation, bound camera, three butt
  assert.match(hero,/pivot.rotation.z-=dt\*\.28/);
  assert.match(hero,/camera\.up\.set\(0,0,1\)/);
  assert.match(hero,/orient\.rotation\.x=Math\.PI\/2/);
- assert.match(hero,/pivot.rotation.z-=deltaX\*\.009/);
+ assert.match(hero,/pivot.rotation.z\+=deltaX\*\.009/);
  assert.match(hero,/onPointerMove=\{onPointerMove\}/);
  assert.match(hero,/onPointerCancel=\{finishDrag\}/);
  assert.match(heroCss,/touch-action:pan-y/);

@@ -145,8 +145,8 @@ export default function FashionHero3D({modelBase,collectionUrl}:Props){
    engine.current={switchModel:show,rotateBy:(deltaX:number)=>{
     if(!objectLoaded)return;
     dragging=true;
-    // Swiping right turns clockwise. Only the centered world-Z pivot rotates.
-    pivot.rotation.z-=deltaX*.009;
+    // Dragging right turns the model counterclockwise; dragging left turns it clockwise.
+    pivot.rotation.z+=deltaX*.009;
     if(host.current)host.current.dataset.rotation=pivot.rotation.z.toFixed(4);
     gl.render(scene,camera);
    },releaseDrag:()=>{dragging=false;freezeUntil=performance.now()+1200;syncLoop()},dispose:()=>{}};

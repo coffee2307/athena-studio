@@ -73,11 +73,11 @@ for(const [width,height] of sizes){
    await page.mouse.move(startX+136,startY,{steps:8});await page.mouse.up();
   }
   const rotationAfterDrag=Number(await stage.getAttribute("data-rotation"));
-  check(rotationAfterDrag<rotationBeforeDrag-.35,"Swipe right should turn clockwise on vertical Z: "+rotationBeforeDrag+" -> "+rotationAfterDrag);
+  check(rotationAfterDrag>rotationBeforeDrag+.35,"Swipe right should turn counterclockwise on vertical Z: "+rotationBeforeDrag+" -> "+rotationAfterDrag);
   check(await stage.getAttribute("data-dragging")==="false","Drag state not released");
   await stage.focus();await page.keyboard.press("ArrowLeft");
   const rotationAfterKey=Number(await stage.getAttribute("data-rotation"));
-  check(rotationAfterKey>rotationAfterDrag+.25,"ArrowLeft did not reverse the vertical rotation");
+  check(rotationAfterKey<rotationAfterDrag-.25,"ArrowLeft did not reverse the vertical rotation");
   await page.waitForTimeout(350);
   const afterIdle=Number(await stage.getAttribute("data-rotation"));
   check(Math.abs(afterIdle-rotationAfterKey)<.04,"Autoplay interrupted user drag too soon");
