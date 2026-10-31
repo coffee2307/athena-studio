@@ -1,16 +1,20 @@
-import type {ReactNode} from "react";
+import type {ComponentType} from "react";
 import type {SovereignSection,SovereignSlug} from "@/data/sovereign-site-registry";
+import {Site as Sora} from "@/templates/creative-studio/src/components/Site";
+import {Site as North} from "@/templates/modern-corporate/src/components/Site";
+import {Site as Moc} from "@/templates/commerce-standard/src/components/Site";
 
-/**
- * P2/P3 integration surface: one renderer per physically isolated template.
- * A completed template must be registered here and its stage changed to "sovereign".
- * Do not import WorldSite, WorldExperiencePages, WorldMotion or any shared UI here.
- * Missing renderers fail closed rather than showing a generic/shared substitute.
- */
+/** Only technical site dispatch; never export shared headers, buttons, page shells or motion. */
 export type IndependentPageProps={
  section:SovereignSection;
  itemIndex?:number;
  embedded?:boolean;
+ basePath?:string;
+ assetBase?:string;
 };
-export type IndependentRenderer=(props:IndependentPageProps)=>ReactNode;
-export const sovereignRenderers:Partial<Record<SovereignSlug,IndependentRenderer>>={};
+export type IndependentRenderer=ComponentType<IndependentPageProps>;
+export const sovereignRenderers:Partial<Record<SovereignSlug,IndependentRenderer>>={
+ "creative-studio":Sora,
+ "modern-corporate":North,
+ "commerce-standard":Moc
+};
