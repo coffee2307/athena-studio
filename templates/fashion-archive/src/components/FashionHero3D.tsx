@@ -87,7 +87,7 @@ export default function FashionHero3D({modelBase,collectionUrl}:Props){
     camera.updateProjectionMatrix();
     const vfov=T.MathUtils.degToRad(camera.fov);
     const hfov=2*Math.atan(Math.tan(vfov/2)*camera.aspect);
-    const distance=Math.max(4.5,currentRadius*1.24/Math.sin(Math.min(vfov,hfov)/2));
+    const distance=Math.max(4.5,currentRadius*1.04/Math.sin(Math.min(vfov,hfov)/2));
     camera.position.set(0,-distance,distance*.16);
     camera.lookAt(0,0,0);
     gl.render(scene,camera);
@@ -221,11 +221,8 @@ export default function FashionHero3D({modelBase,collectionUrl}:Props){
       onPointerUp={onPointerUp} onPointerCancel={finishDrag}
       onKeyDown={onKeyDown} data-dragging="false"
       data-model-state={status} data-active-model={MODELS[active].id}>
-      <div className={s.stageBackdrop} aria-hidden="true"/>
       <canvas ref={canvas} className={s.canvas} aria-label={MODELS[active].caption} role="img"/>
       {status!=="ready"&&<div className={s.loading} role="status">{status==="loading"?"ĐANG DỰNG MÔ HÌNH 3D":"KHÔNG THỂ HIỂN THỊ 3D TRÊN THIẾT BỊ NÀY"}</div>}
-      <span className={s.stageCorner}>STUDIO / 3D OBJECT</span>
-      <span className={s.stageCounter}>0{active+1} / 03</span>
       <span className={s.dragHint}>KÉO NGANG ĐỂ XOAY 360°</span>
     </div>
     <div className={s.modelFooter}>

@@ -60,3 +60,7 @@
  white-space:nowrap;padding:7px 11px;background:#fff8eddf;color:#48382c;
  font:700 10px/1.5 "Be Vietnam Pro",Arial,sans-serif;letter-spacing:.07em}
 @media(max-width:540px){.dragHint{font-size:9px;bottom:10px;padding:6px 9px}}
+
+/* Floating editorial sculpture: no framed/card background behind the 3D model. */
+.modelStage{background:transparent;border:0;overflow:visible}
+.canvas{background:transparent}

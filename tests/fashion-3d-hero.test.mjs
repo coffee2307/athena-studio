@@ -76,3 +76,10 @@ test("FASHION preview generator fails closed until real GLB is ready",()=>{
  assert.match(src,/if\(slug==="fashion-archive"\)/);
  assert.match(src,/\[data-active-model="pose-floor"\]\[data-model-state="ready"\]/);
 });
+
+test("FASHION hero is unframed, larger, and has no STUDIO / 3D OBJECT badge or 01 / 03 overlay",()=>{
+ assert.doesNotMatch(hero,/STUDIO \/ 3D OBJECT/);
+ assert.doesNotMatch(hero,/s\.stageBackdrop|s\.stageCorner|s\.stageCounter/);
+ assert.match(hero,/currentRadius\*1\.04/);
+ assert.match(heroCss,/\.modelStage\{background:transparent;border:0;overflow:visible\}/);
+});
