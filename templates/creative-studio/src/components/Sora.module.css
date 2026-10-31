@@ -2,3 +2,92 @@
 @media(max-width:900px){.headEdition{display:none}.masthead{grid-template-columns:1fr auto auto;height:74px}.desktopIndex{gap:14px}.opening{min-height:auto;grid-template-columns:1fr 1fr;padding:45px 5vw 85px}.opening h1{font-size:clamp(54px,9.1vw,90px)}.manifesto{grid-template-columns:1fr;padding:100px 8vw}.contactBand{grid-template-columns:1fr 1fr}.contactBand p{grid-column:1/-1;grid-row:2}.footerLinks{flex-wrap:wrap}}
 @media(max-width:620px){.masthead{height:68px;padding:0 5vw}.logotype{font-size:31px}.desktopIndex{display:none}.opening{display:flex;flex-direction:column;padding:35px 6vw 68px;gap:32px;align-items:stretch}.opening h1{font-size:clamp(60px,15vw,96px);margin:38px 0 23px}.openingWords>p:not(.kicker){font-size:14px}.openingImage{width:82%;margin-left:auto;max-height:510px;transform:rotate(2deg)}.verticalLabel{top:auto;bottom:30px;left:6vw;right:auto}.manifesto{padding:70px 7vw}.manifesto p{font-size:clamp(34px,9vw,60px)}.featured{padding:70px 6vw}.sectionLabel{gap:15px}.asymmetricGrid{display:block}.project{display:block;margin:0 0 60px!important;max-width:100%!important}.project:nth-child(2){width:84%;margin-left:auto!important}.project:nth-child(3){width:92%}.projectImage{aspect-ratio:5/4}.project h2{font-size:30px}.contactBand{display:flex;flex-direction:column;align-items:flex-start;padding:55px 8vw;gap:15px}.contactBand p{font-size:34px}.lastPage{padding:65px 7vw 25px}.footerName{font-size:clamp(100px,30vw,180px)}.footerLinks{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:65px}.footerLinks p{grid-column:1/-1}.routeIntro{padding:55px 6vw}.routeIntro h1,.aboutLetter h1,.letterForm h1{font-size:clamp(53px,14vw,85px)}.workGrid{display:block;padding:0 6vw}.workPiece{display:block;margin:0 0 65px!important}.workPiece:nth-child(even){width:83%;margin-left:auto!important}.workPiece h2{font-size:32px}.filters{padding-inline:6vw}.story{padding:0 6vw 80px}.storyHeading{padding:55px 0 32px}.storyHeading h1{font-size:54px}.storyHeading p{grid-column:1/-1}.storyHero{height:53vh}.storyText{display:block;padding:55px 0}.storyText h2{font-size:38px;margin:20px 0}.storyPair{grid-template-columns:1fr 1fr;gap:10px}.storyPair img{height:40vh}.discipline{padding:35px 6vw;grid-template-columns:1fr 1fr;gap:15px}.discipline span{grid-column:1/-1}.discipline img{height:130px}.aboutLetter{display:block;padding:65px 6vw}.aboutLetter h1{font-size:62px}.aboutLetter>div{font-size:18px;margin:40px 0}.letterForm{display:block;padding-bottom:75px}.letterForm form{margin:0 6vw}}
 @media(prefers-reduced-motion:reduce){.sora *, .sora *::before,.sora *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* SORA 02 — An inhabited magazine, never the generic template shell. */
+.sora{font-family:"Be Vietnam Pro","Segoe UI",Arial,sans-serif;--sora-depth:0px;overflow-x:clip;overflow-y:visible}
+.sora :where(h1,h2,h3,p,small,span){overflow-wrap:normal}
+.masthead{grid-template-columns:auto 1fr auto;gap:3.3vw;padding-inline:4vw;background:#f0eadf}
+.logotype{font-family:"Times New Roman",Georgia,serif;letter-spacing:-.035em;font-weight:700}
+.headEdition{justify-self:center;text-align:center;font-size:9px;letter-spacing:.08em}
+.desktopIndex{justify-self:end;display:flex;gap:24px}
+.desktopIndex a{display:grid;gap:4px;font:700 12px/1.3 "Be Vietnam Pro","Segoe UI",sans-serif;letter-spacing:0;white-space:nowrap;transition:color .2s,transform .2s}
+.desktopIndex a small{font-size:9px;color:#65745b;font-weight:600}
+.desktopIndex a:hover{color:#6f7d4d;transform:translateY(-2px)}
+.menuButton{display:none}
+.menuBackdrop{position:fixed;z-index:81;inset:0;background:#172418a9;border:0;opacity:0;pointer-events:none;transition:opacity .32s ease}
+.menuBackdrop[data-open="true"]{opacity:1;pointer-events:auto}
+.drawer{visibility:hidden;transform:translateX(105%);transition:transform .42s cubic-bezier(.22,1,.36,1),visibility 0s linear .42s;box-shadow:-20px 0 60px #08170a33}
+.drawer[aria-hidden="false"]{visibility:visible;transform:translateX(0);transition:transform .42s cubic-bezier(.22,1,.36,1),visibility 0s}
+.drawerX{position:absolute;right:5vw;top:28px;background:transparent;border:1px solid #c7dcbf75;color:#f0f1df;display:inline-flex;gap:18px;align-items:center;padding:9px 12px;min-height:44px;font:700 12px "Be Vietnam Pro","Segoe UI",sans-serif}
+.drawerX span{font:300 30px/1 "Segoe UI",sans-serif}
+.drawerTitle{font:italic 500 clamp(53px,8vw,90px)/1.2 "Times New Roman",serif;letter-spacing:-.04em;margin:25px 0 48px}
+.drawerTitle span{color:#d3ef8f}
+.navCollection a{font:italic 500 clamp(30px,4vw,52px)/1.35 "Times New Roman",serif;transition:padding .25s,color .25s}
+.navCollection a:hover{padding-left:16px;color:#d1ed8f}
+.drawerClose{font-weight:700;min-height:48px}
+.opening{background:#f2ede1;min-height:min(860px,100svh);padding:5.5vw 6vw 7.5vw;grid-template-columns:1.05fr .95fr;isolation:isolate}
+.opening:before{content:"SORA / 01";position:absolute;top:22px;left:6vw;font:700 9px "Be Vietnam Pro",sans-serif;letter-spacing:.18em;color:#576353}
+.openingWords{position:relative;z-index:5}
+.opening h1{font:500 clamp(74px,8.5vw,143px)/.99 "Times New Roman",serif;letter-spacing:-.065em;margin:48px -7vw 35px 0;white-space:normal;max-width:8.8ch;text-wrap:balance}
+.opening h1 em{color:#76843f;font-style:italic}
+.openingWords>p:not(.kicker){max-width:34ch;font-size:15px}
+.openingImage{max-height:690px;aspect-ratio:3/4;margin:10px 5vw 0 0;transform:translate3d(0,var(--sora-depth),0) rotate(3deg);box-shadow:14px 18px 0 #abb37d;transition:box-shadow .4s ease}
+.openingImage img{filter:saturate(.83) contrast(1.05)}
+.openingImage figcaption{font:700 10px "Be Vietnam Pro","Segoe UI",sans-serif;max-width:80%}
+.floatingCutout{position:absolute;z-index:6;right:2vw;bottom:1.5vw;width:clamp(130px,17vw,270px);aspect-ratio:5/4;border:10px solid #f5f0e3;background:#c2c9ac;transform:rotate(-9deg);box-shadow:0 18px 35px #1724192d;pointer-events:none;animation:soraFloat 6s ease-in-out infinite alternate}
+.floatingCutout img{width:100%;height:100%;object-fit:cover}
+.editorialSeal{position:absolute;z-index:7;left:45%;top:9%;height:116px;width:116px;border-radius:50%;background:#d8ef8b;border:1px solid #76884a;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(-12deg);animation:soraSpin 14s ease-in-out infinite alternate;pointer-events:none}
+.editorialSeal span{font:750 9px "Be Vietnam Pro",sans-serif}
+.editorialSeal strong{font:italic 700 57px/.9 "Times New Roman",serif}
+.scrollGuide{position:absolute;bottom:24px;left:6vw;font:700 10px "Be Vietnam Pro",sans-serif;letter-spacing:.12em;display:inline-flex;gap:18px}
+.scrollGuide span{display:inline-block;animation:soraBop 1.8s ease-in-out infinite}
+.verticalLabel{right:1.2vw;font-size:9px}
+.typeRibbon{height:78px;background:#d8ef8b;color:#26351e;overflow:hidden;display:flex;align-items:center;border-block:1px solid #50613d}
+.typeRibbon>div{font:italic 500 39px/1 "Times New Roman",serif;white-space:nowrap;min-width:max-content;animation:soraRibbon 25s linear infinite}
+.manifesto{position:relative;overflow:hidden;padding-block:10vw 12vw}
+.manifesto p{position:relative;z-index:1;font-family:"Times New Roman",serif;line-height:1.22;letter-spacing:-.025em}
+.manifestoAccent{position:absolute;right:3%;bottom:-30%;font:italic 500 540px/1 "Times New Roman",serif;color:#344934;opacity:.46;pointer-events:none}
+.manifesto>span{z-index:1}
+.project h2,.workPiece h2,.storyHeading h1,.storyText h2,.discipline>span,.aboutLetter h1,.routeIntro h1,.contactBand p,.footerName{font-family:"Times New Roman",Georgia,serif;line-height:1.15;letter-spacing:-.028em}
+.projectImage{overflow:hidden}
+.projectImage img{filter:saturate(.84);transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.project:nth-child(2) .projectImage{border-radius:48% 48% 0 0}
+.project:nth-child(3) .projectImage{clip-path:polygon(7% 0,100% 0,100% 92%,0 100%,0 12%)}
+.featured{background:linear-gradient(155deg,#f3eedf 0%,#e7e2d4 100%)}
+.project h2{font-size:clamp(28px,3.4vw,48px)}
+.contactBand{background:#d4ed9a;align-items:center}
+.contactBand p{line-height:1.22}
+.lastPage{position:relative;background:#18271c;overflow:hidden}
+.lastPage:before{content:"";position:absolute;right:-7vw;top:-25%;height:470px;width:470px;border:1px solid #cadca54d;border-radius:50%;pointer-events:none}
+.footerName{position:relative;z-index:1;letter-spacing:-.08em}
+.routeIntro h1,.aboutLetter h1{line-height:1.02;letter-spacing:-.048em}
+.routeIntro h1 em,.aboutLetter h1 em{color:#71834c}
+[data-sora-reveal]{transition:opacity .68s ease,transform .68s cubic-bezier(.22,1,.36,1)}
+.sora[data-sora-surface] [data-sora-reveal]:not([data-sora-visible="true"]){opacity:.55;transform:translateY(25px)}
+.sora[data-sora-surface] [data-sora-visible="true"]{opacity:1;transform:translateY(0)}
+@keyframes soraFloat{from{transform:translateY(0) rotate(-9deg)}to{transform:translateY(-17px) rotate(-6deg)}}
+@keyframes soraSpin{from{transform:rotate(-12deg)}to{transform:rotate(8deg)}}
+@keyframes soraRibbon{to{transform:translateX(-44%)}}
+@keyframes soraBop{50%{transform:translateY(7px)}}
+@media (max-width:1120px){.headEdition{display:none}.masthead{grid-template-columns:1fr auto}.opening h1{font-size:clamp(67px,9vw,105px)}}
+@media (max-width:760px){
+.masthead{grid-template-columns:1fr auto;padding-inline:6vw;height:72px}
+.menuButton{display:flex;justify-self:end;align-items:flex-end;border:1px solid #b0bea2;min-height:44px;padding:10px;width:48px}
+.desktopIndex{display:none}.menuButton i{width:23px}.menuButton i:last-child{width:16px}
+.opening{display:flex;flex-direction:column;padding:75px 6vw 80px;min-height:auto;gap:40px}
+.opening h1{font-size:clamp(61px,12.4vw,96px);max-width:none;letter-spacing:-.048em;margin:16px 0 22px}
+.openingWords>p:not(.kicker){font-size:14px}
+.openingImage{height:auto;min-height:0;max-height:none;aspect-ratio:3/4;margin:0 6vw 0 auto;width:76%;transform:translateY(var(--sora-depth)) rotate(3deg)}
+.floatingCutout{right:auto;left:3vw;bottom:76px;width:38%;border-width:7px}
+.editorialSeal{left:auto;right:4vw;top:24%;width:82px;height:82px}
+.editorialSeal strong{font-size:36px}.editorialSeal span{font-size:7px}
+.scrollGuide{bottom:21px}.verticalLabel{right:1vw;top:auto;bottom:180px}
+.typeRibbon{height:63px}.typeRibbon>div{font-size:30px}
+.manifesto{padding:85px 7vw;display:block}
+.manifesto>span{display:block;margin-bottom:25px}.manifesto p{font-size:clamp(35px,8vw,60px)}
+.manifestoAccent{font-size:350px;bottom:-22%}
+.drawer{width:min(490px,100vw);padding:90px 8vw 35px}.drawerX{top:25px;right:8vw}
+.project:nth-child(2) .projectImage{border-radius:35% 35% 0 0}
+}
+@media(max-width:390px){.opening h1{font-size:clamp(51px,12.4vw,68px)}.editorialSeal{top:27%}.typeRibbon>div{font-size:26px}.drawerTitle{font-size:57px}}
+@media(prefers-reduced-motion:reduce){.sora :is(.floatingCutout,.editorialSeal,.typeRibbon>div,.scrollGuide span){animation:none!important}.sora [data-sora-reveal],.drawer,.menuBackdrop{transition:none!important}.sora [data-sora-reveal]{opacity:1!important;transform:none!important}}
