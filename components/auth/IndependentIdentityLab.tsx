@@ -123,8 +123,8 @@ export function IndependentIdentityLab({
    <button className="pill-link pill-dark identity-lab-button" type="button" disabled={pending} onClick={signOut}>Đăng xuất phiên thử nghiệm →</button>
   </>:<>
    {(googleEnabled||githubEnabled)&&<div className="identity-lab-social">
-    {googleEnabled&&<button type="button" disabled={pending} onClick={()=>startSocial("google")}>Tiếp tục với Google ↗</button>}
-    {githubEnabled&&<button type="button" disabled={pending} onClick={()=>startSocial("github")}>Tiếp tục với GitHub ↗</button>}
+    {googleEnabled&&<button type="button" disabled={pending} onClick={()=>startSocial("google")}>Tiếp tục với Google </button>}
+    {githubEnabled&&<button type="button" disabled={pending} onClick={()=>startSocial("github")}>Tiếp tục với GitHub </button>}
    </div>}
    {otpEnabled&&<form className="identity-lab-form" onSubmit={stage==="email"?requestOtp:verifyOtp} aria-busy={pending}>
     <label>Địa chỉ email
