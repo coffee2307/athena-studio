@@ -41,6 +41,8 @@ for(const {w,h} of widths){
    check(metrics.overflow<=3,"Horizontal overflow "+metrics.overflow);
    check(metrics.violations.length===0,metrics.violations.join("; "));
    if(!route){
+    await page.evaluate(()=>scrollTo(0,0));
+    await page.screenshot({path:dir+"/firstfold-"+w+".png",animations:"disabled",timeout:20000});
     const cover=page.locator("section[aria-label='Trang bìa tạp chí sáng tạo SORA']");
     check(await cover.count()===1,"Cover missing");
     const image=cover.locator("figure img").first();
