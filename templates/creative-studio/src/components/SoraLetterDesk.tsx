@@ -40,7 +40,7 @@ export function SoraLetterDesk(){
    <div className={s.letterPreviewFooter}>SORA / MỖI Ý TƯỞNG MỘT CÂU CHUYỆN</div>
   </div>
   <div className={s.letterCommands}>
-   <button type="button" onClick={copy} className={s.letterCopy}>Sao chép thư <span aria-hidden="true">↗</span></button>
+   <button type="button" onClick={copy} className={s.letterCopy}>Sao chép thư <span aria-hidden="true">⧉</span></button>
    <button type="submit" className={s.letterSend}>Soạn trong email <span aria-hidden="true">→</span></button>
   </div>
   <p className={s.letterStatus} role="status">{copied||"Bản mẫu không gửi dữ liệu lên máy chủ. Nút email mở trình soạn thư, không có địa chỉ nhận được thiết lập sẵn."}</p>
