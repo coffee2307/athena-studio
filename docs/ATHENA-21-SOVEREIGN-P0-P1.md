@@ -21,3 +21,20 @@ P2 and P3 will write 21 original homes/subpages/styles/components and remove the
 
 ## No disguised similarity
 The CI gate fingerprints independent source trees and surfaces duplicate hashes. At P1, duplicates are recorded as existing debt, never silently relabeled PASS. In release/strict mode any legacy site, duplicate UI source, or forbidden dependency blocks the build.
+
+## SHA-bound P0 evidence (captured 2026-10-31)
+- **Pre-migration baseline commit:** `a827a43` (branch `feat/athena-dna03-living-creative-20261030`).
+- **Actual browser:** Chromium desktop 1440x900 and mobile emulated 390x844, reduced motion for reliable geometry; no claim of physical Safari/iPhone coverage.
+- **42 first-fold captures:** 21 mobile + 21 desktop, all 200 responses. Additionally 6 footer captures of SORA/NORTH/MOC.
+- **Live demo implementations:** 20 currently render the legacy `world-site` shell, Digital Creators uses separate native static Vite app.
+- **Export identity:** 21 of 21 `templates/*/src/components/Site.tsx` hash to one identical SHA-256 group. Standalone CSS file hashes differ but the same structural selectors/layout shell remain, so visual independence is NOT verified.
+- **Known migration debt:** `sovereign-audit.mjs` reports 42 baseline debt findings and 0 P1 structural failures.
+- **Evidence paths (local only):** `.qa/athena-21-sovereign/audit.json`, `.qa/athena-21-sovereign/baseline/browser-baseline.json`, `.qa/athena-21-sovereign/baseline/*-mobile-first.png`, `.qa/athena-21-sovereign/baseline/*-desktop-first.png`.
+- **Milestone gate:** `node scripts/sovereign-audit.mjs --check` is expected to pass during P1; `--strict` must continue to fail until P2/P3/P4 complete. Do not change the release criterion to hide preexisting duplicates.
+
+## Cutover checklist per site (future P2/P3)
+1. Implement a complete independent app with its own route components, styles, header, footer, motion and actual page states. No import from a shared templates UI directory.
+2. Match the preview implementation to the exported standalone implementation (same source of truth), including asset paths and licensed content.
+3. Register that site's dedicated renderer and **only then** update its stage to `sovereign`; a missing renderer must fail visibly rather than loading a generic UI.
+4. Verify home, work, work/detail, services, about, contact, mobile menu, keyboard, reduced motion, no horizontal overflow, screenshots and export build.
+5. Repeat for all 21, then remove `LegacyWorldSiteAdapter`, `WorldSite`, `WorldExperiencePages` and `WorldMotion` references from production demo routes. Only the final all-sovereign version can pass `--strict`.
