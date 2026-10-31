@@ -45,6 +45,7 @@ import "@/app/project-layout-v4.css";
 import "@/app/athena-dna02.css";
 import "@/app/athena-dna03.css";
 import "@/app/black-velocity-mobile-showcase.css";
+import "@/app/template-navigation-identities.css";
 
 export const metadata: Metadata = {
   ...createMetadata(),
