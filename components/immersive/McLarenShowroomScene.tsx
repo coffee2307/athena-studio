@@ -8,6 +8,7 @@ import {RoomEnvironment} from "three/addons/environments/RoomEnvironment.js";
 import type {WorldSceneProps} from "./WorldScene";
 import {McLarenLoadingUI} from "./McLarenLoadingUI";
 import {CHAPTER_YAWS,CHAPTER_ELEVATIONS,CHAPTER_DISTANCES,narrativeOrbit,wrapOrbit,nextScrollChapter,scrollTransition,clamp01,smooth} from "@/lib/showroom-orbit";
+import {buildCarSilhouetteSupports,projectCarSilhouette} from "@/lib/showroom-framing";
 
 const MODEL_PATH="/models/mclaren.glb?v=20261029-p1-vecarz";
 type SceneState="loading"|"ready"|"fallback";
@@ -102,6 +103,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
  const [percent,setPercent]=useState(0);
  const [phase,setPhase]=useState("Đang chuẩn bị bộ dựng 3D");
  const [slow,setSlow]=useState(false);
+ const [cameraGeneration,setCameraGeneration]=useState(0);
  modeRef.current=preset;
  zoomRef.current=zoom;
  useEffect(()=>{wakeRef.current();},[preset,zoom]);
@@ -113,7 +115,11 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   const finishLoading=()=>window.clearTimeout(slowTimer);
   const motion=window.matchMedia("(prefers-reduced-motion: reduce)");
   if(motion.matches){setStatus("fallback");finishLoading();return;}
-  const isMobile=window.matchMedia("(max-width:760px)").matches;
+  const mobileQuery=window.matchMedia("(max-width:760px)");
+  const isMobile=mobileQuery.matches;
+  // A breakpoint change requires a new camera type, not just a CSS resize.
+  const onBreakpointChange=()=>setCameraGeneration(value=>value+1);
+  mobileQuery.addEventListener("change",onBreakpointChange);
 
   let renderer:THREE.WebGLRenderer;
   try{
@@ -184,8 +190,9 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
 
   const car=new THREE.Group();
   scene.add(car);
-  // Cached local-space geometry bounds follow the car pivot at each camera pose.
-  let frameCorners:THREE.Vector3[]=[];
+  // Cached mesh support vertices approximate the actual visible silhouette.
+  // They are computed once, rather than walking the GLB on every drag frame.
+  let silhouetteSupports:THREE.Vector3[]=[];
   let loaded=false,disposed=false,model:THREE.Object3D|null=null;
   let request=0,visible=true,frameTime=0,drawn=false;
   let expensiveFrames=0,preferImmediateCamera=softwareRenderer;
@@ -229,8 +236,10 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
     camera.aspect=rect.width/rect.height;
     camera.filmOffset=heroWide?-4:0;
    }else{
-    // Constant horizontal world-space framing across portrait phone sizes.
-    const halfWidth=2.74,halfHeight=halfWidth*rect.height/rect.width;
+    // Fixed zoom for each viewport; reserve vertical room on short screens.
+    // This value is never adjusted in response to yaw or pointer movement.
+    const halfWidth=Math.max(3.05,1.50*rect.width/rect.height);
+    const halfHeight=halfWidth*rect.height/rect.width;
     camera.left=-halfWidth;camera.right=halfWidth;
     camera.top=halfHeight;camera.bottom=-halfHeight;
    }
@@ -336,39 +345,33 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
     canvas.dataset.cameraMode=manualMode?"manual":yawTransition?"transition":"scroll";
     canvas.dataset.cameraTargetYaw=scrollOrbit.toFixed(5);
    }
-   // Projection is diagnostic, never a hidden second camera controller.
-   if(frameCorners.length){
-    // Optical framing is a MOBILE-ONLY lens correction. Reset on each frame
-    // before projection so prior drag/scroll frames cannot accumulate offsets.
+   // Rebuild the symmetric orthographic frustum before measuring the model.
+   // An offset from the previous frame must never accumulate during orbit.
+   if(isMobile&&camera instanceof THREE.OrthographicCamera){
+    const halfWidth=(camera.right-camera.left)/2;
+    camera.left=-halfWidth;camera.right=halfWidth;
+    camera.updateProjectionMatrix();
+   }
+   if(silhouetteSupports.length){
+    const raw=projectCarSilhouette(silhouetteSupports,car,camera);
     if(isMobile&&camera instanceof THREE.OrthographicCamera){
-     camera.projectionMatrix.elements[12]=0;
-     camera.projectionMatrixInverse.copy(camera.projectionMatrix).invert();
+     // Horizontal optical framing from actual mesh surface supports, not Box3.
+     // Keep the orthographic width fixed: dragging never causes zoom.
+     const halfWidth=(camera.right-camera.left)/2;
+     camera.left+=raw.centerX*halfWidth;
+     camera.right+=raw.centerX*halfWidth;
+     camera.updateProjectionMatrix();
     }
-    car.updateMatrixWorld(true);camera.updateMatrixWorld(true);
-    let left=Infinity,right=-Infinity,bottom=Infinity,top=-Infinity;
-    for(const corner of frameCorners){
-     const p=corner.clone().applyMatrix4(car.matrixWorld).project(camera);
-     left=Math.min(left,p.x);right=Math.max(right,p.x);
-     bottom=Math.min(bottom,p.y);top=Math.max(top,p.y);
-    }
-    if(isMobile&&camera instanceof THREE.OrthographicCamera){
-     // The GLB's actual projected bounds, not its origin or the desktop hero
-     // alignment, define the visible horizontal midpoint on small screens.
-     // Translation in the projection matrix does not affect orbit yaw/radius.
-     const opticalCenter=(left+right)/2;
-     camera.projectionMatrix.elements[12]=-opticalCenter;
-     camera.projectionMatrixInverse.copy(camera.projectionMatrix).invert();
-     left-=opticalCenter;
-     right-=opticalCenter;
-    }
-    const safeX=isMobile?.96:.90,safeTop=isMobile?.82:.87,safeBottom=isMobile?.80:.85;
-    if(canvas){
-     canvas.dataset.layoutRig=isMobile?"mobile-centered":"desktop-editorial";
-     canvas.dataset.modelCenterX=((left+right)/2).toFixed(5);
-     canvas.dataset.modelFrame=[left,right,bottom,top].map(v=>v.toFixed(4)).join(",");
-     canvas.dataset.modelSafe=String(left>=-safeX&&right<=safeX&&bottom>=-safeBottom&&top<=safeTop);
-     canvas.dataset.modelPivot="car-bounds-center";
-    }
+    const framed=isMobile?projectCarSilhouette(silhouetteSupports,car,camera):raw;
+    // NDC 0.84 reserves an 8% safe margin on both sides.
+    const safeX=isMobile?.84:.90,safeTop=isMobile?.82:.87,safeBottom=isMobile?.82:.85;
+    canvas.dataset.layoutRig=isMobile?"mobile-mesh-optical":"desktop-editorial";
+    canvas.dataset.modelCenterRawX=raw.centerX.toFixed(5);
+    canvas.dataset.modelCenterX=framed.centerX.toFixed(5);
+    canvas.dataset.modelFrame=[framed.left,framed.right,framed.bottom,framed.top].map(v=>v.toFixed(4)).join(",");
+    canvas.dataset.modelSafe=String(framed.left>=-safeX&&framed.right<=safeX&&framed.bottom>=-safeBottom&&framed.top<=safeTop);
+    canvas.dataset.modelPivot="mesh-silhouette-supports";
+    canvas.dataset.modelSupportCount=String(silhouetteSupports.length);
    }
    // As the camera reaches the rear, dim broad studio-panel reflections so
    // black bodywork stays graphite instead of turning silver from that angle.
@@ -473,10 +476,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    model.position.set(-center.x*scalar,.07-bounds.min.y*scalar,-center.z*scalar);
    car.add(model);
    car.updateMatrixWorld(true);
-   const box=new THREE.Box3().setFromObject(car,true);
-   frameCorners=[];
-   for(const x of [box.min.x,box.max.x])for(const y of [box.min.y,box.max.y])for(const z of [box.min.z,box.max.z])
-    frameCorners.push(new THREE.Vector3(x,y,z));
+   silhouetteSupports=buildCarSilhouetteSupports(model,car);
    loaded=true;resize();measureProgress();schedule();
   },event=>{
    if(disposed||!event.total)return;
@@ -501,6 +501,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    canvas.removeEventListener("pointerup",pointerUp);
    canvas.removeEventListener("pointercancel",pointerUp);
    motion.removeEventListener("change",onMotion);
+   mobileQuery.removeEventListener("change",onBreakpointChange);
    // Avoid disposing glTF materials globally while a fetch is pending.
    if(model)model.traverse(obj=>{
     if(obj instanceof THREE.Mesh){
@@ -523,7 +524,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    renderer.dispose();
   };
   return dispose;
- },[enabled,scrollRootId]);
+ },[enabled,scrollRootId,cameraGeneration]);
 
  return <>
   <canvas ref={canvasRef}
