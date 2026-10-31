@@ -10,7 +10,7 @@ const origin=process.env.ATHENA_QA_ORIGIN||"http://127.0.0.1:3182";
 const out=".qa/sovereign-3-rescue/after";
 mkdirSync(out,{recursive:true});
 const slugs=["creative-studio","modern-corporate","commerce-standard"];
-const sizes=[{name:"small",width:320,height:680},{name:"mobile",width:390,height:844},{name:"tablet",width:768,height:920},{name:"desktop",width:1440,height:900}];
+const sizes=[{name:"small",width:320,height:680},{name:"mobile",width:390,height:844},{name:"large-mobile",width:428,height:926},{name:"tablet",width:768,height:920},{name:"desktop",width:1440,height:900}];
 const results=[],failures=[];
 for(const slug of slugs)for(const size of sizes){
  const page=await browser.newPage({viewport:{width:size.width,height:size.height},reducedMotion:"no-preference"});
@@ -35,6 +35,21 @@ for(const slug of slugs)for(const size of sizes){
   if(size.name==="desktop"){
    if(state.toggles!==0)throw Error("Desktop still has redundant hamburger");
    if(state.headerLinks<(slug==="commerce-standard"?2:4))throw Error("Desktop navigation incomplete "+state.headerLinks);
+  }
+  if(size.width<=428&&slug==="creative-studio"){
+   const intersection=await page.evaluate(()=>{
+    const root=document.querySelector("[data-sora-surface]");
+    const seal=[...root.querySelectorAll("div")].find(el=>(el.className||"").toString().includes("editorialSeal"));
+    const copy=[...root.querySelectorAll("section p")].find(el=>el.textContent?.includes("Ý tưởng không chỉ cần đẹp"));
+    if(!seal||!copy)return {missing:true};
+    const a=seal.getBoundingClientRect(),b=copy.getBoundingClientRect();
+    return {missing:false,overlap:Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left))*Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)),copyArea:b.width*b.height};
+   });
+   if(intersection.missing||intersection.overlap>Math.max(60,intersection.copyArea*.03))throw Error("SORA seal obscures paragraph "+JSON.stringify(intersection));
+  }
+  if(size.width<=428&&slug==="commerce-standard"){
+   const firstFold=await page.evaluate(()=>({y:document.querySelector("main h1")?.getBoundingClientRect().top,height:innerHeight}));
+   if(!Number.isFinite(firstFold.y)||firstFold.y>=firstFold.height-25)throw Error("MOC first-fold headline is below screen "+JSON.stringify(firstFold));
   }
   if(size.width<=390){
    const toggle=page.locator("header button[aria-expanded]").first();
