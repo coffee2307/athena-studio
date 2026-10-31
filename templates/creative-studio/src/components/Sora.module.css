@@ -134,3 +134,29 @@
  .sora .asymmetricGrid .project{margin-top:0}
  .sora .editorialSeal{padding:12px;transform:rotate(-8deg)}
 }
+
+
+/* ATHENA-REFINEMENT-02 / SORA magazine-owned interactive editorial laboratory. */
+.editorialLab{background:#dce4cd;padding:clamp(68px,9vw,145px) clamp(24px,7vw,115px);color:#24331f;position:relative;isolation:isolate}
+.labHeading{display:grid;grid-template-columns:.65fr 1.3fr .8fr;gap:clamp(15px,3vw,56px);align-items:start;margin-bottom:clamp(36px,5vw,75px);border-top:1px solid #81926c;padding-top:24px}
+.labHeading>span{font:700 11px/1.5 "Be Vietnam Pro",sans-serif;letter-spacing:.06em}
+.labHeading h2{font:500 clamp(40px,5.7vw,91px)/1.23 "Noto Serif","Be Vietnam Pro",sans-serif;letter-spacing:-.02em;margin:0}
+.labHeading h2 em{color:#607345}
+.labHeading p{font:400 14px/1.9 "Be Vietnam Pro",sans-serif;max-width:30ch;margin:0}
+.labStage{display:grid;grid-template-columns:1.45fr .55fr;gap:clamp(24px,4vw,70px);min-height:440px;align-items:stretch}
+.labVisual{position:relative;overflow:hidden;min-height:440px;background:#a6b69b;clip-path:polygon(0 0,98% 0,100% 91%,6% 100%,0 100%);animation:soraLabAppear .55s cubic-bezier(.19,1,.22,1) both}
+.labVisual img{height:100%;width:100%;object-fit:cover;display:block;filter:saturate(.75) contrast(1.1);transition:transform .65s cubic-bezier(.2,1,.3,1)}
+.labVisual:hover img{transform:scale(1.045)}
+.labIndex{position:absolute;top:21px;left:25px;background:#e9efda;padding:9px 15px;font:700 12px/1.5 "Be Vietnam Pro",sans-serif}
+.labControls{display:flex;flex-direction:column;justify-content:center}
+.labControls button{display:grid;grid-template-columns:36px 1fr;gap:4px 14px;align-items:center;text-align:left;border:0;border-top:1px solid #92a17f;background:transparent;color:#27351f;padding:22px 7px;transition:padding-left .22s,background .22s;min-height:100px}
+.labControls button:last-child{border-bottom:1px solid #92a17f}
+.labControls button:hover,.labControls button[aria-pressed=true]{background:#c6d5b4;padding-left:17px}
+.labControls button>span{grid-row:1/3;font:700 11px "Be Vietnam Pro",sans-serif;align-self:start}
+.labControls button strong{font:500 clamp(22px,2.4vw,37px)/1.3 "Noto Serif","Be Vietnam Pro",sans-serif}
+.labControls button small{font:400 12px/1.6 "Be Vietnam Pro",sans-serif}
+.labControls button[aria-pressed=true] strong:after{content:" ↗";font:400 16px "Be Vietnam Pro",sans-serif;color:#607345}
+@keyframes soraLabAppear{from{opacity:.55;transform:translate3d(0,14px,0)}to{opacity:1;transform:none}}
+@media(max-width:850px){.labHeading{grid-template-columns:1fr 2fr}.labHeading p{grid-column:2;max-width:46ch}.labStage{grid-template-columns:1fr}.labVisual{min-height:0;aspect-ratio:5/4}.labControls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.labControls button{grid-template-columns:1fr;gap:9px;padding:15px;min-height:126px}.labControls button>span{grid-row:auto}.labControls button strong{font-size:clamp(19px,3vw,26px)}.labControls button small{font-size:10px}}
+@media(max-width:550px){.editorialLab{padding:70px 6vw}.labHeading{display:block}.labHeading h2{margin:19px 0 15px;font-size:clamp(36px,8.7vw,55px)}.labHeading p{max-width:36ch}.labVisual{aspect-ratio:4/5}.labControls{grid-template-columns:1fr;gap:0}.labControls button{display:grid;grid-template-columns:34px 1fr;min-height:70px;padding:13px 8px}.labControls button>span{grid-row:1/3}.labControls button strong{font-size:24px}.labControls button small{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.labVisual{animation:none!important}.labVisual img,.labControls button{transition:none!important}}
