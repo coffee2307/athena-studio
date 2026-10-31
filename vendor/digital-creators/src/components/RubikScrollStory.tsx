@@ -129,7 +129,7 @@ export default function RubikScrollStory(){
         <SceneErrorBoundary label="Rubik 3×3"><RubikCanvas progressRef={progressRef} reduced={reducedMotion} dark={dark}/></SceneErrorBoundary>
         <div className="visual-corner-label">27 CUBIES <span>·</span> 12 REVERSE MOVES</div>
       </div>
-      <button type="button" className="motion-skip" onClick={() => sectionRef.current?.nextElementSibling?.scrollIntoView({behavior: reducedMotion ? 'auto' : 'smooth',block:'start'})}>BỎ QUA HIỆU ỨNG ↗</button>
+      <button type="button" className="motion-skip" onClick={() => sectionRef.current?.nextElementSibling?.scrollIntoView({behavior: reducedMotion ? 'auto' : 'smooth',block:'start'})}>BỎ QUA HIỆU ỨNG </button>
       <div className="motion-footer"><span>SCROLL TO SOLVE</span><div className="motion-progress"><i style={{width:(progress*100)+'%'}}/></div><strong>0{step+1} / 03</strong></div>
     </div>
   </section>
