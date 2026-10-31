@@ -235,7 +235,7 @@ export default function LegoActivitiesVisual(){
         <SceneErrorBoundary label="Thành phố sáng tạo"><CityCanvas progressRef={progressRef} reduced={reducedMotion} dark={dark}/></SceneErrorBoundary>
         <div className="city-tag city-tag-bottom">DESIGN • CODE • CREATE <span>·</span></div>
       </div>
-      <button type="button" className="motion-skip" onClick={()=>sectionRef.current?.nextElementSibling?.scrollIntoView({behavior:reducedMotion?'auto':'smooth',block:'start'})}>BỎ QUA HIỆU ỨNG ↗</button>
+      <button type="button" className="motion-skip" onClick={()=>sectionRef.current?.nextElementSibling?.scrollIntoView({behavior:reducedMotion?'auto':'smooth',block:'start'})}>BỎ QUA HIỆU ỨNG </button>
       <div className="motion-footer"><span>IMAGINE / BUILD / CONNECT</span><div className="motion-progress"><i style={{width:progress*100+'%'}}/></div><strong>0{phase+1} / 03</strong></div>
     </div>
   </section>
