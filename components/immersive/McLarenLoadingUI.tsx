@@ -24,6 +24,6 @@ export function McLarenLoadingUI({
   </div>
   <p>{failed?"Không thể mở mô hình 3D trên thiết bị này. Bạn vẫn có thể xem nội dung trên nền studio tĩnh.":phase}</p>
   {slow&&!failed&&<small>Đang xử lý mô hình và các bề mặt phản chiếu. Bạn vẫn có thể chuyển sang nền tĩnh hoặc xem trang khác.</small>}
-  {onFallback&&<button type="button" onClick={onFallback}>Dùng nền tĩnh <span aria-hidden="true">↗</span></button>}
+  {onFallback&&<button type="button" onClick={onFallback}>Dùng nền tĩnh <span aria-hidden="true"></span></button>}
  </div>;
 }
