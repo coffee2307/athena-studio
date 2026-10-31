@@ -39,7 +39,7 @@ export default function CreativeLab() {
             <button className="lab-play" onClick={()=>setPlaying(!playing)} aria-label={playing?'Tạm dừng hoạt ảnh':'Phát hoạt ảnh'}>{playing?<Pause size={19} fill="currentColor"/>:<Play size={19} fill="currentColor"/>}</button>
           </div>
           <div className="lab-timeline"><div className="lab-timeline-label">ANIMATION / TIMELINE</div><div className="lab-timeline-track"><span/><span/><span/><i className={playing?'is-running':''}/></div></div>
-          <div className="lab-card-bottom"><div><strong>Motion experiments</strong><span>Bấm Play để xem hình khối chuyển động.</span></div><span className="lab-mini-icon">↗</span></div>
+          <div className="lab-card-bottom"><div><strong>Motion experiments</strong><span>Bấm Play để xem hình khối chuyển động.</span></div><span className="lab-mini-icon"></span></div>
         </article>
         <article className="lab-card lab-code">
           <div className="lab-card-top"><span><Code2 size={16}/> 03 / CODE SPACE</span><ArrowUpRight size={18}/></div>
@@ -54,7 +54,7 @@ export default function CreativeLab() {
             <span className="line-no">07</span><code className="code-caret">▍</code></div>
             <div className="lab-terminal"><span className="lab-terminal-dot"/> Ready to create something new.</div>
           </div>
-          <div className="lab-card-bottom"><div><strong>Code your curiosity</strong><span>Mọi sản phẩm số đều bắt đầu từ một ý tưởng.</span></div><span className="lab-mini-icon">↗</span></div>
+          <div className="lab-card-bottom"><div><strong>Code your curiosity</strong><span>Mọi sản phẩm số đều bắt đầu từ một ý tưởng.</span></div><span className="lab-mini-icon"></span></div>
         </article>
       </div>
     </div>
