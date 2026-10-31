@@ -1,5 +1,5 @@
 /**
- * ATHENA-21-SOVEREIGN/v2.0 — audit + fail-closed release guard.
+ * ATHENA-15-SOVEREIGN/v3.0 — audit + fail-closed release guard.
  * --check: migration infrastructure contract (P1)
  * --strict: no legacy UI and no identical standalone UI allowed (P5 release)
  * --out=path: write reproducible SHA-based audit report (read-only to site code)
@@ -17,8 +17,8 @@ const known=[...registrySource.matchAll(/^ "([^"]+)":\{stage:"([^"]+)",archetype
 const failures=[],debt=[];
 const hash=p=>createHash("sha256").update(readFileSync(p)).digest("hex");
 const allFiles=path=>!existsSync(path)?[]:readdirSync(path,{withFileTypes:true}).flatMap(e=>e.isDirectory()?allFiles(join(path,e.name)):[join(path,e.name)]);
-if(templates.length!==21||known.length!==21)failures.push("Expected 21 unique registered templates and sovereign stages");
-if(new Set(known.map(x=>x.slug)).size!==21)failures.push("Duplicate sovereign registry slugs");
+if(templates.length!==15||known.length!==15)failures.push("Expected 15 unique registered templates and sovereign stages");
+if(new Set(known.map(x=>x.slug)).size!==15)failures.push("Duplicate sovereign registry slugs");
 if(JSON.stringify([...templates.map(x=>x.slug)].sort())!==JSON.stringify([...known.map(x=>x.slug)].sort()))failures.push("Sovereign registry does not match canonical template catalog");
 const routePaths=[
  "app/template-demos/[slug]/page.tsx",
@@ -81,12 +81,12 @@ for(const group of duplicateSourceGroups)debt.push("Identical exported UI source
 for(const group of duplicateCssGroups)debt.push("Identical exported style source: "+group.join(", "));
 const stages=Object.fromEntries(["legacy","native-static","sovereign"].map(k=>[k,rows.filter(x=>x.stage===k).length]));
 if(mode==="strict"){
- if(stages.legacy||stages["native-static"])failures.push("Strict sovereignty requires all 21 templates to be independent. Remaining: "+rows.filter(r=>r.stage!=="sovereign").map(r=>r.slug+" ["+r.stage+"]").join(", "));
+ if(stages.legacy||stages["native-static"])failures.push("Strict sovereignty requires all 15 templates to be independent. Remaining: "+rows.filter(r=>r.stage!=="sovereign").map(r=>r.slug+" ["+r.stage+"]").join(", "));
  if(duplicateSourceGroups.length)failures.push("Strict sovereignty forbids identical exported UI files");
  if(duplicateCssGroups.length)failures.push("Strict sovereignty forbids identical exported CSS");
  if(rows.some(r=>r.diagonal))failures.push("Forbidden diagonal glyph remains in standalone export");
 }
-const result={planId:"ATHENA-21-SOVEREIGN/v2.0",phase:"P4-native-export",mode,stages,duplicateSourceGroups,duplicateCssGroups,debt,failures,rows};
+const result={planId:"ATHENA-15-SOVEREIGN/v3.0",phase:"P4-native-export",mode,stages,duplicateSourceGroups,duplicateCssGroups,debt,failures,rows};
 if(outputArg){const path=resolve(process.cwd(),outputArg.slice(6));mkdirSync(dirname(path),{recursive:true});writeFileSync(path,JSON.stringify(result,null,2)+"\n");}
 console.log("SOVEREIGN_AUDIT",JSON.stringify({mode,stages,duplicates:{source:duplicateSourceGroups,css:duplicateCssGroups},debt:debt.length,failures}));
 if(failures.length)process.exitCode=1;

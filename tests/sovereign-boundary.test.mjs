@@ -5,10 +5,10 @@ import {resolve,join} from "node:path";
 import {spawnSync} from "node:child_process";
 const root=resolve(import.meta.dirname,"..");
 const load=path=>readFileSync(join(root,path),"utf8");
-test("Sovereign registry describes exactly the canonical 21 template slugs",()=>{
+test("Sovereign registry describes exactly the canonical 15 template slugs",()=>{
  const templates=JSON.parse(load("data/templates.json")).map(x=>x.slug);
  const registry=[...load("data/sovereign-site-registry.ts").matchAll(/^ "([^"]+)":\{stage:"([^"]+)",archetype:"([^"]+)",owner:"([^"]+)"\}/gm)];
- assert.equal(registry.length,21);
+ assert.equal(registry.length,15);
  assert.deepEqual(registry.map(x=>x[1]).sort(),templates.sort());
  assert.ok(registry.every(x=>["legacy","native-static","sovereign"].includes(x[2])));
  assert.ok(registry.every(x=>x[3].length>3&&x[4].length>1));
@@ -36,5 +36,5 @@ test("P0/P1 structural audit reports existing design debt without falsely claimi
  assert.equal(r.status,0,r.stdout+"\n"+r.stderr);
  assert.match(r.stdout,/"legacy":1/);
  assert.match(r.stdout,/"native-static":0/);
- assert.match(r.stdout,/"sovereign":20/);
+ assert.match(r.stdout,/"sovereign":14/);
 });

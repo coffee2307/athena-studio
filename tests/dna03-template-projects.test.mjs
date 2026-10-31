@@ -4,8 +4,8 @@ import {readFileSync,existsSync} from "node:fs";
 import {join,resolve} from "node:path";
 const root=resolve(import.meta.dirname,"..");
 const registry=JSON.parse(readFileSync(join(root,"data/templates.json"),"utf8"));
-test("ATHENA-DNA-03: all 21 templates have independent source contracts",()=>{
- assert.equal(registry.length,21);
+test("ATHENA-DNA-03: all 15 templates have independent source contracts",()=>{
+ assert.equal(registry.length,15);
  const seen=new Set();
  for(const item of registry){
   assert.equal(seen.has(item.slug),false,"Duplicate template "+item.slug);

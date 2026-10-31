@@ -1,0 +1,104 @@
+name: Athena — automatically refresh real template previews
+on:
+  push:
+    branches:
+      - "feat/**"
+      - "fix/**"
+    paths:
+      - "templates/**"
+      - "vendor/digital-creators/**"
+      - "public/sovereign/**"
+      - "public/template-demos/**"
+      - "public/immersive/digital-creators/**"
+      - "public/models/**"
+      - "components/immersive/**"
+      - "components/sovereign/**"
+      - "components/templates/WorldSite.tsx"
+      - "components/templates/WorldImmersiveHome.tsx"
+      - "app/auto-showroom-minimal.css"
+      - "app/template-navigation-identities.css"
+      - "app/template-worlds.css"
+      - "app/template-demos/**"
+      - "app/template-demo.css"
+      - "data/templates.json"
+      - "data/sovereign-site-registry.ts"
+      - "scripts/sovereign-refresh-previews.mjs"
+      - "scripts/template-preview-changed.mjs"
+      - ".github/workflows/template-previews-auto.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: previews-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  refresh:
+    if: startsWith(github.ref, 'refs/heads/feat/') || startsWith(github.ref, 'refs/heads/fix/')
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Identify changed templates
+        id: targets
+        shell: bash
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "slugs=all" >> "$GITHUB_OUTPUT"
+          else
+            echo "slugs=$(node scripts/template-preview-changed.mjs "$BEFORE_SHA")" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Install app and screenshot browser
+        if: steps.targets.outputs.slugs != 'none'
+        run: |
+          npm ci --ignore-scripts --no-audit --no-fund
+          npx playwright install --with-deps chromium
+      - name: Build real demo routes at current source commit
+        if: steps.targets.outputs.slugs != 'none'
+        run: npm run build
+      - name: Start loopback-only demo server
+        if: steps.targets.outputs.slugs != 'none'
+        run: |
+          npm run start -- -p 3182 -H 127.0.0.1 > /tmp/athena-previews-next.log 2>&1 &
+          for i in $(seq 1 75); do
+            if curl -fsS http://127.0.0.1:3182/template-demos/creative-studio > /dev/null; then exit 0; fi
+            sleep 2
+          done
+          cat /tmp/athena-previews-next.log
+          exit 1
+      - name: Capture and apply changed site covers
+        if: steps.targets.outputs.slugs != 'none'
+        run: node scripts/sovereign-refresh-previews.mjs --apply --slugs=${{ steps.targets.outputs.slugs }}
+      - name: Upload real-browser capture evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: template-preview-captures
+          path: .qa/template-preview-refresh/
+          if-no-files-found: ignore
+      - name: Commit only generated previews to the feature branch
+        if: steps.targets.outputs.slugs != 'none'
+        shell: bash
+        run: |
+          git add -A public/template-previews data/template-preview-versions.json
+          if git diff --cached --quiet; then
+            echo "Existing thumbnails already match the current source."
+            exit 0
+          fi
+          git fetch origin "$GITHUB_REF_NAME"
+          if [ "$(git rev-parse FETCH_HEAD)" != "$GITHUB_SHA" ]; then
+            echo "::error::Source branch changed while capturing. Newer commit will trigger a fresh capture."
+            exit 1
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "assets(templates): regenerate actual-browser preview covers [skip ci]"
+          git push origin "HEAD:$GITHUB_REF_NAME"

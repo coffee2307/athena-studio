@@ -9,8 +9,8 @@ const root=resolve(import.meta.dirname,"..");
 const slugs=JSON.parse(readFileSync(join(root,"data/templates.json"),"utf8")).map(x=>x.slug);
 const migrated=slugs.filter(x=>x!=="digital-creators"&&x!=="auto-showroom");
 const read=path=>readFileSync(join(root,path),"utf8");
-test("19 Next.js website exports own scoped visual components and editable brand identities",()=>{
- assert.equal(migrated.length,19);
+test("13 Next.js website exports own scoped visual components and editable brand identities",()=>{
+ assert.equal(migrated.length,13);
  const digests=[];
  for(const slug of migrated){
   const path="templates/"+slug+"/src/";
@@ -24,7 +24,7 @@ test("19 Next.js website exports own scoped visual components and editable brand
   assert.ok(!existsSync(join(root,path+"app/globals.css")),slug+" must not retain old generic global shell");
   digests.push(createHash("sha256").update(body).digest("hex"));
  }
- assert.equal(new Set(digests).size,19,"all 19 website source trees must be different");
+ assert.equal(new Set(digests).size,13,"all 13 website source trees must be different");
 });
 test("Digital Creators is genuinely exported as native Vite app with source-asset parity",()=>{
  const base=join(root,"templates/digital-creators");

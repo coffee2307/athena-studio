@@ -3,11 +3,12 @@ import {useState} from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {getTemplate,templates} from "@/lib/templates";
+import {getTemplatePreviewSrc} from "@/lib/template-preview-image";
 const groups=[
- {id:"featured",label:"Nổi bật",slugs:["finance-trust","hospitality-booking","pet-store","creative-studio"]},
- {id:"business",label:"Doanh nghiệp",slugs:["finance-trust","modern-corporate","engineering-industry","construction-firm"]},
- {id:"commerce",label:"Bán hàng",slugs:["commerce-standard","fashion-archive","pet-store","auto-showroom"]},
- {id:"creative",label:"Sáng tạo",slugs:["creative-studio","editorial-journal","music-label","live-concert"]},
+ {id:"featured",label:"Nổi bật",slugs:["creative-studio","modern-corporate","commerce-standard","auto-showroom"]},
+ {id:"business",label:"Doanh nghiệp",slugs:["modern-corporate","construction-firm","saas-product","architecture-studio"]},
+ {id:"commerce",label:"Bán hàng",slugs:["commerce-standard","fashion-archive","pet-store","hospitality-booking"]},
+ {id:"creative",label:"Sáng tạo",slugs:["creative-studio","campaign-landing","architecture-studio","digital-creators"]},
  {id:"lifestyle",label:"Đời sống",slugs:["hospitality-booking","wellness-clinic","property-showcase","education-platform"]}
 ] as const;
 export function HomeTemplateShowcase(){
@@ -19,7 +20,7 @@ export function HomeTemplateShowcase(){
    <div className="home-demo-intro reveal">
     <p className="section-index"><span className="index-circle">03</span> THƯ VIỆN WEBSITE MẪU</p>
     <h2 id="home-demo-title">Một thương hiệu.<br/><span>Một phong cách riêng.</span></h2>
-    <p className="home-demo-lede">Từ nhà hàng ấm cúng đến tài chính cứng cáp, mỗi website được xây dựng theo một cách trình bày riêng. Xem trực tiếp trang chủ, dịch vụ, dự án và trải nghiệm trên điện thoại.</p>
+    <p className="home-demo-lede">Từ nhà hàng ấm cúng đến showroom ô tô cá tính, mỗi website được xây dựng theo một cách trình bày riêng. Xem trực tiếp trang chủ, dịch vụ, dự án và trải nghiệm trên điện thoại.</p>
     <div className="home-demo-facts"><div><strong>{templates.length}</strong><span>Mẫu đa ngành</span></div><div><strong>{String(groups.length).padStart(2,"0")}</strong><span>Nhóm phong cách</span></div><div><strong>01</strong><span>Định hướng của bạn</span></div></div>
     <Link href="/services/web-development/templates" className="home-demo-all">Xem toàn bộ {templates.length} mẫu <span aria-hidden="true">→</span></Link>
    </div>
@@ -29,7 +30,7 @@ export function HomeTemplateShowcase(){
     </div>
     <div className="home-demo-cards" aria-live="polite">{items.map((item,i)=><article className="home-demo-card" key={item.slug}>
       <Link href={item.demoPath} className="home-demo-picture" aria-label={"Xem demo "+item.title}>
-       <Image src={"/template-previews/"+item.slug+".jpg"+(item.slug==="auto-showroom"?"?v=20261029-p1-3d-cover":"")} alt={"Xem trước website "+item.title} fill sizes="(max-width:600px) 100vw, (max-width:1100px) 50vw, 33vw" />
+       <Image src={getTemplatePreviewSrc(item.slug)} alt={"Xem trước website "+item.title} fill sizes="(max-width:600px) 100vw, (max-width:1100px) 50vw, 33vw" />
        <span className="home-demo-open" aria-hidden="true">Mở website <span></span></span>
       </Link>
       <div className="home-demo-meta"><span>{String(i+1).padStart(2,"0")} / {item.industry}</span><span>{item.style}</span></div>
