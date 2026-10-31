@@ -7,10 +7,15 @@ import {DRACOLoader} from "three/addons/loaders/DRACOLoader.js";
 import {RoomEnvironment} from "three/addons/environments/RoomEnvironment.js";
 import type {WorldSceneProps} from "./WorldScene";
 import {McLarenLoadingUI} from "./McLarenLoadingUI";
+import {CHAPTER_YAWS,CHAPTER_ELEVATIONS,CHAPTER_DISTANCES,narrativeOrbit,wrapOrbit,nextScrollChapter,scrollTransition,clamp01,smooth} from "@/lib/showroom-orbit";
+import {buildCarSilhouetteSupports,projectCarSilhouette} from "@/lib/showroom-framing";
 
 const MODEL_PATH="/models/mclaren.glb?v=20261029-p1-vecarz";
 type SceneState="loading"|"ready"|"fallback";
 const clamp=(value:number,min:number,max:number)=>Math.max(min,Math.min(max,value));
+// Never store accumulated revolutions. The camera only needs the signed
+// orientation within one turn; otherwise scrolling can unwind three rotations.
+// Chapter yaw state and shortest-path math live in lib/showroom-orbit.ts.
 
 function makeStage(){
  const stage=new THREE.Group();
@@ -98,6 +103,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
  const [percent,setPercent]=useState(0);
  const [phase,setPhase]=useState("Đang chuẩn bị bộ dựng 3D");
  const [slow,setSlow]=useState(false);
+ const [cameraGeneration,setCameraGeneration]=useState(0);
  modeRef.current=preset;
  zoomRef.current=zoom;
  useEffect(()=>{wakeRef.current();},[preset,zoom]);
@@ -109,7 +115,11 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   const finishLoading=()=>window.clearTimeout(slowTimer);
   const motion=window.matchMedia("(prefers-reduced-motion: reduce)");
   if(motion.matches){setStatus("fallback");finishLoading();return;}
-  const isMobile=window.matchMedia("(max-width:760px)").matches;
+  const mobileQuery=window.matchMedia("(max-width:760px)");
+  const isMobile=mobileQuery.matches;
+  // A breakpoint change requires a new camera type, not just a CSS resize.
+  const onBreakpointChange=()=>setCameraGeneration(value=>value+1);
+  mobileQuery.addEventListener("change",onBreakpointChange);
 
   let renderer:THREE.WebGLRenderer;
   try{
@@ -119,7 +129,9 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    });
   }catch(error){
    console.warn("Athena McLaren: WebGL unavailable",error);
-   setStatus("fallback");finishLoading();return;
+   setStatus("fallback");finishLoading();
+   mobileQuery.removeEventListener("change",onBreakpointChange);
+   return;
   }
   renderer.outputColorSpace=THREE.SRGBColorSpace;
   renderer.toneMapping=THREE.ACESFilmicToneMapping;
@@ -135,11 +147,15 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
 
   const scene=new THREE.Scene();
   scene.background=new THREE.Color(0x11151a);
-  const camera=new THREE.PerspectiveCamera(34,1,.1,85);
+  // Orthographic mobile product stage: constant apparent size at every yaw.
+  // No perspective dolly or per-frame zoom can be triggered by finger dragging.
+  const camera=isMobile
+   ?new THREE.OrthographicCamera(-2.85,2.85,3.2,-3.2,.1,85)
+   :new THREE.PerspectiveCamera(34,1,.1,85);
   // Aim slightly left of the car on wide showroom screens so the model sits
   // to the right of the editorial headline. Other journeys keep their pose.
   const heroWide=scrollRootId==="bv-cinematic-track"&&!isMobile&&window.innerWidth>=1100;
-  const target=new THREE.Vector3(heroWide?-1.58:scrollRootId&&!isMobile?-.28:0,.68,0);
+  const target=new THREE.Vector3(0,.68,0);
   canvas.dataset.cameraTargetX=target.x.toFixed(2);
   camera.position.set(5.6,2.5,5.8);camera.lookAt(target);
 
@@ -176,11 +192,16 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
 
   const car=new THREE.Group();
   scene.add(car);
+  // Cached mesh support vertices approximate the actual visible silhouette.
+  // They are computed once, rather than walking the GLB on every drag frame.
+  let silhouetteSupports:THREE.Vector3[]=[];
   let loaded=false,disposed=false,model:THREE.Object3D|null=null;
   let request=0,visible=true,frameTime=0,drawn=false;
   let expensiveFrames=0,preferImmediateCamera=softwareRenderer;
   let queuedContinuation=false;
-  let drag=false,previousX=0,turn=0,dragTurn=0;
+  let drag=false,dragPointer:number|null=null,previousX=0;
+  let cameraYaw=.72,manualMode=false,manualRadius=0,manualHeight=0;
+  let yawTransition:{start:number;end:number;startP:number;endP:number;direction:1|-1;radius:number;height:number;startedAt:number}|null=null;
   let currentMode=modeRef.current,currentProgress=0,goalProgress=0;
   // Desktop renders on every requested RAF during active interaction, not at an
   // artificial 38 FPS ceiling. Mobile retains a 30 FPS cap and pixel budget.
@@ -213,7 +234,18 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    canvas.dataset.renderDpr=effectiveDpr.toFixed(3);
    canvas.dataset.renderPixels=String(Math.round(rect.width*rect.height*effectiveDpr*effectiveDpr));
    canvas.dataset.renderQuality=softwareRenderer?"compatibility":"adaptive-high";
-   camera.aspect=rect.width/rect.height;camera.updateProjectionMatrix();
+   if(camera instanceof THREE.PerspectiveCamera){
+    camera.aspect=rect.width/rect.height;
+    camera.filmOffset=heroWide?-4:0;
+   }else{
+    // Fixed zoom for each viewport; reserve vertical room on short screens.
+    // This value is never adjusted in response to yaw or pointer movement.
+    const halfWidth=Math.max(2.66,1.50*rect.width/rect.height);
+    const halfHeight=halfWidth*rect.height/rect.width;
+    camera.left=-halfWidth;camera.right=halfWidth;
+    camera.top=halfHeight;camera.bottom=-halfHeight;
+   }
+   camera.updateProjectionMatrix();
   };
   function draw(now:number){
    request=0;
@@ -245,29 +277,36 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
     ?(drawn?currentProgress+(goalProgress-currentProgress)*scrollFollow:goalProgress)
     :currentProgress+(goalProgress-currentProgress)*lerp;
    if(Math.abs(goalProgress-currentProgress)<.0005)currentProgress=goalProgress;
-   turn+=(dragTurn-turn)*lerp;
+   // Stable authored keyframes. Manual orbit is a separate camera state.
    const angles=[.72,2.0,4.9];
    // Five signed-off narrative keyframes, sampled directly from scroll progress.
    // Reversing scroll settles on the same pose once the glide catches up.
-   const journeyAngles=[.72,1.42,2.12,3.82,5.42];
-   const journeyElevations=[2.35,1.98,2.48,2.18,2.55];
-   const journeyDistances=[1,.93,.71,.88,1.04];
-   const journeyX=[0,.55,-.12,-.44,0];
-   const journeyZ=[0,-.2,.04,.18,0];
+   const journeyElevations=CHAPTER_ELEVATIONS;
+   const journeyDistances=CHAPTER_DISTANCES;
+   const journeyX=[0,.12,-.08,-.12,0];
+   const journeyZ=[0,-.08,.02,.08,0];
    const journeyYaw=[0,-.09,.06,.11,0];
    const position=clamp(currentProgress*4,0,4);
    const lower=Math.min(3,Math.floor(position));
    const fraction=position-lower;
    const smoothFraction=fraction*fraction*(3-2*fraction);
-   const scrollOrbit=THREE.MathUtils.lerp(journeyAngles[lower],journeyAngles[lower+1],smoothFraction);
+   const scrollOrbit=narrativeOrbit(currentProgress);
    const scrollHeight=THREE.MathUtils.lerp(journeyElevations[lower],journeyElevations[lower+1],smoothFraction);
    const scrollDistance=THREE.MathUtils.lerp(journeyDistances[lower],journeyDistances[lower+1],smoothFraction);
    if(scrollRootId){
     // A small, reversible glide accompanies the dolly. No fake wheel spin:
     // this GLB exposes no separately named wheel pivots.
-    car.position.set(THREE.MathUtils.lerp(journeyX[lower],journeyX[lower+1],smoothFraction),0,
-     THREE.MathUtils.lerp(journeyZ[lower],journeyZ[lower+1],smoothFraction));
-    car.rotation.y=THREE.MathUtils.lerp(journeyYaw[lower],journeyYaw[lower+1],smoothFraction);
+    if(isMobile){
+     // Mobile is a centered product stage, not the asymmetric desktop editorial rig.
+     // Chapter direction is controlled by camera yaw only, never by the desktop
+     // camera-track translation or mesh spin.
+     car.position.set(0,0,0);
+     car.rotation.y=0;
+    }else{
+     car.position.set(THREE.MathUtils.lerp(journeyX[lower],journeyX[lower+1],smoothFraction),0,
+      THREE.MathUtils.lerp(journeyZ[lower],journeyZ[lower+1],smoothFraction));
+     car.rotation.y=THREE.MathUtils.lerp(journeyYaw[lower],journeyYaw[lower+1],smoothFraction);
+    }
    }
    if(canvas){
     canvas.dataset.scrollProgress=currentProgress.toFixed(4);
@@ -279,14 +318,65 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    const modeT=modePosition-modeLower;
    const easedMode=modeT*modeT*(3-2*modeT);
    const heroOrbit=angles[modeLower]+(angles[modeLower+1]-angles[modeLower])*easedMode;
-   const orbit=(scrollRootId?scrollOrbit:heroOrbit+currentProgress*.20)+turn;
-   const baseDistance=Math.max(6.75,6.75*.93/Math.max(.60,camera.aspect))*(isMobile?1.30:1);
-   const dist=baseDistance*(scrollRootId?scrollDistance:1)*(1-clamp(zoomRef.current,-1,2)*(isMobile?.04:.09));
-   const y=scrollRootId?scrollHeight:(isMobile?2.6:2.42);
-   const wanted=new THREE.Vector3(Math.cos(orbit)*dist,y,Math.sin(orbit)*dist);
+   const baseDistance=isMobile?8:Math.max(8.2,10*.93/Math.max(.72,(camera as THREE.PerspectiveCamera).aspect));
+   const authoredRadius=isMobile?baseDistance:baseDistance*(scrollRootId?scrollDistance:1)*(1-clamp(zoomRef.current,-1,2)*.09);
+   let radius=authoredRadius;
+   let height=scrollRootId?scrollHeight:(isMobile?2.6:2.42);
+   if(scrollRootId){
+    if(manualMode){
+     radius=manualRadius;height=manualHeight;
+    }else if(yawTransition){
+     const tx=yawTransition;
+     const phase=clamp01((currentProgress-tx.startP)/Math.max(.00001,Math.abs(tx.endP-tx.startP))*(tx.direction));
+     // Prevent an oversized wheel delta from completing an orbit in one GPU frame.
+     const fraction=smooth(Math.min(phase,clamp01((now-tx.startedAt)/420)));
+     cameraYaw=scrollTransition(tx.start,tx.end,tx.startP,tx.endP,currentProgress);
+     radius=THREE.MathUtils.lerp(tx.radius,authoredRadius,fraction);
+     height=THREE.MathUtils.lerp(tx.height,scrollHeight,fraction);
+     if(fraction>=.9999)yawTransition=null;
+    }else cameraYaw=scrollOrbit;
+   }else if(!manualMode)cameraYaw=wrapOrbit(heroOrbit+currentProgress*.20);
+   const wanted=new THREE.Vector3(Math.cos(cameraYaw)*radius,height,Math.sin(cameraYaw)*radius);
    if(scrollRootId)camera.position.copy(wanted);
    else camera.position.lerp(wanted,lerp);
    camera.lookAt(target);
+   // The camera radius is fixed during dragging. No per-frame auto-fit/dolly.
+   if(canvas){
+    canvas.dataset.cameraRadius=radius.toFixed(4);
+    canvas.dataset.cameraYaw=cameraYaw.toFixed(5);
+    canvas.dataset.cameraMode=manualMode?"manual":yawTransition?"transition":"scroll";
+    canvas.dataset.cameraTargetYaw=scrollOrbit.toFixed(5);
+   }
+   // Rebuild the symmetric orthographic frustum before measuring the model.
+   // An offset from the previous frame must never accumulate during orbit.
+   if(isMobile&&camera instanceof THREE.OrthographicCamera){
+    const halfWidth=(camera.right-camera.left)/2;
+    camera.left=-halfWidth;camera.right=halfWidth;
+    camera.updateProjectionMatrix();
+   }
+   if(silhouetteSupports.length){
+    const raw=projectCarSilhouette(silhouetteSupports,car,camera);
+    if(isMobile&&camera instanceof THREE.OrthographicCamera){
+     // Horizontal optical framing from actual mesh surface supports, not Box3.
+     // Keep the orthographic width fixed: dragging never causes zoom.
+     const halfWidth=(camera.right-camera.left)/2;
+     camera.left+=raw.centerX*halfWidth;
+     camera.right+=raw.centerX*halfWidth;
+     camera.updateProjectionMatrix();
+    }
+    const framed=isMobile?projectCarSilhouette(silhouetteSupports,car,camera):raw;
+    // NDC 0.84 reserves an 8% safe margin on both sides.
+    const safeX=isMobile?.84:.90,safeTop=isMobile?.82:.87,safeBottom=isMobile?.82:.85;
+    if(canvas){
+     canvas.dataset.layoutRig=isMobile?"mobile-mesh-optical":"desktop-editorial";
+     canvas.dataset.modelCenterRawX=raw.centerX.toFixed(5);
+     canvas.dataset.modelCenterX=framed.centerX.toFixed(5);
+     canvas.dataset.modelFrame=[framed.left,framed.right,framed.bottom,framed.top].map(v=>v.toFixed(4)).join(",");
+     canvas.dataset.modelSafe=String(framed.left>=-safeX&&framed.right<=safeX&&framed.bottom>=-safeBottom&&framed.top<=safeTop);
+     canvas.dataset.modelPivot="mesh-silhouette-supports";
+     canvas.dataset.modelSupportCount=String(silhouetteSupports.length);
+    }
+   }
    // As the camera reaches the rear, dim broad studio-panel reflections so
    // black bodywork stays graphite instead of turning silver from that angle.
    scene.environmentIntensity=scrollRootId?THREE.MathUtils.lerp(.95,.5,currentProgress):.95;
@@ -304,25 +394,52 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
     }
    }
    if(!drawn){drawn=true;finishLoading();setPercent(100);setStatus("ready");}
-   const movement=Math.abs(currentMode-modeRef.current)+Math.abs(currentProgress-goalProgress)+Math.abs(turn-dragTurn)+camera.position.distanceTo(wanted);
-   if(movement>.006){queuedContinuation=true;schedule();}
+   const movement=Math.abs(currentMode-modeRef.current)+Math.abs(currentProgress-goalProgress)+(scrollRootId?0:camera.position.distanceTo(wanted));
+   if(movement>.006||yawTransition){queuedContinuation=true;schedule();}
   }
 
   const pointerDown=(event:PointerEvent)=>{
-   drag=true;previousX=event.clientX;
+   if(event.pointerType==="mouse"&&event.button!==0)return;
+   drag=true;dragPointer=event.pointerId;previousX=event.clientX;
+   manualMode=true;yawTransition=null;
+   cameraYaw=wrapOrbit(Math.atan2(camera.position.z,camera.position.x));
+   manualRadius=Math.hypot(camera.position.x,camera.position.z);
+   manualHeight=camera.position.y;
    canvas.setPointerCapture(event.pointerId);
   };
   const pointerMove=(event:PointerEvent)=>{
-   if(!drag)return;
-   dragTurn+=clamp(event.clientX-previousX,-45,45)*.006;
-   previousX=event.clientX;schedule();
+   if(!drag||dragPointer!==event.pointerId)return;
+   const delta=clamp(event.clientX-previousX,-45,45);
+   previousX=event.clientX;
+   if(Math.abs(delta)<.01)return;
+   // Rotate immediately around the true model pivot. Normalizing at every
+   // move guarantees three complete turns still have a bounded angle.
+   cameraYaw=wrapOrbit(cameraYaw+delta*(isMobile?.0075:.0065));
+   canvas.dataset.orbitOffset=cameraYaw.toFixed(5);
+   schedule();
   };
-  const pointerUp=()=>{drag=false;};
+  const pointerUp=(event:PointerEvent)=>{
+   if(dragPointer!==event.pointerId)return;
+   drag=false;dragPointer=null;
+   if(canvas.hasPointerCapture(event.pointerId))canvas.releasePointerCapture(event.pointerId);
+  };
   const onScroll=()=>{
+   const previous=goalProgress;
    measureProgress();
-   // Return from a manual orbit gradually when scrolling resumes; clearing
-   // both values here caused an immediate visible angle snap.
-   if(scrollRootId)dragTurn=0;
+   if(scrollRootId&&!drag&&Math.abs(goalProgress-previous)>.00015){
+    const direction:1|-1=goalProgress>previous?1:-1;
+    if(manualMode||yawTransition&&yawTransition.direction!==direction){
+     const destination=nextScrollChapter(previous,direction);
+     const endpoint=destination/4;
+     yawTransition={
+      start:cameraYaw,end:CHAPTER_YAWS[destination],
+      startP:previous,endP:endpoint,direction,
+      radius:Math.hypot(camera.position.x,camera.position.z),
+      height:camera.position.y,startedAt:performance.now()
+     };
+     manualMode=false;
+    }
+   }
    schedule();
   };
   const onVisibility=()=>{if(document.hidden){cancelAnimationFrame(request);request=0;}else schedule();};
@@ -362,6 +479,8 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    model.scale.multiplyScalar(scalar);
    model.position.set(-center.x*scalar,.07-bounds.min.y*scalar,-center.z*scalar);
    car.add(model);
+   car.updateMatrixWorld(true);
+   silhouetteSupports=buildCarSilhouetteSupports(model,car);
    loaded=true;resize();measureProgress();schedule();
   },event=>{
    if(disposed||!event.total)return;
@@ -386,6 +505,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    canvas.removeEventListener("pointerup",pointerUp);
    canvas.removeEventListener("pointercancel",pointerUp);
    motion.removeEventListener("change",onMotion);
+   mobileQuery.removeEventListener("change",onBreakpointChange);
    // Avoid disposing glTF materials globally while a fetch is pending.
    if(model)model.traverse(obj=>{
     if(obj instanceof THREE.Mesh){
@@ -408,7 +528,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    renderer.dispose();
   };
   return dispose;
- },[enabled,scrollRootId]);
+ },[enabled,scrollRootId,cameraGeneration]);
 
  return <>
   <canvas ref={canvasRef}

@@ -133,13 +133,6 @@
  .velar-work-end,.velar-process-bottom,.ix-editorial-minimal-head,.ix-editorial-minimal-foot{flex-wrap:wrap}
  .velar-detail-next strong{font-size:26px}
 }
-/* The full-width stage has no internal left crop or mobile canvas rectangle. */
-.ix-auto-showroom .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas{left:0;width:100%;top:0;bottom:0;height:100%}
-@media(max-width:760px){
- .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas,
- .ix-auto-showroom .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas{left:-12%;width:124%;top:22svh;bottom:0;height:78svh}
-}
-
 /* BLACK VELOCITY responsive stage. Keep editorial copy, model and chapter
    controls in separate visual zones on narrow screens. These overrides live
    last so earlier generic immersive styles cannot reintroduce overlap. */
@@ -172,15 +165,6 @@
   min-height:40px;padding:10px 13px;font-size:10px;
  }
  .ix-auto-showroom .bv-cinematic-track .ix-hero-text-link{display:none}
- .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas,
- .ix-auto-showroom .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas{
-  left:0;width:100%;top:clamp(300px,43svh,390px);bottom:auto;
-  height:clamp(210px,42svh,380px);
- }
- .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track[data-chapter]:not([data-chapter="0"]) .ix-hero-visual .ix-auto-3d-canvas,
- .ix-auto-showroom .bv-cinematic-track[data-chapter]:not([data-chapter="0"]) .ix-hero-visual .ix-auto-3d-canvas{
-  top:13svh;height:clamp(200px,45svh,400px);
- }
  .ix-auto-showroom .bv-cinematic-track .ix-visual-vignette{
   background:linear-gradient(180deg,#050609ed 0%,#05060977 29%,transparent 51%,#050609ad 100%);
  }
@@ -222,9 +206,112 @@
  /* Very short phones cannot fit the whole editorial intro and a full-size
     vehicle at once. Compact the copy and preserve a separate control band. */
  .ix-auto-showroom .bv-cinematic-track .ix-hero-copy>p{display:none}
- .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas,
- .ix-auto-showroom .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas{
-  top:clamp(280px,45svh,310px);height:clamp(150px,30svh,200px);
- }
  .ix-auto-showroom .bv-cinematic-track .bv-zoom-controls{bottom:120px}
 }
+
+/* BLACK VELOCITY / mobile rendering contract. Keep the 3D stage large across
+   every chapter; short screens get a compact headline rather than a 200px car. */
+@media(max-width:760px){
+ .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas,
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas{
+  top:clamp(320px,42svh,375px);height:clamp(345px,50svh,448px);
+  width:100%;left:0;right:0;bottom:auto;
+ }
+ .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track[data-chapter]:not([data-chapter="0"]) .ix-hero-visual .ix-auto-3d-canvas,
+ .ix-auto-showroom .bv-cinematic-track[data-chapter]:not([data-chapter="0"]) .ix-hero-visual .ix-auto-3d-canvas{
+  top:clamp(165px,24svh,228px);height:clamp(350px,52svh,460px);
+ }
+ .ix-auto-showroom .bv-cinematic-track .bv-zoom-controls{display:none!important}
+}
+@media(max-width:760px) and (max-height:680px){
+ .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas,
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas{
+  top:clamp(245px,40svh,305px);height:clamp(275px,46svh,340px);
+ }
+ .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track[data-chapter]:not([data-chapter="0"]) .ix-hero-visual .ix-auto-3d-canvas,
+ .ix-auto-showroom .bv-cinematic-track[data-chapter]:not([data-chapter="0"]) .ix-hero-visual .ix-auto-3d-canvas{
+  top:125px;height:clamp(305px,51svh,360px);
+ }
+}
+
+/* FINAL VIEWPORT CONTRACT / mobile hero fits beneath its site header so
+   chapter controls, legal attribution and car are visible without extra scroll. */
+@media(max-width:760px){
+ .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track>.ix-hero,
+ .ix-auto-showroom.ix-site[data-immersive="false"] .bv-cinematic-track>.ix-hero{
+  height:calc(100svh - 90px);min-height:0;max-height:none;
+ }
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-nav{
+  bottom:16px;top:auto;
+ }
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-meter{bottom:70px}
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-skip{display:none}
+ .ix-auto-showroom .bv-cinematic-track .bv-model-credit{
+  bottom:91px;left:16px;right:16px;max-width:calc(100% - 32px);
+  text-align:center;
+ }
+}
+
+/* BLACK VELOCITY camera rebuild: the canvas NEVER jumps between chapters.
+   Camera orientation is owned by the scroll state machine, not CSS. */
+@media(max-width:760px){
+ .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas,
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas,
+ .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track[data-chapter]:not([data-chapter="0"]) .ix-hero-visual .ix-auto-3d-canvas,
+ .ix-auto-showroom .bv-cinematic-track[data-chapter]:not([data-chapter="0"]) .ix-hero-visual .ix-auto-3d-canvas{
+  left:0;right:0;bottom:auto;
+  top:clamp(280px,36svh,345px);
+  width:100%;height:clamp(360px,52svh,460px);
+ }
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas{transition:none!important}
+}
+@media(max-width:760px) and (max-height:700px){
+ .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas,
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas,
+ .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track[data-chapter]:not([data-chapter="0"]) .ix-hero-visual .ix-auto-3d-canvas,
+ .ix-auto-showroom .bv-cinematic-track[data-chapter]:not([data-chapter="0"]) .ix-hero-visual .ix-auto-3d-canvas{
+  top:clamp(240px,37svh,290px);height:clamp(310px,49svh,375px);
+ }
+}
+
+/* Camera rebuild visual QA: place chapter controls INSIDE first phone viewport.
+   Earlier absolute nav was 34px below the sticky stage (390x844). */
+@media(max-width:760px){
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-nav{
+  top:auto!important;bottom:clamp(120px,15svh,148px)!important;
+  z-index:15;
+ }
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-meter{
+  bottom:clamp(177px,21svh,205px)!important;
+ }
+}
+
+
+/* ATHENA-REFINEMENT-02 — loader and licensing in the McLaren's own visual language. */
+.world-site[data-world="auto-showroom"] .ix-auto-showroom .bv-cinematic-track .ix-car-load.bv-load-spinner{
+ position:absolute;z-index:24;left:50%;right:auto;top:50%;bottom:auto;
+ width:min(290px,calc(100vw - 38px));min-height:0;
+ transform:translate3d(-50%,-50%,0);padding:28px 22px;
+ display:flex;flex-direction:column;align-items:center;justify-content:center;gap:11px;
+ text-align:center;background:#0d1218ed;border:1px solid #f58b4359;
+ box-shadow:0 24px 65px #000a;backdrop-filter:blur(12px);pointer-events:auto;
+}
+.world-site[data-world="auto-showroom"] .bv-load-spinner .bv-spinner-ring{width:52px;height:52px;display:block;border:3px solid #7a838e66;border-top-color:#f58b43;border-right-color:#f58b43;border-radius:50%;animation:bvSpinnerRotate .88s linear infinite;flex:none}
+.world-site[data-world="auto-showroom"] .bv-load-spinner strong{font:750 13px/1.55 "Be Vietnam Pro",sans-serif;color:#f4f5f6;letter-spacing:0}
+.world-site[data-world="auto-showroom"] .bv-load-spinner .bv-spinner-description{font:400 11px/1.6 "Be Vietnam Pro",sans-serif;color:#b7c3cb}
+.world-site[data-world="auto-showroom"] .bv-load-spinner .bv-spinner-a11y{position:absolute;clip-path:inset(50%);height:1px;width:1px;overflow:hidden;white-space:nowrap}
+.world-site[data-world="auto-showroom"] .bv-load-spinner .bv-spinner-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:9px;margin-top:8px}
+.world-site[data-world="auto-showroom"] .bv-load-spinner .bv-spinner-actions button{min-height:44px;padding:9px 12px;background:#f18b4a;color:#111319;border:1px solid #f18b4a;font:750 11px "Be Vietnam Pro",sans-serif}
+.world-site[data-world="auto-showroom"] .bv-load-spinner .bv-spinner-actions button+button{background:#151b21;color:#f3f4f5;border-color:#98a4b0}
+.world-site[data-world="auto-showroom"] .bv-after-cinematic{display:flex;gap:24px;justify-content:space-between;align-items:center;padding:18px clamp(20px,6vw,110px);background:#0b0e12;color:#aeb7bd;border-bottom:1px solid #333d47}
+.world-site[data-world="auto-showroom"] .bv-after-cinematic>span{font:750 9px/1.5 "Be Vietnam Pro",sans-serif;letter-spacing:.12em;white-space:nowrap}
+.world-site[data-world="auto-showroom"] .bv-after-cinematic .ix-glb-credit{font:400 10px/1.6 "Be Vietnam Pro",sans-serif;margin:0;text-align:right;color:#aeb7bd}
+.world-site[data-world="auto-showroom"] .bv-after-cinematic a{color:#e4e9eb;text-underline-offset:3px}
+@keyframes bvSpinnerRotate{to{transform:rotate(360deg)}}
+@media(max-width:760px){
+.world-site[data-world="auto-showroom"] .ix-auto-showroom .bv-cinematic-track .ix-car-load.bv-load-spinner{left:50%;right:auto;top:50%;bottom:auto;width:min(276px,calc(100vw - 32px));transform:translate3d(-50%,-50%,0);padding:23px 17px}
+.world-site[data-world="auto-showroom"] .bv-after-cinematic{display:block;padding:18px 20px}
+.world-site[data-world="auto-showroom"] .bv-after-cinematic>span{display:block;margin-bottom:7px}
+.world-site[data-world="auto-showroom"] .bv-after-cinematic .ix-glb-credit{text-align:left;max-width:100%}
+}
+@media(prefers-reduced-motion:reduce){.world-site[data-world="auto-showroom"] .bv-load-spinner .bv-spinner-ring{animation:none;border-color:#f58b43 #647582 #647582 #647582}}

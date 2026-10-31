@@ -22,12 +22,12 @@ export function AuthNavigation(){
    <nav className="auth-navigation-links" aria-label="Điều hướng trên trang tài khoản">
     {pages.map(page=><Link key={page.href} href={page.href}>{page.label}</Link>)}
    </nav>
-   <Link href={next.href} className="auth-navigation-switch">{next.label}<Icon name="arrow-up-right" size={15}/></Link>
+   <Link href={next.href} className="auth-navigation-switch">{next.label}<Icon name="arrow-right" size={15}/></Link>
    <details className="auth-navigation-mobile">
     <summary aria-label="Mở điều hướng trang tài khoản"><Icon name="menu" size={20}/><span>Menu</span></summary>
     <nav aria-label="Điều hướng tài khoản trên điện thoại">
-     {pages.map(page=><Link key={page.href} href={page.href}>{page.label}<Icon name="arrow-up-right" size={16}/></Link>)}
-     <Link href={next.href} className="auth-navigation-mobile-action">{next.label}<Icon name="arrow-up-right" size={16}/></Link>
+     {pages.map(page=><Link key={page.href} href={page.href}>{page.label}<Icon name="arrow-right" size={16}/></Link>)}
+     <Link href={next.href} className="auth-navigation-mobile-action">{next.label}<Icon name="arrow-right" size={16}/></Link>
     </nav>
    </details>
   </div>

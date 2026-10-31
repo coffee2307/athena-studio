@@ -5,7 +5,7 @@ import type {ReactNode} from "react";
 
 export const AUTO_CINEMATIC_ID="bv-cinematic-track";
 
-const chapters=[
+export const chapters=[
  {eyebrow:"01 / THE REVEAL",title:"BORN FOR THE EDGE.",description:"Một đường nét xuất hiện từ bóng tối. Cuộn xuống để đưa chiếc xe từ ánh sáng studio vào hành trình khám phá.",detail:"SILHOUETTE / LIGHT"},
  {eyebrow:"02 / SIDE PROFILE",title:"A LINE OF INTENT.",description:"Chiếc xe lướt ngang sân khấu. Camera đi cùng thân xe để bộc lộ tỷ lệ thấp, dáng dài và đường cắt dứt khoát.",detail:"PROPORTION / MOVEMENT"},
  {eyebrow:"03 / MATERIAL STUDY",title:"EVERY SURFACE COUNTS.",description:"Đến gần bề mặt sơn graphite, mâm xe và các mảng carbon. Không cần làm nhòe hình để tạo chiều sâu.",detail:"GRAPHITE / DETAIL"},
@@ -38,7 +38,8 @@ export function AutoCinematicTrack({children}:{children:ReactNode}){
    const rect=track.getBoundingClientRect();
    const p=clamp(-rect.top/Math.max(1,rect.height-window.innerHeight));
    track.style.setProperty("--bv-progress",p.toFixed(5));
-   const next=Math.min(4,Math.floor(p*5));
+   // Chapter labels switch at the midpoint between the five authored camera poses.
+   const next=Math.min(4,Math.round(p*4));
    setChapter(previous=>previous===next?previous:next);
   };
   const schedule=()=>{if(!raf)raf=requestAnimationFrame(update);};

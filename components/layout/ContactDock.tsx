@@ -104,8 +104,8 @@ export function ContactDock(){
      <p>Chọn Gmail hoặc Outlook để mở thư đã điền sẵn nội dung. Bạn có thể chỉnh sửa trước khi gửi.</p>
      <div className="athena-email-address">coffee2307@gmail.com</div>
      <div className="athena-contact-buttons">
-      <a href={consultationGmail} target="_blank" rel="noopener noreferrer" className="athena-contact-primary">Soạn bằng Gmail <Icon name="arrow-up-right" size={16}/></a>
-      <a href={consultationOutlook} target="_blank" rel="noopener noreferrer">Soạn bằng Outlook <Icon name="arrow-up-right" size={16}/></a>
+      <a href={consultationGmail} target="_blank" rel="noopener noreferrer" className="athena-contact-primary">Soạn bằng Gmail <Icon name="arrow-right" size={16}/></a>
+      <a href={consultationOutlook} target="_blank" rel="noopener noreferrer">Soạn bằng Outlook <Icon name="arrow-right" size={16}/></a>
      </div>
     </>:<>
      <p>{active==="phone"?"Dùng điện thoại quét mã QR để mở bàn phím gọi điện đã điền sẵn số.":"Quét mã QR bằng camera điện thoại hoặc nhấn nút bên dưới để mở "+choice.label+"."}</p>
@@ -113,7 +113,7 @@ export function ContactDock(){
      <strong className="athena-contact-number">0965 747 147</strong>
      <div className="athena-contact-buttons">
       <a href={choice.href} target={active==="phone"?undefined:"_blank"} rel={active==="phone"?undefined:"noopener noreferrer"} className="athena-contact-primary">
-       {active==="phone"?"Mở ứng dụng gọi điện":"Mở "+choice.label} <Icon name="arrow-up-right" size={16}/>
+       {active==="phone"?"Mở ứng dụng gọi điện":"Mở "+choice.label} <Icon name="arrow-right" size={16}/>
       </a>
       <button onClick={()=>copy("0965747147")}>Sao chép số điện thoại <Icon name="arrow-right" size={16}/></button>
      </div>

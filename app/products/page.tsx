@@ -39,7 +39,7 @@ export default function ProductsPage(){
        <div><span>ĐẦU RA</span><strong>Trạng thái, nhật ký và tóm tắt</strong></div>
        <div><span>TÌNH TRẠNG</span><strong>Thử nghiệm nội bộ, chưa phát hành</strong></div>
       </div>
-      <div className="athena-product-actions"><Link href="/products/sitepulse" className="athena-product-primary">Khám phá SitePulse <Icon name="arrow-up-right" size={18}/></Link><Link href="/contact" className="athena-product-secondary">Trao đổi về nhu cầu <Icon name="arrow-right" size={17}/></Link></div>
+      <div className="athena-product-actions"><Link href="/products/sitepulse" className="athena-product-primary">Khám phá SitePulse <Icon name="arrow-right" size={18}/></Link><Link href="/contact" className="athena-product-secondary">Trao đổi về nhu cầu <Icon name="arrow-right" size={17}/></Link></div>
      </div>
      <div className="athena-product-visual"><SitePulseDemo/></div>
     </article>
@@ -53,6 +53,6 @@ export default function ProductsPage(){
    </div>
   </section>
 
-  <section className="athena-products-next"><div className="container athena-products-next-inner"><div><p className="section-index"><span className="index-circle">03</span> CÙNG XÁC ĐỊNH NHU CẦU</p><h2>Một vấn đề thực tế<br/>đáng để giải quyết?</h2><p>SitePulse chưa mở đăng ký công khai hoặc thu phí. Nếu website của bạn cần được theo dõi và kiểm tra có hệ thống, hãy chia sẻ vấn đề để Athena cân nhắc hướng phát triển phù hợp.</p></div><Link href="/contact" className="athena-product-primary">Trao đổi ý tưởng sản phẩm <Icon name="arrow-up-right" size={18}/></Link></div></section>
+  <section className="athena-products-next"><div className="container athena-products-next-inner"><div><p className="section-index"><span className="index-circle">03</span> CÙNG XÁC ĐỊNH NHU CẦU</p><h2>Một vấn đề thực tế<br/>đáng để giải quyết?</h2><p>SitePulse chưa mở đăng ký công khai hoặc thu phí. Nếu website của bạn cần được theo dõi và kiểm tra có hệ thống, hãy chia sẻ vấn đề để Athena cân nhắc hướng phát triển phù hợp.</p></div><Link href="/contact" className="athena-product-primary">Trao đổi ý tưởng sản phẩm <Icon name="arrow-right" size={18}/></Link></div></section>
  </div>;
 }

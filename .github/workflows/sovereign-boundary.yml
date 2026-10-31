@@ -1,0 +1,116 @@
+name: Sovereign template boundary
+on:
+  pull_request:
+    paths:
+      - "app/template-demos/**"
+      - "components/sovereign/**"
+      - "components/templates/WorldSite.tsx"
+      - "components/templates/WorldImmersiveHome.tsx"
+      - "components/immersive/McLarenLoadingUI.tsx"
+      - "app/template-navigation-identities.css"
+      - "app/auto-showroom-minimal.css"
+      - "config/showroom-protection.json"
+      - "data/sovereign-site-registry.ts"
+      - "templates/**"
+      - "scripts/sovereign-*.mjs"
+      - "scripts/refinement02-*.mjs"
+      - "scripts/sora-living-issue-qa.mjs"
+      - "scripts/north-diagnostic-qa.mjs"
+      - "scripts/north-impact-rail-qa.mjs"
+      - "scripts/fashion-3d-qa.mjs"
+      - "scripts/create-site.mjs"
+      - "public/template-previews/**"
+      - "tests/sovereign-*.test.mjs"
+      - "tests/refinement02-source.test.mjs"
+      - "tests/sora-living-issue.test.mjs"
+      - "tests/north-diagnostic.test.mjs"
+      - "tests/north-impact-rail.test.mjs"
+      - "tests/fashion-3d-hero.test.mjs"
+      - "tests/dna03-template-projects.test.mjs"
+      - ".github/workflows/sovereign-boundary.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  sovereign-source-integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Sovereign architecture and legacy debt baseline
+        run: node scripts/sovereign-audit.mjs --check --out=.qa/athena-21-sovereign/audit.json
+      - name: Route, framework and standalone export contracts
+        run: node --test tests/sovereign-boundary.test.mjs tests/sovereign-export-fidelity.test.mjs tests/sovereign-p8-type-layout.test.mjs tests/sora-living-issue.test.mjs tests/dna03-template-projects.test.mjs tests/fashion-3d-hero.test.mjs
+      - name: Locked McLaren asset/camera and refinements contracts
+        run: node --test tests/showroom-protection.test.mjs tests/refinement02-source.test.mjs
+      - name: Install Digital Creators standalone dependencies
+        run: npm ci --prefix templates/digital-creators --no-audit --no-fund
+      - name: Compile the native Vite/React/Three.js export
+        run: npm run build --prefix templates/digital-creators
+      - name: Confirm Digital Creators source fidelity after build
+        run: node scripts/sovereign-digital-creators-sync.mjs --check
+      - name: Build independently exportable Fashion Archive 3D carousel
+        run: |
+          npm ci --prefix templates/fashion-archive --no-audit --no-fund
+          npm run test:unit --prefix templates/fashion-archive
+          npm run build --prefix templates/fashion-archive
+      - name: Publish audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sovereign-p4-source-audit
+          path: .qa/athena-21-sovereign/audit.json
+          if-no-files-found: ignore
+  sovereign-p8-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Build Athena demo routes at the candidate SHA
+        run: npm run build
+      - name: Start local-only preview
+        run: |
+          npm run start -- -p 3182 -H 127.0.0.1 > /tmp/athena-p8-next.log 2>&1 &
+          for i in $(seq 1 60); do
+            curl -fsS http://127.0.0.1:3182/template-demos/creative-studio >/dev/null && exit 0
+            sleep 2
+          done
+          cat /tmp/athena-p8-next.log
+          exit 1
+      - name: Vietnamese type, collision and X-only mobile menu QA
+        run: node scripts/sovereign-p8-layout-qa.mjs
+      - name: SORA Living Issue interactive cover, letters and 30 route/viewports
+        run: node scripts/sora-living-issue-qa.mjs
+      - name: Four-template refined layout and mobile cockpit QA
+        run: node scripts/refinement02-qa.mjs
+      - name: NORTH diagnosis interactions, services and 36 responsive route checks
+        run: node scripts/north-diagnostic-qa.mjs
+      - name: NORTH sticky rail and impact interaction browser checks
+        run: node scripts/north-impact-rail-qa.mjs
+      - name: Fashion 3D GLB, Z-axis drag, font and contrast browser checks
+        run: node scripts/fashion-3d-qa.mjs
+      - name: Upload P8 screenshots and render evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sovereign-p8-chromium-evidence
+          path: |
+            .qa/sovereign-p8/
+            .qa/refinement02/
+            .qa/sora-living-issue/
+            .qa/north-upgrade/
+            .qa/north-impact-rail/
+            .qa/fashion-3d/
+          if-no-files-found: ignore

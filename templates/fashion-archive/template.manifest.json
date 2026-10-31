@@ -1,0 +1,14 @@
+{
+  "slug": "fashion-archive",
+  "name": "Thương hiệu thời trang",
+  "layout": "editorial",
+  "originalDemo": "/template-demos/fashion-archive",
+  "status": "standalone-baseline-extraction",
+  "fidelity": "original bespoke demos require visual parity review",
+  "license": {
+    "name": "startbootstrap-creative",
+    "url": "https://github.com/StartBootstrap/startbootstrap-creative",
+    "license": "MIT"
+  },
+  "version": "0.1.0"
+}

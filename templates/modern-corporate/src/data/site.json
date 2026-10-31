@@ -1,0 +1,35 @@
+{
+  "slug": "modern-corporate",
+  "title": "Doanh nghiệp hiện đại",
+  "industry": "Dịch vụ B2B",
+  "style": "Modern Corporate",
+  "purpose": "Trình bày dịch vụ và tạo yêu cầu tư vấn",
+  "description": "Kiến trúc thông tin rõ ràng cho doanh nghiệp cần giải thích dịch vụ, quy trình và năng lực.",
+  "variant": "corporate",
+  "features": [
+    "Điều hướng theo nhu cầu",
+    "Khối dịch vụ theo vấn đề",
+    "Lời kêu gọi tư vấn rõ ràng",
+    "Website demo nhiều trang với điều hướng desktop/mobile",
+    "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+    "Trải nghiệm trong popup hoặc mở toàn màn hình"
+  ],
+  "modules": [
+    "content",
+    "contact"
+  ],
+  "reference": {
+    "name": "startbootstrap-agency",
+    "url": "https://github.com/StartBootstrap/startbootstrap-agency",
+    "license": "MIT"
+  },
+  "brand": "NORTH",
+  "layout": "structured",
+  "images": [
+    "/images/image-1.jpg",
+    "/images/image-2.jpg",
+    "/images/image-3.jpg",
+    "/images/image-4.jpg",
+    "/images/image-5.jpg"
+  ]
+}

@@ -12,14 +12,19 @@ import {WorldExperiencePages,isExperienceSection,type ExperienceSection} from "@
 import {WorldImmersiveHome,hasImmersiveHome} from "@/components/templates/WorldImmersiveHome";
 import {WorldSubpageFeature} from "@/components/templates/WorldSubpageFeature";
 import {AutoShowroomSubpages} from "@/components/templates/AutoShowroomSubpages";
+import {WORLD_NAV_IDENTITIES} from "@/data/world-navigation-identities";
+import {WorldMotion} from "@/components/templates/WorldMotion";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faBagShopping,faCartShopping,faUser,faCalendarCheck,faEnvelope,faArrowUp,faCircleInfo,faTicket,faMusic,faBriefcase} from "@fortawesome/free-solid-svg-icons";
 
 export type WorldSection="home"|"work"|"services"|"about"|"contact"|"detail";
 type Props={slug:string;section?:WorldSection;itemIndex?:number;embedded?:boolean};
 function picture(slug:string,n:number){return "/template-demos/"+slug+"/image-"+(n%5+1)+".jpg";}
-function Arrow(){return <span aria-hidden="true">↗</span>;}
+function Arrow(){return <span className="world-action-dot" aria-hidden="true"/>;}
 
 export function WorldSite({slug,section="home",itemIndex,embedded=false}:Props){
  const world=copies[slug],extra=worldDetails[slug];
+ const navIdentity=WORLD_NAV_IDENTITIES[slug];
  const [menuOpen,setMenuOpen]=useState(false);
  const [isFramed,setIsFramed]=useState(false);
  const [cart,setCart]=useState(0);
@@ -39,6 +44,7 @@ export function WorldSite({slug,section="home",itemIndex,embedded=false}:Props){
   {id:"contact",label:"Liên hệ",href:root+"/contact"}
  ];
  useEffect(()=>{setMenuOpen(false);setFormState("idle");},[slug,section,itemIndex]);
+ // Fixed menu + scrim contain pointer interaction without changing body scrollbar width.
  useEffect(()=>{try{setIsFramed(window.self!==window.top)}catch{setIsFramed(true)}},[]);
  useEffect(()=>{try{setCart(Number(window.sessionStorage.getItem("athena-demo-cart-"+slug)||0));}catch{}},[slug]);
  useEffect(()=>{const close=(event:KeyboardEvent)=>{if(event.key==="Escape"){setLightbox(null);setCartOpen(false);setMenuOpen(false);}};window.addEventListener("keydown",close);return()=>window.removeEventListener("keydown",close);},[]);
@@ -79,7 +85,7 @@ export function WorldSite({slug,section="home",itemIndex,embedded=false}:Props){
  const home=()=> <main id="world-main">
   <section className="world-hero">
    <div className="world-hero-copy"><p className="world-eyebrow">{world.eyebrow}</p><h1>{world.title}</h1><p className="world-hero-subtitle">{world.intro}</p>
-    <div className="world-hero-actions"><Link className="world-btn" href={isBooking?root+"/contact":root+"/work"}>{textCTA} <Arrow/></Link><Link className="world-inline-link" href={root+"/about"}>Về thương hiệu ↗</Link></div>
+    <div className="world-hero-actions"><Link className="world-btn" href={isBooking?root+"/contact":root+"/work"}>{textCTA} <Arrow/></Link><Link className="world-inline-link" href={root+"/about"}>Về thương hiệu </Link></div>
     <div className="world-hero-foot"><span>{extra.slogan}</span><span>SCROLL TO EXPLORE ↓</span></div>
    </div>
    <div className="world-hero-visual"><Image src={img(0)} alt={"Hình ảnh đại diện "+world.brand} fill priority sizes="(max-width:700px) 100vw, 55vw"/><div className="world-hero-photo-caption"><span>01 / 05</span><span>{world.eyebrow}</span></div></div>
@@ -99,7 +105,7 @@ export function WorldSite({slug,section="home",itemIndex,embedded=false}:Props){
   <section className="world-visual-essay world-visual-essay-reverse"><div className="world-essay-photo"><Image src={img(3)} alt={"Chi tiết "+world.brand} fill sizes="(max-width:700px) 100vw, 52vw"/></div><div className="world-essay-copy"><p className="world-eyebrow">A DIFFERENT POINT OF VIEW</p><h2>Không chỉ là hình thức.</h2><p>{extra.story}</p><Link className="world-inline-link" href={root+"/work"}>Xem điều chúng tôi làm <Arrow/></Link></div></section>{contactCta()}
  </main>;
  const contact=()=> <main id="world-main">
-  <section className="world-page-heading"><p className="world-eyebrow">GET IN TOUCH / {world.brand}</p><h1>Liên hệ<span>.</span></h1><div><p>{extra.contactIntro}</p><span>LET&apos;S TALK ↗</span></div></section>
+  <section className="world-page-heading"><p className="world-eyebrow">GET IN TOUCH / {world.brand}</p><h1>Liên hệ<span>.</span></h1><div><p>{extra.contactIntro}</p><span>LET&apos;S TALK </span></div></section>
   <section className="world-section world-contact-layout"><div className="world-contact-details"><p className="world-eyebrow">START A CONVERSATION</p><h2>{extra.contactTitle}</h2><p>{extra.story}</p><div className="world-contact-facts"><div><span>TRANG THÁI</span><strong>Bản demo tương tác</strong></div><div><span>PHẠM VI</span><strong>{extra.servicesLabel}</strong></div><div><span>PHẢN HỒI</span><strong>Biểu mẫu mô phỏng, không gửi dữ liệu</strong></div></div></div>
   <form className="world-contact-form" onSubmit={handleForm}>
    <p className="world-eyebrow">01 / YOUR ENQUIRY</p>
@@ -107,24 +113,33 @@ export function WorldSite({slug,section="home",itemIndex,embedded=false}:Props){
    <div className="world-form-row"><label htmlFor={formId+"-phone"}>Số điện thoại (không bắt buộc)<input id={formId+"-phone"} name="phone" type="tel" autoComplete="tel" placeholder="+84 ..."/></label><label htmlFor={formId+"-interest"}>{isBooking?"Dịch vụ quan tâm":"Bạn quan tâm đến"} <span>*</span><select id={formId+"-interest"} required defaultValue=""><option value="" disabled>Chọn một nội dung</option>{extra.services.map(s=><option key={s.title} value={s.title}>{s.title}</option>)}<option value="other">Trao đổi khác</option></select></label></div>
    {isBooking&&<div className="world-form-row"><label htmlFor={formId+"-date"}>Ngày mong muốn <span>*</span><input id={formId+"-date"} name="date" type="date" min={new Date().toLocaleDateString("en-CA")} required/></label><label htmlFor={formId+"-guests"}>{slug==="hospitality-booking"?"Số khách":"Số người tham gia"}<select id={formId+"-guests"} defaultValue="2">{[1,2,3,4,5,6].map(n=><option key={n} value={n}>{n} người</option>)}</select></label></div>}
    <label htmlFor={formId+"-message"}>Lời nhắn <span>*</span><textarea id={formId+"-message"} rows={5} minLength={10} required placeholder="Mô tả điều bạn đang tìm kiếm..."/></label>
-   <div className="world-form-consent"><span aria-hidden="true">ⓘ</span><span>Đây là biểu mẫu mô phỏng của Athena. Thông tin không được gửi đến máy chủ và không phát sinh đặt chỗ, thanh toán hay đăng ký thật.</span></div>
+   <div className="world-form-consent"><FontAwesomeIcon icon={faCircleInfo} aria-hidden="true"/><span>Đây là biểu mẫu mô phỏng của Athena. Thông tin không được gửi đến máy chủ và không phát sinh đặt chỗ, thanh toán hay đăng ký thật.</span></div>
    <button className="world-btn" type="submit">{isBooking?"Thử gửi yêu cầu đặt lịch":"Gửi yêu cầu mô phỏng"} <Arrow/></button>
    {formState==="success"&&<p className="world-form-success" role="status"><strong>Đã mô phỏng gửi thành công.</strong> Dữ liệu chỉ được sử dụng để trình diễn giao diện và không được chuyển đến bất kỳ hộp thư nào.</p>}
   </form></section>
   <section className="world-contact-photo"><Image src={img(4)} alt={world.brand+" — không gian minh họa"} fill sizes="100vw"/><div><span>WE WOULD LOVE TO HEAR FROM YOU.</span><strong>{world.brand}</strong></div></section>
  </main>;
- return <div className="world-site" data-world={slug} data-page={section} id="world-top">
+ return <div className="world-site" data-world={slug} data-nav-style={navIdentity?.name??"gallery"} data-nav-open={menuOpen?"true":"false"} data-page={section} id="world-top">
   <div className="world-announcement"><span>{world.eyebrow}</span><span>EXPERIENCE CONCEPT / 2026</span></div>
   <header className="world-header">
    <Link className="world-brand" href={root} aria-label={world.brand+" — Trang chủ"}>{world.brand}</Link>
    <nav className="world-desktop-nav" aria-label={"Điều hướng "+world.brand}>{pages.map(p=><Link key={p.id} href={p.href} scroll={false} onClick={()=>window.scrollTo({top:0,left:0,behavior:"auto"})} aria-current={(section==="detail"?"work":section)===p.id?"page":undefined}>{p.label}</Link>)}</nav>
-   <div className="world-header-actions">{isShop&&<button className="world-cart-button" type="button" onClick={()=>setCartOpen(true)} aria-label={"Mở giỏ hàng với "+cart+" sản phẩm"}>BAG ({cart})</button>}<Link className="world-header-cta" href={root+"/contact"}>{isBooking?"Đặt lịch":"Bắt đầu"} <Arrow/></Link><button className="world-menu-toggle" type="button" aria-expanded={menuOpen} aria-controls={"world-menu-"+slug} aria-label={menuOpen?"Đóng menu":"Mở menu"} onClick={()=>setMenuOpen(!menuOpen)}><span/><span/></button></div>
+   <div className="world-header-actions">{isShop&&<button className="world-cart-button" type="button" onClick={()=>setCartOpen(true)} aria-label={"Mở giỏ hàng với "+cart+" sản phẩm"}><FontAwesomeIcon icon={slug==="commerce-standard"?faBagShopping:faCartShopping} aria-hidden="true"/><span className="world-cart-count">{cart}</span></button>}
+    {["saas-product","education-platform","team-intranet"].includes(slug)&&<Link className="world-account-link" href={root+"/about"} aria-label={"Giới thiệu "+world.brand}><FontAwesomeIcon icon={faUser} aria-hidden="true"/><span>{slug==="team-intranet"?"Nhóm":"Giới thiệu"}</span></Link>}
+    <Link className="world-header-cta" href={root+"/contact"}>{isBooking&&<FontAwesomeIcon icon={faCalendarCheck} aria-hidden="true"/>}{slug==="live-concert"&&<FontAwesomeIcon icon={faTicket} aria-hidden="true"/>}{slug==="music-label"&&<FontAwesomeIcon icon={faMusic} aria-hidden="true"/>}{slug==="finance-trust"&&<FontAwesomeIcon icon={faBriefcase} aria-hidden="true"/>}{isBooking?"Đặt lịch":slug==="live-concert"?"Giữ chỗ":slug==="music-label"?"Liên hệ":"Bắt đầu"}</Link><button className="world-menu-toggle" type="button" aria-expanded={menuOpen} aria-controls={"world-menu-"+slug} aria-label={menuOpen?"Đóng menu "+world.brand:"Mở menu "+world.brand} onClick={()=>setMenuOpen(value=>!value)}><span className="world-toggle-bars" data-bars={navIdentity?.bars??3} aria-hidden="true"><i/><i/><i/></span></button></div>
   </header>
-  <div className={"world-mobile-nav"+(menuOpen?" is-open":"")} id={"world-menu-"+slug} aria-hidden={!menuOpen}>{pages.map((p,i)=><Link tabIndex={menuOpen?0:-1} key={p.id} href={p.href} scroll={false} onClick={()=>{setMenuOpen(false);window.scrollTo({top:0,left:0,behavior:"auto"});}}><span>0{i+1}</span>{p.label}<Arrow/></Link>)}<div className="world-mobile-nav-bottom"><strong>{world.brand}</strong><span>{extra.slogan}</span></div></div>
+  <button className={"world-nav-scrim"+(menuOpen?" is-open":"")} type="button" tabIndex={menuOpen?0:-1} disabled={!menuOpen} aria-label={"Đóng điều hướng "+world.brand} onClick={()=>setMenuOpen(false)}/>
+  <nav className={"world-mobile-nav"+(menuOpen?" is-open":"")} id={"world-menu-"+slug} aria-label={"Điều hướng mở rộng "+world.brand} aria-hidden={!menuOpen} inert={!menuOpen}>
+    {slug==="auto-showroom"&&<div className="bv-mobile-nav-bar"><span>VELAR / ĐIỀU HƯỚNG</span><button type="button" aria-label="Đóng menu showroom" onClick={()=>setMenuOpen(false)}>×</button></div>}
+   <div className="world-mobile-nav-intro"><span>{slug==="auto-showroom"?"CHỌN MỘT HƯỚNG KHÁM PHÁ":navIdentity?.subtitle}</span><strong>{slug==="auto-showroom"?"KHÁM PHÁ VELAR":navIdentity?.headline}</strong></div>
+   <div className="world-mobile-nav-links">{pages.map((p,i)=><Link aria-current={(section==="detail"?"work":section)===p.id?"page":undefined} key={p.id} href={p.href} scroll={false} onClick={()=>{setMenuOpen(false);window.scrollTo({top:0,left:0,behavior:"auto"});}}><span className="world-nav-index">0{i+1}</span><span className="world-nav-label">{slug==="auto-showroom"?({home:"TRANG CHỦ",work:"THIẾT KẾ",services:"TRẢI NGHIỆM",about:"VỀ VELAR",contact:"LIÊN HỆ"} as Record<string,string>)[p.id]:p.label}</span><span className="world-nav-decoration" aria-hidden="true"/></Link>)}</div>
+   <div className="world-mobile-nav-bottom"><strong>{world.brand}</strong><span>{extra.slogan}</span></div>
+  </nav>
   {section!=="home"&&slug!=="auto-showroom"&&hasImmersiveHome(slug)&&<WorldSubpageFeature slug={slug} section={section}/>}
   {section==="home"?(hasImmersiveHome(slug)?<WorldImmersiveHome slug={slug} world={world} extra={extra}/>:hasSpecializedHomepage(slug)?<WorldSpecialHome slug={slug} world={world} extra={extra} addToCart={addToCart}/>:hasExistingSpecialHome(slug)?<WorldExistingSpecialHome slug={slug} world={world} extra={extra} addToCart={addToCart}/>:hasLegacySpecialHome(slug)?<WorldLegacySpecialHome slug={slug} world={world} extra={extra}/>:home()):slug==="auto-showroom"?<AutoShowroomSubpages section={section} itemIndex={itemIndex} world={world} extra={extra}/>:isExperienceSection(section)?<WorldExperiencePages slug={slug} section={section as ExperienceSection} itemIndex={itemIndex} world={world} extra={extra} addToCart={addToCart}/>:section==="about"?about():contact()}
-  <footer className="world-footer"><div className="world-footer-main"><div className="world-footer-identity"><Link href={root}>{world.brand}</Link><p>{extra.slogan}</p></div><div className="world-footer-column"><span>KHÁM PHÁ</span>{pages.slice(0,3).map(p=><Link key={p.id} href={p.href}>{p.label}</Link>)}</div><div className="world-footer-column"><span>THÔNG TIN</span>{pages.slice(3).map(p=><Link key={p.id} href={p.href}>{p.label}</Link>)}<Link href={root+"/work"}>Khám phá nội dung</Link></div><div className="world-footer-column"><span>TRẢI NGHIỆM</span><Link href={root+"/contact"}>Gửi yêu cầu ↗</Link><p>Một dự án website mẫu của Athena Studio. Tất cả chức năng giao dịch chỉ mang tính mô phỏng.</p></div></div><div className="world-footer-bottom"><span>© 2026 {world.brand} — {extra.footerLine}</span><Link href="#world-top">TRỞ LÊN ĐẦU ↑</Link><span>CREATED FOR ATHENA DEMO LIBRARY</span></div></footer>
-  {isShop&&cartOpen&&<div className="world-drawer-backdrop" onClick={()=>setCartOpen(false)} role="presentation"><aside className="world-cart-drawer" role="dialog" aria-modal="true" aria-label="Giỏ hàng demo" onClick={event=>event.stopPropagation()}><div className="world-drawer-head"><span>YOUR BAG / DEMO</span><button onClick={()=>setCartOpen(false)} aria-label="Đóng giỏ">×</button></div><h2>Giỏ hàng của bạn.</h2><p>{cart?cart+" sản phẩm đã được thêm vào giỏ demo.":"Giỏ hàng hiện đang trống."}</p><div className="world-drawer-info">Không có xử lý thanh toán, thông tin cá nhân hay đơn hàng thật.</div>{cart>0&&<button onClick={resetCart} className="world-drawer-secondary">Xóa giỏ mô phỏng</button>}<Link href={root+"/work"} onClick={()=>setCartOpen(false)} className="world-btn">Tiếp tục mua sắm <Arrow/></Link></aside></div>}
+  <footer className="world-footer"><div className="world-footer-main"><div className="world-footer-identity"><span className="world-footer-kicker">EST. 2026 / {navIdentity?.scene}</span><Link href={root}>{world.brand}</Link><p>{extra.slogan}</p></div><div className="world-footer-column"><span>KHÁM PHÁ</span>{pages.slice(0,3).map(p=><Link key={p.id} href={p.href}>{p.label}</Link>)}</div><div className="world-footer-column"><span>THÔNG TIN</span>{pages.slice(3).map(p=><Link key={p.id} href={p.href}>{p.label}</Link>)}<Link href={root+"/work"}>Khám phá nội dung</Link></div><div className="world-footer-column world-footer-end"><span>{isShop?"CHĂM SÓC":isBooking?"ĐẶT LỊCH":"KẾT NỐI"}</span><Link href={root+"/contact"}><FontAwesomeIcon icon={faEnvelope} aria-hidden="true"/> Gửi yêu cầu</Link><p>Một dự án website mẫu của Athena Studio. Tất cả chức năng giao dịch chỉ mang tính mô phỏng.</p></div></div><div className="world-footer-bottom"><span>© 2026 {world.brand} — {extra.footerLine}</span><Link href="#world-top" className="world-back-top"><FontAwesomeIcon icon={faArrowUp} aria-hidden="true"/> ĐẦU TRANG</Link><span>CREATED FOR ATHENA DEMO LIBRARY</span></div></footer>
+  <WorldMotion slug={slug} section={section}/>
+  {isShop&&cartOpen&&<div className="world-drawer-backdrop" onClick={()=>setCartOpen(false)} role="presentation"><aside className="world-cart-drawer" role="dialog" aria-modal="true" aria-label="Giỏ hàng demo" onClick={event=>event.stopPropagation()}><div className="world-drawer-head"><span><FontAwesomeIcon icon={faBagShopping} aria-hidden="true"/> YOUR BAG / DEMO</span><button onClick={()=>setCartOpen(false)} aria-label="Đóng giỏ">×</button></div><h2>Giỏ hàng của bạn.</h2><p>{cart?cart+" sản phẩm đã được thêm vào giỏ demo.":"Giỏ hàng hiện đang trống."}</p><div className="world-drawer-info">Không có xử lý thanh toán, thông tin cá nhân hay đơn hàng thật.</div>{cart>0&&<button onClick={resetCart} className="world-drawer-secondary">Xóa giỏ mô phỏng</button>}<Link href={root+"/work"} onClick={()=>setCartOpen(false)} className="world-btn">Tiếp tục mua sắm <Arrow/></Link></aside></div>}
   {lightbox!==null&&<div className="world-lightbox" role="dialog" aria-modal="true" aria-label="Xem ảnh" onClick={()=>setLightbox(null)}><button onClick={()=>setLightbox(null)} aria-label="Đóng ảnh">×</button><Image src={img(lightbox)} alt={world.brand+" — ảnh trải nghiệm"} width={1600} height={1100} sizes="90vw"/></div>}
   {!embedded&&!isFramed&&section==="home"&&<TemplateEngagementPrompt slug={slug}/>}
  </div>;

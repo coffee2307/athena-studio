@@ -1,0 +1,14 @@
+{
+  "slug": "creative-studio",
+  "name": "Studio sáng tạo",
+  "layout": "editorial",
+  "originalDemo": "/template-demos/creative-studio",
+  "status": "standalone-baseline-extraction",
+  "fidelity": "original bespoke demos require visual parity review",
+  "license": {
+    "name": "startbootstrap-freelancer",
+    "url": "https://github.com/StartBootstrap/startbootstrap-freelancer",
+    "license": "MIT"
+  },
+  "version": "0.1.0"
+}

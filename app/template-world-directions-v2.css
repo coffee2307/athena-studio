@@ -1,0 +1,321 @@
+/* Distinct per-brand components (header/footer/buttons/type) and cheap scroll reveals.
+   No JS smooth-scroll hijacking, no per-frame React re-renders, no remote font CDN. */
+html:has(.world-site){scrollbar-gutter:stable}
+.world-site{--world-display:'Be Vietnam Pro',sans-serif;--world-body:'Be Vietnam Pro',sans-serif;--world-cta-round:0;--world-reveal-transform:translateY(28px);--world-reveal-rot:rotate(0deg);--world-reveal-blur:0px;font-family:var(--world-body)}
+.world-site :where(.world-hero h1,.world-section-heading h2,.world-page-heading h1,.world-about-hero h1,.world-closing h2,.world-footer-identity>a){font-family:var(--world-display)}
+.world-site .world-header-cta svg,.world-site .world-cart-button svg,.world-site .world-account-link svg{width:15px;height:15px;flex:none}
+.world-site .world-header-cta{display:inline-flex;gap:9px;align-items:center}
+.world-site .world-header-actions{gap:10px}
+.world-site .world-cart-button{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:43px;min-width:48px;font-family:var(--world-body);border:1px solid var(--w-border)}
+.world-site .world-cart-count{font-variant-numeric:tabular-nums;font-size:11px}
+.world-site .world-account-link{display:inline-flex;align-items:center;gap:8px;min-height:43px;padding:9px 12px;border:1px solid var(--w-border);font:600 11px/1.2 var(--world-body)}
+.world-site .world-header-cta,.world-site .world-btn,.world-site .world-inline-link,.world-site .world-text-link{font-family:var(--world-body);border-radius:var(--world-cta-round);transition:transform .25s ease,background .25s ease,color .25s ease,box-shadow .25s ease}
+.world-site .world-btn:hover,.world-site .world-header-cta:hover{transform:translateY(-2px)}
+.world-site .world-footer-kicker{display:block;font:650 10px/1.5 var(--world-body);letter-spacing:.13em;text-transform:uppercase;margin-bottom:23px;opacity:.78}
+.world-site .world-footer{color:inherit;overflow:hidden}
+.world-site .world-footer-main{align-items:start}
+.world-site .world-footer-column a svg,.world-site .world-back-top svg{width:13px;height:13px;margin-right:6px}
+.world-site .world-footer-identity>a{display:inline-block;max-width:100%;overflow-wrap:anywhere}
+.world-site .world-footer-bottom{align-items:center}
+.world-site .world-back-top{display:inline-flex;gap:8px;align-items:center}
+.world-site [data-world-reveal="pending"]{opacity:0;transform:var(--world-reveal-transform) var(--world-reveal-rot);filter:blur(var(--world-reveal-blur));}
+.world-site [data-world-reveal="seen"]{opacity:1;transform:none;filter:none;transition:opacity 700ms ease,transform 750ms cubic-bezier(.2,.65,.15,1),filter 750ms ease;transition-delay:var(--world-motion-stagger,0ms)}
+.world-site [data-world-reveal="pending"]{transition:none;will-change:transform,opacity}
+.world-site [data-world-reveal="seen"]{will-change:auto}
+@media(max-width:920px){
+ .world-site .world-header{isolation:isolate}
+ .world-site .world-header-actions{gap:7px}
+ .world-site .world-account-link span{display:none}
+ .world-site .world-account-link{width:43px;min-width:43px;padding:0;justify-content:center}
+ .world-site .world-cart-button{min-height:43px;min-width:43px;padding:9px}
+ .world-site .world-footer-kicker{font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){
+ .world-site [data-world-reveal]{opacity:1!important;transform:none!important;filter:none!important;transition:none!important;will-change:auto!important}
+ .world-site :where(.world-btn,.world-header-cta,.world-inline-link,.world-text-link){transition:none!important}
+}
+
+/* gallery / independent typography, spacing, header, button, footer and scroll motion. */
+.world-site[data-nav-style="gallery"]{--world-display:'Fraunces','Noto Serif',serif;--world-body:'DM Sans','Be Vietnam Pro',sans-serif;--world-cta-round:0;--world-reveal-transform:translateX(-36px);--world-reveal-rot:rotate(-1deg);}
+.world-site[data-nav-style="gallery"] .world-brand{font-family:var(--world-display)}
+.world-site[data-nav-style="gallery"] .world-btn,.world-site[data-nav-style="gallery"] .world-header-cta{border-radius:0;border:1px solid currentColor; font-style:italic;text-transform:none;font-size:15px;}
+.world-site[data-nav-style="gallery"] .world-desktop-nav a{font-style:italic;text-transform:none;font-size:15px;}
+.world-site[data-nav-style="gallery"] .world-footer{background:#171e15;color:#ebf1de; border-top:2px solid #d9f27d;}
+.world-site[data-nav-style="gallery"] .world-footer-identity>a{font-family:var(--world-display);font-size:clamp(32px,4.1vw,66px);}
+.world-site[data-nav-style="gallery"] .world-footer-column>span{font-family:var(--world-display);font-size:12px;letter-spacing:.07em;}
+@media(min-width:921px){.world-site[data-nav-style="gallery"] .world-header{min-height:105px;}
+.world-site[data-nav-style="gallery"] .world-footer-main{grid-template-columns:2fr 1fr 1fr;}
+}
+
+/* terminal / independent typography, spacing, header, button, footer and scroll motion. */
+.world-site[data-nav-style="terminal"]{--world-display:'Space Grotesk','Be Vietnam Pro',sans-serif;--world-body:'DM Sans','Be Vietnam Pro',sans-serif;--world-cta-round:6px;--world-reveal-transform:translateY(24px);--world-reveal-rot:rotate(0deg);}
+.world-site[data-nav-style="terminal"] .world-brand{font-family:var(--world-display)}
+.world-site[data-nav-style="terminal"] .world-btn,.world-site[data-nav-style="terminal"] .world-header-cta{border-radius:4px;box-shadow:3px 3px 0 #8faacb; font-weight:700;text-transform:uppercase;letter-spacing:.04em;}
+.world-site[data-nav-style="terminal"] .world-desktop-nav a{font-weight:700;text-transform:uppercase;letter-spacing:.04em;}
+.world-site[data-nav-style="terminal"] .world-footer{background:#e7edf5;color:#172b45; border-top:5px solid #3562bd;}
+.world-site[data-nav-style="terminal"] .world-footer-identity>a{font-family:var(--world-display);font-size:clamp(32px,4.1vw,66px);}
+.world-site[data-nav-style="terminal"] .world-footer-column>span{font-family:var(--world-display);font-size:12px;letter-spacing:.07em;}
+@media(min-width:921px){.world-site[data-nav-style="terminal"] .world-header{min-height:78px;}
+.world-site[data-nav-style="terminal"] .world-footer-main{grid-template-columns:1.4fr 1fr 1fr 1fr;}
+}
+
+/* catalog / independent typography, spacing, header, button, footer and scroll motion. */
+.world-site[data-nav-style="catalog"]{--world-display:'Fraunces','Noto Serif',serif;--world-body:'DM Sans','Be Vietnam Pro',sans-serif;--world-cta-round:6px;--world-reveal-transform:translateY(38px);--world-reveal-rot:rotate(0deg);}
+.world-site[data-nav-style="catalog"] .world-brand{font-family:var(--world-display)}
+.world-site[data-nav-style="catalog"] .world-btn,.world-site[data-nav-style="catalog"] .world-header-cta{border-radius:28px; font-weight:450;font-family:var(--world-display);}
+.world-site[data-nav-style="catalog"] .world-desktop-nav a{font-weight:450;font-family:var(--world-display);}
+.world-site[data-nav-style="catalog"] .world-footer{background:#f6f1e8;color:#423426; border-top:1px dashed #bfa182;}
+.world-site[data-nav-style="catalog"] .world-footer-identity>a{font-family:var(--world-display);font-size:clamp(32px,4.1vw,66px);}
+.world-site[data-nav-style="catalog"] .world-footer-column>span{font-family:var(--world-display);font-size:12px;letter-spacing:.07em;}
+@media(min-width:921px){.world-site[data-nav-style="catalog"] .world-header{min-height:80px;}
+.world-site[data-nav-style="catalog"] .world-footer-main{grid-template-columns:1fr 1fr 1fr;}
+}
+
+/* atelier / independent typography, spacing, header, button, footer and scroll motion. */
+.world-site[data-nav-style="atelier"]{--world-display:'Fraunces','Noto Serif',serif;--world-body:'DM Sans','Be Vietnam Pro',sans-serif;--world-cta-round:0;--world-reveal-transform:translateY(15px);--world-reveal-rot:rotate(0deg);}
+.world-site[data-nav-style="atelier"] .world-brand{font-family:var(--world-display)}
+.world-site[data-nav-style="atelier"] .world-btn,.world-site[data-nav-style="atelier"] .world-header-cta{border:1px solid #f2e9dc;border-radius:0; font-style:italic;letter-spacing:.06em;font-weight:400;}
+.world-site[data-nav-style="atelier"] .world-desktop-nav a{font-style:italic;letter-spacing:.06em;font-weight:400;}
+.world-site[data-nav-style="atelier"] .world-footer{background:#321b24;color:#f2e9dc; border-top:1px solid #aa7d73;}
+.world-site[data-nav-style="atelier"] .world-footer-identity>a{font-family:var(--world-display);font-size:clamp(32px,4.1vw,66px);}
+.world-site[data-nav-style="atelier"] .world-footer-column>span{font-family:var(--world-display);font-size:12px;letter-spacing:.07em;}
+@media(min-width:921px){.world-site[data-nav-style="atelier"] .world-header{min-height:103px;}
+.world-site[data-nav-style="atelier"] .world-footer-main{grid-template-columns:2fr .85fr .85fr;}
+}
+
+/* command / independent typography, spacing, header, button, footer and scroll motion. */
+.world-site[data-nav-style="command"]{--world-display:'Space Grotesk','Be Vietnam Pro',sans-serif;--world-body:'DM Sans','Be Vietnam Pro',sans-serif;--world-cta-round:14px;--world-reveal-transform:translateY(19px);--world-reveal-rot:rotate(0deg);}
+.world-site[data-nav-style="command"] .world-brand{font-family:var(--world-display)}
+.world-site[data-nav-style="command"] .world-btn,.world-site[data-nav-style="command"] .world-header-cta{border:1px solid #5e72a5;border-radius:12px; font-size:13px;letter-spacing:-.03em;font-weight:700;}
+.world-site[data-nav-style="command"] .world-desktop-nav a{font-size:13px;letter-spacing:-.03em;font-weight:700;}
+.world-site[data-nav-style="command"] .world-footer{background:#151f34;color:#f2f3ff; border-top:1px solid #4b5c7a;}
+.world-site[data-nav-style="command"] .world-footer-identity>a{font-family:var(--world-display);font-size:clamp(32px,4.1vw,66px);}
+.world-site[data-nav-style="command"] .world-footer-column>span{font-family:var(--world-display);font-size:12px;letter-spacing:.07em;}
+@media(min-width:921px){.world-site[data-nav-style="command"] .world-header{min-height:70px;}
+.world-site[data-nav-style="command"] .world-footer-main{grid-template-columns:1.5fr repeat(3,1fr);}
+}
+
+/* poster / independent typography, spacing, header, button, footer and scroll motion. */
+.world-site[data-nav-style="poster"]{--world-display:'Space Grotesk','Be Vietnam Pro',sans-serif;--world-body:'Space Grotesk','Be Vietnam Pro',sans-serif;--world-cta-round:0;--world-reveal-transform:translateY(50px);--world-reveal-rot:rotate(-3deg);}
+.world-site[data-nav-style="poster"] .world-brand{font-family:var(--world-display)}
+.world-site[data-nav-style="poster"] .world-btn,.world-site[data-nav-style="poster"] .world-header-cta{border:3px solid #111;border-radius:0;box-shadow:6px 6px 0 #ef5531; font-weight:900;text-transform:uppercase;letter-spacing:-.05em;}
+.world-site[data-nav-style="poster"] .world-desktop-nav a{font-weight:900;text-transform:uppercase;letter-spacing:-.05em;}
+.world-site[data-nav-style="poster"] .world-footer{background:#eaff3e;color:#101309; border-top:8px solid #14160d;}
+.world-site[data-nav-style="poster"] .world-footer-identity>a{font-family:var(--world-display);font-size:clamp(32px,4.1vw,66px);}
+.world-site[data-nav-style="poster"] .world-footer-column>span{font-family:var(--world-display);font-size:12px;letter-spacing:.07em;}
+@media(min-width:921px){.world-site[data-nav-style="poster"] .world-header{min-height:90px;}
+.world-site[data-nav-style="poster"] .world-footer-main{grid-template-columns:2.5fr 1fr;}
+}
+
+/* table / independent typography, spacing, header, button, footer and scroll motion. */
+.world-site[data-nav-style="table"]{--world-display:'Fraunces','Noto Serif',serif;--world-body:'DM Sans','Be Vietnam Pro',sans-serif;--world-cta-round:40px;--world-reveal-transform:translateY(28px);--world-reveal-rot:rotate(0deg);}
+.world-site[data-nav-style="table"] .world-brand{font-family:var(--world-display)}
+.world-site[data-nav-style="table"] .world-btn,.world-site[data-nav-style="table"] .world-header-cta{border-radius:999px;border:1px solid currentColor; font-weight:400;font-family:var(--world-display);}
+.world-site[data-nav-style="table"] .world-desktop-nav a{font-weight:400;font-family:var(--world-display);}
+.world-site[data-nav-style="table"] .world-footer{background:#efe6d6;color:#354638; border-top:2px solid #947c5b;}
+.world-site[data-nav-style="table"] .world-footer-identity>a{font-family:var(--world-display);font-size:clamp(32px,4.1vw,66px);}
+.world-site[data-nav-style="table"] .world-footer-column>span{font-family:var(--world-display);font-size:12px;letter-spacing:.07em;}
+@media(min-width:921px){.world-site[data-nav-style="table"] .world-header{min-height:94px;}
+.world-site[data-nav-style="table"] .world-footer-main{grid-template-columns:1.3fr 1fr 1fr;}
+}
+
+/* contents / independent typography, spacing, header, button, footer and scroll motion. */
+.world-site[data-nav-style="contents"]{--world-display:'Fraunces','Noto Serif',serif;--world-body:'DM Sans','Be Vietnam Pro',sans-serif;--world-cta-round:0;--world-reveal-transform:translateX(32px);--world-reveal-rot:rotate(0deg);}
+.world-site[data-nav-style="contents"] .world-brand{font-family:var(--world-display)}
+.world-site[data-nav-style="contents"] .world-btn,.world-site[data-nav-style="contents"] .world-header-cta{border:1px solid #3e2d27;border-radius:0; font-family:var(--world-display);font-weight:400;}
+.world-site[data-nav-style="contents"] .world-desktop-nav a{font-family:var(--world-display);font-weight:400;}
+.world-site[data-nav-style="contents"] .world-footer{background:#f7f0e4;color:#30241d; border-top:5px double #3e2d27;}
+.world-site[data-nav-style="contents"] .world-footer-identity>a{font-family:var(--world-display);font-size:clamp(32px,4.1vw,66px);}
+.world-site[data-nav-style="contents"] .world-footer-column>span{font-family:var(--world-display);font-size:12px;letter-spacing:.07em;}
+@media(min-width:921px){.world-site[data-nav-style="contents"] .world-header{min-height:90px;}
+.world-site[data-nav-style="contents"] .world-footer-main{grid-template-columns:2.1fr 1fr 1fr;}
+}
+
+/* blueprint / independent typography, spacing, header, button, footer and scroll motion. */
+.world-site[data-nav-style="blueprint"]{--world-display:'Space Grotesk','Be Vietnam Pro',sans-serif;--world-body:'DM Sans','Be Vietnam Pro',sans-serif;--world-cta-round:0;--world-reveal-transform:translateX(-40px);--world-reveal-rot:rotate(0deg);}
+.world-site[data-nav-style="blueprint"] .world-brand{font-family:var(--world-display)}
+.world-site[data-nav-style="blueprint"] .world-btn,.world-site[data-nav-style="blueprint"] .world-header-cta{border:1px solid #5f6660;border-radius:0; font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:400;}
+.world-site[data-nav-style="blueprint"] .world-desktop-nav a{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:400;}
+.world-site[data-nav-style="blueprint"] .world-footer{background-color:#e1ded7;color:#30332e;background-image:linear-gradient(#2935280a 1px,transparent 1px);background-size:28px 28px; border-top:1px solid #7e8178;}
+.world-site[data-nav-style="blueprint"] .world-footer-identity>a{font-family:var(--world-display);font-size:clamp(32px,4.1vw,66px);}
+.world-site[data-nav-style="blueprint"] .world-footer-column>span{font-family:var(--world-display);font-size:12px;letter-spacing:.07em;}
+@media(min-width:921px){.world-site[data-nav-style="blueprint"] .world-header{min-height:91px;}
+.world-site[data-nav-style="blueprint"] .world-footer-main{grid-template-columns:1.4fr 1fr 1fr 1fr;}
+}
+
+/* breath / independent typography, spacing, header, button, footer and scroll motion. */
+.world-site[data-nav-style="breath"]{--world-display:'Fraunces','Noto Serif',serif;--world-body:'DM Sans','Be Vietnam Pro',sans-serif;--world-cta-round:36px;--world-reveal-transform:translateY(18px);--world-reveal-rot:rotate(0deg);}
+.world-site[data-nav-style="breath"] .world-brand{font-family:var(--world-display)}
+.world-site[data-nav-style="breath"] .world-btn,.world-site[data-nav-style="breath"] .world-header-cta{border-radius:999px;box-shadow:0 7px 22px #5c81601c; font-weight:400;font-family:var(--world-display);}
+.world-site[data-nav-style="breath"] .world-desktop-nav a{font-weight:400;font-family:var(--world-display);}
+.world-site[data-nav-style="breath"] .world-footer{background:#e9f1e6;color:#31513b; border-top:1px solid #b6ccb6;}
+.world-site[data-nav-style="breath"] .world-footer-identity>a{font-family:var(--world-display);font-size:clamp(32px,4.1vw,66px);}
+.world-site[data-nav-style="breath"] .world-footer-column>span{font-family:var(--world-display);font-size:12px;letter-spacing:.07em;}
+@media(min-width:921px){.world-site[data-nav-style="breath"] .world-header{min-height:90px;}
+.world-site[data-nav-style="breath"] .world-footer-main{grid-template-columns:1.5fr 1fr 1fr;}
+}
+
+/* residence / independent typography, spacing, header, button, footer and scroll motion. */
+.world-site[data-nav-style="residence"]{--world-display:'Fraunces','Noto Serif',serif;--world-body:'DM Sans','Be Vietnam Pro',sans-serif;--world-cta-round:0;--world-reveal-transform:translateY(24px);--world-reveal-rot:rotate(0deg);}
+.world-site[data-nav-style="residence"] .world-brand{font-family:var(--world-display)}
+.world-site[data-nav-style="residence"] .world-btn,.world-site[data-nav-style="residence"] .world-header-cta{border-radius:0;border:1px solid #d3b67f; font-family:var(--world-display);font-weight:400;letter-spacing:.05em;}
+.world-site[data-nav-style="residence"] .world-desktop-nav a{font-family:var(--world-display);font-weight:400;letter-spacing:.05em;}
+.world-site[data-nav-style="residence"] .world-footer{background:#131c1b;color:#f0e9d8; border-top:1px solid #d3b67f;}
+.world-site[data-nav-style="residence"] .world-footer-identity>a{font-family:var(--world-display);font-size:clamp(32px,4.1vw,66px);}
+.world-site[data-nav-style="residence"] .world-footer-column>span{font-family:var(--world-display);font-size:12px;letter-spacing:.07em;}
+@media(min-width:921px){.world-site[data-nav-style="residence"] .world-header{min-height:106px;}
+.world-site[data-nav-style="residence"] .world-footer-main{grid-template-columns:2fr 1fr 1fr;}
+}
+
+/* syllabus / independent typography, spacing, header, button, footer and scroll motion. */
+.world-site[data-nav-style="syllabus"]{--world-display:'Space Grotesk','Be Vietnam Pro',sans-serif;--world-body:'DM Sans','Be Vietnam Pro',sans-serif;--world-cta-round:12px;--world-reveal-transform:translateY(42px);--world-reveal-rot:rotate(0deg);}
+.world-site[data-nav-style="syllabus"] .world-brand{font-family:var(--world-display)}
+.world-site[data-nav-style="syllabus"] .world-btn,.world-site[data-nav-style="syllabus"] .world-header-cta{border-radius:11px;box-shadow:0 5px 0 #bfaaee; font-weight:700;}
+.world-site[data-nav-style="syllabus"] .world-desktop-nav a{font-weight:700;}
+.world-site[data-nav-style="syllabus"] .world-footer{background:#f1ecff;color:#30265c; border-top:6px solid #6952b0;}
+.world-site[data-nav-style="syllabus"] .world-footer-identity>a{font-family:var(--world-display);font-size:clamp(32px,4.1vw,66px);}
+.world-site[data-nav-style="syllabus"] .world-footer-column>span{font-family:var(--world-display);font-size:12px;letter-spacing:.07em;}
+@media(min-width:921px){.world-site[data-nav-style="syllabus"] .world-header{min-height:81px;}
+.world-site[data-nav-style="syllabus"] .world-footer-main{grid-template-columns:1.3fr repeat(3,1fr);}
+}
+
+/* poppy / independent typography, spacing, header, button, footer and scroll motion. */
+.world-site[data-nav-style="poppy"]{--world-display:'Fraunces','Noto Serif',serif;--world-body:'DM Sans','Be Vietnam Pro',sans-serif;--world-cta-round:25px;--world-reveal-transform:translateY(27px);--world-reveal-rot:rotate(1.5deg);}
+.world-site[data-nav-style="poppy"] .world-brand{font-family:var(--world-display)}
+.world-site[data-nav-style="poppy"] .world-btn,.world-site[data-nav-style="poppy"] .world-header-cta{border-radius:22px 40px 22px 40px;box-shadow:4px 5px 0 #e9b6c7; font-weight:800;letter-spacing:-.02em;}
+.world-site[data-nav-style="poppy"] .world-desktop-nav a{font-weight:800;letter-spacing:-.02em;}
+.world-site[data-nav-style="poppy"] .world-footer{background:#fff1e7;color:#703f58; border-top:6px dotted #eab6c7;}
+.world-site[data-nav-style="poppy"] .world-footer-identity>a{font-family:var(--world-display);font-size:clamp(32px,4.1vw,66px);}
+.world-site[data-nav-style="poppy"] .world-footer-column>span{font-family:var(--world-display);font-size:12px;letter-spacing:.07em;}
+@media(min-width:921px){.world-site[data-nav-style="poppy"] .world-header{min-height:83px;}
+.world-site[data-nav-style="poppy"] .world-footer-main{grid-template-columns:1.5fr 1fr 1fr;}
+}
+
+/* cockpit / independent typography, spacing, header, button, footer and scroll motion. */
+.world-site[data-nav-style="cockpit"]{--world-display:'Space Grotesk','Be Vietnam Pro',sans-serif;--world-body:'DM Sans','Be Vietnam Pro',sans-serif;--world-cta-round:0;--world-reveal-transform:translateX(32px);--world-reveal-rot:rotate(0deg);}
+.world-site[data-nav-style="cockpit"] .world-brand{font-family:var(--world-display)}
+.world-site[data-nav-style="cockpit"] .world-btn,.world-site[data-nav-style="cockpit"] .world-header-cta{border:1px solid #ff741c;border-radius:0; text-transform:uppercase;letter-spacing:.08em;font-weight:800;}
+.world-site[data-nav-style="cockpit"] .world-desktop-nav a{text-transform:uppercase;letter-spacing:.08em;font-weight:800;}
+.world-site[data-nav-style="cockpit"] .world-footer{background:#0c1017;color:#dee5e8; border-top:4px solid #ff741c;}
+.world-site[data-nav-style="cockpit"] .world-footer-identity>a{font-family:var(--world-display);font-size:clamp(32px,4.1vw,66px);}
+.world-site[data-nav-style="cockpit"] .world-footer-column>span{font-family:var(--world-display);font-size:12px;letter-spacing:.07em;}
+@media(min-width:921px){.world-site[data-nav-style="cockpit"] .world-header{min-height:94px;}
+.world-site[data-nav-style="cockpit"] .world-footer-main{grid-template-columns:2fr 1fr 1fr;}
+}
+
+/* forge / independent typography, spacing, header, button, footer and scroll motion. */
+.world-site[data-nav-style="forge"]{--world-display:'Space Grotesk','Be Vietnam Pro',sans-serif;--world-body:'DM Sans','Be Vietnam Pro',sans-serif;--world-cta-round:0;--world-reveal-transform:translateX(-30px);--world-reveal-rot:rotate(0deg);}
+.world-site[data-nav-style="forge"] .world-brand{font-family:var(--world-display)}
+.world-site[data-nav-style="forge"] .world-btn,.world-site[data-nav-style="forge"] .world-header-cta{border:2px solid #283136;border-radius:0; font-weight:850;text-transform:uppercase;}
+.world-site[data-nav-style="forge"] .world-desktop-nav a{font-weight:850;text-transform:uppercase;}
+.world-site[data-nav-style="forge"] .world-footer{background:#dfded8;color:#283136; border-top:8px solid #e96f33;}
+.world-site[data-nav-style="forge"] .world-footer-identity>a{font-family:var(--world-display);font-size:clamp(32px,4.1vw,66px);}
+.world-site[data-nav-style="forge"] .world-footer-column>span{font-family:var(--world-display);font-size:12px;letter-spacing:.07em;}
+@media(min-width:921px){.world-site[data-nav-style="forge"] .world-header{min-height:87px;}
+.world-site[data-nav-style="forge"] .world-footer-main{grid-template-columns:2fr 1fr 1fr;}
+}
+
+/* ledger / independent typography, spacing, header, button, footer and scroll motion. */
+.world-site[data-nav-style="ledger"]{--world-display:'DM Sans','Be Vietnam Pro',sans-serif;--world-body:'DM Sans','Be Vietnam Pro',sans-serif;--world-cta-round:2px;--world-reveal-transform:translateY(22px);--world-reveal-rot:rotate(0deg);}
+.world-site[data-nav-style="ledger"] .world-brand{font-family:var(--world-display)}
+.world-site[data-nav-style="ledger"] .world-btn,.world-site[data-nav-style="ledger"] .world-header-cta{border-radius:2px;border:1px solid #718fa5; font-weight:600;font-size:12px;}
+.world-site[data-nav-style="ledger"] .world-desktop-nav a{font-weight:600;font-size:12px;}
+.world-site[data-nav-style="ledger"] .world-footer{background:#eef2f6;color:#20394e; border-top:1px solid #7194ad;}
+.world-site[data-nav-style="ledger"] .world-footer-identity>a{font-family:var(--world-display);font-size:clamp(32px,4.1vw,66px);}
+.world-site[data-nav-style="ledger"] .world-footer-column>span{font-family:var(--world-display);font-size:12px;letter-spacing:.07em;}
+@media(min-width:921px){.world-site[data-nav-style="ledger"] .world-header{min-height:79px;}
+.world-site[data-nav-style="ledger"] .world-footer-main{grid-template-columns:1.6fr repeat(3,1fr);}
+}
+
+/* structure / independent typography, spacing, header, button, footer and scroll motion. */
+.world-site[data-nav-style="structure"]{--world-display:'Space Grotesk','Be Vietnam Pro',sans-serif;--world-body:'DM Sans','Be Vietnam Pro',sans-serif;--world-cta-round:0;--world-reveal-transform:translateY(30px);--world-reveal-rot:rotate(0deg);}
+.world-site[data-nav-style="structure"] .world-brand{font-family:var(--world-display)}
+.world-site[data-nav-style="structure"] .world-btn,.world-site[data-nav-style="structure"] .world-header-cta{border-radius:0;border:2px solid #303a37;box-shadow:5px 5px 0 #da8251; text-transform:uppercase;font-weight:900;}
+.world-site[data-nav-style="structure"] .world-desktop-nav a{text-transform:uppercase;font-weight:900;}
+.world-site[data-nav-style="structure"] .world-footer{background:#e5e2d9;color:#343a37; border-top:10px solid #303a37;}
+.world-site[data-nav-style="structure"] .world-footer-identity>a{font-family:var(--world-display);font-size:clamp(32px,4.1vw,66px);}
+.world-site[data-nav-style="structure"] .world-footer-column>span{font-family:var(--world-display);font-size:12px;letter-spacing:.07em;}
+@media(min-width:921px){.world-site[data-nav-style="structure"] .world-header{min-height:88px;}
+.world-site[data-nav-style="structure"] .world-footer-main{grid-template-columns:1.4fr repeat(3,1fr);}
+}
+
+/* vinyl / independent typography, spacing, header, button, footer and scroll motion. */
+.world-site[data-nav-style="vinyl"]{--world-display:'Fraunces','Noto Serif',serif;--world-body:'DM Sans','Be Vietnam Pro',sans-serif;--world-cta-round:60px;--world-reveal-transform:translateX(-36px);--world-reveal-rot:rotate(-1deg);}
+.world-site[data-nav-style="vinyl"] .world-brand{font-family:var(--world-display)}
+.world-site[data-nav-style="vinyl"] .world-btn,.world-site[data-nav-style="vinyl"] .world-header-cta{border-radius:999px;border:1px solid #51283c; font-style:italic;font-family:var(--world-display);font-weight:400;}
+.world-site[data-nav-style="vinyl"] .world-desktop-nav a{font-style:italic;font-family:var(--world-display);font-weight:400;}
+.world-site[data-nav-style="vinyl"] .world-footer{background:#f5ddd6;color:#502337; border-top:2px dashed #a66379;}
+.world-site[data-nav-style="vinyl"] .world-footer-identity>a{font-family:var(--world-display);font-size:clamp(32px,4.1vw,66px);}
+.world-site[data-nav-style="vinyl"] .world-footer-column>span{font-family:var(--world-display);font-size:12px;letter-spacing:.07em;}
+@media(min-width:921px){.world-site[data-nav-style="vinyl"] .world-header{min-height:97px;}
+.world-site[data-nav-style="vinyl"] .world-footer-main{grid-template-columns:2fr 1fr 1fr;}
+}
+
+/* stage / independent typography, spacing, header, button, footer and scroll motion. */
+.world-site[data-nav-style="stage"]{--world-display:'Space Grotesk','Be Vietnam Pro',sans-serif;--world-body:'Space Grotesk','Be Vietnam Pro',sans-serif;--world-cta-round:0;--world-reveal-transform:translateY(54px);--world-reveal-rot:rotate(0deg);}
+.world-site[data-nav-style="stage"] .world-brand{font-family:var(--world-display)}
+.world-site[data-nav-style="stage"] .world-btn,.world-site[data-nav-style="stage"] .world-header-cta{border:2px solid #eaff36;border-radius:0;box-shadow:0 0 18px #9c31df88; font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:.05em;}
+.world-site[data-nav-style="stage"] .world-desktop-nav a{font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:.05em;}
+.world-site[data-nav-style="stage"] .world-footer{background:radial-gradient(circle at 85% 10%,#542796,#140b25 70%);color:#efffdb; border-top:6px solid #efff36;}
+.world-site[data-nav-style="stage"] .world-footer-identity>a{font-family:var(--world-display);font-size:clamp(32px,4.1vw,66px);}
+.world-site[data-nav-style="stage"] .world-footer-column>span{font-family:var(--world-display);font-size:12px;letter-spacing:.07em;}
+@media(min-width:921px){.world-site[data-nav-style="stage"] .world-header{min-height:101px;}
+.world-site[data-nav-style="stage"] .world-footer-main{grid-template-columns:1.4fr repeat(3,1fr);}
+}
+
+/* workspace / independent typography, spacing, header, button, footer and scroll motion. */
+.world-site[data-nav-style="workspace"]{--world-display:'DM Sans','Be Vietnam Pro',sans-serif;--world-body:'DM Sans','Be Vietnam Pro',sans-serif;--world-cta-round:10px;--world-reveal-transform:translateY(20px);--world-reveal-rot:rotate(0deg);}
+.world-site[data-nav-style="workspace"] .world-brand{font-family:var(--world-display)}
+.world-site[data-nav-style="workspace"] .world-btn,.world-site[data-nav-style="workspace"] .world-header-cta{border-radius:10px;border:1px solid #bbc5e1; font-size:12px;font-weight:650;letter-spacing:0;}
+.world-site[data-nav-style="workspace"] .world-desktop-nav a{font-size:12px;font-weight:650;letter-spacing:0;}
+.world-site[data-nav-style="workspace"] .world-footer{background:#f6f8fd;color:#2b3451; border-top:1px solid #d2d9e6;}
+.world-site[data-nav-style="workspace"] .world-footer-identity>a{font-family:var(--world-display);font-size:clamp(32px,4.1vw,66px);}
+.world-site[data-nav-style="workspace"] .world-footer-column>span{font-family:var(--world-display);font-size:12px;letter-spacing:.07em;}
+@media(min-width:921px){.world-site[data-nav-style="workspace"] .world-header{min-height:65px;}
+.world-site[data-nav-style="workspace"] .world-footer-main{grid-template-columns:1.5fr repeat(3,1fr);}
+}
+
+/* Dedicated layout signatures in place of a single reused nav/footer form. */
+@media(min-width:921px){
+.world-site[data-nav-style="gallery"] .world-header{padding-inline:7vw;justify-content:space-between}
+.world-site[data-nav-style="gallery"] .world-desktop-nav{gap:34px}
+.world-site[data-nav-style="gallery"] .world-footer-main{gap:7vw}
+.world-site[data-nav-style="terminal"] .world-footer-identity{border-left:4px solid #3562bd;padding-left:22px}
+.world-site[data-nav-style="catalog"] .world-footer-identity{grid-column:1/-1;border-bottom:1px solid #ac9075;padding-bottom:24px}
+.world-site[data-nav-style="catalog"] .world-footer-main{grid-template-columns:repeat(3,1fr)}
+.world-site[data-nav-style="atelier"] .world-footer-identity{grid-column:1/-1;border-bottom:1px solid #a37b6e;padding-bottom:36px}
+.world-site[data-nav-style="atelier"] .world-footer-main{grid-template-columns:1.6fr 1fr 1fr}
+.world-site[data-nav-style="command"] .world-footer-main{padding:25px;background:#23314f;border-radius:22px;margin-bottom:30px}
+.world-site[data-nav-style="poster"] .world-footer-identity{grid-column:1/-1}
+.world-site[data-nav-style="poster"] .world-footer-identity>a{font-size:clamp(72px,12vw,180px);line-height:.9;text-transform:uppercase;letter-spacing:-.1em}
+.world-site[data-nav-style="poster"] .world-footer-main{grid-template-columns:repeat(3,1fr)}
+.world-site[data-nav-style="table"] .world-footer-identity{border-right:1px solid #9f9177;padding-right:30px}
+.world-site[data-nav-style="contents"] .world-footer-identity{border-bottom:5px double #483b34;padding-bottom:21px}
+.world-site[data-nav-style="blueprint"] .world-footer-main{border:1px solid #b0aba0;padding:30px}
+.world-site[data-nav-style="breath"] .world-footer-main{padding:30px;border-radius:50px;background:#dcebdc}
+.world-site[data-nav-style="residence"] .world-footer-identity{grid-column:1/-1;border-bottom:1px solid #a99261;padding-bottom:40px}
+.world-site[data-nav-style="residence"] .world-footer-main{grid-template-columns:repeat(3,1fr)}
+.world-site[data-nav-style="syllabus"] .world-footer-identity{background:#dfd5fa;border-radius:25px;padding:26px}
+.world-site[data-nav-style="poppy"] .world-footer-identity{background:#ffe5f1;border-radius:50px 50px 15px 50px;padding:28px}
+.world-site[data-nav-style="cockpit"] .world-footer-identity{border-left:3px solid #ff741c;padding:10px 0 10px 25px}
+.world-site[data-nav-style="forge"] .world-footer-identity{border-left:12px solid #e96f33;padding-left:24px}
+.world-site[data-nav-style="ledger"] .world-footer-main{border-block:1px solid #8a9fac;padding-block:28px}
+.world-site[data-nav-style="structure"] .world-footer-main{border-left:12px solid #d78251;padding-left:28px}
+.world-site[data-nav-style="vinyl"] .world-footer-identity{grid-column:1/-1;padding-bottom:25px;border-bottom:2px dashed #b36a80}
+.world-site[data-nav-style="vinyl"] .world-footer-main{grid-template-columns:repeat(3,1fr)}
+.world-site[data-nav-style="stage"] .world-footer-identity{grid-column:1/-1}
+.world-site[data-nav-style="stage"] .world-footer-identity>a{font-size:clamp(65px,10vw,150px);line-height:.85;text-shadow:4px 4px #ad3fc0}
+.world-site[data-nav-style="stage"] .world-footer-main{grid-template-columns:repeat(3,1fr)}
+.world-site[data-nav-style="workspace"] .world-footer-main{background:#fff;padding:35px;border:1px solid #d5dce8;border-radius:15px}
+}
+@media(max-width:920px){
+ .world-site .world-footer-main{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px}
+ .world-site .world-footer-identity{grid-column:1/-1}
+ .world-site .world-footer-column{min-width:0}
+ .world-site .world-footer-end{grid-column:1/-1}
+ .world-site .world-footer-bottom{gap:17px}
+}
+@media(max-width:400px){
+ .world-site .world-footer-main{grid-template-columns:1fr 1fr;gap:22px}
+ .world-site .world-header{min-height:72px}
+}

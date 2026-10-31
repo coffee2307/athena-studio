@@ -1,0 +1,35 @@
+{
+  "slug": "construction-firm",
+  "title": "Xây dựng Terracon",
+  "industry": "Xây dựng",
+  "style": "Structural Minimalism",
+  "purpose": "Website trình diễn với trải nghiệm theo ngành",
+  "description": "Đối tác xây dựng với quy trình thi công rõ ràng, quản lý chất lượng và trách nhiệm trong từng giai đoạn.",
+  "variant": "construction",
+  "features": [
+    "Bố cục chuyên biệt theo ngành",
+    "Header, footer và menu điện thoại",
+    "Trang chi tiết & lọc nội dung",
+    "Biểu mẫu demo, không gửi dữ liệu thật",
+    "Hiệu ứng phản hồi và xem trước trực tiếp"
+  ],
+  "modules": [
+    "content",
+    "contact",
+    "catalog"
+  ],
+  "reference": {
+    "name": "Original Athena demo; inspiration: MIT templates",
+    "url": "https://pixelandoak.com/templates/",
+    "license": "MIT"
+  },
+  "brand": "TERRACON",
+  "layout": "structured",
+  "images": [
+    "/images/image-1.jpg",
+    "/images/image-2.jpg",
+    "/images/image-3.jpg",
+    "/images/image-4.jpg",
+    "/images/image-5.jpg"
+  ]
+}

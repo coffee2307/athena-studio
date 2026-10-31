@@ -141,7 +141,7 @@ export function ImmersiveJourney({slug}: {slug: World}) {
       <h2>{slug==="auto-showroom"?"YOUR NEXT PERSPECTIVE.":"Thiết kế để được trải nghiệm."}</h2>
       <p>Đây là mô hình 3D tương tác thử nghiệm của Athena Studio. Các thành phần và chức năng thương mại chỉ mang tính minh họa.</p>
       {slug==="auto-showroom"&&<ModelAttribution/>}
-      <div><Link href={"/template-demos/" + slug}>Trở lại website mẫu ↗</Link><Link href={"/contact?service=web-development&template=" + slug}>Yêu cầu tùy biến ↗</Link></div>
+      <div><Link href={"/template-demos/" + slug}>Trở lại website mẫu </Link><Link href={"/contact?service=web-development&template=" + slug}>Yêu cầu tùy biến </Link></div>
     </section>
   </main>;
 }

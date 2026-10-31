@@ -31,7 +31,7 @@ try{
    assert.equal(response?.status,200,slug+" HTTP");
    const html=await response.text();
    const preset=registry.find(item=>item.slug===slug);
-   assert.ok(html.includes(`template-${preset.variant}`),slug+" renders selected variant");
+   assert.ok(html.includes(`site-${preset.variant}`),slug+" renders selected variant");
    assert.ok(html.includes("Studio Kiểm Thử"),slug+" brand");
    for(const [,id] of html.matchAll(/href="#([^"]+)"/g))assert.ok(html.includes(`id="${id}"`),slug+" dead anchor "+id);
    assert.doesNotMatch(html,/__BRAND_NAME__|__TEMPLATE_SLUG__|<form/);

@@ -92,10 +92,6 @@
  .ix-auto-showroom .bv-cinematic-track .ix-hero-primary{min-height:42px;padding:10px 12px;font-size:10px}
  .ix-auto-showroom .bv-cinematic-track .ix-hero-text-link,
  .ix-auto-showroom .bv-cinematic-track .ix-journey-link{font-size:10px;min-height:36px}
- .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas,
- .ix-auto-showroom .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas{
-  left:0;width:100%;top:clamp(380px,46svh,420px);bottom:auto;height:340px;
- }
  .ix-auto-showroom .bv-cinematic-track .ix-visual-vignette{
   background:linear-gradient(180deg,#050609d9 0%,#050609a3 29%,transparent 58%,#050609b8 100%);
  }
@@ -115,12 +111,55 @@
  .bv-cinematic-meter{bottom:120px;left:16px;right:16px}
  .bv-cinematic-skip{left:17px;bottom:155px;font-size:8px}
 }
-@media(max-width:375px){
- .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas,
- .ix-auto-showroom .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas{top:440px}
-}
 @media(prefers-reduced-motion:reduce){
  .ix-auto-showroom .bv-cinematic-track .ix-hero-copy,
  .ix-auto-showroom .bv-cinematic-track .ix-scene-footer,
  .ix-auto-showroom .bv-cinematic-track .ix-hero-bottom{transition:none}
+}
+
+/* BLACK VELOCITY / showroom usability lock candidate — mobile is model-first.
+   Keep one fixed 3D stage, real vertical page scrolling, and horizontal orbit drag. */
+.ix-auto-showroom .bv-cinematic-track .ix-auto-3d-canvas{cursor:grab;touch-action:pan-y}
+.ix-auto-showroom .bv-cinematic-track .ix-auto-3d-canvas:active{cursor:grabbing}
+@media(max-width:760px){
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-copy{padding:46px 18px 0}
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-copy h1{
+  font-size:clamp(38px,9.5vw,55px);line-height:1.01;margin:12px 0;
+ }
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-copy>p{
+  font-size:12px;line-height:1.48;max-width:330px;
+ }
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-links{margin-top:13px;gap:8px}
+ .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas,
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas{
+  left:0;right:0;width:100%;top:clamp(335px,43svh,390px);
+  height:clamp(365px,49svh,430px);bottom:auto;
+ }
+ /* Zoom buttons obscured the car and were difficult to operate on touch screens.
+    The cinematic camera now automatically fits the vehicle at each viewport. */
+ .ix-auto-showroom .bv-cinematic-track .bv-zoom-controls{display:none!important}
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-nav{
+  top:auto;bottom:50px;right:auto;left:50%;transform:translateX(-50%);
+  display:grid;grid-template-columns:repeat(5,44px);grid-auto-flow:column;gap:7px;
+ }
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-nav button{
+  width:44px;height:44px;font-size:11px;border-radius:4px;
+ }
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-meter{bottom:34px}
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-skip{bottom:118px;left:18px}
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-copy{
+  width:calc(100% - 30px);max-width:420px;margin:0 auto 12px;
+  padding:15px 17px;border-left-width:2px;
+ }
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-copy h2{font-size:clamp(27px,7.5vw,39px)}
+}
+@media(max-width:355px){
+ .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas,
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas{
+  top:clamp(335px,46svh,370px);height:clamp(330px,47svh,392px);
+ }
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-nav{gap:5px}
+}
+@media(prefers-reduced-motion:reduce){
+ .ix-auto-showroom .bv-cinematic-track .bv-cinematic-copy{transition:none}
 }

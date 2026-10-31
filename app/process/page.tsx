@@ -31,7 +31,7 @@ export default function WorkflowPage(){
    <p className="page-kicker"><span className="eyebrow-dot"/> CÁCH ATHENA HỢP TÁC</p>
    <h1>Làm rõ đầu ra<br/><em>trước khi bắt đầu.</em></h1>
    <div className="page-hero-lede"><div className="dna02-hero-lede"><p>Từ yêu cầu đến bàn giao: sáu bước rõ ràng, luôn biết điều gì diễn ra tiếp theo.</p><details><summary>Đọc thêm về cách làm</summary><p>Để khách biết mình cần chuẩn bị gì, nhận gì ở từng bước và khi nào cần đưa ra quyết định. Quy trình thực tế sẽ được điều chỉnh theo quy mô dự án và thỏa thuận.</p></details></div>
-    <Link className="pill-link pill-dark" href="/contact">Mô tả nhu cầu <Icon name="arrow-up-right" size={19}/></Link></div>
+    <Link className="pill-link pill-dark" href="/contact">Mô tả nhu cầu <Icon name="arrow-right" size={19}/></Link></div>
   <StudioHeroScene mode="process"/>
  </div></section>
   <section className="page-section"><div className="container">
@@ -50,6 +50,6 @@ export default function WorkflowPage(){
    <h2 className="agency-faq-title">Trước khi hợp tác,<br/><span>bạn có thể muốn biết.</span></h2>
    <div className="agency-faq-list">{faqs.map(([q,a])=><details key={q}><summary>{q}<Icon name="chevron-down" size={20}/></summary><p>{a}</p></details>)}</div>
   </div></section>
-  <section className="agency-final-cta"><div className="container"><p>ĐÃ CÓ MỘT VẤN ĐỀ CỤ THỂ?</p><h2>Gửi tình trạng thực tế.<br/>Nhận hướng trao đổi phù hợp.</h2><Link href="/contact">Bắt đầu bằng yêu cầu tư vấn <Icon name="arrow-up-right" size={18}/></Link></div></section>
+  <section className="agency-final-cta"><div className="container"><p>ĐÃ CÓ MỘT VẤN ĐỀ CỤ THỂ?</p><h2>Gửi tình trạng thực tế.<br/>Nhận hướng trao đổi phù hợp.</h2><Link href="/contact">Bắt đầu bằng yêu cầu tư vấn <Icon name="arrow-right" size={18}/></Link></div></section>
  </div>;
 }

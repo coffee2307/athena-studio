@@ -13,10 +13,10 @@ test("scaffolder creates an isolated site and refuses unregistered modules or ov
  try{
   const output=join(folder,"client-site");
   execFileSync(process.execPath,[cli,"--template","creative-studio","--name","client-site","--brand","Client Brand","--out",output],{cwd:root,stdio:"pipe"});
-  const config=await readFile(join(output,"src/config/site.ts"),"utf8");
-  const manifest=JSON.parse(await readFile(join(output,"project.manifest.json"),"utf8"));
+  const config=await readFile(join(output,"src/data/site.json"),"utf8");
+  const manifest=JSON.parse(await readFile(join(output,"template.manifest.json"),"utf8"));
   assert.match(config,/Client Brand/);
-  assert.match(config,/variant:"portfolio"/);
+  assert.match(config,/"variant": "portfolio"/);
   assert.equal(manifest.variant,"portfolio");
   assert.deepEqual(manifest.modules,["content","contact"]);
   assert.equal(manifest.database,"not-configured");
@@ -36,7 +36,7 @@ test("brand token literals survive generation and unknown flags are refused",asy
  try{
   const brand='Brand __TEMPLATE_SLUG__ "Q" \\ Atelier';
   execFileSync(process.execPath,[cli,"--template","modern-corporate","--name","literal-site","--brand",brand,"--out",join(folder,"site")],{cwd:root,stdio:"pipe"});
-  const manifest=JSON.parse(await readFile(join(folder,"site/project.manifest.json"),"utf8"));
+  const manifest=JSON.parse(await readFile(join(folder,"site/template.manifest.json"),"utf8"));
   assert.equal(manifest.brand,brand);
   assert.throws(()=>execFileSync(process.execPath,[cli,"--template","creative-studio","--name","bad-flag","--brand","Safe Brand","--out",join(folder,"bad"),"--unknown","yes"],{cwd:root,stdio:"pipe"}));
  }finally{await rm(folder,{recursive:true,force:true});}
@@ -47,8 +47,8 @@ test("scaffolder safely serializes a configured contact email as a source litera
  try{
   const output=join(folder,"site");
   execFileSync(process.execPath,[cli,"--template","creative-studio","--name","email-site","--brand","Email Studio","--out",output,"--email","coffee@example.com"],{cwd:root,stdio:"pipe"});
-  const config=await readFile(join(output,"src/config/site.ts"),"utf8");
-  assert.match(config,/contactEmail:"coffee@example\.com"/);
+  const config=await readFile(join(output,"src/data/site.json"),"utf8");
+  assert.match(config,/"contactEmail": "coffee@example\.com"/);
   assert.throws(()=>execFileSync(process.execPath,[cli,"--template","creative-studio","--name","bad-email","--brand","Email Studio","--out",join(folder,"bad"),"--email",'coffee";process.exit(1);//@example.com'],{cwd:root,stdio:"pipe"}));
  }finally{await rm(folder,{recursive:true,force:true});}
 });

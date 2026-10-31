@@ -1,0 +1,293 @@
+
+.root{--paper:#F5F1E9;--ink:#201D1A;--copper:#B77B53;--gold:#F2D58A;--muted:#655B53;background:var(--paper);color:var(--ink);min-height:100vh;overflow-x:clip;font:450 15px/1.65 "Be Vietnam Pro",Arial,sans-serif}
+.root *,.root *::before,.root *::after{box-sizing:border-box}
+.root a{color:inherit;text-decoration:none}
+.root button,.root textarea{font:inherit}
+.root :where(a,button,input,textarea):focus-visible{outline:3px solid #B27748;outline-offset:4px}
+.root button{cursor:pointer}
+.topIndex{background:#24201E;color:#F6E9D9;display:flex;justify-content:space-between;gap:20px;padding:9px 5vw;font:800 9px/1.5 "Be Vietnam Pro",sans-serif;letter-spacing:.13em}
+.header{position:relative;z-index:30;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;min-height:89px;padding:14px 5vw;border-bottom:1px solid #9889776b;background:#f9f5ed}
+.logo{white-space:nowrap;font:700 clamp(20px,2.25vw,33px)/1 "Be Vietnam Pro",Arial,sans-serif;letter-spacing:-.075em}
+.logo em{font-weight:400}
+.logoDot{color:var(--copper);font-size:35px}
+.header nav{display:flex;justify-content:center;gap:clamp(18px,2.3vw,42px)}
+.header nav a{font:750 11px "Be Vietnam Pro",sans-serif;position:relative;padding:12px 0;white-space:nowrap}
+.header nav a:after{content:"";position:absolute;bottom:4px;left:0;right:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .2s}
+.header nav a:hover:after{transform:scaleX(1)}
+.headAction{justify-self:end;display:flex;gap:23px;align-items:center;font:800 10px "Be Vietnam Pro",sans-serif;padding:13px 16px;border:1px solid #8A7866;min-height:44px}
+.headAction:hover{background:#201D1A;color:#F5F1E9}
+.hamburger{display:none;justify-self:end;flex-direction:column;justify-content:center;align-items:flex-start;gap:5px;width:48px;height:48px;background:transparent;border:1px solid #988977;padding:11px;color:var(--ink)}
+.hamburger i{display:block;width:24px;height:2px;background:currentColor}
+.hamburger i:nth-child(2){width:16px}
+.menuScrim{position:fixed;inset:0;z-index:60;border:0;background:#191715a8}
+.menuPanel{position:fixed;z-index:61;inset:0 0 0 auto;width:min(480px,90vw);padding:45px 30px;background:#27201C;color:#FBF3E8;transform:translateX(110%);visibility:hidden;transition:transform .32s,visibility .32s;display:flex;flex-direction:column;gap:6px;overflow:auto}
+.menuPanel:not([aria-hidden="true"]){transform:none;visibility:visible}
+.menuTitle{font:800 11px "Be Vietnam Pro",sans-serif;letter-spacing:.14em;margin-bottom:42px;color:#E9BE9D}
+.menuPanel>a{border-bottom:1px solid #a68f7959;display:flex;align-items:center;gap:17px;padding:18px 2px;font:500 clamp(27px,5vw,41px) "Be Vietnam Pro",Arial,sans-serif}
+.menuPanel>a small{font:750 11px "Be Vietnam Pro",sans-serif;color:#DAAC85}
+.menuPanel>a span{margin-left:auto}
+.menuPanel button{margin-top:30px;background:#E2B992;color:#241B18;border:0;padding:17px;font:750 12px "Be Vietnam Pro",sans-serif;min-height:48px}
+.sectionIntro{display:grid;grid-template-columns:1.2fr .8fr;column-gap:7%;row-gap:20px;align-items:end}
+.sectionIntro>span,.subpageCover>small,.materialHeading>span,.atelierTeaserText>small,.finalCampaignCopy>small{font:800 11px/1.6 "Be Vietnam Pro",sans-serif;letter-spacing:.12em;color:#8A5D3E}
+.sectionIntro>span{grid-column:1/-1}
+.sectionIntro h2{font:500 clamp(51px,6.7vw,117px)/.95 "Be Vietnam Pro",Arial,sans-serif;letter-spacing:-.04em;margin:0;text-wrap:balance}
+.sectionIntro h2 em{font-weight:400;color:#A57351}
+.sectionIntro>p{font-size:15px;max-width:40ch;line-height:1.9;color:#554941;margin-bottom:7px}
+.collectionSection{padding:112px 6vw 110px;background:#F5F1E9;scroll-margin-top:20px}
+.collectionGrid{display:grid;grid-template-columns:1.06fr .93fr 1.06fr;gap:clamp(14px,2.1vw,36px);align-items:start;margin:65px 0 45px}
+.lookCard{min-width:0;display:block}
+.lookCard:nth-child(2){margin-top:125px}
+.lookCard:nth-child(3){margin-top:48px}
+.lookFrame{position:relative;overflow:hidden;background:#DDD3C7;aspect-ratio:3/4}
+.lookFrame img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.78) contrast(1.05);transition:transform .65s cubic-bezier(.22,1,.36,1),filter .4s}
+.lookCard:hover .lookFrame img{transform:scale(1.055);filter:saturate(.95)}
+.lookFrame>span{position:absolute;left:15px;top:15px;font:800 10px "Be Vietnam Pro",sans-serif;background:#f9f4e9f0;color:#39281f;padding:8px 10px}
+.lookFrameLink{position:absolute;bottom:16px;right:16px;padding:12px 14px;background:#26201c;color:#f5f0e8;font:800 10px "Be Vietnam Pro",sans-serif;transform:translateY(calc(100% + 18px));transition:transform .25s}
+.lookCard:is(:hover,:focus-visible) .lookFrameLink{transform:none}
+.lookMeta{border-top:1px solid #8B796D;margin-top:18px;padding-top:15px}
+.lookMeta h3{font:650 clamp(26px,2.7vw,42px)/1.3 "Be Vietnam Pro",Arial,sans-serif;letter-spacing:-.04em;margin:0 0 11px}
+.lookMeta p{font-size:13px;color:#5B514A;max-width:33ch;margin:0}
+.collectionBottom{border-top:1px solid #96877B;display:flex;justify-content:space-between;align-items:center;gap:25px;padding-top:22px;font:800 10px/1.5 "Be Vietnam Pro",sans-serif;letter-spacing:.08em}
+.collectionBottom a{display:inline-flex;align-items:center;min-height:46px;gap:20px;border-bottom:1px solid #675244}
+.collectionBottom a:hover{color:#9B653C}
+.materialSection{background:#26201D;color:#F6EFE6;padding:115px 6vw 130px;position:relative;overflow:hidden}
+.materialSection:before{content:"";position:absolute;inset:-25% -20% auto auto;width:70vw;height:70vw;pointer-events:none;background:radial-gradient(circle,#BB7F3B25,transparent 65%)}
+.materialHeading{display:grid;grid-template-columns:1fr .7fr;gap:25px;align-items:end;position:relative}
+.materialHeading>span{grid-column:1/-1;color:#E2AD87}
+.materialHeading h2{margin:0;font:500 clamp(68px,9vw,155px)/.88 "Be Vietnam Pro",Arial,sans-serif;letter-spacing:-.045em}
+.materialHeading h2 span{color:#C68E62}
+.materialHeading>p{max-width:33ch;font-size:15px;color:#D7C7BB}
+.materialWorkbench{position:relative;display:grid;grid-template-columns:.36fr .64fr;gap:4vw;margin-top:65px;align-items:stretch}
+.materialControls{display:flex;flex-direction:column;justify-content:flex-start}
+.materialControls button{display:grid;grid-template-columns:1fr auto;gap:16px;text-align:left;background:transparent;color:#F8EFE4;border:0;border-top:1px solid #AE97895C;padding:24px 3px;min-height:94px}
+.materialControls button:last-child{border-bottom:1px solid #AE97895C}
+.materialControls button small{grid-column:1/-1;letter-spacing:.14em;color:#D2A77F;font-size:10px}
+.materialControls button strong{font:500 clamp(26px,3vw,49px)/1.1 "Be Vietnam Pro",Arial,sans-serif}
+.materialControls button[aria-pressed="true"] strong{font-style:italic;color:#EFBF8B}
+.materialControls button:hover{color:#EFBF8B}
+.materialWindow{position:relative;min-width:0;min-height:625px;overflow:hidden;background:#47372C}
+.materialWindow>img{width:100%;height:100%;position:absolute;inset:0;object-fit:cover;filter:saturate(.75) contrast(1.1);display:block}
+.materialHighlight{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle 210px at var(--pointer-x,50%) var(--pointer-y,50%),#FFF4CE70,transparent 65%),linear-gradient(to top,#16120FCF,transparent 51%);mix-blend-mode:screen}
+.materialLabel{position:absolute;bottom:0;left:0;right:0;padding:32px;background:linear-gradient(transparent,#1B1715E6)}
+.materialLabel>span{font:800 10px "Be Vietnam Pro",sans-serif;letter-spacing:.12em;color:#E6BB91}
+.materialLabel h3{font:650 clamp(35px,4.5vw,70px)/1.25 "Be Vietnam Pro",Arial,sans-serif;margin:14px 0}
+.materialLabel p{max-width:42ch;font-size:14px;line-height:1.7;margin:0;color:#F3E8DD}
+.atelierTeaser{display:grid;grid-template-columns:1fr 1fr;background:#EFE9DF;min-height:800px}
+.atelierTeaserImage{position:relative;min-height:650px}
+.atelierTeaserImage img{width:100%;height:100%;position:absolute;inset:0;object-fit:cover;filter:sepia(.2) saturate(.8)}
+.atelierTeaserImage span{position:absolute;top:25px;left:25px;padding:10px 15px;background:#F6F0E5;font:750 10px "Be Vietnam Pro",sans-serif}
+.atelierTeaserText{padding:clamp(55px,7vw,115px) clamp(40px,6vw,100px);align-self:center}
+.atelierTeaserText h2{font:500 clamp(57px,5.3vw,93px)/.98 "Be Vietnam Pro",Arial,sans-serif;letter-spacing:-.04em;margin:35px 0}
+.atelierTeaserText h2 em{color:#A67451}
+.atelierTeaserText p{color:#554940;max-width:39ch;font-size:16px;line-height:1.85}
+.atelierTeaserText a{display:inline-flex;gap:45px;align-items:center;min-height:52px;border-bottom:1px solid #4E3A2C;font:800 11px "Be Vietnam Pro",sans-serif;margin-top:30px}
+.finalCampaign{position:relative;background:#181716;color:#F8F1E8;min-height:900px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;align-items:center}
+.finalCampaignVisual{position:absolute;inset:0 0 0 37%;opacity:.62}
+.finalCampaignVisual img{width:100%;height:100%;object-fit:cover;filter:brightness(.55) saturate(.7)}
+.finalCampaignVisual:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#181716 0%,transparent 65%),linear-gradient(0deg,#1817169C,transparent 60%)}
+.finalCampaignCopy{position:relative;z-index:2;padding:90px 7vw;grid-column:1/-1;max-width:1200px}
+.finalCampaignCopy>small{color:#E4AF89}
+.finalCampaignCopy h2{font:500 clamp(75px,9.7vw,160px)/.91 "Be Vietnam Pro",Arial,sans-serif;letter-spacing:-.045em;margin:29px 0}
+.finalCampaignCopy h2 em{color:#F1C798}
+.finalCampaignCopy p{font-size:17px;max-width:32ch;color:#F0E5D9}
+.finalCampaignCopy a{display:inline-flex;align-items:center;gap:28px;min-height:52px;margin-top:35px;padding:15px 21px;background:#F4E5D4;color:#241915;font:800 11px "Be Vietnam Pro",sans-serif}
+.finalCampaignLine{position:absolute;bottom:5%;left:7%;right:7%;height:1px;background:#E7D1BC66}
+.archivePage,.atelierPage,.aboutPage,.detailPage{min-height:75vh;background:#F5F1E9}
+.archivePage,.atelierPage,.aboutPage{padding-bottom:115px}
+.subpageCover{padding:90px 7vw 60px;min-height:520px;background:#F2EEE5}
+.subpageCover h1{font:500 clamp(70px,10.2vw,178px)/.9 "Be Vietnam Pro",Arial,sans-serif;letter-spacing:-.085em;margin:23px 0 35px}
+.subpageCover h1 em{font-weight:400;color:#B07851}
+.subpageCover>div{display:flex;align-items:flex-end;justify-content:space-between;gap:35px;border-top:1px solid #AA9D8D;padding-top:20px}
+.subpageCover p{max-width:40ch;font-size:15px;color:#544B45;margin:0}
+.subpageCover>div>span{font:800 10px "Be Vietnam Pro",sans-serif;white-space:nowrap;letter-spacing:.1em}
+.archivePage>.collectionGrid{margin:30px 7vw 75px}
+.archivePage>.collectionBottom{margin:0 7vw}
+.filters{display:flex;gap:9px;padding:35px 7vw 10px;flex-wrap:wrap}
+.filters button{display:inline-flex;justify-content:space-between;align-items:center;gap:19px;min-height:45px;border:1px solid #927F6E;background:transparent;padding:11px 16px;color:#29211B;font:750 11px "Be Vietnam Pro",sans-serif}
+.filters button[aria-pressed="true"]{background:#24201D;color:#FAF3E8}
+.filters button:hover{border-color:#B17B53}
+.detailPage{padding:65px 7vw 125px}
+.backLink{display:inline-flex;min-height:45px;align-items:center;gap:12px;border-bottom:1px solid #866A52;font:800 11px "Be Vietnam Pro",sans-serif}
+.detailLayout{display:grid;grid-template-columns:1.03fr .97fr;gap:8vw;margin-top:45px}
+.detailPhotos{min-width:0}
+.detailMain{position:relative;min-height:650px;background:#D5C9BA}
+.detailMain>img{width:100%;height:100%;position:absolute;inset:0;object-fit:cover}
+.detailMain>span{position:absolute;bottom:15px;left:15px;background:#f8f3e8e8;padding:10px;font:800 10px "Be Vietnam Pro",sans-serif}
+.detailThumbs{display:flex;gap:9px;margin-top:12px}
+.detailThumbs button{width:95px;height:110px;border:2px solid transparent;padding:0;background:transparent}
+.detailThumbs button[aria-pressed="true"]{border-color:#AF7652}
+.detailThumbs img{width:100%;height:100%;object-fit:cover}
+.detailCopy{align-self:center}
+.detailCopy>span{font:800 10px "Be Vietnam Pro",sans-serif;color:#916346}
+.detailCopy h1{font:500 clamp(52px,6vw,98px)/.95 "Be Vietnam Pro",Arial,sans-serif;letter-spacing:-.06em;margin:19px 0}
+.detailCopy h2{font:650 clamp(23px,2.7vw,40px) "Be Vietnam Pro",sans-serif;margin:18px 0}
+.detailCopy>p{color:#51483D;font-size:17px;line-height:1.8;max-width:41ch}
+.detailNotes{border-block:1px solid #AE9C88;margin:35px 0;padding:15px 0}
+.detailNotes>div{display:grid;grid-template-columns:.32fr 1fr;gap:20px;padding:15px 0}
+.detailNotes small{font:800 10px "Be Vietnam Pro",sans-serif;color:#866346}
+.detailNotes p{margin:0;font-size:14px}
+.detailCopy>a{display:inline-flex;align-items:center;gap:32px;min-height:51px;padding:14px 17px;background:#241F1B;color:#FFF3E6;font:800 11px "Be Vietnam Pro",sans-serif}
+.atelierProcess{display:grid;grid-template-columns:.38fr .62fr;gap:4vw;margin:0 7vw}
+.processSteps{display:flex;flex-direction:column}
+.processSteps button{display:grid;grid-template-columns:1fr auto;gap:12px;border:0;border-top:1px solid #A99A87;background:transparent;padding:22px 13px;text-align:left;min-height:125px}
+.processSteps button:last-child{border-bottom:1px solid #A99A87}
+.processSteps button span:first-child{grid-column:1/-1;font:800 10px "Be Vietnam Pro",sans-serif;letter-spacing:.1em;color:#876245}
+.processSteps button strong{font:650 clamp(29px,3vw,53px)/1.25 "Be Vietnam Pro",Arial,sans-serif}
+.processSteps button[aria-pressed="true"]{background:#E4D9CB}
+.processVisual{position:relative;min-height:650px;background:#2A211E;color:#FFF3E9}
+.processVisual>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.45;filter:saturate(.67)}
+.processVisual>div{position:absolute;inset:auto 0 0;padding:40px;background:linear-gradient(transparent,#191411eF)}
+.processVisual small{font:800 10px "Be Vietnam Pro",sans-serif;letter-spacing:.13em;color:#E9BB8D}
+.processVisual h2{font:650 clamp(47px,5vw,83px)/1.2 "Be Vietnam Pro",Arial,sans-serif;margin:18px 0}
+.processVisual p{max-width:46ch;font-size:14px}
+.processVisual strong{font:800 11px "Be Vietnam Pro",sans-serif;color:#E9BB8D}
+.atelierStatement{margin:100px 7vw 0;padding:43px 0;border-top:1px solid #958576;display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.atelierStatement strong{font:650 clamp(32px,4vw,63px)/1.28 "Be Vietnam Pro",Arial,sans-serif}
+.atelierStatement p{font-size:17px;max-width:40ch;align-self:center}
+.aboutGrid{display:grid;grid-template-columns:1fr 1fr;gap:7vw;padding:75px 7vw 115px}
+.aboutGrid>div{align-self:center}
+.aboutGrid small{font:800 11px "Be Vietnam Pro",sans-serif;color:#986848}
+.aboutGrid h2{font:500 clamp(40px,4.8vw,75px)/1.04 "Be Vietnam Pro",Arial,sans-serif;letter-spacing:-.06em;margin:28px 0}
+.aboutGrid p{font-size:16px;max-width:47ch;color:#51443C}
+.aboutGrid a{display:inline-flex;align-items:center;gap:18px;border-bottom:1px solid #715D4A;padding:14px 0;margin-top:22px;font:800 11px "Be Vietnam Pro",sans-serif}
+.aboutGrid figure{margin:0;position:relative}
+.aboutGrid img{width:100%;height:680px;object-fit:cover;filter:saturate(.6)}
+.aboutGrid figcaption{margin-top:13px;font:800 10px "Be Vietnam Pro",sans-serif;letter-spacing:.1em}
+.contactPage{display:grid;grid-template-columns:1fr 1fr;gap:7vw;padding:100px 7vw 140px}
+.contactLead>small{font:800 10px "Be Vietnam Pro",sans-serif;color:#9E6947;letter-spacing:.15em}
+.contactLead h1{font:500 clamp(60px,6vw,106px)/.93 "Be Vietnam Pro",Arial,sans-serif;letter-spacing:-.075em;margin:25px 0}
+.contactLead h1 em{color:#B17C58}
+.contactLead>p{font-size:16px;line-height:1.8;max-width:41ch}
+.contactPicture{margin-top:40px;max-width:440px;max-height:360px;overflow:hidden}
+.contactPicture img{width:100%;max-height:370px;object-fit:cover;filter:saturate(.68)}
+.contactPage form{padding:36px;background:#ECE3D6;align-self:flex-start;display:flex;flex-direction:column;gap:16px;border:1px solid #BCA993}
+.fieldLabel{font:800 10px "Be Vietnam Pro",sans-serif;letter-spacing:.12em;margin-top:12px}
+.contactOptions{display:grid;gap:9px}
+.contactOption{position:relative;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;min-height:60px;border:1px solid #9F8C79;background:#F8F2E9;padding:16px;cursor:pointer}
+.contactOption:has(input:checked){background:#241E1B;color:#F8EEE3;border-color:#241E1B}
+.contactOption:focus-within{outline:3px solid #B07A51;outline-offset:3px}
+.contactOption input{position:absolute;opacity:0;width:1px;height:1px}
+.contactOption>span{font:750 11px "Be Vietnam Pro",sans-serif;color:#BD8D66}
+.contactOption strong{font-size:14px}
+.contactOption b{font-size:15px}
+.contactPage textarea{display:block;min-height:210px;width:100%;padding:18px;border:1px solid #9F8C79;border-radius:0;background:#F8F2E9;color:#241E1B;resize:vertical;font:500 14px/1.7 "Be Vietnam Pro",sans-serif}
+.contactPage textarea::placeholder{color:#70665B}
+.submitInquiry{min-height:54px;background:#241E1B;color:#FBF2E8;border:0;padding:16px 19px;display:flex;align-items:center;justify-content:space-between;font:800 12px "Be Vietnam Pro",sans-serif}
+.submitInquiry:hover{background:#6B4C37}
+.contactPrivacy{font-size:11px;color:#5A4B40;margin:0}
+.footer{background:#181716;color:#F5EBDE;padding:55px 6vw 32px;overflow:hidden}
+.footerHeading{display:flex;justify-content:space-between;gap:25px;border-bottom:1px solid #bda38b5c;padding-bottom:20px;font:800 11px "Be Vietnam Pro",sans-serif;letter-spacing:.1em}
+.footerHeading a{border-bottom:1px solid #d2bda7}
+.footerSignature{font:500 clamp(88px,16vw,300px)/.73 "Be Vietnam Pro",Arial,sans-serif;letter-spacing:-.095em;padding:65px 0}
+.footerSignature span{color:#D4A476}
+.footerSignature em{color:#E6CEAF}
+.footerBottom{border-top:1px solid #bda38b5c;padding-top:27px;display:flex;justify-content:space-between;gap:25px;font:750 10px/1.6 "Be Vietnam Pro",sans-serif;letter-spacing:.06em}
+.footerBottom nav{display:flex;flex-wrap:wrap;gap:24px}
+.footerBottom a:hover{color:#E4B083}
+@media(max-width:1100px){
+ .header{grid-template-columns:1fr auto}
+ .header nav{display:none}
+ .headAction{display:none}
+ .hamburger{display:flex}
+ .sectionIntro h2{font-size:clamp(51px,8vw,99px)}
+ .atelierTeaser{min-height:650px}
+ .atelierTeaserImage{min-height:650px}
+}
+@media(max-width:850px){
+ .topIndex{display:none}
+ .header{padding:10px 6vw;min-height:73px}
+ .sectionIntro{grid-template-columns:1fr}
+ .sectionIntro h2{font-size:clamp(50px,9vw,90px)}
+ .sectionIntro>p{max-width:56ch}
+ .collectionSection{padding:75px 6vw}
+ .collectionGrid{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:45px}
+ .lookCard:nth-child(2),.lookCard:nth-child(3){margin-top:0}
+ .materialSection{padding:75px 6vw}
+ .materialHeading{grid-template-columns:1fr}
+ .materialHeading h2{font-size:clamp(58px,10vw,102px)}
+ .materialWorkbench{grid-template-columns:1fr}
+ .materialControls{display:grid;grid-template-columns:repeat(3,1fr)}
+ .materialControls button{border-bottom:1px solid #AE97895C;min-height:120px;padding:18px 10px}
+ .materialControls button strong{font-size:26px}
+ .materialWindow{min-height:560px}
+ .atelierTeaser{grid-template-columns:1fr}
+ .atelierTeaserImage{min-height:520px}
+ .atelierTeaserText{padding:75px 7vw}
+ .finalCampaign{min-height:700px}
+ .subpageCover{min-height:0;padding:70px 6vw 45px}
+ .subpageCover h1{font-size:clamp(65px,10vw,115px)}
+ .atelierProcess,.aboutGrid,.detailLayout,.contactPage{grid-template-columns:1fr}
+ .processVisual{min-height:520px}
+ .processSteps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+ .processSteps button{min-height:140px}
+ .processSteps button strong{font-size:28px}
+ .contactPage{padding:75px 6vw}
+ .contactPicture{display:none}
+}
+@media(max-width:540px){
+ .logo{font-size:22px}
+ .header{padding:11px 6vw;min-height:69px}
+ .collectionSection{padding:61px 6vw}
+ .sectionIntro h2{font-size:clamp(45px,11vw,66px)}
+ .sectionIntro>p{font-size:13px;line-height:1.8}
+ .collectionGrid{grid-template-columns:1fr;gap:40px;margin-top:35px}
+ .lookFrame{aspect-ratio:4/4.6}
+ .lookMeta h3{font-size:33px}
+ .lookFrameLink{transform:none;bottom:12px;right:12px}
+ .collectionBottom{align-items:flex-start;flex-direction:column;gap:8px}
+ .materialSection{padding:67px 6vw}
+ .materialHeading h2{font-size:clamp(51px,12vw,76px)}
+ .materialHeading>p{font-size:13px}
+ .materialWorkbench{margin-top:38px}
+ .materialControls{grid-template-columns:1fr}
+ .materialControls button{min-height:70px;grid-template-columns:auto 1fr auto;align-items:center;gap:9px}
+ .materialControls button small{grid-column:auto;font-size:8px}
+ .materialControls button strong{font-size:27px}
+ .materialWindow{min-height:470px}
+ .materialLabel{padding:23px}
+ .atelierTeaserImage{min-height:360px}
+ .atelierTeaserText{padding:62px 6vw}
+ .atelierTeaserText h2{font-size:clamp(47px,10.5vw,70px)}
+ .finalCampaign{min-height:650px}
+ .finalCampaignVisual{left:12%}
+ .finalCampaignCopy{padding:60px 6vw}
+ .finalCampaignCopy h2{font-size:clamp(67px,13vw,95px)}
+ .subpageCover{padding:65px 6vw 40px}
+ .subpageCover h1{font-size:clamp(57px,12vw,80px)}
+ .subpageCover>div{display:block}
+ .subpageCover>div>span{display:block;margin-top:17px}
+ .archivePage>.collectionGrid{margin:35px 6vw}
+ .archivePage>.collectionBottom{margin:0 6vw}
+ .filters{padding:20px 6vw}
+ .filters button{font-size:10px;padding:9px 11px}
+ .detailPage{padding:42px 6vw 70px}
+ .detailLayout{gap:27px;margin-top:29px}
+ .detailMain{min-height:470px}
+ .detailThumbs button{height:88px;width:75px}
+ .detailCopy h1{font-size:58px}
+ .detailCopy>p{font-size:14px}
+ .detailNotes>div{grid-template-columns:1fr;gap:6px}
+ .atelierProcess{margin:0 6vw}
+ .processSteps{grid-template-columns:1fr}
+ .processSteps button{min-height:83px;grid-template-columns:1fr auto}
+ .processSteps button strong{font-size:30px}
+ .processVisual{min-height:470px}
+ .processVisual>div{padding:25px}
+ .processVisual h2{font-size:50px}
+ .atelierStatement{margin:65px 6vw 0;grid-template-columns:1fr;gap:10px}
+ .atelierStatement strong{font-size:35px}
+ .atelierStatement p{font-size:14px}
+ .aboutGrid{padding:55px 6vw}
+ .aboutGrid h2{font-size:45px}
+ .aboutGrid p{font-size:14px}
+ .aboutGrid img{height:440px}
+ .contactLead h1{font-size:clamp(60px,13vw,79px)}
+ .contactPage form{padding:22px}
+ .footer{padding:45px 6vw 30px}
+ .footerSignature{font-size:clamp(68px,16vw,110px);padding:65px 0}
+ .footerBottom{display:block}
+ .footerBottom nav{margin-top:20px;gap:17px}
+}
+@media(prefers-reduced-motion:reduce){
+ .root *, .root *::before,.root *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}

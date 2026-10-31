@@ -1,0 +1,30 @@
+{
+  "slug": "digital-creators",
+  "title": "Digital Creators — Không gian sáng tạo số",
+  "industry": "Sáng tạo & giáo dục",
+  "style": "Immersive 3D",
+  "purpose": "Trải nghiệm kể chuyện 3D cho dự án sáng tạo số",
+  "description": "Website đa trang có Rubik giải theo cuộn, tranh xuất hiện theo nét cọ và thành phố lắp ghép 3D. Phiên bản giới thiệu đề xuất CLB sáng tạo số, không phải website đăng ký thật.",
+  "variant": "immersive",
+  "features": [
+    "WebGL động theo cuộn trang",
+    "Rubik 3×3 có chuỗi bước",
+    "Tranh vẽ theo thao tác cuộn",
+    "Thành phố lắp ghép hình học 3D",
+    "Giảm chuyển động, dự phòng thiết bị yếu",
+    "Website tĩnh độc lập, không thu thập thông tin người dùng"
+  ],
+  "modules": [
+    "content"
+  ],
+  "reference": {
+    "name": "coffee2307/digital-creators",
+    "url": "https://github.com/coffee2307/digital-creators",
+    "license": "Owner project"
+  },
+  "brand": "Digital Creators — Không gian sáng tạo số",
+  "layout": "playful",
+  "images": [
+    "/images/preview.png"
+  ]
+}

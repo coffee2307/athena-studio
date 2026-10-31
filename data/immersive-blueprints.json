@@ -69,14 +69,6 @@
       "status": "planned"
     },
     {
-      "slug": "editorial-journal",
-      "title": "Spatial Library",
-      "scene": "Thư viện số với trang in nổi, hình minh họa và bài viết.",
-      "signatureInteraction": "Chọn bìa, lật trang 3D nhưng giữ chế độ đọc HTML.",
-      "phase": 3,
-      "status": "planned"
-    },
-    {
       "slug": "architecture-studio",
       "title": "Architectural Study",
       "scene": "Mặt bằng, sàn và cột của công trình tối giản trong không gian.",
@@ -125,51 +117,11 @@
       "status": "prototype-webgl2"
     },
     {
-      "slug": "engineering-industry",
-      "title": "Exploded Precision",
-      "scene": "Máy cơ khí 3D cho phép xem riêng từng chi tiết cấu tạo.",
-      "signatureInteraction": "Kéo slider tách cụm chi tiết, xem mặt cắt và thông số.",
-      "phase": 2,
-      "status": "planned"
-    },
-    {
-      "slug": "finance-trust",
-      "title": "Data Observatory",
-      "scene": "Không gian dữ liệu 3D với hình học tin cậy và biểu đồ định lượng.",
-      "signatureInteraction": "Lọc khung thời gian, xem dữ liệu minh họa không giả thành kết quả thật.",
-      "phase": 4,
-      "status": "planned"
-    },
-    {
       "slug": "construction-firm",
       "title": "Build in Time",
       "scene": "Công trình 3D xuất hiện theo thứ tự thi công có chứng minh kỹ thuật.",
       "signatureInteraction": "Kéo timeline tiến độ, bật/tắt từng lớp kết cấu.",
       "phase": 2,
-      "status": "planned"
-    },
-    {
-      "slug": "music-label",
-      "title": "Sonic Recording Studio",
-      "scene": "Phòng thu với bàn mixer, đĩa vinyl và visualizer.",
-      "signatureInteraction": "Phát âm thanh demo khi người dùng bật, chỉnh mixer và đĩa quay.",
-      "phase": 3,
-      "status": "planned"
-    },
-    {
-      "slug": "live-concert",
-      "title": "Neon Stage",
-      "scene": "Sân khấu với đèn, màn hình visualizer và khán đài.",
-      "signatureInteraction": "Đổi ánh sáng, chọn khu ghế và thử quy trình vé không thanh toán.",
-      "phase": 3,
-      "status": "planned"
-    },
-    {
-      "slug": "team-intranet",
-      "title": "Orbit Workspace",
-      "scene": "Không gian nhóm ba chiều liên kết module lịch, dự án và tệp.",
-      "signatureInteraction": "Chọn cụm công việc để mở dashboard HTML truy cập được.",
-      "phase": 4,
       "status": "planned"
     },
     {

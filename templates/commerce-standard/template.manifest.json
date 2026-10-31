@@ -1,0 +1,14 @@
+{
+  "slug": "commerce-standard",
+  "name": "Cửa hàng trực tuyến",
+  "layout": "catalog",
+  "originalDemo": "/template-demos/commerce-standard",
+  "status": "standalone-baseline-extraction",
+  "fidelity": "original bespoke demos require visual parity review",
+  "license": {
+    "name": "startbootstrap-shop-homepage",
+    "url": "https://github.com/StartBootstrap/startbootstrap-shop-homepage",
+    "license": "MIT"
+  },
+  "version": "0.1.0"
+}

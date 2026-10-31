@@ -1,0 +1,362 @@
+.north{min-height:100vh;background:#e9eff1;color:#1a3448;font:15px/1.65 "Be Vietnam Pro",sans-serif;overflow-x:clip}.north *{box-sizing:border-box}.north a{text-decoration:none;color:inherit}.north button,.north textarea,.north select{font:inherit;cursor:pointer}.north :where(a,button,select,textarea):focus-visible{outline:3px solid #bf8046;outline-offset:4px}.utility{background:#19364c;color:#ccdae3;min-height:35px;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:5px 4vw;font:600 9px/1.4 "Be Vietnam Pro";letter-spacing:.11em}.globalHead{height:97px;background:#f4f7f6;display:grid;grid-template-columns:1fr auto auto auto;gap:35px;align-items:center;padding:0 4vw;border-bottom:1px solid #9caeb9;position:relative;z-index:45}.insignia{display:flex;align-items:center;gap:13px}.insignia>b{font:900 38px "Be Vietnam Pro";letter-spacing:-.14em;border-right:1px solid #9aa8b1;padding-right:15px}.insignia>b span{color:#c68953}.insignia>span{font:800 18px "Be Vietnam Pro";letter-spacing:.12em;line-height:1}.insignia>span small{display:block;font:650 9px "Be Vietnam Pro";letter-spacing:.1em;margin-top:9px}.topNav{display:flex;align-items:center;gap:27px}.topNav a{font-size:12px;font-weight:700;position:relative}.topNav a:hover:after{content:"";position:absolute;height:2px;left:0;right:0;bottom:-9px;background:#b88955}.consult{display:inline-flex;gap:15px;align-items:center;min-height:47px;background:#1a3448;color:#fff!important;padding:10px 18px;font-size:11px;font-weight:800}.trigger{display:none}.rail{position:fixed;top:140px;bottom:0;left:0;width:43px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:30px 12px;background:#d4e0e4;border-right:1px solid #aebfc7;z-index:5}.rail span{font-size:9px;font-weight:800;writing-mode:vertical-rl;letter-spacing:.15em}.content{padding-left:43px}.banner{display:grid;grid-template-columns:1fr 1fr;min-height:670px}.bannerCopy{padding:8vw 5vw 4vw 6vw;display:flex;align-items:flex-start;flex-direction:column}.eyebrow{font:700 10px "Be Vietnam Pro";letter-spacing:.14em}.banner h1,.pageHead h1{font:700 clamp(60px,6.4vw,116px)/.96 "Be Vietnam Pro";letter-spacing:-.09em;margin:40px 0}.bannerCopy>p{font-size:17px;max-width:47ch;line-height:1.8}.primary{margin-top:35px;background:#17364b;color:#fff!important;padding:19px 24px;min-height:52px;font:750 13px "Be Vietnam Pro";display:flex;align-items:center;gap:30px}.bannerMeta{display:flex;align-items:center;gap:14px;margin-top:auto;padding-top:70px;font-size:10px;font-weight:750;letter-spacing:.08em}.bannerMeta b{font-size:30px;color:#b38c67}.diagram{background:#1c384e;color:#eaf1f3;padding:55px 4vw 37px;display:flex;flex-direction:column;position:relative;overflow:hidden}.diagram:before{content:"";position:absolute;inset:0;background-image:linear-gradient(#bed0d711 1px,transparent 1px),linear-gradient(90deg,#bed0d711 1px,transparent 1px);background-size:44px 44px;pointer-events:none}.gridCaption{font:700 10px "Be Vietnam Pro";letter-spacing:.16em;position:relative}.diagramNodes{display:flex;gap:12px;margin:90px 0 50px;position:relative}.diagramNodes button{flex:1;text-align:left;min-height:120px;padding:13px;background:#234b62;border:1px solid #96b7c466;color:#d6e6ea;display:flex;flex-direction:column;justify-content:space-between}.diagramNodes button small{font-size:10px}.diagramNodes button strong{font-size:11px;letter-spacing:.1em}.diagramNodes button[aria-pressed=true]{background:#a3c5c9;color:#1a3448;transform:translateY(-8px)}.diagramContent{border-top:1px solid #a0bec266;padding-top:28px;position:relative;min-height:205px}.diagramContent small{font-size:10px;letter-spacing:.12em}.diagramContent h2{font-size:clamp(26px,3.2vw,46px);letter-spacing:-.055em;margin:12px 0}.diagramContent p{max-width:37ch}.diagramContent a{font-size:12px;text-decoration:underline;text-underline-offset:5px}.diagramFoot{display:flex;justify-content:space-between;border-top:1px solid #aac1cb66;padding-top:18px;margin-top:auto;font-size:9px;letter-spacing:.12em;position:relative}.impact{padding:110px 7vw;display:grid;grid-template-columns:1fr 1fr;gap:8vw;background:#e9eff1}.impact small,.capabilities small,.proof small,.pageHead small{font-size:10px;letter-spacing:.14em;font-weight:800}.impact h2,.capabilities h2{font-size:clamp(44px,5.1vw,85px);letter-spacing:-.025em;line-height:1.06;margin:30px 0}.impactBody{border-left:2px solid #95adb2;padding:28px 0 0 25px;display:flex;flex-direction:column;justify-content:space-between}.impactBody p{font-size:18px;max-width:40ch;line-height:1.8}.impactBody div{display:flex;gap:15px;flex-wrap:wrap;font-size:10px;font-weight:750}.capabilities{background:#f8faf8;padding:100px 7vw;display:grid;grid-template-columns:.8fr 1.2fr;gap:6vw}.capabilities>div{border-top:1px solid #8b9da2}.capabilities>div a{min-height:145px;display:grid;grid-template-columns:40px 1fr 30px;grid-template-rows:auto auto;gap:10px;border-bottom:1px solid #a5b4b8;padding:26px 0}.capabilities>div a small{grid-row:1/3}.capabilities>div a strong{font-size:clamp(18px,2.2vw,29px)}.capabilities>div a p{grid-column:2;font-size:13px;margin:0}.capabilities>div a>span{grid-column:3;grid-row:1/3;font-size:30px}.proof{display:grid;grid-template-columns:1fr 1fr;background:#d5e2e3}.proof img{width:100%;height:630px;object-fit:cover}.proof>div{padding:7vw;align-self:center}.proof h2{font-size:clamp(32px,4.1vw,64px);line-height:1.14;letter-spacing:-.025em}.proof p{line-height:1.8;max-width:44ch}.proof a{display:inline-block;margin-top:35px;border-bottom:1px solid;padding:12px 0;font-size:13px}.directoryFooter{padding:70px 5vw 25px 8vw;background:#132e43;color:#e9f1f2}.footerIntro{display:grid;grid-template-columns:1fr 2fr;gap:30px;align-items:flex-end;padding-bottom:75px;border-bottom:1px solid #8ba3b077}.footerIntro span{font-size:10px;letter-spacing:.14em;font-weight:800;align-self:flex-start}.footerIntro h2{font-size:clamp(55px,7vw,120px);line-height:.96;letter-spacing:-.09em;margin:0}.footerIntro a{grid-column:2;justify-self:flex-start;display:inline-flex;border-bottom:1px solid;padding:12px 0;font-size:15px}.footerLower{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:5vw;padding:50px 0 100px}.footerLower>div{display:flex;flex-direction:column;align-items:flex-start;gap:12px}.footerLower b{font-size:34px;letter-spacing:-.025em}.footerLower small{font-size:10px;letter-spacing:.12em;color:#b2cbd1}.footerLower a{font-size:13px}.footerLower p{max-width:35ch;margin:0;font-size:13px}.directoryFooter>small{font-size:9px;letter-spacing:.11em}.pageHead{padding:95px 7vw 65px}.pageHead h1{margin:33px 0}.pageHead p{font-size:17px;line-height:1.75;max-width:48ch}.directory{padding-bottom:110px}.directoryGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:0 7vw}.directoryGrid>a{background:#fff;border:1px solid #c3d1d3;padding:16px;min-width:0}.directoryGrid small{font-size:10px;font-weight:750;letter-spacing:.11em}.directoryGrid img{display:block;width:100%;aspect-ratio:5/4;object-fit:cover;margin:17px 0 25px}.directoryGrid h2{font-size:26px;letter-spacing:-.025em}.directoryGrid p{font-size:14px}.case{padding:65px 7vw 120px}.caseTop{display:flex;justify-content:space-between;gap:20px;font-size:11px;font-weight:800;letter-spacing:.1em}.case h1{font-size:clamp(54px,7vw,118px);letter-spacing:-.09em;max-width:13ch;line-height:1.03}.caseGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:45px 0 80px}.caseGrid>div{border-top:3px solid #7c9fa6;padding:20px 15px 20px 0}.caseGrid span{font-size:10px;letter-spacing:.12em}.caseGrid p{font-size:20px;font-weight:650}.caseImage{width:100%;height:55vw;max-height:700px;object-fit:cover}.case>p{font-size:12px;max-width:60ch}.solutions{padding-bottom:90px}.process{display:grid;grid-template-columns:1fr 1.2fr;padding:0 7vw;gap:3vw}.stepButtons{display:flex;flex-direction:column}.stepButtons button{text-align:left;background:transparent;border:0;border-top:1px solid #839ca4;padding:22px 8px;display:flex;flex-direction:column;gap:12px;min-height:107px}.stepButtons button span{font-size:21px;font-weight:750}.stepButtons button[aria-pressed=true]{background:#d5e6e7;padding-left:22px;border-left:5px solid #2d6374}.stepDetail{background:#1c3a4c;color:#e3eff2;padding:60px 5vw;min-height:520px;display:flex;flex-direction:column;align-items:flex-start}.stepDetail small{font-size:10px;letter-spacing:.14em}.stepDetail h2{font-size:clamp(36px,4vw,66px);letter-spacing:-.025em;line-height:1.1;margin:80px 0 20px}.stepDetail p{font-size:17px;line-height:1.7}.progressLine{height:3px;width:100%;background:#7198a3;margin:auto 0 30px}.progressLine span{display:block;height:3px;background:#d4a56d;transition:width .3s}.stepDetail button{background:#d7e9e8;border:0;color:#19364c;padding:15px 18px;font-weight:800;min-height:48px}.principles{padding-bottom:100px}.values{display:grid;grid-template-columns:repeat(3,1fr);padding:0 7vw;gap:4vw}.values>div{border-top:4px solid #28566a;padding-top:19px}.values b{font-size:11px}.values h2{font-size:clamp(29px,3.5vw,51px);line-height:1.1;letter-spacing:-.025em}.values p{font-size:16px;line-height:1.8}.principles>img{width:86%;margin:95px 7vw 0;height:50vw;max-height:600px;object-fit:cover}.inquiry{display:grid;grid-template-columns:1fr 1fr;gap:30px;padding:40px 7vw 110px}.inquiry .pageHead{padding:50px 0}.inquiry form{display:flex;flex-direction:column;gap:17px;padding:60px 3vw;background:#f9faf8;align-self:flex-start;border:1px solid #bac8c9}.inquiry label{font-size:13px;font-weight:800}.inquiry select,.inquiry textarea{width:100%;padding:18px 15px;background:#fff;border:1px solid #9cb1b4;min-height:52px}.inquiry textarea{min-height:220px;resize:vertical}.inquiry button{padding:17px;background:#19364c;color:white;border:0;font-weight:800;text-align:left;min-height:48px}.inquiry form p{font-size:12px}
+.scrim{position:fixed;inset:0;z-index:60;border:0;background:#091922aa}.panel{position:fixed;top:0;right:0;bottom:0;z-index:61;width:min(520px,92vw);background:#dce9eb;padding:50px 40px;visibility:hidden;transform:translateX(110%);transition:transform .3s;overflow:auto}.panel:not([aria-hidden="true"]){transform:none;visibility:visible}.panelTop{display:flex;justify-content:space-between;font-size:10px;letter-spacing:.12em;font-weight:800;margin-bottom:60px}.panelTop button{border:1px solid;padding:8px 13px;background:transparent}.panel>div:nth-child(2){display:flex;flex-direction:column}.panel>div:nth-child(2) a{border-top:1px solid #b3c7cd;display:flex;align-items:center;gap:20px;padding:22px 0;font-size:27px;font-weight:800}.panel a small{font-size:11px}.panel>p{margin-top:55px;font-size:13px}
+@media(max-width:1120px){.topNav{gap:14px}.globalHead{gap:18px}.topNav a{font-size:11px}.banner{min-height:600px}.banner h1{font-size:clamp(55px,6vw,90px)}}
+@media(max-width:850px){.utility{font-size:8px}.utility span:last-child{display:none}.globalHead{height:77px;grid-template-columns:1fr auto auto;padding-inline:5vw}.topNav{display:none}.trigger{border:1px solid #8ca3b2;background:transparent;width:47px;height:47px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:6px;padding:11px}.trigger i{width:100%;height:2px;display:block;background:#19364c}.trigger i:nth-child(2){width:75%}.rail{display:none}.content{padding:0}.banner{grid-template-columns:1fr}.bannerCopy{padding:85px 6vw 45px}.bannerMeta{padding-top:40px}.diagram{min-height:490px;padding:45px 6vw}.diagramNodes{margin:50px 0}.impact,.capabilities,.proof{grid-template-columns:1fr;gap:35px;padding:80px 6vw}.proof{padding:0}.proof img{height:350px}.proof>div{padding:7vw}.directoryFooter{padding:60px 6vw 25px}.directoryGrid{padding:0 6vw}.pageHead{padding:70px 6vw 40px}.inquiry{padding:0 6vw 80px;grid-template-columns:1fr}.process{padding:0 6vw}.caseGrid{grid-template-columns:1fr}.values{padding:0 6vw}}
+@media(max-width:600px){.globalHead{height:69px;gap:10px}.insignia>b{font-size:32px;padding-right:11px}.insignia>span{font-size:15px}.insignia>span small{font-size:7px}.consult{display:none}.bannerCopy{padding-top:65px}.banner h1{font-size:clamp(54px,13vw,78px);margin:30px 0}.bannerCopy>p{font-size:15px}.diagramNodes{gap:5px}.diagramNodes button{padding:8px;min-height:98px}.diagramNodes button strong{font-size:9px}.diagram{padding:40px 5vw}.impact,.capabilities{padding:75px 6vw}.impact h2,.capabilities h2{font-size:49px}.capabilities>div a{grid-template-columns:26px 1fr 15px}.capabilities>div a strong{font-size:20px}.proof img{height:280px}.proof h2{font-size:39px}.footerIntro{display:block;padding-bottom:55px}.footerIntro h2{margin:26px 0;font-size:63px}.footerIntro a{display:inline-block}.footerLower{grid-template-columns:1fr 1fr;gap:30px;padding-bottom:60px}.footerLower>div:first-child{grid-column:1/-1}.directoryGrid{display:block}.directoryGrid>a{display:block;margin-bottom:18px}.pageHead h1{font-size:clamp(52px,12vw,77px)}.case{padding:45px 6vw 80px}.case h1{font-size:55px}.caseGrid{margin:45px 0}.process{display:block}.stepButtons{display:grid;grid-template-columns:1fr 1fr;gap:9px}.stepButtons button{min-height:115px;border:1px solid #c4d3d6;padding:14px}.stepButtons button span{font-size:15px}.stepDetail{padding:38px 25px;margin-top:18px;min-height:360px}.stepDetail h2{margin:35px 0}.values{display:block}.values>div{margin-bottom:55px}.principles>img{width:88%;margin:20px 6vw;height:50vw}.inquiry form{padding:28px}}
+@media(prefers-reduced-motion:reduce){.north *, .north *::before{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* NORTH 02 — Cartographic business navigation, no shared marketing shell */
+.north{font-family:"Be Vietnam Pro","Segoe UI","Be Vietnam Pro",sans-serif;background:#e8eef0;overflow-x:clip}
+.north :is(h1,h2,h3){font-family:"Be Vietnam Pro","Segoe UI","Be Vietnam Pro",sans-serif;letter-spacing:-.045em;overflow-wrap:break-word}
+.utility{background:#142b3c;color:#e1ebee;padding-block:10px;letter-spacing:.06em}
+.globalHead{background:#f2f7f6;box-shadow:0 4px 0 #c5d9df;min-height:100px}
+.insignia>b{font-family:"Segoe UI","Be Vietnam Pro",sans-serif}
+.insignia>span small{letter-spacing:.04em}
+.topNav a{display:flex;align-items:center;gap:4px;position:relative;min-height:44px;font-size:13px}
+.topNav a:before{content:"";height:5px;width:5px;border:1px solid #9baeb6;transform:rotate(45deg);transition:transform .22s,background .22s}
+.topNav a:hover:before{background:#b97944;transform:rotate(135deg)}
+.consult{background:#c88352;color:#18334a!important;border:1px solid #9e5e37;min-height:48px;transition:transform .2s,background .2s}
+.consult:hover{transform:translateY(-3px);background:#e1a879}
+.scrim{position:fixed;inset:0;z-index:60;background:#092435aa;opacity:0;pointer-events:none;transition:opacity .32s ease}
+.scrim[data-open="true"]{opacity:1;pointer-events:auto}
+.panel{visibility:hidden;transform:translateX(105%);transition:transform .45s cubic-bezier(.2,1,.3,1),visibility 0s linear .45s;box-shadow:-12px 0 55px #13293f31}
+.panel[aria-hidden="false"]{visibility:visible;transform:translateX(0);transition:transform .45s cubic-bezier(.2,1,.3,1),visibility 0s}
+.panelTop{font:750 11px "Be Vietnam Pro","Segoe UI",sans-serif;letter-spacing:.06em}
+.panelTop button{min-height:46px;font:750 12px "Be Vietnam Pro",sans-serif}
+.panelTop button span{font:300 27px/1 "Be Vietnam Pro",sans-serif;margin-left:10px}
+.panel>div:nth-child(2) a{transition:background .2s,padding-left .2s;border-left:3px solid transparent}
+.panel>div:nth-child(2) a:hover{background:#bbd3d6;padding-left:14px;border-left-color:#ba835c}
+.rail{background:#c8d8dc;z-index:5}
+.banner{position:relative;min-height:720px;background:linear-gradient(135deg,#e5edef,#eaf2ee)}
+.bannerCopy{position:relative;padding-top:7.3vw}
+.bannerCopy:before{content:"HƯỚNG ĐI / 01";font:750 10px "Be Vietnam Pro",sans-serif;letter-spacing:.1em;border-top:2px solid #a5b9bc;padding-top:12px;color:#7b8184}
+.banner h1{font-size:clamp(57px,6.5vw,114px);line-height:1.1;letter-spacing:-.025em;margin-block:40px}
+.banner h1 em{color:#b47a50;font-style:normal;font-weight:500}
+.bannerCopy>p{max-width:36ch}
+.diagram{position:relative;overflow:hidden;padding:35px 4vw 32px;background:#143248;min-width:0}
+.diagram:before{background-size:30px 30px;opacity:.9}
+.diagram:after{content:"";position:absolute;right:-120px;top:-120px;border:1px solid #7aa3ad30;width:500px;height:500px;border-radius:50%;box-shadow:0 0 0 80px #e3f1ff08,0 0 0 160px #e3f1ff08;pointer-events:none}
+.gridCaption{font-size:11px;color:#c9e1e5;z-index:1}
+.systemOrbit{z-index:1;position:relative;margin:22px auto 6px;max-width:520px;min-height:190px;display:flex;flex-direction:column;align-items:center}
+.systemOrbit svg{width:min(100%,470px);height:auto;color:#70a1b7;filter:drop-shadow(0 0 11px #6ca4b43d);overflow:visible}
+.systemOrbit path{stroke-dasharray:5 10;animation:northFlow 17s linear infinite}
+.systemOrbit circle{fill:#e7ad6e;stroke:#b6dce0;stroke-width:2;transform-box:fill-box;transform-origin:center;animation:northPulse 3s ease-in-out infinite alternate}
+.systemOrbit circle:nth-of-type(3){fill:#bde6b3;animation-delay:.5s}
+.systemOrbit circle:nth-of-type(5){animation-delay:1.1s}
+.systemOrbit span{font:700 9px "Be Vietnam Pro","Segoe UI",sans-serif;letter-spacing:.08em;color:#c8dce0;text-align:center}
+.systemOrbit b{margin-inline:10px;color:#e6af70}
+.diagramNodes{margin:16px 0 26px;gap:8px}
+.diagramNodes button{min-height:88px;justify-content:center;gap:14px;position:relative;background:#24455c;border-color:#99b8c8a1;transition:transform .28s,background .28s,box-shadow .28s}
+.diagramNodes button:before{content:"";position:absolute;top:-12px;left:50%;height:10px;width:1px;background:#99b8c8}
+.diagramNodes button:after{content:"";position:absolute;top:-18px;left:calc(50% - 3px);width:7px;height:7px;border-radius:50%;background:#d1e4e5}
+.diagramNodes button[aria-pressed=true]{transform:translateY(-7px);box-shadow:0 9px 0 #113044;background:#d3e7e8}
+.diagramNodes button strong{font:750 12px "Be Vietnam Pro",sans-serif;letter-spacing:0}
+.diagramContent{min-height:180px;padding-top:24px}
+.diagramContent h2{font-size:clamp(25px,2.6vw,42px);letter-spacing:-.04em;line-height:1.2}
+.diagramContent p{font-size:14px}
+.diagramContent a{display:inline-block;margin:10px 0 5px}
+.diagramFoot{color:#c4dbde;font-size:9px}
+.bannerMeta{color:#506a71}
+.impact{background:#e7eff0;border-top:12px solid #c7dce0}
+.impact h2,.capabilities h2{font-size:clamp(46px,5vw,79px);line-height:1.16;letter-spacing:-.025em}
+.impactBody{position:relative}
+
+.impactBody div span{font-size:10px}
+.capabilities{background:#f3f6f4}
+.capabilities>div a{transition:background .25s,padding-left .25s}
+.capabilities>div a:hover{background:#dce8eb;padding-left:18px}
+.capabilities>div a strong{font-weight:750;letter-spacing:-.04em}
+.proof{overflow:hidden}
+.proof img{filter:saturate(.8);transition:transform .9s cubic-bezier(.2,1,.35,1)}
+.proof[data-north-visible="true"] img{transform:scale(1.04)}
+.proof h2{line-height:1.22;letter-spacing:-.04em}
+.pageHead h1,.case h1,.footerIntro h2{line-height:1.1;letter-spacing:-.04em}
+.directoryGrid>a{transition:transform .25s,box-shadow .25s;border-top:5px solid #3e7182}
+.directoryGrid>a:hover{transform:translateY(-9px);box-shadow:0 15px 20px #123a4b1a}
+.stepButtons button{transition:background .22s,padding-left .22s}
+.stepButtons button[aria-pressed=true]{padding-left:22px}
+.values>div{position:relative}
+.values>div:before{content:"";position:absolute;top:-10px;right:0;width:20px;height:20px;background:#c88b60}
+.north [data-north-scene]{transition:opacity .65s ease,transform .65s cubic-bezier(.16,1,.3,1)}
+.north [data-north-scene]:not([data-north-visible="true"]){opacity:.68;transform:translateY(24px)}
+.north [data-north-visible="true"]{opacity:1;transform:translateY(0)}
+@keyframes northFlow{to{stroke-dashoffset:-120}}
+@keyframes northPulse{from{transform:scale(.82)}to{transform:scale(1.2)}}
+@media(max-width:1120px){.topNav{gap:13px}.globalHead{grid-template-columns:1fr auto auto;gap:18px}.topNav a{font-size:12px}.banner h1{font-size:clamp(56px,5.9vw,92px)}}
+@media(max-width:850px){.globalHead{height:74px}.topNav{display:none}.trigger{display:flex}.rail{display:none}.banner{grid-template-columns:1fr}.bannerCopy{padding:70px 6vw 50px}.banner h1{font-size:clamp(51px,10vw,79px)}.systemOrbit{max-width:500px;min-height:0}.diagram{padding:40px 6vw}.diagramNodes{margin:13px 0 33px}.diagramContent{min-height:160px}.panel{width:min(510px,100vw);padding:45px 7vw}.capabilities>div a{min-height:125px}.diagramFoot{font-size:8px}}
+@media(max-width:600px){.utility{font-size:8px}.insignia>span small{font-size:7px}.globalHead{grid-template-columns:1fr auto}.consult{display:none}.bannerCopy{padding-top:67px}.banner h1{font-size:clamp(47px,11.6vw,65px);margin:32px 0;line-height:1.14}.diagram{padding:35px 5vw}.systemOrbit{margin:18px auto 4px}.systemOrbit svg{max-height:145px}.diagramNodes{gap:5px}.diagramNodes button{min-height:90px;padding:6px}.diagramNodes button strong{font-size:10px}.diagramContent h2{font-size:30px}.impact,.capabilities{padding:75px 6vw}.impact h2,.capabilities h2{font-size:clamp(41px,10.8vw,56px)}.proof h2{font-size:clamp(32px,8.9vw,43px)}.panelTop{margin-bottom:45px}.panel>div:nth-child(2) a{font-size:27px}}
+@media(prefers-reduced-motion:reduce){.north :is(.systemOrbit path,.systemOrbit circle){animation:none!important}.north [data-north-scene],.panel,.scrim{transition:none!important}.north [data-north-scene]{opacity:1!important;transform:none!important}}
+
+/* Active only while topology can be seen; reduced motion always stops it. */
+.north .systemOrbit path,.north .systemOrbit circle{animation-play-state:paused}
+.north [data-north-ambient][data-north-active="true"] .systemOrbit path,.north [data-north-ambient][data-north-active="true"] .systemOrbit circle{animation-play-state:running}
+
+/* P8: a single close icon; preserve NORTH engineering panel. */
+.north .panelTop button{width:48px;height:48px;min-width:48px;min-height:48px;padding:0;display:grid;place-items:center;font-size:0;line-height:1}
+.north .panelTop button span{display:block;margin:0;font:400 33px/1 "Be Vietnam Pro",sans-serif}
+.north :is(.banner h1,.pageHead h1,.case h1){line-height:1.24;letter-spacing:-.025em;overflow-wrap:break-word}
+.north .topNav a{line-height:1.5;letter-spacing:0}
+
+
+/* ATHENA-REFINEMENT-02 / NORTH: no decorative pseudo-elements on text. */
+.impactBody{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(25px,4vw,75px);align-items:center;isolation:isolate}
+.impactNarrative{min-width:0;position:relative;z-index:1}
+.impactNarrative>span{display:block;color:#507486;font:700 10px/1.5 "Be Vietnam Pro",sans-serif;letter-spacing:.06em;margin-bottom:16px}
+.impactNarrative p{max-width:44ch;font:400 clamp(16px,1.5vw,22px)/1.9 "Be Vietnam Pro",sans-serif;letter-spacing:0;min-height:calc(1.9em * 4);margin:0;text-wrap:pretty}
+.impactJourney{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;grid-column:1 / -1;position:relative;z-index:1}
+.impactJourney button{display:grid;gap:10px;min-width:0;text-align:left;background:transparent;border:1px solid #a1bdc6;color:#1b3949;padding:15px 13px;min-height:94px;transition:background .2s,transform .2s;cursor:pointer}
+.impactJourney button span{font:700 11px "Be Vietnam Pro",sans-serif}
+.impactJourney button strong{font:650 clamp(12px,1.4vw,18px)/1.45 "Be Vietnam Pro",sans-serif}
+.impactJourney button:hover{transform:translateY(-3px)}
+.impactJourney button[aria-pressed="true"]{background:#15364a;color:#f0f6f6}
+.impactMap{min-height:180px;width:100%;position:relative;overflow:hidden;border:1px solid #a4c1c9;background:radial-gradient(circle at 64% 42%,#d5e5e9,#eef3f2);display:grid;place-items:center}
+.mapTrack{width:75%;height:2px;background:#94afbb;display:flex;justify-content:space-between;align-items:center;position:relative;isolation:isolate}
+.mapTrack:before{content:"";position:absolute;left:0;top:0;bottom:0;width:calc(var(--north-progress,0) * 100%);background:#bd8159;transition:width .42s cubic-bezier(.2,1,.3,1);z-index:-1}
+.mapTrack[data-step="0"]{--north-progress:0}
+.mapTrack[data-step="1"]{--north-progress:.5}
+.mapTrack[data-step="2"]{--north-progress:1}
+.mapTrack span{display:block;width:21px;height:21px;border:4px solid #dce8e9;border-radius:50%;background:#1b465d;box-shadow:0 0 0 2px #638b9b;transition:background .35s,transform .35s}
+.mapTrack[data-step="1"] span:nth-child(-n+2),.mapTrack[data-step="2"] span{background:#cb8956;transform:scale(1.15)}
+.north .impactBody:after{content:none!important}
+@media(max-width:850px){.impactBody{grid-template-columns:1fr}.impactNarrative p{min-height:0}.impactMap{grid-row:2;min-height:130px}.impactJourney{grid-row:3}}
+@media(max-width:450px){.impactJourney button{padding:11px 7px;min-height:84px}.impactJourney button strong{font-size:12px}.impactBody{gap:24px}}
+@media(prefers-reduced-motion:reduce){.impactJourney button,.mapTrack:before,.mapTrack span{transition:none!important}}
+
+/* NORTH / Decision Canvas — scoped refinement; preserves independent corporate DNA. */
+.north .banner{grid-template-columns:minmax(0,.96fr) minmax(0,1.04fr);min-height:710px;background:linear-gradient(137deg,#edf4f3 0%,#e3eef0 63%,#dae7e8 100%)}
+.north .bannerCopy{padding:clamp(45px,6.2vw,94px) clamp(30px,4.7vw,72px) 50px;min-width:0}
+.north .banner h1{font-size:clamp(53px,5.5vw,88px);letter-spacing:-.047em;line-height:1.105;margin:36px 0 24px;max-width:9.6ch;text-wrap:balance}
+.north .bannerCopy>p{font-size:clamp(15px,1.25vw,18px);line-height:1.7;max-width:37ch;margin:0;color:#315062}
+.north .banner h1 em{color:#ba7b4f;font-style:normal;font-weight:600}
+.north .heroActions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:32px}
+.north .heroActions .primary{margin:0;min-height:53px;padding:15px 19px;background:#17374b;color:#fff!important;transition:background .18s,transform .18s;gap:18px}
+.north .heroActions .primary:hover{background:#2b5d72;transform:translateY(-2px)}
+.north .heroSecondary{display:inline-flex;align-items:center;justify-content:center;min-height:53px;padding:14px 16px;border:1px solid #7b9aa8;background:#e6f0f0;color:#1d4054!important;font-size:12px;font-weight:750;transition:background .18s}
+.north .heroSecondary:hover{background:#d1e5e8}
+.north .bannerMeta{width:100%;border-top:1px solid #bbced1;margin-top:auto;padding-top:34px;color:#476675}
+.north .bannerMeta b{font:800 36px/1 "Be Vietnam Pro",sans-serif;color:#ad754d}
+.north .bannerMeta span{font-size:10px;line-height:1.65}
+.north .diagram{padding:33px clamp(22px,3.2vw,52px) 27px;background:#153447;min-width:0;scroll-margin-top:16px}
+.north .diagram:after{opacity:.35}
+.north .diagnosticHead{display:flex;justify-content:space-between;align-items:center;gap:14px;position:relative;z-index:1}
+.north .liveSignal{display:inline-flex;align-items:center;gap:8px;color:#c9e6e5;font-size:10px;letter-spacing:.1em;font-weight:750}
+.north .liveSignal i{height:8px;width:8px;background:#e2ad78;display:block;border-radius:50%;box-shadow:0 0 0 4px #e2ad7827}
+.north .diagnosticTitle{font:750 clamp(23px,2.4vw,34px)/1.24 "Be Vietnam Pro",sans-serif;letter-spacing:-.045em;margin:23px 0 7px;position:relative;z-index:1;color:#f5f8f5}
+.north .diagnosticIntro{color:#bfdae2;font:450 12px/1.7 "Be Vietnam Pro",sans-serif;max-width:48ch;margin:0;position:relative;z-index:1}
+.north .systemOrbit{min-height:0;margin:12px auto 0;width:100%;max-width:440px}
+.north .systemOrbit svg{width:100%;max-height:134px;filter:drop-shadow(0 0 12px #8bc3cc28)}
+.north .systemOrbit span{font-size:8px;margin:0}
+.north .systemOrbit circle{transition:fill .25s,stroke .25s;animation-duration:4.6s}
+.north .diagram[data-focus="0"] .systemOrbit circle:nth-of-type(2),
+.north .diagram[data-focus="1"] .systemOrbit circle:nth-of-type(3),
+.north .diagram[data-focus="2"] .systemOrbit circle:nth-of-type(4){fill:#fff4d4;stroke:#f6ac6f;stroke-width:5}
+.north .diagramNodes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:17px 0 18px;z-index:1}
+.north .diagramNodes button{position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;min-width:0;min-height:102px;padding:13px 12px;background:#234c61;border:1px solid #7da5b7;color:#e6eff2;box-shadow:none;transform:none;transition:background .22s,border-color .22s,transform .22s}
+.north .diagramNodes button:hover{background:#30627a;border-color:#b6e1e3;transform:translateY(-3px)}
+.north .diagramNodes button[aria-pressed="true"]{background:#d4e8e7;border-color:#f2c58e;color:#123248;box-shadow:inset 0 4px #c88b5c;transform:translateY(-3px)}
+.north .diagramNodes button small{font:750 9px/1.4 "Be Vietnam Pro",sans-serif;letter-spacing:.04em}
+.north .diagramNodes button strong{font:750 clamp(12px,1.15vw,15px)/1.4 "Be Vietnam Pro",sans-serif;letter-spacing:-.025em;text-align:left}
+.north .diagramNodes button>span{position:absolute;right:12px;top:10px;font-size:12px;opacity:.8}
+.north .diagramContent{padding:20px 0 2px;border-top:1px solid #7b9daa7b;min-height:0;z-index:1}
+.north .diagramContent>small{font:750 9px/1.5 "Be Vietnam Pro",sans-serif;letter-spacing:.12em;color:#e2af85}
+.north .diagramContent h3{font:750 clamp(25px,2.45vw,35px)/1.2 "Be Vietnam Pro",sans-serif;letter-spacing:-.05em;margin:8px 0 18px;color:#fff}
+.north .beforeAfter{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.north .beforeAfter>div{background:#ffffff0b;border:1px solid #8badbf55;padding:13px 14px;min-width:0}
+.north .beforeAfter span,.north .diagnosticDeliver>span{display:block;font:800 9px/1.6 "Be Vietnam Pro",sans-serif;letter-spacing:.1em;color:#e6b488}
+.north .beforeAfter p{font:450 12px/1.65 "Be Vietnam Pro",sans-serif;color:#e6f0f1;margin:8px 0 0;max-width:none}
+.north .diagnosticDeliver{padding:11px 0;margin-top:4px}
+.north .diagnosticDeliver p{margin:5px 0 0;font-size:12px;color:#e0eff0;line-height:1.6}
+.north .diagramContent>a{display:inline-flex;align-items:center;gap:15px;min-height:42px;border-bottom:1px solid #e2b687;text-decoration:none;font-size:12px;font-weight:750;color:#fff}
+.north .diagramContent>a:hover{color:#f4c28f}
+.north .diagramFoot{margin-top:14px;padding-top:13px;position:relative;color:#a7c8d2;gap:14px;flex-wrap:wrap}
+.north .stepOutput{margin-top:35px;padding:19px;border:1px solid #9cbcc1b5;background:#ffffff14;display:grid;gap:9px;width:100%}
+.north .stepOutput strong{color:#e1b584;font-size:10px;letter-spacing:.08em}
+.north .stepOutput span{font-size:14px;line-height:1.6}
+.north .stepDetail h2{margin:40px 0 20px}
+.north .inquiry form{background:linear-gradient(155deg,#fff,#e8f2f1);border-top:4px solid #bd8259}
+.north .inquiry form button{transition:background .18s}
+.north .inquiry form button:hover{background:#315d70}
+@media(max-width:1120px){
+ .north .banner h1{font-size:clamp(48px,5.2vw,71px)}
+ .north .diagram{padding-inline:24px}
+ .north .beforeAfter{gap:7px}
+ .north .beforeAfter>div{padding:10px}
+}
+@media(max-width:850px){
+ .north .banner{grid-template-columns:minmax(0,1fr);min-height:0}
+ .north .bannerCopy{padding:55px 6vw 35px}
+ .north .banner h1{font-size:clamp(52px,9vw,78px);max-width:none}
+ .north .bannerMeta{margin-top:34px;padding-top:19px}
+ .north .diagram{padding:33px 6vw 31px}
+ .north .systemOrbit{max-width:490px}
+ .north .systemOrbit svg{max-height:158px}
+ .north .diagramNodes{margin:12px 0 22px}
+ .north .diagramNodes button{min-height:93px}
+ .north .beforeAfter>div{padding:16px}
+}
+@media(max-width:600px){
+ .north .bannerCopy{padding:36px 6vw 24px}
+ .north .bannerCopy:before{font-size:9px;padding-top:8px}
+ .north .eyebrow{font-size:9px;line-height:1.7;margin-top:17px}
+ .north .banner h1{font-size:clamp(44px,10.9vw,64px);line-height:1.11;margin:21px 0 17px;letter-spacing:-.045em}
+ .north .bannerCopy>p{font-size:15px;line-height:1.65}
+ .north .heroActions{gap:10px;margin-top:23px}
+ .north .heroActions .primary{padding:12px 14px;min-height:48px}
+ .north .heroSecondary{min-height:48px;padding:12px 13px}
+ .north .bannerMeta{display:none}
+ .north .diagram{padding:29px 6vw}
+ .north .diagnosticTitle{font-size:23px;margin:15px 0 7px}
+ .north .diagnosticIntro{font-size:12px}
+ .north .systemOrbit{margin:7px auto}
+ .north .systemOrbit svg{max-height:110px}
+ .north .systemOrbit span{font-size:7px}
+ .north .diagramNodes{gap:7px;margin:12px 0 18px}
+ .north .diagramNodes button{padding:10px 8px;min-height:100px;gap:8px}
+ .north .diagramNodes button small{font-size:8px;max-width:90%}
+ .north .diagramNodes button strong{font-size:11px}
+ .north .diagramNodes button>span{right:6px;top:6px}
+ .north .diagramContent h3{font-size:26px}
+ .north .beforeAfter{grid-template-columns:1fr;gap:8px}
+ .north .beforeAfter>div{padding:12px 13px}
+ .north .beforeAfter p{margin:5px 0 0;font-size:12px}
+ .north .diagramFoot{font-size:8px}
+ .north .stepDetail h2{margin:22px 0 18px}
+}
+@media(max-width:350px){
+ .north .heroActions .primary,.north .heroSecondary{width:100%;justify-content:center}
+ .north .diagramNodes button small{font-size:7px}
+ .north .diagramNodes button strong{font-size:10px}
+ .north .liveSignal{font-size:8px}
+}
+@media(prefers-reduced-motion:reduce){
+ .north .heroActions .primary,.north .heroSecondary,.north .diagramNodes button,.north .systemOrbit circle,.north .inquiry form button{transition:none!important;animation:none!important}
+}
+
+
+/* NORTH continuity / timeline refinement: approved localized bugfix. */
+.north{--north-utility-height:35px;--north-header-height:100px}
+.north .utility{
+  position:sticky;top:0;z-index:90;
+  height:var(--north-utility-height);min-height:var(--north-utility-height);
+  box-sizing:border-box;display:flex;align-items:center;
+}
+.north .globalHead{
+  position:sticky;top:var(--north-utility-height);z-index:89;
+  height:var(--north-header-height);min-height:var(--north-header-height);
+  box-sizing:border-box;
+}
+.north .rail{
+  position:fixed;top:calc(var(--north-utility-height) + var(--north-header-height));
+  bottom:0;left:0;width:43px;height:auto;z-index:38;
+  background:#c8d8dc;
+}
+.north .impact{
+  display:grid;grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);
+  gap:clamp(28px,5vw,75px);padding:clamp(70px,8vw,112px) 7vw;
+  align-items:center;background:#e6eff0;
+}
+.north .impactLead{min-width:0;align-self:center}
+.north .impactLead>small{display:block;color:#38596a;font:800 10px/1.5 "Be Vietnam Pro",sans-serif;letter-spacing:.13em}
+.north .impactLead h2{font:750 clamp(42px,4.4vw,74px)/1.12 "Be Vietnam Pro",sans-serif;letter-spacing:-.055em;margin:24px 0;max-width:13ch;text-wrap:balance;color:#173247}
+.north .impactLead>p{font-size:clamp(15px,1.25vw,18px);line-height:1.75;max-width:40ch;color:#36566a;margin:0}
+.north .impactPrinciples{display:grid;gap:0;margin-top:38px;border-top:1px solid #a1b9c1;max-width:430px}
+.north .impactPrinciples>div{display:flex;align-items:baseline;gap:20px;min-height:54px;padding:14px 0;border-bottom:1px solid #a1b9c1;color:#1b3c51}
+.north .impactPrinciples span{font:750 11px/1.4 "Be Vietnam Pro",sans-serif;color:#a87452}
+.north .impactPrinciples strong{font:650 14px/1.5 "Be Vietnam Pro",sans-serif}
+.north .impactBody{
+  display:flex;flex-direction:column;gap:0;min-width:0;
+  padding:clamp(22px,3.3vw,44px);
+  background:linear-gradient(155deg,#193d52,#143245 82%);
+  color:#f4f8f7;border:1px solid #33576a;
+  box-shadow:14px 16px 0 #c9dadf;
+}
+.north .impactBody::after{content:none!important}
+.north .impactPanelTop{display:flex;justify-content:space-between;align-items:center;gap:14px;border-bottom:1px solid #7596a470;padding-bottom:19px}
+.north .impactPanelTop span{font:750 10px/1.5 "Be Vietnam Pro",sans-serif;letter-spacing:.09em;color:#bed7da}
+.north .impactPanelTop span:last-child{color:#e9ae7f}
+.north .impactJourney{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;
+  margin:23px 0 30px;position:relative;z-index:1;
+}
+.north .impactJourney button{
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;
+  min-width:0;min-height:102px;padding:15px 12px;gap:12px;
+  background:#234c61;border:1px solid #799ead;color:#f1f7f7;text-align:left;
+  cursor:pointer;transition:background .2s,transform .2s,border-color .2s;
+}
+.north .impactJourney button:hover{background:#305f75;transform:translateY(-3px)}
+.north .impactJourney button[aria-pressed="true"]{background:#d8e9e9;color:#13384d;border-color:#edc398;box-shadow:inset 0 4px #d49a6d;transform:none}
+.north .impactJourney button span{font:800 11px/1.5 "Be Vietnam Pro",sans-serif}
+.north .impactJourney button strong{font:750 clamp(12px,1.2vw,16px)/1.4 "Be Vietnam Pro",sans-serif}
+.north .impactNarrative{min-width:0;position:relative;z-index:1}
+.north .impactNarrative>span{font:800 10px/1.5 "Be Vietnam Pro",sans-serif;letter-spacing:.09em;color:#e6b38b;margin-bottom:12px}
+.north .impactNarrative h3{font:750 clamp(26px,3vw,42px)/1.2 "Be Vietnam Pro",sans-serif;letter-spacing:-.04em;margin:0 0 10px;color:#fff}
+.north .impactNarrative p{font:450 clamp(14px,1.18vw,17px)/1.7 "Be Vietnam Pro",sans-serif;min-height:0;max-width:45ch;color:#e2ecef;margin:0}
+.north .impactDeliverable{margin-top:24px;padding:17px 19px;background:#ffffff10;border-left:3px solid #dc9d71}
+.north .impactDeliverable small{display:block;font:800 10px/1.5 "Be Vietnam Pro",sans-serif;letter-spacing:.09em;color:#f3c092}
+.north .impactDeliverable p{margin:7px 0 0;font:550 13px/1.65 "Be Vietnam Pro",sans-serif;color:#edf5f5}
+.north .impactMap{
+  display:flex;align-items:center;gap:20px;
+  width:100%;height:auto;min-height:0;padding-top:27px;margin-top:22px;
+  border:none;border-top:1px solid #7495a27a;background:none;
+  overflow:visible;
+}
+.north .mapTrack{height:2px;width:auto;flex:1;background:#658595}
+.north .mapTrack:before{height:2px;background:#e4a774}
+.north .mapTrack span{width:13px;height:13px;border:3px solid #18384b;background:#8badb9;box-shadow:0 0 0 1px #9fbcc4}
+.north .mapTrack[data-step="1"] span:nth-child(-n+2),.north .mapTrack[data-step="2"] span{background:#e9ad7b;transform:scale(1.05)}
+.north .impactMap small{font:800 10px/1.5 "Be Vietnam Pro",sans-serif;letter-spacing:.08em;color:#e6b38b;white-space:nowrap}
+@media(max-width:850px){
+  .north{--north-header-height:74px}
+  .north .impact{grid-template-columns:1fr;gap:33px;padding:68px 6vw}
+  .north .impactLead h2{font-size:clamp(44px,8.4vw,70px)}
+  .north .impactPrinciples{margin-top:22px}
+  .north .impactBody{padding:clamp(20px,5vw,33px)}
+}
+@media(max-width:600px){
+  .north{--north-utility-height:35px;--north-header-height:69px}
+  .north .impact{padding:60px 6vw;gap:27px}
+  .north .impactLead h2{font-size:clamp(39px,10.4vw,55px);margin:19px 0}
+  .north .impactLead>p{font-size:15px}
+  .north .impactPrinciples>div{min-height:44px;padding:10px 0}
+  .north .impactPrinciples strong{font-size:13px}
+  .north .impactBody{box-shadow:8px 9px 0 #c9dadf;padding:20px 17px}
+  .north .impactPanelTop span{font-size:9px}
+  .north .impactJourney{gap:7px;margin:20px 0 24px}
+  .north .impactJourney button{min-height:85px;padding:12px 9px}
+  .north .impactJourney button strong{font-size:12px}
+  .north .impactNarrative h3{font-size:28px}
+  .north .impactNarrative p{font-size:14px}
+  .north .impactDeliverable{margin-top:17px;padding:14px}
+}
+@media(max-width:350px){
+  .north .impactJourney button{padding:9px 6px}
+  .north .impactJourney button strong{font-size:11px}
+  .north .impactPanelTop span:last-child{font-size:8px}
+}
+@media(prefers-reduced-motion:reduce){
+  .north .impactJourney button,.north .mapTrack:before,.north .mapTrack span{transition:none!important;animation:none!important}
+}
+
+/* Mobile preserves scrolling room: rail is hidden, so no sticky header is necessary. */
+@media(max-width:850px){
+ .north .utility{position:relative;top:auto}
+ .north .globalHead{position:relative;top:auto}
+ .north .rail{display:none}
+}
+.north .impact{scroll-margin-top:calc(var(--north-utility-height) + var(--north-header-height) + 16px)}
+
+@media(max-width:850px){.north .utility{z-index:40}.north .globalHead{z-index:45}}
+
+.north .impactJourney button{transform:none!important;transition:background-color .18s,border-color .18s}
+.north .impactJourney button:hover{transform:none}
+.north .impactNarrative{display:grid;gap:12px;align-content:start;min-height:230px}
+.north .impactNarrative h3{margin:0}
+.north .impactDeliverable{margin-top:10px}
+.north .inquiry .selectShell{position:relative;width:100%;min-width:0}
+.north .inquiry .selectShell select{display:block;width:100%;min-height:56px;padding:14px 51px 14px 18px;appearance:none;-webkit-appearance:none;border:1px solid #89a8b6;border-radius:0;background:#f1f6f5;color:#18394c;font:650 15px/1.5 "Be Vietnam Pro",sans-serif;cursor:pointer;outline-offset:3px}
+.north .inquiry .selectShell select:hover{background:#e0eceb;border-color:#356477}
+.north .inquiry .selectShell select:focus-visible{outline:3px solid #b47c51}
+.north .inquiry .selectChevron{pointer-events:none;position:absolute;right:17px;top:50%;transform:translateY(-54%);font-size:25px;line-height:1;color:#244b60}
+.north .inquiry .selectShell option{background:#f1f6f5;color:#18394c}
+.selectShell{position:relative;width:100%;--sel-bg:#f0f5f4;--sel-text:#19394b;--sel-line:#7897a6;--sel-hover:#dbe9e9;--sel-focus:#ad7a55}.selectShell :global(.athenaStyledSelectTrigger){display:flex;justify-content:space-between;align-items:center;width:100%;min-height:54px;padding:14px 18px;border:1px solid var(--sel-line);background:var(--sel-bg);color:var(--sel-text);font:650 15px "Be Vietnam Pro",sans-serif;cursor:pointer}.selectShell :global(.athenaStyledSelectList){position:absolute;left:0;right:0;top:calc(100% + 5px);z-index:90;padding:6px;background:var(--sel-bg);border:1px solid var(--sel-line);box-shadow:0 14px 26px #172f3b28}.selectShell :global(.athenaStyledSelectOption){display:block;width:100%;min-height:45px;padding:13px;border:0;background:transparent;color:var(--sel-text);text-align:left;font:550 14px "Be Vietnam Pro",sans-serif;cursor:pointer}.selectShell :global(.athenaStyledSelectOption:hover),.selectShell :global(.athenaStyledSelectOption[data-active="true"]){background:var(--sel-hover)}.selectShell :global(.athenaStyledSelectOption[aria-selected="true"]){border-left:3px solid var(--sel-focus);font-weight:800}.selectShell :global(.athenaStyledSelectTrigger:focus-visible){outline:3px solid var(--sel-focus);outline-offset:3px}

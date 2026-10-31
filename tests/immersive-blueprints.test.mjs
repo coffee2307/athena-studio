@@ -7,12 +7,12 @@ const read = async path => readFile(new URL(path, root), "utf8");
 const registry = JSON.parse(await read("data/templates.json"));
 const blueprint = JSON.parse(await read("data/immersive-blueprints.json"));
 
-test("all 21 Athena templates have unique immersive direction and honest delivery status", () => {
-  assert.equal(blueprint.worlds.length, 21);
+test("all 15 Athena templates have unique immersive direction and honest delivery status", () => {
+  assert.equal(blueprint.worlds.length, 15);
   const slugs = registry.map(entry => entry.slug);
   const scenes = blueprint.worlds.map(entry => entry.slug);
   assert.deepEqual([...scenes].sort(), [...slugs].sort());
-  assert.equal(new Set(scenes).size, 21);
+  assert.equal(new Set(scenes).size, 15);
   const allowed = new Set(["prototype-webgl2", "existing-original", "planned"]);
   for (const scene of blueprint.worlds) {
     assert.ok(scene.title.length > 3, scene.slug);

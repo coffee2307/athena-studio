@@ -62,7 +62,7 @@ export function ContactEmailBrief({template,defaultService=""}:{template?:Pick<T
    <label>Nhu cầu và mục tiêu <span>*</span>
     <textarea name="message" minLength={20} maxLength={4000} required rows={4} placeholder="Tình trạng hiện tại, điều cần cải thiện và kết quả bạn mong muốn."/>
    </label>
-   <button className="pill-link pill-dark athena-email-brief-prepare" type="submit">Chuẩn bị nội dung email <Icon name="arrow-up-right" size={18}/></button>
+   <button className="pill-link pill-dark athena-email-brief-prepare" type="submit">Chuẩn bị nội dung email <Icon name="arrow-right" size={18}/></button>
   </form>
   {draft&&<div className="athena-email-brief-result" role="status">
    <strong>Đã chuẩn bị bản nháp — chưa gửi</strong>
@@ -70,7 +70,7 @@ export function ContactEmailBrief({template,defaultService=""}:{template?:Pick<T
    <label htmlFor="athena-draft-preview">Nội dung bản nháp</label>
    <textarea id="athena-draft-preview" readOnly value={"Chủ đề: "+draft.subject+"\n\n"+draft.body} rows={8}/>
    <div className="athena-email-brief-actions">
-    <a className="pill-link pill-dark" href={draft.href}>Mở ứng dụng email <Icon name="arrow-up-right" size={17}/></a>
+    <a className="pill-link pill-dark" href={draft.href}>Mở ứng dụng email <Icon name="arrow-right" size={17}/></a>
     <button type="button" onClick={copy} className="pill-link athena-email-copy"><Icon name="copy" size={17}/> {copied?"Đã sao chép":"Sao chép bản nháp"}</button>
    </div>
   </div>}

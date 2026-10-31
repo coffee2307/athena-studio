@@ -80,8 +80,9 @@ test("Footer and contact shortcuts expose phone, email, WhatsApp and Zalo links"
 test("Business process and pricing pages explain deliverables, customer responsibilities and cost scope",async({page})=>{
  await page.goto("/process");
  await expect(page.getByRole("heading",{level:1})).toContainText("Làm rõ đầu ra");
- await expect(page.locator(".agency-process-step")).toHaveCount(6);
- await expect(page.locator(".agency-process-roles").first()).toContainText("Khách hàng");
+ await expect(page.locator(".dna02-journey-stop")).toHaveCount(6);
+ await page.locator(".dna02-journey-details").first().locator("summary").click();
+ await expect(page.locator(".dna02-journey-details")).toContainText("Bạn chuẩn bị");
  await page.getByRole("link",{name:/Xem cách Athena lập báo giá/}).click();
  await expect(page).toHaveURL(/\/pricing$/);
  await expect(page.locator(".agency-price-card")).toHaveCount(3);
