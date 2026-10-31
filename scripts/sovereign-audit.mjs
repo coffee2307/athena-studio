@@ -6,6 +6,7 @@
  */
 import {readFileSync,existsSync,readdirSync,mkdirSync,writeFileSync} from "node:fs";
 import {createHash} from "node:crypto";
+import {spawnSync} from "node:child_process";
 import {resolve,join,relative,dirname} from "node:path";
 const root=resolve(import.meta.dirname,"..");
 const mode=process.argv.includes("--strict")?"strict":"check";
@@ -36,18 +37,25 @@ const rendererSource=readFileSync(join(root,"components/sovereign/sovereign-rend
 const rendererImports=[...rendererSource.matchAll(/from ["']@\/templates\/([^/]+)\/src\/components\/Site["']/g)].map(m=>m[1]);
 if(new Set(rendererImports).size!==rendererImports.length)failures.push("Same standalone site is imported under multiple renderers");
 for(const site of known){
- if(site.stage!=="sovereign")continue;
+ if(site.stage!=="sovereign"||site.slug==="digital-creators")continue;
  if(!rendererImports.includes(site.slug))failures.push("Sovereign site does not import its own standalone Site: "+site.slug);
  if(!rendererSource.includes('"'+site.slug+'":'))failures.push("Sovereign site missing renderer registration: "+site.slug);
 }
 const forbidden=["WorldSite","WorldMotion","WorldExperiencePages","world-header-cta","world-footer","world-btn"];
 const rows=known.map(site=>{
  const path=join(root,"templates",site.slug);
- const src=join(path,"src/components/Site.tsx");
+ const isNative=site.slug==="digital-creators"&&site.stage==="sovereign";
+ const src=isNative?join(path,"src/App.tsx"):join(path,"src/components/Site.tsx");
  const scopedCss=existsSync(src)?readFileSync(src,"utf8").match(/import\s+\w+\s+from\s+["']\.\/([^"']+\.module\.css)["']/)?.[1]:undefined;
- const css=scopedCss?join(path,"src/components",scopedCss):join(path,"src/app/globals.css");
+ const css=isNative?join(path,"src/digital-navigation.css"):scopedCss?join(path,"src/components",scopedCss):join(path,"src/app/globals.css");
  const present=existsSync(src)&&existsSync(css)&&existsSync(join(path,"package.json"))&&existsSync(join(path,"template.manifest.json"));
  if(!present)failures.push("Template missing export essentials: "+site.slug);
+ if(isNative){
+  const pkg=existsSync(join(path,"package.json"))?JSON.parse(readFileSync(join(path,"package.json"),"utf8")):{};
+  if(!existsSync(join(path,"vite.config.ts"))||!pkg.scripts?.build?.includes("vite"))failures.push("Digital Creators export must build as native Vite site");
+  const parity=spawnSync(process.execPath,[join(root,"scripts/sovereign-digital-creators-sync.mjs"),"--check"],{cwd:root,encoding:"utf8"});
+  if(parity.status!==0)failures.push("Digital Creators export source/asset parity failed: "+(parity.stdout||parity.stderr||"").slice(0,600));
+ }
  const sourceHash=existsSync(src)?hash(src):null;
  const cssHash=existsSync(css)?hash(css):null;
  const sourceFiles=allFiles(join(path,"src")).filter(f=>/\.(?:tsx?|jsx?|css)$/.test(f));
@@ -78,7 +86,7 @@ if(mode==="strict"){
  if(duplicateCssGroups.length)failures.push("Strict sovereignty forbids identical exported CSS");
  if(rows.some(r=>r.diagonal))failures.push("Forbidden diagonal glyph remains in standalone export");
 }
-const result={planId:"ATHENA-21-SOVEREIGN/v2.0",phase:"P0+P1",mode,stages,duplicateSourceGroups,duplicateCssGroups,debt,failures,rows};
+const result={planId:"ATHENA-21-SOVEREIGN/v2.0",phase:"P4-native-export",mode,stages,duplicateSourceGroups,duplicateCssGroups,debt,failures,rows};
 if(outputArg){const path=resolve(process.cwd(),outputArg.slice(6));mkdirSync(dirname(path),{recursive:true});writeFileSync(path,JSON.stringify(result,null,2)+"\n");}
 console.log("SOVEREIGN_AUDIT",JSON.stringify({mode,stages,duplicates:{source:duplicateSourceGroups,css:duplicateCssGroups},debt:debt.length,failures}));
 if(failures.length)process.exitCode=1;
