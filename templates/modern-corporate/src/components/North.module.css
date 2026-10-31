@@ -121,3 +121,113 @@
 @media(max-width:850px){.impactBody{grid-template-columns:1fr}.impactNarrative p{min-height:0}.impactMap{grid-row:2;min-height:130px}.impactJourney{grid-row:3}}
 @media(max-width:450px){.impactJourney button{padding:11px 7px;min-height:84px}.impactJourney button strong{font-size:12px}.impactBody{gap:24px}}
 @media(prefers-reduced-motion:reduce){.impactJourney button,.mapTrack:before,.mapTrack span{transition:none!important}}
+
+/* NORTH / Decision Canvas — scoped refinement; preserves independent corporate DNA. */
+.north .banner{grid-template-columns:minmax(0,.96fr) minmax(0,1.04fr);min-height:710px;background:linear-gradient(137deg,#edf4f3 0%,#e3eef0 63%,#dae7e8 100%)}
+.north .bannerCopy{padding:clamp(45px,6.2vw,94px) clamp(30px,4.7vw,72px) 50px;min-width:0}
+.north .banner h1{font-size:clamp(53px,5.5vw,88px);letter-spacing:-.047em;line-height:1.105;margin:36px 0 24px;max-width:9.6ch;text-wrap:balance}
+.north .bannerCopy>p{font-size:clamp(15px,1.25vw,18px);line-height:1.7;max-width:37ch;margin:0;color:#315062}
+.north .banner h1 em{color:#ba7b4f;font-style:normal;font-weight:600}
+.north .heroActions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:32px}
+.north .heroActions .primary{margin:0;min-height:53px;padding:15px 19px;background:#17374b;color:#fff!important;transition:background .18s,transform .18s;gap:18px}
+.north .heroActions .primary:hover{background:#2b5d72;transform:translateY(-2px)}
+.north .heroSecondary{display:inline-flex;align-items:center;justify-content:center;min-height:53px;padding:14px 16px;border:1px solid #7b9aa8;background:#e6f0f0;color:#1d4054!important;font-size:12px;font-weight:750;transition:background .18s}
+.north .heroSecondary:hover{background:#d1e5e8}
+.north .bannerMeta{width:100%;border-top:1px solid #bbced1;margin-top:auto;padding-top:34px;color:#476675}
+.north .bannerMeta b{font:800 36px/1 "Be Vietnam Pro",sans-serif;color:#ad754d}
+.north .bannerMeta span{font-size:10px;line-height:1.65}
+.north .diagram{padding:33px clamp(22px,3.2vw,52px) 27px;background:#153447;min-width:0;scroll-margin-top:16px}
+.north .diagram:after{opacity:.35}
+.north .diagnosticHead{display:flex;justify-content:space-between;align-items:center;gap:14px;position:relative;z-index:1}
+.north .liveSignal{display:inline-flex;align-items:center;gap:8px;color:#c9e6e5;font-size:10px;letter-spacing:.1em;font-weight:750}
+.north .liveSignal i{height:8px;width:8px;background:#e2ad78;display:block;border-radius:50%;box-shadow:0 0 0 4px #e2ad7827}
+.north .diagnosticTitle{font:750 clamp(23px,2.4vw,34px)/1.24 "Be Vietnam Pro",sans-serif;letter-spacing:-.045em;margin:23px 0 7px;position:relative;z-index:1;color:#f5f8f5}
+.north .diagnosticIntro{color:#bfdae2;font:450 12px/1.7 "Be Vietnam Pro",sans-serif;max-width:48ch;margin:0;position:relative;z-index:1}
+.north .systemOrbit{min-height:0;margin:12px auto 0;width:100%;max-width:440px}
+.north .systemOrbit svg{width:100%;max-height:134px;filter:drop-shadow(0 0 12px #8bc3cc28)}
+.north .systemOrbit span{font-size:8px;margin:0}
+.north .systemOrbit circle{transition:fill .25s,stroke .25s;animation-duration:4.6s}
+.north .diagram[data-focus="0"] .systemOrbit circle:nth-of-type(2),
+.north .diagram[data-focus="1"] .systemOrbit circle:nth-of-type(3),
+.north .diagram[data-focus="2"] .systemOrbit circle:nth-of-type(4){fill:#fff4d4;stroke:#f6ac6f;stroke-width:5}
+.north .diagramNodes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:17px 0 18px;z-index:1}
+.north .diagramNodes button{position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;min-width:0;min-height:102px;padding:13px 12px;background:#234c61;border:1px solid #7da5b7;color:#e6eff2;box-shadow:none;transform:none;transition:background .22s,border-color .22s,transform .22s}
+.north .diagramNodes button:hover{background:#30627a;border-color:#b6e1e3;transform:translateY(-3px)}
+.north .diagramNodes button[aria-pressed="true"]{background:#d4e8e7;border-color:#f2c58e;color:#123248;box-shadow:inset 0 4px #c88b5c;transform:translateY(-3px)}
+.north .diagramNodes button small{font:750 9px/1.4 "Be Vietnam Pro",sans-serif;letter-spacing:.04em}
+.north .diagramNodes button strong{font:750 clamp(12px,1.15vw,15px)/1.4 "Be Vietnam Pro",sans-serif;letter-spacing:-.025em;text-align:left}
+.north .diagramNodes button>span{position:absolute;right:12px;top:10px;font-size:12px;opacity:.8}
+.north .diagramContent{padding:20px 0 2px;border-top:1px solid #7b9daa7b;min-height:0;z-index:1}
+.north .diagramContent>small{font:750 9px/1.5 "Be Vietnam Pro",sans-serif;letter-spacing:.12em;color:#e2af85}
+.north .diagramContent h3{font:750 clamp(25px,2.45vw,35px)/1.2 "Be Vietnam Pro",sans-serif;letter-spacing:-.05em;margin:8px 0 18px;color:#fff}
+.north .beforeAfter{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.north .beforeAfter>div{background:#ffffff0b;border:1px solid #8badbf55;padding:13px 14px;min-width:0}
+.north .beforeAfter span,.north .diagnosticDeliver>span{display:block;font:800 9px/1.6 "Be Vietnam Pro",sans-serif;letter-spacing:.1em;color:#e6b488}
+.north .beforeAfter p{font:450 12px/1.65 "Be Vietnam Pro",sans-serif;color:#e6f0f1;margin:8px 0 0;max-width:none}
+.north .diagnosticDeliver{padding:11px 0;margin-top:4px}
+.north .diagnosticDeliver p{margin:5px 0 0;font-size:12px;color:#e0eff0;line-height:1.6}
+.north .diagramContent>a{display:inline-flex;align-items:center;gap:15px;min-height:42px;border-bottom:1px solid #e2b687;text-decoration:none;font-size:12px;font-weight:750;color:#fff}
+.north .diagramContent>a:hover{color:#f4c28f}
+.north .diagramFoot{margin-top:14px;padding-top:13px;position:relative;color:#a7c8d2;gap:14px;flex-wrap:wrap}
+.north .stepOutput{margin-top:35px;padding:19px;border:1px solid #9cbcc1b5;background:#ffffff14;display:grid;gap:9px;width:100%}
+.north .stepOutput strong{color:#e1b584;font-size:10px;letter-spacing:.08em}
+.north .stepOutput span{font-size:14px;line-height:1.6}
+.north .stepDetail h2{margin:40px 0 20px}
+.north .inquiry form{background:linear-gradient(155deg,#fff,#e8f2f1);border-top:4px solid #bd8259}
+.north .inquiry form button{transition:background .18s}
+.north .inquiry form button:hover{background:#315d70}
+@media(max-width:1120px){
+ .north .banner h1{font-size:clamp(48px,5.2vw,71px)}
+ .north .diagram{padding-inline:24px}
+ .north .beforeAfter{gap:7px}
+ .north .beforeAfter>div{padding:10px}
+}
+@media(max-width:850px){
+ .north .banner{grid-template-columns:minmax(0,1fr);min-height:0}
+ .north .bannerCopy{padding:55px 6vw 35px}
+ .north .banner h1{font-size:clamp(52px,9vw,78px);max-width:none}
+ .north .bannerMeta{margin-top:34px;padding-top:19px}
+ .north .diagram{padding:33px 6vw 31px}
+ .north .systemOrbit{max-width:490px}
+ .north .systemOrbit svg{max-height:158px}
+ .north .diagramNodes{margin:12px 0 22px}
+ .north .diagramNodes button{min-height:93px}
+ .north .beforeAfter>div{padding:16px}
+}
+@media(max-width:600px){
+ .north .bannerCopy{padding:36px 6vw 24px}
+ .north .bannerCopy:before{font-size:9px;padding-top:8px}
+ .north .eyebrow{font-size:9px;line-height:1.7;margin-top:17px}
+ .north .banner h1{font-size:clamp(44px,10.9vw,64px);line-height:1.11;margin:21px 0 17px;letter-spacing:-.045em}
+ .north .bannerCopy>p{font-size:15px;line-height:1.65}
+ .north .heroActions{gap:10px;margin-top:23px}
+ .north .heroActions .primary{padding:12px 14px;min-height:48px}
+ .north .heroSecondary{min-height:48px;padding:12px 13px}
+ .north .bannerMeta{display:none}
+ .north .diagram{padding:29px 6vw}
+ .north .diagnosticTitle{font-size:23px;margin:15px 0 7px}
+ .north .diagnosticIntro{font-size:12px}
+ .north .systemOrbit{margin:7px auto}
+ .north .systemOrbit svg{max-height:110px}
+ .north .systemOrbit span{font-size:7px}
+ .north .diagramNodes{gap:7px;margin:12px 0 18px}
+ .north .diagramNodes button{padding:10px 8px;min-height:100px;gap:8px}
+ .north .diagramNodes button small{font-size:8px;max-width:90%}
+ .north .diagramNodes button strong{font-size:11px}
+ .north .diagramNodes button>span{right:6px;top:6px}
+ .north .diagramContent h3{font-size:26px}
+ .north .beforeAfter{grid-template-columns:1fr;gap:8px}
+ .north .beforeAfter>div{padding:12px 13px}
+ .north .beforeAfter p{margin:5px 0 0;font-size:12px}
+ .north .diagramFoot{font-size:8px}
+ .north .stepDetail h2{margin:22px 0 18px}
+}
+@media(max-width:350px){
+ .north .heroActions .primary,.north .heroSecondary{width:100%;justify-content:center}
+ .north .diagramNodes button small{font-size:7px}
+ .north .diagramNodes button strong{font-size:10px}
+ .north .liveSignal{font-size:8px}
+}
+@media(prefers-reduced-motion:reduce){
+ .north .heroActions .primary,.north .heroSecondary,.north .diagramNodes button,.north .systemOrbit circle,.north .inquiry form button{transition:none!important;animation:none!important}
+}
