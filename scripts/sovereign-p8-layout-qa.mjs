@@ -63,6 +63,15 @@ for(const site of sites){
      }
      await cdps.detach();
     }
+    if(vp.width<=428&&site==="commerce-standard"&&route===""){
+     const mobileHeader=await page.evaluate(()=>{
+      const help=document.querySelector('[class*="_actions__"] [class*="_support__"]');
+      const strip=document.querySelector('[class*="_shippingNote__"]');
+      return {helpVisible:!!help&&getComputedStyle(help).display!=="none",stripHeight:strip?.getBoundingClientRect().height,stripLine:strip?parseFloat(getComputedStyle(strip).lineHeight):null};
+     });
+     if(mobileHeader.helpVisible)throw Error("MOC desktop help label bleeds into mobile header");
+     if(mobileHeader.stripHeight>mobileHeader.stripLine*2+12)throw Error("MOC utility announcement is wrapping excessively");
+    }
     if(vp.width<=428&&route===""){
      const toggle=page.locator("header button[aria-expanded]").first();if(!await toggle.count())throw Error("Missing mobile toggle");
      await toggle.click();
