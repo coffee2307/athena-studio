@@ -1,6 +1,7 @@
 import {notFound} from "next/navigation";
 import type {Metadata} from "next";
-import {WorldSite,type WorldSection} from "@/components/templates/WorldSite";
+import {SovereignDemoRoute} from "@/components/sovereign/SovereignDemoRoute";
+import type {SovereignSection} from "@/data/sovereign-site-registry";
 import {getTemplate,templates} from "@/lib/templates";
 const sections=["work","services","about","contact"] as const;
 type Props={params:Promise<{slug:string;section:string}>};
@@ -12,5 +13,5 @@ export async function generateMetadata({params}:Props):Promise<Metadata>{
 export default async function DemoSectionPage({params}:Props){
  const {slug,section}=await params;
  if(!getTemplate(slug)||!sections.some(s=>s===section))notFound();
- return <WorldSite slug={slug} section={section as WorldSection}/>;
+ return <SovereignDemoRoute slug={slug} section={section as SovereignSection}/>;
 }
