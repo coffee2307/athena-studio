@@ -20,7 +20,14 @@ for(const slug of slugs){
   identities.add(variant);
   const menu=page.locator(".world-menu-toggle");
   if(!await menu.isVisible())throw Error("menu opener not visible");
-  if(await menu.locator(".world-toggle-glyph").count()!==1)throw Error("missing unique opener glyph");
+  const bars=menu.locator(".world-toggle-bars");
+  if(await bars.count()!==1)throw Error("missing conventional hamburger strokes");
+  const lines=Number(await bars.getAttribute("data-bars"));
+  if(lines!==2&&lines!==3)throw Error("must show 2 or 3 strokes");
+  if(await bars.locator("i:visible").count()!==lines)throw Error("visible stroke count mismatch");
+  const toggleBox=await menu.boundingBox();
+  if(!toggleBox||toggleBox.width<44||toggleBox.height<44)throw Error("mobile toggle is too small");
+  await page.screenshot({path:".qa/template-navigation/"+slug+"-mobile-closed.png",animations:"disabled",timeout:25000});
   await menu.click();
   const nav=page.locator(".world-mobile-nav");
   await nav.waitFor({state:"visible",timeout:7000});
@@ -60,6 +67,10 @@ try{
  if(response?.status()!==200)throw Error("Digital Creators HTTP "+response?.status());
  const toggle=digital.locator(".dc-constellation-toggle");
  await toggle.waitFor({state:"visible",timeout:10000});
+ if(await toggle.locator(".dc-menu-bars i:visible").count()!==3)throw Error("Digital Creators must use three-bar hamburger");
+ const digitalBox=await toggle.boundingBox();
+ if(!digitalBox||digitalBox.width<44||digitalBox.height<44)throw Error("Digital Creators toggle too small");
+ await digital.screenshot({path:".qa/template-navigation/digital-creators-mobile-closed.png",animations:"disabled"});
  await toggle.click();
  const panel=digital.locator(".dc-constellation-nav");
  await panel.waitFor({state:"visible",timeout:6000});
