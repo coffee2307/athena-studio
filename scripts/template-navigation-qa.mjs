@@ -69,7 +69,8 @@ try{
  if(await toggle.getAttribute("aria-expanded")!=="false")throw Error("Digital Creators Escape failed");
  await toggle.click();
  await panel.locator(".dc-orbit-card").nth(1).click();
- await digital.waitForURL("**/#/gioi-thieu",{timeout:12000});
+ await digital.waitForFunction(()=>location.hash==="#/gioi-thieu",null,{timeout:12000});
+ if(!await digital.getByRole("heading",{level:1}).count())throw Error("Digital Creators route lacks heading");
  console.log("PASS MOBILE digital-creators digital-creators-native");
 }catch(error){failures.push({slug:"digital-creators",reason:String(error)});console.log("FAIL DIGITAL",String(error));}
 await digital.close();
