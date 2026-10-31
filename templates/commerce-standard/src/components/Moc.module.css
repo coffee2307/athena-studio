@@ -151,3 +151,6 @@
  .moc .wordmark small{font-size:7px;max-width:150px;line-height:1.5}
  .moc .secondary{display:none}
 }
+
+/* P8 verified mobile header: inquiry stays in drawer, never squeezed beside the wordmark. */
+@media(max-width:650px){.moc .actions .support,.moc .leftNav{display:none!important}.moc .actions{justify-self:end;gap:0}.moc .storeHead{grid-template-columns:minmax(48px,1fr) auto minmax(48px,1fr)}.moc .wordmark{white-space:normal;max-width:100%}}
