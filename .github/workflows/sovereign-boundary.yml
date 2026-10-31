@@ -1,0 +1,36 @@
+name: Sovereign template boundary
+on:
+  pull_request:
+    paths:
+      - "app/template-demos/**"
+      - "components/sovereign/**"
+      - "data/sovereign-site-registry.ts"
+      - "templates/**"
+      - "scripts/sovereign-audit.mjs"
+      - "tests/sovereign-boundary.test.mjs"
+      - ".github/workflows/sovereign-boundary.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  p1-route-boundary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Sovereign architecture and legacy debt baseline
+        run: node scripts/sovereign-audit.mjs --check --out=.qa/athena-21-sovereign/audit.json
+      - name: Route boundaries
+        run: node --test tests/sovereign-boundary.test.mjs
+      - name: Publish audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sovereign-p1-source-audit
+          path: .qa/athena-21-sovereign/audit.json
+          if-no-files-found: ignore
