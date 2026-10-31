@@ -62,7 +62,7 @@
 .footerName{position:relative;z-index:1;letter-spacing:-.08em}
 .routeIntro h1,.aboutLetter h1{line-height:1.02;letter-spacing:-.048em}
 .routeIntro h1 em,.aboutLetter h1 em{color:#71834c}
-[data-sora-reveal]{transition:opacity .68s ease,transform .68s cubic-bezier(.22,1,.36,1)}
+.sora [data-sora-reveal]{transition:opacity .68s ease,transform .68s cubic-bezier(.22,1,.36,1)}
 .sora[data-sora-surface] [data-sora-reveal]:not([data-sora-visible="true"]){opacity:.55;transform:translateY(25px)}
 .sora[data-sora-surface] [data-sora-visible="true"]{opacity:1;transform:translateY(0)}
 @keyframes soraFloat{from{transform:translateY(0) rotate(-9deg)}to{transform:translateY(-17px) rotate(-6deg)}}
