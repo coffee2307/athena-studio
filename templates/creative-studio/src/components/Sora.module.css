@@ -160,3 +160,104 @@
 @media(max-width:850px){.labHeading{grid-template-columns:1fr 2fr}.labHeading p{grid-column:2;max-width:46ch}.labStage{grid-template-columns:1fr}.labVisual{min-height:0;aspect-ratio:5/4}.labControls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.labControls button{grid-template-columns:1fr;gap:9px;padding:15px;min-height:126px}.labControls button>span{grid-row:auto}.labControls button strong{font-size:clamp(19px,3vw,26px)}.labControls button small{font-size:10px}}
 @media(max-width:550px){.editorialLab{padding:70px 6vw}.labHeading{display:block}.labHeading h2{margin:19px 0 15px;font-size:clamp(36px,8.7vw,55px)}.labHeading p{max-width:36ch}.labVisual{aspect-ratio:4/5}.labControls{grid-template-columns:1fr;gap:0}.labControls button{display:grid;grid-template-columns:34px 1fr;min-height:70px;padding:13px 8px}.labControls button>span{grid-row:1/3}.labControls button strong{font-size:24px}.labControls button small{font-size:12px}}
 @media(prefers-reduced-motion:reduce){.labVisual{animation:none!important}.labVisual img,.labControls button{transition:none!important}}
+
+
+/* SORA LIVING ISSUE v1.0 — owned editorial cover; no world template primitives. */
+.livingHero{--sora-paper:#f2ecde;--sora-ink:#202b21;position:relative;isolation:isolate;min-height:min(860px,calc(100svh - 92px));display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:clamp(15px,2.2vw,42px);padding:clamp(54px,5vw,80px) clamp(25px,5.7vw,100px) 75px;background:var(--sora-paper);overflow:hidden}
+.livingHero:before{content:"";position:absolute;top:-18vw;left:36%;width:50vw;aspect-ratio:1;border:1px solid #9ba58e29;border-radius:50%;box-shadow:0 0 0 8vw #d9e3ce18,0 0 0 19vw #d9e3ce0b;pointer-events:none}
+.livingWords{position:relative;z-index:8;display:flex;flex-direction:column;align-items:flex-start;min-width:0}
+.issueTop{display:flex;justify-content:space-between;align-items:center;width:100%;gap:12px;max-width:540px;padding-bottom:12px;border-bottom:1px solid #707d676c;font:750 9px/1.55 "Be Vietnam Pro",sans-serif;letter-spacing:.075em;color:#4c5e47}
+.livingWords h1{position:relative;font:500 clamp(70px,7.2vw,125px)/1.21 "Noto Serif","Be Vietnam Pro",sans-serif;letter-spacing:-.028em;max-width:9.2ch;margin:clamp(38px,4.2vw,70px) 0 22px;text-wrap:balance;color:#1e2b20}
+.livingWords h1 em{color:#738644;font-style:italic}
+.livingWords>p{font:400 clamp(14px,1.05vw,16px)/1.85 "Be Vietnam Pro",sans-serif;max-width:39ch;margin:0}
+.livingActions{display:flex;flex-wrap:wrap;gap:9px 24px;align-items:center;margin-top:clamp(25px,3.4vw,48px)}
+.livingPrimary{display:inline-flex;align-items:center;justify-content:space-between;gap:20px;min-height:52px;padding:12px 19px;border:1px solid #1c2a20;background:#1e3025;color:#f4f5e9!important;font:750 12px/1.45 "Be Vietnam Pro",sans-serif;transition:background .22s,transform .22s}
+.livingPrimary:hover{background:#526b3e;transform:translateY(-3px)}
+.livingSecondary{display:inline-flex;align-items:center;gap:12px;min-height:48px;padding:7px 0;border-bottom:1px solid #819074;font:700 11px/1.5 "Be Vietnam Pro",sans-serif}
+.livingPagePicker{display:flex;align-items:center;gap:13px;margin-top:auto;padding-top:32px}
+.livingPagePicker button{position:relative;min-height:44px;min-width:44px;border:1px solid #a4b092;background:transparent;color:#445537;display:grid;place-items:center;font:750 10px "Be Vietnam Pro",sans-serif;transition:background .2s,border-color .2s}
+.livingPagePicker button[aria-pressed="true"]{background:#d9eb8e;border-color:#6f8454;color:#213b21}
+.livingPagePicker button:hover{transform:translateY(-2px)}
+.livingPagePicker button i{position:absolute;left:9px;bottom:7px;height:2px;width:8px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .22s}
+.livingPagePicker button[aria-pressed="true"] i{transform:scaleX(1)}
+.livingHint{font:600 10px/1.6 "Be Vietnam Pro",sans-serif;color:#62735a;letter-spacing:.01em;margin-left:7px}
+.livingVisual{position:relative;z-index:3;display:flex;flex-direction:column;min-width:0;align-self:center;transform:translate3d(0,var(--sora-depth,0px),0);will-change:auto}
+.livingArtboard{--sora-drag-x:0px;--sora-drag-y:0px;position:relative;min-height:520px;height:clamp(490px,49vw,690px);max-width:740px;width:100%;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.livingArtboard[data-dragging="true"]{cursor:grabbing}
+.livingGridTexture{position:absolute;inset:0 6% 7% 7%;background:repeating-linear-gradient(0deg,transparent 0 35px,#607d4b1b 36px 37px),repeating-linear-gradient(90deg,transparent 0 35px,#607d4b1b 36px 37px);mask-image:linear-gradient(to bottom,transparent,#000 30%,#000 70%,transparent);pointer-events:none}
+.livingCardBehind{position:absolute;top:7%;right:8%;width:68%;height:78%;padding:24px;background:#d8e5bb;border:1px solid #849668;transform:rotate(9deg) translate3d(0,0,0);box-shadow:16px 16px 0 #bdcc9d;display:flex;flex-direction:column;align-items:flex-start;pointer-events:none}
+.livingCardBehind>span{font:750 10px/1.5 "Be Vietnam Pro",sans-serif;letter-spacing:.08em}
+.livingCardBehind strong{font:700 clamp(65px,8vw,135px)/.96 "Noto Serif","Be Vietnam Pro",sans-serif;letter-spacing:-.05em;color:#658044;margin-top:45px}
+.livingCardBehind small{font:italic 500 14px "Noto Serif","Be Vietnam Pro",sans-serif;margin-top:auto}
+.livingPhoto{position:absolute;top:11%;left:5%;height:76%;width:72%;margin:0;background:#d0c9b9;box-shadow:0 18px 33px #24352435,9px 9px 0 #f9f5e9;border:10px solid #f5f1e7;transform:translate3d(var(--sora-drag-x),var(--sora-drag-y),0) rotate(-6deg);animation:soraCoverEnter .55s cubic-bezier(.2,1,.3,1) both;transition:transform .42s cubic-bezier(.22,1,.36,1);overflow:hidden}
+.livingArtboard[data-dragging="true"] .livingPhoto{transition:none}
+.livingPhoto img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.82) contrast(1.05);pointer-events:none}
+.livingPhoto figcaption{position:absolute;bottom:0;left:0;right:0;padding:13px 16px;background:#f4f0e4e8;color:#283322;font:700 10px/1.55 "Be Vietnam Pro",sans-serif;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.livingPaperCutout{position:absolute;right:-1%;bottom:6%;z-index:3;width:45%;min-height:180px;aspect-ratio:1.35;padding:18px 20px;background:#f4ebd8;border:1px solid #8c9477;box-shadow:7px 9px 0 #7d9662aa;transform:rotate(10deg);display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.livingPaperCutout>span{font:700 9px/1.5 "Be Vietnam Pro",sans-serif;letter-spacing:.08em}
+.livingPaperCutout strong{font:600 clamp(36px,4vw,61px)/1.2 "Noto Serif","Be Vietnam Pro",sans-serif;letter-spacing:-.02em;color:#61793d;overflow-wrap:anywhere}
+.livingPaperCutout small{font:400 12px/1.65 "Be Vietnam Pro",sans-serif}
+.livingSeal{position:absolute;z-index:5;top:3%;left:1%;width:105px;height:105px;border:1px solid #798f5a;border-radius:50%;background:#daef8f;transform:rotate(-13deg);display:flex;align-items:center;justify-content:center;gap:2px;flex-direction:column;pointer-events:none}
+.livingSeal span{font:750 9px/1.35 "Be Vietnam Pro",sans-serif;text-align:center}
+.livingSeal strong{font:500 38px/1.1 "Noto Serif","Be Vietnam Pro",sans-serif}
+.livingMarginNote{position:absolute;top:13%;right:-2%;writing-mode:vertical-rl;font:750 9px/1.5 "Be Vietnam Pro",sans-serif;letter-spacing:.09em}
+.livingArtworkControls{display:flex;justify-content:space-between;align-items:center;gap:12px;max-width:700px;border-top:1px solid #8d9a79;margin-top:11px;padding-top:13px}
+.dragHint{font:700 9px/1.55 "Be Vietnam Pro",sans-serif;letter-spacing:.035em;color:#657458}
+.livingArrows{display:flex;gap:8px}
+.livingArrows button{width:46px;height:46px;border:1px solid #6c805d;background:#e8edd8;display:grid;place-items:center;font:500 22px "Be Vietnam Pro",sans-serif;transition:background .22s,transform .22s}
+.livingArrows button:hover{background:#d5e985;transform:translateY(-2px)}
+.livingFolio{position:absolute;bottom:17px;left:clamp(25px,5.7vw,100px);right:clamp(25px,5.7vw,100px);display:flex;justify-content:space-between;gap:15px;font:700 9px/1.5 "Be Vietnam Pro",sans-serif;letter-spacing:.06em;color:#7f8d73}
+@keyframes soraCoverEnter{from{opacity:.7;transform:translate3d(20px,20px,0) rotate(0deg)}to{opacity:1;transform:translate3d(var(--sora-drag-x),var(--sora-drag-y),0) rotate(-6deg)}}
+/* SORA letter desk: cards as printed creative briefs, rather than OS-native select dropdown. */
+.letterForm{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(22px,4vw,85px);padding:clamp(70px,6vw,110px) clamp(25px,6vw,105px) clamp(80px,7vw,120px);background:#eee9df;align-items:start}
+.letterForm .routeIntro{padding:0;min-width:0}
+.letterForm .routeIntro>span{display:block;margin-bottom:28px}
+.letterForm .routeIntro h1{font:500 clamp(52px,6vw,101px)/1.24 "Noto Serif","Be Vietnam Pro",sans-serif;letter-spacing:-.022em;margin:0 0 26px;max-width:11ch}
+.letterForm .routeIntro h1 em{color:#738849}
+.letterForm .routeIntro p{font-size:15px;line-height:1.85}
+.letterIntroStamp{display:flex;align-items:center;justify-content:center;flex-direction:column;width:140px;height:140px;border:1px solid #5f7a49;border-radius:50%;background:#d9e98e;transform:rotate(-11deg);margin:60px auto 0 18%;font-family:"Be Vietnam Pro",sans-serif;line-height:1.5}
+.letterIntroStamp span{font-size:11px;font-weight:800}
+.letterIntroStamp strong{text-align:center;font-size:15px;line-height:1.5}
+.letterForm .letterDesk{margin:0;min-width:0;display:flex;flex-direction:column;gap:26px;padding:0}
+.letterDesk .letterSubjects{display:block;min-width:0;border:0;margin:0;padding:0}
+.letterDesk .letterSubjects legend{font:500 clamp(20px,2vw,28px)/1.45 "Noto Serif","Be Vietnam Pro",sans-serif;letter-spacing:-.01em;padding:0;margin:0 0 8px}
+.letterDesk .letterSubjects>p{margin:0 0 18px;color:#63705f;font:400 13px/1.7 "Be Vietnam Pro",sans-serif}
+.letterOptions{display:grid;grid-template-columns:1fr;gap:9px}
+.letterOption{display:flex;gap:15px;align-items:center;position:relative;min-width:0;min-height:91px;padding:11px 14px;border:1px solid #aab29c;background:#f5f1e8;cursor:pointer;transition:background .2s,border-color .2s,transform .2s}
+.letterOption[data-chosen="true"]{background:#dfeac0;border-color:#596f44;box-shadow:inset 4px 0 #648044}
+.letterOption:hover{transform:translateX(4px);background:#e5ebd2}
+.letterOption:focus-within{outline:3px solid #7c9659;outline-offset:3px}
+.letterOption input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;overflow:hidden}
+.letterOptionArt{flex:none;display:grid;place-items:center;height:62px;width:62px;background:#d0d7c0;border:1px solid #768968;font:italic 500 37px/1 "Noto Serif","Be Vietnam Pro",sans-serif;color:#395633;transform:rotate(-7deg)}
+.letterOption:nth-child(2) .letterOptionArt{background:#d9e9a1;transform:rotate(5deg)}
+.letterOption:nth-child(3) .letterOptionArt{background:#dfcdb7;transform:rotate(-5deg)}
+.letterOptionBody{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0;flex:1}
+.letterOptionBody strong{font:750 14px/1.5 "Be Vietnam Pro",sans-serif}
+.letterOptionBody small{font:400 12px/1.65 "Be Vietnam Pro",sans-serif;color:#596656}
+.letterOptionCheck{font:700 23px "Be Vietnam Pro",sans-serif;color:#5a7549}
+.letterWriting{display:flex;flex-direction:column;gap:12px}
+.letterForm .letterWriting>label{font:500 23px/1.5 "Noto Serif","Be Vietnam Pro",sans-serif;margin:0}
+.letterForm .letterWriting textarea{font:400 14px/1.9 "Be Vietnam Pro",sans-serif;min-height:130px;width:100%;max-width:100%;border:1px solid #a9b198;background:#faf8f0;padding:16px;resize:vertical;color:#1c2b1d;outline-offset:2px}
+.letterCharacters{text-align:right;color:#66715d;font:600 10px/1.5 "Be Vietnam Pro",sans-serif}
+.letterPreview{position:relative;overflow:hidden;background:#faf6ec;border:1px solid #9caa86;box-shadow:9px 10px 0 #d2dbbe;padding:22px 23px 15px;min-height:230px}
+.letterPreview:before{content:"";position:absolute;right:-40px;bottom:-80px;width:190px;height:190px;border:1px solid #a0b58a;border-radius:50%;box-shadow:0 0 0 19px #dbe7b036;pointer-events:none}
+.letterPreviewHeader,.letterPreviewFooter{display:flex;justify-content:space-between;gap:16px;color:#67775b;font:750 9px/1.5 "Be Vietnam Pro",sans-serif;letter-spacing:.075em}
+.letterPreviewHeader{border-bottom:1px solid #adb69b;padding-bottom:13px}
+.letterPreviewMain{display:grid;grid-template-columns:64px 1fr;gap:18px;align-items:start;margin:23px 0;position:relative}
+.letterPreviewMark{display:grid;place-items:center;height:61px;width:61px;background:#d6e986;transform:rotate(-9deg);font:italic 500 44px/1 "Noto Serif","Be Vietnam Pro",sans-serif;color:#405c35}
+.letterPreviewMain small{display:block;font:700 9px/1.55 "Be Vietnam Pro",sans-serif;color:#748563}
+.letterPreviewMain h2{font:500 clamp(19px,2.1vw,28px)/1.4 "Noto Serif","Be Vietnam Pro",sans-serif;letter-spacing:-.01em;margin:6px 0 10px;overflow-wrap:break-word}
+.letterPreviewMain p{font:400 13px/1.85 "Be Vietnam Pro",sans-serif;color:#4b594a;margin:0;white-space:pre-wrap;overflow-wrap:anywhere;max-height:270px;overflow:auto}
+.letterPreviewFooter{justify-content:flex-start;padding-top:10px;border-top:1px solid #b5c0a5}
+.letterCommands{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1fr);gap:10px;margin-top:5px}
+.letterForm .letterCommands button{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 15px;min-height:56px;font:750 12px/1.5 "Be Vietnam Pro",sans-serif;text-align:left;transition:background .2s,transform .2s;cursor:pointer}
+.letterForm .letterCopy{border:1px solid #657e59;background:#e0e9cd;color:#21321e}
+.letterForm .letterSend{border:1px solid #1e3124;background:#1e3124;color:#f5f8e9}
+.letterForm .letterCommands button:hover{transform:translateY(-3px)}
+.letterForm .letterCopy:hover{background:#d5e7b4}
+.letterForm .letterSend:hover{background:#3d5c39}
+.letterForm .letterStatus{font:400 11px/1.75 "Be Vietnam Pro",sans-serif;color:#566653;margin:0}
+@media(max-width:1100px){.livingHero{grid-template-columns:1fr 1fr;gap:8px;padding-inline:4vw}.livingWords h1{font-size:clamp(55px,7.6vw,83px)}.livingArtboard{height:clamp(390px,48vw,560px);min-height:390px}.livingCardBehind strong{font-size:65px}.livingPaperCutout{padding:12px;min-height:145px}.livingPaperCutout strong{font-size:37px}.letterForm{gap:24px;padding-inline:5vw}.letterForm .routeIntro h1{font-size:clamp(50px,6vw,75px)}}
+@media(max-width:760px){.livingHero{display:flex;flex-direction:column;gap:20px;padding:46px 6vw 62px;min-height:0}.livingWords h1{font-size:clamp(53px,10vw,84px);margin:32px 0 20px;max-width:none}.livingWords>p{max-width:44ch}.livingPagePicker{padding-top:26px}.livingVisual{width:100%;max-width:660px;margin-inline:auto;transform:none}.livingArtboard{min-height:0;height:auto;aspect-ratio:1.1}.livingPhoto{left:7%;width:69%;height:75%;top:12%}.livingCardBehind strong{font-size:clamp(52px,11vw,80px)}.livingPaperCutout{width:41%;bottom:8%;right:1%}.livingSeal{width:85px;height:85px}.livingSeal strong{font-size:27px}.livingFolio{display:none}.dragHint{font-size:9px}.letterForm{display:flex;flex-direction:column;gap:45px;padding:64px 6vw 90px}.letterForm .routeIntro{padding:0;width:100%}.letterForm .routeIntro h1{font-size:clamp(51px,9vw,78px);max-width:none}.letterIntroStamp{display:none}.letterForm .letterDesk{width:100%}}
+@media(max-width:430px){.livingHero{padding:34px 5vw 58px}.issueTop{font-size:8px}.issueTop span:last-child{white-space:nowrap}.livingWords h1{font-size:clamp(48px,12vw,62px);line-height:1.18;margin:26px 0 17px}.livingWords>p{font-size:13px;line-height:1.8}.livingActions{gap:6px 15px;margin-top:23px}.livingPrimary{font-size:11px;min-height:48px}.livingSecondary{font-size:10px}.livingHint{font-size:9px}.livingArtboard{aspect-ratio:.95}.livingCardBehind{padding:13px}.livingCardBehind strong{font-size:44px;margin-top:30px}.livingPaperCutout{width:47%;padding:9px 11px;min-height:108px}.livingPaperCutout strong{font-size:26px}.livingPaperCutout small{font-size:9px}.livingSeal{width:66px;height:66px}.livingSeal span{font-size:7px}.livingSeal strong{font-size:23px}.livingPhoto{border-width:6px}.livingPhoto figcaption{font-size:8px;padding:9px;display:block}.livingPhoto figcaption span{display:block}.livingMarginNote{display:none}.dragHint{font-size:8px;max-width:170px}.livingArrows button{width:44px;height:44px}.letterForm .routeIntro h1{font-size:clamp(43px,11vw,61px)}.letterOption{padding:10px;gap:10px}.letterOptionArt{width:53px;height:53px;font-size:32px}.letterOptionBody strong{font-size:13px}.letterOptionBody small{font-size:11px}.letterPreview{padding:17px 15px}.letterPreviewMain{grid-template-columns:45px 1fr;gap:14px}.letterPreviewMark{height:43px;width:43px;font-size:30px}.letterCommands{grid-template-columns:1fr}.letterForm .letterCommands button{min-height:50px}}
+@media(prefers-reduced-motion:reduce){.livingPhoto{animation:none!important;transition:none!important}.livingHero :is(.livingPrimary,.livingPagePicker button,.livingArrows button,.letterOption,.letterCommands button){transition:none!important}.livingVisual{transform:none!important}}
