@@ -18,7 +18,7 @@ html:has(.world-site){scrollbar-gutter:stable}
 .world-site .world-footer-identity>a{display:inline-block;max-width:100%;overflow-wrap:anywhere}
 .world-site .world-footer-bottom{align-items:center}
 .world-site .world-back-top{display:inline-flex;gap:8px;align-items:center}
-.world-site :where(.world-section-heading,.world-work-card,.world-service-row,.world-footer-column,.world-footer-identity,.world-visual-essay .world-essay-copy,.world-visual-essay .world-essay-photo,.signature-section-head,.experience-section-head)[data-world-reveal="pending"]{opacity:0;transform:var(--world-reveal-transform) var(--world-reveal-rot);filter:blur(var(--world-reveal-blur));}
+.world-site [data-world-reveal="pending"]{opacity:0;transform:var(--world-reveal-transform) var(--world-reveal-rot);filter:blur(var(--world-reveal-blur));}
 .world-site [data-world-reveal="seen"]{opacity:1;transform:none;filter:none;transition:opacity 700ms ease,transform 750ms cubic-bezier(.2,.65,.15,1),filter 750ms ease;transition-delay:var(--world-motion-stagger,0ms)}
 .world-site [data-world-reveal="pending"]{transition:none;will-change:transform,opacity}
 .world-site [data-world-reveal="seen"]{will-change:auto}
