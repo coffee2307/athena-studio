@@ -23,7 +23,7 @@ export const sovereignSites = {
  "music-label":{stage:"sovereign",archetype:"record-sleeves",owner:"ECHO"},
  "live-concert":{stage:"sovereign",archetype:"live-poster",owner:"NEON-LIVE"},
  "team-intranet":{stage:"sovereign",archetype:"internal-workspace",owner:"ORBIT"},
- "digital-creators":{stage:"native-static",archetype:"creative-club-webgl",owner:"DIGITAL-CREATORS"}
+ "digital-creators":{stage:"sovereign",archetype:"creative-club-webgl",owner:"DIGITAL-CREATORS"}
 } as const;
 export type SovereignSlug = keyof typeof sovereignSites;
 export type SovereignStage = "legacy"|"native-static"|"sovereign";
