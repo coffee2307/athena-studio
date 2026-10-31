@@ -1,31 +1,31 @@
 {
-  "title": "BLACK VELOCITY / AUTO SHOWROOM — FROZEN",
+  "title": "BLACK VELOCITY / VISUAL FRAMING v2.1 — PROTECTED",
   "status": "protected",
-  "approved_on": "2026-10-30",
+  "approved_on": "2026-10-31",
   "scope": "/template-demos/auto-showroom — cinematic McLaren P1",
-  "policy": "BLACK VELOCITY showroom protected. Mobile-only independent centered rig and orthographic optical recentering explicitly approved on 2026-10-31; desktop remains intentionally asymmetric. Do not change this showroom's camera, 3D assets, styles, controls or source outside a new explicit user request.",
+  "policy": "Explicit owner approval on 2026-10-31 covers GLB-mesh optical silhouette framing, one responsive mobile stage, breakpoint camera recreation and regression checks. Desktop editorial composition and the vecarz CC BY 4.0 GLB stay unchanged. Future modifications require a new explicit request and updated verification.",
   "verified": [
-    "6/6 WebGL interaction tests Chromium Windows",
-    "4/4 pure camera math tests",
-    "Mobile stage size 320/390/428",
-    "No camera-radius change during drag or mobile chapter scroll",
-    "No drag revolution unwind; absolute next chapter target",
-    "GLB credit vecarz CC BY preserved",
-    "Real iPhone Safari performance remains UNVERIFIED",
-    "Mobile composition: chapter copy appears above the full vehicle without overlap; 3D canvas fixed across scenes; chapter 02 uses genuine side-profile yaw. Await browser regression before final signoff.",
-    "Mobile 3D optical midpoint exactly centered within NDC ±0.005 at 320,390,428 px × 5 chapters (Chromium Windows). Desktop asymmetric scene unchanged."
+    "45/45 actual Chromium WebGL framing checks: 9 widths (320/375/390/428/497/500/600/768/1440px) × 5 chapters",
+    "Mobile frame from 129 actual mesh silhouette support vertices; safe x margin >= 8% at all checked chapter poses",
+    "Mobile horizontal center within 5% of stage; no screen overflow or stage/control-band collision in checked viewports",
+    "Existing canonical orbit/drag/scroll regression: 0 failures; camera radius does not change on mobile drag",
+    "TypeScript, targeted ESLint, and Next.js production build PASS on Windows",
+    "Model geometry, material textures and vecarz CC BY attribution preserved",
+    "Physical iPhone Safari GPU/performance and production deploy remain UNVERIFIED"
   ],
   "file_blobs": {
-    "components/immersive/McLarenShowroomScene.tsx": "d705115967e9c78ceaf5a55b15adef5fcfa5a588",
+    "components/immersive/McLarenShowroomScene.tsx": "d359d4ba3d18bd525a3caace42fba21ed4b09218",
     "components/immersive/AutoCinematicTrack.tsx": "56cd30b34fd3d44e44d4962a6e48a453cd72954a",
     "components/immersive/WorldScene.tsx": "fc03a3697c95ffa5bd3338abee6a08f79ec7cb70",
     "components/templates/WorldImmersiveHome.tsx": "cc1536de1894f2e6dfa0c4d7c7ec9a69d76aa466",
     "components/immersive/McLarenLoadingUI.tsx": "af519307a1bb3879491b5e1c639f2407c3343271",
-    "app/black-velocity-cinematic.css": "716a71292bfe3f49fdf35b3e53ca9a1e1d5db38f",
+    "app/black-velocity-cinematic.css": "36baf04538b32631349970c1d3d1c6962fc9f2e5",
     "app/black-velocity.css": "6741c818651ada85c4f1108e43e63cfcaf3e8fa2",
-    "app/auto-showroom-minimal.css": "3408859ce809bdac49a1912f1c45c5d721e7c7d1",
+    "app/auto-showroom-minimal.css": "3a628bf226a8eda5b3d6ae78c915550bff715acc",
     "public/models/mclaren.glb": "b2a0e4fa38b928afdcebd01e3b31ab2dd0558e73",
     "lib/showroom-orbit.ts": "1cebf096a745005be050dc30c917290fcc658f67",
-    "app/black-velocity-mobile-showcase.css": "cd64916fa70aefe6f145a36ab7a17713d71d02df"
+    "app/black-velocity-mobile-showcase.css": "29ceb6dd380155158070b566e483b0c497ef8393",
+    "lib/showroom-framing.ts": "5c809484675dfed09c7cb87fc64ba482c69d6e6d",
+    "scripts/black-velocity-framing-qa.mjs": "d128a879f81889c0b004c3700b260ef6526dd23d"
   }
 }
