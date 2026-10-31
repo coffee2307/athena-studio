@@ -4,12 +4,20 @@ on:
     paths:
       - "app/template-demos/**"
       - "components/sovereign/**"
+      - "components/templates/WorldSite.tsx"
+      - "components/templates/WorldImmersiveHome.tsx"
+      - "components/immersive/McLarenLoadingUI.tsx"
+      - "app/template-navigation-identities.css"
+      - "app/auto-showroom-minimal.css"
+      - "config/showroom-protection.json"
       - "data/sovereign-site-registry.ts"
       - "templates/**"
       - "scripts/sovereign-*.mjs"
+      - "scripts/refinement02-*.mjs"
       - "scripts/create-site.mjs"
       - "public/template-previews/**"
       - "tests/sovereign-*.test.mjs"
+      - "tests/refinement02-source.test.mjs"
       - "tests/dna03-template-projects.test.mjs"
       - ".github/workflows/sovereign-boundary.yml"
   workflow_dispatch:
@@ -30,6 +38,8 @@ jobs:
         run: node scripts/sovereign-audit.mjs --check --out=.qa/athena-21-sovereign/audit.json
       - name: Route, framework and standalone export contracts
         run: node --test tests/sovereign-boundary.test.mjs tests/sovereign-export-fidelity.test.mjs tests/sovereign-p8-type-layout.test.mjs tests/dna03-template-projects.test.mjs
+      - name: Locked McLaren asset/camera and refinements contracts
+        run: node --test tests/showroom-protection.test.mjs tests/refinement02-source.test.mjs
       - name: Install Digital Creators standalone dependencies
         run: npm ci --prefix templates/digital-creators --no-audit --no-fund
       - name: Compile the native Vite/React/Three.js export
@@ -68,10 +78,14 @@ jobs:
           exit 1
       - name: Vietnamese type, collision and X-only mobile menu QA
         run: node scripts/sovereign-p8-layout-qa.mjs
+      - name: Four-template refined layout and mobile cockpit QA
+        run: node scripts/refinement02-qa.mjs
       - name: Upload P8 screenshots and render evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: sovereign-p8-chromium-evidence
-          path: .qa/sovereign-p8/
+          path: |
+            .qa/sovereign-p8/
+            .qa/refinement02/
           if-no-files-found: ignore
