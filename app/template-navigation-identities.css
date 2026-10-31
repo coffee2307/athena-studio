@@ -223,3 +223,10 @@
 @media(prefers-reduced-motion:reduce){
 .world-site .world-menu-toggle,.world-site .world-mobile-nav,.world-site .world-nav-scrim,.world-site .world-mobile-nav-links>a{animation:none!important;transition:none!important}
 }
+
+/* Affordances without a repeated northeast-arrow glyph. */
+.world-site .world-action-dot{display:inline-block;width:8px;height:8px;flex:0 0 8px;border-radius:50%;border:1.5px solid currentColor;vertical-align:middle;opacity:.65}
+.world-site .world-cover-arrow{display:none}
+.world-site .world-service-arrow{display:grid;place-items:center;width:40px;height:40px;border:1px solid var(--w-border);border-radius:100%}
+.world-site .world-service-arrow .world-action-dot{width:12px;height:12px;border-width:2px}
+.world-site .experience-image-arrow{display:none}
