@@ -36,6 +36,13 @@ jobs:
         run: npm run build --prefix templates/digital-creators
       - name: Confirm Digital Creators source fidelity after build
         run: node scripts/sovereign-digital-creators-sync.mjs --check
+      - name: Publish audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sovereign-p4-source-audit
+          path: .qa/athena-21-sovereign/audit.json
+          if-no-files-found: ignore
   sovereign-p8-browser:
     runs-on: ubuntu-latest
     timeout-minutes: 18
@@ -67,11 +74,4 @@ jobs:
         with:
           name: sovereign-p8-chromium-evidence
           path: .qa/sovereign-p8/
-          if-no-files-found: ignore
-      - name: Publish audit evidence
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: sovereign-p4-source-audit
-          path: .qa/athena-21-sovereign/audit.json
           if-no-files-found: ignore
