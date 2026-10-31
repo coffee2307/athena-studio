@@ -23,9 +23,15 @@ export function WorldMotion({slug,section}:{slug:string;section:string}){
    ".legacy-creative-intro",".legacy-saas-feature",".legacy-architecture-index",
    ".experience-section-head",".experience-product-grid>article",
    ".experience-platform-feature",".experience-story-excerpt",
-   ".ix-manifesto>h2",".ix-series-heading",".ix-ending>h2"
+   ".ix-manifesto>h2",".ix-series-heading",".ix-ending>h2",
+   "main#world-main > section:not(:first-of-type)"
   ].join(",");
-  const nodes=Array.from(root.querySelectorAll<HTMLElement>(selectors)).filter(el=>!el.closest(".world-mobile-nav,.world-nav-scrim,.bv-cinematic-track"));
+  const nodes=Array.from(root.querySelectorAll<HTMLElement>(selectors)).filter(el=>{
+   if(el.closest(".world-mobile-nav,.world-nav-scrim,.bv-cinematic-track"))return false;
+   // Preserve the locked 3D cinematic rig; only animate editorial copy there.
+   if(slug==="auto-showroom"&&el.matches("main#world-main > section"))return false;
+   return !el.querySelector("canvas,iframe");
+  });
   const io=new IntersectionObserver(entries=>{
    for(const entry of entries){
     if(!entry.isIntersecting)continue;
