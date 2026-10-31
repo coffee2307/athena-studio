@@ -231,3 +231,119 @@
 @media(prefers-reduced-motion:reduce){
  .north .heroActions .primary,.north .heroSecondary,.north .diagramNodes button,.north .systemOrbit circle,.north .inquiry form button{transition:none!important;animation:none!important}
 }
+
+
+/* NORTH continuity / timeline refinement: approved localized bugfix. */
+.north{--north-utility-height:35px;--north-header-height:100px}
+.north .utility{
+  position:sticky;top:0;z-index:90;
+  height:var(--north-utility-height);min-height:var(--north-utility-height);
+  box-sizing:border-box;display:flex;align-items:center;
+}
+.north .globalHead{
+  position:sticky;top:var(--north-utility-height);z-index:89;
+  height:var(--north-header-height);min-height:var(--north-header-height);
+  box-sizing:border-box;
+}
+.north .rail{
+  position:fixed;top:calc(var(--north-utility-height) + var(--north-header-height));
+  bottom:0;left:0;width:43px;height:auto;z-index:38;
+  background:#c8d8dc;
+}
+.north .impact{
+  display:grid;grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);
+  gap:clamp(28px,5vw,75px);padding:clamp(70px,8vw,112px) 7vw;
+  align-items:center;background:#e6eff0;
+}
+.north .impactLead{min-width:0;align-self:center}
+.north .impactLead>small{display:block;color:#38596a;font:800 10px/1.5 "Be Vietnam Pro",sans-serif;letter-spacing:.13em}
+.north .impactLead h2{font:750 clamp(42px,4.4vw,74px)/1.12 "Be Vietnam Pro",sans-serif;letter-spacing:-.055em;margin:24px 0;max-width:13ch;text-wrap:balance;color:#173247}
+.north .impactLead>p{font-size:clamp(15px,1.25vw,18px);line-height:1.75;max-width:40ch;color:#36566a;margin:0}
+.north .impactPrinciples{display:grid;gap:0;margin-top:38px;border-top:1px solid #a1b9c1;max-width:430px}
+.north .impactPrinciples>div{display:flex;align-items:baseline;gap:20px;min-height:54px;padding:14px 0;border-bottom:1px solid #a1b9c1;color:#1b3c51}
+.north .impactPrinciples span{font:750 11px/1.4 "Be Vietnam Pro",sans-serif;color:#a87452}
+.north .impactPrinciples strong{font:650 14px/1.5 "Be Vietnam Pro",sans-serif}
+.north .impactBody{
+  display:flex;flex-direction:column;gap:0;min-width:0;
+  padding:clamp(22px,3.3vw,44px);
+  background:linear-gradient(155deg,#193d52,#143245 82%);
+  color:#f4f8f7;border:1px solid #33576a;
+  box-shadow:14px 16px 0 #c9dadf;
+}
+.north .impactBody::after{content:none!important}
+.north .impactPanelTop{display:flex;justify-content:space-between;align-items:center;gap:14px;border-bottom:1px solid #7596a470;padding-bottom:19px}
+.north .impactPanelTop span{font:750 10px/1.5 "Be Vietnam Pro",sans-serif;letter-spacing:.09em;color:#bed7da}
+.north .impactPanelTop span:last-child{color:#e9ae7f}
+.north .impactJourney{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;
+  margin:23px 0 30px;position:relative;z-index:1;
+}
+.north .impactJourney button{
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;
+  min-width:0;min-height:102px;padding:15px 12px;gap:12px;
+  background:#234c61;border:1px solid #799ead;color:#f1f7f7;text-align:left;
+  cursor:pointer;transition:background .2s,transform .2s,border-color .2s;
+}
+.north .impactJourney button:hover{background:#305f75;transform:translateY(-3px)}
+.north .impactJourney button[aria-pressed="true"]{background:#d8e9e9;color:#13384d;border-color:#edc398;box-shadow:inset 0 4px #d49a6d;transform:none}
+.north .impactJourney button span{font:800 11px/1.5 "Be Vietnam Pro",sans-serif}
+.north .impactJourney button strong{font:750 clamp(12px,1.2vw,16px)/1.4 "Be Vietnam Pro",sans-serif}
+.north .impactNarrative{min-width:0;position:relative;z-index:1}
+.north .impactNarrative>span{font:800 10px/1.5 "Be Vietnam Pro",sans-serif;letter-spacing:.09em;color:#e6b38b;margin-bottom:12px}
+.north .impactNarrative h3{font:750 clamp(26px,3vw,42px)/1.2 "Be Vietnam Pro",sans-serif;letter-spacing:-.04em;margin:0 0 10px;color:#fff}
+.north .impactNarrative p{font:450 clamp(14px,1.18vw,17px)/1.7 "Be Vietnam Pro",sans-serif;min-height:0;max-width:45ch;color:#e2ecef;margin:0}
+.north .impactDeliverable{margin-top:24px;padding:17px 19px;background:#ffffff10;border-left:3px solid #dc9d71}
+.north .impactDeliverable small{display:block;font:800 10px/1.5 "Be Vietnam Pro",sans-serif;letter-spacing:.09em;color:#f3c092}
+.north .impactDeliverable p{margin:7px 0 0;font:550 13px/1.65 "Be Vietnam Pro",sans-serif;color:#edf5f5}
+.north .impactMap{
+  display:flex;align-items:center;gap:20px;
+  width:100%;height:auto;min-height:0;padding-top:27px;margin-top:22px;
+  border:none;border-top:1px solid #7495a27a;background:none;
+  overflow:visible;
+}
+.north .mapTrack{height:2px;width:auto;flex:1;background:#658595}
+.north .mapTrack:before{height:2px;background:#e4a774}
+.north .mapTrack span{width:13px;height:13px;border:3px solid #18384b;background:#8badb9;box-shadow:0 0 0 1px #9fbcc4}
+.north .mapTrack[data-step="1"] span:nth-child(-n+2),.north .mapTrack[data-step="2"] span{background:#e9ad7b;transform:scale(1.05)}
+.north .impactMap small{font:800 10px/1.5 "Be Vietnam Pro",sans-serif;letter-spacing:.08em;color:#e6b38b;white-space:nowrap}
+@media(max-width:850px){
+  .north{--north-header-height:74px}
+  .north .impact{grid-template-columns:1fr;gap:33px;padding:68px 6vw}
+  .north .impactLead h2{font-size:clamp(44px,8.4vw,70px)}
+  .north .impactPrinciples{margin-top:22px}
+  .north .impactBody{padding:clamp(20px,5vw,33px)}
+}
+@media(max-width:600px){
+  .north{--north-utility-height:35px;--north-header-height:69px}
+  .north .impact{padding:60px 6vw;gap:27px}
+  .north .impactLead h2{font-size:clamp(39px,10.4vw,55px);margin:19px 0}
+  .north .impactLead>p{font-size:15px}
+  .north .impactPrinciples>div{min-height:44px;padding:10px 0}
+  .north .impactPrinciples strong{font-size:13px}
+  .north .impactBody{box-shadow:8px 9px 0 #c9dadf;padding:20px 17px}
+  .north .impactPanelTop span{font-size:9px}
+  .north .impactJourney{gap:7px;margin:20px 0 24px}
+  .north .impactJourney button{min-height:85px;padding:12px 9px}
+  .north .impactJourney button strong{font-size:12px}
+  .north .impactNarrative h3{font-size:28px}
+  .north .impactNarrative p{font-size:14px}
+  .north .impactDeliverable{margin-top:17px;padding:14px}
+}
+@media(max-width:350px){
+  .north .impactJourney button{padding:9px 6px}
+  .north .impactJourney button strong{font-size:11px}
+  .north .impactPanelTop span:last-child{font-size:8px}
+}
+@media(prefers-reduced-motion:reduce){
+  .north .impactJourney button,.north .mapTrack:before,.north .mapTrack span{transition:none!important;animation:none!important}
+}
+
+/* Mobile preserves scrolling room: rail is hidden, so no sticky header is necessary. */
+@media(max-width:850px){
+ .north .utility{position:relative;top:auto}
+ .north .globalHead{position:relative;top:auto}
+ .north .rail{display:none}
+}
+.north .impact{scroll-margin-top:calc(var(--north-utility-height) + var(--north-header-height) + 16px)}
+
+@media(max-width:850px){.north .utility{z-index:40}.north .globalHead{z-index:45}}

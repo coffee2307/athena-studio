@@ -43,12 +43,32 @@ export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:{sect
  <main className={s.content}>
  {section==="home"&&<>
   <section className={s.banner} id="north-diagnostic"><div className={s.bannerCopy}><span className={s.eyebrow}>CHIẾN LƯỢC / VẬN HÀNH / CÔNG NGHỆ</span><h1>Rõ ràng<br/>giữa <em>phức tạp.</em></h1><p>Nhìn rõ điểm nghẽn, chọn đúng giải pháp và xác định việc cần làm tiếp theo.</p><div className={s.heroActions}><a className={s.primary} href="#north-diagnostic-tool">Chọn vấn đề của bạn <span aria-hidden="true">→</span></a><Link className={s.heroSecondary} href={go("/work")}>Xem phạm vi dịch vụ</Link></div><div className={s.bannerMeta}><b>03</b><span>NHÓM VẤN ĐỀ THƯỜNG GẶP<br/>CHỌN ĐỂ XEM CÁCH XỬ LÝ</span></div></div><div className={s.diagram} id="north-diagnostic-tool" data-north-ambient data-focus={active} role="region" aria-label="Bảng chẩn đoán vận hành NORTH"><div className={s.diagnosticHead}><span className={s.gridCaption}>NORTH / BẢNG CHẨN ĐOÁN</span><span className={s.liveSignal}><i aria-hidden="true"/>TƯƠNG TÁC</span></div><h2 className={s.diagnosticTitle}>Bạn đang gặp vướng mắc nào?</h2><p className={s.diagnosticIntro}>Chọn một tình huống để xem hướng xử lý và hạng mục bàn giao tham khảo.</p><div className={s.systemOrbit} aria-hidden="true"><svg viewBox="0 0 470 210" preserveAspectRatio="xMidYMid meet"><path d="M30 96 L130 30 L238 104 L364 38 L443 112 M130 30 L210 182 L364 38 M238 104 L318 189 L443 112" fill="none" stroke="currentColor" strokeWidth="1.6" strokeDasharray="5 10"/><circle cx="30" cy="96" r="8"/><circle cx="130" cy="30" r="7"/><circle cx="238" cy="104" r="11"/><circle cx="364" cy="38" r="7"/><circle cx="443" cy="112" r="8"/><circle cx="210" cy="182" r="6"/><circle cx="318" cy="189" r="6"/></svg><span>KHẢO SÁT <b>→</b> KẾT NỐI <b>→</b> TRIỂN KHAI</span></div><div className={s.diagramNodes} role="group" aria-label="Chọn vấn đề đang gặp">{services.map((x,i)=><button type="button" aria-controls="north-diagnostic-result" aria-label={"Chọn vấn đề: "+x.shortIssue} aria-pressed={active===i} onClick={()=>setActive(i)} key={x.tag}><small>0{i+1} / {x.tag}</small><strong>{x.shortIssue}</strong><span aria-hidden="true">↗</span></button>)}</div><div className={s.diagramContent} id="north-diagnostic-result" aria-live="polite" aria-atomic="true"><small>HƯỚNG XỬ LÝ / 0{active+1}</small><h3>{services[active].name}</h3><div className={s.beforeAfter}><div><span>VẤN ĐỀ</span><p>{services[active].problem}</p></div><div><span>HƯỚNG XỬ LÝ</span><p>{services[active].solution}</p></div></div><div className={s.diagnosticDeliver}><span>ĐẦU RA THAM KHẢO</span><p>{services[active].deliver}</p></div><Link href={go("/work/"+(active+1))}>Xem chi tiết dịch vụ <span aria-hidden="true">→</span></Link></div><div className={s.diagramFoot}>BẢN MINH HỌA QUY TRÌNH <span>KHÔNG PHẢI TƯ VẤN TỰ ĐỘNG</span></div></div></section>
-  <section className={s.impact} data-north-scene><header><small>01 / TƯ DUY VẬN HÀNH</small><h2>Ít nút thắt.<br/>Rõ hướng đi.</h2></header><div className={s.impactBody}>
-    <div className={s.impactNarrative} aria-live="polite"><span>TRẠNG THÁI 0{impactStep+1} / 03</span><p>{["Bắt đầu bằng những câu hỏi đúng, dữ liệu có thể kiểm tra và vấn đề thực sự cần giải quyết.","Kết nối từng bộ phận vào một luồng vận hành rõ trách nhiệm và có thể theo dõi.","Đưa giải pháp vào thử nghiệm, đo lường kết quả rồi tiếp tục cải tiến."][impactStep]}</p></div>
-    <div className={s.impactJourney} role="group" aria-label="Khám phá ba bước vận hành">{[["01","Khảo sát"],["02","Kết nối"],["03","Triển khai"]].map(([n,label],i)=><button key={n} type="button" aria-pressed={impactStep===i} onClick={()=>setImpactStep(i)}><span>{n}</span><strong>{label}</strong></button>)}</div>
-    <div className={s.impactMap} aria-hidden="true"><div className={s.mapTrack} data-step={impactStep}><span/><span/><span/></div></div>
-  </div></section>
-  <section className={s.capabilities} data-north-scene><header><small>02 / NĂNG LỰC CỐT LÕI</small><h2>Ba năng lực.<br/>Một hệ thống.</h2></header><div>{services.map((x,i)=><Link href={go("/work/"+(i+1))} key={x.name}><small>0{i+1}</small><strong>{x.name}</strong><p>{x.problem}</p><span aria-hidden="true">↳</span></Link>)}</div></section>
+  <section className={s.impact} data-north-scene>
+    <div className={s.impactLead}>
+      <small>01 / PHƯƠNG PHÁP LÀM VIỆC</small>
+      <h2>Ít nút thắt.<br/>Rõ hướng đi.</h2>
+      <p>Một quy trình không cần phức tạp để hiệu quả. Bắt đầu từ vấn đề thực tế, thống nhất cách làm, rồi kiểm chứng kết quả.</p>
+      <div className={s.impactPrinciples} aria-label="Ba nguyên tắc làm việc">
+        <div><span>01</span><strong>Hiểu việc đang vướng.</strong></div>
+        <div><span>02</span><strong>Rõ ai chịu trách nhiệm.</strong></div>
+        <div><span>03</span><strong>Thử nghiệm và đo kết quả.</strong></div>
+      </div>
+    </div>
+    <div className={s.impactBody}>
+      <div className={s.impactPanelTop}><span>NORTH / QUY TRÌNH BA BƯỚC</span><span>CHỌN ĐỂ XEM</span></div>
+      <div className={s.impactJourney} role="group" aria-label="Khám phá ba bước vận hành">
+        {[["01","Khảo sát"],["02","Kết nối"],["03","Triển khai"]].map(([n,label],i)=><button key={n} type="button" aria-controls="north-impact-result" aria-pressed={impactStep===i} onClick={()=>setImpactStep(i)}><span>{n}</span><strong>{label}</strong></button>)}
+      </div>
+      <div className={s.impactNarrative} id="north-impact-result" aria-live="polite" aria-atomic="true">
+        <span>BƯỚC 0{impactStep+1} / 03</span>
+        <h3>{["Xác định vấn đề","Thống nhất cách làm","Kiểm tra hiệu quả"][impactStep]}</h3>
+        <p>{["Tìm hiểu công việc hiện tại, ghi rõ điểm nghẽn và thu thập thông tin cần kiểm tra.","Làm rõ vai trò từng bộ phận, các điểm bàn giao và thứ tự ưu tiên công việc.","Thử nghiệm phương án, theo dõi kết quả và điều chỉnh trước khi mở rộng."][impactStep]}</p>
+        <div className={s.impactDeliverable}><small>ĐẦU RA CỦA BƯỚC NÀY</small><p>{["Sơ đồ hiện trạng và danh sách vấn đề cần xử lý.","Bản phân công, luồng công việc và tiêu chí hoàn thành.","Kết quả thử nghiệm cùng các điều chỉnh được đề xuất."][impactStep]}</p></div>
+      </div>
+      <div className={s.impactMap} aria-hidden="true"><div className={s.mapTrack} data-step={impactStep}><span/><span/><span/></div><small>0{impactStep+1} / 03</small></div>
+    </div>
+  </section>
+    <section className={s.capabilities} data-north-scene><header><small>02 / NĂNG LỰC CỐT LÕI</small><h2>Ba năng lực.<br/>Một hệ thống.</h2></header><div>{services.map((x,i)=><Link href={go("/work/"+(i+1))} key={x.name}><small>0{i+1}</small><strong>{x.name}</strong><p>{x.problem}</p><span aria-hidden="true">↳</span></Link>)}</div></section>
   <section className={s.proof} data-north-scene><img src={images[1]} alt="Minh họa không gian và hệ thống vận hành"/><div><small>PHƯƠNG PHÁP CÓ THỂ ÁP DỤNG</small><h2>Quyết định phức tạp cần khung tư duy rõ ràng.</h2><p>Website minh họa phương pháp làm việc. Các năng lực trình bày ở đây là nội dung mẫu, không phải hồ sơ năng lực của khách hàng thật.</p><Link href={go("/about")}>Nguyên tắc làm việc →</Link></div></section>
  </>}
  {section==="work"&&<section className={s.directory}><div className={s.pageHead}><small>DANH MỤC NĂNG LỰC / 01—03</small><h1>Năng lực<br/>có hệ thống.</h1><p>Chọn một năng lực để xem vấn đề, phương pháp và đầu ra minh họa.</p></div><div className={s.directoryGrid}>{services.map((x,i)=><Link href={go("/work/"+(i+1))} key={x.name}><small>NORTH / 0{i+1}</small><img src={images[i%images.length]} alt={"Minh họa "+x.name}/><h2>{x.name}</h2><p>{x.problem}</p></Link>)}</div></section>}

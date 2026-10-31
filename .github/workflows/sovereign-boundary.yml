@@ -16,12 +16,14 @@ on:
       - "scripts/refinement02-*.mjs"
       - "scripts/sora-living-issue-qa.mjs"
       - "scripts/north-diagnostic-qa.mjs"
+      - "scripts/north-impact-rail-qa.mjs"
       - "scripts/create-site.mjs"
       - "public/template-previews/**"
       - "tests/sovereign-*.test.mjs"
       - "tests/refinement02-source.test.mjs"
       - "tests/sora-living-issue.test.mjs"
       - "tests/north-diagnostic.test.mjs"
+      - "tests/north-impact-rail.test.mjs"
       - "tests/dna03-template-projects.test.mjs"
       - ".github/workflows/sovereign-boundary.yml"
   workflow_dispatch:
@@ -88,6 +90,8 @@ jobs:
         run: node scripts/refinement02-qa.mjs
       - name: NORTH diagnosis interactions, services and 36 responsive route checks
         run: node scripts/north-diagnostic-qa.mjs
+      - name: NORTH sticky rail and impact interaction browser checks
+        run: node scripts/north-impact-rail-qa.mjs
       - name: Upload P8 screenshots and render evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -98,4 +102,5 @@ jobs:
             .qa/refinement02/
             .qa/sora-living-issue/
             .qa/north-upgrade/
+            .qa/north-impact-rail/
           if-no-files-found: ignore
