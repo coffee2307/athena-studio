@@ -13,7 +13,7 @@ const root=resolve(import.meta.dirname,"..");
 const canonical=join(root,"vendor/digital-creators");
 const target=join(root,"templates/digital-creators");
 const apply=process.argv.includes("--apply");
-const listed=["src","index.html","vite.config.ts","tsconfig.json","package.json"];
+const listed=["src","index.html","vite.config.ts","tsconfig.json","package.json",".gitignore"];
 const digest=path=>createHash("sha256").update(readFileSync(path)).digest("hex");
 const walk=path=>!existsSync(path)?[]:readdirSync(path,{withFileTypes:true}).flatMap(x=>x.isDirectory()?walk(join(path,x.name)):[join(path,x.name)]);
 const sourceSitePath=join(target,"src/data/site.json");
