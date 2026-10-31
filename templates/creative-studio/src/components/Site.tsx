@@ -24,7 +24,7 @@ export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:{sect
   const observer=new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting){(entry.target as HTMLElement).dataset.soraVisible="true";observer.unobserve(entry.target)}},{threshold:.12,rootMargin:"0px 0px -24px 0px"});
   items.forEach(x=>observer.observe(x));
   let frame=0;
-  const onScroll=()=>{if(frame||document.hidden)return;frame=requestAnimationFrame(()=>{frame=0;const hero=root.querySelector<HTMLElement>("[data-sora-parallax]");if(!hero)return;const rect=hero.getBoundingClientRect();if(rect.bottom<0||rect.top>innerHeight)return;root.style.setProperty("--sora-depth",Math.round(Math.max(-1,Math.min(1,(rect.top-innerHeight*.25)/innerHeight))*-28)+"px")})};
+  const onScroll=()=>{if(frame||document.hidden)return;frame=requestAnimationFrame(()=>{frame=0;const hero=root.querySelector<HTMLElement>("[data-sora-parallax]");if(!hero)return;const rect=hero.getBoundingClientRect();if(rect.bottom<0||rect.top>innerHeight)return;root.style.setProperty("--sora-depth",Math.round(Math.max(-1,Math.min(1,(rect.top-innerHeight*.25)/innerHeight))*-28)+"px");const p=Math.max(0,Math.min(1,(innerHeight*.75-rect.top)/(innerHeight+rect.height*.32)));root.style.setProperty("--sora-page-rise",Math.round(-36*p)+"px");root.style.setProperty("--sora-page-turn",(-4*p).toFixed(2)+"deg")})};
   window.addEventListener("scroll",onScroll,{passive:true});onScroll();
   const ambient=root.querySelectorAll<HTMLElement>("[data-sora-ambient]");
   const ambientObserver=new IntersectionObserver(entries=>{for(const entry of entries)(entry.target as HTMLElement).dataset.soraActive=(!document.hidden&&entry.isIntersecting)?"true":"false"});
