@@ -84,6 +84,9 @@ for(const site of sites){
      await close.click();if(await toggle.getAttribute("aria-expanded")!=="false")throw Error("X failed to close menu");
      // no click on the shared invisible scrim is needed to prove the menu exit.
     }
+    if(vp.width===1440&&route===""){
+     await page.screenshot({type:"jpeg",path:join(dir,site+"-home-1440.jpg"),quality:86,animations:"disabled",timeout:15000});
+    }
     if(vp.width===390){
      await page.screenshot({path:join(dir,site+"-"+(route||"home")+"-390.png"),animations:"disabled",timeout:15000});
     }
