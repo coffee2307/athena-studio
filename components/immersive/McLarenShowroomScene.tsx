@@ -238,7 +238,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    }else{
     // Fixed zoom for each viewport; reserve vertical room on short screens.
     // This value is never adjusted in response to yaw or pointer movement.
-    const halfWidth=Math.max(3.05,1.50*rect.width/rect.height);
+    const halfWidth=Math.max(2.66,1.50*rect.width/rect.height);
     const halfHeight=halfWidth*rect.height/rect.width;
     camera.left=-halfWidth;camera.right=halfWidth;
     camera.top=halfHeight;camera.bottom=-halfHeight;
