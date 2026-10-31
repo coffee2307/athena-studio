@@ -30,7 +30,7 @@ export function HomeTemplateShowcase(){
     <div className="home-demo-cards" aria-live="polite">{items.map((item,i)=><article className="home-demo-card" key={item.slug}>
       <Link href={item.demoPath} className="home-demo-picture" aria-label={"Xem demo "+item.title}>
        <Image src={"/template-previews/"+item.slug+".jpg"+(item.slug==="auto-showroom"?"?v=20261029-p1-3d-cover":"")} alt={"Xem trước website "+item.title} fill sizes="(max-width:600px) 100vw, (max-width:1100px) 50vw, 33vw" />
-       <span className="home-demo-open" aria-hidden="true">Mở website <span>↗</span></span>
+       <span className="home-demo-open" aria-hidden="true">Mở website <span></span></span>
       </Link>
       <div className="home-demo-meta"><span>{String(i+1).padStart(2,"0")} / {item.industry}</span><span>{item.style}</span></div>
       <h3><Link href={item.demoPath}>{item.title}</Link></h3>
