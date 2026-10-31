@@ -8,7 +8,7 @@ const entries=[
   "headline": "The collection is the story.",
   "description": "An archive of silhouettes, gestures and details.",
   "kicker": "LOOK 01 / COLLECTION",
-  "cta": "Explore the edition",
+  "cta": "XEM BỘ SƯU TẬP",
   "layout": "editorial",
   "theme": "curtain",
   "ink": "#24191e",
@@ -28,7 +28,7 @@ const entries=[
   "headline": "Make room for better work.",
   "description": "A product experience built around clarity and flow.",
   "kicker": "PRODUCT / INTERACTIVE TOUR",
-  "cta": "Explore the workspace",
+  "cta": "KHÁM PHÁ WORKSPACE",
   "layout": "dashboard",
   "theme": "product",
   "ink": "#151c40",
@@ -48,7 +48,7 @@ const entries=[
   "headline": "Ideas made impossible to ignore.",
   "description": "A campaign isn't a page; it's a moment worth joining.",
   "kicker": "CAMPAIGN / THE MESSAGE",
-  "cta": "Enter the experience",
+  "cta": "THAM GIA CHIẾN DỊCH",
   "layout": "poster",
   "theme": "amplify",
   "ink": "#19180e",
@@ -68,7 +68,7 @@ const entries=[
   "headline": "Stay for the conversation.",
   "description": "A restaurant story told through seasonal tables and ingredients.",
   "kicker": "TABLE / SEASONAL NOTES",
-  "cta": "Explore the menu",
+  "cta": "KHÁM PHÁ THỰC ĐƠN",
   "layout": "booklet",
   "theme": "table",
   "ink": "#274638",
@@ -88,7 +88,7 @@ const entries=[
   "headline": "Stories worth keeping.",
   "description": "A quiet journal about ideas, culture and the details between.",
   "kicker": "ISSUE 08 / SELECTED WRITING",
-  "cta": "Open the issue",
+  "cta": "ĐỌC SỐ BÁO",
   "layout": "newspaper",
   "theme": "stories",
   "ink": "#32281e",
@@ -108,7 +108,7 @@ const entries=[
   "headline": "Space shapes thought.",
   "description": "An architectural practice exploring the space between light and structure.",
   "kicker": "ARCHIVE / BUILT & UNBUILT",
-  "cta": "View the spaces",
+  "cta": "XEM KHÔNG GIAN",
   "layout": "blueprint",
   "theme": "spaces",
   "ink": "#343c39",
@@ -128,7 +128,7 @@ const entries=[
   "headline": "Find your own rhythm.",
   "description": "Care begins with space to understand what you need.",
   "kicker": "CARE / AN INDIVIDUAL JOURNEY",
-  "cta": "Discover the approach",
+  "cta": "CHỌN LỘ TRÌNH CHĂM SÓC",
   "layout": "garden",
   "theme": "care",
   "ink": "#345a45",
@@ -148,7 +148,7 @@ const entries=[
   "headline": "A place to belong.",
   "description": "Considered spaces for living, gathered as an intimate collection.",
   "kicker": "RESIDENCES / PRIVATE VIEWING",
-  "cta": "Explore residences",
+  "cta": "THAM QUAN KHÔNG GIAN",
   "layout": "brochure",
   "theme": "residences",
   "ink": "#142321",
@@ -168,7 +168,7 @@ const entries=[
   "headline": "Curiosity has a path.",
   "description": "Learn with small steps, clear milestones and room to explore.",
   "kicker": "LEARNING / YOUR PATH",
-  "cta": "Choose a lesson",
+  "cta": "CHỌN BÀI HỌC",
   "layout": "classroom",
   "theme": "learning",
   "ink": "#372873",
@@ -188,7 +188,7 @@ const entries=[
   "headline": "Every little friend matters.",
   "description": "The essentials for a happier everyday with your pet.",
   "kicker": "POPPY / FRIENDLY FINDS",
-  "cta": "Find their favourites",
+  "cta": "TÌM ĐỒ CHO THÚ CƯNG",
   "layout": "playful",
   "theme": "petshop",
   "ink": "#6c3d53",
@@ -208,7 +208,7 @@ const entries=[
   "headline": "Engineered to fit.",
   "description": "Materials, tolerances and production thinking in one technical space.",
   "kicker": "FORGE / SPECIFICATION INDEX",
-  "cta": "Inspect capability",
+  "cta": "XEM NĂNG LỰC CƠ KHÍ",
   "layout": "technical",
   "theme": "engineering",
   "ink": "#252e32",
@@ -228,7 +228,7 @@ const entries=[
   "headline": "Understand before you decide.",
   "description": "Research-first financial explanations with transparent assumptions.",
   "kicker": "ATLAS / INSIGHT DESK",
-  "cta": "Explore the framework",
+  "cta": "XEM KHUNG NGHIÊN CỨU",
   "layout": "ledger",
   "theme": "financial",
   "ink": "#1d3549",
@@ -248,7 +248,7 @@ const entries=[
   "headline": "Built from the ground up.",
   "description": "A clear record of process, people and places under construction.",
   "kicker": "PROJECT / THE BUILD LOG",
-  "cta": "Explore the works",
+  "cta": "KHÁM PHÁ CÔNG TRÌNH",
   "layout": "construction",
   "theme": "projects",
   "ink": "#363c36",
@@ -268,7 +268,7 @@ const entries=[
   "headline": "Sounds have a home.",
   "description": "An independent catalog of artists, visual releases and sonic identities.",
   "kicker": "ECHO / RELEASE NO. 001",
-  "cta": "Browse the records",
+  "cta": "XEM CÁC ẤN PHẨM",
   "layout": "vinyl",
   "theme": "releases",
   "ink": "#412337",
@@ -288,7 +288,7 @@ const entries=[
   "headline": "The night starts here.",
   "description": "A live culture poster with an evolving line-up and immersive stage notes.",
   "kicker": "NEON / THE LINE-UP",
-  "cta": "See the program",
+  "cta": "KHÁM PHÁ CHƯƠNG TRÌNH",
   "layout": "neon",
   "theme": "lineup",
   "ink": "#211133",
@@ -308,7 +308,7 @@ const entries=[
   "headline": "Work, in one place.",
   "description": "A clearer view of people, projects and everyday priorities.",
   "kicker": "ORBIT / TEAM SPACE",
-  "cta": "Enter the workspace",
+  "cta": "MỞ KHÔNG GIAN NHÓM",
   "layout": "operating",
   "theme": "team",
   "ink": "#2b3751",
@@ -336,7 +336,7 @@ function makeSection(st,which){const cls=st.variant+"_"+which;
 
 function home(st){
  const c=st.layout;
- const intro='<div className={style.heroWords}><small>'+st.kicker+'</small><h1>'+st.headline+'</h1><p>'+st.description+'</p><Link href={go("/work")}>DISCOVER THE COLLECTION <span aria-hidden="true">→</span></Link></div>';
+ const intro='<div className={style.heroWords}><small>'+st.kicker+'</small><h1>'+st.headline+'</h1><p>'+st.description+'</p><Link href={go("/work")}>'+st.cta+' <span aria-hidden="true">→</span></Link></div>';
  const figure='<figure className={style.heroFigure}><img src={media[selected%media.length]} alt={artifacts[selected].title}/><figcaption>0{selected+1} / {artifacts[selected].title}</figcaption></figure>';
  const choose='<div className={style.interactive} role="group" aria-label="Khám phá nội dung">'+ '{artifacts.map((item,i)=><button type="button" key={item.title} aria-pressed={selected===i} onClick={()=>setSelected(i)}><span>0{i+1}</span><b>{item.title}</b></button>)}'+'</div>';
  const scenes={
@@ -513,7 +513,43 @@ function cssFor(st){
  '@media(max-width:540px){.root{font-size:14px}.header{padding:12px 6vw}.logo{font-size:27px}.heroWords{padding:65px 7vw}.heroWords h1{font-size:clamp(52px,12vw,72px)}.heroWords p{font-size:15px}.heroFigure{height:420px}.heroFigure img{height:420px}.interactive{flex-direction:column}.interactive button{min-height:70px;gap:9px}.heroWords a{font-size:10px}.posterRibbon{font-size:15px}.archivePage,.servicePage{padding:65px 6vw}.catalogGrid{grid-template-columns:1fr}.artifact:nth-child(2){margin-top:0}.artifact img{max-height:490px}.sectionTitle h1{font-size:54px}.detailPage{padding:55px 6vw}.detailPage h1{font-size:54px}.detailPair{grid-template-columns:1fr}.aboutPage,.contactPage{padding:70px 6vw}.aboutCopy h1,.contactIntro h1{font-size:54px}.aboutMedia img{min-height:270px}.footer{padding:60px 7vw}.footerSignature{font-size:clamp(45px,13vw,80px)}.footerColumns{grid-template-columns:1fr}.footerTop{display:block}.footerMenu{display:grid;grid-template-columns:1fr 1fr}.serviceVisual{grid-template-columns:1fr}.serviceVisual figcaption{writing-mode:horizontal-tb}.menuPanel{padding:38px 24px}}',
  '@media(prefers-reduced-motion:reduce){.root *, .root *::before,.root *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}'
  ];
- return css.join("\n").replaceAll("align-items:start","align-items:flex-start");
+const perIndustryDetails={
+ editorial:'.heroWords a{background:transparent;color:var(--ink);border-bottom:1px solid currentColor;padding-inline:0;border-radius:0}.editorialCover .heroFigure{transform:rotate(-1deg)}',
+ dashboard:'.productBoard .heroWords a{border-radius:12px}.appPanel{box-shadow:12px 12px 0 #ffffff25}',
+ poster:'.posterStage .heroWords h1{font-style:italic;text-transform:uppercase;letter-spacing:-.08em}.posterStage .heroWords a{transform:rotate(-2deg);border:3px solid var(--ink);box-shadow:5px 5px 0 var(--paper)}',
+ booklet:'.tableStage .heroWords a{border-radius:50px;background:transparent;color:var(--ink);border:1px solid var(--ink)}',
+ newspaper:'.newspaperColumns .interactive button{border-bottom:2px solid var(--paper);border-top:0;border-inline:0}.editorialCover .heroWords a{background:transparent;color:var(--ink);padding-inline:0;border-bottom:2px solid var(--ink)}',
+ blueprint:'.planBoard .heroWords h1{text-transform:uppercase}.planBoard .heroWords a{border:1px solid var(--paper);border-radius:0}',
+ garden:'.gardenScene .heroWords a{border-radius:100px}.gardenScene .heroWords h1{font-style:italic;font-weight:500}',
+ brochure:'.residenceView .heroWords a{background:transparent;border:1px solid var(--ink);color:var(--ink);border-radius:0}',
+ classroom:'.learningSpace .heroWords a{border-radius:16px;box-shadow:5px 5px 0 var(--paper)}',
+ playful:'.poppyScene .heroWords a{border-radius:34px;transform:rotate(-1deg);box-shadow:4px 4px 0 var(--accent)}',
+ technical:'.drawingStage .heroWords a{border:2px solid var(--ink);border-radius:0;text-transform:uppercase}.specSheet{background-image:linear-gradient(#34343413 1px,transparent 1px);background-size:20px 20px}',
+ ledger:'.marketDesk .heroWords a{border-radius:3px}.marketDesk .heroWords h1{font-weight:650}',
+ construction:'.siteBuilding .heroWords a{background:transparent;border:2px solid var(--ink);color:var(--ink);border-radius:0}',
+ vinyl:'.recordSleeve .heroWords a{border-radius:100px}.recordSleeve .heroWords h1{font-style:italic}',
+ neon:'.nightStage .heroWords a{border:2px solid var(--paper);border-radius:0;font-weight:900}.nightStage .heroWords h1{text-transform:uppercase}',
+ operating:'.orbitHome .heroWords a{border-radius:12px}.workspaceModules{box-shadow:0 20px 35px #0002}'
+};
+const mobileSignatures={
+ editorial:'.editorialCover .heroFigure{order:-1;transform:none}.editorialCover .heroWords{padding-top:45px}',
+ dashboard:'.productBoard .appPanel{order:-1;min-height:180px}.productBoard .heroWords{padding-top:22px}',
+ poster:'.posterStage .heroWords h1{font-size:clamp(58px,15vw,95px)}',
+ booklet:'.tableStage .heroFigure{order:-1}.tableStage .heroWords{padding-top:20px}',
+ newspaper:'.editorialCover .heroFigure{order:-1}',
+ blueprint:'.planBoard .heroFigure{order:-1}',
+ garden:'.gardenScene .heroFigure{order:-1}.gardenHalo{z-index:2}',
+ brochure:'.residenceView .heroFigure{order:-1}',
+ classroom:'.learningSpace .courseCards{order:-1}.learningSpace .heroWords{padding-top:15px}',
+ playful:'.poppyScene .heroFigure{order:-1}.poppyScene .heroWords{padding-top:20px}',
+ technical:'.drawingStage .specSheet{order:-1}',
+ ledger:'.marketDesk .researchBoard{order:-1}.marketDesk .heroWords{padding-top:18px}',
+ construction:'.siteBuilding .heroFigure{order:-1}',
+ vinyl:'.recordSleeve .heroFigure{order:-1;max-width:87%;margin:auto}',
+ neon:'.nightStage .heroFigure{order:-1}.nightStage .heroWords{padding-top:15px}',
+ operating:'.orbitHome .workspaceModules{order:-1}.orbitHome .heroWords{padding-top:18px}'
+};
+return (css.join("\n")+"\n"+perIndustryDetails[st.layout]+"\n@media(max-width:850px){"+mobileSignatures[st.layout]+"}").replaceAll("align-items:start","align-items:flex-start");
 }
 for(const st of entries){
  const dir="templates/"+st.slug+"/src/";
