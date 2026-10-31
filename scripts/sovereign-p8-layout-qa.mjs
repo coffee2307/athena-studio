@@ -22,24 +22,24 @@ for(const site of sites){
     const response=await page.goto(url,{waitUntil:"load",timeout:45000});
     if(response?.status()!==200)throw Error("HTTP "+response?.status()+" "+url);
     await page.evaluate(()=>document.fonts.ready);
-    const selectors=site==="creative-studio"?{root:".sora",close:".drawerX",panel:".drawer"}:site==="modern-corporate"?{root:".north",close:".panelTop button",panel:".panel"}:{root:".moc",close:".browseClose",panel:".browsePanel"};
+    const selectors=site==="creative-studio"?{root:".sora",close:'[class*="_drawerX__"]',panel:'[class*="_drawer__"]'}:site==="modern-corporate"?{root:".north",close:'[class*="_panelTop__"] button',panel:'[class*="_panel__"]'}:{root:".moc",close:'[class*="_browseClose__"]',panel:'[class*="_browsePanel__"]'};
     const measured=await page.evaluate(({site,route})=>{
      const rect=e=>{const r=e.getBoundingClientRect();return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height}};
      const by=q=>[...document.querySelectorAll(q)].filter(e=>getComputedStyle(e).display!=="none");
      const issues=[];
      const collide=(a,b,description,ratio=.02)=>{const A=rect(a),B=rect(b);const x=Math.max(0,Math.min(A.right,B.right)-Math.max(A.left,B.left)),y=Math.max(0,Math.min(A.bottom,B.bottom)-Math.max(A.top,B.top));if(x*y>Math.max(24,Math.min(A.width*A.height,B.width*B.height)*ratio))issues.push({description,area:Math.round(x*y)})};
      if(site==="creative-studio"){
-      const cards=by(route==="work"?".workPiece":".project");
+      const cards=by(route==="work"?'[class*="_workPiece__"]':'[class*="_project__"]');
       for(let i=0;i<cards.length;i++)for(let j=i+1;j<cards.length;j++){
        for(const e of [...cards[i].querySelectorAll("h2,p,small")])for(const img of cards[j].querySelectorAll("img"))collide(e,img,"SORA text/image cards "+i+"/"+j);
        for(const e of [...cards[j].querySelectorAll("h2,p,small")])for(const img of cards[i].querySelectorAll("img"))collide(e,img,"SORA text/image cards "+j+"/"+i);
       }
      }
      if(site==="commerce-standard"&&!route){
-      const strips=[".shippingNote",".storeHead",".secondary"].map(q=>document.querySelector(q)).filter(Boolean);
+      const strips=['[class*="_shippingNote__"]','[class*="_storeHead__"]','[class*="_secondary__"]'].map(q=>document.querySelector(q)).filter(Boolean);
       for(let i=0;i<strips.length-1;i++)collide(strips[i],strips[i+1],"MOC header bands",.002);
-      const logo=document.querySelector(".wordmark");const cat=document.querySelector(".secondary");if(logo&&cat)collide(logo,cat,"MOC logo/nav",.001);
-      const labels=by(".secondary a");
+      const logo=document.querySelector('[class*="_wordmark__"]');const cat=document.querySelector('[class*="_secondary__"]');if(logo&&cat)collide(logo,cat,"MOC logo/nav",.001);
+      const labels=by('[class*="_secondary__"] a');
       for(let i=0;i<labels.length;i++)for(let j=i+1;j<labels.length;j++)collide(labels[i],labels[j],"MOC nav labels",.003);
      }
      const all=[...document.querySelectorAll("h1,h2,h3,label,nav a,button,figcaption,small")].filter(e=>{const s=getComputedStyle(e),r=e.getBoundingClientRect();return s.display!=="none"&&r.width>3&&r.height>3&&!e.closest('[aria-hidden="true"]')});
@@ -53,7 +53,7 @@ for(const site of sites){
      const cdps=await page.context().newCDPSession(page);
      await cdps.send("DOM.enable");await cdps.send("CSS.enable");
      const doc=await cdps.send("DOM.getDocument");
-     for(const selector of [".letterForm label",".letterForm h1"]){
+     for(const selector of ['[class*="_letterForm__"] label','[class*="_letterForm__"] h1']){
       const {nodeId}=await cdps.send("DOM.querySelector",{nodeId:doc.root.nodeId,selector});
       if(!nodeId)throw Error("Missing CDP font target "+selector);
       const res=await cdps.send("CSS.getPlatformFontsForNode",{nodeId});
