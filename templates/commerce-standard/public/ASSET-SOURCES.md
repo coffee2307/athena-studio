@@ -8,3 +8,11 @@ construction-firm: https://www.pexels.com/photo/585419/, https://www.pexels.com/
 music-label: https://www.pexels.com/photo/164938/, https://www.pexels.com/photo/167092/, https://www.pexels.com/photo/210922/, https://www.pexels.com/photo/4571219/, https://www.pexels.com/photo/4087991/
 live-concert: https://www.pexels.com/photo/1763075/, https://www.pexels.com/photo/1105666/, https://www.pexels.com/photo/1190298/, https://www.pexels.com/photo/167491/, https://www.pexels.com/photo/154147/
 team-intranet: https://www.pexels.com/photo/3184291/, https://www.pexels.com/photo/3183150/, https://www.pexels.com/photo/3184360/, https://www.pexels.com/photo/3184639/, https://www.pexels.com/photo/3183197/
+
+MOC Sovereign editorial product assets (Pexels free license; demo photography; not merchant product images):
+- Image 1: https://www.pexels.com/photo/vases-in-a-minimalist-studio-19217224/ — Pavel Morillo
+- Image 2: https://www.pexels.com/photo/lamp-on-table-6825311/ — Kaboompics
+- Image 3: https://www.pexels.com/photo/close-up-shot-of-a-beige-textile-7232409/ — Artem Podrez
+- Image 4: https://www.pexels.com/photo/a-close-up-shot-of-ceramic-vases-5598279/ — Anna Tarazevich
+- Image 5: https://www.pexels.com/photo/rustic-woven-basket-in-minimalist-setting-34846770/ — Magda Ehlers
+
