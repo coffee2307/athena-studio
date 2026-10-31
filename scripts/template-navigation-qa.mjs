@@ -53,6 +53,26 @@ for(const slug of slugs){
  }catch(error){failures.push({slug,reason:String(error)});console.log("FAIL DESKTOP",slug,String(error));}
 }
 await desktop.close();
+// The 21st site is a standalone Vite/React experience, not a WorldSite skin.
+const digital=await browser.newPage({viewport:{width:390,height:844},reducedMotion:"reduce"});
+try{
+ const response=await digital.goto(origin+"/immersive/digital-creators/index.html#/",{waitUntil:"domcontentloaded",timeout:40000});
+ if(response?.status()!==200)throw Error("Digital Creators HTTP "+response?.status());
+ const toggle=digital.locator(".dc-constellation-toggle");
+ await toggle.waitFor({state:"visible",timeout:10000});
+ await toggle.click();
+ const panel=digital.locator(".dc-constellation-nav");
+ await panel.waitFor({state:"visible",timeout:6000});
+ if(await panel.locator(".dc-orbit-card").count()!==3)throw Error("Creative atlas needs three orbit routes");
+ await digital.screenshot({path:".qa/template-navigation/digital-creators-mobile-open.png",animations:"disabled"});
+ await digital.keyboard.press("Escape");
+ if(await toggle.getAttribute("aria-expanded")!=="false")throw Error("Digital Creators Escape failed");
+ await toggle.click();
+ await panel.locator(".dc-orbit-card").nth(1).click();
+ await digital.waitForURL("**/#/gioi-thieu",{timeout:12000});
+ console.log("PASS MOBILE digital-creators digital-creators-native");
+}catch(error){failures.push({slug:"digital-creators",reason:String(error)});console.log("FAIL DIGITAL",String(error));}
+await digital.close();
 await browser.close();
-console.log("TEMPLATE_NAV_RESULT",JSON.stringify({unique:identities.size,checked:slugs.length,failures}));
+console.log("TEMPLATE_NAV_RESULT",JSON.stringify({unique:identities.size+1,checked:slugs.length+1,failures}));
 if(failures.length||identities.size!==20)process.exitCode=1;
