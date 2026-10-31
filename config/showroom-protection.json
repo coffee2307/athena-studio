@@ -3,7 +3,7 @@
   "status": "protected",
   "approved_on": "2026-10-31",
   "scope": "/template-demos/auto-showroom — cinematic McLaren P1",
-  "policy": "Explicit owner approval on 2026-10-31 covers GLB-mesh optical silhouette framing, one responsive mobile stage, breakpoint camera recreation and regression checks. Desktop editorial composition and the vecarz CC BY 4.0 GLB stay unchanged. Future modifications require a new explicit request and updated verification. Follow-on approved UI adjustment: distinct template navigation patterns, removal of repeated northeast-arrow text, and subtle decorative affordance only; GLB and camera path unchanged.",
+  "policy": "Explicit owner approval on 2026-10-31 covers GLB-mesh optical silhouette framing, one responsive mobile stage, breakpoint camera recreation and regression checks. Desktop editorial composition and the vecarz CC BY 4.0 GLB stay unchanged. Future modifications require a new explicit request and updated verification. Follow-on approved UI adjustment: distinct template navigation patterns, removal of repeated northeast-arrow text, and subtle decorative affordance only; GLB and camera path unchanged. Owner's 2026-10-31 ATHENA-REFINEMENT-02 approval permits removal of the redundant showroom mode rail, an accessible 3D spinner and the cockpit mobile-menu UI; GLB, Draco decoder, camera logic, cinematic keyframes and complete author attribution must remain protected.",
   "verified": [
     "45/45 actual Chromium WebGL framing checks: 9 widths (320/375/390/428/497/500/600/768/1440px) × 5 chapters",
     "Mobile frame from 129 actual mesh silhouette support vertices; safe x margin >= 8% at all checked chapter poses",
@@ -13,17 +13,18 @@
     "Model geometry, material textures and vecarz CC BY attribution preserved",
     "Physical iPhone Safari GPU/performance and production deploy remain UNVERIFIED",
     "Navigation: 21 unique registered identities (20 WorldSite patterns, Digital Creators native design).",
-    "Northeast-arrow glyph eliminated from Athena application source; 3D and attribution unchanged."
+    "Northeast-arrow glyph eliminated from Athena application source; 3D and attribution unchanged.",
+    "REFINEMENT-02: explicitly approved loader, post-cinematic rail and menu UI changes are protected by new SHA hashes; prior camera/model asset hashes are unchanged."
   ],
   "file_blobs": {
     "components/immersive/McLarenShowroomScene.tsx": "d359d4ba3d18bd525a3caace42fba21ed4b09218",
     "components/immersive/AutoCinematicTrack.tsx": "56cd30b34fd3d44e44d4962a6e48a453cd72954a",
     "components/immersive/WorldScene.tsx": "fc03a3697c95ffa5bd3338abee6a08f79ec7cb70",
-    "components/templates/WorldImmersiveHome.tsx": "1df6fc54ac76e60707660fac8a521081208daf0d",
-    "components/immersive/McLarenLoadingUI.tsx": "5e946715a0e43b0091912dc60fd76774ad2ce2c3",
+    "components/templates/WorldImmersiveHome.tsx": "9b6b94d902f1da792009afb71b569442ad26edb9",
+    "components/immersive/McLarenLoadingUI.tsx": "af4009a7150adc77ac64ff8fae669f52b989aea8",
     "app/black-velocity-cinematic.css": "36baf04538b32631349970c1d3d1c6962fc9f2e5",
     "app/black-velocity.css": "6741c818651ada85c4f1108e43e63cfcaf3e8fa2",
-    "app/auto-showroom-minimal.css": "3a628bf226a8eda5b3d6ae78c915550bff715acc",
+    "app/auto-showroom-minimal.css": "06277b51b6938ebefb7d24e49443485403638e8c",
     "public/models/mclaren.glb": "b2a0e4fa38b928afdcebd01e3b31ab2dd0558e73",
     "lib/showroom-orbit.ts": "1cebf096a745005be050dc30c917290fcc658f67",
     "app/black-velocity-mobile-showcase.css": "29ceb6dd380155158070b566e483b0c497ef8393",
