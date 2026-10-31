@@ -18,7 +18,7 @@ export function OperationsShell({children,admin=false,notice,title,subtitle}:{ch
    <p className="small-index">ATHENA STUDIO / {admin?"ĐIỀU HÀNH":"KHÔNG GIAN KHÁCH HÀNG"}</p>
    <h1>{title}<em>.</em></h1>
    <p className="ops-intro">{subtitle}</p>
-   <nav className="ops-tabs" aria-label="Điều hướng khu vực tài khoản">{nav.map(item=><Link href={item.href} key={item.href}>{item.label} <span aria-hidden="true">↗</span></Link>)}</nav>
+   <nav className="ops-tabs" aria-label="Điều hướng khu vực tài khoản">{nav.map(item=><Link href={item.href} key={item.href}>{item.label} <span aria-hidden="true"></span></Link>)}</nav>
    {messageFromNotice(notice)&&<p className="ops-notice" role="status">{messageFromNotice(notice)}</p>}
    {children}
   </div>
