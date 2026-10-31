@@ -126,3 +126,6 @@
 .browseFoot{font-size:18px;padding-top:5px}
 }
 @media(prefers-reduced-motion:reduce){.moc :is(.heroLabel,.ticker>div,.showcase figure img,.materialPreview img){animation:none!important}.moc [data-moc-reveal],.menuOverlay,.browsePanel{transition:none!important}.moc [data-moc-reveal]{opacity:1!important;transform:none!important}}
+
+/* Bring meaningful shop headline into the first mobile fold without losing photo-led identity. */
+@media(max-width:650px){.showcase figure{height:44svh;min-height:310px;max-height:430px}.showcaseCopy{padding-top:35px;padding-bottom:62px}.showcase h1{margin:19px 0 24px}.heroLabel{height:96px;width:96px;top:9%;right:6%}}
