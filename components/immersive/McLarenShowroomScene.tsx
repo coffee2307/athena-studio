@@ -7,8 +7,9 @@ import {DRACOLoader} from "three/addons/loaders/DRACOLoader.js";
 import {RoomEnvironment} from "three/addons/environments/RoomEnvironment.js";
 import type {WorldSceneProps} from "./WorldScene";
 import {McLarenLoadingUI} from "./McLarenLoadingUI";
-import {CHAPTER_YAWS,CHAPTER_ELEVATIONS,CHAPTER_DISTANCES,narrativeOrbit,wrapOrbit,nextScrollChapter,scrollTransition,clamp01,smooth} from "@/lib/showroom-orbit";
+import {CHAPTER_YAWS,CHAPTER_ELEVATIONS,CHAPTER_DISTANCES,narrativeOrbit,wrapOrbit,shortestOrbitDelta,nextScrollChapter,clamp01,smooth} from "@/lib/showroom-orbit";
 import {buildCarSilhouetteSupports,projectCarSilhouette} from "@/lib/showroom-framing";
+import {showroomZoomFactor,showroomZoomRadius} from "@/lib/showroom-camera-controls";
 
 const MODEL_PATH="/models/mclaren.glb?v=20261029-p1-vecarz";
 type SceneState="loading"|"ready"|"fallback";
@@ -201,6 +202,8 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   let queuedContinuation=false;
   let drag=false,dragPointer:number|null=null,previousX=0;
   let cameraYaw=.72,manualMode=false,manualRadius=0,manualHeight=0;
+  // Canonical radius excludes zoom. Never capture camera.position after zoom as a base.
+  let unzoomedRadius=8.2;
   let yawTransition:{start:number;end:number;startP:number;endP:number;direction:1|-1;radius:number;height:number;startedAt:number}|null=null;
   let currentMode=modeRef.current,currentProgress=0,goalProgress=0;
   // Desktop renders on every requested RAF during active interaction, not at an
@@ -330,22 +333,27 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
      const phase=clamp01((currentProgress-tx.startP)/Math.max(.00001,Math.abs(tx.endP-tx.startP))*(tx.direction));
      // Prevent an oversized wheel delta from completing an orbit in one GPU frame.
      const fraction=smooth(Math.min(phase,clamp01((now-tx.startedAt)/420)));
-     cameraYaw=scrollTransition(tx.start,tx.end,tx.startP,tx.endP,currentProgress);
+     // Angle, radius and elevation share the same bounded transition fraction.
+     cameraYaw=wrapOrbit(tx.start+shortestOrbitDelta(tx.start,tx.end)*fraction);
      radius=THREE.MathUtils.lerp(tx.radius,authoredRadius,fraction);
      height=THREE.MathUtils.lerp(tx.height,scrollHeight,fraction);
      if(fraction>=.9999)yawTransition=null;
     }else cameraYaw=scrollOrbit;
    }else if(!manualMode)cameraYaw=wrapOrbit(heroOrbit+currentProgress*.20);
-   // Apply zoom after chapter/manual camera decisions, so it still works after a drag.
-   // Each click moves the camera by ~18%; the default view remains unchanged.
-   if(!isMobile)radius*=1-clamp(zoomRef.current,-2,2)*.18;
-   const wanted=new THREE.Vector3(Math.cos(cameraYaw)*radius,height,Math.sin(cameraYaw)*radius);
+   // Store the canonical radius BEFORE zoom. Only the projection uses the zoom factor.
+   // A drag or scroll snap must never bake an already magnified radius into manual state.
+   unzoomedRadius=radius;
+   const zoomFactor=isMobile?1:showroomZoomFactor(zoomRef.current);
+   const displayedRadius=showroomZoomRadius(radius,isMobile?0:zoomRef.current);
+   const wanted=new THREE.Vector3(Math.cos(cameraYaw)*displayedRadius,height,Math.sin(cameraYaw)*displayedRadius);
    if(scrollRootId)camera.position.copy(wanted);
    else camera.position.lerp(wanted,lerp);
    camera.lookAt(target);
    // The camera radius is fixed during dragging. No per-frame auto-fit/dolly.
    if(canvas){
-    canvas.dataset.cameraRadius=radius.toFixed(4);
+    canvas.dataset.cameraRadius=displayedRadius.toFixed(4);
+    canvas.dataset.cameraBaseRadius=unzoomedRadius.toFixed(4);
+    canvas.dataset.zoomFactor=zoomFactor.toFixed(6);
     canvas.dataset.zoomLevel=String(zoomRef.current);
     canvas.dataset.cameraYaw=cameraYaw.toFixed(5);
     canvas.dataset.cameraMode=manualMode?"manual":yawTransition?"transition":"scroll";
@@ -407,7 +415,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    drag=true;dragPointer=event.pointerId;previousX=event.clientX;
    manualMode=true;yawTransition=null;
    cameraYaw=wrapOrbit(Math.atan2(camera.position.z,camera.position.x));
-   manualRadius=Math.hypot(camera.position.x,camera.position.z);
+   manualRadius=unzoomedRadius;
    manualHeight=camera.position.y;
    canvas.setPointerCapture(event.pointerId);
   };
@@ -438,7 +446,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
      yawTransition={
       start:cameraYaw,end:CHAPTER_YAWS[destination],
       startP:previous,endP:endpoint,direction,
-      radius:Math.hypot(camera.position.x,camera.position.z),
+      radius:unzoomedRadius,
       height:camera.position.y,startedAt:performance.now()
      };
      manualMode=false;

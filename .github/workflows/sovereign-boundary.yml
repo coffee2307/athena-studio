@@ -6,6 +6,17 @@ on:
       - "components/sovereign/**"
       - "components/templates/WorldSite.tsx"
       - "components/templates/WorldImmersiveHome.tsx"
+      - "components/templates/WorldEditorialInterlude.tsx"
+      - "components/immersive/McLarenShowroomScene.tsx"
+      - "components/immersive/AutoCinematicTrack.tsx"
+      - "components/immersive/ModelAttribution.tsx"
+      - "lib/showroom-camera-controls.ts"
+      - "data/demo-worlds.ts"
+      - "data/demo-world-details.ts"
+      - "app/black-velocity.css"
+      - "app/black-velocity-cinematic.css"
+      - "scripts/showroom-camera-integrated-qa.mjs"
+      - "tests/showroom-camera-and-copy.test.mjs"
       - "components/immersive/McLarenLoadingUI.tsx"
       - "app/template-navigation-identities.css"
       - "app/auto-showroom-minimal.css"
@@ -47,7 +58,9 @@ jobs:
       - name: Route, framework and standalone export contracts
         run: node --test tests/sovereign-boundary.test.mjs tests/sovereign-export-fidelity.test.mjs tests/sovereign-p8-type-layout.test.mjs tests/sora-living-issue.test.mjs tests/dna03-template-projects.test.mjs tests/fashion-3d-hero.test.mjs
       - name: Locked McLaren asset/camera and refinements contracts
-        run: node --test tests/showroom-protection.test.mjs tests/refinement02-source.test.mjs
+        run: |
+          node --test tests/showroom-protection.test.mjs tests/refinement02-source.test.mjs
+          node --experimental-strip-types --test tests/showroom-camera-and-copy.test.mjs
       - name: Install Digital Creators standalone dependencies
         run: npm ci --prefix templates/digital-creators --no-audit --no-fund
       - name: Compile the native Vite/React/Three.js export
@@ -101,6 +114,8 @@ jobs:
         run: node scripts/north-impact-rail-qa.mjs
       - name: Fashion 3D GLB, Z-axis drag, font and contrast browser checks
         run: node scripts/fashion-3d-qa.mjs
+      - name: McLaren canonical zoom, drag, 12 scroll samples and homepage identity
+        run: SHOWROOM_QA_WIDTHS=390,1440 node scripts/showroom-camera-integrated-qa.mjs
       - name: Upload P8 screenshots and render evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -113,4 +128,5 @@ jobs:
             .qa/north-upgrade/
             .qa/north-impact-rail/
             .qa/fashion-3d/
+            .qa/showroom-camera-integrated/
           if-no-files-found: ignore

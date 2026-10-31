@@ -163,3 +163,6 @@
 @media(prefers-reduced-motion:reduce){
  .ix-auto-showroom .bv-cinematic-track .bv-cinematic-copy{transition:none}
 }
+
+/* Keep chapter copy below the sticky showroom header during mid-chapter scroll. */
+@media(min-width:761px){.ix-auto-showroom .bv-cinematic-step .bv-cinematic-copy{position:sticky;top:clamp(132px,18svh,190px)}}

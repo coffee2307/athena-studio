@@ -49,8 +49,12 @@ export function WorldImmersiveHome({slug,world,extra}:Props){
    <div className="ix-hero-copy">
     <div className="ix-kicker"><span className="ix-kicker-dot"/>{isAuto?"BLACK VELOCITY / CONCEPT STUDY":world.eyebrow}</div>
     <h1>{isStudio?<>Đủ khác biệt<br/>để <em>được nhớ.</em></>:isArch?<>Không gian<br/><em>biết lắng nghe.</em></>:<>BORN FOR<br/><em>THE EDGE.</em></>}</h1>
-    <p>{isAuto?"Khám phá thiết kế McLaren P1 qua mô hình 3D tương tác: từ dáng xe thấp, đường dẫn khí đến bề mặt và các chi tiết hoàn thiện. Đây là trải nghiệm showroom minh họa, không phải trang bán xe.":world.intro}</p>
-    <div className="ix-hero-links"><Link href={root+"/work"} className="ix-hero-primary">{isArch?"Khám phá công trình":slug==="auto-showroom"?"Khám phá thiết kế":"Xem dự án"} <span aria-hidden="true"></span></Link><Link href={root+"/about"} className="ix-hero-text-link">{isAuto?"Về BLACK VELOCITY":"Câu chuyện của chúng tôi"} <span aria-hidden="true"></span></Link><Link href={root+"/experience"} className="ix-journey-link">{isAuto?"Cinematic Experience":"Trải nghiệm 3D"} <span aria-hidden="true"></span></Link></div>
+    <p>{isAuto?"Khám phá McLaren P1 qua năm góc nhìn 3D. Kéo ngang để xoay, dùng nút + và − để quan sát chi tiết, hoặc cuộn xuống để tiếp tục hành trình.":world.intro}</p>
+    <div className="ix-hero-links">
+     {isAuto?<button type="button" className="ix-hero-primary" onClick={()=>jumpToAutoCinematicChapter(1)}>XEM NĂM GÓC NHÌN</button>:<Link href={root+"/work"} className="ix-hero-primary">{isArch?"Khám phá công trình":"Xem dự án"} <span aria-hidden="true"></span></Link>}
+     <Link href={isAuto?root+"/work":root+"/about"} className="ix-hero-text-link">{isAuto?"BA NGHIÊN CỨU THIẾT KẾ":"Câu chuyện của chúng tôi"}</Link>
+     {!isAuto&&<Link href={root+"/experience"} className="ix-journey-link">Trải nghiệm 3D</Link>}
+    </div>
    </div>
    <div className="ix-hero-visual immersive-stage" data-scene={slug} data-preset={mode}>
     {isAuto?<div className="ix-hero-image bv-studio-fallback" aria-hidden="true"/>:<div className="ix-hero-image" key={activeImage}><Image src={activeImage} fill priority quality={88} unoptimized={slug==="creative-studio"} alt={"Ảnh concept "+world.brand+": "+caption} sizes="(max-width: 820px) 100vw, 70vw" className="ix-hero-photograph"/></div>}
@@ -78,10 +82,10 @@ export function WorldImmersiveHome({slug,world,extra}:Props){
     {!isAuto&&<div className="ix-visual-coordinate"><span>EDITION / 2026</span><span>{enable3D?"3D STUDY / ACTIVE":"EDITORIAL VIEW / 3D OPTIONAL"}</span></div>}
     {isStudio&&!enable3D&&<div className="ix-studio-overlay" aria-hidden="true"><span>01 / 03</span><strong>FORM<br/><em>&amp; FEELING.</em></strong><span>SORA © STUDIO</span></div>}
     {isArch&&<div className="ix-arch-overlay" aria-hidden="true"><span>MỘC / ARCHITECTURE</span><strong>Built around<br/><i>the way we live.</i></strong></div>}
-    {!isStudio&&!isArch&&!enable3D&&<div className="ix-auto-overlay" aria-hidden="true"><span>VELAR / MOTOR COLLECTION</span><strong>BEYOND<br/>THE <i>ORDINARY.</i></strong></div>}
-    <div className="ix-scene-footer"><div className="ix-scene-caption"><span>{String(mode+1).padStart(2,"0")} / 03</span><strong>{caption}</strong></div></div>
+    {!isStudio&&!isArch&&!enable3D&&<div className="ix-auto-overlay" aria-hidden="true"><span>BLACK VELOCITY / DESIGN STUDY</span><strong>BEYOND<br/>THE <i>ORDINARY.</i></strong></div>}
+    {!isAuto&&<div className="ix-scene-footer"><div className="ix-scene-caption"><span>{String(mode+1).padStart(2,"0")} / 03</span><strong>{caption}</strong></div></div>}
    </div>
-   <div className="ix-hero-bottom"><span>{isAuto?"EXPLORE THE MACHINE":"SCROLL TO DISCOVER"} <span aria-hidden="true">↓</span></span><span>{slug==="auto-showroom"?"MÔ HÌNH 3D / CONCEPT DEMO":world.brand+" / DEMONSTRATION SITE"}</span></div>
+   <div className="ix-hero-bottom"><span>{isAuto?"EXPLORE THE MACHINE":"SCROLL TO DISCOVER"} <span aria-hidden="true">↓</span></span><span>{slug==="auto-showroom"?"MCLAREN P1 / FIVE PERSPECTIVES":world.brand+" / DEMONSTRATION SITE"}</span></div>
   </section>;
  return <main className={"ix-site ix-"+slug+" immersive-home"} data-immersive={enable3D?"true":"false"} id="world-main">
   {isAuto?<AutoCinematicTrack>{hero}</AutoCinematicTrack>:hero}
@@ -92,10 +96,10 @@ export function WorldImmersiveHome({slug,world,extra}:Props){
     <button type="button" className="ix-render-toggle" aria-pressed={enable3D ? "true" : "false"} aria-label={enable3D?"Tắt chế độ 3D":"Bật chế độ 3D"} onClick={()=>setEnable3D(value=>!value)}>3D {enable3D?"ON":"OFF"}</button>
    </div>
   </section>}
-  {isAuto&&<div className="bv-after-cinematic" id="bv-after-cinematic"><span>TIẾP TỤC KHÁM PHÁ</span><ModelAttribution compact/></div>}
-  <section className="ix-manifesto"><span>{isAuto?"02 / DESIGN PHILOSOPHY":"01 / THE STUDIO"}</span><h2>{isAuto?"THE FORM OF PERFORMANCE.":extra.storyTitle}</h2><div><p>{isAuto?"BLACK VELOCITY là website showroom mẫu của Athena Studio. Trọng tâm là trải nghiệm xem McLaren P1 ở nhiều góc độ, quan sát bề mặt thân xe và chuyển cảnh mượt mà. Mô hình 3D được cấp phép CC BY 4.0; đây không phải website chính thức của McLaren hoặc dịch vụ bán xe.":extra.story}</p><Link href={root+"/about"}>{isAuto?"Khám phá định hướng":"Về chúng tôi"} <span aria-hidden="true"></span></Link></div></section>
+  {isAuto&&<div className="bv-after-cinematic" id="bv-after-cinematic"><span>3D STUDY / ORIGINAL MODEL CREDIT</span><ModelAttribution compact/></div>}
+  <section className="ix-manifesto"><span>{isAuto?"FIVE PERSPECTIVES / ONE CAR":"01 / THE STUDIO"}</span><h2>{isAuto?"ONE CAR. FIVE PERSPECTIVES.":extra.storyTitle}</h2><div><p>{isAuto?"Một hình khối, nhiều cách nhìn: dáng xe thấp ở góc toàn cảnh, đường nét thân xe dưới ánh sáng studio và những chi tiết phía sau. Mỗi chuyển động camera đưa người xem đến gần hơn với McLaren P1.":extra.story}</p><Link href={root+"/about"}>{isAuto?"Đọc về BLACK VELOCITY":"Về chúng tôi"}</Link></div></section>
   <WorldEditorialInterlude slug={slug as "creative-studio"|"architecture-studio"|"auto-showroom"}/>
   {!isAuto&&<Series slug={slug} world={world} root={root}/>}
-  <section className="ix-ending"><span>{isAuto?"05 / NEXT EXPERIENCE":"04 / GET IN TOUCH"}</span><h2>{isAuto?"YOUR NEXT PERSPECTIVE.":extra.contactTitle}</h2><p>{isAuto?"Tiếp tục xem các góc nhìn thiết kế và trang giới thiệu concept, hoặc mở biểu mẫu yêu cầu tùy biến website mẫu.":extra.contactIntro}</p><Link href={root+"/contact"}>{isAuto?"Yêu cầu tùy biến website":"Bắt đầu một cuộc trò chuyện"} <span aria-hidden="true"></span></Link></section>
+  <section className="ix-ending"><span>{isAuto?"CONTINUE THE STUDY":"04 / GET IN TOUCH"}</span><h2>{isAuto?"EXPLORE THE DETAILS.":extra.contactTitle}</h2><p>{isAuto?"Ba nghiên cứu chọn lọc về tỷ lệ, bề mặt và phần đuôi của McLaren P1. Khám phá từng góc nhìn ở trang tiếp theo.":extra.contactIntro}</p><Link href={isAuto?root+"/work":root+"/contact"}>{isAuto?"XEM BA NGHIÊN CỨU":"Bắt đầu một cuộc trò chuyện"}</Link></section>
  </main>;
 }
