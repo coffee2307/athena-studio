@@ -6,7 +6,8 @@ test("NORTH impact has meaningful outcomes rather than an empty decorative diagr
  assert.match(jsx,/aria-pressed=\{impactStep===i\}/);
  assert.match(jsx,/aria-controls="north-impact-result"/);
  assert.match(jsx,/aria-live="polite"/);
- assert.match(jsx,/className=\{s.impactMap\}/);
+ assert.match(jsx,/className=\{s.impactBody\}/);
+ assert.doesNotMatch(jsx,/className=\{s.impactMap\}/);
 });
 test("NORTH sticky utility and header remain joined to fixed rail",()=>{
  assert.match(css,/\.north \.utility\{\s*position:sticky;top:0/);
