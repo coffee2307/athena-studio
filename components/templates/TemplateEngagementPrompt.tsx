@@ -31,7 +31,7 @@ export function TemplateEngagementPrompt({slug,embedded=false}:{slug:string;embe
    <h2 id="template-interest-title">Bạn có thích mẫu này?</h2>
    <p>Hãy cho Athena biết điều bạn muốn giữ lại. Chúng tôi sẽ tùy biến giao diện theo thương hiệu, nội dung và cách bạn vận hành.</p>
    <div className="template-interest-actions">
-    <Link href={"/contact?service=web-development&template="+encodeURIComponent(slug)} target={embedded?"_top":undefined} onClick={close}>Trao đổi với Athena ↗</Link>
+    <Link href={"/contact?service=web-development&template="+encodeURIComponent(slug)} target={embedded?"_top":undefined} onClick={close}>Trao đổi với Athena </Link>
     <button type="button" onClick={close}>Tiếp tục xem demo</button>
    </div>
   </section>
