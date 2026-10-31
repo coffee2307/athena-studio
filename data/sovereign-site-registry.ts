@@ -3,9 +3,9 @@
  * Stage reflects the ACTUAL demo implementation, not its desired future status.
  */
 export const sovereignSites = {
- "creative-studio":{stage:"legacy",archetype:"living-editorial",owner:"SORA"},
- "modern-corporate":{stage:"legacy",archetype:"capability-navigation",owner:"NORTH"},
- "commerce-standard":{stage:"legacy",archetype:"tactile-storefront",owner:"MOC"},
+ "creative-studio":{stage:"sovereign",archetype:"living-editorial",owner:"SORA"},
+ "modern-corporate":{stage:"sovereign",archetype:"capability-navigation",owner:"NORTH"},
+ "commerce-standard":{stage:"sovereign",archetype:"tactile-storefront",owner:"MOC"},
  "fashion-archive":{stage:"legacy",archetype:"fashion-archive",owner:"FASHION"},
  "saas-product":{stage:"legacy",archetype:"product-workspace",owner:"LUMA"},
  "campaign-landing":{stage:"legacy",archetype:"campaign-poster",owner:"CAMPAIGN"},
