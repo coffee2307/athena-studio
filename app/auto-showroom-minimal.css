@@ -285,3 +285,33 @@
   bottom:clamp(177px,21svh,205px)!important;
  }
 }
+
+
+/* ATHENA-REFINEMENT-02 — loader and licensing in the McLaren's own visual language. */
+.world-site[data-world="auto-showroom"] .ix-auto-showroom .bv-cinematic-track .ix-car-load.bv-load-spinner{
+ position:absolute;z-index:24;left:50%;right:auto;top:50%;bottom:auto;
+ width:min(290px,calc(100vw - 38px));min-height:0;
+ transform:translate3d(-50%,-50%,0);padding:28px 22px;
+ display:flex;flex-direction:column;align-items:center;justify-content:center;gap:11px;
+ text-align:center;background:#0d1218ed;border:1px solid #f58b4359;
+ box-shadow:0 24px 65px #000a;backdrop-filter:blur(12px);pointer-events:auto;
+}
+.world-site[data-world="auto-showroom"] .bv-load-spinner .bv-spinner-ring{width:52px;height:52px;display:block;border:3px solid #7a838e66;border-top-color:#f58b43;border-right-color:#f58b43;border-radius:50%;animation:bvSpinnerRotate .88s linear infinite;flex:none}
+.world-site[data-world="auto-showroom"] .bv-load-spinner strong{font:750 13px/1.55 "Be Vietnam Pro",sans-serif;color:#f4f5f6;letter-spacing:0}
+.world-site[data-world="auto-showroom"] .bv-load-spinner .bv-spinner-description{font:400 11px/1.6 "Be Vietnam Pro",sans-serif;color:#b7c3cb}
+.world-site[data-world="auto-showroom"] .bv-load-spinner .bv-spinner-a11y{position:absolute;clip-path:inset(50%);height:1px;width:1px;overflow:hidden;white-space:nowrap}
+.world-site[data-world="auto-showroom"] .bv-load-spinner .bv-spinner-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:9px;margin-top:8px}
+.world-site[data-world="auto-showroom"] .bv-load-spinner .bv-spinner-actions button{min-height:44px;padding:9px 12px;background:#f18b4a;color:#111319;border:1px solid #f18b4a;font:750 11px "Be Vietnam Pro",sans-serif}
+.world-site[data-world="auto-showroom"] .bv-load-spinner .bv-spinner-actions button+button{background:#151b21;color:#f3f4f5;border-color:#98a4b0}
+.world-site[data-world="auto-showroom"] .bv-after-cinematic{display:flex;gap:24px;justify-content:space-between;align-items:center;padding:18px clamp(20px,6vw,110px);background:#0b0e12;color:#aeb7bd;border-bottom:1px solid #333d47}
+.world-site[data-world="auto-showroom"] .bv-after-cinematic>span{font:750 9px/1.5 "Be Vietnam Pro",sans-serif;letter-spacing:.12em;white-space:nowrap}
+.world-site[data-world="auto-showroom"] .bv-after-cinematic .ix-glb-credit{font:400 10px/1.6 "Be Vietnam Pro",sans-serif;margin:0;text-align:right;color:#aeb7bd}
+.world-site[data-world="auto-showroom"] .bv-after-cinematic a{color:#e4e9eb;text-underline-offset:3px}
+@keyframes bvSpinnerRotate{to{transform:rotate(360deg)}}
+@media(max-width:760px){
+.world-site[data-world="auto-showroom"] .ix-auto-showroom .bv-cinematic-track .ix-car-load.bv-load-spinner{left:50%;right:auto;top:50%;bottom:auto;width:min(276px,calc(100vw - 32px));transform:translate3d(-50%,-50%,0);padding:23px 17px}
+.world-site[data-world="auto-showroom"] .bv-after-cinematic{display:block;padding:18px 20px}
+.world-site[data-world="auto-showroom"] .bv-after-cinematic>span{display:block;margin-bottom:7px}
+.world-site[data-world="auto-showroom"] .bv-after-cinematic .ix-glb-credit{text-align:left;max-width:100%}
+}
+@media(prefers-reduced-motion:reduce){.world-site[data-world="auto-showroom"] .bv-load-spinner .bv-spinner-ring{animation:none;border-color:#f58b43 #647582 #647582 #647582}}
