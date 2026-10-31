@@ -233,3 +233,38 @@
 
 /* Prevent short menu labels from wrapping in the compact automotive rail. */
 @media(max-width:920px){.world-site[data-nav-style="cockpit"] .world-mobile-nav-links .world-nav-label{white-space:nowrap;overflow-wrap:normal}}
+
+/* Mobile trigger contract: familiar two/three bars. Individual brands keep
+   their own panel layout and entrance motion, never ornamental trigger glyphs. */
+@media(max-width:920px){
+ .world-site .world-menu-toggle{
+  width:46px;min-width:46px;height:46px;min-height:46px;
+  padding:0;gap:0;display:grid!important;place-items:center;
+  flex:0 0 46px;touch-action:manipulation;
+ }
+ .world-site .world-menu-toggle > .world-toggle-bars{
+  width:23px!important;height:18px!important;display:flex!important;
+  flex-direction:column;justify-content:space-between;align-items:flex-start;
+  padding:0!important;background:transparent!important;
+  border:0!important;transform:none!important;
+  opacity:1!important;transition:none!important;
+ }
+ .world-site .world-menu-toggle .world-toggle-bars i{
+  display:block;width:100%;height:2px;min-height:2px;flex:none;
+  background:currentColor;border:0;border-radius:2px;
+  transform:none;transition:width .2s ease,transform .2s ease;
+ }
+ .world-site .world-toggle-bars[data-bars="2"]{height:12px!important}
+ .world-site .world-toggle-bars[data-bars="2"] i:nth-child(2){width:72%}
+ .world-site .world-toggle-bars[data-bars="2"] i:nth-child(3){display:none}
+ .world-site .world-toggle-bars[data-bars="3"] i:nth-child(2){width:74%}
+ .world-site .world-menu-toggle[aria-expanded="true"] .world-toggle-bars i:first-child{
+  transform:translateX(2px);width:84%;
+ }
+ .world-site .world-menu-toggle[aria-expanded="true"] .world-toggle-bars i:nth-child(2){width:100%}
+ .world-site .world-menu-toggle[aria-expanded="true"] .world-toggle-bars i:nth-child(3){width:82%}
+ .world-site .world-menu-toggle:focus-visible{outline:2px solid var(--w-accent);outline-offset:3px}
+}
+@media(prefers-reduced-motion:reduce){
+ .world-site .world-menu-toggle .world-toggle-bars i{transition:none!important}
+}
