@@ -35,6 +35,6 @@ test("P0/P1 structural audit reports existing design debt without falsely claimi
  const r=spawnSync(process.execPath,[join(root,"scripts/sovereign-audit.mjs"),"--check"],{cwd:root,encoding:"utf8"});
  assert.equal(r.status,0,r.stdout+"\n"+r.stderr);
  assert.match(r.stdout,/"legacy":1/);
- assert.match(r.stdout,/"native-static":1/);
- assert.match(r.stdout,/"sovereign":19/);
+ assert.match(r.stdout,/"native-static":0/);
+ assert.match(r.stdout,/"sovereign":20/);
 });
