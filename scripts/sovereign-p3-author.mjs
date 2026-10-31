@@ -392,6 +392,7 @@ function footer(st){
 
 function makeSite(st){
  const Head=header(st);
+ Head.markup=Head.markup.replace(/(<Link className=\{style\.logo\} href=\{go\("\/"\)\}>)[^<]*/,'$1{site.brand}');
  const artifacts=st.parts.map((title,i)=>({title,description:[
  "An independent exploration of craft, process and everyday moments.",
  "A closer look at the detail, people and thinking behind the work.",
@@ -416,7 +417,7 @@ function makeSite(st){
  ' useEffect(()=>{if(!menu)return;const close=(event:KeyboardEvent)=>{if(event.key==="Escape")setMenu(false)};window.addEventListener("keydown",close);return()=>window.removeEventListener("keydown",close)},[menu]);',
  ' return <div className={style.root} id="'+st.slug+'-top">',
  Head.markup,
- ' {menu&&<button className={style.menuScrim} aria-label="Đóng điều hướng" onClick={()=>setMenu(false)}/>}<aside className={style.menuPanel} inert={!menu} aria-hidden={!menu}><div className={style.menuTitle}>NAVIGATION / '+st.brand.toUpperCase()+'</div>{navItems.map(([label,path],i)=><Link key={path} href={go(path)} onClick={()=>setMenu(false)}><small>0{i+1}</small>{label}</Link>)}<button onClick={()=>setMenu(false)}>CLOSE / MENU</button></aside>',
+ ' {menu&&<button className={style.menuScrim} aria-label="Đóng điều hướng" onClick={()=>setMenu(false)}/>}<aside className={style.menuPanel} inert={!menu} aria-hidden={!menu}><div className={style.menuTitle}>NAVIGATION / {site.brand}</div>{navItems.map(([label,path],i)=><Link key={path} href={go(path)} onClick={()=>setMenu(false)}><small>0{i+1}</small>{label}</Link>)}<button onClick={()=>setMenu(false)}>CLOSE / MENU</button></aside>',
  ' <main>',
  ' {section==="home"&&<>'+home(st)+'</>}',
  ' {section==="work"&&<>'+makeSection(st,"work")+'</>}',
@@ -425,7 +426,7 @@ function makeSite(st){
  ' {section==="about"&&<>'+makeSection(st,"about")+'</>}',
  ' {section==="contact"&&<>'+makeSection(st,"contact")+'</>}',
  ' </main>',
- footer(st),
+ footer(st).replaceAll(st.brand,"{site.brand}"),
  ' </div>;',
  '}'
  ];
