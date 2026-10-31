@@ -22,6 +22,23 @@ for(const width of [390,1440]){
  }catch(e){results.push({width,state,status,error:String(e)});console.log("WEBGL_PROBE_ERROR",String(e))}
  await page.close();
 }
+// Deterministic slow-network probe: a loaded spinner must appear before a single GLB byte resolves.
+{
+ const page=await browser.newPage({viewport:{width:390,height:844},reducedMotion:"no-preference"});
+ await page.route("**/models/mclaren.glb*",async route=>{await new Promise(resolve=>setTimeout(resolve,5000));await route.continue().catch(()=>{});});
+ try{
+  await page.goto(origin+"/template-demos/auto-showroom",{waitUntil:"domcontentloaded",timeout:45000});
+  const spinner=page.locator(".bv-spinner-ring");
+  await spinner.waitFor({state:"visible",timeout:8000});
+  const txt=await page.locator(".bv-load-spinner strong").textContent();
+  if(!txt?.includes("Đang tải mô hình McLaren"))throw Error("Incorrect spinner copy: "+txt);
+  if(await page.locator(".bv-load-spinner .ix-car-load-track").count())throw Error("Visual percent track remains");
+  await page.screenshot({path:".qa/refinement02/webgl/spinner-390.png"});
+  results.push({width:390,state:"spinner-visible",status:txt});
+  console.log("WEBGL_LOADING_SPINNER_PASS",txt);
+ }catch(e){results.push({width:390,state:"spinner-failed",error:String(e)});console.log("WEBGL_LOADING_SPINNER_FAIL",String(e))}
+ await page.close();
+}
 await browser.close();
 writeFileSync(".qa/refinement02/webgl/results.json",JSON.stringify(results,null,2));
 if(results.some(x=>x.error))process.exitCode=1;
