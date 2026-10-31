@@ -175,3 +175,10 @@
 @keyframes mocTileReveal{from{opacity:.64;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:650px){.moc .storeHead{min-height:74px;padding:9px 5vw;grid-template-columns:minmax(48px,1fr) auto minmax(48px,1fr)}.moc .wordmark{min-width:0}.moc .brandName{font-size:clamp(28px,9vw,39px)}.moc .wordmark small{font-size:7px;max-width:170px}.moc .secondary{display:none}}
 @media(prefers-reduced-motion:reduce){.moc .tile,.moc .cartBadge{animation:none!important}.moc .tileImage img{transition:none!important}}
+
+.moc .supportPage .selectShell{position:relative;width:100%;min-width:0}
+.moc .supportPage .selectShell select{display:block;width:100%;min-height:56px;padding:14px 51px 14px 18px;appearance:none;-webkit-appearance:none;border:1px solid #a68f74;border-radius:0;background:#fffaf2;color:#3a2d21;font:600 15px/1.5 "Be Vietnam Pro",sans-serif;cursor:pointer;outline-offset:3px}
+.moc .supportPage .selectShell select:hover{background:#f1e6d7;border-color:#79593d}
+.moc .supportPage .selectShell select:focus-visible{outline:3px solid #976c47}
+.moc .supportPage .selectChevron{pointer-events:none;position:absolute;right:17px;top:50%;transform:translateY(-54%);font-size:25px;line-height:1;color:#6d4b32}
+.moc .supportPage .selectShell option{background:#fffaf2;color:#3a2d21}

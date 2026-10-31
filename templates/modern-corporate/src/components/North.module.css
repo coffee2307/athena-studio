@@ -347,3 +347,15 @@
 .north .impact{scroll-margin-top:calc(var(--north-utility-height) + var(--north-header-height) + 16px)}
 
 @media(max-width:850px){.north .utility{z-index:40}.north .globalHead{z-index:45}}
+
+.north .impactJourney button{transform:none!important;transition:background-color .18s,border-color .18s}
+.north .impactJourney button:hover{transform:none}
+.north .impactNarrative{display:grid;gap:12px;align-content:start;min-height:230px}
+.north .impactNarrative h3{margin:0}
+.north .impactDeliverable{margin-top:10px}
+.north .inquiry .selectShell{position:relative;width:100%;min-width:0}
+.north .inquiry .selectShell select{display:block;width:100%;min-height:56px;padding:14px 51px 14px 18px;appearance:none;-webkit-appearance:none;border:1px solid #89a8b6;border-radius:0;background:#f1f6f5;color:#18394c;font:650 15px/1.5 "Be Vietnam Pro",sans-serif;cursor:pointer;outline-offset:3px}
+.north .inquiry .selectShell select:hover{background:#e0eceb;border-color:#356477}
+.north .inquiry .selectShell select:focus-visible{outline:3px solid #b47c51}
+.north .inquiry .selectChevron{pointer-events:none;position:absolute;right:17px;top:50%;transform:translateY(-54%);font-size:25px;line-height:1;color:#244b60}
+.north .inquiry .selectShell option{background:#f1f6f5;color:#18394c}
