@@ -81,7 +81,7 @@ for(const group of duplicateSourceGroups)debt.push("Identical exported UI source
 for(const group of duplicateCssGroups)debt.push("Identical exported style source: "+group.join(", "));
 const stages=Object.fromEntries(["legacy","native-static","sovereign"].map(k=>[k,rows.filter(x=>x.stage===k).length]));
 if(mode==="strict"){
- if(stages.legacy||stages["native-static"])failures.push("Strict sovereignty requires all 21 stages to be sovereign, including correct standalone export for Digital Creators");
+ if(stages.legacy||stages["native-static"])failures.push("Strict sovereignty requires all 21 templates to be independent. Remaining: "+rows.filter(r=>r.stage!=="sovereign").map(r=>r.slug+" ["+r.stage+"]").join(", "));
  if(duplicateSourceGroups.length)failures.push("Strict sovereignty forbids identical exported UI files");
  if(duplicateCssGroups.length)failures.push("Strict sovereignty forbids identical exported CSS");
  if(rows.some(r=>r.diagonal))failures.push("Forbidden diagonal glyph remains in standalone export");
