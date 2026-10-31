@@ -4,9 +4,9 @@ import {useRef,useState} from "react";
 import s from "./Sora.module.css";
 
 const pages=[
- {eyebrow:"01 / NHẬN DIỆN",title:"Một dấu ấn",note:"Hình ảnh mang theo tính cách.",accent:"NẾP",index:1},
- {eyebrow:"02 / KHÔNG GIAN",title:"Một cảm giác",note:"Ánh sáng mở đầu câu chuyện.",accent:"LẶNG",index:3},
- {eyebrow:"03 / TRẢI NGHIỆM",title:"Một chuyển động",note:"Khi giao diện biết lắng nghe.",accent:"MÙA",index:4}
+ {eyebrow:"01 / NHẬN DIỆN",title:"Bộ nhận diện thương hiệu",note:"Logo, bảng màu và kiểu chữ.",accent:"LOGO",index:1},
+ {eyebrow:"02 / WEBSITE",title:"Thiết kế website",note:"Trang nội dung và giao diện tương tác.",accent:"WEB",index:3},
+ {eyebrow:"03 / HÌNH ẢNH",title:"Chiến dịch hình ảnh",note:"Ảnh quảng cáo và bài đăng mạng xã hội.",accent:"ẢNH",index:4}
 ] as const;
 export function SoraLivingCover({images,workHref}:{images:string[];workHref:string}){
  const [page,setPage]=useState(0);
@@ -38,25 +38,25 @@ export function SoraLivingCover({images,workHref}:{images:string[];workHref:stri
  return <section className={s.livingHero} data-sora-ambient aria-label="Trang bìa tạp chí sáng tạo SORA">
   <div className={s.livingWords}>
    <div className={s.issueTop}><span>SORA / TẠP CHÍ SÁNG TẠO</span><span>ẤN BẢN 01 — 2026</span></div>
-   <h1><span>Ý tưởng</span><br/><em>có đời</em><br/>sống riêng.</h1>
-   <p>Không chỉ để ngắm nhìn. Mỗi ý tưởng đều có chất liệu, một cá tính và một câu chuyện để khám phá.</p>
-   <div className={s.livingActions}><Link href={workHref} className={s.livingPrimary}>Khám phá tuyển tập <span aria-hidden="true">→</span></Link><a href="#sora-manifesto" className={s.livingSecondary}>Lật sang trang sau <span aria-hidden="true">↓</span></a></div>
+   <h1><span>Logo.</span><br/><em>Website.</em><br/>Hình ảnh.</h1>
+   <p>Khám phá các mẫu thiết kế logo, giao diện website và hình ảnh quảng bá. Mỗi mẫu cho biết rõ nội dung và mục đích sử dụng.</p>
+   <div className={s.livingActions}><Link href={workHref} className={s.livingPrimary}>Xem các mẫu thiết kế <span aria-hidden="true">→</span></Link><a href="#sora-manifesto" className={s.livingSecondary}>Lật sang trang sau <span aria-hidden="true">↓</span></a></div>
    <div className={s.livingPagePicker} role="group" aria-label="Thay đổi trang bìa">
     {pages.map((p,i)=><button key={p.eyebrow} type="button" aria-label={"Xem "+p.eyebrow} aria-pressed={page===i} onClick={()=>setPage(i)}><span>0{i+1}</span><i/></button>)}
-    <span className={s.livingHint}>Chọn một câu chuyện</span>
+    <span className={s.livingHint}>Chọn loại thiết kế</span>
    </div>
   </div>
   <div className={s.livingVisual} data-sora-parallax data-cover={page}>
    <div className={s.livingArtboard} ref={stage} onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up} data-dragging="false">
     <div className={s.livingGridTexture} aria-hidden="true"/>
-    <div className={s.livingCardBehind} aria-hidden="true"><span>THƯ VIỆN / HÌNH ẢNH</span><strong>MAKE<br/>IT<br/>FEEL.</strong><small>một góc nhìn khác</small></div>
+    <div className={s.livingCardBehind} aria-hidden="true"><span>SORA / MẪU THIẾT KẾ</span><strong>LOGO<br/>WEB<br/>ẢNH.</strong><small>Ba nhóm dịch vụ</small></div>
     <figure className={s.livingPhoto} key={"living-"+page}>
      <img src={images[pages[page].index]||images[0]} alt={"Bìa số "+(page+1)+": "+pages[page].title}/>
      <figcaption>{pages[page].eyebrow} <span>— {pages[page].title}</span></figcaption>
     </figure>
-    <div className={s.livingPaperCutout} aria-hidden="true"><span>THE ART OF</span><strong>{pages[page].accent}</strong><small>{pages[page].note}</small></div>
+    <div className={s.livingPaperCutout} aria-hidden="true"><span>THIẾT KẾ</span><strong>{pages[page].accent}</strong><small>{pages[page].note}</small></div>
     <div className={s.livingSeal} aria-hidden="true"><span>SORA<br/>ISSUE</span><strong>01</strong></div>
-    <div className={s.livingMarginNote} aria-hidden="true">KẾT HỢP / THỬ NGHIỆM / KHÁM PHÁ</div>
+    <div className={s.livingMarginNote} aria-hidden="true">NHẬN DIỆN / WEBSITE / QUẢNG BÁ</div>
    </div>
    <div className={s.livingArtworkControls}>
     <span className={s.dragHint}>KÉO ẢNH ĐỂ ĐỔI TRANG / HOẶC CHẠM NÚT</span>

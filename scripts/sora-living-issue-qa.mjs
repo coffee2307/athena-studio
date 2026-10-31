@@ -47,12 +47,12 @@ for(const {w,h} of widths){
     check(await cover.count()===1,"Cover missing");
     const image=cover.locator("figure img").first();
     const before=await image.getAttribute("src");
-    await page.getByRole("button",{name:"Xem 02 / KHÔNG GIAN"}).click();
-    check(await page.getByRole("button",{name:"Xem 02 / KHÔNG GIAN"}).getAttribute("aria-pressed")==="true","Cover selector not selected");
+    await page.getByRole("button",{name:"Xem 02 / WEBSITE"}).click();
+    check(await page.getByRole("button",{name:"Xem 02 / WEBSITE"}).getAttribute("aria-pressed")==="true","Cover selector not selected");
     const after=await image.getAttribute("src");
     check(before!==after,"Cover image did not update");
     await page.getByRole("button",{name:"Trang bìa tiếp theo"}).click();
-    check(await page.getByRole("button",{name:"Xem 03 / TRẢI NGHIỆM"}).getAttribute("aria-pressed")==="true","Cover arrow not working");
+    check(await page.getByRole("button",{name:"Xem 03 / HÌNH ẢNH"}).getAttribute("aria-pressed")==="true","Cover arrow not working");
     if(w===1440){
      const art=page.locator('[class*="_livingArtboard__"]');
      const box=await art.boundingBox();check(!!box,"Cover artboard missing");
@@ -79,7 +79,7 @@ for(const {w,h} of widths){
      });
      check(!spacing.missing&&Math.abs(spacing.desired-spacing.formLeft)<4&&Math.abs(spacing.desired-spacing.introLeft)<4,"SORA letter desk has old unbalanced mobile indentation "+JSON.stringify(spacing));
     }
-    const group=page.getByRole("group",{name:/Bạn đang nghĩ về điều gì/});
+    const group=page.getByRole("group",{name:/Bạn cần thiết kế nội dung gì/});
     check(await group.count()===1,"Accessible subject group missing");
     const radios=page.getByRole("radio");
     check(await radios.count()===3,"Missing radio controls");

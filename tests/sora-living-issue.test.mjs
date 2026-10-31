@@ -27,6 +27,15 @@ test("SORA alone owns the new components, preserving all authored routes",()=>{
  assert.match(src,/SoraLetterDesk/);
  for(const route of ["home","work","contact","services","about","detail"])assert.match(src,new RegExp('section==="'+route+'"'));
 });
+test("SORA copy identifies concrete samples and services without vague project names",()=>{
+ const site=f("Site.tsx"),cover=f("SoraLivingCover.tsx"),letter=f("SoraLetterDesk.tsx");
+ for(const forbidden of ["Nếp —", "Lặng —", "Mùa —", "Một cá tính cần được nhìn thấy", "Một không gian số có dấu ấn riêng", "Một câu chuyện đáng được kể"]){
+  assert.ok(![site,cover,letter].some(src=>src.includes(forbidden)), "Vague text remains: "+forbidden);
+ }
+ for(const phrase of ["Bộ nhận diện quán cà phê","Website studio nội thất","Bộ ảnh ra mắt sản phẩm","Đây là nội dung minh họa"]){assert.ok(site.includes(phrase), "Missing factual sample label: "+phrase);}
+ for(const phrase of ["Logo.","Website.","Hình ảnh.","Chọn loại thiết kế"]){assert.ok(cover.includes(phrase), "Missing accessible cover label: "+phrase);}
+ for(const phrase of ["Thiết kế logo, bảng màu, kiểu chữ","Thiết kế giao diện, trang nội dung","Thiết kế ảnh quảng cáo, banner"]){assert.ok(letter.includes(phrase), "Missing service deliverables: "+phrase);}
+});
 test("SORA maintains Vietnamese font no-go and reduced motion",()=>{
  const css=f("Sora.module.css");
  assert.doesNotMatch(css,/(?:Georgia|Times New Roman)/);
