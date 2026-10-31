@@ -11,7 +11,7 @@ export function SovereignDemoRoute({slug,section="home",itemIndex,embedded}:{
 }){
  const site=findSovereignSite(slug);
  if(!site)notFound();
- if(slug==="digital-creators"&&(site.stage==="native-static"||site.stage==="sovereign")){
+ if(slug==="digital-creators"&&site.stage==="sovereign"){
   // Native Vite/Three.js owns all of its independent UI; the Next demo is a technical redirect only.
   redirect("/immersive/digital-creators/index.html");
  }
