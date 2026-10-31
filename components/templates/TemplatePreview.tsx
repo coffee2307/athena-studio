@@ -7,7 +7,7 @@ export function TemplatePreview({template,device="desktop"}:{template:Template;d
  const screenshot="/template-previews/"+template.slug+extension+(template.slug==="auto-showroom"?"?v=20261029-p1-3d-cover":"");
  return <div className="template-device-frame" data-device={device}>
   <div className="template-thumbnail">
-   <div className="template-thumbnail-browser" aria-hidden="true"><span className="template-browser-dots"><i/><i/><i/></span><span>{template.slug}.preview</span><span>↗</span></div>
+   <div className="template-thumbnail-browser" aria-hidden="true"><span className="template-browser-dots"><i/><i/><i/></span><span>{template.slug}.preview</span><span></span></div>
    <div className="template-thumbnail-screen"><Image className="template-thumbnail-image" src={screenshot} alt={(template.slug==="auto-showroom"?"Poster concept website ":"Ảnh chụp giao diện website ")+template.title} fill sizes="(max-width: 640px) 100vw, (max-width: 1050px) 50vw, 33vw" priority={false}/></div>
   </div>
  </div>;
