@@ -17,7 +17,7 @@ import {WORLD_NAV_IDENTITIES} from "@/data/world-navigation-identities";
 export type WorldSection="home"|"work"|"services"|"about"|"contact"|"detail";
 type Props={slug:string;section?:WorldSection;itemIndex?:number;embedded?:boolean};
 function picture(slug:string,n:number){return "/template-demos/"+slug+"/image-"+(n%5+1)+".jpg";}
-function Arrow(){return <span aria-hidden="true"></span>;}
+function Arrow(){return <span className="world-action-dot" aria-hidden="true"/>;}
 
 export function WorldSite({slug,section="home",itemIndex,embedded=false}:Props){
  const world=copies[slug],extra=worldDetails[slug];
