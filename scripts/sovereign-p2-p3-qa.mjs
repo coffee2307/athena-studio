@@ -33,12 +33,30 @@ for(const size of [{name:"mobile",width:390,height:844},{name:"desktop",width:14
     if(await button.getAttribute("aria-expanded")!=="true")throw Error("Mobile menu did not open");
     await page.keyboard.press("Escape");
     if(await button.getAttribute("aria-expanded")!=="false")throw Error("Mobile menu did not close");
-    for(const section of ["work","services","about","contact","work/1"]){
+    for(const section of (["creative-studio","commerce-standard"].includes(slug)?["work","services","about","contact","work/1","work/4","work/5"]:["work","services","about","contact","work/1"])){
      const resp=await page.goto(base+"/"+section,{waitUntil:"domcontentloaded",timeout:45000});
      if(resp?.status()!==200)throw Error("Route "+section+" returned "+resp?.status());
      if(!await page.locator("main h1").count())throw Error("Missing heading at "+section);
      if(await page.locator(".world-site").count())throw Error("Shared UI at "+section);
     }
+   }
+   if(size.name==="mobile"&&slug==="commerce-standard"){
+    await page.goto(base+"/work",{waitUntil:"domcontentloaded"});
+    await page.getByRole("button",{name:/Xem nhanh/}).first().click();
+    if(!await page.getByRole("dialog",{name:/Xem nhanh/}).count())throw Error("MOC quick-view dialog missing");
+    await page.getByRole("button",{name:"THÊM VÀO GIỎ"}).last().click();
+    if(!await page.getByRole("dialog",{name:"Giỏ hàng minh họa"}).count())throw Error("MOC bag not opened");
+   }
+   if(size.name==="mobile"&&slug==="creative-studio"){
+    await page.goto(base+"/work",{waitUntil:"domcontentloaded"});
+    await page.getByRole("button",{name:"Digital",exact:true}).click();
+    if(await page.getByRole("button",{name:"Digital",exact:true}).getAttribute("aria-pressed")!=="true")throw Error("SORA project filter did not activate");
+   }
+   if(size.name==="mobile"&&slug==="modern-corporate"){
+    await page.goto(base+"/services",{waitUntil:"domcontentloaded"});
+    const step=page.getByRole("button",{name:/03 \/ Build/});
+    await step.click();
+    if(await step.getAttribute("aria-pressed")!=="true")throw Error("NORTH process explorer did not change");
    }
    if(errors.length)throw Error("Runtime page errors "+errors.join("; ").slice(0,550));
    results.push({slug,viewport:size.name,...meta});
