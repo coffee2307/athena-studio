@@ -4,3 +4,85 @@
 @media(max-width:850px){.utility{font-size:8px}.utility span:last-child{display:none}.globalHead{height:77px;grid-template-columns:1fr auto auto;padding-inline:5vw}.topNav{display:none}.trigger{border:1px solid #8ca3b2;background:transparent;width:47px;height:47px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:6px;padding:11px}.trigger i{width:100%;height:2px;display:block;background:#19364c}.trigger i:nth-child(2){width:75%}.rail{display:none}.content{padding:0}.banner{grid-template-columns:1fr}.bannerCopy{padding:85px 6vw 45px}.bannerMeta{padding-top:40px}.diagram{min-height:490px;padding:45px 6vw}.diagramNodes{margin:50px 0}.impact,.capabilities,.proof{grid-template-columns:1fr;gap:35px;padding:80px 6vw}.proof{padding:0}.proof img{height:350px}.proof>div{padding:7vw}.directoryFooter{padding:60px 6vw 25px}.directoryGrid{padding:0 6vw}.pageHead{padding:70px 6vw 40px}.inquiry{padding:0 6vw 80px;grid-template-columns:1fr}.process{padding:0 6vw}.caseGrid{grid-template-columns:1fr}.values{padding:0 6vw}}
 @media(max-width:600px){.globalHead{height:69px;gap:10px}.insignia>b{font-size:32px;padding-right:11px}.insignia>span{font-size:15px}.insignia>span small{font-size:7px}.consult{display:none}.bannerCopy{padding-top:65px}.banner h1{font-size:clamp(54px,13vw,78px);margin:30px 0}.bannerCopy>p{font-size:15px}.diagramNodes{gap:5px}.diagramNodes button{padding:8px;min-height:98px}.diagramNodes button strong{font-size:9px}.diagram{padding:40px 5vw}.impact,.capabilities{padding:75px 6vw}.impact h2,.capabilities h2{font-size:49px}.capabilities>div a{grid-template-columns:26px 1fr 15px}.capabilities>div a strong{font-size:20px}.proof img{height:280px}.proof h2{font-size:39px}.footerIntro{display:block;padding-bottom:55px}.footerIntro h2{margin:26px 0;font-size:63px}.footerIntro a{display:inline-block}.footerLower{grid-template-columns:1fr 1fr;gap:30px;padding-bottom:60px}.footerLower>div:first-child{grid-column:1/-1}.directoryGrid{display:block}.directoryGrid>a{display:block;margin-bottom:18px}.pageHead h1{font-size:clamp(52px,12vw,77px)}.case{padding:45px 6vw 80px}.case h1{font-size:55px}.caseGrid{margin:45px 0}.process{display:block}.stepButtons{display:grid;grid-template-columns:1fr 1fr;gap:9px}.stepButtons button{min-height:115px;border:1px solid #c4d3d6;padding:14px}.stepButtons button span{font-size:15px}.stepDetail{padding:38px 25px;margin-top:18px;min-height:360px}.stepDetail h2{margin:35px 0}.values{display:block}.values>div{margin-bottom:55px}.principles>img{width:88%;margin:20px 6vw;height:50vw}.inquiry form{padding:28px}}
 @media(prefers-reduced-motion:reduce){.north *, .north *::before{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* NORTH 02 — Cartographic business navigation, no shared marketing shell */
+.north{font-family:"Be Vietnam Pro","Segoe UI",Arial,sans-serif;background:#e8eef0;overflow-x:clip}
+.north :is(h1,h2,h3){font-family:"Be Vietnam Pro","Segoe UI",Arial,sans-serif;letter-spacing:-.045em;overflow-wrap:break-word}
+.utility{background:#142b3c;color:#e1ebee;padding-block:10px;letter-spacing:.06em}
+.globalHead{background:#f2f7f6;box-shadow:0 4px 0 #c5d9df;min-height:100px}
+.insignia>b{font-family:"Segoe UI",Arial,sans-serif}
+.insignia>span small{letter-spacing:.04em}
+.topNav a{display:flex;align-items:center;gap:4px;position:relative;min-height:44px;font-size:13px}
+.topNav a:before{content:"";height:5px;width:5px;border:1px solid #9baeb6;transform:rotate(45deg);transition:transform .22s,background .22s}
+.topNav a:hover:before{background:#b97944;transform:rotate(135deg)}
+.consult{background:#c88352;color:#18334a!important;border:1px solid #9e5e37;min-height:48px;transition:transform .2s,background .2s}
+.consult:hover{transform:translateY(-3px);background:#e1a879}
+.scrim{position:fixed;inset:0;z-index:60;background:#092435aa;opacity:0;pointer-events:none;transition:opacity .32s ease}
+.scrim[data-open="true"]{opacity:1;pointer-events:auto}
+.panel{visibility:hidden;transform:translateX(105%);transition:transform .45s cubic-bezier(.2,1,.3,1),visibility 0s linear .45s;box-shadow:-12px 0 55px #13293f31}
+.panel[aria-hidden="false"]{visibility:visible;transform:translateX(0);transition:transform .45s cubic-bezier(.2,1,.3,1),visibility 0s}
+.panelTop{font:750 11px "Be Vietnam Pro","Segoe UI",sans-serif;letter-spacing:.06em}
+.panelTop button{min-height:46px;font:750 12px "Be Vietnam Pro",sans-serif}
+.panelTop button span{font:300 27px/1 Arial,sans-serif;margin-left:10px}
+.panel>div:nth-child(2) a{transition:background .2s,padding-left .2s;border-left:3px solid transparent}
+.panel>div:nth-child(2) a:hover{background:#bbd3d6;padding-left:14px;border-left-color:#ba835c}
+.rail{background:#c8d8dc;z-index:5}
+.banner{position:relative;min-height:720px;background:linear-gradient(135deg,#e5edef,#eaf2ee)}
+.bannerCopy{position:relative;padding-top:7.3vw}
+.bannerCopy:before{content:"HƯỚNG ĐI / 01";font:750 10px "Be Vietnam Pro",sans-serif;letter-spacing:.1em;border-top:2px solid #a5b9bc;padding-top:12px;color:#7b8184}
+.banner h1{font-size:clamp(57px,6.5vw,114px);line-height:1.1;letter-spacing:-.06em;margin-block:40px}
+.banner h1 em{color:#b47a50;font-style:normal;font-weight:500}
+.bannerCopy>p{max-width:36ch}
+.diagram{position:relative;overflow:hidden;padding:35px 4vw 32px;background:#143248;min-width:0}
+.diagram:before{background-size:30px 30px;opacity:.9}
+.diagram:after{content:"";position:absolute;right:-120px;top:-120px;border:1px solid #7aa3ad30;width:500px;height:500px;border-radius:50%;box-shadow:0 0 0 80px #e3f1ff08,0 0 0 160px #e3f1ff08;pointer-events:none}
+.gridCaption{font-size:11px;color:#c9e1e5;z-index:1}
+.systemOrbit{z-index:1;position:relative;margin:22px auto 6px;max-width:520px;min-height:190px;display:flex;flex-direction:column;align-items:center}
+.systemOrbit svg{width:min(100%,470px);height:auto;color:#70a1b7;filter:drop-shadow(0 0 11px #6ca4b43d);overflow:visible}
+.systemOrbit path{stroke-dasharray:5 10;animation:northFlow 17s linear infinite}
+.systemOrbit circle{fill:#e7ad6e;stroke:#b6dce0;stroke-width:2;transform-box:fill-box;transform-origin:center;animation:northPulse 3s ease-in-out infinite alternate}
+.systemOrbit circle:nth-of-type(3){fill:#bde6b3;animation-delay:.5s}
+.systemOrbit circle:nth-of-type(5){animation-delay:1.1s}
+.systemOrbit span{font:700 9px "Be Vietnam Pro","Segoe UI",sans-serif;letter-spacing:.08em;color:#c8dce0;text-align:center}
+.systemOrbit b{margin-inline:10px;color:#e6af70}
+.diagramNodes{margin:16px 0 26px;gap:8px}
+.diagramNodes button{min-height:88px;justify-content:center;gap:14px;position:relative;background:#24455c;border-color:#99b8c8a1;transition:transform .28s,background .28s,box-shadow .28s}
+.diagramNodes button:before{content:"";position:absolute;top:-12px;left:50%;height:10px;width:1px;background:#99b8c8}
+.diagramNodes button:after{content:"";position:absolute;top:-18px;left:calc(50% - 3px);width:7px;height:7px;border-radius:50%;background:#d1e4e5}
+.diagramNodes button[aria-pressed=true]{transform:translateY(-7px);box-shadow:0 9px 0 #113044;background:#d3e7e8}
+.diagramNodes button strong{font:750 12px "Be Vietnam Pro",sans-serif;letter-spacing:0}
+.diagramContent{min-height:180px;padding-top:24px}
+.diagramContent h2{font-size:clamp(25px,2.6vw,42px);letter-spacing:-.04em;line-height:1.2}
+.diagramContent p{font-size:14px}
+.diagramContent a{display:inline-block;margin:10px 0 5px}
+.diagramFoot{color:#c4dbde;font-size:9px}
+.bannerMeta{color:#506a71}
+.impact{background:#e7eff0;border-top:12px solid #c7dce0}
+.impact h2,.capabilities h2{font-size:clamp(46px,5vw,79px);line-height:1.16;letter-spacing:-.05em}
+.impactBody{position:relative}
+.impactBody:after{content:"";position:absolute;right:0;top:0;width:70px;height:70px;border-radius:50%;border:3px solid #c1d6dc;box-shadow:0 0 0 20px #d4e4e8;pointer-events:none}
+.impactBody div span{font-size:10px}
+.capabilities{background:#f3f6f4}
+.capabilities>div a{transition:background .25s,padding-left .25s}
+.capabilities>div a:hover{background:#dce8eb;padding-left:18px}
+.capabilities>div a strong{font-weight:750;letter-spacing:-.04em}
+.proof{overflow:hidden}
+.proof img{filter:saturate(.8);transition:transform .9s cubic-bezier(.2,1,.35,1)}
+.proof[data-north-visible="true"] img{transform:scale(1.04)}
+.proof h2{line-height:1.22;letter-spacing:-.04em}
+.pageHead h1,.case h1,.footerIntro h2{line-height:1.1;letter-spacing:-.04em}
+.directoryGrid>a{transition:transform .25s,box-shadow .25s;border-top:5px solid #3e7182}
+.directoryGrid>a:hover{transform:translateY(-9px);box-shadow:0 15px 20px #123a4b1a}
+.stepButtons button{transition:background .22s,padding-left .22s}
+.stepButtons button[aria-pressed=true]{padding-left:22px}
+.values>div{position:relative}
+.values>div:before{content:"";position:absolute;top:-10px;right:0;width:20px;height:20px;background:#c88b60}
+.north [data-north-scene]{transition:opacity .65s ease,transform .65s cubic-bezier(.16,1,.3,1)}
+.north [data-north-scene]:not([data-north-visible="true"]){opacity:.68;transform:translateY(24px)}
+.north [data-north-visible="true"]{opacity:1;transform:translateY(0)}
+@keyframes northFlow{to{stroke-dashoffset:-120}}
+@keyframes northPulse{from{transform:scale(.82)}to{transform:scale(1.2)}}
+@media(max-width:1120px){.topNav{gap:13px}.globalHead{grid-template-columns:1fr auto auto;gap:18px}.topNav a{font-size:12px}.banner h1{font-size:clamp(56px,5.9vw,92px)}}
+@media(max-width:850px){.globalHead{height:74px}.topNav{display:none}.trigger{display:flex}.rail{display:none}.banner{grid-template-columns:1fr}.bannerCopy{padding:70px 6vw 50px}.banner h1{font-size:clamp(51px,10vw,79px)}.systemOrbit{max-width:500px;min-height:0}.diagram{padding:40px 6vw}.diagramNodes{margin:13px 0 33px}.diagramContent{min-height:160px}.panel{width:min(510px,100vw);padding:45px 7vw}.capabilities>div a{min-height:125px}.diagramFoot{font-size:8px}}
+@media(max-width:600px){.utility{font-size:8px}.insignia>span small{font-size:7px}.globalHead{grid-template-columns:1fr auto}.consult{display:none}.bannerCopy{padding-top:67px}.banner h1{font-size:clamp(47px,11.6vw,65px);margin:32px 0;line-height:1.14}.diagram{padding:35px 5vw}.systemOrbit{margin:18px auto 4px}.systemOrbit svg{max-height:145px}.diagramNodes{gap:5px}.diagramNodes button{min-height:90px;padding:6px}.diagramNodes button strong{font-size:10px}.diagramContent h2{font-size:30px}.impact,.capabilities{padding:75px 6vw}.impact h2,.capabilities h2{font-size:clamp(41px,10.8vw,56px)}.proof h2{font-size:clamp(32px,8.9vw,43px)}.panelTop{margin-bottom:45px}.panel>div:nth-child(2) a{font-size:27px}}
+@media(prefers-reduced-motion:reduce){.north :is(.systemOrbit path,.systemOrbit circle){animation:none!important}.north [data-north-scene],.panel,.scrim{transition:none!important}.north [data-north-scene]{opacity:1!important;transform:none!important}}
