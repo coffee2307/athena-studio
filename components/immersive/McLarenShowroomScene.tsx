@@ -129,7 +129,9 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    });
   }catch(error){
    console.warn("Athena McLaren: WebGL unavailable",error);
-   setStatus("fallback");finishLoading();return;
+   setStatus("fallback");finishLoading();
+   mobileQuery.removeEventListener("change",onBreakpointChange);
+   return;
   }
   renderer.outputColorSpace=THREE.SRGBColorSpace;
   renderer.toneMapping=THREE.ACESFilmicToneMapping;
