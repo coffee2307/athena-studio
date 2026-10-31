@@ -44,7 +44,8 @@ const forbidden=["WorldSite","WorldMotion","WorldExperiencePages","world-header-
 const rows=known.map(site=>{
  const path=join(root,"templates",site.slug);
  const src=join(path,"src/components/Site.tsx");
- const css=join(path,"src/app/globals.css");
+ const scopedCss=existsSync(src)?readFileSync(src,"utf8").match(/import\s+\w+\s+from\s+["']\.\/([^"']+\.module\.css)["']/)?.[1]:undefined;
+ const css=scopedCss?join(path,"src/components",scopedCss):join(path,"src/app/globals.css");
  const present=existsSync(src)&&existsSync(css)&&existsSync(join(path,"package.json"))&&existsSync(join(path,"template.manifest.json"));
  if(!present)failures.push("Template missing export essentials: "+site.slug);
  const sourceHash=existsSync(src)?hash(src):null;
