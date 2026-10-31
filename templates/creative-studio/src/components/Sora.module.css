@@ -95,3 +95,7 @@
 /* Mobile composition correction from actual 390px screenshot: stamp must never cover copy. */
 @media(max-width:760px){.editorialSeal{top:auto;bottom:27%;right:4vw;left:auto;z-index:7}.openingWords{z-index:9}.openingImage{z-index:2}.floatingCutout{z-index:5}}
 @media(max-width:390px){.editorialSeal{top:auto;bottom:29%;right:2vw}}
+
+/* Ambient motion only while the chapter is visible; no scrollbar-jitter. */
+.sora .floatingCutout,.sora .editorialSeal,.sora .scrollGuide span,.sora .typeRibbon>div{animation-play-state:paused}
+.sora [data-sora-ambient][data-sora-active="true"] .floatingCutout,.sora [data-sora-ambient][data-sora-active="true"] .editorialSeal,.sora [data-sora-ambient][data-sora-active="true"] .scrollGuide span,.sora [data-sora-ambient][data-sora-active="true"]>div{animation-play-state:running}
