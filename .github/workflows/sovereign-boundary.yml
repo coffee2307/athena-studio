@@ -17,6 +17,7 @@ on:
       - "scripts/sora-living-issue-qa.mjs"
       - "scripts/north-diagnostic-qa.mjs"
       - "scripts/north-impact-rail-qa.mjs"
+      - "scripts/fashion-3d-qa.mjs"
       - "scripts/create-site.mjs"
       - "public/template-previews/**"
       - "tests/sovereign-*.test.mjs"
@@ -24,6 +25,7 @@ on:
       - "tests/sora-living-issue.test.mjs"
       - "tests/north-diagnostic.test.mjs"
       - "tests/north-impact-rail.test.mjs"
+      - "tests/fashion-3d-hero.test.mjs"
       - "tests/dna03-template-projects.test.mjs"
       - ".github/workflows/sovereign-boundary.yml"
   workflow_dispatch:
@@ -43,7 +45,7 @@ jobs:
       - name: Sovereign architecture and legacy debt baseline
         run: node scripts/sovereign-audit.mjs --check --out=.qa/athena-21-sovereign/audit.json
       - name: Route, framework and standalone export contracts
-        run: node --test tests/sovereign-boundary.test.mjs tests/sovereign-export-fidelity.test.mjs tests/sovereign-p8-type-layout.test.mjs tests/sora-living-issue.test.mjs tests/dna03-template-projects.test.mjs
+        run: node --test tests/sovereign-boundary.test.mjs tests/sovereign-export-fidelity.test.mjs tests/sovereign-p8-type-layout.test.mjs tests/sora-living-issue.test.mjs tests/dna03-template-projects.test.mjs tests/fashion-3d-hero.test.mjs
       - name: Locked McLaren asset/camera and refinements contracts
         run: node --test tests/showroom-protection.test.mjs tests/refinement02-source.test.mjs
       - name: Install Digital Creators standalone dependencies
@@ -52,6 +54,11 @@ jobs:
         run: npm run build --prefix templates/digital-creators
       - name: Confirm Digital Creators source fidelity after build
         run: node scripts/sovereign-digital-creators-sync.mjs --check
+      - name: Build independently exportable Fashion Archive 3D carousel
+        run: |
+          npm ci --prefix templates/fashion-archive --no-audit --no-fund
+          npm run test:unit --prefix templates/fashion-archive
+          npm run build --prefix templates/fashion-archive
       - name: Publish audit evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -92,6 +99,8 @@ jobs:
         run: node scripts/north-diagnostic-qa.mjs
       - name: NORTH sticky rail and impact interaction browser checks
         run: node scripts/north-impact-rail-qa.mjs
+      - name: Fashion 3D GLB, Z-axis drag, font and contrast browser checks
+        run: node scripts/fashion-3d-qa.mjs
       - name: Upload P8 screenshots and render evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -103,4 +112,5 @@ jobs:
             .qa/sora-living-issue/
             .qa/north-upgrade/
             .qa/north-impact-rail/
+            .qa/fashion-3d/
           if-no-files-found: ignore

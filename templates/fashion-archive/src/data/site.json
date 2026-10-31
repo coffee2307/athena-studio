@@ -4,15 +4,14 @@
   "industry": "Thời trang",
   "style": "Luxury",
   "purpose": "Kể câu chuyện bộ sưu tập và bán sản phẩm",
-  "description": "Giao diện thời trang giàu khoảng trống, hình ảnh biên tập và thông tin sản phẩm có chủ đích.",
+  "description": "Thời trang tương tác 3D với ba người mẫu, điều khiển bằng nút chọn và chữ tiếng Việt không bị lỗi font.",
   "variant": "fashion",
   "features": [
-    "Mở đầu kiểu campaign",
-    "Trang bộ sưu tập biên tập",
-    "Tùy biến theo quy trình ra mắt",
-    "Website demo nhiều trang với điều hướng desktop/mobile",
-    "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
-    "Trải nghiệm trong popup hoặc mở toàn màn hình"
+    "3D GLB / Draco / WebP",
+    "Xoay quanh trục Z và ba nút lựa chọn",
+    "Be Vietnam Pro xuyên suốt",
+    "Tôn trọng chế độ giảm chuyển động",
+    "Ghi nguồn CC BY 4.0"
   ],
   "modules": [
     "catalog",

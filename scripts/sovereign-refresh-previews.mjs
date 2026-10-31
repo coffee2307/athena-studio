@@ -33,7 +33,14 @@ for(const slug of slugs){
   if(response?.status()!==200)throw Error("HTTP "+response?.status());
   await page.evaluate(()=>document.fonts.ready);
   await page.locator("h1").first().waitFor({timeout:15000});
-  await page.waitForTimeout(slug==="auto-showroom"?6500:isDigital?950:300);
+  // A finished GLB scene is part of the actual cover, not an optional decoration.
+  // Never overwrite the Fashion cover with a blank "loading" placeholder.
+  if(slug==="fashion-archive"){
+   await page.locator('[data-active-model="pose-floor"][data-model-state="ready"]').waitFor({timeout:35000});
+   await page.waitForTimeout(250);
+  }else{
+   await page.waitForTimeout(slug==="auto-showroom"?6500:isDigital?950:300);
+  }
   if(slug==="auto-showroom"){
    if(await page.locator('[data-model-loading="failed"]').count())throw Error("McLaren model failed to render — refusing to overwrite valid car cover");
    if(await page.locator("canvas").count()===0)throw Error("McLaren scene canvas missing — refusing blank cover");

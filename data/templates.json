@@ -177,7 +177,7 @@
     "industry": "Thời trang",
     "style": "Luxury",
     "purpose": "Kể câu chuyện bộ sưu tập và bán sản phẩm",
-    "description": "Giao diện thời trang giàu khoảng trống, hình ảnh biên tập và thông tin sản phẩm có chủ đích.",
+    "description": "Thời trang 3D: ba tạo hình người mẫu xoay trục Z, chuyển mẫu qua ba chấm, typography Be Vietnam Pro và bộ sưu tập tương tác.",
     "variant": "fashion",
     "tags": [
       "Fashion",
@@ -193,19 +193,19 @@
       "Liên hệ"
     ],
     "features": [
-      "Mở đầu kiểu campaign",
-      "Trang bộ sưu tập biên tập",
-      "Tùy biến theo quy trình ra mắt",
-      "Website demo nhiều trang với điều hướng desktop/mobile",
-      "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
-      "Trải nghiệm trong popup hoặc mở toàn màn hình"
+      "Hero 3D với ba người mẫu GLB nén Draco",
+      "Tự xoay quanh trục Z, dừng khi tab ẩn hoặc giảm chuyển động",
+      "Ba chấm để chuyển người mẫu, có trạng thái và hỗ trợ bàn phím",
+      "Bộ sưu tập và chi tiết look, atelier và biểu mẫu riêng",
+      "Font Be Vietnam Pro hỗ trợ đầy đủ dấu tiếng Việt",
+      "Ghi nguồn mô hình CC BY 4.0"
     ],
     "modules": [
       "catalog",
       "commerce",
       "content"
     ],
-    "version": "2.0.0",
+    "version": "3.1.0",
     "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
