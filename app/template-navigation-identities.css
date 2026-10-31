@@ -1,0 +1,225 @@
+/* ATHENA: 20 independent navigation art directions.
+ * Digital Creators is the 21st, independently vendored experience.
+ * Only interaction primitives and accessibility behavior are shared.
+ */
+.world-site .world-nav-scrim{display:none}
+.world-site .world-mobile-nav-intro,.world-site .world-mobile-nav-links{display:none}
+.world-site .world-toggle-glyph,.world-site .world-toggle-label{font:inherit}
+@media(min-width:921px){
+.world-site[data-nav-style="gallery"] .world-header{border-bottom:0;padding-inline:6%;min-height:94px}
+.world-site[data-nav-style="gallery"] .world-desktop-nav a{font-family:var(--w-serif);font-style:italic;font-size:14px}
+.world-site[data-nav-style="terminal"] .world-header{background:#e4eaf1;box-shadow:inset 0 -3px #263b54}
+.world-site[data-nav-style="terminal"] .world-desktop-nav{border-left:1px solid var(--w-border);padding-left:24px}
+.world-site[data-nav-style="catalog"] .world-header{display:grid;grid-template-columns:1fr auto 1fr;gap:15px}
+.world-site[data-nav-style="catalog"] .world-brand{grid-column:2;grid-row:1;font-family:var(--w-serif);font-size:27px}
+.world-site[data-nav-style="catalog"] .world-desktop-nav{grid-column:1;grid-row:1;justify-self:start;margin:0}
+.world-site[data-nav-style="catalog"] .world-header-actions{grid-column:3;justify-self:end}
+.world-site[data-nav-style="atelier"] .world-header{min-height:100px;border-bottom:1px solid #ffffff50}
+.world-site[data-nav-style="atelier"] .world-brand{font-family:var(--w-serif);letter-spacing:.16em;font-weight:400}
+.world-site[data-nav-style="atelier"] .world-desktop-nav{gap:29px}
+.world-site[data-nav-style="command"] .world-header{margin:12px 3% 0;border:1px solid #ffffff39;border-radius:14px;min-height:67px}
+.world-site[data-nav-style="command"] .world-desktop-nav a{font-size:12px}
+.world-site[data-nav-style="poster"] .world-header{background:#e9ff49;border:4px solid #0c110d;transform:rotate(-.25deg);min-height:82px}
+.world-site[data-nav-style="poster"] .world-desktop-nav a{font-size:13px;font-weight:900;text-transform:uppercase}
+.world-site[data-nav-style="table"] .world-header{padding-inline:8%;background:#f7f1e6;border-bottom:1px solid #9d8566;min-height:94px}
+.world-site[data-nav-style="table"] .world-brand{font-family:var(--w-serif);font-size:26px;font-weight:400}
+.world-site[data-nav-style="table"] .world-desktop-nav a{font-family:var(--w-serif);font-weight:400}
+.world-site[data-nav-style="contents"] .world-header{min-height:88px;border-block:2px solid #332b26;backdrop-filter:none}
+.world-site[data-nav-style="contents"] .world-brand{font-family:var(--w-serif);font-size:31px;font-weight:400}
+.world-site[data-nav-style="blueprint"] .world-header{margin:15px 3% 0;border:1px solid #757975;background:transparent}
+.world-site[data-nav-style="blueprint"] .world-brand{font-weight:400;letter-spacing:.14em}
+.world-site[data-nav-style="breath"] .world-header{border-radius:100px;min-height:76px;margin:12px 4% 0;background:#f3f7f1}
+.world-site[data-nav-style="breath"] .world-brand{font-family:var(--w-serif);font-weight:400}
+.world-site[data-nav-style="residence"] .world-header{background:#101615;min-height:94px;border-color:#bea778}
+.world-site[data-nav-style="residence"] .world-brand{font-family:var(--w-serif);font-size:24px;font-weight:400}
+.world-site[data-nav-style="syllabus"] .world-header{border-bottom:4px solid #48377c;background:#faf7ff}
+.world-site[data-nav-style="syllabus"] .world-desktop-nav a{padding-inline:8px;border-radius:7px}
+.world-site[data-nav-style="poppy"] .world-header{border-radius:0 0 35px 35px;background:#fff9f0;min-height:88px}
+.world-site[data-nav-style="poppy"] .world-desktop-nav a{border-radius:999px;padding-inline:11px}
+.world-site[data-nav-style="cockpit"] .world-header{min-height:94px;border-bottom:1px solid #ff741c;background:#090b0e}
+.world-site[data-nav-style="cockpit"] .world-desktop-nav a{letter-spacing:.15em;text-transform:uppercase;font-size:10px}
+.world-site[data-nav-style="forge"] .world-header{background:#e7e7e2;border-block:3px solid #252c30;min-height:82px}
+.world-site[data-nav-style="forge"] .world-desktop-nav a{font-weight:900;text-transform:uppercase}
+.world-site[data-nav-style="ledger"] .world-header{background:#fff;min-height:82px;border-bottom:1px solid #778ea5}
+.world-site[data-nav-style="ledger"] .world-desktop-nav{gap:11px}.world-site[data-nav-style="ledger"] .world-desktop-nav a{padding:10px;border:1px solid transparent}
+.world-site[data-nav-style="ledger"] .world-desktop-nav a[aria-current="page"]{border-color:#abc0d1}
+.world-site[data-nav-style="structure"] .world-header{border-bottom:5px solid #303937;background:#eae8e1;min-height:89px}
+.world-site[data-nav-style="structure"] .world-brand{font-weight:950;letter-spacing:.04em}
+.world-site[data-nav-style="vinyl"] .world-header{background:#f5e1d8;border-bottom:2px dashed #692e41;min-height:91px}
+.world-site[data-nav-style="vinyl"] .world-brand{font-family:var(--w-serif);font-style:italic;letter-spacing:.04em}
+.world-site[data-nav-style="stage"] .world-header{background:#110b21;border-bottom:3px solid #eaff2f;min-height:87px}
+.world-site[data-nav-style="stage"] .world-desktop-nav a{font-weight:900;font-size:12px;letter-spacing:.1em}
+.world-site[data-nav-style="workspace"] .world-header{background:#fff;min-height:62px;border-bottom:1px solid #dbe1ed}
+.world-site[data-nav-style="workspace"] .world-desktop-nav{margin-right:auto;margin-left:45px}
+}
+@media(max-width:920px){
+.world-site .world-header{z-index:48}
+.world-site .world-menu-toggle{display:inline-flex!important;align-items:center;justify-content:center;flex-direction:row;gap:9px;width:auto;min-width:48px;min-height:43px;height:auto;padding:9px 12px;border:1px solid var(--w-border);position:relative;z-index:50;white-space:nowrap;transition:background .2s,border-color .2s}
+.world-site .world-menu-toggle .world-toggle-glyph,.world-site .world-menu-toggle .world-toggle-label{width:auto;height:auto;background:transparent;display:inline-block;transform:none!important;transition:transform .3s,font-size .3s}
+.world-site .world-menu-toggle .world-toggle-glyph{font-size:21px;line-height:1}
+.world-site .world-menu-toggle .world-toggle-label{font-size:9px;font-weight:850;letter-spacing:.08em;line-height:1.2}
+.world-site .world-menu-toggle[aria-expanded="true"] .world-toggle-glyph{transform:rotate(35deg)!important}
+.world-site .world-nav-scrim{display:block;position:fixed;inset:0;background:#06080acc;border:0;padding:0;opacity:0;pointer-events:none;z-index:43;transition:opacity .25s}
+.world-site .world-nav-scrim.is-open{opacity:1;pointer-events:auto}
+.world-site .world-mobile-nav{display:flex;flex-direction:column;gap:0;position:fixed;z-index:46;left:auto;right:auto;top:auto;bottom:auto;inset:auto;width:min(420px,90vw);height:auto;max-height:calc(100dvh - 82px);padding:24px;background:var(--w-paper);color:var(--w-ink);border:1px solid var(--w-border);box-shadow:0 26px 90px #0006;overflow-y:auto;overscroll-behavior:contain;opacity:0;visibility:hidden;pointer-events:none;transform:var(--nav-closed,translateX(12%));transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .28s,visibility .28s;isolation:isolate}
+.world-site .world-mobile-nav.is-open{opacity:1;visibility:visible;pointer-events:auto;transform:translate3d(0,0,0)}
+.world-site .world-mobile-nav-intro{display:flex;flex-direction:column;gap:12px;min-height:100px;margin-bottom:16px}
+.world-site .world-mobile-nav-intro>span{font-size:10px;letter-spacing:.17em;text-transform:uppercase;opacity:.75}
+.world-site .world-mobile-nav-intro>strong{font-size:clamp(26px,6vw,43px);font-weight:800;line-height:1;letter-spacing:-.06em}
+.world-site .world-mobile-nav-links{display:flex;flex-direction:column;gap:0}
+.world-site .world-mobile-nav-links>a{display:grid;grid-template-columns:34px minmax(0,1fr) 28px;gap:12px;align-items:center;min-width:0;padding:17px 4px;border-bottom:1px solid currentColor;font-size:clamp(20px,4.6vw,33px);font-weight:600;letter-spacing:-.06em;line-height:1.2;transition:background .16s,transform .16s}
+.world-site .world-mobile-nav-links>a:hover,.world-site .world-mobile-nav-links>a[aria-current="page"]{background:color-mix(in srgb,var(--w-accent) 18%,transparent);transform:translateX(3px)}
+.world-site .world-mobile-nav-links .world-nav-index{font-size:10px;letter-spacing:.08em;opacity:.65}
+.world-site .world-mobile-nav-links .world-nav-label{overflow-wrap:anywhere}
+.world-site .world-mobile-nav-links .world-nav-decoration{justify-self:center;width:8px;height:8px;border:1px solid currentColor;border-radius:50%;opacity:.7}
+.world-site .world-mobile-nav-bottom{display:flex;gap:16px;margin-top:auto;padding-top:35px;justify-content:space-between;align-items:end;border:0}
+.world-site .world-mobile-nav-bottom strong{font-size:14px;max-width:50%;overflow-wrap:anywhere}
+.world-site .world-mobile-nav-bottom span{font-size:10px;max-width:55%;text-align:right}
+.world-site .world-mobile-nav.is-open .world-mobile-nav-links>a{animation:worldNavReveal .4s both}
+.world-site .world-mobile-nav-links>a:nth-child(2){animation-delay:.03s}
+.world-site .world-mobile-nav-links>a:nth-child(3){animation-delay:.06s}
+.world-site .world-mobile-nav-links>a:nth-child(4){animation-delay:.09s}
+.world-site .world-mobile-nav-links>a:nth-child(5){animation-delay:.12s}
+@keyframes worldNavReveal{from{opacity:0;translate:0 8px}to{opacity:1;translate:0 0}}
+/* 01. SORA: left artboard with oversized italic gallery catalog. */
+.world-site[data-nav-style="gallery"] .world-mobile-nav{--nav-closed:translateX(-115%);top:12px;left:12px;bottom:12px;width:min(540px,calc(100vw - 24px));max-height:none;padding:clamp(30px,7vw,62px);border:1px solid #bbd18b;background:#171e15;color:#e4f3c4}
+.world-site[data-nav-style="gallery"] .world-mobile-nav-intro strong{font-family:var(--w-serif);font-style:italic;font-weight:400;font-size:clamp(43px,10vw,76px)}
+.world-site[data-nav-style="gallery"] .world-mobile-nav-links>a{font-family:var(--w-serif);font-size:clamp(27px,7vw,46px);font-weight:400;border-bottom-color:#a6ba934a}
+.world-site[data-nav-style="gallery"] .world-menu-toggle{background:#d9f27d;color:#151a10;border-radius:0;border:0}
+.world-site[data-nav-style="gallery"] .world-mobile-nav-bottom{font-family:var(--w-serif);font-style:italic}
+/* 02. NORTH: precise right-hand enterprise utility rail. */
+.world-site[data-nav-style="terminal"] .world-mobile-nav{--nav-closed:translateX(110%);right:0;top:0;bottom:0;max-height:none;width:min(430px,84vw);padding:102px 28px 34px;background:#eef3f8;border:0;border-left:6px solid #3562bd;box-shadow:-20px 0 90px #17233265}
+.world-site[data-nav-style="terminal"] .world-mobile-nav-intro strong{font-size:29px;letter-spacing:0;font-weight:700}
+.world-site[data-nav-style="terminal"] .world-mobile-nav-links>a{font-size:19px;letter-spacing:0;font-weight:650;grid-template-columns:25px 1fr 16px;border-bottom:1px solid #c2d0dc}
+.world-site[data-nav-style="terminal"] .world-mobile-nav-links .world-nav-decoration{border-radius:0;width:7px;height:7px;background:#3266bd;border:0}
+.world-site[data-nav-style="terminal"] .world-menu-toggle{background:#24415b;color:#fff;border:0}
+/* 03. MOC OBJECTS: storefront bottom catalog drawer. */
+.world-site[data-nav-style="catalog"] .world-mobile-nav{--nav-closed:translateY(110%);bottom:0;left:0;right:0;width:100%;max-height:79dvh;border:0;border-top:4px solid #b6825c;padding:24px 25px 28px;background:#faf7f0;box-shadow:0 -15px 70px #30281e36}
+.world-site[data-nav-style="catalog"] .world-mobile-nav-intro{min-height:65px}
+.world-site[data-nav-style="catalog"] .world-mobile-nav-intro strong{font-family:var(--w-serif);font-size:30px;font-weight:400}
+.world-site[data-nav-style="catalog"] .world-mobile-nav-links{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.world-site[data-nav-style="catalog"] .world-mobile-nav-links>a{display:flex;flex-direction:column;align-items:start;gap:8px;min-height:100px;padding:15px;background:#eee6db;border:1px solid #d8cabc;font-size:18px}
+.world-site[data-nav-style="catalog"] .world-mobile-nav-links .world-nav-decoration{display:none}
+.world-site[data-nav-style="catalog"] .world-menu-toggle{border-radius:999px;background:#e9ddcf;color:#3c3327}
+/* 04. ATELIER: theatrical full-screen edition index. */
+.world-site[data-nav-style="atelier"] .world-mobile-nav{--nav-closed:translateY(-103%);inset:0;width:100%;max-height:none;background:linear-gradient(110deg,#2a111b 0 53%,#5b3038 53%);color:#fff2e6;border:0;padding:105px 8vw 25px}
+.world-site[data-nav-style="atelier"] .world-mobile-nav-intro strong{font-family:var(--w-serif);font-weight:400;font-size:48px;letter-spacing:.1em}
+.world-site[data-nav-style="atelier"] .world-mobile-nav-links>a{font-family:var(--w-serif);font-style:italic;font-size:clamp(27px,8vw,47px);border-bottom:0;border-top:1px solid #e3afab73}
+.world-site[data-nav-style="atelier"] .world-mobile-nav-links .world-nav-decoration{border-radius:0;transform:rotate(45deg);width:6px;height:6px;background:#dba186}
+.world-site[data-nav-style="atelier"] .world-menu-toggle{border:1px solid #d5b6ac;border-radius:0;background:transparent;color:#f7ede5}
+/* 05. LUMA: floating command palette. */
+.world-site[data-nav-style="command"] .world-mobile-nav{--nav-closed:translateY(-24px) scale(.95);top:19dvh;left:50%;width:min(530px,94vw);max-height:66dvh;translate:-50% 0;background:#182440;color:#e4eafe;border:1px solid #8293ca;border-radius:18px;padding:22px}
+.world-site[data-nav-style="command"] .world-mobile-nav-intro{min-height:68px;border-bottom:1px solid #ffffff2b}
+.world-site[data-nav-style="command"] .world-mobile-nav-intro strong{font-size:25px;letter-spacing:0}
+.world-site[data-nav-style="command"] .world-mobile-nav-links>a{border:1px solid transparent;border-radius:10px;margin-block:2px;padding:12px;font-size:16px;letter-spacing:0;grid-template-columns:22px 1fr 15px}
+.world-site[data-nav-style="command"] .world-mobile-nav-links>a[aria-current="page"]{border-color:#a4a8ff}
+.world-site[data-nav-style="command"] .world-mobile-nav-links .world-nav-decoration{height:7px;width:7px;background:#a4a8ff;border:0}
+.world-site[data-nav-style="command"] .world-menu-toggle{border-radius:10px;background:#a4a8ff;color:#171a30}
+/* 06. MO FESTIVAL: bold poster takeover from the bottom. */
+.world-site[data-nav-style="poster"] .world-mobile-nav{--nav-closed:translateY(110%);inset:0;width:100%;max-height:none;background:#e9ff49;color:#11140b;border:8px solid #141610;padding:106px 6vw 24px}
+.world-site[data-nav-style="poster"] .world-mobile-nav-intro strong{font-weight:950;font-size:clamp(45px,12vw,82px);line-height:.85;max-width:650px}
+.world-site[data-nav-style="poster"] .world-mobile-nav-links>a{font-size:clamp(28px,8vw,52px);font-weight:950;text-transform:uppercase;border-bottom:4px solid #181a0e}
+.world-site[data-nav-style="poster"] .world-mobile-nav-links .world-nav-index{background:#f35b32;border-radius:50%;height:26px;width:26px;display:grid;place-items:center}
+.world-site[data-nav-style="poster"] .world-menu-toggle{background:#141610;color:#edff42;border:3px solid #141610;font-weight:950}
+/* 07. MOC BEP: compact folded restaurant card. */
+.world-site[data-nav-style="table"] .world-mobile-nav{--nav-closed:translateY(-40px) rotateX(-8deg);top:82px;left:50%;translate:-50% 0;width:min(480px,94vw);max-height:calc(100dvh - 105px);background:#fbf5e8;color:#34513b;border:2px solid #a38e70;border-radius:4px 4px 34px 34px;padding:30px;box-shadow:0 17px 0 #d9d0bd,0 40px 90px #0005}
+.world-site[data-nav-style="table"] .world-mobile-nav-intro strong{font:400 clamp(30px,7vw,44px)/1.15 var(--w-serif);text-align:center}
+.world-site[data-nav-style="table"] .world-mobile-nav-intro>span{text-align:center}
+.world-site[data-nav-style="table"] .world-mobile-nav-links>a{font:400 clamp(19px,5vw,27px)/1.4 var(--w-serif);border-bottom:1px dashed #afa28b}
+.world-site[data-nav-style="table"] .world-mobile-nav-links .world-nav-decoration{width:7px;height:7px;background:#a05338}
+.world-site[data-nav-style="table"] .world-menu-toggle{border-radius:30px;background:#f4e9d1;color:#38503b}
+/* 08. FIELDNOTES: print newspaper contents. */
+.world-site[data-nav-style="contents"] .world-mobile-nav{--nav-closed:translateX(-110%);left:0;top:0;bottom:0;max-height:none;width:min(570px,92vw);background:#fcf7ed;color:#2c251f;border:0;border-right:2px solid #28211d;padding:94px 24px 18px}
+.world-site[data-nav-style="contents"] .world-mobile-nav-intro{border-block:4px double #332c22;padding-block:15px}
+.world-site[data-nav-style="contents"] .world-mobile-nav-intro strong{font:400 clamp(39px,10vw,66px)/1 var(--w-serif)}
+.world-site[data-nav-style="contents"] .world-mobile-nav-links>a{font:400 clamp(21px,5.7vw,31px)/1.35 var(--w-serif);grid-template-columns:28px 1fr 12px;border-bottom:1px solid #3b312d}
+.world-site[data-nav-style="contents"] .world-mobile-nav-links .world-nav-decoration{width:12px;height:2px;border:0;border-radius:0;background:#a93427}
+.world-site[data-nav-style="contents"] .world-menu-toggle{border-top:3px double currentColor;border-bottom:3px double currentColor;border-left:0;border-right:0}
+/* 09. MOC ARCH: blueprint left architectural grid. */
+.world-site[data-nav-style="blueprint"] .world-mobile-nav{--nav-closed:translateX(-107%);left:0;top:0;bottom:0;width:min(580px,90vw);max-height:none;background-color:#e4e1d8;background-image:linear-gradient(#535b521f 1px,transparent 1px),linear-gradient(90deg,#535b521f 1px,transparent 1px);background-size:25px 25px;border:0;border-right:3px solid #454b46;padding:105px 32px 28px}
+.world-site[data-nav-style="blueprint"] .world-mobile-nav-intro strong{font-size:clamp(32px,8vw,55px);font-weight:450;letter-spacing:.015em}
+.world-site[data-nav-style="blueprint"] .world-mobile-nav-links>a{font-size:clamp(21px,5.8vw,31px);font-weight:480;border-bottom:1px solid #737970;grid-template-columns:35px 1fr 15px}
+.world-site[data-nav-style="blueprint"] .world-mobile-nav-links .world-nav-decoration{width:8px;height:8px;border-radius:0;transform:rotate(45deg)}
+.world-site[data-nav-style="blueprint"] .world-menu-toggle{border-radius:0;border:1px solid #4b514b;background:#dedbd1;color:#2b312c}
+/* 10. AN NHIEN: rounded botanical sheet. */
+.world-site[data-nav-style="breath"] .world-mobile-nav{--nav-closed:translateY(105%);left:3vw;right:3vw;bottom:12px;width:auto;max-height:77dvh;border:1px solid #acc3ae;border-radius:38px;background:linear-gradient(140deg,#f2f8ec,#dbeade);padding:32px 25px}
+.world-site[data-nav-style="breath"] .world-mobile-nav-intro strong{font:400 clamp(31px,8vw,46px)/1.2 var(--w-serif)}
+.world-site[data-nav-style="breath"] .world-mobile-nav-links>a{font-size:clamp(21px,5.5vw,29px);font-weight:450;border-bottom-color:#88a98e70}
+.world-site[data-nav-style="breath"] .world-mobile-nav-links .world-nav-decoration{border-radius:100%;width:12px;height:12px;border:2px solid #8aaf94}
+.world-site[data-nav-style="breath"] .world-menu-toggle{border-radius:99px;background:#d8e9d8;color:#35583c;border:0}
+/* 11. NEST PROPERTY: right-side luxury brochure rail. */
+.world-site[data-nav-style="residence"] .world-mobile-nav{--nav-closed:translateX(110%);right:0;top:0;bottom:0;max-height:none;width:min(490px,88vw);background:linear-gradient(140deg,#1a2523,#0a1110);color:#f7e8c7;border:0;border-left:1px solid #d3b67f;padding:115px 28px 30px}
+.world-site[data-nav-style="residence"] .world-mobile-nav-intro strong{font:400 clamp(35px,8vw,49px)/1.08 var(--w-serif);text-transform:uppercase}
+.world-site[data-nav-style="residence"] .world-mobile-nav-links>a{font:400 clamp(22px,5.8vw,32px)/1.2 var(--w-serif);border-bottom-color:#bca07155}
+.world-site[data-nav-style="residence"] .world-mobile-nav-links .world-nav-decoration{border-radius:0;border:1px solid #d3b67f;width:6px;height:6px}
+.world-site[data-nav-style="residence"] .world-menu-toggle{border:1px solid #d1b780;background:#111e1b;color:#f6e6c4}
+/* 12. MO LEARNING: interactive syllabus sheet with lesson tiles. */
+.world-site[data-nav-style="syllabus"] .world-mobile-nav{--nav-closed:translateY(105%);left:0;bottom:0;width:100%;max-height:85dvh;background:#f5f0ff;border:0;border-top:7px solid #6952b0;border-radius:25px 25px 0 0;padding:27px}
+.world-site[data-nav-style="syllabus"] .world-mobile-nav-intro strong{font-size:clamp(31px,8vw,45px);font-weight:800}
+.world-site[data-nav-style="syllabus"] .world-mobile-nav-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.world-site[data-nav-style="syllabus"] .world-mobile-nav-links>a{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:8px;min-height:94px;border:1px solid #c8b8f0;border-radius:13px;background:#fff;padding:13px;font-size:clamp(15px,4vw,19px);font-weight:750;letter-spacing:0}
+.world-site[data-nav-style="syllabus"] .world-mobile-nav-links .world-nav-decoration{display:none}
+.world-site[data-nav-style="syllabus"] .world-menu-toggle{border-radius:10px;background:#5a438d;color:#fff;border:0}
+/* 13. POPPY: playful cloud-like pet club drawer. */
+.world-site[data-nav-style="poppy"] .world-mobile-nav{--nav-closed:translateY(-30px) scale(.85);top:84px;left:4vw;right:4vw;width:auto;max-height:calc(100dvh - 105px);border:4px solid #ffbed1;border-radius:43px;background:#fff7ee;color:#653f51;padding:28px;box-shadow:8px 9px 0 #f2c7d4}
+.world-site[data-nav-style="poppy"] .world-mobile-nav-intro strong{font-size:clamp(34px,9vw,53px);color:#ca4e8b;transform:rotate(-2deg)}
+.world-site[data-nav-style="poppy"] .world-mobile-nav-links>a{font-size:clamp(21px,6.4vw,34px);border:0;border-radius:18px;margin:3px 0;background:#ffe4ed;padding:14px;transform:rotate(-1deg)}
+.world-site[data-nav-style="poppy"] .world-mobile-nav-links>a:nth-child(even){background:#ffecc6;transform:rotate(1deg)}
+.world-site[data-nav-style="poppy"] .world-mobile-nav-links .world-nav-decoration{background:#ed86a7;border:0}
+.world-site[data-nav-style="poppy"] .world-menu-toggle{background:#ffcfdf;border:0;border-radius:100px;color:#8a305c}
+/* 14. VELAR: automotive cockpit control console. */
+.world-site[data-nav-style="cockpit"] .world-mobile-nav{--nav-closed:translateX(110%);right:0;top:0;bottom:0;width:min(465px,91vw);max-height:none;background:repeating-linear-gradient(90deg,#141922 0 1px,#0a0d12 1px 30px);color:#e5eaeb;border:0;border-left:5px solid #ff741c;padding:113px 24px 22px}
+.world-site[data-nav-style="cockpit"] .world-mobile-nav-intro strong{font-size:clamp(26px,7vw,39px);letter-spacing:.1em;font-weight:850;color:#ff822e}
+.world-site[data-nav-style="cockpit"] .world-mobile-nav-links>a{font-size:clamp(18px,5vw,26px);font-weight:800;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid #ff741c63;grid-template-columns:31px 1fr 20px}
+.world-site[data-nav-style="cockpit"] .world-mobile-nav-links .world-nav-decoration{width:11px;height:2px;background:#ff741c;border:0;border-radius:0}
+.world-site[data-nav-style="cockpit"] .world-menu-toggle{background:#131820;border:1px solid #ff741c;color:#ff863e;border-radius:0}
+/* 15. FORGE: industrial safety shutter. */
+.world-site[data-nav-style="forge"] .world-mobile-nav{--nav-closed:translateX(-110%);left:0;top:0;bottom:0;width:min(440px,89vw);max-height:none;padding:103px 23px 26px;color:#1d252a;background:repeating-linear-gradient(135deg,#e5e7e3 0 26px,#d5dbd6 26px 27px);border:0;border-right:8px solid #ef7337}
+.world-site[data-nav-style="forge"] .world-mobile-nav-intro strong{font-size:clamp(28px,8vw,43px);font-weight:950;letter-spacing:.012em}
+.world-site[data-nav-style="forge"] .world-mobile-nav-links>a{font-family:Arial,sans-serif;font-size:clamp(18px,5.5vw,31px);font-weight:900;text-transform:uppercase;border-bottom:3px solid #293137;grid-template-columns:35px 1fr 17px}
+.world-site[data-nav-style="forge"] .world-mobile-nav-links .world-nav-index{background:#e96f33;color:#151c20;padding:5px 4px}
+.world-site[data-nav-style="forge"] .world-mobile-nav-links .world-nav-decoration{border-radius:0;border:2px solid #e96f33}
+.world-site[data-nav-style="forge"] .world-menu-toggle{border:2px solid #20272a;background:#f07537;color:#101a1d}
+/* 16. ATLAS: structured private banking directory. */
+.world-site[data-nav-style="ledger"] .world-mobile-nav{--nav-closed:translateX(110%);right:0;top:78px;bottom:0;width:min(470px,93vw);max-height:calc(100dvh - 78px);background:#fff;color:#172f45;border:1px solid #bdc9d2;border-top:6px solid #356b91;padding:31px}
+.world-site[data-nav-style="ledger"] .world-mobile-nav-intro strong{font-size:27px;letter-spacing:.03em;font-weight:650}
+.world-site[data-nav-style="ledger"] .world-mobile-nav-links>a{font-size:clamp(17px,5vw,22px);letter-spacing:0;font-weight:550;grid-template-columns:26px 1fr 15px;border-bottom:1px solid #b8c5cf;padding-block:18px}
+.world-site[data-nav-style="ledger"] .world-mobile-nav-links .world-nav-decoration{border-radius:0;width:10px;height:10px;border-color:#336b90}
+.world-site[data-nav-style="ledger"] .world-menu-toggle{background:#e8f1f6;border:1px solid #7697aa;color:#18334a;border-radius:2px}
+/* 17. TERRACON: blocky construction plan emerging bottom-left. */
+.world-site[data-nav-style="structure"] .world-mobile-nav{--nav-closed:translateX(-110%) rotate(-3deg);left:0;top:80px;bottom:0;width:min(520px,94vw);max-height:calc(100dvh - 80px);background:linear-gradient(145deg,#d2d3cc,#f2f0e8);color:#303733;border:0;border-right:12px solid #dc7e4b;padding:36px 23px}
+.world-site[data-nav-style="structure"] .world-mobile-nav-intro strong{font-size:clamp(32px,9vw,52px);font-weight:950;text-transform:uppercase}
+.world-site[data-nav-style="structure"] .world-mobile-nav-links>a{font-size:clamp(20px,6vw,34px);font-weight:780;text-transform:uppercase;border-bottom:3px solid #687068}
+.world-site[data-nav-style="structure"] .world-mobile-nav-links .world-nav-decoration{border-radius:0;width:15px;height:4px;background:#dc7e4b;border:0}
+.world-site[data-nav-style="structure"] .world-menu-toggle{border-radius:0;background:#303733;color:#f6eee5;border:0}
+/* 18. ECHO: vinyl record sleeve, asymmetric disc stage. */
+.world-site[data-nav-style="vinyl"] .world-mobile-nav{--nav-closed:translateX(-120%) rotate(-6deg);left:0;top:0;bottom:0;width:min(560px,96vw);max-height:none;border:0;border-right:4px solid #bd5466;color:#4d2033;padding:103px 26px 29px;background:radial-gradient(circle at 91% 16%,#a44362 0 8%,#17121f 8.5% 11%,#a44362 11.5% 11.7%,#f4d6cc 12% 100%)}
+.world-site[data-nav-style="vinyl"] .world-mobile-nav-intro strong{font:italic 400 clamp(42px,10vw,67px)/1 var(--w-serif)}
+.world-site[data-nav-style="vinyl"] .world-mobile-nav-links>a{font:400 clamp(22px,5.5vw,32px)/1.3 var(--w-serif);border-bottom:1px solid #a17a83}
+.world-site[data-nav-style="vinyl"] .world-mobile-nav-links .world-nav-decoration{width:11px;height:11px;border:3px solid #aa4969;border-radius:100%}
+.world-site[data-nav-style="vinyl"] .world-menu-toggle{background:#2b1c2b;color:#ffe9dd;border-radius:50px;border:0}
+/* 19. NEON LIVE: full neon stage and marquee-like oversized tickets. */
+.world-site[data-nav-style="stage"] .world-mobile-nav{--nav-closed:translateY(110%);inset:0;width:100%;max-height:none;background:radial-gradient(circle at 85% 20%,#6725ae,#1a1033 58%,#090818);color:#f9ffdd;border:0;padding:105px 6vw 22px}
+.world-site[data-nav-style="stage"] .world-mobile-nav-intro strong{font-size:clamp(42px,12vw,81px);font-weight:950;line-height:.87;text-transform:uppercase;text-shadow:4px 4px #db40bd}
+.world-site[data-nav-style="stage"] .world-mobile-nav-links>a{font-size:clamp(25px,7.3vw,45px);font-weight:900;letter-spacing:-.02em;text-transform:uppercase;border-bottom:3px solid #edff26}
+.world-site[data-nav-style="stage"] .world-mobile-nav-links .world-nav-decoration{background:#edff26;border-radius:0;border:0;box-shadow:0 0 12px #edff26}
+.world-site[data-nav-style="stage"] .world-menu-toggle{background:#edff26;color:#1a0f30;border:0;border-radius:0}
+/* 20. ORBIT: compact desktop-like workspace app launcher. */
+.world-site[data-nav-style="workspace"] .world-mobile-nav{--nav-closed:translateY(-20px) scale(.93);top:72px;right:12px;width:min(410px,calc(100vw - 24px));max-height:calc(100dvh - 85px);background:#fff;color:#222b44;border:1px solid #d7def0;border-radius:16px;padding:19px;box-shadow:0 18px 60px #29325636}
+.world-site[data-nav-style="workspace"] .world-mobile-nav-intro{min-height:60px}.world-site[data-nav-style="workspace"] .world-mobile-nav-intro strong{font-size:21px;letter-spacing:0}
+.world-site[data-nav-style="workspace"] .world-mobile-nav-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.world-site[data-nav-style="workspace"] .world-mobile-nav-links>a{display:flex;flex-direction:column;align-items:start;gap:10px;min-height:85px;padding:12px;background:#f2f4fa;border:1px solid #e1e5f0;border-radius:10px;font-size:15px;letter-spacing:0;font-weight:650}
+.world-site[data-nav-style="workspace"] .world-mobile-nav-links .world-nav-index{background:#e0e3f5;border-radius:6px;padding:5px}
+.world-site[data-nav-style="workspace"] .world-mobile-nav-links .world-nav-decoration{display:none}
+.world-site[data-nav-style="workspace"] .world-menu-toggle{background:#f2f3ff;color:#4048a3;border:1px solid #c4c8eb;border-radius:9px}
+}
+@media(max-width:390px){
+.world-site .world-menu-toggle .world-toggle-label{font-size:8px}
+.world-site .world-menu-toggle{padding:7px 9px;min-width:43px}
+.world-site .world-mobile-nav-links>a{padding-block:13px}
+.world-site[data-nav-style="poster"] .world-mobile-nav{padding-top:94px}
+.world-site[data-nav-style="stage"] .world-mobile-nav{padding-top:96px}
+}
+@media(prefers-reduced-motion:reduce){
+.world-site .world-menu-toggle,.world-site .world-mobile-nav,.world-site .world-nav-scrim,.world-site .world-mobile-nav-links>a{animation:none!important;transition:none!important}
+}
