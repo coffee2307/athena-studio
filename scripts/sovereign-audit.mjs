@@ -32,6 +32,14 @@ const adapter="components/sovereign/LegacyWorldSiteAdapter.tsx";
 if(!readFileSync(join(root,adapter),"utf8").includes('from "@/components/templates/WorldSite"'))failures.push("Missing isolated transitional adapter");
 const router="components/sovereign/SovereignDemoRoute.tsx";
 if(readFileSync(join(root,router),"utf8").includes('from "@/components/templates/WorldSite"'))failures.push("Sovereign technical router must not import legacy UI directly");
+const rendererSource=readFileSync(join(root,"components/sovereign/sovereign-renderers.ts"),"utf8");
+const rendererImports=[...rendererSource.matchAll(/from ["']@\/templates\/([^/]+)\/src\/components\/Site["']/g)].map(m=>m[1]);
+if(new Set(rendererImports).size!==rendererImports.length)failures.push("Same standalone site is imported under multiple renderers");
+for(const site of known){
+ if(site.stage!=="sovereign")continue;
+ if(!rendererImports.includes(site.slug))failures.push("Sovereign site does not import its own standalone Site: "+site.slug);
+ if(!rendererSource.includes('"'+site.slug+'":'))failures.push("Sovereign site missing renderer registration: "+site.slug);
+}
 const forbidden=["WorldSite","WorldMotion","WorldExperiencePages","world-header-cta","world-footer","world-btn"];
 const rows=known.map(site=>{
  const path=join(root,"templates",site.slug);
