@@ -133,13 +133,6 @@
  .velar-work-end,.velar-process-bottom,.ix-editorial-minimal-head,.ix-editorial-minimal-foot{flex-wrap:wrap}
  .velar-detail-next strong{font-size:26px}
 }
-/* The full-width stage has no internal left crop or mobile canvas rectangle. */
-.ix-auto-showroom .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas{left:0;width:100%;top:0;bottom:0;height:100%}
-@media(max-width:760px){
- .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas,
- .ix-auto-showroom .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas{left:-12%;width:124%;top:22svh;bottom:0;height:78svh}
-}
-
 /* BLACK VELOCITY responsive stage. Keep editorial copy, model and chapter
    controls in separate visual zones on narrow screens. These overrides live
    last so earlier generic immersive styles cannot reintroduce overlap. */
@@ -172,15 +165,6 @@
   min-height:40px;padding:10px 13px;font-size:10px;
  }
  .ix-auto-showroom .bv-cinematic-track .ix-hero-text-link{display:none}
- .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas,
- .ix-auto-showroom .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas{
-  left:0;width:100%;top:clamp(300px,43svh,390px);bottom:auto;
-  height:clamp(210px,42svh,380px);
- }
- .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track[data-chapter]:not([data-chapter="0"]) .ix-hero-visual .ix-auto-3d-canvas,
- .ix-auto-showroom .bv-cinematic-track[data-chapter]:not([data-chapter="0"]) .ix-hero-visual .ix-auto-3d-canvas{
-  top:13svh;height:clamp(200px,45svh,400px);
- }
  .ix-auto-showroom .bv-cinematic-track .ix-visual-vignette{
   background:linear-gradient(180deg,#050609ed 0%,#05060977 29%,transparent 51%,#050609ad 100%);
  }
@@ -222,10 +206,6 @@
  /* Very short phones cannot fit the whole editorial intro and a full-size
     vehicle at once. Compact the copy and preserve a separate control band. */
  .ix-auto-showroom .bv-cinematic-track .ix-hero-copy>p{display:none}
- .ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas,
- .ix-auto-showroom .bv-cinematic-track .ix-hero-visual .ix-auto-3d-canvas{
-  top:clamp(280px,45svh,310px);height:clamp(150px,30svh,200px);
- }
  .ix-auto-showroom .bv-cinematic-track .bv-zoom-controls{bottom:120px}
 }
 
