@@ -130,6 +130,7 @@ export function WorldSite({slug,section="home",itemIndex,embedded=false}:Props){
   </header>
   <button className={"world-nav-scrim"+(menuOpen?" is-open":"")} type="button" tabIndex={menuOpen?0:-1} disabled={!menuOpen} aria-label={"Đóng điều hướng "+world.brand} onClick={()=>setMenuOpen(false)}/>
   <nav className={"world-mobile-nav"+(menuOpen?" is-open":"")} id={"world-menu-"+slug} aria-label={"Điều hướng mở rộng "+world.brand} aria-hidden={!menuOpen} inert={!menuOpen}>
+    {slug==="auto-showroom"&&<div className="bv-mobile-nav-bar"><span>VELAR / ĐIỀU HƯỚNG</span><button type="button" aria-label="Đóng menu showroom" onClick={()=>setMenuOpen(false)}>×</button></div>}
    <div className="world-mobile-nav-intro"><span>{navIdentity?.subtitle}</span><strong>{navIdentity?.headline}</strong></div>
    <div className="world-mobile-nav-links">{pages.map((p,i)=><Link aria-current={(section==="detail"?"work":section)===p.id?"page":undefined} key={p.id} href={p.href} scroll={false} onClick={()=>{setMenuOpen(false);window.scrollTo({top:0,left:0,behavior:"auto"});}}><span className="world-nav-index">0{i+1}</span><span className="world-nav-label">{p.label}</span><span className="world-nav-decoration" aria-hidden="true"/></Link>)}</div>
    <div className="world-mobile-nav-bottom"><strong>{world.brand}</strong><span>{extra.slogan}</span></div>
