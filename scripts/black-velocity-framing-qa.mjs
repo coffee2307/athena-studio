@@ -38,7 +38,7 @@ try{
     return {frame:f,rig:c.getAttribute("data-layout-rig"),supports:Number(c.getAttribute("data-model-support-count")),safe:c.getAttribute("data-model-safe"),center:Number(c.getAttribute("data-model-center-x")),box:{left:rect.left,right:rect.right,top:rect.top,bottom:rect.bottom,width:rect.width,height:rect.height},heroBottom:h.bottom,navTop:n?.top,overflow:document.documentElement.scrollWidth-innerWidth};
    });
    const isMobile=width<=760;
-   const [l,r,b,t]=m.frame;
+   const [l,r]=m.frame;
    const margin=isMobile?.84:.90;
    const visible=Number.isFinite(l)&&Number.isFinite(r)&&m.safe==="true"&&l>=-margin-.015&&r<=margin+.015;
    const positioning=!isMobile||m.box.left>=-1&&m.box.right<=width+1&&m.box.bottom<=m.heroBottom-95;
