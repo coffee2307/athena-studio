@@ -20,7 +20,7 @@ export function PortfolioDirectory({items}:{items:Project[]}){
      <ProjectArtwork project={project} compact/>
     </Link></div>
     <div className="ae-project-tile-foot"><div className="ae-project-tile-top"><span>{String(index+1).padStart(2,"0")} / {project.category}</span><span>{project.kind==="research"?"NGHIÊN CỨU":"DỰ ÁN SÁNG LẬP"}</span></div>
-     <div className="ae-project-tile-copy"><div><h3>{project.title}</h3><p>{project.summary}</p></div><div className="ae-project-tile-actions"><Link href={"/projects/"+project.slug}>Khám phá dự án <span aria-hidden="true">↗</span></Link></div></div>
+     <div className="ae-project-tile-copy"><div><h3>{project.title}</h3><p>{project.summary}</p></div><div className="ae-project-tile-actions"><Link href={"/projects/"+project.slug}>Khám phá dự án <span aria-hidden="true"></span></Link></div></div>
     </div>
    </article>)}
   </div>

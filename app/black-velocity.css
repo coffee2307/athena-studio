@@ -673,3 +673,8 @@
 /* Preserve the source car's orange pinstripes in the static GLB study photographs. */
 .ix-auto-showroom .ix-work-shot img,
 .ix-auto-showroom .ix-hero-image img{filter:contrast(1.08) saturate(.97)}
+
+/* BLACK VELOCITY: one scroll-to-chapter action (native button), same visual affordance as original link. */
+.ix-auto-showroom .ix-hero-copy button.ix-hero-primary{appearance:none;font-family:"Be Vietnam Pro",sans-serif;font-size:11px;cursor:pointer;text-align:left;letter-spacing:.02em}
+.ix-auto-showroom .ix-hero-copy button.ix-hero-primary:focus-visible{outline:3px solid #ffe1c2;outline-offset:4px}
+@media(max-width:760px){.ix-auto-showroom .ix-hero-copy button.ix-hero-primary{font-size:10px;min-height:44px}}

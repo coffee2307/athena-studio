@@ -1,0 +1,35 @@
+{
+  "slug": "architecture-studio",
+  "title": "Kiến trúc & không gian",
+  "industry": "Kiến trúc",
+  "style": "Vật liệu tối giản",
+  "purpose": "Trưng bày công trình, quy trình và năng lực thiết kế",
+  "description": "Một portfolio giàu khoảng thở, để ảnh công trình dẫn dắt câu chuyện từ ý tưởng đến không gian hoàn thiện.",
+  "variant": "architecture",
+  "features": [
+    "Bộ lọc công trình theo loại hình",
+    "Thư viện ảnh toàn màn hình",
+    "Trang dự án theo giai đoạn",
+    "Website demo nhiều trang với điều hướng desktop/mobile",
+    "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+    "Trải nghiệm trong popup hoặc mở toàn màn hình"
+  ],
+  "modules": [
+    "content",
+    "contact"
+  ],
+  "reference": {
+    "name": "startbootstrap-agency",
+    "url": "https://github.com/StartBootstrap/startbootstrap-agency",
+    "license": "MIT"
+  },
+  "brand": "FORMA",
+  "layout": "editorial",
+  "images": [
+    "/images/image-1.jpg",
+    "/images/image-2.jpg",
+    "/images/image-3.jpg",
+    "/images/image-4.jpg",
+    "/images/image-5.jpg"
+  ]
+}

@@ -2,7 +2,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { RoundedBox } from '@react-three/drei'
 import { useEffect, useMemo, useRef } from 'react'
 import { Color, InstancedMesh, Object3D, Vector3, type Group } from 'three'
-import { ArrowDown, ArrowUpRight, Blocks, Sparkles } from 'lucide-react'
+import { ArrowDown, ArrowRight, Blocks, Sparkles } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useScrollScene } from '../hooks/useScrollScene'
 import SceneErrorBoundary from './SceneErrorBoundary'
@@ -228,14 +228,14 @@ export default function LegoActivitiesVisual(){
       <div className="motion-copy">
         {steps.map((story,i)=><div key={story.label} className={'motion-copy-panel'+(i===phase?' selected':'')} aria-hidden={!reducedMotion&&i!==phase}>
           <span className="motion-tag"><Sparkles size={15}/>{story.label}</span><h2>{story.heading}</h2><p>{story.description}</p>
-          {i===2&&<Link to="/dang-ky" tabIndex={reducedMotion||phase===i?0:-1} className="motion-cta">Tham gia kiến tạo <ArrowUpRight size={16}/></Link>}
+          {i===2&&<Link to="/dang-ky" tabIndex={reducedMotion||phase===i?0:-1} className="motion-cta">Tham gia kiến tạo <ArrowRight size={16}/></Link>}
         </div>)}
       </div>
       <div className="motion-visual city-visual"><div className="city-tag city-tag-top">A CITY BUILT BY CREATORS</div>
         <SceneErrorBoundary label="Thành phố sáng tạo"><CityCanvas progressRef={progressRef} reduced={reducedMotion} dark={dark}/></SceneErrorBoundary>
         <div className="city-tag city-tag-bottom">DESIGN • CODE • CREATE <span>·</span></div>
       </div>
-      <button type="button" className="motion-skip" onClick={()=>sectionRef.current?.nextElementSibling?.scrollIntoView({behavior:reducedMotion?'auto':'smooth',block:'start'})}>BỎ QUA HIỆU ỨNG ↗</button>
+      <button type="button" className="motion-skip" onClick={()=>sectionRef.current?.nextElementSibling?.scrollIntoView({behavior:reducedMotion?'auto':'smooth',block:'start'})}>BỎ QUA HIỆU ỨNG </button>
       <div className="motion-footer"><span>IMAGINE / BUILD / CONNECT</span><div className="motion-progress"><i style={{width:progress*100+'%'}}/></div><strong>0{phase+1} / 03</strong></div>
     </div>
   </section>

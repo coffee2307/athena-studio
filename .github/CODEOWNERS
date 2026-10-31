@@ -1,0 +1,14 @@
+# McLaren P1 / BLACK VELOCITY: owner approval is required for any protected modification.
+/components/immersive/McLarenShowroomScene.tsx @coffee2307
+/components/immersive/AutoCinematicTrack.tsx @coffee2307
+/components/immersive/WorldScene.tsx @coffee2307
+/components/immersive/McLarenLoadingUI.tsx @coffee2307
+/components/templates/WorldImmersiveHome.tsx @coffee2307
+/app/black-velocity-cinematic.css @coffee2307
+/app/black-velocity.css @coffee2307
+/app/auto-showroom-minimal.css @coffee2307
+/public/models/mclaren.glb @coffee2307
+/config/showroom-protection.json @coffee2307
+/tests/showroom-protection.test.mjs @coffee2307
+
+/lib/showroom-orbit.ts @coffee2307

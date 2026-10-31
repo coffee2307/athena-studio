@@ -1,7 +1,7 @@
 "use client";
 import {useState} from "react";
 type Principle={title:string,text:string};
-const symbols=["✳","↗","◈","◇"];
+const symbols=["+","","◈","◇"];
 export function AboutPrinciples({principles}:{principles:Principle[]}){
  const [active,setActive]=useState(0);
  return <div className="dna02-about-system">

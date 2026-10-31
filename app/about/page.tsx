@@ -15,7 +15,7 @@ export default function StudioPage(){return <div className="page-shell agency-ab
   <p className="page-kicker"><span className="eyebrow-dot"/> ATHENA STUDIO / THIẾT KẾ & CÔNG NGHỆ</p>
   <h1>Đối tác cho những<br/><em>vấn đề số cụ thể.</em></h1>
   <div className="page-hero-lede"><div className="dna02-hero-lede"><p>Studio sáng tạo độc lập. Thiết kế có bản sắc, công nghệ hữu ích và kết quả có thể kiểm chứng.</p><details><summary>Đọc thêm về cách làm</summary><p>Athena là studio độc lập do founder xây dựng, tập trung vào thiết kế website, cải thiện hệ thống đang dùng và nghiên cứu những ứng dụng AI hữu ích. Quy mô và năng lực thực hiện được trao đổi phù hợp từng dự án, không dựa trên số liệu khách hàng hoặc thành tích chưa xác minh.</p></details></div>
-   <Link className="pill-link pill-dark" href="/contact">Gửi nhu cầu <Icon name="arrow-up-right" size={18}/></Link></div>
+   <Link className="pill-link pill-dark" href="/contact">Gửi nhu cầu <Icon name="arrow-right" size={18}/></Link></div>
  <StudioHeroScene mode="about"/>
  </div></section>
  <section className="page-section"><div className="container">
@@ -39,5 +39,5 @@ export default function StudioPage(){return <div className="page-shell agency-ab
   <div className="agency-case-actions"><Link href="/projects" className="agency-outline-cta">Xem hồ sơ dự án <Icon name="arrow-right" size={18}/></Link>
    <Link href="/process" className="agency-outline-cta">Xem quy trình hợp tác <Icon name="arrow-right" size={18}/></Link></div>
  </div></section>
- <section className="agency-final-cta"><div className="container"><p>KHI BẠN CÓ MỘT BÀI TOÁN THỰC TẾ</p><h2>Trao đổi tình trạng hiện tại.<br/>Làm rõ phương án phù hợp.</h2><Link href="/contact">Liên hệ Athena <Icon name="arrow-up-right" size={18}/></Link></div></section>
+ <section className="agency-final-cta"><div className="container"><p>KHI BẠN CÓ MỘT BÀI TOÁN THỰC TẾ</p><h2>Trao đổi tình trạng hiện tại.<br/>Làm rõ phương án phù hợp.</h2><Link href="/contact">Liên hệ Athena <Icon name="arrow-right" size={18}/></Link></div></section>
  </div>}

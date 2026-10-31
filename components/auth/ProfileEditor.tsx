@@ -21,7 +21,7 @@ export function ProfileEditor({name}:{name:string}){
  return <form onSubmit={save} className="athena-profile-form">
   <label htmlFor="athena-profile-name">Tên hiển thị</label>
   <input id="athena-profile-name" value={value} onChange={e=>{setValue(e.target.value);setStatus("idle");}} autoComplete="name" minLength={2} maxLength={80} required/>
-  <button type="submit" className="pill-link pill-dark" disabled={busy||value.trim().length<2}>{busy?"Đang lưu…":"Lưu tên hiển thị ↗"}</button>
+  <button type="submit" className="pill-link pill-dark" disabled={busy||value.trim().length<2}>{busy?"Đang lưu…":"Lưu tên hiển thị "}</button>
   <span role="status" className={status==="error"?"athena-profile-error":"athena-profile-status"}>{status==="saved"?"Đã cập nhật hồ sơ.":status==="error"?"Không thể cập nhật, vui lòng thử lại.":""}</span>
  </form>;
 }

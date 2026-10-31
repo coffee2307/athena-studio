@@ -1,0 +1,43 @@
+{
+  "title": "BLACK VELOCITY / VISUAL FRAMING v2.1 — PROTECTED",
+  "status": "protected",
+  "approved_on": "2026-10-31",
+  "scope": "/template-demos/auto-showroom — cinematic McLaren P1",
+  "policy": "Explicit owner approval on 2026-10-31 covers GLB-mesh optical silhouette framing, one responsive mobile stage, breakpoint camera recreation and regression checks. Desktop editorial composition and the vecarz CC BY 4.0 GLB stay unchanged. Future modifications require a new explicit request and updated verification. Follow-on approved UI adjustment: distinct template navigation patterns, removal of repeated northeast-arrow text, and subtle decorative affordance only; GLB and camera path unchanged. Owner's 2026-10-31 ATHENA-REFINEMENT-02 approval permits removal of the redundant showroom mode rail, an accessible 3D spinner and the cockpit mobile-menu UI; GLB, Draco decoder, camera logic, cinematic keyframes and complete author attribution must remain protected. Owner approval 2026-11-01 covers removing double-applied zoom, enforcing independent orbit/zoom camera state, ensuring caption legibility in desktop scroll story, and writing accurate BLACK VELOCITY homepage copy. Do not merge or deploy until separate permission.",
+  "verified": [
+    "45/45 actual Chromium WebGL framing checks: 9 widths (320/375/390/428/497/500/600/768/1440px) × 5 chapters",
+    "Mobile frame from 129 actual mesh silhouette support vertices; safe x margin >= 8% at all checked chapter poses",
+    "Mobile horizontal center within 5% of stage; no screen overflow or stage/control-band collision in checked viewports",
+    "Existing canonical orbit/drag/scroll regression: 0 failures; camera radius does not change on mobile drag",
+    "TypeScript, targeted ESLint, and Next.js production build PASS on Windows",
+    "Model geometry, material textures and vecarz CC BY attribution preserved",
+    "Physical iPhone Safari GPU/performance and production deploy remain UNVERIFIED",
+    "Navigation: 21 unique registered identities (20 WorldSite patterns, Digital Creators native design).",
+    "Northeast-arrow glyph eliminated from Athena application source; 3D and attribution unchanged.",
+    "REFINEMENT-02: explicitly approved loader, post-cinematic rail and menu UI changes are protected by new SHA hashes; prior camera/model asset hashes are unchanged.",
+    "2026-11-01 owner-directed camera fix: canonical unzoomed radius protected; baseline Chrome evidence showed 6.724 -> 5.514 after drag, patched Chrome showed 6.724 -> 6.724.",
+    "2026-11-01 content review: BLACK VELOCITY single public identity; model supplied by vecarz (@heynic) with CC BY 4.0, no claims of official McLaren sales; model asset hash remains unchanged.",
+    "2026-11-01 protection reconciliation: app/auto-showroom-minimal.css was unchanged from HEAD (Git blob 0d6ae955) but protection had an older reference hash; no CSS source changes were made."
+  ],
+  "file_blobs": {
+    "components/immersive/McLarenShowroomScene.tsx": "20ef79c6e1c3470992c895d1016a668946c1d4fb",
+    "components/immersive/AutoCinematicTrack.tsx": "fc433b8b45763e9d0ec3996151f1ba448ddf8356",
+    "components/immersive/WorldScene.tsx": "fc03a3697c95ffa5bd3338abee6a08f79ec7cb70",
+    "components/templates/WorldImmersiveHome.tsx": "43cd012fbdd7c020d45865af8ca6d1e1cafba3b9",
+    "components/immersive/McLarenLoadingUI.tsx": "af4009a7150adc77ac64ff8fae669f52b989aea8",
+    "app/black-velocity-cinematic.css": "2a8160c7fb50ea9146b0d47017857ef79c627326",
+    "app/black-velocity.css": "ff6972dd862269e4e2d78266bc327e42432ab764",
+    "app/auto-showroom-minimal.css": "0d6ae955f70ca560a0513c266ddc5de32ef84478",
+    "public/models/mclaren.glb": "b2a0e4fa38b928afdcebd01e3b31ab2dd0558e73",
+    "lib/showroom-orbit.ts": "1cebf096a745005be050dc30c917290fcc658f67",
+    "app/black-velocity-mobile-showcase.css": "29ceb6dd380155158070b566e483b0c497ef8393",
+    "lib/showroom-framing.ts": "5c809484675dfed09c7cb87fc64ba482c69d6e6d",
+    "scripts/black-velocity-framing-qa.mjs": "d128a879f81889c0b004c3700b260ef6526dd23d",
+    "components/templates/WorldEditorialInterlude.tsx": "a51af9a2d6ac8222a2495a257ae061980c42e405",
+    "components/immersive/ModelAttribution.tsx": "300ce3c4b1e49a152befdeee76232d3f3a1e360c",
+    "data/demo-worlds.ts": "7487041c026c5e61b11ccc7784e089953c83a874",
+    "data/demo-world-details.ts": "557f11970661f4828749ff7a8592ce6386478dfc",
+    "lib/showroom-camera-controls.ts": "ae97377d0ba7fd7118787b142e02e9028eddc22d"
+  },
+  "approved_update": "2026-11-01 — Explicit user approval for canonical zoom/drag/scroll repair and BLACK VELOCITY home copy unification, no unrelated template changes or release."
+}

@@ -17,7 +17,7 @@ export function StudioHeroScene({mode}:{mode:"process"|"about"}){
  const items=scenes[mode];
  return <div className={"dna02-page-hero-scene dna02-page-hero-"+mode} aria-label={mode==="process"?"Ba chặng trong hành trình hợp tác":"Ba lĩnh vực Athena hỗ trợ"}>
   <div className="dna02-page-scene-head"><span>{mode==="process"?"ATHENA / THE PROCESS":"ATHENA / CREATIVE ENGINEERING"}</span><span>0{active+1} / 03</span></div>
-  <div className="dna02-page-scene-art" aria-hidden="true"><i/><strong>{items[active].label}</strong><span>✳</span></div>
+  <div className="dna02-page-scene-art" aria-hidden="true"><i/><strong>{items[active].label}</strong><span>+</span></div>
   <div className="dna02-page-scene-options" role="group" aria-label="Khám phá các lĩnh vực">
    {items.map((s,i)=><button type="button" key={s.label} onClick={()=>setActive(i)} aria-pressed={active===i}>{s.title}</button>)}
   </div>

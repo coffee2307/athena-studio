@@ -177,7 +177,7 @@
     "industry": "Thời trang",
     "style": "Luxury",
     "purpose": "Kể câu chuyện bộ sưu tập và bán sản phẩm",
-    "description": "Giao diện thời trang giàu khoảng trống, hình ảnh biên tập và thông tin sản phẩm có chủ đích.",
+    "description": "Thời trang 3D: ba tạo hình người mẫu xoay trục Z, chuyển mẫu qua ba chấm, typography Be Vietnam Pro và bộ sưu tập tương tác.",
     "variant": "fashion",
     "tags": [
       "Fashion",
@@ -193,19 +193,19 @@
       "Liên hệ"
     ],
     "features": [
-      "Mở đầu kiểu campaign",
-      "Trang bộ sưu tập biên tập",
-      "Tùy biến theo quy trình ra mắt",
-      "Website demo nhiều trang với điều hướng desktop/mobile",
-      "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
-      "Trải nghiệm trong popup hoặc mở toàn màn hình"
+      "Hero 3D với ba người mẫu GLB nén Draco",
+      "Tự xoay quanh trục Z, dừng khi tab ẩn hoặc giảm chuyển động",
+      "Ba chấm để chuyển người mẫu, có trạng thái và hỗ trợ bàn phím",
+      "Bộ sưu tập và chi tiết look, atelier và biểu mẫu riêng",
+      "Font Be Vietnam Pro hỗ trợ đầy đủ dấu tiếng Việt",
+      "Ghi nguồn mô hình CC BY 4.0"
     ],
     "modules": [
       "catalog",
       "commerce",
       "content"
     ],
-    "version": "2.0.0",
+    "version": "3.1.0",
     "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
@@ -397,62 +397,6 @@
     "reference": {
       "name": "startbootstrap-business-casual",
       "url": "https://github.com/StartBootstrap/startbootstrap-business-casual",
-      "license": "MIT"
-    }
-  },
-  {
-    "slug": "editorial-journal",
-    "title": "Tạp chí và xuất bản",
-    "category": "Blog / Editorial",
-    "industry": "Nội dung",
-    "style": "Editorial",
-    "purpose": "Xuất bản bài viết và chuyên mục",
-    "description": "Hệ thống bài viết theo chuyên mục với cấp bậc nội dung và typography dễ đọc.",
-    "variant": "editorial",
-    "tags": [
-      "Blog",
-      "Magazine",
-      "Editorial"
-    ],
-    "pages": [
-      "Trang chủ",
-      "Bài viết",
-      "Chi tiết bài viết",
-      "Chuyên mục",
-      "Tòa soạn",
-      "Liên hệ"
-    ],
-    "features": [
-      "Trang bài viết ưu tiên khả năng đọc",
-      "Chuyên mục và nội dung liên quan",
-      "Sẵn sàng nối CMS sau khi chọn quy trình biên tập",
-      "Website demo nhiều trang với điều hướng desktop/mobile",
-      "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
-      "Trải nghiệm trong popup hoặc mở toàn màn hình"
-    ],
-    "modules": [
-      "content"
-    ],
-    "version": "2.0.0",
-    "status": "interactive-demo",
-    "compatibility": {
-      "starter": "web-foundation@1",
-      "next": "15.5.x",
-      "react": "19.x"
-    },
-    "estimatedPrice": "18–38 triệu đồng",
-    "qualityTier": "Publisher",
-    "demoPath": "/template-demos/editorial-journal",
-    "images": [
-      "/template-demos/editorial-journal/image-1.jpg",
-      "/template-demos/editorial-journal/image-2.jpg",
-      "/template-demos/editorial-journal/image-3.jpg",
-      "/template-demos/editorial-journal/image-4.jpg",
-      "/template-demos/editorial-journal/image-5.jpg"
-    ],
-    "reference": {
-      "name": "startbootstrap-clean-blog",
-      "url": "https://github.com/StartBootstrap/startbootstrap-clean-blog",
       "license": "MIT"
     }
   },
@@ -802,120 +746,6 @@
     }
   },
   {
-    "slug": "engineering-industry",
-    "title": "Cơ khí chính xác Forge",
-    "category": "Industrial / B2B",
-    "industry": "Cơ khí",
-    "style": "Industrial Technical",
-    "purpose": "Website trình diễn với trải nghiệm theo ngành",
-    "description": "Giải pháp gia công CNC, tích hợp thiết bị và kỹ thuật công nghiệp theo tiêu chuẩn được kiểm soát.",
-    "variant": "industrial",
-    "tags": [
-      "Cơ khí",
-      "Industrial Technical",
-      "Interactive multi-page"
-    ],
-    "pages": [
-      "Trang chủ",
-      "Danh mục / Dự án",
-      "3 trang chi tiết",
-      "Dịch vụ / Giải pháp",
-      "Về chúng tôi",
-      "Liên hệ"
-    ],
-    "features": [
-      "Bố cục chuyên biệt theo ngành",
-      "Header, footer và menu điện thoại",
-      "Trang chi tiết & lọc nội dung",
-      "Biểu mẫu demo, không gửi dữ liệu thật",
-      "Hiệu ứng phản hồi và xem trước trực tiếp"
-    ],
-    "modules": [
-      "content",
-      "contact",
-      "catalog"
-    ],
-    "version": "3.0.0",
-    "status": "interactive-demo",
-    "compatibility": {
-      "starter": "web-foundation@2",
-      "next": "15.5.x",
-      "react": "19.x"
-    },
-    "estimatedPrice": "22–42 triệu đồng",
-    "qualityTier": "Tailored Concept",
-    "demoPath": "/template-demos/engineering-industry",
-    "images": [
-      "/template-demos/engineering-industry/image-1.jpg",
-      "/template-demos/engineering-industry/image-2.jpg",
-      "/template-demos/engineering-industry/image-3.jpg",
-      "/template-demos/engineering-industry/image-4.jpg",
-      "/template-demos/engineering-industry/image-5.jpg"
-    ],
-    "reference": {
-      "name": "Original Athena demo; inspiration: MIT templates",
-      "url": "https://pixelandoak.com/templates/",
-      "license": "MIT"
-    }
-  },
-  {
-    "slug": "finance-trust",
-    "title": "Tài chính Atlas Capital",
-    "category": "Financial Services",
-    "industry": "Tài chính",
-    "style": "Institutional Finance",
-    "purpose": "Website trình diễn với trải nghiệm theo ngành",
-    "description": "Giải pháp tài chính được thiết kế dựa trên dữ liệu, kỷ luật rủi ro và sự minh bạch.",
-    "variant": "finance",
-    "tags": [
-      "Tài chính",
-      "Institutional Finance",
-      "Interactive multi-page"
-    ],
-    "pages": [
-      "Trang chủ",
-      "Danh mục / Dự án",
-      "3 trang chi tiết",
-      "Dịch vụ / Giải pháp",
-      "Về chúng tôi",
-      "Liên hệ"
-    ],
-    "features": [
-      "Bố cục chuyên biệt theo ngành",
-      "Header, footer và menu điện thoại",
-      "Trang chi tiết & lọc nội dung",
-      "Biểu mẫu demo, không gửi dữ liệu thật",
-      "Hiệu ứng phản hồi và xem trước trực tiếp"
-    ],
-    "modules": [
-      "content",
-      "contact",
-      "catalog"
-    ],
-    "version": "3.0.0",
-    "status": "interactive-demo",
-    "compatibility": {
-      "starter": "web-foundation@2",
-      "next": "15.5.x",
-      "react": "19.x"
-    },
-    "estimatedPrice": "28–55 triệu đồng",
-    "qualityTier": "Tailored Concept",
-    "demoPath": "/template-demos/finance-trust",
-    "images": [
-      "/template-demos/finance-trust/image-1.jpg",
-      "/template-demos/finance-trust/image-2.jpg",
-      "/template-demos/finance-trust/image-3.jpg",
-      "/template-demos/finance-trust/image-4.jpg",
-      "/template-demos/finance-trust/image-5.jpg"
-    ],
-    "reference": {
-      "name": "Original Athena demo; inspiration: MIT templates",
-      "url": "https://pixelandoak.com/templates/",
-      "license": "MIT"
-    }
-  },
-  {
     "slug": "construction-firm",
     "title": "Xây dựng Terracon",
     "category": "Construction / Real Estate",
@@ -965,177 +795,6 @@
       "/template-demos/construction-firm/image-3.jpg",
       "/template-demos/construction-firm/image-4.jpg",
       "/template-demos/construction-firm/image-5.jpg"
-    ],
-    "reference": {
-      "name": "Original Athena demo; inspiration: MIT templates",
-      "url": "https://pixelandoak.com/templates/",
-      "license": "MIT"
-    }
-  },
-  {
-    "slug": "music-label",
-    "title": "Hãng thu âm Echo Records",
-    "category": "Music / Media",
-    "industry": "Âm nhạc",
-    "style": "Sonic Editorial",
-    "purpose": "Website trình diễn với trải nghiệm theo ngành",
-    "description": "Nơi nghệ sĩ, những bản thu và hình ảnh gặp nhau trong một ngôn ngữ giàu cảm xúc.",
-    "variant": "music",
-    "tags": [
-      "Âm nhạc",
-      "Sonic Editorial",
-      "Interactive multi-page"
-    ],
-    "pages": [
-      "Trang chủ",
-      "Danh mục / Dự án",
-      "3 trang chi tiết",
-      "Dịch vụ / Giải pháp",
-      "Về chúng tôi",
-      "Liên hệ"
-    ],
-    "features": [
-      "Bố cục chuyên biệt theo ngành",
-      "Header, footer và menu điện thoại",
-      "Trang chi tiết & lọc nội dung",
-      "Biểu mẫu demo, không gửi dữ liệu thật",
-      "Hiệu ứng phản hồi và xem trước trực tiếp"
-    ],
-    "modules": [
-      "content",
-      "contact",
-      "catalog"
-    ],
-    "version": "3.0.0",
-    "status": "interactive-demo",
-    "compatibility": {
-      "starter": "web-foundation@2",
-      "next": "15.5.x",
-      "react": "19.x"
-    },
-    "estimatedPrice": "18–35 triệu đồng",
-    "qualityTier": "Tailored Concept",
-    "demoPath": "/template-demos/music-label",
-    "images": [
-      "/template-demos/music-label/image-1.jpg",
-      "/template-demos/music-label/image-2.jpg",
-      "/template-demos/music-label/image-3.jpg",
-      "/template-demos/music-label/image-4.jpg",
-      "/template-demos/music-label/image-5.jpg"
-    ],
-    "reference": {
-      "name": "Original Athena demo; inspiration: MIT templates",
-      "url": "https://pixelandoak.com/templates/",
-      "license": "MIT"
-    }
-  },
-  {
-    "slug": "live-concert",
-    "title": "Sự kiện âm nhạc NEON LIVE",
-    "category": "Event / Ticketing",
-    "industry": "Concert",
-    "style": "Neon Maximalist",
-    "purpose": "Website trình diễn với trải nghiệm theo ngành",
-    "description": "Sân khấu âm nhạc, nghệ sĩ và những khoảnh khắc không thể phát lại. Trải nghiệm lịch diễn và vé mô phỏng.",
-    "variant": "concert",
-    "tags": [
-      "Concert",
-      "Neon Maximalist",
-      "Interactive multi-page"
-    ],
-    "pages": [
-      "Trang chủ",
-      "Danh mục / Dự án",
-      "3 trang chi tiết",
-      "Dịch vụ / Giải pháp",
-      "Về chúng tôi",
-      "Liên hệ"
-    ],
-    "features": [
-      "Bố cục chuyên biệt theo ngành",
-      "Header, footer và menu điện thoại",
-      "Trang chi tiết & lọc nội dung",
-      "Biểu mẫu demo, không gửi dữ liệu thật",
-      "Hiệu ứng phản hồi và xem trước trực tiếp"
-    ],
-    "modules": [
-      "content",
-      "contact",
-      "catalog"
-    ],
-    "version": "3.0.0",
-    "status": "interactive-demo",
-    "compatibility": {
-      "starter": "web-foundation@2",
-      "next": "15.5.x",
-      "react": "19.x"
-    },
-    "estimatedPrice": "20–42 triệu đồng",
-    "qualityTier": "Tailored Concept",
-    "demoPath": "/template-demos/live-concert",
-    "images": [
-      "/template-demos/live-concert/image-1.jpg",
-      "/template-demos/live-concert/image-2.jpg",
-      "/template-demos/live-concert/image-3.jpg",
-      "/template-demos/live-concert/image-4.jpg",
-      "/template-demos/live-concert/image-5.jpg"
-    ],
-    "reference": {
-      "name": "Original Athena demo; inspiration: MIT templates",
-      "url": "https://pixelandoak.com/templates/",
-      "license": "MIT"
-    }
-  },
-  {
-    "slug": "team-intranet",
-    "title": "Cổng thông tin nội bộ Orbit",
-    "category": "Internal Tools",
-    "industry": "Doanh nghiệp",
-    "style": "Productive Workspace",
-    "purpose": "Website trình diễn với trải nghiệm theo ngành",
-    "description": "Không gian làm việc chung giúp đội ngũ theo dõi thông báo, lịch biểu, tài liệu và tiến độ dự án.",
-    "variant": "intranet",
-    "tags": [
-      "Doanh nghiệp",
-      "Productive Workspace",
-      "Interactive multi-page"
-    ],
-    "pages": [
-      "Trang chủ",
-      "Danh mục / Dự án",
-      "3 trang chi tiết",
-      "Dịch vụ / Giải pháp",
-      "Về chúng tôi",
-      "Liên hệ"
-    ],
-    "features": [
-      "Bố cục chuyên biệt theo ngành",
-      "Header, footer và menu điện thoại",
-      "Trang chi tiết & lọc nội dung",
-      "Biểu mẫu demo, không gửi dữ liệu thật",
-      "Hiệu ứng phản hồi và xem trước trực tiếp"
-    ],
-    "modules": [
-      "content",
-      "contact",
-      "catalog"
-    ],
-    "version": "3.0.0",
-    "status": "interactive-demo",
-    "compatibility": {
-      "starter": "web-foundation@2",
-      "next": "15.5.x",
-      "react": "19.x"
-    },
-    "estimatedPrice": "35–75 triệu đồng",
-    "qualityTier": "Tailored Concept",
-    "demoPath": "/template-demos/team-intranet",
-    "images": [
-      "/template-demos/team-intranet/image-1.jpg",
-      "/template-demos/team-intranet/image-2.jpg",
-      "/template-demos/team-intranet/image-3.jpg",
-      "/template-demos/team-intranet/image-4.jpg",
-      "/template-demos/team-intranet/image-5.jpg"
     ],
     "reference": {
       "name": "Original Athena demo; inspiration: MIT templates",

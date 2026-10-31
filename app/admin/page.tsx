@@ -24,13 +24,13 @@ export default async function AdminDashboard({searchParams}:Props){
    <SectionTitle index="01 / DỰ ÁN" title="Tiến độ gần đây."/>
    {projects.data?.length?<div className="ops-simple-list">{projects.data.map(p=><Link key={p.id} href={"/account/projects/"+p.id}>
     <div><strong>{p.name}</strong><small>{formatDate(p.created_at)}</small></div>
-    <StatusPill value={p.status} label={projectStatus[p.status as keyof typeof projectStatus]||"Đang cập nhật"}/><span>↗</span></Link>)}</div>:<EmptyState title="Chưa có dự án." description="Hãy tạo không gian làm việc khách hàng được ủy quyền trước, sau đó tạo dự án tương ứng."/>}
-   <div className="ops-bottom-link"><Link href="/admin/projects">Quản lý và tạo dự án ↗</Link></div>
+    <StatusPill value={p.status} label={projectStatus[p.status as keyof typeof projectStatus]||"Đang cập nhật"}/><span></span></Link>)}</div>:<EmptyState title="Chưa có dự án." description="Hãy tạo không gian làm việc khách hàng được ủy quyền trước, sau đó tạo dự án tương ứng."/>}
+   <div className="ops-bottom-link"><Link href="/admin/projects">Quản lý và tạo dự án </Link></div>
    <SectionTitle index="02 / HỖ TRỢ" title="Yêu cầu gần đây."/>
    {tickets.data?.length?<div className="ops-simple-list">{tickets.data.map(t=><Link key={t.id} href={"/account/support/"+t.id}>
     <div><strong>{t.title}</strong><small>{formatDate(t.created_at)}</small></div>
-    <StatusPill value={t.status} label={ticketStatus[t.status as keyof typeof ticketStatus]||"Đang cập nhật"}/><span>↗</span></Link>)}</div>:<EmptyState title="Chưa có yêu cầu hỗ trợ." description="Các yêu cầu mới sẽ xuất hiện tại đây khi khách hàng được cấp quyền sử dụng hệ thống."/>}
-   <div className="ops-bottom-link"><Link href="/admin/support">Quản lý hỗ trợ ↗</Link></div>
+    <StatusPill value={t.status} label={ticketStatus[t.status as keyof typeof ticketStatus]||"Đang cập nhật"}/><span></span></Link>)}</div>:<EmptyState title="Chưa có yêu cầu hỗ trợ." description="Các yêu cầu mới sẽ xuất hiện tại đây khi khách hàng được cấp quyền sử dụng hệ thống."/>}
+   <div className="ops-bottom-link"><Link href="/admin/support">Quản lý hỗ trợ </Link></div>
   </>}
  </OperationsShell>;
 }

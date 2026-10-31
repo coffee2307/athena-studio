@@ -1,0 +1,14 @@
+{
+  "slug": "campaign-landing",
+  "name": "Landing page chiến dịch",
+  "layout": "statement",
+  "originalDemo": "/template-demos/campaign-landing",
+  "status": "standalone-baseline-extraction",
+  "fidelity": "original bespoke demos require visual parity review",
+  "license": {
+    "name": "startbootstrap-landing-page",
+    "url": "https://github.com/StartBootstrap/startbootstrap-landing-page",
+    "license": "MIT"
+  },
+  "version": "0.1.0"
+}

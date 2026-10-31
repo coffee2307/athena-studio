@@ -8,5 +8,5 @@ interface ButtonProps {
 }
 
 export function Button({ href, children, variant = "solid" }: ButtonProps) {
-  return <Link className={`button button-${variant}`} href={href}>{children}<span aria-hidden="true">↗</span></Link>;
+  return <Link className={`button button-${variant}`} href={href}>{children}<span aria-hidden="true"></span></Link>;
 }

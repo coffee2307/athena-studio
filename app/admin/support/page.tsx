@@ -16,6 +16,6 @@ export default async function AdminTickets({searchParams}:Props){
   <SectionTitle index="01 / YÊU CẦU GẦN ĐÂY" title="Danh sách hỗ trợ."/>
   {error?<ErrorState/>:data?.length?<div className="ops-simple-list">{data.map(t=><Link href={"/account/support/"+t.id} key={t.id}>
    <div><strong>{t.title}</strong><small>{formatDate(t.created_at)}</small></div>
-   <StatusPill value={t.status} label={ticketStatus[t.status as keyof typeof ticketStatus]||"Đang cập nhật"}/><span>↗</span></Link>)}</div>:<EmptyState title="Chưa có yêu cầu." description="Hệ thống chưa tiếp nhận yêu cầu hỗ trợ từ các dự án được phân quyền."/>}
+   <StatusPill value={t.status} label={ticketStatus[t.status as keyof typeof ticketStatus]||"Đang cập nhật"}/><span></span></Link>)}</div>:<EmptyState title="Chưa có yêu cầu." description="Hệ thống chưa tiếp nhận yêu cầu hỗ trợ từ các dự án được phân quyền."/>}
  </OperationsShell>;
 }
