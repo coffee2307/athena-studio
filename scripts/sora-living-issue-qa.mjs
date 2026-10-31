@@ -66,6 +66,19 @@ for(const {w,h} of widths){
     check(target==="#sora-manifesto","Scroll narrative anchor incorrect");
    }
    if(route==="contact"){
+    await page.evaluate(()=>scrollTo(0,0));
+    await page.screenshot({path:dir+"/contact-firstfold-"+w+".png",animations:"disabled",timeout:20000});
+    if(w<=428){
+     const spacing=await page.evaluate(()=>{
+      const section=document.querySelector('[class*="_letterForm__"]');
+      const form=section?.querySelector("form");
+      const intro=section?.querySelector('[class*="_routeIntro__"]');
+      if(!section||!form||!intro)return {missing:true};
+      const padding=parseFloat(getComputedStyle(section).paddingLeft);
+      return {missing:false,desired:section.getBoundingClientRect().left+padding,formLeft:form.getBoundingClientRect().left,introLeft:intro.getBoundingClientRect().left,formRight:innerWidth-form.getBoundingClientRect().right};
+     });
+     check(!spacing.missing&&Math.abs(spacing.desired-spacing.formLeft)<4&&Math.abs(spacing.desired-spacing.introLeft)<4,"SORA letter desk has old unbalanced mobile indentation "+JSON.stringify(spacing));
+    }
     const group=page.getByRole("group",{name:/Bạn đang nghĩ về điều gì/});
     check(await group.count()===1,"Accessible subject group missing");
     const radios=page.getByRole("radio");
