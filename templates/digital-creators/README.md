@@ -1,6 +1,9 @@
-# Digital Creators — Không gian sáng tạo số — Athena independent template
-Standalone Next.js App Router project. This is a **DNA-03 extraction baseline** with its own app, components, visual assets, routes, package and content config. It is not yet a pixel-identical extraction of every previous Athena demo interaction; compare original /template-demos/digital-creators and implement any missing bespoke scenes before delivery to a customer.
+# Digital Creators — Independent Vite source
 
-Setup: npm install && npm run build && npm run dev. Routes: /, /work, /services, /about, /contact.
-Customize src/data/site.json and src/app/globals.css. Never add production credentials. Contact form is demo-only; no submission or payment integration.
-Asset copyright/origin: see public/ASSET-SOURCES.md, original Athena registry and upstream credits. Don't claim example portfolio work is a customer commission.
+This is the native Digital Creators interactive website (Rubik 3D, brush illustration, LEGO city), not a generic Next.js scaffold. Site interface belongs to this project only.
+
+Run: `npm ci`, `npm run build`, then `npm run preview`. Default deployment base is `/`. Hash routes work with static hosting. External fonts may require a network connection. No production deployment is performed by this export.
+
+The original owner project remains at `vendor/digital-creators` inside Athena. To update this exported project, run `node scripts/sovereign-digital-creators-sync.mjs --apply` from Athena root, then regenerate its package lock. `--check` blocks accidental drift. The project's design copy is authored and is not automatically replaced by a changed `site.brand` in the generic scaffolder.
+
+See `public/ASSET-SOURCES.md` and upstream provenance.
