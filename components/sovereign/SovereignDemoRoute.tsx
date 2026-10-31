@@ -1,3 +1,4 @@
+import {createElement} from "react";
 import {notFound,redirect} from "next/navigation";
 import {findSovereignSite} from "@/data/sovereign-site-registry";
 import type {SovereignSection} from "@/data/sovereign-site-registry";
@@ -17,5 +18,5 @@ export function SovereignDemoRoute({slug,section="home",itemIndex,embedded}:{
  if(site.stage==="legacy")return <LegacyWorldSiteAdapter slug={slug} section={section} itemIndex={itemIndex} embedded={embedded}/>;
  const renderer=sovereignRenderers[slug as keyof typeof sovereignRenderers];
  if(!renderer)throw new Error("Sovereign template has no independent renderer: "+slug);
- return renderer({section,itemIndex,embedded});
+ return createElement(renderer,{section,itemIndex,embedded,basePath:"/template-demos/"+slug,assetBase:"/sovereign/"+slug});
 }
