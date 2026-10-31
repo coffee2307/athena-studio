@@ -39,8 +39,8 @@ for(const slug of slugs)for(const size of sizes){
   if(size.width<=428&&slug==="creative-studio"){
    const intersection=await page.evaluate(()=>{
     const root=document.querySelector("[data-sora-surface]");
-    const seal=[...root.querySelectorAll("div")].find(el=>(el.className||"").toString().includes("editorialSeal"));
-    const copy=[...root.querySelectorAll("section p")].find(el=>el.textContent?.includes("Ý tưởng không chỉ cần đẹp"));
+    const seal=root.querySelector('[class*="_livingSeal__"]');
+    const copy=[...root.querySelectorAll("section p")].find(el=>el.textContent?.includes("Không chỉ để ngắm nhìn"));
     if(!seal||!copy)return {missing:true};
     const a=seal.getBoundingClientRect(),b=copy.getBoundingClientRect();
     return {missing:false,overlap:Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left))*Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)),copyArea:b.width*b.height};
