@@ -34,7 +34,7 @@ test("Only the explicitly isolated compatibility adapter can import the shared W
 test("P0/P1 structural audit reports existing design debt without falsely claiming 21 designs",()=>{
  const r=spawnSync(process.execPath,[join(root,"scripts/sovereign-audit.mjs"),"--check"],{cwd:root,encoding:"utf8"});
  assert.equal(r.status,0,r.stdout+"\n"+r.stderr);
- assert.match(r.stdout,/"legacy":17/);
+ assert.match(r.stdout,/"legacy":1/);
  assert.match(r.stdout,/"native-static":1/);
- assert.match(r.stdout,/"sovereign":3/);
+ assert.match(r.stdout,/"sovereign":19/);
 });
