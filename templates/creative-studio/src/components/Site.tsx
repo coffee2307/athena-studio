@@ -6,26 +6,25 @@ import s from "./Sora.module.css";
 type Section="home"|"work"|"services"|"about"|"contact"|"detail";
 export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:{section?:Section;itemIndex?:number;basePath?:string;assetBase?:string}){
  const [menu,setMenu]=useState(false);
- const [edition,setEdition]=useState(0);
  const [filter,setFilter]=useState("Tất cả");
  const [brief,setBrief]=useState("");
  const [subject,setSubject]=useState("Nhận diện thương hiệu");
  const images=site.images.map(path=>assetBase+path);
  const go=(p:string)=>basePath+(p==="/"?"":p);
- const routes:[string,string][]=[["Dự án","/work"],["Lĩnh vực","/services"],["Triết lý","/about"],["Viết cho SORA","/contact"]];
- const projects=[{name:"Nếp / A new kind of familiar",type:"Identity",line:"Ngôn ngữ thị giác của những điều gần gũi."},{name:"Lặng / Space is a feeling",type:"Space",line:"Không gian được kể bằng ánh sáng và im lặng."},{name:"Mùa / Interfaces that breathe",type:"Digital",line:"Một trải nghiệm số giữ lại nhịp sống tự nhiên."},{name:"Chân trời / Unfinished futures",type:"Identity",line:"Thử nghiệm cách một câu chuyện có thể bắt đầu."},{name:"Dòng chảy / Moving identities",type:"Digital",line:"Chuyển động là một phần của nhận diện."}];
+ const routes:[string,string][]=[["Tuyển tập","/work"],["Chuyên môn","/services"],["Câu chuyện","/about"],["Gửi lời nhắn","/contact"]];
+ const projects=[{name:"Nếp — Điều thân thuộc",type:"Nhận diện",line:"Ngôn ngữ thị giác của những điều gần gũi."},{name:"Lặng — Những khoảng trống",type:"Không gian",line:"Không gian được kể bằng ánh sáng và im lặng."},{name:"Mùa — Giao diện biết thở",type:"Trải nghiệm số",line:"Một trải nghiệm số giữ lại nhịp sống tự nhiên."},{name:"Chân trời — Chuyện mới",type:"Nhận diện",line:"Thử nghiệm cách một câu chuyện có thể bắt đầu."},{name:"Dòng chảy — Nhận diện động",type:"Trải nghiệm số",line:"Chuyển động là một phần của nhận diện."}];
  useEffect(()=>{setMenu(false)},[section]);
  useEffect(()=>{if(!menu)return;const close=(e:KeyboardEvent)=>{if(e.key==="Escape")setMenu(false)};window.addEventListener("keydown",close);return()=>window.removeEventListener("keydown",close)},[menu]);
- const nav=<><div className={s.navCollection}>{routes.map(([label,url],i)=><Link key={url} onClick={()=>setMenu(false)} href={go(url)}><small>0{i+1}</small><span>{label}</span></Link>)}</div><span className={s.navEnd}>AN INDEPENDENT CREATIVE PRACTICE / EST. 2026</span></>;
- return <div className={s.sora} id="sora-top">
+ const nav=<><div className={s.navCollection}>{routes.map(([label,url],i)=><Link key={url} onClick={()=>setMenu(false)} href={go(url)}><small>0{i+1}</small><span>{label}</span></Link>)}</div><span className={s.navEnd}>MỖI CÂU CHUYỆN CẦN MỘT NGÔN NGỮ RIÊNG</span></>;
+ return <div className={s.sora} id="sora-top" data-sora-surface>
   <header className={s.masthead}>
    <Link className={s.logotype} href={go("/")}>{site.brand}<span>®</span></Link>
-   <span className={s.headEdition}>INDEPENDENT STUDIO / VOL. 01</span>
-   <nav className={s.desktopIndex} aria-label="Chỉ mục sáng tạo"><Link href={go("/work")}>INDEX / WORK</Link><Link href={go("/about")}>STUDIO NOTES</Link></nav>
+   <span className={s.headEdition}>XƯỞNG SÁNG TẠO / SỐ 01</span>
+   <nav className={s.desktopIndex} aria-label="Điều hướng SORA trên máy tính">{routes.map(([label,url],index)=><Link href={go(url)} key={url}><small>0{index+1}</small>{label}</Link>)}</nav>
    <button className={s.menuButton} aria-expanded={menu} aria-label={menu?"Đóng mục lục":"Mở mục lục"} onClick={()=>setMenu(v=>!v)}><i/><i/></button>
   </header>
-  {menu&&<div className={s.menuBackdrop} onClick={()=>setMenu(false)} role="presentation"/>}
-  <aside className={s.drawer} aria-hidden={!menu} inert={!menu}><span className={s.drawerTitle}>THE INDEX.</span>{nav}<button className={s.drawerClose} onClick={()=>setMenu(false)}>Khép mục lục</button></aside>
+  <button className={s.menuBackdrop} type="button" data-open={menu} aria-label="Đóng mục lục" aria-hidden={!menu} tabIndex={menu?0:-1} onClick={()=>setMenu(false)}/>
+  <aside className={s.drawer} role="dialog" aria-label="Mục lục SORA" aria-hidden={!menu} inert={!menu}><button className={s.drawerX} onClick={()=>setMenu(false)} aria-label="Đóng mục lục">Đóng <span aria-hidden="true">×</span></button><span className={s.drawerTitle}>Mục lục<span>.</span></span>{nav}<button className={s.drawerClose} onClick={()=>setMenu(false)}>Khép lại trang này <span aria-hidden="true">←</span></button></aside>
   <main>
    {section==="home"&&<>
     <section className={s.opening}><div className={s.openingWords}><p className={s.kicker}>AN ONGOING EXPERIMENT / SORA</p><h1>We make<br/><em>things</em><br/>mean more.</h1><p>Ý tưởng không chỉ cần đẹp. Chúng cần một đời sống riêng, một giọng nói riêng và đủ sức khiến người khác dừng lại.</p><Link className={s.lineLink} href={go("/work")}>Mở tuyển tập dự án <span aria-hidden="true">→</span></Link></div><figure className={s.openingImage}><img src={images[0]} alt="Ảnh chủ đề SORA, thiết kế sáng tạo"/><figcaption>FIG. 01 / A WORLD IN PROGRESS</figcaption></figure><span className={s.verticalLabel}>A LIVING CREATIVE PORTFOLIO</span></section>
