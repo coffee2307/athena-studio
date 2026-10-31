@@ -72,7 +72,7 @@
 .world-site .world-mobile-nav-links .world-nav-index{font-size:10px;letter-spacing:.08em;opacity:.65}
 .world-site .world-mobile-nav-links .world-nav-label{overflow-wrap:anywhere}
 .world-site .world-mobile-nav-links .world-nav-decoration{justify-self:center;width:8px;height:8px;border:1px solid currentColor;border-radius:50%;opacity:.7}
-.world-site .world-mobile-nav-bottom{display:flex;gap:16px;margin-top:auto;padding-top:35px;justify-content:space-between;align-items:end;border:0}
+.world-site .world-mobile-nav-bottom{display:flex;gap:16px;margin-top:auto;padding-top:35px;justify-content:space-between;align-items:flex-end;border:0}
 .world-site .world-mobile-nav-bottom strong{font-size:14px;max-width:50%;overflow-wrap:anywhere}
 .world-site .world-mobile-nav-bottom span{font-size:10px;max-width:55%;text-align:right}
 .world-site .world-mobile-nav.is-open .world-mobile-nav-links>a{animation:worldNavReveal .4s both}
@@ -98,7 +98,7 @@
 .world-site[data-nav-style="catalog"] .world-mobile-nav-intro{min-height:65px}
 .world-site[data-nav-style="catalog"] .world-mobile-nav-intro strong{font-family:var(--w-serif);font-size:30px;font-weight:400}
 .world-site[data-nav-style="catalog"] .world-mobile-nav-links{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.world-site[data-nav-style="catalog"] .world-mobile-nav-links>a{display:flex;flex-direction:column;align-items:start;gap:8px;min-height:100px;padding:15px;background:#eee6db;border:1px solid #d8cabc;font-size:18px}
+.world-site[data-nav-style="catalog"] .world-mobile-nav-links>a{display:flex;flex-direction:column;align-items:flex-start;gap:8px;min-height:100px;padding:15px;background:#eee6db;border:1px solid #d8cabc;font-size:18px}
 .world-site[data-nav-style="catalog"] .world-mobile-nav-links .world-nav-decoration{display:none}
 .world-site[data-nav-style="catalog"] .world-menu-toggle{border-radius:999px;background:#e9ddcf;color:#3c3327}
 /* 04. ATELIER: theatrical full-screen edition index. */
@@ -208,7 +208,7 @@
 .world-site[data-nav-style="workspace"] .world-mobile-nav{--nav-closed:translateY(-20px) scale(.93);top:72px;right:12px;width:min(410px,calc(100vw - 24px));max-height:calc(100dvh - 85px);background:#fff;color:#222b44;border:1px solid #d7def0;border-radius:16px;padding:19px;box-shadow:0 18px 60px #29325636}
 .world-site[data-nav-style="workspace"] .world-mobile-nav-intro{min-height:60px}.world-site[data-nav-style="workspace"] .world-mobile-nav-intro strong{font-size:21px;letter-spacing:0}
 .world-site[data-nav-style="workspace"] .world-mobile-nav-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
-.world-site[data-nav-style="workspace"] .world-mobile-nav-links>a{display:flex;flex-direction:column;align-items:start;gap:10px;min-height:85px;padding:12px;background:#f2f4fa;border:1px solid #e1e5f0;border-radius:10px;font-size:15px;letter-spacing:0;font-weight:650}
+.world-site[data-nav-style="workspace"] .world-mobile-nav-links>a{display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-height:85px;padding:12px;background:#f2f4fa;border:1px solid #e1e5f0;border-radius:10px;font-size:15px;letter-spacing:0;font-weight:650}
 .world-site[data-nav-style="workspace"] .world-mobile-nav-links .world-nav-index{background:#e0e3f5;border-radius:6px;padding:5px}
 .world-site[data-nav-style="workspace"] .world-mobile-nav-links .world-nav-decoration{display:none}
 .world-site[data-nav-style="workspace"] .world-menu-toggle{background:#f2f3ff;color:#4048a3;border:1px solid #c4c8eb;border-radius:9px}
