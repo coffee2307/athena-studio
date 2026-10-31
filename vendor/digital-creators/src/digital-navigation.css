@@ -1,0 +1,40 @@
+/* Digital Creators / Creative Atlas — standalone 21st navigation identity. */
+@media(max-width:760px){
+ .menu-toggle.dc-constellation-toggle{display:inline-flex;align-items:center;gap:8px;border:1px solid #b4a0d5;border-radius:14px;background:#f0e9fc;color:#52436e;padding:9px 11px;min-height:44px}
+ .dc-constellation-glyph{font:700 24px/1 Outfit,sans-serif;transition:transform .3s}
+ .menu-toggle.dc-constellation-toggle[aria-expanded="true"] .dc-constellation-glyph{transform:rotate(90deg)}
+ .dc-constellation-label{font-size:10px;font-weight:850;letter-spacing:.1em}
+ .mobile-navigation.dc-constellation-nav{display:flex;position:fixed;top:72px;left:0;right:0;bottom:0;width:100%;height:calc(100dvh - 72px);padding:26px clamp(18px,5vw,38px) 25px;overflow-y:auto;overscroll-behavior:contain;border:0;box-shadow:none;background:radial-gradient(circle at 88% 18%,#e7ddff 0 12%,transparent 35%),radial-gradient(circle at 12% 75%,#d4f2e9 0 10%,transparent 40%),#faf9fc;color:#25283b;transform:translateY(24px) scale(.95);transform-origin:center;opacity:0;visibility:hidden;transition:transform .34s cubic-bezier(.18,.77,.23,1),opacity .34s,visibility .34s}
+ .mobile-navigation.dc-constellation-nav.show{transform:translateY(0) scale(1);opacity:1;visibility:visible}
+ .dc-map-intro{display:flex;flex-direction:column;align-items:flex-start;gap:9px;position:relative;z-index:1;margin:10px 0 25px}
+ .dc-map-intro>span{font-size:10px;font-weight:900;letter-spacing:.2em;color:#745e9a}
+ .dc-map-intro strong{font:900 clamp(34px,9vw,59px)/.95 Outfit,'Be Vietnam Pro',sans-serif;letter-spacing:-.065em;max-width:610px}
+ .dc-map-intro small{font-size:12px;color:#747187;line-height:1.6}
+ .dc-orbit-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-areas:"a b" "c c";gap:10px;position:relative;z-index:1}
+ .mobile-navigation.dc-constellation-nav .dc-orbit-card{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:12px;min-height:150px;padding:19px 17px;border:1px solid #d9cde8;border-radius:25px;color:#393148;position:relative;text-align:left;box-shadow:0 14px 35px #352c5310;transition:transform .2s,box-shadow .2s}
+ .mobile-navigation.dc-constellation-nav .dc-orbit-card:hover{transform:translateY(-3px);box-shadow:0 18px 35px #352c532c}
+ .mobile-navigation.dc-constellation-nav .dc-orbit-card-1{grid-area:a;background:#ece4fb;border-radius:28px 60px 24px 23px;transform:rotate(-2deg)}
+ .mobile-navigation.dc-constellation-nav .dc-orbit-card-2{grid-area:b;background:#dcf2ee;border-radius:60px 28px 24px 25px;transform:rotate(2deg)}
+ .mobile-navigation.dc-constellation-nav .dc-orbit-card-3{grid-area:c;background:#fbe9df;border-radius:26px 26px 52px 52px;min-height:116px}
+ .dc-orbit-number{display:grid;place-items:center;border-radius:50%;width:26px;height:26px;background:#ffffffb9;font-size:10px;letter-spacing:0;font-weight:850}
+ .mobile-navigation.dc-constellation-nav .dc-orbit-card strong{font:850 clamp(20px,5.3vw,32px)/1.1 Outfit,'Be Vietnam Pro',sans-serif;letter-spacing:-.05em}
+ .dc-orbit-description{font-size:10px;line-height:1.5;opacity:.75;font-weight:650}
+ .mobile-navigation.dc-constellation-nav .dc-constellation-register{margin-top:23px;padding:17px 20px;background:#352d4c;color:white;min-height:52px;align-items:center;border-radius:16px}
+ .mobile-navigation.dc-constellation-nav>p{margin-top:26px;text-align:center;font-size:9px;line-height:1.5}
+}
+@media(max-width:360px){
+ .mobile-navigation.dc-constellation-nav{padding:18px 13px}
+ .dc-map-intro{margin-bottom:14px}
+ .mobile-navigation.dc-constellation-nav .dc-orbit-card{min-height:135px;padding:13px}
+ .dc-orbit-description{font-size:9px}
+}
+:root[data-theme="dark"] .menu-toggle.dc-constellation-toggle{background:#203251;color:#c5f4ff;border-color:#5c8eab}
+:root[data-theme="dark"] .mobile-navigation.dc-constellation-nav{background:radial-gradient(circle at 84% 10%,#31436a 0 10%,transparent 36%),radial-gradient(circle at 10% 75%,#163c44 0 10%,transparent 43%),#0e172c;color:#f4f9ff}
+:root[data-theme="dark"] .dc-map-intro>span,:root[data-theme="dark"] .dc-map-intro small{color:#a8c5d6}
+:root[data-theme="dark"] .mobile-navigation.dc-constellation-nav .dc-orbit-card{color:#eff6ff;border-color:#415f86}
+:root[data-theme="dark"] .mobile-navigation.dc-constellation-nav .dc-orbit-card-1{background:#25365b}
+:root[data-theme="dark"] .mobile-navigation.dc-constellation-nav .dc-orbit-card-2{background:#1c484b}
+:root[data-theme="dark"] .mobile-navigation.dc-constellation-nav .dc-orbit-card-3{background:#51343f}
+@media(prefers-reduced-motion:reduce){
+ .mobile-navigation.dc-constellation-nav,.menu-toggle.dc-constellation-toggle .dc-constellation-glyph,.mobile-navigation.dc-constellation-nav .dc-orbit-card{transition:none!important;animation:none!important}
+}
