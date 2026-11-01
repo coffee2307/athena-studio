@@ -1,4 +1,4 @@
-.root{--ink:#142321;--paper:#ece7dc;--accent:#d4b886;--display:Georgia,serif;--radius:0;background:var(--paper);color:var(--ink);min-height:100vh;font:15px/1.65 Arial,Helvetica,sans-serif;overflow-x:clip}
+.root{--ink:#142321;--paper:#ece7dc;--accent:#d4b886;--display:"Be Vietnam Pro",Arial,sans-serif;--radius:0;background:var(--paper);color:var(--ink);min-height:100vh;font:15px/1.65 Arial,Helvetica,sans-serif;overflow-x:clip}
 .root *{box-sizing:border-box}.root a{color:inherit;text-decoration:none}.root button,.root textarea{font:inherit;cursor:pointer}.root :where(a,button,textarea):focus-visible{outline:3px solid var(--accent);outline-offset:4px}
 .header{display:grid;grid-template-columns:1fr 2fr auto auto;min-height:105px;align-items:center;gap:clamp(12px,3vw,40px);padding:18px 5vw;border-bottom:1px solid currentColor;position:relative;z-index:45;background:var(--paper)}
 .logo{font:800 clamp(22px,3vw,40px)/1.05 var(--display);letter-spacing:-.055em}.logo small{font:700 9px Arial;letter-spacing:.12em;display:inline-block;margin-left:8px}.logo span{color:var(--accent)}
@@ -36,3 +36,16 @@
 .archivePage{background:#1a2725;color:#f4e9d6}.catalogGrid{grid-template-columns:1.5fr .8fr .8fr}.artifact img{aspect-ratio:3/4}.artifact:nth-child(2){margin-top:10vw}.serviceSequence button{border:1px solid #bfa37a}.contactPage form{background:#17231f;color:#f1e5d2}
 @media(max-width:850px){.residenceView .heroFigure{order:-1}}
 @media(max-width:850px){.catalogGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.artifact:nth-child(2){margin-top:0}}@media(max-width:540px){.catalogGrid{grid-template-columns:1fr}.archivePage .sectionTitle h1{font-size:clamp(43px,12vw,65px)}}
+
+/* ATHENA-DNA-04 / property-showcase: locally owned pointer language (spatial), never exported. */
+.root :global([data-dna04-artifact]){
+ --dna04-shift-x:0px;--dna04-shift-y:0px;--dna04-tilt-x:0deg;--dna04-tilt-y:0deg;
+ --dna04-small-rotate:0deg;--dna04-point-x:50%;--dna04-point-y:50%;
+ transition:transform .24s cubic-bezier(.2,.75,.25,1),box-shadow .3s ease;
+}
+@media (hover:hover) and (pointer:fine){
+ .root :global([data-dna04-artifact]:hover){transform:perspective(1100px) rotateY(var(--dna04-tilt-x)) translate3d(0,var(--dna04-shift-y),0);box-shadow:0 25px 32px #293a342d;border-radius:2px;outline:1px solid #d0b88c55}
+}
+@media (prefers-reduced-motion:reduce){
+ .root :global([data-dna04-artifact]){transition:none!important;transform:none!important;box-shadow:none!important}
+}

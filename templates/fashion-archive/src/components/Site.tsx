@@ -47,11 +47,33 @@ export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:{sect
   </header>
   {menu&&<button className={s.menuScrim} type="button" aria-label="Đóng điều hướng" onClick={()=>setMenu(false)}/>}
   <aside className={s.menuPanel} inert={!menu} aria-hidden={!menu}><div className={s.menuTitle}>THE MENU / {site.brand}</div>{navItems.map(([text,path],i)=><Link href={go(path)} onClick={()=>setMenu(false)} key={path}><small>0{i+1}</small>{text}<span aria-hidden="true"></span></Link>)}<button onClick={()=>setMenu(false)} type="button">ĐÓNG MENU ×</button></aside></>;
- const card=(look:typeof looks[number],index:number)=> <Link className={s.lookCard} href={go("/work/"+(index+1))} key={look.id}>
+ const card=(look:typeof looks[number],index:number)=> <Link className={s.lookCard} data-dna04-artifact="fashion-archive-lookCard" href={go("/work/"+(index+1))} key={look.id}>
   <div className={s.lookFrame}><img src={media[look.image]} loading="lazy" alt={"Ảnh minh họa phong cách "+look.name}/><span>{look.id} / {look.kind}</span><div className={s.lookFrameLink} aria-hidden="true">XEM LOOK </div></div>
   <div className={s.lookMeta}><h3>{look.name}</h3><p>{look.desc}</p></div>
  </Link>;
- return <div className={s.root} id="fashion-archive-top">
+
+ const dna04Pointer=(event:React.PointerEvent<HTMLDivElement>)=>{
+  if(event.pointerType!=="mouse"||window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  const target=(event.target as HTMLElement).closest<HTMLElement>("[data-dna04-artifact]");
+  if(!target||!event.currentTarget.contains(target))return;
+  const bounds=target.getBoundingClientRect();
+  if(!bounds.width||!bounds.height)return;
+  const x=Math.max(-1,Math.min(1,((event.clientX-bounds.left)/bounds.width-.5)*2));
+  const y=Math.max(-1,Math.min(1,((event.clientY-bounds.top)/bounds.height-.5)*2));
+  target.style.setProperty("--dna04-shift-x",(x*5).toFixed(2)+"px");
+  target.style.setProperty("--dna04-shift-y",(y*4).toFixed(2)+"px");
+  target.style.setProperty("--dna04-tilt-x",(x*2.5).toFixed(2)+"deg");
+  target.style.setProperty("--dna04-tilt-y",(-y*2.5).toFixed(2)+"deg");
+  target.style.setProperty("--dna04-small-rotate",(x*1.1).toFixed(2)+"deg");
+  target.style.setProperty("--dna04-point-x",((x+1)*50).toFixed(1)+"%");
+  target.style.setProperty("--dna04-point-y",((y+1)*50).toFixed(1)+"%");
+ };
+ const dna04PointerOut=(event:React.PointerEvent<HTMLDivElement>)=>{
+  const target=(event.target as HTMLElement).closest<HTMLElement>("[data-dna04-artifact]");
+  if(!target||target.contains(event.relatedTarget as Node))return;
+  for(const name of ["--dna04-shift-x","--dna04-shift-y","--dna04-tilt-x","--dna04-tilt-y","--dna04-small-rotate","--dna04-point-x","--dna04-point-y"])target.style.removeProperty(name);
+ };
+ return <div className={s.root} onPointerMove={dna04Pointer} onPointerOut={dna04PointerOut} id="fashion-archive-top">
   {storyMenu}
   <main>
    {section==="home"&&<>
@@ -63,7 +85,7 @@ export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:{sect
     </section>
     <section className={s.materialSection} aria-label="Khám phá chất liệu và phom dáng">
      <div className={s.materialHeading}><span>02 / THE OBSERVATION</span><h2>LOOK CLOSER<span>.</span></h2><p>Chọn một hướng quan sát để thay đổi hình ảnh và cách đọc chi tiết.</p></div>
-     <div className={s.materialWorkbench}>
+     <div className={s.materialWorkbench} data-dna04-artifact="fashion-archive-materialWorkbench">
       <div className={s.materialControls} role="group" aria-label="Chọn khía cạnh cần quan sát">{materials.map((item,i)=><button key={item.name} type="button" aria-pressed={material===i} onClick={()=>setMaterial(i)}><small>{item.point}</small><strong>{item.name}</strong><span aria-hidden="true"></span></button>)}</div>
       <div className={s.materialWindow} onPointerMove={e=>{if(e.pointerType==="mouse"){const box=e.currentTarget.getBoundingClientRect();setPointer({x:Math.round((e.clientX-box.left)/box.width*100),y:Math.round((e.clientY-box.top)/box.height*100)})}}} onPointerLeave={()=>setPointer({x:50,y:50})} style={{"--pointer-x":pointer.x+"%","--pointer-y":pointer.y+"%"} as React.CSSProperties}>
        <img src={media[materials[material].image]} alt={"Ảnh minh họa quan sát "+materials[material].name} loading="lazy"/>
@@ -86,7 +108,7 @@ export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:{sect
    </section>}
    {section==="detail"&&<article className={s.detailPage}>
     <Link className={s.backLink} href={go("/work")}>← TRỞ LẠI COLLECTION</Link><div className={s.detailLayout}>
-     <div className={s.detailPhotos}><div className={s.detailMain}><img src={media[(chosen.image+detailImage)%media.length]} alt={"Góc nhìn "+(detailImage+1)+" của "+chosen.name}/><span>LOOK {chosen.id} / VISUAL STUDY</span></div><div className={s.detailThumbs} role="group" aria-label="Thay đổi ảnh sản phẩm">{[0,1,2].map(i=><button type="button" key={i} aria-pressed={detailImage===i} onClick={()=>setDetailImage(i)}><img src={media[(chosen.image+i)%media.length]} alt={"Ảnh "+(i+1)}/></button>)}</div></div>
+     <div className={s.detailPhotos} data-dna04-artifact="fashion-archive-detailPhotos"><div className={s.detailMain}><img src={media[(chosen.image+detailImage)%media.length]} alt={"Góc nhìn "+(detailImage+1)+" của "+chosen.name}/><span>LOOK {chosen.id} / VISUAL STUDY</span></div><div className={s.detailThumbs} role="group" aria-label="Thay đổi ảnh sản phẩm">{[0,1,2].map(i=><button type="button" key={i} aria-pressed={detailImage===i} onClick={()=>setDetailImage(i)}><img src={media[(chosen.image+i)%media.length]} alt={"Ảnh "+(i+1)}/></button>)}</div></div>
      <div className={s.detailCopy}><span>LOOK {chosen.id} / {chosen.kind}</span><h1>{chosen.title}</h1><h2>{chosen.name}</h2><p>{chosen.desc}</p><div className={s.detailNotes}><div><small>ĐIỂM NHẤN</small><p>{chosen.feature}</p></div><div><small>TRẠNG THÁI</small><p>Hình ảnh minh họa cho mẫu website; chưa có sản phẩm bán hoặc dữ liệu tồn kho.</p></div></div><Link href={go("/contact")}>LIÊN HỆ VỀ LOOK NÀY <span aria-hidden="true"></span></Link></div>
     </div>
    </article>}

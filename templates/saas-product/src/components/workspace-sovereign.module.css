@@ -36,3 +36,16 @@
 .archivePage{background:#f5f5ff}.catalogGrid{grid-template-columns:repeat(3,1fr)}.artifact{border:1px solid #bbc3e2;background:white;padding:12px;border-radius:12px}.artifact:nth-child(2){margin-top:0}.artifact img{aspect-ratio:16/10}.serviceSequence button{border-radius:12px;background:#fff}.serviceVisual{border-radius:12px}.contactPage form{border-radius:14px}
 @media(max-width:850px){.productBoard .appPanel{order:-1;min-height:180px}.productBoard .heroWords{padding-top:22px}}
 @media(max-width:850px){.catalogGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.artifact:nth-child(2){margin-top:0}}@media(max-width:540px){.catalogGrid{grid-template-columns:1fr}.archivePage .sectionTitle h1{font-size:clamp(43px,12vw,65px)}}
+
+/* ATHENA-DNA-04 / saas-product: locally owned pointer language (systems), never exported. */
+.root :global([data-dna04-artifact]){
+ --dna04-shift-x:0px;--dna04-shift-y:0px;--dna04-tilt-x:0deg;--dna04-tilt-y:0deg;
+ --dna04-small-rotate:0deg;--dna04-point-x:50%;--dna04-point-y:50%;
+ transition:transform .24s cubic-bezier(.2,.75,.25,1),box-shadow .3s ease;
+}
+@media (hover:hover) and (pointer:fine){
+ .root :global([data-dna04-artifact]:hover){transform:perspective(1200px) rotateX(var(--dna04-tilt-y)) rotateY(var(--dna04-tilt-x));box-shadow:0 12px 28px #545b8b29;border-radius:10px;outline:1px solid #8191ab26}
+}
+@media (prefers-reduced-motion:reduce){
+ .root :global([data-dna04-artifact]){transition:none!important;transform:none!important;box-shadow:none!important}
+}

@@ -40,7 +40,29 @@ export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:{sect
   return()=>{observer.disconnect();ambientObserver.disconnect();document.removeEventListener("visibilitychange",onVisible);window.removeEventListener("scroll",onScroll);if(frame)cancelAnimationFrame(frame)};
  },[section]);
  const nav=<><div className={s.navCollection}>{routes.map(([label,url],i)=><Link key={url} onClick={()=>setMenu(false)} href={go(url)}><small>0{i+1}</small><span>{label}</span></Link>)}</div><span className={s.navEnd}>LOGO / WEBSITE / HÌNH ẢNH</span></>;
- return <div className={s.sora} id="sora-top" data-sora-surface>
+
+ const dna04Pointer=(event:React.PointerEvent<HTMLDivElement>)=>{
+  if(event.pointerType!=="mouse"||window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  const target=(event.target as HTMLElement).closest<HTMLElement>("[data-dna04-artifact]");
+  if(!target||!event.currentTarget.contains(target))return;
+  const bounds=target.getBoundingClientRect();
+  if(!bounds.width||!bounds.height)return;
+  const x=Math.max(-1,Math.min(1,((event.clientX-bounds.left)/bounds.width-.5)*2));
+  const y=Math.max(-1,Math.min(1,((event.clientY-bounds.top)/bounds.height-.5)*2));
+  target.style.setProperty("--dna04-shift-x",(x*5).toFixed(2)+"px");
+  target.style.setProperty("--dna04-shift-y",(y*4).toFixed(2)+"px");
+  target.style.setProperty("--dna04-tilt-x",(x*2.5).toFixed(2)+"deg");
+  target.style.setProperty("--dna04-tilt-y",(-y*2.5).toFixed(2)+"deg");
+  target.style.setProperty("--dna04-small-rotate",(x*1.1).toFixed(2)+"deg");
+  target.style.setProperty("--dna04-point-x",((x+1)*50).toFixed(1)+"%");
+  target.style.setProperty("--dna04-point-y",((y+1)*50).toFixed(1)+"%");
+ };
+ const dna04PointerOut=(event:React.PointerEvent<HTMLDivElement>)=>{
+  const target=(event.target as HTMLElement).closest<HTMLElement>("[data-dna04-artifact]");
+  if(!target||target.contains(event.relatedTarget as Node))return;
+  for(const name of ["--dna04-shift-x","--dna04-shift-y","--dna04-tilt-x","--dna04-tilt-y","--dna04-small-rotate","--dna04-point-x","--dna04-point-y"])target.style.removeProperty(name);
+ };
+ return <div className={s.sora} onPointerMove={dna04Pointer} onPointerOut={dna04PointerOut} id="sora-top" data-sora-surface>
   <header className={s.masthead}>
    <Link className={s.logotype} href={go("/")}>{site.brand}<span>®</span></Link>
    <span className={s.headEdition}>XƯỞNG SÁNG TẠO / SỐ 01</span>
@@ -54,17 +76,17 @@ export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:{sect
     <SoraLivingCover images={images} workHref={go("/work")}/>
     <div className={s.typeRibbon} data-sora-ambient aria-hidden="true"><div>THIẾT KẾ LOGO · GIAO DIỆN WEBSITE · HÌNH ẢNH QUẢNG CÁO · THIẾT KẾ LOGO · GIAO DIỆN WEBSITE · HÌNH ẢNH QUẢNG CÁO ·</div></div>
     <section id="sora-manifesto" className={s.manifesto} data-sora-reveal><span>02 / CÁCH LÀM VIỆC</span><p>Mỗi thiết kế cần giải quyết một việc cụ thể: <em>giúp người xem nhận ra thương hiệu, hiểu sản phẩm và biết bước tiếp theo.</em></p><div className={s.manifestoAccent} aria-hidden="true">“</div></section>
-    <section className={s.featured}><div className={s.sectionLabel}><span>03 / CÁC MẪU THIẾT KẾ</span><Link href={go("/work")}>Xem tất cả mẫu <span aria-hidden="true">→</span></Link></div><div className={s.asymmetricGrid}>{projects.slice(0,3).map((project,i)=><Link className={s.project} data-sora-reveal key={project.name} href={go("/work/"+(i+1))}><div className={s.projectImage}><img src={images[i+1]||images[0]} alt={project.name}/><span>0{i+1} / {project.type}</span></div><h2>{project.name}</h2><p>{project.line}</p></Link>)}</div></section>
+    <section className={s.featured} data-dna04-artifact="creative-studio-featured"><div className={s.sectionLabel}><span>03 / CÁC MẪU THIẾT KẾ</span><Link href={go("/work")}>Xem tất cả mẫu <span aria-hidden="true">→</span></Link></div><div className={s.asymmetricGrid}>{projects.slice(0,3).map((project,i)=><Link className={s.project} data-dna04-artifact="creative-studio-project" data-sora-reveal key={project.name} href={go("/work/"+(i+1))}><div className={s.projectImage}><img src={images[i+1]||images[0]} alt={project.name}/><span>0{i+1} / {project.type}</span></div><h2>{project.name}</h2><p>{project.line}</p></Link>)}</div></section>
     <section className={s.editorialLab} data-sora-reveal aria-label="Bàn biên tập SORA">
       <div className={s.labHeading}><span>04 / XƯỞNG HÌNH ẢNH</span><h2>Một ý tưởng.<br/><em>Ba cách kể.</em></h2><p>Chọn một mục để xem ba thành phần thường có trong một thiết kế: hình ảnh, chất liệu và chuyển động.</p></div>
       <div className={s.labStage}>
-        <div className={s.labVisual} data-layer={editorialLayer} key={editorialLayer}><img src={images[[2,4,3][editorialLayer]]} alt={["Thử nghiệm hình ảnh và đường nét","Hình ảnh và chất liệu trong nhận diện","Nhịp chuyển động của một dự án sáng tạo"][editorialLayer]}/><div className={s.labIndex} aria-hidden="true">0{editorialLayer+1} / 03</div></div>
+        <div className={s.labVisual} data-dna04-artifact="creative-studio-labVisual" data-layer={editorialLayer} key={editorialLayer}><img src={images[[2,4,3][editorialLayer]]} alt={["Thử nghiệm hình ảnh và đường nét","Hình ảnh và chất liệu trong nhận diện","Nhịp chuyển động của một dự án sáng tạo"][editorialLayer]}/><div className={s.labIndex} aria-hidden="true">0{editorialLayer+1} / 03</div></div>
         <div className={s.labControls} role="group" aria-label="Chọn lớp sáng tạo">{[["01","Hình ảnh","Lựa chọn ảnh và bố cục."],["02","Chất liệu","So sánh màu sắc và bề mặt."],["03","Chuyển động","Xem cách hiệu ứng dẫn hướng người dùng."]].map(([index,title,desc],i)=><button type="button" aria-pressed={editorialLayer===i} onClick={()=>setEditorialLayer(i)} key={index}><span>{index}</span><strong>{title}</strong><small>{desc}</small></button>)}</div>
       </div>
     </section>
     <section className={s.contactBand} data-sora-reveal><span>05 / LIÊN HỆ</span><p>Cần thiết kế logo, website hay hình ảnh quảng cáo?</p><Link href={go("/contact")}>Gửi yêu cầu thiết kế <span aria-hidden="true">→</span></Link></section>
    </>}
-   {section==="work"&&<section className={s.workSpread}><div className={s.routeIntro}><span>THƯ VIỆN MẪU / SỐ 01</span><h1>Năm mẫu<br/><em>thiết kế cụ thể.</em></h1><p>Chọn một nhóm để xem mẫu logo, website hoặc hình ảnh quảng cáo. Đây là dự án minh họa, không phải hồ sơ khách hàng thực tế.</p></div><div className={s.filters} role="group" aria-label="Lọc dự án">{["Tất cả","Nhận diện","Website","Hình ảnh"].map(x=><button aria-pressed={filter===x} key={x} onClick={()=>setFilter(x)}>{x}</button>)}</div><div className={s.workGrid}>{projects.map((p,i)=>({p,i})).filter(({p})=>filter==="Tất cả"||p.type===filter).map(({p,i})=><Link key={p.name} href={go("/work/"+(i+1))} className={s.workPiece}><img src={images[i%images.length]} alt={p.name}/><small>HÌNH {String(i+1).padStart(2,"0")} / {p.type}</small><h2>{p.name}</h2><p>{p.line}</p></Link>)}</div></section>}
+   {section==="work"&&<section className={s.workSpread}><div className={s.routeIntro}><span>THƯ VIỆN MẪU / SỐ 01</span><h1>Năm mẫu<br/><em>thiết kế cụ thể.</em></h1><p>Chọn một nhóm để xem mẫu logo, website hoặc hình ảnh quảng cáo. Đây là dự án minh họa, không phải hồ sơ khách hàng thực tế.</p></div><div className={s.filters} role="group" aria-label="Lọc dự án">{["Tất cả","Nhận diện","Website","Hình ảnh"].map(x=><button aria-pressed={filter===x} key={x} onClick={()=>setFilter(x)}>{x}</button>)}</div><div className={s.workGrid}>{projects.map((p,i)=>({p,i})).filter(({p})=>filter==="Tất cả"||p.type===filter).map(({p,i})=><Link key={p.name} href={go("/work/"+(i+1))} className={s.workPiece} data-dna04-artifact="creative-studio-workPiece"><img src={images[i%images.length]} alt={p.name}/><small>HÌNH {String(i+1).padStart(2,"0")} / {p.type}</small><h2>{p.name}</h2><p>{p.line}</p></Link>)}</div></section>}
    {section==="detail"&&<article className={s.story}><div className={s.storyHeading}><Link href={go("/work")}>← VỀ TUYỂN TẬP</Link><span>HỒ SƠ / 0{itemIndex}</span><h1>{projects[(itemIndex-1)%projects.length].name}</h1><p>{projects[(itemIndex-1)%projects.length].line}</p></div><img className={s.storyHero} src={images[(itemIndex-1)%images.length]} alt="Ảnh mở đầu case study"/><div className={s.storyText}><span>01 / GÓC NHÌN</span><h2>Mẫu thiết kế gồm những gì?</h2><p>{projects[(itemIndex-1)%projects.length].deliverables} Mục tiêu: {projects[(itemIndex-1)%projects.length].goal} Đây là nội dung minh họa, không phải hồ sơ khách hàng thật.</p></div><div className={s.storyPair}><img src={images[itemIndex%images.length]} alt="Chi tiết thị giác dự án"/><img src={images[(itemIndex+1)%images.length]} alt="Thử nghiệm hình ảnh dự án"/></div><Link className={s.lineLink} href={go("/contact")}>Trao đổi về dự án mới →</Link></article>}
    {section==="services"&&<section className={s.disciplines}><div className={s.routeIntro}><span>DỊCH VỤ / 03 NHÓM THIẾT KẾ</span><h1>Logo, website<br/><em>và hình ảnh.</em></h1><p>Xem những hạng mục có thể thiết kế cho một thương hiệu.</p></div>{[{t:"01 / Nhận diện thương hiệu",d:"Thiết kế logo, bảng màu, kiểu chữ và các ấn phẩm thương hiệu."},{t:"02 / Website sáng tạo",d:"Thiết kế giao diện, trang nội dung và các tính năng tương tác."},{t:"03 / Chiến dịch hình ảnh",d:"Thiết kế ảnh quảng cáo, banner và bài đăng mạng xã hội."}].map((x,i)=><div className={s.discipline} key={x.t}><span>{x.t}</span><p>{x.d}</p><img src={images[i%images.length]} alt={"Minh họa "+x.t}/></div>)}</section>}
    {section==="about"&&<section className={s.aboutLetter}><span>MỘT LÁ THƯ / TỪ SORA</span><h1>Một xưởng<br/><em>không rập</em><br/>khuôn.</h1><div><p>Chúng tôi tin rằng mọi thương hiệu đều có một câu chuyện chưa được kể đúng cách. SORA là mẫu website giới thiệu dịch vụ thiết kế logo, website và hình ảnh quảng bá.</p><p>Đây là website mẫu minh họa trải nghiệm sáng tạo. Các dự án và nội dung bên trong không đại diện cho khách hàng thật của Athena Studio.</p></div><figure><img src={images[3]} alt="Không gian sáng tạo SORA"/><figcaption>KHÔNG CÓ HAI CÂU CHUYỆN GIỐNG NHAU.</figcaption></figure></section>}

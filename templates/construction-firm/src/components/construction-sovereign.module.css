@@ -36,3 +36,16 @@
 .archivePage{background:#e3e1d8}.catalogGrid{grid-template-columns:1.6fr .9fr .9fr;gap:13px}.artifact{border-top:6px solid #303a37;padding-top:18px}.artifact img{aspect-ratio:16/10}.artifact:nth-child(2){margin-top:0}.serviceSequence button{border-top:6px solid var(--accent)}.contactPage form{border-left:10px solid var(--accent)}
 @media(max-width:850px){.siteBuilding .heroFigure{order:-1}}
 @media(max-width:850px){.catalogGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.artifact:nth-child(2){margin-top:0}}@media(max-width:540px){.catalogGrid{grid-template-columns:1fr}.archivePage .sectionTitle h1{font-size:clamp(43px,12vw,65px)}}
+
+/* ATHENA-DNA-04 / construction-firm: locally owned pointer language (blueprint), never exported. */
+.root :global([data-dna04-artifact]){
+ --dna04-shift-x:0px;--dna04-shift-y:0px;--dna04-tilt-x:0deg;--dna04-tilt-y:0deg;
+ --dna04-small-rotate:0deg;--dna04-point-x:50%;--dna04-point-y:50%;
+ transition:transform .24s cubic-bezier(.2,.75,.25,1),box-shadow .3s ease;
+}
+@media (hover:hover) and (pointer:fine){
+ .root :global([data-dna04-artifact]:hover){transform:perspective(1000px) rotateX(var(--dna04-tilt-y)) translate3d(var(--dna04-shift-x),0,0);box-shadow:10px 10px 0 #363c3630;border-radius:1px;outline:1px solid #8a908735}
+}
+@media (prefers-reduced-motion:reduce){
+ .root :global([data-dna04-artifact]){transition:none!important;transform:none!important;box-shadow:none!important}
+}

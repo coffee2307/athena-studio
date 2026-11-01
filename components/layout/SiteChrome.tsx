@@ -7,6 +7,7 @@ import {Footer} from "@/components/layout/Footer";
 import {ContactDock} from "@/components/layout/ContactDock";
 import {ExperienceEffects} from "@/components/experience/ExperienceEffects";
 import {PageTransition} from "@/components/experience/PageTransition";
+import {AthenaPointerResponse} from "@/components/experience/AthenaPointerResponse";
 
 export function SiteChrome({children}:{children:ReactNode}){
  const pathname=usePathname();
@@ -26,5 +27,6 @@ export function SiteChrome({children}:{children:ReactNode}){
   <Footer/>
   <ContactDock/>
   <ExperienceEffects/>
+  <AthenaPointerResponse/>
  </AuthSessionProvider>;
 }

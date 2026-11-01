@@ -1,0 +1,177 @@
+/* ATHENA-DNA-04 / Interactive Living Websites. Owned by Athena only; no template CSS. */
+.dna04-about,.dna04-process{font-family:"Be Vietnam Pro",Arial,sans-serif;color:#1d2724}
+.dna04-about *, .dna04-process *{box-sizing:border-box}
+.dna04-about a,.dna04-process a{text-decoration:none}
+.dna04-about h1,.dna04-about h2,.dna04-about h3,.dna04-process h1,.dna04-process h2,.dna04-process h3{letter-spacing:-.055em}
+.dna04-about-intro{background:#e7e8df;position:relative;overflow:hidden}
+.dna04-about-intro:before{content:"";position:absolute;width:58vw;height:58vw;max-width:850px;max-height:850px;border:1px solid #c8cec3;border-radius:50%;left:-22vw;top:-21vw;pointer-events:none}
+.dna04-about-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:clamp(25px,5vw,90px);min-height:760px;align-items:center;padding-top:68px;padding-bottom:76px}
+.dna04-about-copy{position:relative;z-index:1;max-width:610px}
+.dna04-kicker{display:flex;gap:12px;align-items:center;color:#485b4e;font-size:11px;letter-spacing:.12em;font-weight:800;margin-bottom:35px}
+.dna04-kicker span{height:8px;width:8px;background:#ee6547;border-radius:50%}
+.dna04-about-copy h1{font-size:clamp(54px,5.3vw,92px);line-height:1.07;margin:0 0 24px;font-weight:800}
+.dna04-about-copy h1 em,.dna04-about h2 em,.dna04-process h1 em,.dna04-process h2 em{font-style:normal;font-family:"Noto Serif","Be Vietnam Pro",serif;font-weight:400;letter-spacing:-.06em}
+.dna04-about-copy h1 em{color:#547d5c}
+.dna04-about-copy>p:not(.dna04-kicker){font-size:16px;line-height:1.95;max-width:470px;color:#495449}
+.dna04-about-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;align-items:center}
+.dna04-about-cta a{display:inline-flex;align-items:center;gap:20px;min-height:51px;padding:12px 20px;border:1px solid #1e2d26;font-weight:750;font-size:13px;transition:transform .25s cubic-bezier(.2,.7,.2,1),background-color .2s,color .2s}
+.dna04-about-cta a:first-child{background:#1e2d26;color:#f5f6ed}
+.dna04-about-cta a:last-child{color:#1e2d26}
+@media(hover:hover){.dna04-about-cta a:hover{transform:translateY(-4px)}.dna04-about-cta a:last-child:hover{background:#c5d1b8}}
+.dna04-about-footnote{font-size:11px;letter-spacing:.08em;color:#667267;margin-top:44px}
+.dna04-desk{position:relative;background:#d9dfd1;border:1px solid #b8c2b2;padding:24px;min-width:0;border-radius:3px;box-shadow:24px 24px 0 #c8d1c1}
+.dna04-desk-top{display:flex;justify-content:space-between;gap:10px;font:800 10px/1.4 "Be Vietnam Pro",sans-serif;letter-spacing:.06em;color:#40544a}
+.dna04-desk-visual{position:relative;min-height:385px;display:flex;align-items:center;justify-content:center;perspective:1100px;isolation:isolate}
+.dna04-desk-orbit{position:absolute;width:360px;height:360px;max-width:88%;border:1px solid #a5b39c;border-radius:50%;top:8px;right:3%;transform:translate3d(calc(var(--desk-x,0px) * -.5),calc(var(--desk-y,0px) * -.5),0);pointer-events:none}
+.dna04-desk-paper{background:#ede9df;border:1px solid #bfc0b1;box-shadow:11px 13px 0 #a2b29f;position:absolute}
+.dna04-desk-under{width:65%;height:255px;left:6%;top:15%;padding:25px;transform:rotate(-13deg) translate3d(calc(var(--desk-x,0px) * -.4),calc(var(--desk-y,0px) * -.4),0);color:#2e433b}
+.dna04-desk-under>span{display:block;font-size:10px;letter-spacing:.08em}
+.dna04-desk-under>strong{font:800 clamp(23px,2.1vw,37px)/1.12 "Space Grotesk","Be Vietnam Pro",sans-serif;display:block;margin-top:35px}
+.dna04-desk-main{width:72%;height:270px;right:6%;top:16%;padding:11px;background:#eaf0e4;z-index:2;transform:rotate(6deg) translate3d(var(--desk-x,0px),var(--desk-y,0px),0);animation:dna04-paper-in .35s ease both;transition:transform .2s ease;box-shadow:9px 13px 0 #b1b9a8}
+.dna04-desk-window{position:relative;width:100%;height:calc(100% - 20px);background:#c1cbba;overflow:hidden}
+.dna04-desk-window img{object-fit:cover;object-position:center top;filter:saturate(.9)}
+.dna04-desk-photo-credit{display:block;font-size:8px;letter-spacing:.08em;margin-top:4px}
+.dna04-desk-slip{background:#f8c9a2;width:108px;height:93px;position:absolute;right:0;bottom:4%;z-index:3;display:flex;flex-direction:column;justify-content:space-between;padding:10px 15px;transform:rotate(-7deg) translate3d(calc(var(--desk-x,0px) * -.5),calc(var(--desk-y,0px) * -.5),0);box-shadow:4px 5px 0 #bc8e6c}
+.dna04-desk-slip small{font-size:9px;font-weight:850}.dna04-desk-slip strong{font-size:30px;line-height:1;align-self:flex-end}
+.dna04-desk-tabs{display:flex;gap:5px;border-top:1px solid #b7c4b0;padding-top:14px}
+.dna04-desk-tabs button{flex:1;min-height:46px;border:1px solid #b6c2af;background:#e1e9dd;display:flex;align-items:center;justify-content:center;gap:7px;font-weight:750;font-size:12px;color:#284236;cursor:pointer;transition:transform .2s ease,background .2s ease}
+.dna04-desk-tabs button span{font-size:10px;color:#5e7465}.dna04-desk-tabs button[aria-pressed="true"]{background:#284236;color:#fff}.dna04-desk-tabs button[aria-pressed="true"] span{color:#c5dcc8}
+.dna04-desk-tabs button:hover{transform:translateY(-3px)}
+.dna04-desk-description{display:flex;justify-content:space-between;align-items:end;gap:22px;padding-top:22px}
+.dna04-desk-description>div{max-width:360px}
+.dna04-desk-description small{font-size:10px;letter-spacing:.06em;color:#527061;font-weight:800}
+.dna04-desk-description h2{font-size:clamp(21px,2vw,28px);line-height:1.3;margin:6px 0 9px}
+.dna04-desk-description p{font-size:12px;line-height:1.7;margin:0;color:#4f6054}
+.dna04-desk-description>a{flex-shrink:0;color:#264537;font-weight:800;border-bottom:1px solid #385b49;padding-bottom:9px;font-size:11px}
+.dna04-about-principles-section{padding:110px 0;background:#faf9f4}
+.dna04-section-heading{margin-bottom:50px;display:grid;grid-template-columns:1fr 1.35fr;gap:30px}
+.dna04-section-heading>span,.dna04-about-proof-head>span{font-size:11px;font-weight:750;letter-spacing:.12em;color:#5c695e}
+.dna04-section-heading h2,.dna04-about-proof-head h2{font-size:clamp(44px,5vw,72px);line-height:1.12;margin:0}
+.dna04-section-heading>p{grid-column:2;max-width:510px;color:#687066;line-height:1.8;font-size:15px;margin:0}
+.dna04-principles{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.dna04-principles-nav{border-top:1px solid #b7bfb2}
+.dna04-principles-nav button{appearance:none;width:100%;display:grid;grid-template-columns:45px 1fr 30px;align-items:center;text-align:left;gap:12px;min-height:100px;padding:17px 16px;background:transparent;border:0;border-bottom:1px solid #bec6b9;color:#2f3e33;cursor:pointer;transition:padding .25s,background .25s}
+.dna04-principles-nav button>span:first-child{font-size:11px;color:#6b746b}
+.dna04-principles-nav button strong{font-size:clamp(15px,1.5vw,21px);line-height:1.45}
+.dna04-principles-nav button>span:last-child{justify-self:end;font-size:24px;font-weight:400}
+.dna04-principles-nav button[aria-pressed="true"]{background:#dce8d9;padding-left:28px}
+.dna04-principles-feature{position:relative;min-height:410px;background:#253d31;color:#e7f0e2;padding:clamp(25px,4vw,50px);overflow:hidden;display:flex;flex-direction:column}
+.dna04-principles-feature:before{content:"";position:absolute;width:300px;height:300px;border-radius:50%;border:1px solid #78917b;right:-70px;top:-90px}
+.dna04-principles-feature>small{font-size:10px;letter-spacing:.1em;color:#bfd7bd}
+.dna04-principles-line{display:block;width:100px;height:1px;background:#c8e6ba;margin-top:65px}
+.dna04-principles-feature h3{font-size:clamp(25px,3vw,42px);line-height:1.25;max-width:440px;margin:20px 0 15px}
+.dna04-principles-feature p{max-width:410px;font-size:15px;line-height:1.9;color:#d3e1d2}
+.dna04-principles-foot{display:flex;justify-content:space-between;gap:10px;border-top:1px solid #6c8b76;margin-top:auto;padding-top:22px;font-size:10px;letter-spacing:.08em}
+.dna04-about-proof{background:#e5dfd5;padding:115px 0}
+.dna04-about-proof-head{display:grid;grid-template-columns:.6fr 1.6fr;margin-bottom:40px;gap:25px}
+.dna04-about-proof-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.dna04-about-proof-card,.dna04-about-proof-note{padding:30px;min-height:300px;display:flex;flex-direction:column;align-items:start;border:1px solid #adb7ac;position:relative;overflow:hidden}
+.dna04-about-proof-card{background:#f5f3e9;color:#263a30;transition:transform .25s,box-shadow .25s}
+.dna04-about-proof-card:before{content:"";position:absolute;height:160px;width:160px;border-radius:50%;border:1px solid #b4c4b4;right:-50px;bottom:-60px;transition:transform .3s}
+.dna04-about-proof-card:hover{transform:translateY(-6px);box-shadow:8px 8px 0 #acb5aa}
+.dna04-about-proof-card:hover:before{transform:scale(1.5)}
+.dna04-about-proof-card>span,.dna04-about-proof-note>span{font-size:11px;font-weight:750;letter-spacing:.08em}
+.dna04-about-proof-card>strong{font:800 clamp(39px,4vw,70px)/1.2 "Space Grotesk",sans-serif;margin-top:45px}
+.dna04-about-proof-card p{line-height:1.75;font-size:13px;position:relative}
+.dna04-about-proof-card i{font-size:12px;font-style:normal;font-weight:750;margin-top:auto}
+.dna04-about-proof-note{background:#273c31;color:#f1f1e6;justify-content:space-between}
+.dna04-about-proof-note h3{font-size:clamp(22px,2.2vw,31px);line-height:1.3}
+.dna04-about-proof-note p{font-size:13px;line-height:1.8}
+.dna04-about-ending{background:#1b3028;color:#eef4e8;padding:110px 0}
+.dna04-about-ending .container{display:flex;flex-direction:column;align-items:start}
+.dna04-about-ending span{font-size:11px;letter-spacing:.11em;color:#b9d0bb}
+.dna04-about-ending h2{font-size:clamp(40px,5.5vw,82px);line-height:1.15;margin:30px 0}
+.dna04-about-ending h2 em{color:#b6d5a5}
+.dna04-about-ending a{background:#e8f1db;color:#20362a;font-size:14px;font-weight:800;min-height:52px;padding:16px 28px}
+@keyframes dna04-paper-in{from{opacity:.5;translate:0 16px}to{opacity:1;translate:0 0}}
+/* PROCESS: radically different grammar — precise schematic / stage-driven */
+.dna04-process-intro{background:#ede9e2;overflow:hidden;padding:75px 0 90px}
+.dna04-process-index{display:flex;justify-content:space-between;gap:20px;color:#485247;font-size:10px;font-weight:750;letter-spacing:.12em;border-bottom:1px solid #b6bdb4;padding-bottom:17px}
+.dna04-process-intro-grid{display:grid;grid-template-columns:1.45fr .55fr;gap:50px;align-items:end;padding-top:80px}
+.dna04-process-intro-grid>div:first-child>p{font-size:11px;letter-spacing:.12em;font-weight:800}
+.dna04-process-intro h1{font-size:clamp(64px,7vw,122px);line-height:1.09;margin:24px 0 0;color:#1c2d29}
+.dna04-process-intro h1 em{color:#bb5e42}
+.dna04-process-intro-aside{border-left:1px solid #a9b1a4;padding:30px 0 0 30px}
+.dna04-process-intro-aside>p{line-height:1.9;color:#47584f;max-width:350px}
+.dna04-process-track{display:flex;gap:10px;margin-bottom:30px}
+.dna04-process-track i{height:13px;width:36px;border:1px solid #8e9e90;transform:skew(-19deg);background:#bbc8b7}
+.dna04-process-track i:nth-child(odd){background:#c56c50}
+.dna04-process-intro-aside>a{display:inline-flex;gap:30px;border-bottom:1px solid #293a30;font-weight:800;color:#293a30;margin-top:22px;padding:0 0 10px}
+.dna04-process-journey{background:#f9f9f4;padding:95px 0 30px}
+.dna04-blueprint{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(28px,5vw,90px);align-items:start}
+.dna04-blueprint-left{position:sticky;top:112px}
+.dna04-blueprint-label{display:flex;justify-content:space-between;gap:16px;font-size:10px;letter-spacing:.12em;color:#56675a;font-weight:800}
+.dna04-blueprint-left>h2{font-size:clamp(43px,4.4vw,67px);line-height:1.15;margin:28px 0 20px}
+.dna04-blueprint-left>h2 em{color:#c27154}
+.dna04-blueprint-lede{line-height:1.85;color:#687568;font-size:14px;max-width:400px}
+.dna04-blueprint-steps{margin-top:35px;border-top:1px solid #c0c9be}
+.dna04-blueprint-steps button{appearance:none;display:flex;align-items:center;gap:20px;text-align:left;background:transparent;color:#35483b;width:100%;border:0;border-bottom:1px solid #d5dbd2;padding:15px 0;min-height:53px;cursor:pointer;transition:padding-left .2s,background .2s}
+.dna04-blueprint-steps button span{font-size:10px;color:#657b66;font-weight:800}
+.dna04-blueprint-steps button strong{font-size:12px;font-weight:650}
+.dna04-blueprint-steps button i{width:7px;height:7px;margin-left:auto;border:1px solid #94a896;border-radius:50%}
+.dna04-blueprint-steps button[aria-pressed="true"]{background:#e1eadf;padding-left:15px}
+.dna04-blueprint-steps button[aria-pressed="true"] i{background:#c86d4e;border-color:#c86d4e}
+.dna04-blueprint-story{min-width:0}
+.dna04-blueprint-sticky{position:sticky;top:95px;z-index:2}
+.dna04-blueprint-stage{background:#dfebe0;border:1px solid #b5c7b9;min-height:520px;position:relative;padding:25px;overflow:hidden;color:#22372b}
+.dna04-blueprint-grid{position:absolute;inset:0;opacity:.35;pointer-events:none;background-image:linear-gradient(#9cae9c 1px,transparent 1px),linear-gradient(90deg,#9cae9c 1px,transparent 1px);background-size:36px 36px;mask-image:linear-gradient(to bottom,transparent,#000 25%,#000 85%,transparent)}
+.dna04-blueprint-toolbar{position:relative;display:flex;justify-content:space-between;gap:10px;font-size:9px;letter-spacing:.08em;font-weight:800}
+.dna04-blueprint-art{position:relative;min-height:380px;display:grid;place-items:center;perspective:1100px}
+.dna04-blueprint-page{width:min(85%,390px);height:290px;background:#f7f5ed;border:1px solid #9fae9c;box-shadow:14px 15px 0 #c0cfc1;padding:22px;transform:rotate(-5deg) perspective(1000px) rotateY(-7deg);transition:transform .5s,box-shadow .5s}
+.dna04-blueprint-stage[data-chapter="1"] .dna04-blueprint-page,.dna04-blueprint-stage[data-chapter="4"] .dna04-blueprint-page{transform:rotate(3deg) perspective(1000px) rotateY(7deg)}
+.dna04-blueprint-page>span{font-size:9px;font-weight:800;letter-spacing:.08em}
+.dna04-blueprint-art-lines{display:flex;flex-direction:column;gap:7px;margin-top:22px}
+.dna04-blueprint-art-lines i{height:3px;background:#bfcbbc;width:80%}
+.dna04-blueprint-art-lines i:nth-child(2){width:65%}.dna04-blueprint-art-lines i:nth-child(3){width:48%}
+.dna04-blueprint-art-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:25px}
+.dna04-blueprint-art-tiles>div{min-height:55px;padding:10px 7px;background:#eff1eb;border:1px dashed #adb7ae;display:flex;flex-direction:column;justify-content:space-between;opacity:.3;transition:opacity .35s,background .35s}
+.dna04-blueprint-art-tiles>div[data-ready="true"]{opacity:1;background:#d9e8d5;border-style:solid}
+.dna04-blueprint-art-tiles>div span{font-size:8px}.dna04-blueprint-art-tiles>div b{font-size:9px}
+.dna04-blueprint-stamp{position:absolute;right:0;bottom:24px;padding:14px 17px;background:#cc7655;color:#fff;font-size:10px;font-weight:750;transform:rotate(7deg)}
+.dna04-blueprint-stamp b{font-size:21px;display:block}
+.dna04-blueprint-current{position:relative;border-top:1px solid #9cad9f;display:flex;flex-direction:column;gap:5px;padding-top:17px;min-height:85px}
+.dna04-blueprint-current small{font-size:10px;letter-spacing:.1em;color:#536f55}
+.dna04-blueprint-current strong{font-size:clamp(16px,1.55vw,23px);line-height:1.35}
+.dna04-blueprint-chapters{padding-top:30px}
+.dna04-blueprint-chapter{min-height:380px;display:flex;flex-direction:column;justify-content:center;padding:45px 35px;margin-top:45px;background:#eef1e8;border-left:5px solid #c56f51;scroll-margin-top:150px}
+.dna04-blueprint-chapter:nth-child(even){background:#e8ebe4}
+.dna04-blueprint-chapter>span{font-size:10px;font-weight:800;letter-spacing:.1em;color:#8d684e}
+.dna04-blueprint-chapter h3{font-size:clamp(22px,2.6vw,36px);line-height:1.22;margin:14px 0}
+.dna04-blueprint-chapter>p{line-height:1.85;color:#59695d;margin:0 0 22px;font-size:14px}
+.dna04-blueprint-responsibility{display:grid;grid-template-columns:1fr 1fr;gap:20px;border-top:1px solid #cbd2c5;padding-top:17px}
+.dna04-blueprint-responsibility small,.dna04-blueprint-mobile-output small{font-size:10px;letter-spacing:.08em;color:#5c7860;font-weight:800}
+.dna04-blueprint-responsibility p{font-size:12px;line-height:1.7;color:#435647}
+.dna04-blueprint-mobile-output{display:none}
+.dna04-process-commercial{background:#243b2f;color:#f2f6ec;padding:100px 0}
+.dna04-process-commercial .container{display:grid;grid-template-columns:.65fr 1.35fr;gap:40px}
+.dna04-process-commercial .container>span{font-size:10px;letter-spacing:.1em;color:#b7d0b9}
+.dna04-process-commercial h2{font-size:clamp(42px,5vw,78px);line-height:1.14;margin:0 0 30px}
+.dna04-process-commercial h2 em{color:#bdcfaa}
+.dna04-process-commercial p{max-width:610px;line-height:1.85;color:#d2dfd0}
+.dna04-process-commercial a{display:inline-block;margin-top:20px;padding-bottom:9px;border-bottom:1px solid #b8cda9;color:#eef8eb;font-weight:750}
+.dna04-process-questions{background:#f7f5f0;padding:100px 0}
+.dna04-process-questions .dna04-section-heading{grid-template-columns:.55fr 1.5fr}
+.dna04-process-accordion{max-width:1040px;margin-left:auto;border-top:1px solid #bbc3b8}
+.dna04-process-accordion details{border-bottom:1px solid #c4cdc1}
+.dna04-process-accordion summary{display:flex;align-items:center;gap:24px;list-style:none;padding:24px 8px;font-size:clamp(15px,1.55vw,19px);font-weight:700;cursor:pointer;min-height:76px}
+.dna04-process-accordion summary::-webkit-details-marker{display:none}
+.dna04-process-accordion summary span{font-size:10px;color:#727d72}
+.dna04-process-accordion summary b{margin-left:auto;font-size:25px;font-weight:400}
+.dna04-process-accordion details[open] summary b{transform:rotate(45deg)}
+.dna04-process-accordion details>p{max-width:690px;padding:0 48px 22px;font-size:14px;color:#586b5c;line-height:1.8}
+.dna04-process-ending{padding:95px 0;background:#d8e1d2}
+.dna04-process-ending span{font-size:11px;font-weight:800;letter-spacing:.1em}
+.dna04-process-ending h2{font-size:clamp(38px,4.5vw,70px);line-height:1.18;margin:25px 0}
+.dna04-process-ending h2 em{color:#b0664a}
+.dna04-process-ending a{color:#fff;display:inline-flex;background:#293f32;padding:17px 23px;font-weight:750;font-size:13px}
+/* catalog and main website pointer response; templates own their own CSS */
+.template-card-preview,.home-demo-picture,.dna-library-frame-media,.dna02-preview-window{--dna04-mx:50%;--dna04-my:50%;--dna04-rx:0deg;--dna04-ry:0deg}
+.template-card-preview{position:relative;transform:perspective(1000px) rotateX(var(--dna04-rx)) rotateY(var(--dna04-ry));transition:transform .25s ease;transform-style:preserve-3d}
+.template-card-preview:after,.dna-library-frame-media:after,.home-demo-picture:after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at var(--dna04-mx) var(--dna04-my),#ffffff34 0%,transparent 52%);opacity:0;transition:opacity .3s;z-index:3}
+.template-card-preview:hover:after,.dna-library-frame-media:hover:after,.home-demo-picture:hover:after{opacity:1}
+.home-demo-picture img,.dna-library-frame-media img{transition:transform .4s cubic-bezier(.2,.7,.2,1);transform-origin:var(--dna04-mx) var(--dna04-my)}
+@media(hover:hover){.home-demo-picture:hover img,.dna-library-frame-media:hover img{transform:scale(1.035)}}
+.template-card-preview:focus-visible,.dna04-about a:focus-visible,.dna04-process a:focus-visible,.dna04-about button:focus-visible,.dna04-process button:focus-visible{outline:3px solid #e87352;outline-offset:3px}
+@media(max-width:1000px){.dna04-about-layout{grid-template-columns:1fr;max-width:760px;min-height:auto}.dna04-about-copy{max-width:690px}.dna04-about-copy h1{font-size:clamp(52px,8vw,82px)}.dna04-desk{max-width:690px}.dna04-about-proof-grid{grid-template-columns:1fr 1fr}.dna04-about-proof-note{grid-column:span 2;min-height:230px}.dna04-blueprint{grid-template-columns:1fr}.dna04-blueprint-left{position:static}.dna04-blueprint-story{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:20px}.dna04-blueprint-sticky{top:88px;align-self:stretch}.dna04-blueprint-stage{min-height:480px}.dna04-blueprint-chapter{min-height:300px;margin-top:30px}.dna04-blueprint-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;border:0}.dna04-blueprint-steps button{min-height:60px;border:1px solid #d5dbd2;padding:9px}.dna04-process-intro-grid{grid-template-columns:1fr .55fr}}
+@media(max-width:700px){.dna04-about-layout{padding-top:45px;padding-bottom:64px;gap:45px}.dna04-about-copy h1{font-size:clamp(46px,10.1vw,72px)}.dna04-about-copy>p:not(.dna04-kicker){font-size:14px}.dna04-desk{box-shadow:8px 9px 0 #c8d1c1;padding:15px}.dna04-desk-visual{min-height:290px}.dna04-desk-paper.dna04-desk-under{height:195px;padding:15px}.dna04-desk-paper.dna04-desk-main{height:215px}.dna04-desk-slip{bottom:0;width:83px;height:80px}.dna04-desk-description{flex-direction:column;align-items:start}.dna04-desk-description h2{font-size:23px}.dna04-desk-tabs button{font-size:11px}.dna04-about-principles-section,.dna04-about-proof{padding:68px 0}.dna04-section-heading,.dna04-about-proof-head{grid-template-columns:1fr;gap:15px}.dna04-section-heading h2,.dna04-about-proof-head h2{font-size:clamp(39px,9vw,58px)}.dna04-section-heading>p{grid-column:1}.dna04-principles{grid-template-columns:1fr}.dna04-principles-nav button{min-height:75px}.dna04-principles-feature{min-height:350px}.dna04-about-proof-grid{grid-template-columns:1fr}.dna04-about-proof-note{grid-column:auto}.dna04-about-proof-card{min-height:245px}.dna04-about-ending{padding:70px 0}.dna04-process-intro{padding:50px 0 65px}.dna04-process-intro-grid{grid-template-columns:1fr;gap:20px;padding-top:35px}.dna04-process-intro h1{font-size:clamp(51px,11vw,80px)}.dna04-process-intro-aside{padding:10px 0 0 0;border-left:0}.dna04-process-index{font-size:9px}.dna04-process-index span:last-child{display:none}.dna04-process-journey{padding:60px 0}.dna04-blueprint-left h2{font-size:clamp(39px,9vw,57px)}.dna04-blueprint-story{display:block}.dna04-blueprint-sticky{position:relative;top:0}.dna04-blueprint-stage{min-height:385px;padding:16px}.dna04-blueprint-art{min-height:260px}.dna04-blueprint-page{height:230px;padding:14px}.dna04-blueprint-art-lines{margin-top:12px}.dna04-blueprint-art-tiles{margin-top:15px}.dna04-blueprint-art-tiles>div{min-height:43px}.dna04-blueprint-stamp{bottom:8px;padding:8px}.dna04-blueprint-current{min-height:70px}.dna04-blueprint-chapter{min-height:0;margin-top:18px;padding:25px 21px;scroll-margin-top:80px}.dna04-blueprint-responsibility{grid-template-columns:1fr;gap:6px}.dna04-blueprint-mobile-output{display:flex;flex-direction:column;gap:8px;border-top:1px solid #b6c2b7;padding-top:14px}.dna04-blueprint-mobile-output strong{font-size:13px}.dna04-process-commercial,.dna04-process-questions,.dna04-process-ending{padding:68px 0}.dna04-process-commercial .container{grid-template-columns:1fr;gap:20px}.dna04-process-questions .dna04-section-heading{grid-template-columns:1fr}.dna04-process-accordion summary{gap:13px}.dna04-process-accordion details>p{padding:0 12px 18px}.dna04-about-proof-head{margin-bottom:25px}}
+@media(prefers-reduced-motion:reduce){.dna04-about *,.dna04-process *,.template-card-preview,.home-demo-picture img,.dna-library-frame-media img{animation:none!important;transition:none!important;scroll-behavior:auto!important}.dna04-desk-paper{transform:none!important}}

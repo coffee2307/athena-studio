@@ -1,4 +1,4 @@
-import {StudioHeroScene} from "@/components/experience/StudioHeroScene";
+import {AboutStudioDesk} from "@/components/experience/AboutStudioDesk";
 import {AboutPrinciples} from "@/components/experience/AboutPrinciples";
 import Link from "next/link";
 import {createMetadata} from "@/lib/metadata";
@@ -10,34 +10,21 @@ const principles=[
  {title:"Thiết kế và vận hành phải đi cùng nhau",text:"Trải nghiệm đẹp chỉ có ý nghĩa khi dễ thao tác, hoạt động tốt trên thiết bị thực tế, có bảo mật, sao lưu và kế hoạch duy trì phù hợp."},
  {title:"Giữ riêng dữ liệu và mã nguồn cần bảo vệ",text:"Portfolio công khai những gì đã được phép giới thiệu. Dữ liệu khách hàng, quyền truy cập quản trị và repository không được mở chỉ để làm minh chứng năng lực."}
 ];
-export default function StudioPage(){return <div className="page-shell agency-about-page">
- <section className="page-hero"><div className="container">
-  <p className="page-kicker"><span className="eyebrow-dot"/> ATHENA STUDIO / THIẾT KẾ & CÔNG NGHỆ</p>
-  <h1>Đối tác cho những<br/><em>vấn đề số cụ thể.</em></h1>
-  <div className="page-hero-lede"><div className="dna02-hero-lede"><p>Studio sáng tạo độc lập. Thiết kế có bản sắc, công nghệ hữu ích và kết quả có thể kiểm chứng.</p><details><summary>Đọc thêm về cách làm</summary><p>Athena là studio độc lập do founder xây dựng, tập trung vào thiết kế website, cải thiện hệ thống đang dùng và nghiên cứu những ứng dụng AI hữu ích. Quy mô và năng lực thực hiện được trao đổi phù hợp từng dự án, không dựa trên số liệu khách hàng hoặc thành tích chưa xác minh.</p></details></div>
-   <Link className="pill-link pill-dark" href="/contact">Gửi nhu cầu <Icon name="arrow-right" size={18}/></Link></div>
- <StudioHeroScene mode="about"/>
- </div></section>
- <section className="page-section"><div className="container">
-  <div className="agency-process-head"><p className="section-index"><span className="index-circle">01</span> CHÚNG TÔI GIÚP ĐƯỢC GÌ?</p>
-   <h2>Ba hướng hỗ trợ <span>có thể triển khai.</span></h2></div>
-  <div className="agency-price-grid">
-   <article className="agency-price-card"><span>01 / WEBSITE</span><h3>Thiết kế và phát triển</h3><p>Trang giới thiệu, landing page, cửa hàng hoặc giao diện theo nhu cầu đã thống nhất.</p><Link className="agency-outline-cta" href="/services/web-development">Tìm hiểu <Icon name="arrow-right" size={16}/></Link></article>
-   <article className="agency-price-card"><span>02 / VẬN HÀNH</span><h3>Chăm sóc website</h3><p>Rà soát, sửa lỗi và bảo trì hệ thống hiện tại trên cơ sở quyền truy cập và phạm vi được xác nhận.</p><Link className="agency-outline-cta" href="/services/website-care">Tìm hiểu <Icon name="arrow-right" size={16}/></Link></article>
-   <article className="agency-price-card"><span>03 / AI</span><h3>Tự động hóa có kiểm chứng</h3><p>Đánh giá công việc lặp lại, thử nghiệm nguyên mẫu và thiết kế bước kiểm tra của con người.</p><Link className="agency-outline-cta" href="/services/ai-integration">Tìm hiểu <Icon name="arrow-right" size={16}/></Link></article>
-  </div>
- </div></section>
- <section className="page-section agency-section-muted"><div className="container">
-  <p className="section-index"><span className="index-circle">02</span> NGUYÊN TẮC LÀM VIỆC</p>
-  <h2 className="agency-faq-title">Cách Athena <span>ra quyết định.</span></h2>
-  <AboutPrinciples principles={principles}/>
- </div></section>
- <section className="page-section"><div className="container">
-  <div className="agency-process-head"><div><p className="section-index"><span className="index-circle">03</span> NĂNG LỰC MINH HỌA</p>
-   <h2>Xem dự án, <span>không chỉ nghe giới thiệu.</span></h2></div>
-   <p>PHAM là sản phẩm của founder có ảnh giao diện thực; ECONITH là hệ thống nghiên cứu đang kiểm định. Các hồ sơ chỉ dùng nội dung được phép công bố và không biến dự án riêng thành hợp đồng khách hàng.</p></div>
-  <div className="agency-case-actions"><Link href="/projects" className="agency-outline-cta">Xem hồ sơ dự án <Icon name="arrow-right" size={18}/></Link>
-   <Link href="/process" className="agency-outline-cta">Xem quy trình hợp tác <Icon name="arrow-right" size={18}/></Link></div>
- </div></section>
- <section className="agency-final-cta"><div className="container"><p>KHI BẠN CÓ MỘT BÀI TOÁN THỰC TẾ</p><h2>Trao đổi tình trạng hiện tại.<br/>Làm rõ phương án phù hợp.</h2><Link href="/contact">Liên hệ Athena <Icon name="arrow-right" size={18}/></Link></div></section>
- </div>}
+export default function StudioPage(){
+ return <main className="dna04-about">
+  <section className="dna04-about-intro"><div className="container dna04-about-layout">
+   <div className="dna04-about-copy"><p className="dna04-kicker"><span/> ATHENA / INDEPENDENT CREATIVE ENGINEERING</p><h1>Không chỉ<br/>làm website.<br/><em>Chúng tôi tạo<br/>trải nghiệm.</em></h1><p>Athena kết hợp thiết kế có bản sắc và kỹ thuật có thể kiểm chứng. Từ ý tưởng ban đầu đến sản phẩm thực sự sử dụng được.</p><div className="dna04-about-cta"><Link href="/projects">Xem dự án thực tế <span aria-hidden="true">→</span></Link><Link href="/contact">Bắt đầu trao đổi</Link></div><div className="dna04-about-footnote">Studio độc lập / Thiết kế · Web · AI</div></div>
+   <AboutStudioDesk/>
+  </div></section>
+  <section className="dna04-about-principles-section"><div className="container">
+   <div className="dna04-section-heading"><span>01 / THE WAY WE THINK</span><h2>Mọi quyết định<br/><em>đều có lý do.</em></h2><p>Bốn nguyên tắc giúp biến một cuộc trò chuyện thành sản phẩm có thể bàn giao, sử dụng và tiếp tục phát triển.</p></div>
+   <AboutPrinciples principles={principles}/>
+  </div></section>
+  <section className="dna04-about-proof"><div className="container"><div className="dna04-about-proof-head"><span>02 / WORK IN THE OPEN</span><h2>Hãy xem những gì<br/><em>đã được xây dựng.</em></h2></div><div className="dna04-about-proof-grid">
+   <Link href="/projects" className="dna04-about-proof-card"><span>PROJECT / 001</span><strong>PHAM</strong><p>Website và trải nghiệm thương hiệu thời trang do founder phát triển. Không phải hợp đồng khách hàng.</p><i>Khám phá dự án →</i></Link>
+   <Link href="/projects" className="dna04-about-proof-card"><span>PROJECT / 002</span><strong>ECONITH</strong><p>Dự án nghiên cứu định lượng đang kiểm thử; minh họa cách Athena tiếp cận hệ thống dữ liệu và độ tin cậy.</p><i>Khám phá dự án →</i></Link>
+   <div className="dna04-about-proof-note"><span>PROOF FIRST.</span><h3>Không số liệu tưởng tượng.<br/>Không portfolio giả.</h3><p>Các dự án founder được ghi đúng nguồn gốc. Mọi công bố về khách hàng phải có quyền sử dụng nội dung.</p></div>
+  </div></div></section>
+  <section className="dna04-about-ending"><div className="container"><span>03 / START SOMETHING REAL</span><h2>Có một vấn đề cần giải quyết?<br/><em>Chúng ta bắt đầu từ đó.</em></h2><Link href="/contact">Trao đổi với Athena <span aria-hidden="true">→</span></Link></div></section>
+ </main>;
+}

@@ -36,3 +36,16 @@
 .archivePage{background:var(--accent);color:var(--ink)}.catalogGrid{grid-template-columns:1.2fr 1fr .8fr;gap:6px}.artifact{border:4px solid var(--ink);padding:12px;transform:rotate(-1deg)}.artifact:nth-child(2){transform:rotate(1deg);margin-top:3vw}.archivePage h1{text-transform:uppercase}.contactPage form{border:5px solid var(--accent)}
 @media(max-width:850px){.posterStage .heroWords h1{font-size:clamp(58px,15vw,95px)}}
 @media(max-width:850px){.catalogGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.artifact:nth-child(2){margin-top:0}}@media(max-width:540px){.catalogGrid{grid-template-columns:1fr}.archivePage .sectionTitle h1{font-size:clamp(43px,12vw,65px)}}
+
+/* ATHENA-DNA-04 / campaign-landing: locally owned pointer language (poster), never exported. */
+.root :global([data-dna04-artifact]){
+ --dna04-shift-x:0px;--dna04-shift-y:0px;--dna04-tilt-x:0deg;--dna04-tilt-y:0deg;
+ --dna04-small-rotate:0deg;--dna04-point-x:50%;--dna04-point-y:50%;
+ transition:transform .24s cubic-bezier(.2,.75,.25,1),box-shadow .3s ease;
+}
+@media (hover:hover) and (pointer:fine){
+ .root :global([data-dna04-artifact]:hover){transform:translate3d(var(--dna04-shift-x),var(--dna04-shift-y),0) rotate(var(--dna04-small-rotate));box-shadow:12px 14px 0 #f36d3c80;outline:1px solid #26212145}
+}
+@media (prefers-reduced-motion:reduce){
+ .root :global([data-dna04-artifact]){transition:none!important;transform:none!important;box-shadow:none!important}
+}
