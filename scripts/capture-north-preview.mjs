@@ -1,0 +1,16 @@
+import {chromium} from "@playwright/test";
+import {mkdirSync,statSync,writeFileSync} from "node:fs";
+const target="public/template-previews/modern-corporate.jpg";
+mkdirSync(".qa/north-decision-qa",{recursive:true});
+const b=await chromium.launch({channel:process.platform==="win32"?"chrome":undefined,headless:true});
+const p=await b.newPage({viewport:{width:1440,height:900},deviceScaleFactor:1,reducedMotion:"reduce"});
+const url="http://127.0.0.1:3182/template-demos/modern-corporate";
+const response=await p.goto(url,{waitUntil:"networkidle",timeout:40000});
+if(response?.status()!==200)throw new Error("NORTH did not return HTTP 200");
+await p.locator("h1").waitFor({state:"visible"});
+await p.evaluate(()=>document.fonts.ready);
+await p.screenshot({path:target,type:"jpeg",quality:90,animations:"disabled",scale:"css"});
+const info={target,bytes:statSync(target).size,source:url,viewport:"1440x900",derivedFromActualBrowser:true};
+writeFileSync(".qa/north-decision-qa/preview-proof.json",JSON.stringify(info,null,2));
+console.log("NORTH_REAL_PREVIEW_UPDATED",JSON.stringify(info));
+await b.close();

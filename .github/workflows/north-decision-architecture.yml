@@ -1,0 +1,73 @@
+name: NORTH — Decision Architecture QA
+on:
+  push:
+    branches:
+      - "feat/north-decision-architecture-*"
+    paths:
+      - "templates/modern-corporate/**"
+      - "scripts/north-decision-qa.mjs"
+      - "tests/north-decision-architecture.test.mjs"
+      - ".github/workflows/north-decision-architecture.yml"
+      - "public/template-previews/modern-corporate.jpg"
+  pull_request:
+    paths:
+      - "templates/modern-corporate/**"
+      - "scripts/north-decision-qa.mjs"
+      - "tests/north-decision-architecture.test.mjs"
+      - "public/template-previews/modern-corporate.jpg"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: north-decision-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  visual-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - name: Source contract and brand safety
+        run: node --test tests/north-decision-architecture.test.mjs
+      - name: Type safety
+        run: npm run typecheck
+      - name: Build Athena with NORTH demo
+        run: npm run build
+      - name: Install Chromium for rendered screenshots and interactions
+        run: npx playwright install --with-deps chromium
+      - name: Start local production server
+        run: |
+          npm run start -- -p 3182 -H 127.0.0.1 > /tmp/north-server.log 2>&1 &
+          for i in $(seq 1 90); do
+            if curl -fsS http://127.0.0.1:3182/template-demos/modern-corporate > /dev/null; then break; fi
+            sleep 2
+          done
+          curl -fsS http://127.0.0.1:3182/template-demos/modern-corporate/services > /dev/null
+      - name: Eight routes across six viewports, interactive atlas and keyboard navigation
+        run: node scripts/north-decision-qa.mjs
+      - name: Upload screenshots and browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: north-decision-browser-evidence
+          path: |
+            .qa/north-decision-qa/
+          if-no-files-found: warn
+  standalone-site:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Build NORTH as a standalone product
+        working-directory: templates/modern-corporate
+        run: |
+          npm ci
+          npm run build
