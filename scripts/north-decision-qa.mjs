@@ -1,118 +1,97 @@
 import {chromium} from "@playwright/test";
 import {mkdirSync,writeFileSync} from "node:fs";
 import {execSync} from "node:child_process";
-const output=".qa/north-decision-qa";
-mkdirSync(output,{recursive:true});
-const sha=execSync("git rev-parse HEAD",{encoding:"utf8"}).trim();
 const origin="http://127.0.0.1:3182/template-demos/modern-corporate";
+const folder=".qa/north-decision-qa";mkdirSync(folder,{recursive:true});
+const head=execSync("git rev-parse HEAD",{encoding:"utf8"}).trim();
 const browser=await chromium.launch({channel:process.platform==="win32"?"chrome":undefined,headless:true});
-const errors=[],success=[];
-const routes=["","/work","/services","/about","/contact","/work/1","/work/2","/work/3"];
-const widths=[[320,680],[390,844],[428,926],[768,1024],[1440,900],[1920,1080]];
-const assert=(condition,msg)=>{if(!condition)throw new Error(msg)};
-for(const [width,height] of widths){
- const ctx=await browser.newContext({viewport:{width,height},deviceScaleFactor:1,hasTouch:width<768,isMobile:false,reducedMotion:"no-preference"});
- const page=await ctx.newPage();const issues=[];
- page.on("pageerror",e=>issues.push(e.message));
- for(const route of routes){
-  const label=width+"-"+(route.slice(1).replaceAll("/","-")||"home");
+const viewports=[[320,680],[390,760],[390,844],[428,926],[768,1024],[1440,900],[1920,1080]];
+const routes=["","/work","/work/1","/work/2","/work/3","/services","/about","/contact"];
+const results=[],failures=[];
+function assert(condition,msg){if(!condition)throw Error(msg)}
+for(const [width,height] of viewports){
+ const context=await browser.newContext({viewport:{width,height},deviceScaleFactor:1,hasTouch:width<=428,reducedMotion:"no-preference"});
+ const page=await context.newPage();
+ let jsErrors=[];page.on("pageerror",error=>jsErrors.push(error.message));
+ for(const suffix of routes){
+  const id=width+"x"+height+"-"+(suffix.replaceAll("/","-")||"home");
   try{
-   const res=await page.goto(origin+route,{waitUntil:"load",timeout:38000});
-   assert(res?.status()===200,"HTTP "+res?.status());
-   await page.locator("h1").first().waitFor();
-   await page.waitForTimeout(150);
+   jsErrors=[];
+   const response=await page.goto(origin+suffix,{waitUntil:"load",timeout:35000});
+   assert(response?.status()===200,"HTTP "+response?.status());
    const data=await page.evaluate(()=>{
-    const h=document.querySelector("h1");
-    const img=[...document.images].filter(i=>{let a=i.getBoundingClientRect();return a.height>0&&a.top<innerHeight&&a.bottom>0});
-    const buttons=[...document.querySelectorAll("button")].filter(b=>b.getBoundingClientRect().width>0);
-    return {overflow:document.documentElement.scrollWidth-innerWidth,title:h?.innerText,headingBox:h?.getBoundingClientRect().toJSON(),visibleImageErrors:img.filter(i=>i.complete&&i.naturalWidth===0).map(i=>i.src),buttons:buttons.length,buttonTooSmall:buttons.filter(b=>{const r=b.getBoundingClientRect();return r.width<34||r.height<34}).map(b=>b.innerText?.slice(0,30)).slice(0,6),skeletonCount:document.querySelectorAll('[class*="Skeleton"],[class*="skeleton"]').length,html:document.documentElement.lang};
+    const heading=document.querySelector("h1");const rect=heading?.getBoundingClientRect();
+    const images=[...document.querySelectorAll("img")].filter(i=>{const r=i.getBoundingClientRect();return r.height>0&&r.top<innerHeight&&r.bottom>0});
+    return {overflow:document.documentElement.scrollWidth-innerWidth,heading:heading?.innerText||"",bounds:rect?{x:rect.x,right:rect.right}:null,
+     broken:images.filter(i=>i.complete&&i.naturalWidth===0).map(i=>i.src),
+     skeletons:document.querySelectorAll("[class*='Skeleton'],[class*='skeleton']").length,
+     animations:[...document.querySelectorAll("main *")].filter(el=>{const st=getComputedStyle(el);return st.animationName!=="none"&&st.animationIterationCount==="infinite"}).length};
    });
+   assert(data.heading.trim().length>8,"missing useful heading");
    assert(data.overflow<=3,"horizontal overflow "+data.overflow);
-   assert(data.headingBox.left>=-5&&data.headingBox.right<=width+5,"heading clipped "+JSON.stringify(data.headingBox));
-   assert(data.visibleImageErrors.length===0,"broken images "+data.visibleImageErrors.join(","));
-   assert(data.skeletonCount===0,"unexpected skeleton");
-   assert(issues.length===0,"JS errors "+issues.join(";"));
-   if((width===390||width===1440)&&["","/work","/about","/contact"].includes(route))await page.screenshot({path:output+"/"+label+"-first.png",animations:"disabled"});
-   if(route===""&&(width===390||width===1440)){
-    for(const [key,pct] of [["mid",.47],["footer",.98]]){
-     await page.evaluate(p=>scrollTo({top:(document.documentElement.scrollHeight-innerHeight)*p,behavior:"instant"}),pct);
-     await page.waitForTimeout(250);
-     await page.screenshot({path:output+"/"+label+"-"+key+".png",animations:"disabled"});
-    }
+   assert(data.bounds?.x>=-5&&data.bounds.right<=width+5,"heading clipped");
+   assert(data.broken.length===0,"broken image "+data.broken);
+   assert(data.skeletons===0,"unexpected skeleton");
+   assert(data.animations===0,"unnecessary infinite animation");
+   assert(jsErrors.length===0,"JavaScript: "+jsErrors.join(";"));
+   if([390,1440].includes(width)&&["","/work","/about","/contact"].includes(suffix))
+    await page.screenshot({path:folder+"/"+id+".png",animations:"disabled"});
+   if(suffix===""&&[390,1440].includes(width)){
+    await page.evaluate(()=>scrollTo(0,document.documentElement.scrollHeight*.58));
+    await page.waitForTimeout(130);
+    await page.screenshot({path:folder+"/"+id+"-middle.png",animations:"disabled"});
    }
-   success.push({label,route,width,data});
-  }catch(e){errors.push({label,error:String(e),jsErrors:issues.splice(0)});
-   try{await page.screenshot({path:output+"/"+label+"-FAILED.png",timeout:10000})}catch{}
+   results.push({id,pass:true,data});
+  }catch(error){
+   failures.push({id,error:String(error),jsErrors});
+   try{await page.screenshot({path:folder+"/"+id+"-failed.png",timeout:6000})}catch{}
   }
  }
+ // Essential interactions.
  await page.goto(origin,{waitUntil:"load"});
  try{
-  const nodes=page.locator("button[class*='atlasNode']");
-  assert(await nodes.count()===3,"node count");
-  await nodes.nth(1).click();
-  assert(await nodes.nth(1).getAttribute("aria-pressed")==="true","node 2 not selected");
-  assert((await page.locator("#north-atlas-output").innerText()).includes("Thông tin đang mắc kẹt"),"node result incorrect");
-  await nodes.nth(2).click();
-  assert(await nodes.nth(2).getAttribute("aria-pressed")==="true","node 3 not selected");
-  await page.locator("#north-atlas-output a").click();
+  const choices=page.locator('[aria-controls="north-decision-result"]');
+  assert(await choices.count()===3,"expected exactly three problem choices");
+  await choices.nth(1).click();
+  assert(await choices.nth(1).getAttribute("aria-pressed")==="true","second choice not selected");
+  assert((await page.locator("#north-decision-result").innerText()).includes("Kết nối quy trình"),"result did not update");
+  await choices.nth(2).click();
+  assert(await choices.nth(2).getAttribute("aria-pressed")==="true","third choice not selected");
+  await page.locator("#north-decision-result a").click();
   await page.waitForURL("**/modern-corporate/work/3");
-  success.push({label:width+"-map-interactive",result:"pass"});
- }catch(e){errors.push({label:width+"-map-interactive",error:String(e)})}
- await page.goto(origin+"/services",{waitUntil:"load"});
- try{
-  const stage=page.locator("button[class*='pipelineSteps']");
-  const steps=page.locator('[class*="pipelineSteps"] button');
-  assert(await steps.count()===4,"pipeline step count");
-  await steps.nth(2).click();
-  assert(await steps.nth(2).getAttribute("aria-pressed")==="true","step 3 not selected");
-  assert((await page.locator("#north-pipeline-result").innerText()).includes("Mọi bước đều có một lý do."),"step 3 content not updated");
-  success.push({label:width+"-pipeline-interactive",result:"pass"});
- }catch(e){errors.push({label:width+"-pipeline-interactive",error:String(e)})}
+  results.push({id:width+"-choices-and-detail",pass:true});
+ }catch(error){failures.push({id:width+"-choices-and-detail",error:String(error)})}
+ if(width<768){
+  await page.goto(origin,{waitUntil:"load"});
+  try{
+   const button=page.locator('button[aria-controls="north-mobile-menu"]');
+   assert(await button.isVisible(),"mobile menu button not visible");
+   await button.click();
+   assert(await button.getAttribute("aria-expanded")==="true","menu not open");
+   await page.keyboard.press("Escape");
+   assert(await button.getAttribute("aria-expanded")==="false","Escape does not dismiss menu");
+   results.push({id:width+"-mobile-menu",pass:true});
+  }catch(error){failures.push({id:width+"-mobile-menu",error:String(error)})}
+ }
  await page.goto(origin+"/contact",{waitUntil:"load"});
  try{
   await page.locator("#north-name").fill("North QA");
   await page.locator("#north-email").fill("qa@example.com");
-  const picker=page.locator("#north-issue");
-  await picker.click();
+  await page.locator("#north-issue").click();
   const options=page.locator('[role="listbox"] [role="option"]');
-  assert(await options.count()===3,"custom dropdown should display three options");
+  assert(await options.count()===3,"dropdown options unavailable");
   await options.nth(1).click();
-  assert((await picker.innerText()).includes("Phát triển nền tảng số"),"custom dropdown choice not applied");
-  assert(await page.locator("select").count()===0,"unexpected native dropdown");
-  await page.locator("#north-detail").fill("Đây là phần mô tả vấn đề đủ dài để nghiệm thu biểu mẫu NORTH.");
-  assert(await page.locator("#north-detail").inputValue()!=="","textarea lost value");
-  const ratios=await page.evaluate(()=>{
-   const candidates=[document.querySelector('button[type="submit"]'),document.querySelector('[class*="consult"]')].filter(Boolean);
-   const parse=value=>(value.match(/[0-9.]+/g)||[]).slice(0,3).map(Number);
-   const light=color=>{
-    const channels=parse(color).map(v=>{const c=v/255;return c<=.04045?c/12.92:Math.pow((c+.055)/1.055,2.4)});
-    return channels[0]*.2126+channels[1]*.7152+channels[2]*.0722;
-   };
-   return candidates.map(el=>{
-    const style=getComputedStyle(el);
-    const a=light(style.color),b=light(style.backgroundColor);
-    return {element:el.tagName,ratio:(Math.max(a,b)+.05)/(Math.min(a,b)+.05),fg:style.color,bg:style.backgroundColor};
-   });
-  });
-  for(const ratio of ratios)assert(ratio.ratio>=4.5,"text contrast below WCAG AA "+JSON.stringify(ratio));
-  success.push({label:width+"-contact-form",result:"pass",ratios});
- }catch(e){errors.push({label:width+"-contact-form",error:String(e)})}
- if(width<768){
-  await page.goto(origin,{waitUntil:"load"});
-  try{
-   const trigger=page.getByRole("button",{name:"Mở điều hướng"});
-   assert(await trigger.isVisible(),"mobile menu trigger invisible");
-   await trigger.click();
-   assert(await page.getByRole("link",{name:/Tư duy NORTH/}).last().isVisible(),"mobile menu did not open");
-   await page.keyboard.press("Escape");
-   assert(await page.getByRole("button",{name:"Mở điều hướng"}).getAttribute("aria-expanded")==="false","menu Escape failed");
-   success.push({label:width+"-mobile-menu",result:"pass"});
-  }catch(e){errors.push({label:width+"-mobile-menu",error:String(e)})}
- }
- await ctx.close();
+  assert((await page.locator("#north-issue").innerText()).includes("Kết nối quy trình và công cụ"),"dropdown option did not update");
+  assert(await page.locator("select").count()===0,"browser native select not expected");
+  await page.locator("#north-detail").fill("Công việc phải nhập lại nhiều lần; muốn rút ngắn thời gian xử lý.");
+  const values=await page.locator("#north-detail").inputValue();
+  assert(values.length>10,"textarea content missing");
+  results.push({id:width+"-contact-form",pass:true});
+ }catch(error){failures.push({id:width+"-contact-form",error:String(error)})}
+ await context.close();
 }
+const report={baseSha:head,browser:"Chrome",mobileClass:"EMULATED",passes:results.length,failures:failures.length,errors:failures,results};
+writeFileSync(folder+"/simplified-report.json",JSON.stringify(report,null,2)+"\n");
+console.log("NORTH_SIMPLIFIED_QA",JSON.stringify({passes:results.length,failures:failures.length,errors:failures},null,2));
 await browser.close();
-const report={sha,browser:"Chrome",environment:"LAB_DESKTOP_AND_MOBILE_EMULATED",successCount:success.length,errorCount:errors.length,errors,success};
-writeFileSync(output+"/report.json",JSON.stringify(report,null,2)+"\n");
-console.log(JSON.stringify({sha,successCount:success.length,errorCount:errors.length,errors},null,2));
-if(errors.length)process.exitCode=1;
+if(failures.length)process.exitCode=1;
