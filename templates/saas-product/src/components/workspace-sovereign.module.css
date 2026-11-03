@@ -219,3 +219,16 @@
 .root .workTitle h3{line-height:1.35!important;letter-spacing:-.015em}
 @media(max-width:650px){.root .heroCopy h1{font-size:clamp(34px,9.1vw,59px)!important}}
 
+
+
+/* LUMA: task-status flow graph, derived entirely from the interactive task model. */
+.root .flowNavigator{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 20px 15px}
+.root .flowNode{min-width:0;min-height:91px;display:grid;grid-template-columns:1fr auto;align-content:space-between;gap:2px;padding:11px 12px;background:#f2f5fd;color:var(--navy);border:1px solid #cfdbed;border-radius:11px;text-align:left;transition:transform .18s ease,border-color .18s ease,background-color .18s ease;cursor:pointer}
+.root .flowNode[aria-pressed="true"]{background:#e1e9ff;border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}
+.root .flowNode:hover{transform:translateY(-2px);border-color:var(--blue)}
+.root .flowStep{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;color:var(--blueInk);font-size:9px;font-weight:800;letter-spacing:.065em}
+.root .flowStep>span{font-size:15px;line-height:1}
+.root .flowNode strong{font:850 27px/1.1 system-ui,"Segoe UI",Arial,sans-serif;letter-spacing:-.02em}
+.root .flowName{font-size:10px;font-weight:700;line-height:1.3;max-width:11ch;justify-self:end;align-self:end;text-align:right}
+@media(max-width:650px){.root .flowNavigator{margin:0 12px 13px;gap:5px}.root .flowNode{min-height:81px;padding:9px 7px;border-radius:9px}.root .flowNode strong{font-size:23px}.root .flowName{font-size:9px}.root .flowStep{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.root .flowNode{transition:none!important}.root .flowNode:hover{transform:none!important}}
