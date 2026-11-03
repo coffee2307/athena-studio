@@ -210,3 +210,12 @@
 .root [data-scroll-reveal="true"]:not([data-scroll-visible="true"]){opacity:0;transform:translate3d(0,28px,0)}
 .root [data-scroll-reveal="true"][data-scroll-visible="true"]{opacity:1;transform:translate3d(0,0,0);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
 @media(prefers-reduced-motion:reduce){.root [data-scroll-reveal]{opacity:1!important;transform:none!important;transition:none!important}}
+
+
+/* Vietnamese-safe display layout: preserve complete accented glyphs. */
+.root :is(h1,h2,h3,h4){line-height:1.18!important;letter-spacing:-.03em;overflow-wrap:normal}
+.root .heroCopy h1{font-size:clamp(42px,6.2vw,94px)!important;line-height:1.2!important;letter-spacing:-.03em!important;max-width:100%;overflow-wrap:normal}
+.root .heroCopy{min-width:0}
+.root .workTitle h3{line-height:1.35!important;letter-spacing:-.015em}
+@media(max-width:650px){.root .heroCopy h1{font-size:clamp(34px,9.1vw,59px)!important}}
+
