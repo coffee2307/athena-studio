@@ -144,6 +144,9 @@
 .dna-browser-bar{position:absolute;top:12%;left:8%;right:8%;height:27px;background:#fcfcfb;display:flex;align-items:center;gap:5px;padding:0 10px;border:1px solid #d8dcd5;border-radius:10px 10px 0 0}
 .dna-browser-bar span{font-size:9px;color:#677067;margin-left:auto}
 .dna-browser-preview{position:absolute;top:calc(12% + 27px);left:8%;right:8%;bottom:7%;border:1px solid #d8dcd5;border-top:0;background:#f7f7f4;box-shadow:0 12px 22px #292a2924;overflow:hidden}
+/* Website preview has separately captured portrait art on mobile: never letterbox a landscape screenshot. */
+.dna-browser-preview picture{position:absolute;inset:0;display:block;overflow:hidden}
+.dna-browser-preview picture img{width:100%;height:100%;object-fit:cover;object-position:center top}
 .dna-scene-care{background:radial-gradient(circle at 65% 44%,#d2ddcf 0,#e9efe5 68%,#e3eae0 100%)}
 .dna-care-board{width:78%;max-width:350px;background:#fcfdfa;border:1px solid #bdcbbb;border-radius:18px;padding:18px 17px;box-shadow:0 15px 45px #455c3c25;transform:rotate(-2deg)}
 .dna-care-top{display:flex;justify-content:space-between;align-items:center;font-size:10px;letter-spacing:.14em;font-weight:800;color:#475548}
