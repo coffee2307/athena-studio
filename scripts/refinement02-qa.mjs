@@ -5,7 +5,7 @@ const dir=".qa/refinement02";mkdirSync(dir,{recursive:true});
 const browser=await chromium.launch({channel:process.platform==="win32"?"chrome":undefined,headless:true});
 const sites=[
  {slug:"creative-studio",root:"[data-sora-surface]"},
- {slug:"modern-corporate",root:"[data-north-surface]"},
+ {slug:"modern-corporate",root:"[data-north-page]"},
  {slug:"commerce-standard",root:"[data-moc-surface]"},
  {slug:"auto-showroom",root:'.world-site[data-world="auto-showroom"]'}
 ];
@@ -28,11 +28,11 @@ for(const item of sites)for(const vp of sizes){
    const hit=(a,b)=>a&&b?Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left))*Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)):0;
    const r={overflow:doc.scrollWidth-innerWidth,headline:document.querySelector("main h1")?.textContent?.trim().slice(0,90),issues:[]};
    if(slug==="modern-corporate"){
-    const body=el.querySelector('[class*="_impactBody__"]'),para=body?.querySelector("p"),pseudo=body&&getComputedStyle(body,"::after").content;
-    if(pseudo&&pseudo!=="none"&&pseudo!=="normal")r.issues.push("NORTH overlap pseudo still exists: "+pseudo);
-    const map=el.querySelector('[class*="_impactMap__"]');
-    if(!map)r.issues.push("NORTH missing interactive map");
-    if(hit(rect(para),rect(map))>24)r.issues.push("NORTH diagram overlaps paragraph");
+    const panel=el.querySelector('[class*="_decisionPanel__"]');
+    const result=el.querySelector("#north-decision-result");
+    const choices=[...el.querySelectorAll('[class*="_problemChoice__"]')];
+    if(!panel||!result||choices.length!==3)r.issues.push("NORTH decision panel absent");
+    for(const choice of choices)if(hit(rect(choice),rect(result))>24)r.issues.push("NORTH decision output overlap");
    }
    if(slug==="commerce-standard"){
     const header=el.querySelector("header"),mark=el.querySelector('[class*="_brandName__"]'),sub=el.querySelector('[class*="_wordmark__"] small'),nav=el.querySelector('[class*="_secondary__"]');
@@ -75,9 +75,11 @@ for(const item of sites)for(const vp of sizes){
    if(await x.nth(2).getAttribute("aria-pressed")!=="true")throw Error("SORA layer selection");
   }
   if(item.slug==="modern-corporate"&&vp.w===390){
-   const x=page.locator('[class*="_impactJourney__"] button');
+   const x=page.locator('[data-north-page="home"] button[aria-pressed]');
+   if(await x.count()!==3)throw Error("NORTH choice count");
    await x.nth(2).click();
-   if(await x.nth(2).getAttribute("aria-pressed")!=="true")throw Error("NORTH journey selection");
+   if(await x.nth(2).getAttribute("aria-pressed")!=="true")throw Error("NORTH selection");
+   if(!(await page.locator("#north-decision-result h3").innerText()).includes("Lập kế hoạch triển khai"))throw Error("NORTH result");
   }
   if(item.slug==="auto-showroom"){
    const state=await page.locator('.ix-auto-3d-canvas').first().getAttribute("data-renderer").catch(()=>null);
