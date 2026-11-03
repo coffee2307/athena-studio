@@ -273,12 +273,10 @@
 
 /* ATHENA-DNA-04 / creative-studio: locally owned pointer language (editorial), never exported. */
 .sora :global([data-dna04-artifact]){
- --dna04-shift-x:0px;--dna04-shift-y:0px;--dna04-tilt-x:0deg;--dna04-tilt-y:0deg;
- --dna04-small-rotate:0deg;--dna04-point-x:50%;--dna04-point-y:50%;
  transition:transform .24s cubic-bezier(.2,.75,.25,1),box-shadow .3s ease;
 }
 @media (hover:hover) and (pointer:fine){
- .sora :global([data-dna04-artifact]:hover){transform:rotate(-1.25deg) translate3d(var(--dna04-shift-x),var(--dna04-shift-y),0);box-shadow:9px 15px 0 #9eaf8a;border-radius:1px;filter:saturate(.96)}
+ .sora :global([data-dna04-artifact]:hover){box-shadow:9px 15px 0 #9eaf8a;border-radius:1px;filter:saturate(.96)}
 }
 @media (prefers-reduced-motion:reduce){
  .sora :global([data-dna04-artifact]){transition:none!important;transform:none!important;box-shadow:none!important}

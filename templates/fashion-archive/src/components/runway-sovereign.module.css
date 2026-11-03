@@ -295,12 +295,10 @@
 
 /* ATHENA-DNA-04 / fashion-archive: locally owned pointer language (editorial), never exported. */
 .root :global([data-dna04-artifact]){
- --dna04-shift-x:0px;--dna04-shift-y:0px;--dna04-tilt-x:0deg;--dna04-tilt-y:0deg;
- --dna04-small-rotate:0deg;--dna04-point-x:50%;--dna04-point-y:50%;
  transition:transform .24s cubic-bezier(.2,.75,.25,1),box-shadow .3s ease;
 }
 @media (hover:hover) and (pointer:fine){
- .root :global([data-dna04-artifact]:hover){transform:translate3d(calc(var(--dna04-shift-x) * .8),var(--dna04-shift-y),0) rotate(var(--dna04-small-rotate));box-shadow:10px 14px 0 #aa8d761f;border-radius:1px;filter:saturate(.96)}
+ .root :global([data-dna04-artifact]:hover){box-shadow:10px 14px 0 #aa8d761f;border-radius:1px;filter:saturate(.96)}
 }
 @media (prefers-reduced-motion:reduce){
  .root :global([data-dna04-artifact]){transition:none!important;transform:none!important;box-shadow:none!important}

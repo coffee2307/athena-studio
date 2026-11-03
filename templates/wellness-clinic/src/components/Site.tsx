@@ -15,28 +15,9 @@ export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:{sect
  useEffect(()=>{setMenu(false)},[section]);
  useEffect(()=>{if(!menu)return;const close=(event:KeyboardEvent)=>{if(event.key==="Escape")setMenu(false)};window.addEventListener("keydown",close);return()=>window.removeEventListener("keydown",close)},[menu]);
 
- const dna04Pointer=(event:React.PointerEvent<HTMLDivElement>)=>{
-  if(event.pointerType!=="mouse"||window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
-  const target=(event.target as HTMLElement).closest<HTMLElement>("[data-dna04-artifact]");
-  if(!target||!event.currentTarget.contains(target))return;
-  const bounds=target.getBoundingClientRect();
-  if(!bounds.width||!bounds.height)return;
-  const x=Math.max(-1,Math.min(1,((event.clientX-bounds.left)/bounds.width-.5)*2));
-  const y=Math.max(-1,Math.min(1,((event.clientY-bounds.top)/bounds.height-.5)*2));
-  target.style.setProperty("--dna04-shift-x",(x*5).toFixed(2)+"px");
-  target.style.setProperty("--dna04-shift-y",(y*4).toFixed(2)+"px");
-  target.style.setProperty("--dna04-tilt-x",(x*2.5).toFixed(2)+"deg");
-  target.style.setProperty("--dna04-tilt-y",(-y*2.5).toFixed(2)+"deg");
-  target.style.setProperty("--dna04-small-rotate",(x*1.1).toFixed(2)+"deg");
-  target.style.setProperty("--dna04-point-x",((x+1)*50).toFixed(1)+"%");
-  target.style.setProperty("--dna04-point-y",((y+1)*50).toFixed(1)+"%");
- };
- const dna04PointerOut=(event:React.PointerEvent<HTMLDivElement>)=>{
-  const target=(event.target as HTMLElement).closest<HTMLElement>("[data-dna04-artifact]");
-  if(!target||target.contains(event.relatedTarget as Node))return;
-  for(const name of ["--dna04-shift-x","--dna04-shift-y","--dna04-tilt-x","--dna04-tilt-y","--dna04-small-rotate","--dna04-point-x","--dna04-point-y"])target.style.removeProperty(name);
- };
- return <div className={style.root} onPointerMove={dna04Pointer} onPointerOut={dna04PointerOut} id="wellness-clinic-top">
+
+
+ return <div className={style.root} id="wellness-clinic-top">
 <header className={style.header}><div className={style.headStatus}>A QUIETER PATH</div><Link className={style.logo} href={go("/")}>{site.brand}</Link><button className={style.hamburger} aria-expanded={menu} onClick={()=>setMenu(v=>!v)} aria-label={menu?"Đóng điều hướng":"Mở điều hướng"}><i/><i/><i/></button><Link className={style.actionHead} href={go("/contact")}>Lời nhắn</Link></header>
  {menu&&<button className={style.menuScrim} aria-label="Đóng điều hướng" onClick={()=>setMenu(false)}/>}<aside className={style.menuPanel} inert={!menu} aria-hidden={!menu}><div className={style.menuTitle}>NAVIGATION / {site.brand}</div>{navItems.map(([label,path],i)=><Link key={path} href={go(path)} onClick={()=>setMenu(false)}><small>0{i+1}</small>{label}</Link>)}<button onClick={()=>setMenu(false)}>CLOSE / MENU</button></aside>
  <main>

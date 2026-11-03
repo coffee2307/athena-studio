@@ -16,27 +16,26 @@ test("DNA04 About has its own interactive desk, separate from Process",()=>{
  assert.match(read("components/experience/ProcessBlueprint.tsx"),/IntersectionObserver/);
  assert.match(read("components/experience/ProcessBlueprint.tsx"),/requestedStage/);
 });
-test("all independent templates own pointer interactions and their own CSS",()=>{
+test("all independent templates keep stable panels without cursor-driven tilt",()=>{
  for(const slug of slugs.filter(x=>x!=="digital-creators"&&x!=="auto-showroom")){
   const base="templates/"+slug+"/src/components/";
   const site=read(base+"Site.tsx");
   const cssfile=readdirSync(base).find(f=>f.endsWith(".module.css")&&f!=="FashionHero3D.module.css");
-  assert.ok(cssfile,"No sovereign CSS for "+slug);
+  assert.ok(cssfile,"Independent CSS required for "+slug);
   const css=read(base+cssfile);
-  // NORTH intentionally removes pointer parallax in the approved simple design.
+  assert.doesNotMatch(site,/dna04Pointer|onPointerMove=\{dna04Pointer\}|onPointerOut=\{dna04PointerOut\}/,"Unwanted pointer-driven panel transforms in "+slug);
+  assert.doesNotMatch(css,/--dna04-(?:shift|tilt|small-rotate|point)|transform:[^;{}]*rotate[XY]?\(var\(--dna04/,"Cursor-driven transforms must be absent in "+slug);
   if(slug==="modern-corporate"){
-   assert.doesNotMatch(site,/dna04Pointer/,"NORTH stays simple");
    assert.match(site,/className=\{s\.decisionPanel\}/);
    assert.match(css,/\.decisionPanel\{/);
   }else{
-   assert.match(site,/dna04Pointer/,"Pointer effect in "+slug);
-   assert.match(site,/data-dna04-artifact/,"Local artifact in "+slug);
-   assert.match(css,/data-dna04-artifact/,"Local CSS in "+slug);
+   assert.match(site,/data-dna04-artifact/,"Keep visual artifacts in "+slug);
+   assert.match(css,/data-dna04-artifact/,"Keep hover/focus styling in "+slug);
   }
   assert.match(css,/prefers-reduced-motion/,"Reduced motion in "+slug);
-
  }
 });
+
 test("NORTH and MỘC own their dropdown components",()=>{
  for(const [slug,component] of [["modern-corporate","NorthSelector"],["commerce-standard","MocSelector"]]){
   assert.ok(existsSync("templates/"+slug+"/src/components/"+component+".tsx"));

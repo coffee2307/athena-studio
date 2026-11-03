@@ -41,28 +41,9 @@ export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:{sect
  },[section]);
  const shopTiles=(indexes:number[])=><div className={s.productWall}>{indexes.map(i=><article className={s.tile} data-dna04-artifact="commerce-standard-tile" key={i}><button className={s.tileImage} onClick={()=>{setQuick(i);setQty(1)}} aria-label={"Xem nhanh "+catalog[i].name}><img src={images[i%images.length]} alt={catalog[i].name}/><span>XEM SẢN PHẨM</span></button><div className={s.tileFoot}><div><small>{catalog[i].group.toUpperCase()}</small><h3>{catalog[i].name}</h3><p>{money(catalog[i].price)}</p></div><button className={s.tileAdd} onClick={()=>add(i,1)} aria-label={"Thêm "+catalog[i].name+" vào giỏ"}>+</button></div></article>)}</div>;
 
- const dna04Pointer=(event:React.PointerEvent<HTMLDivElement>)=>{
-  if(event.pointerType!=="mouse"||window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
-  const target=(event.target as HTMLElement).closest<HTMLElement>("[data-dna04-artifact]");
-  if(!target||!event.currentTarget.contains(target))return;
-  const bounds=target.getBoundingClientRect();
-  if(!bounds.width||!bounds.height)return;
-  const x=Math.max(-1,Math.min(1,((event.clientX-bounds.left)/bounds.width-.5)*2));
-  const y=Math.max(-1,Math.min(1,((event.clientY-bounds.top)/bounds.height-.5)*2));
-  target.style.setProperty("--dna04-shift-x",(x*5).toFixed(2)+"px");
-  target.style.setProperty("--dna04-shift-y",(y*4).toFixed(2)+"px");
-  target.style.setProperty("--dna04-tilt-x",(x*2.5).toFixed(2)+"deg");
-  target.style.setProperty("--dna04-tilt-y",(-y*2.5).toFixed(2)+"deg");
-  target.style.setProperty("--dna04-small-rotate",(x*1.1).toFixed(2)+"deg");
-  target.style.setProperty("--dna04-point-x",((x+1)*50).toFixed(1)+"%");
-  target.style.setProperty("--dna04-point-y",((y+1)*50).toFixed(1)+"%");
- };
- const dna04PointerOut=(event:React.PointerEvent<HTMLDivElement>)=>{
-  const target=(event.target as HTMLElement).closest<HTMLElement>("[data-dna04-artifact]");
-  if(!target||target.contains(event.relatedTarget as Node))return;
-  for(const name of ["--dna04-shift-x","--dna04-shift-y","--dna04-tilt-x","--dna04-tilt-y","--dna04-small-rotate","--dna04-point-x","--dna04-point-y"])target.style.removeProperty(name);
- };
- return <div className={s.moc} onPointerMove={dna04Pointer} onPointerOut={dna04PointerOut} id="moc-top" data-moc-surface>
+
+
+ return <div className={s.moc} id="moc-top" data-moc-surface>
   <div className={s.shippingNote}>VẬT DỤNG TUYỂN CHỌN CHO NHỮNG NGÀY CHẬM</div>
   <header className={s.storeHead}><nav className={s.leftNav} aria-label="Danh mục cửa hàng"><Link href={go("/work")}>CỬA HÀNG</Link><Link href={go("/about")}>CÂU CHUYỆN</Link></nav><button className={s.menuToggle} onClick={()=>setMenu(v=>!v)} aria-label={menu?"Đóng danh mục":"Mở danh mục"} aria-expanded={menu}><i/><i/><i/></button><Link className={s.wordmark} href={go("/")}><span className={s.brandName}>{site.brand}<span className={s.brandDot}>.</span></span><small>ĐỒ DÙNG CHO NHỮNG NGÀY CHẬM</small></Link><div className={s.actions}><Link className={s.support} href={go("/contact")}>HỖ TRỢ</Link><button onClick={()=>setCartOpen(true)} className={s.cartTrigger} aria-label={"Mở giỏ hàng có "+total+" sản phẩm"}><FontAwesomeIcon icon={faBagShopping} aria-hidden="true"/><strong key={total} className={s.cartBadge}>{total}</strong></button></div></header>
   <nav className={s.secondary} aria-label="Phân loại sản phẩm"><Link href={go("/work")}>TẤT CẢ SẢN PHẨM</Link><Link href={go("/services")}>CHẤT LIỆU & BẢO QUẢN</Link><Link href={go("/about")}>CHUYỆN NHÀ MỘC</Link><Link href={go("/contact")}>TƯ VẤN</Link></nav>

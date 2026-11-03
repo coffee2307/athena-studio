@@ -39,12 +39,10 @@
 
 /* ATHENA-DNA-04 / architecture-studio: locally owned pointer language (blueprint), never exported. */
 .root :global([data-dna04-artifact]){
- --dna04-shift-x:0px;--dna04-shift-y:0px;--dna04-tilt-x:0deg;--dna04-tilt-y:0deg;
- --dna04-small-rotate:0deg;--dna04-point-x:50%;--dna04-point-y:50%;
  transition:transform .24s cubic-bezier(.2,.75,.25,1),box-shadow .3s ease;
 }
 @media (hover:hover) and (pointer:fine){
- .root :global([data-dna04-artifact]:hover){transform:perspective(1100px) rotateY(var(--dna04-tilt-x)) translate3d(var(--dna04-shift-x),var(--dna04-shift-y),0);box-shadow:12px 14px 0 #81796c30;border-radius:1px;outline:1px solid #8a908735}
+ .root :global([data-dna04-artifact]:hover){box-shadow:12px 14px 0 #81796c30;border-radius:1px;outline:1px solid #8a908735}
 }
 @media (prefers-reduced-motion:reduce){
  .root :global([data-dna04-artifact]){transition:none!important;transform:none!important;box-shadow:none!important}

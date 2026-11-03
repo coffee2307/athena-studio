@@ -187,12 +187,10 @@
 
 /* ATHENA-DNA-04 / commerce-standard: locally owned pointer language (tactile), never exported. */
 .moc :global([data-dna04-artifact]){
- --dna04-shift-x:0px;--dna04-shift-y:0px;--dna04-tilt-x:0deg;--dna04-tilt-y:0deg;
- --dna04-small-rotate:0deg;--dna04-point-x:50%;--dna04-point-y:50%;
  transition:transform .24s cubic-bezier(.2,.75,.25,1),box-shadow .3s ease;
 }
 @media (hover:hover) and (pointer:fine){
- .moc :global([data-dna04-artifact]:hover){transform:translate3d(var(--dna04-shift-x),calc(var(--dna04-shift-y) - 3px),0) rotate(var(--dna04-small-rotate));box-shadow:0 20px 24px #5b3d2d18;border-radius:5px;filter:saturate(1.03)}
+ .moc :global([data-dna04-artifact]:hover){box-shadow:0 20px 24px #5b3d2d18;border-radius:5px;filter:saturate(1.03)}
 }
 @media (prefers-reduced-motion:reduce){
  .moc :global([data-dna04-artifact]){transition:none!important;transform:none!important;box-shadow:none!important}
