@@ -1,5 +1,7 @@
 # ATHENA STUDIO — Production A release runbook (22/10/2026)
 
+**Cập nhật trạng thái 03/11/2026:** Văn bản này ghi nhận tình trạng ngày 22/10. Hồ sơ `public/models/ATTRIBUTION.md` nay đã có nguồn Sketchfab vecarz, CC Attribution và SHA-256 của GLB. Quyền công bố vẫn cần chủ dự án đối chiếu tệp, chứng cứ, ghi công và phê duyệt riêng theo preflight; không được coi cập nhật tài liệu là tự động GO. Xem `docs/ATHENA_PRODUCTION_A_RC_20261103.md`.
+
 **Scope:** public Vietnamese-language agency website, service pages, portfolio, legal pages and working contact paths. **Not** production Identity, customer data portal, payments, marketing tracking, Supabase migration or repository access.
 
 **Status:** Engineering candidate. **NO-GO** until real evidence and an owner-approved release SHA. All external services, DNS, VPS spend and production feature flags remain unchanged.

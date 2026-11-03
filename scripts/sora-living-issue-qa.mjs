@@ -51,8 +51,10 @@ for(const {w,h} of widths){
     check(await page.getByRole("button",{name:"Xem 02 / WEBSITE"}).getAttribute("aria-pressed")==="true","Cover selector not selected");
     const after=await image.getAttribute("src");
     check(before!==after,"Cover image did not update");
-    await page.getByRole("button",{name:"Trang bìa tiếp theo"}).click();
-    check(await page.getByRole("button",{name:"Xem 03 / HÌNH ẢNH"}).getAttribute("aria-pressed")==="true","Cover arrow not working");
+    // The owner removed decorative arrow controls. Verify the real third page picker.
+    await page.getByRole("button",{name:"Xem 03 / HÌNH ẢNH"}).click();
+    check(await page.getByRole("button",{name:"Xem 03 / HÌNH ẢNH"}).getAttribute("aria-pressed")==="true","Third cover picker not working");
+    check(await page.getByRole("button",{name:"Trang bìa tiếp theo"}).count()===0,"Obsolete arrow control reappeared");
     if(w===1440){
      const art=page.locator('[class*="_livingArtboard__"]');
      const box=await art.boundingBox();check(!!box,"Cover artboard missing");

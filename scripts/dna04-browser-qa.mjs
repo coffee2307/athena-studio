@@ -85,9 +85,21 @@ for(const slug of slugs){
   const {page}=await audit({ctx:desktop,name:"desktop"},route,suffix===""&&["creative-studio","fashion-archive","pet-store"].includes(slug));
   if(page){
    if(suffix===""&&slug!=="auto-showroom"){
-    const bound=await page.locator("[data-dna04-artifact]").count();
-    if(bound===0)failed.push({name:"desktop",route,error:"no local interactive artifact"});
-    else results.push({name:"desktop",route:route+"#local-motion",count:bound});
+    if(slug==="modern-corporate"){
+     // NORTH intentionally removed decorative pointer artifacts. Prove its real decision widget instead.
+     try{
+      const choices=page.locator("[data-north-page=home] button[aria-pressed]");
+      check(await choices.count()===3,"NORTH requires three actionable decisions");
+      await choices.nth(2).click();
+      check(await choices.nth(2).getAttribute("aria-pressed")==="true","NORTH choice did not update");
+      check((await page.locator("#north-decision-result h3").innerText()).includes("Lập kế hoạch triển khai"),"NORTH result did not update");
+      results.push({name:"desktop",route:route+"#live-decision",pass:true});
+     }catch(e){failed.push({name:"desktop",route,error:String(e)})}
+    }else{
+     const bound=await page.locator("[data-dna04-artifact]").count();
+     if(bound===0)failed.push({name:"desktop",route,error:"no local interactive artifact"});
+     else results.push({name:"desktop",route:route+"#local-motion",count:bound});
+    }
    }
    await page.close();
   }
