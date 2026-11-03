@@ -1,5 +1,5 @@
 /* MỞ FESTIVAL — an independent living-poster design, not a shared Athena component. */
-.root{--night:#191917;--paper:#f2f0e6;--acid:#eaff45;--signal:#f36a41;--line:#272723;color:var(--night);background:var(--paper);font:400 15px/1.5 Arial,"Helvetica Neue",sans-serif;min-height:100vh;overflow-x:clip}
+.root{--night:#191917;--paper:#f2f0e6;--acid:#eaff45;--signal:#f36a41;--line:#272723;color:var(--night);background:var(--paper);font:400 15px/1.5 "Segoe UI","Segoe UI",Arial,sans-serif;min-height:100vh;overflow-x:clip}
 .root *{box-sizing:border-box}
 .root :where(h1,h2,h3,p,figure){margin:0}
 .root a{color:inherit;text-decoration:none}
@@ -8,9 +8,9 @@
 .root :where(a,button,input,select,textarea):focus-visible{outline:3px solid var(--signal);outline-offset:4px}
 .root ::selection{background:var(--signal);color:var(--night)}
 .header{height:84px;display:flex;align-items:center;gap:2vw;padding:0 clamp(20px,4vw,70px);position:sticky;top:0;z-index:40;background:var(--paper);border-bottom:2px solid var(--night)}
-.logo{display:flex;gap:9px;align-items:center;font:900 38px/.8 Arial Black,Arial,sans-serif;letter-spacing:-.12em;white-space:nowrap}
+.logo{display:flex;gap:9px;align-items:center;font:900 38px/.8 "Segoe UI","Segoe UI",Arial,sans-serif;letter-spacing:-.045em;white-space:nowrap}
 .logoDot{color:var(--signal);letter-spacing:0}
-.logo small{font:800 9px/1.12 Arial,sans-serif;letter-spacing:.12em;border-left:1px solid var(--night);padding-left:12px;margin-left:5px}
+.logo small{font:800 9px/1.12 "Segoe UI",Arial,sans-serif;letter-spacing:.12em;border-left:1px solid var(--night);padding-left:12px;margin-left:5px}
 .desktopNav{display:flex;justify-content:center;gap:clamp(20px,3vw,50px);margin-left:auto;font-size:12px;font-weight:800}
 .desktopNav a{padding:16px 0;position:relative}
 .desktopNav a::after{content:"";position:absolute;bottom:9px;left:0;right:100%;height:2px;background:var(--night);transition:right .22s ease}
@@ -22,9 +22,9 @@
 .menuButton span{font-size:7px;font-weight:900;letter-spacing:.12em}
 .mobileNav{position:fixed;z-index:39;inset:84px 0 0;background:var(--acid);padding:38px 5vw;display:flex;flex-direction:column;gap:0;visibility:hidden;opacity:0;transform:translateY(-20px);pointer-events:none;transition:opacity .22s ease,transform .22s ease,visibility .22s ease;overflow-y:auto}
 .mobileNav[data-open="true"]{visibility:visible;opacity:1;transform:none;pointer-events:auto}
-.mobileLabel,.eyebrow{font:800 11px/1.35 Arial,sans-serif;letter-spacing:.1em}
-.mobileNav>a{display:flex;align-items:center;gap:18px;border-bottom:2px solid var(--night);padding:13px 0;font-size:clamp(30px,8vw,50px);font-weight:900;letter-spacing:-.07em}
-.mobileNav>a small{font:800 10px Arial;letter-spacing:0}
+.mobileLabel,.eyebrow{font:800 11px/1.35 "Segoe UI",Arial,sans-serif;letter-spacing:.1em}
+.mobileNav>a{display:flex;align-items:center;gap:18px;border-bottom:2px solid var(--night);padding:13px 0;font-size:clamp(30px,8vw,50px);font-weight:900;letter-spacing:-.045em}
+.mobileNav>a small{font:800 10px "Segoe UI",Arial;letter-spacing:0}
 .mobileNav>a span{margin-left:auto;font-size:24px}
 .mobileNav p{font-size:12px;max-width:33ch;margin-top:24px}
 .posterStage{position:relative;min-height:min(870px,calc(100svh - 84px));background:var(--acid);overflow:hidden;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);grid-template-rows:auto 1fr auto;border-bottom:2px solid var(--night)}
@@ -32,9 +32,9 @@
 .heroTop{border-bottom:2px solid var(--night);z-index:2}
 .heroBottom{border-top:2px solid var(--night);z-index:2}
 .heroText{z-index:2;position:relative;padding:clamp(40px,6vh,85px) 0 58px clamp(20px,4vw,70px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
-.heroOverline{display:flex;align-items:center;gap:10px;font:900 11px Arial;letter-spacing:.07em}
+.heroOverline{display:flex;align-items:center;gap:10px;font:900 11px "Segoe UI",Arial;letter-spacing:.07em}
 .heroOverline i{width:10px;height:10px;border-radius:50%;background:var(--signal);display:block}
-.heroText h1{font:900 clamp(62px,8.6vw,156px)/.84 Arial Black,Arial,sans-serif;letter-spacing:-.105em;margin:25px 0 34px;white-space:nowrap;position:relative}
+.heroText h1{font:900 clamp(62px,8.6vw,156px)/.84 "Segoe UI","Segoe UI",Arial,sans-serif;letter-spacing:-.105em;margin:25px 0 34px;white-space:nowrap;position:relative}
 .heroText h1 em,.pageHero h1 em,.aboutPage h1 em,.contactPage h1 em{font-style:normal;color:#b53e18}
 .heroPeriod{color:#b53e18}
 .heroText>p{max-width:39ch;line-height:1.65;font-weight:600;font-size:clamp(15px,1.3vw,19px)}
@@ -46,39 +46,39 @@
 .heroArt::before{content:"";position:absolute;inset:11% 10%;border:2px solid var(--night);border-radius:50%;transform:rotate(-19deg) scaleX(1.15)}
 .heroArt::after{content:"";position:absolute;width:85%;aspect-ratio:1;border:2px dashed var(--night);border-radius:50%;transform:scale(1.28);opacity:.35}
 .artHalo{position:absolute;width:135%;height:2px;background:var(--night);transform:rotate(-36deg);box-shadow:0 130px 0 var(--night),0 -130px 0 var(--night);opacity:.7}
-.artCenter{z-index:2;font:900 clamp(125px,19vw,360px)/.8 Arial Black,Arial,sans-serif;letter-spacing:-.15em;margin-right:.12em;color:var(--acid);-webkit-text-stroke:3px var(--night);transform:rotate(-13deg)}
-.artTop,.artBottom{position:absolute;z-index:3;font:900 clamp(22px,3vw,54px)/.94 Arial Black,Arial,sans-serif;letter-spacing:-.06em}
+.artCenter{z-index:2;font:900 clamp(125px,19vw,360px)/.8 "Segoe UI","Segoe UI",Arial,sans-serif;letter-spacing:-.15em;margin-right:.12em;color:var(--acid);-webkit-text-stroke:3px var(--night);transform:rotate(-13deg)}
+.artTop,.artBottom{position:absolute;z-index:3;font:900 clamp(22px,3vw,54px)/.94 "Segoe UI","Segoe UI",Arial,sans-serif;letter-spacing:-.06em}
 .artTop{left:6%;top:6%;transform:rotate(-8deg)}.artBottom{right:5%;bottom:8%;text-align:right;transform:rotate(7deg)}
-.artSeal{position:absolute;z-index:4;top:17%;right:12%;width:86px;height:86px;border:2px solid var(--night);border-radius:50%;background:var(--acid);display:grid;place-content:center;text-align:center;font:900 9px/1.4 Arial;transform:rotate(14deg)}
+.artSeal{position:absolute;z-index:4;top:17%;right:12%;width:86px;height:86px;border:2px solid var(--night);border-radius:50%;background:var(--acid);display:grid;place-content:center;text-align:center;font:900 9px/1.4 "Segoe UI",Arial;transform:rotate(14deg)}
 .manifesto{min-height:470px;display:grid;grid-template-columns:1fr 2.5fr auto;gap:35px;padding:clamp(65px,9vw,145px) clamp(20px,5vw,85px);background:var(--paper);align-items:start}
-.manifesto p{font:900 clamp(39px,5.5vw,94px)/1.02 Arial Black,Arial,sans-serif;letter-spacing:-.085em;max-width:13ch}
+.manifesto p{font:900 clamp(39px,5.5vw,94px)/1.02 "Segoe UI","Segoe UI",Arial,sans-serif;letter-spacing:-.045em;max-width:13ch}
 .manifesto strong{color:#b53e18}
 .manifesto a{display:inline-flex;gap:14px;margin-top:25px;font-weight:900;font-size:12px;border-bottom:2px solid var(--night);padding-bottom:8px}
-.manifestoGlyph{font:900 100px/.7 Arial;color:var(--signal)}
+.manifestoGlyph{font:900 100px/.7 "Segoe UI",Arial;color:var(--signal)}
 .chapterSection{background:var(--night);color:var(--paper);padding:100px clamp(20px,5vw,85px) 120px}
 .sectionHeading{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:55px}
-.sectionHeading h2{font:900 clamp(54px,7vw,124px)/.88 Arial Black,Arial,sans-serif;letter-spacing:-.08em;margin:19px 0 0}
+.sectionHeading h2{font:900 clamp(54px,7vw,124px)/.88 "Segoe UI","Segoe UI",Arial,sans-serif;letter-spacing:-.045em;margin:19px 0 0}
 .sectionHeading>p{max-width:32ch;font-size:15px;line-height:1.8}
 .chapterLayout{display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:clamp(30px,5vw,85px);align-items:stretch}
 .chapterControls{display:flex;flex-direction:column}
 .chapterButton{width:100%;background:transparent;color:inherit;border:0;border-top:1px solid #6e6e63;padding:23px 0 30px;display:grid;grid-template-columns:35px 1fr 25px;gap:14px;text-align:left;align-items:start}
 .chapterButton:last-child{border-bottom:1px solid #6e6e63}
-.chapterButton>small{font-size:10px;font-weight:900;margin-top:9px}.chapterButton>span{font:800 clamp(23px,2.6vw,42px)/1.06 Arial,sans-serif;letter-spacing:-.06em;max-width:14ch}
-.chapterButton>span em{display:block;font:800 10px Arial;letter-spacing:.06em;font-style:normal;margin-top:12px;color:#c0c1b6}
+.chapterButton>small{font-size:10px;font-weight:900;margin-top:9px}.chapterButton>span{font:800 clamp(23px,2.6vw,42px)/1.06 "Segoe UI",Arial,sans-serif;letter-spacing:-.06em;max-width:14ch}
+.chapterButton>span em{display:block;font:800 10px "Segoe UI",Arial;letter-spacing:.06em;font-style:normal;margin-top:12px;color:#c0c1b6}
 .chapterButton>b{font:700 25px Arial}
 .chapterButton[aria-pressed="true"]{color:var(--acid)}.chapterButton[aria-pressed="true"] em{color:var(--acid)}
 .chapterVisual{position:relative;background:var(--signal);min-height:575px;overflow:hidden;border:1px solid #5e5d59}
 .chapterVisual img{display:block;width:100%;height:100%;min-height:575px;object-fit:cover;filter:saturate(.85)}
 .chapterImageLabel{position:absolute;left:22px;top:22px;background:var(--acid);color:var(--night);font-size:10px;font-weight:900;padding:12px}
 .chapterVisual figcaption{position:absolute;inset:auto 0 0;background:linear-gradient(transparent,#111e 30%,#111);padding:100px clamp(22px,3vw,45px) 35px;color:var(--paper)}
-.chapterVisual figcaption strong{font:900 clamp(35px,5vw,80px)/.9 Arial Black,Arial,sans-serif;letter-spacing:-.06em}
+.chapterVisual figcaption strong{font:900 clamp(35px,5vw,80px)/.9 "Segoe UI","Segoe UI",Arial,sans-serif;letter-spacing:-.06em}
 .chapterVisual figcaption p{max-width:36ch;font-size:15px;margin-top:12px}
 .chapterVisual figcaption a{display:inline-flex;gap:25px;font-size:12px;font-weight:900;color:var(--acid);margin-top:18px;padding:10px 0;border-bottom:1px solid currentColor}
 .runningLine{background:var(--signal);color:var(--night);overflow:hidden;border-block:2px solid var(--night)}
-.runningLine div{font:900 clamp(18px,2.4vw,35px)/1.2 Arial Black,Arial,sans-serif;letter-spacing:-.04em;padding:22px 3vw;white-space:normal}
+.runningLine div{font:900 clamp(18px,2.4vw,35px)/1.2 "Segoe UI","Segoe UI",Arial,sans-serif;letter-spacing:-.04em;padding:22px 3vw;white-space:normal}
 .runningLine span{margin:0 22px}
 .closingInvitation{min-height:610px;padding:100px clamp(20px,6vw,95px);background:var(--acid);display:flex;flex-direction:column;align-items:start;justify-content:space-between}
-.closingInvitation h2{font:900 clamp(70px,11vw,200px)/.8 Arial Black,Arial,sans-serif;letter-spacing:-.1em;margin:30px 0 55px}
+.closingInvitation h2{font:900 clamp(70px,11vw,200px)/.8 "Segoe UI","Segoe UI",Arial,sans-serif;letter-spacing:-.1em;margin:30px 0 55px}
 .closingInvitation h2 span{color:#b53e18}
 .closingInvitation>div{display:flex;align-items:end;justify-content:space-between;gap:40px;width:100%}
 .closingInvitation p{font-size:16px;font-weight:600;max-width:42ch;line-height:1.65}
@@ -86,12 +86,12 @@
 .footerUpper{display:flex;justify-content:space-between;gap:50px}.footerUpper p{max-width:42ch;font-size:15px;margin-top:20px}
 .footerUpper nav{display:flex;gap:18px;flex-wrap:wrap;justify-content:flex-end;font-weight:800;font-size:12px}
 .footerUpper nav a:hover{text-decoration:underline}
-.footerMark{font:900 clamp(140px,25vw,460px)/.77 Arial Black,Arial,sans-serif;letter-spacing:-.17em;margin:80px 0 40px;text-align:left;white-space:nowrap}
+.footerMark{font:900 clamp(140px,25vw,460px)/.77 "Segoe UI","Segoe UI",Arial,sans-serif;letter-spacing:-.17em;margin:80px 0 40px;text-align:left;white-space:nowrap}
 .footerMark span{color:var(--signal)}
 .footerBottom{display:flex;align-items:center;justify-content:space-between;gap:15px;border-top:1px solid #7f8079;padding-top:23px;font-size:10px;font-weight:800;letter-spacing:.05em}
 .subPage,.aboutPage,.contactPage,.detailPage{min-height:70vh}
 .pageHero{background:var(--acid);padding:90px clamp(20px,6vw,95px) 65px}
-.pageHero h1,.aboutPage h1,.contactPage h1{font:900 clamp(64px,9vw,160px)/.88 Arial Black,Arial,sans-serif;letter-spacing:-.09em;margin:25px 0}
+.pageHero h1,.aboutPage h1,.contactPage h1{font:900 clamp(64px,9vw,160px)/.88 "Segoe UI","Segoe UI",Arial,sans-serif;letter-spacing:-.045em;margin:25px 0}
 .pageHero p{max-width:55ch;font-size:18px;font-weight:600;line-height:1.55}
 .programGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding:70px clamp(20px,5vw,85px) 110px;background:var(--paper)}
 .programCard{display:block;min-width:0;padding-bottom:20px;border-bottom:2px solid var(--night);transition:transform .22s ease}
@@ -102,13 +102,13 @@
 .programCard:hover .programPhoto img{transform:scale(1.035)}
 .programPhoto b{position:absolute;left:12px;top:12px;font-size:11px;background:var(--acid);padding:11px}
 .programCard>span{font-size:10px;font-weight:900;letter-spacing:.06em}
-.programCard h2{font:900 clamp(27px,3.3vw,48px)/1 Arial Black,Arial,sans-serif;letter-spacing:-.06em;margin:15px 0}
+.programCard h2{font:900 clamp(27px,3.3vw,48px)/1 "Segoe UI","Segoe UI",Arial,sans-serif;letter-spacing:-.06em;margin:15px 0}
 .programCard p{font-size:15px;line-height:1.6;min-height:60px}
 .programCard>strong{display:block;font-size:11px;margin-top:25px;letter-spacing:.06em}
 .detailPage{background:var(--paper);padding:65px clamp(20px,6vw,95px) 110px}
 .back{font-size:11px;font-weight:900;border-bottom:2px solid var(--night);padding-bottom:8px}
 .detailHeading{padding:85px 0 45px}
-.detailHeading h1{font:900 clamp(55px,8vw,130px)/.93 Arial Black,Arial,sans-serif;letter-spacing:-.08em;max-width:15ch;margin:25px 0}
+.detailHeading h1{font:900 clamp(55px,8vw,130px)/.93 "Segoe UI","Segoe UI",Arial,sans-serif;letter-spacing:-.045em;max-width:15ch;margin:25px 0}
 .detailHeading p{font-size:20px;max-width:46ch}
 .detailImage{background:var(--signal)}
 .detailImage img{display:block;width:100%;max-height:760px;min-height:320px;object-fit:cover}
@@ -121,12 +121,12 @@
 .experienceChoices{display:flex;flex-direction:column;gap:0}
 .experienceChoices button{background:transparent;color:inherit;border:0;border-bottom:1px solid #5e5e57;padding:30px 0;text-align:left;display:grid;grid-template-columns:1fr 22px;align-items:center}
 .experienceChoices button small{grid-column:1/-1;font-size:10px;font-weight:900;letter-spacing:.05em}
-.experienceChoices button strong{font:900 clamp(31px,4vw,56px)/1 Arial Black,Arial,sans-serif;letter-spacing:-.06em;margin-top:12px}
+.experienceChoices button strong{font:900 clamp(31px,4vw,56px)/1 "Segoe UI","Segoe UI",Arial,sans-serif;letter-spacing:-.06em;margin-top:12px}
 .experienceChoices button[aria-pressed="true"]{color:var(--acid)}
 .experienceFrame{position:relative;min-height:550px;overflow:hidden;background:var(--signal)}
 .experienceFrame img{position:absolute;width:100%;height:100%;object-fit:cover}
 .experienceFrame>div{position:absolute;inset:auto 0 0;background:linear-gradient(transparent,#171717ee 26%,#171717);padding:120px 35px 35px}
-.experienceFrame h2{font:900 clamp(40px,5vw,70px)/.95 Arial Black,Arial,sans-serif;letter-spacing:-.055em;margin:12px 0}
+.experienceFrame h2{font:900 clamp(40px,5vw,70px)/.95 "Segoe UI","Segoe UI",Arial,sans-serif;letter-spacing:-.055em;margin:12px 0}
 .experienceFrame p{max-width:52ch;font-size:15px}
 .experienceFrame a{display:inline-flex;gap:25px;margin-top:20px;font-size:12px;font-weight:900;border-bottom:1px solid currentColor;padding-bottom:8px}
 .aboutPage{background:var(--paper);padding:85px clamp(20px,5vw,85px) 125px}
@@ -153,5 +153,14 @@
 .root [data-dna04-artifact]{transform:none;isolation:isolate}
 @media(max-width:1100px){.posterStage{grid-template-columns:1.1fr .9fr}.heroText h1{font-size:clamp(58px,8.2vw,100px)}.artCenter{font-size:20vw}.artTop,.artBottom{font-size:3.5vw}.chapterVisual{min-height:520px}.chapterVisual img{min-height:520px}}
 @media(max-width:850px){.header{height:72px}.desktopNav,.headerCta{display:none}.menuButton{display:flex;margin-left:auto}.mobileNav{inset:72px 0 0}.posterStage{grid-template-columns:1fr;grid-template-rows:auto auto auto auto;min-height:0}.heroText{padding:65px 5vw 55px}.heroText h1{font-size:clamp(66px,10vw,106px);margin:28px 0}.heroArt{min-height:370px;border-left:0;border-top:2px solid var(--night)}.artCenter{font-size:clamp(160px,31vw,300px)}.artTop,.artBottom{font-size:clamp(26px,5.4vw,45px)}.heroBottom{padding:17px 5vw}.manifesto{grid-template-columns:1fr;gap:22px;min-height:0}.manifestoGlyph{display:none}.chapterLayout{grid-template-columns:1fr}.chapterControls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.chapterButton{display:flex;flex-direction:column;border:1px solid #66665d!important;padding:17px;min-height:150px}.chapterButton>span{font-size:23px}.chapterButton>b{display:none}.chapterVisual{min-height:480px}.chapterVisual img{min-height:480px}.sectionHeading{align-items:start;flex-direction:column}.programGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.programCard:nth-child(2){padding-top:0}.programCard:last-child{grid-column:1/-1;max-width:60%}.experience{grid-template-columns:1fr}.experienceChoices{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.experienceChoices button{border:1px solid #555;min-width:0;padding:15px}.experienceChoices button strong{font-size:25px}.aboutSplit{grid-template-columns:1fr}.contactPage{grid-template-columns:1fr}.contactGraphic{display:none}}
-@media(max-width:560px){.heroTop{padding:15px 5vw;font-size:9px}.heroTop span:last-child{max-width:14ch;text-align:right}.heroText{padding:54px 5vw 50px}.heroText h1{font-size:clamp(53px,11.4vw,72px);letter-spacing:-.11em}.heroText>p{font-size:15px;max-width:33ch}.heroActions{gap:8px}.heroActions .primary{width:100%}.heroArt{min-height:300px}.artCenter{font-size:43vw}.artTop,.artBottom{font-size:25px}.artSeal{width:69px;height:69px;font-size:8px}.heroBottom{font-size:9px}.manifesto{padding:70px 5vw}.manifesto p{font-size:clamp(39px,11vw,59px)}.chapterSection{padding:75px 5vw 80px}.sectionHeading h2{font-size:61px}.sectionHeading p{font-size:14px}.chapterControls{grid-template-columns:1fr;gap:0}.chapterButton{display:grid;grid-template-columns:24px 1fr 20px;align-items:center;border:0!important;border-top:1px solid #6b6a62!important;padding:18px 3px;min-height:0}.chapterButton:last-child{border-bottom:1px solid #6b6a62!important}.chapterButton>span{font-size:25px}.chapterButton>b{display:block}.chapterVisual,.chapterVisual img{min-height:450px}.chapterVisual figcaption{padding:110px 18px 24px}.chapterVisual figcaption strong{font-size:42px}.runningLine div{font-size:16px;line-height:1.8}.runningLine span{margin:0 6px}.closingInvitation{padding:75px 5vw;min-height:530px}.closingInvitation h2{font-size:clamp(57px,12.5vw,78px)}.closingInvitation>div{align-items:start;flex-direction:column}.footer{padding:60px 5vw 25px}.footerUpper{flex-direction:column;gap:35px}.footerUpper nav{justify-content:flex-start}.footerMark{font-size:48vw;margin:60px 0 35px}.footerBottom{font-size:9px;flex-wrap:wrap}.pageHero{padding:75px 5vw 50px}.pageHero h1,.aboutPage h1,.contactPage h1{font-size:clamp(51px,12vw,75px)}.pageHero p{font-size:15px}.programGrid{display:grid;grid-template-columns:1fr;padding:50px 5vw 85px}.programCard:last-child{grid-column:auto;max-width:100%}.programPhoto{aspect-ratio:4/3}.detailPage{padding:55px 5vw 80px}.detailHeading{padding:65px 0 35px}.detailHeading h1{font-size:clamp(46px,11vw,67px)}.detailStory{grid-template-columns:1fr;gap:8px;margin:50px 0}.detailStory p{margin-bottom:20px}.experience{padding:45px 5vw 80px}.experienceChoices{grid-template-columns:1fr}.experienceChoices button{display:grid;grid-template-columns:1fr 25px}.experienceFrame{min-height:480px}.experienceFrame>div{padding:110px 22px 24px}.experienceFrame h2{font-size:43px}.aboutPage{padding:75px 5vw 90px}.aboutSplit{margin-top:50px}.aboutArt{min-height:350px}.aboutArt b{font-size:33vw}.aboutText h2{font-size:40px}.contactPage{padding:75px 5vw 100px}.contactIntro p{font-size:16px}.contactForm{padding:24px}}
+@media(max-width:560px){.heroTop{padding:15px 5vw;font-size:9px}.heroTop span:last-child{max-width:14ch;text-align:right}.heroText{padding:54px 5vw 50px}.heroText h1{font-size:clamp(53px,11.4vw,72px);letter-spacing:-.045em}.heroText>p{font-size:15px;max-width:33ch}.heroActions{gap:8px}.heroActions .primary{width:100%}.heroArt{min-height:300px}.artCenter{font-size:43vw}.artTop,.artBottom{font-size:25px}.artSeal{width:69px;height:69px;font-size:8px}.heroBottom{font-size:9px}.manifesto{padding:70px 5vw}.manifesto p{font-size:clamp(39px,11vw,59px)}.chapterSection{padding:75px 5vw 80px}.sectionHeading h2{font-size:61px}.sectionHeading p{font-size:14px}.chapterControls{grid-template-columns:1fr;gap:0}.chapterButton{display:grid;grid-template-columns:24px 1fr 20px;align-items:center;border:0!important;border-top:1px solid #6b6a62!important;padding:18px 3px;min-height:0}.chapterButton:last-child{border-bottom:1px solid #6b6a62!important}.chapterButton>span{font-size:25px}.chapterButton>b{display:block}.chapterVisual,.chapterVisual img{min-height:450px}.chapterVisual figcaption{padding:110px 18px 24px}.chapterVisual figcaption strong{font-size:42px}.runningLine div{font-size:16px;line-height:1.8}.runningLine span{margin:0 6px}.closingInvitation{padding:75px 5vw;min-height:530px}.closingInvitation h2{font-size:clamp(57px,12.5vw,78px)}.closingInvitation>div{align-items:start;flex-direction:column}.footer{padding:60px 5vw 25px}.footerUpper{flex-direction:column;gap:35px}.footerUpper nav{justify-content:flex-start}.footerMark{font-size:48vw;margin:60px 0 35px}.footerBottom{font-size:9px;flex-wrap:wrap}.pageHero{padding:75px 5vw 50px}.pageHero h1,.aboutPage h1,.contactPage h1{font-size:clamp(51px,12vw,75px)}.pageHero p{font-size:15px}.programGrid{display:grid;grid-template-columns:1fr;padding:50px 5vw 85px}.programCard:last-child{grid-column:auto;max-width:100%}.programPhoto{aspect-ratio:4/3}.detailPage{padding:55px 5vw 80px}.detailHeading{padding:65px 0 35px}.detailHeading h1{font-size:clamp(46px,11vw,67px)}.detailStory{grid-template-columns:1fr;gap:8px;margin:50px 0}.detailStory p{margin-bottom:20px}.experience{padding:45px 5vw 80px}.experienceChoices{grid-template-columns:1fr}.experienceChoices button{display:grid;grid-template-columns:1fr 25px}.experienceFrame{min-height:480px}.experienceFrame>div{padding:110px 22px 24px}.experienceFrame h2{font-size:43px}.aboutPage{padding:75px 5vw 90px}.aboutSplit{margin-top:50px}.aboutArt{min-height:350px}.aboutArt b{font-size:33vw}.aboutText h2{font-size:40px}.contactPage{padding:75px 5vw 100px}.contactIntro p{font-size:16px}.contactForm{padding:24px}}
 @media(prefers-reduced-motion:reduce){.root *, .root *::before,.root *::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* Vietnamese typography: avoid clipped tone marks in tight display text. */
+.root{font-family:"Segoe UI",Arial,sans-serif; font-synthesis:none}
+.root :where(h1,h2,h3,h4){line-height:max(1.12,1em);overflow-wrap:break-word}
+.root :where(input,textarea,select,button){font-family:inherit}
+/* Scroll-driven reveals enhance navigation without obscuring content without JS. */
+.root [data-scroll-reveal="true"]:not([data-scroll-visible="true"]){opacity:0;transform:translate3d(0,28px,0)}
+.root [data-scroll-reveal="true"][data-scroll-visible="true"]{opacity:1;transform:translate3d(0,0,0);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
+@media(prefers-reduced-motion:reduce){.root [data-scroll-reveal]{opacity:1!important;transform:none!important;transition:none!important}}
