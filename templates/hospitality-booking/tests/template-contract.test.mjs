@@ -12,3 +12,11 @@ test("template has standalone metadata, routes and local images",()=>{
  assert.ok(existsSync(join(root,"src/app/page.tsx")));
  assert.ok(existsSync(join(root,"src/app/[section]/page.tsx")));
 });
+
+test("booking page is independent and non-transactional",()=>{
+ assert.ok(existsSync(join(root,"src/app/booking/page.tsx")));
+ const source=readFileSync(join(root,"src/components/Site.tsx"),"utf8");
+ assert.match(source,/section==="booking"/);
+ assert.match(source,/Chưa gửi yêu cầu hoặc giữ bàn/);
+ assert.ok(!source.includes("hello@example.com?subject="),"Do not prefill a fictitious recipient");
+});

@@ -15,7 +15,7 @@ export function TemplateExperienceInfo({slug}:{slug:string}){
  const site=findSovereignSite(slug);
  const id=useId();
  const [eligible,setEligible]=useState(false);
- const compactByDefault=["auto-showroom","campaign-landing","saas-product"].includes(slug);
+ const compactByDefault=["auto-showroom","campaign-landing","saas-product","hospitality-booking"].includes(slug);
  const [expanded,setExpanded]=useState(!compactByDefault);
  const key="athena-demo-info:"+slug;
  useEffect(()=>{
