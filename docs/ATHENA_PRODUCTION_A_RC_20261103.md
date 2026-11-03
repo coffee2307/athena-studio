@@ -41,3 +41,11 @@ Release source: `release/athena-production-a-rc-20261103`, branched from `6242fe
 ## Release process after acceptance
 
 Freeze SHA → GitHub CI + reproducible Linux build → reviewed immutable container image → deploy isolated staging noindex → external HTTPS/contact/mobile/performance/accessibility/security checks → owner publication decision → production image-by-digest → monitor real traffic → rollback by previous digest on failure.
+
+## 2026-11-03 — Further release hardening
+
+- The approved simplified NORTH layout no longer contains the old decorative impact rail. Its CI browser QA now verifies the actual three decision controls, live outcomes, keyboard focus order, working detail links, four-step process and mobile menu, without bypassing functionality. Local Chrome results: diagnostic routes 36/36 PASS; layout/keyboard checks 15/15 PASS.
+- Refined four-template QA 20/20 PASS; SORA page-picker QA 30/30 PASS; Fashion Archive 3D QA 6/6 PASS; responsive Sovereign QA 90/90 PASS.
+- Black Velocity/Auto Showroom's expanded floating Athena information card previously blocked the desktop hero CTA and mobile angle controls. It now defaults to an accessible zoom-in handle **only on this immersive showroom**, retaining intentional open/close interaction. Other templates continue to open the information panel by default. Real Chrome canonical McLaren 3D/camera tests on 390px and 1440px: 3/3 PASS including CTA hit testing and mobile control exposure.
+- Current local root checks: 224 passed, 0 failed, 1 skipped; lint 0 errors and 12 warnings; TypeScript PASS. Previous optimized Next.js build completed with 179 routes. Only GitHub Actions on the final head SHA may confirm release CI.
+- Production remains NO_GO pending owner and external acceptance. No main merge, DNS, public tunnel, indexing, paid service, customer data collection or production deployment has been authorized.

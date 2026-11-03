@@ -20,6 +20,13 @@ test("floating demo information excludes embedded previews and handles subpages"
  assert.match(widget,/Escape/);
  assert.match(widget,/template\.estimatedPrice/);
 });
+test("immersive showroom defaults to zoom-in info to keep car CTA and camera controls accessible",()=>{
+ const widget=read("components/templates/TemplateExperienceInfo.tsx");
+ assert.match(widget,/useState\(slug!=="auto-showroom"\)/);
+ assert.match(widget,/if\(slug==="auto-showroom"\)\{setExpanded\(false\);return;\}/);
+ assert.match(widget,/athena-demo-float-handle/);
+});
+
 test("desktop modal controls and sidebar remain unchanged",()=>{
  const modal=read("components/templates/TemplateDemoModal.tsx");
  assert.match(modal,/dialogRef\.current/);

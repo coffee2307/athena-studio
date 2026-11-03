@@ -15,13 +15,15 @@ export function TemplateExperienceInfo({slug}:{slug:string}){
  const site=findSovereignSite(slug);
  const id=useId();
  const [eligible,setEligible]=useState(false);
- const [expanded,setExpanded]=useState(true);
+ const [expanded,setExpanded]=useState(slug!=="auto-showroom");
  const key="athena-demo-info:"+slug;
  useEffect(()=>{
   setEligible(window.self===window.top&&new URLSearchParams(window.location.search).get("embed")!=="1");
+  // Immersive showroom controls must be available on first entry at every viewport.
+  if(slug==="auto-showroom"){setExpanded(false);return;}
   try{setExpanded(window.sessionStorage.getItem(key)!=="collapsed");}
   catch{setExpanded(true);}
- },[key]);
+ },[key,slug]);
  const toggle=useCallback((next:boolean)=>{
   setExpanded(next);
   try{window.sessionStorage.setItem(key,next?"expanded":"collapsed");}catch{}

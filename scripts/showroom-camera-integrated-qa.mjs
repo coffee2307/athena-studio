@@ -28,6 +28,19 @@ for(const [width,height] of sizes.filter(([w])=>!process.env.SHOWROOM_QA_WIDTHS|
  try{
   const response=await page.goto(root,{waitUntil:"load",timeout:45000});assert(response?.status()===200,"HTTP "+response?.status());
   await ready(page);
+  const floatingInfo=page.locator('[data-athena-demo-info="auto-showroom"]');
+  const floatingHandle=floatingInfo.locator(".athena-demo-float-handle");
+  await floatingHandle.waitFor({state:"visible",timeout:12000});
+  assert((await floatingInfo.getAttribute("class"))?.includes("is-collapsed"),"Immersive info must start collapsed");
+  // The five camera controls are never covered by a non-dismissed info panel.
+  if(width<=760){
+   const sceneButtons=page.locator('button[aria-label^="Đến cảnh "]');
+   assert(await sceneButtons.count()===5,"Five mobile chapter buttons absent");
+   for(let i=0;i<5;i++){
+    const exposed=await sceneButtons.nth(i).evaluate(el=>{const r=el.getBoundingClientRect();const target=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);return target===el||el.contains(target)});
+    assert(exposed,"Floating information obscures mobile scene "+(i+1));
+   }
+  }
   const start=await camera(page);assert(start.renderer==="ready","model never ready");
   assert(near(start.display,start.base*start.factor,.025),"initial zoom invariant");
   const body=await page.locator("#world-main").innerText();
@@ -82,7 +95,13 @@ for(const [width,height] of sizes.filter(([w])=>!process.env.SHOWROOM_QA_WIDTHS|
   }
   await page.evaluate(()=>window.scrollTo({top:0,behavior:"instant"}));
   await page.waitForFunction(()=>document.getElementById("bv-cinematic-track")?.dataset.chapter==="0",null,{timeout:12000});const cta=page.locator("button.ix-hero-primary");await cta.waitFor({state:"visible",timeout:12000});assert(await cta.count()===1,"CTA missing");
+  const ctaExposed=await cta.evaluate(el=>{const r=el.getBoundingClientRect();const target=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);return target===el||el.contains(target)});
+  assert(ctaExposed,"Floating information obscures primary CTA");
   await cta.click();await page.waitForTimeout(1000);
+  await floatingHandle.click();
+  await floatingInfo.locator(".athena-demo-float-panel").waitFor({state:"visible",timeout:8000});
+  await floatingInfo.locator(".athena-demo-float-toggle").click();
+  await floatingHandle.waitFor({state:"visible",timeout:8000});
   const afterCTA=await camera(page);assert(afterCTA.progress>.10,"CTA does not advance "+afterCTA.progress);
   assert(errors.length===0,"runtime errors "+errors.join(" | "));
   entry.interactions.push({label:"CTA",progress:afterCTA.progress});
