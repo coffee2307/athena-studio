@@ -462,3 +462,11 @@
  .root .bookingForm,.root .bookingAside{min-width:0;width:100%;grid-column:1}
  .root .bookingAside{position:relative;top:auto}
 }
+
+/* Booking date and party-size controls share one precise baseline and height. */
+.root .dateGuests{align-items:start}
+.root .dateGuests>label{min-width:0}
+.root .dateGuests>label input[type="date"]{height:53px;min-height:53px;box-sizing:border-box}
+.root .guestCounter legend{margin:0 0 11px;line-height:17px}
+.root .guestCounter>div{height:53px;min-height:53px;box-sizing:border-box}
+.root .guestCounter>div button{height:51px;min-height:51px;line-height:1}
