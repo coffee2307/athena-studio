@@ -289,6 +289,7 @@
 .dna-service-web-development .dna-browser-preview img{object-fit:contain!important;object-position:center!important}
 @media(max-width:760px){
  /* Match the other two service cards: preview on the left, content on the right. */
+ .dna-services-grid{grid-auto-rows:1fr}
  .dna-service-web-development{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);min-height:220px}
  .dna-service-web-development .dna-service-scene{height:100%;min-width:0;aspect-ratio:auto;overflow:hidden}
  .dna-service-web-development .dna-scene-web{height:100%;min-height:0;padding:clamp(8px,2vw,12px);justify-content:center}
