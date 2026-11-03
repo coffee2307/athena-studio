@@ -1,0 +1,23 @@
+/* Athena-owned floating demo information; never changes individual templates. */
+.athena-demo-float{position:fixed;z-index:80;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:16px;color:#1d211f;font-family:"Be Vietnam Pro",Arial,sans-serif;font-size:12px;line-height:1.55;pointer-events:none}
+.athena-demo-float *{box-sizing:border-box}
+.athena-demo-float-panel{pointer-events:auto;width:min(296px,calc(100vw - 32px));max-height:min(72dvh,450px);overflow-y:auto;overscroll-behavior:contain;border:1px solid #cfd3ce;border-radius:15px;background:#fcfcf9;box-shadow:0 14px 52px #0002;padding:13px 15px 11px}
+.athena-demo-float-header{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:28px}
+.athena-demo-float-header>span{font-size:9px;letter-spacing:.11em;font-weight:800;color:#59655e}
+.athena-demo-float-toggle,.athena-demo-float-handle{font:800 19px/1 Arial,sans-serif;cursor:pointer;border:1px solid #d4d9d1;color:#202a24;background:#f3f5f0;display:grid;place-items:center}
+.athena-demo-float-toggle{width:44px;height:44px;min-width:44px;border-radius:10px}
+.athena-demo-float-handle{width:48px;height:48px;pointer-events:auto;border-radius:15px;background:#fcfcf9;box-shadow:0 8px 30px #0003;letter-spacing:2px}
+.athena-demo-float-brand{margin:3px 0 1px!important;color:#748078!important;letter-spacing:.13em;font-size:9px!important;font-weight:800}
+.athena-demo-float h2{font:750 17px/1.25 "Be Vietnam Pro",sans-serif!important;letter-spacing:-.045em!important;color:#1d211f!important;margin:2px 0 5px!important}
+.athena-demo-float-category{font-size:10px!important;line-height:1.5!important;color:#535d56!important;margin:0 0 11px!important}
+.athena-demo-float-price{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 10px;border-top:1px solid #e1e4dd;padding:10px 0}
+.athena-demo-float-price span{font-size:10px;color:#5b635e}
+.athena-demo-float-price strong{font-size:11px;font-weight:800;color:#1e2621}
+.athena-demo-float-links{display:grid;grid-template-columns:1fr auto;gap:9px;align-items:center}
+.athena-demo-float-links a{min-height:44px;display:flex;align-items:center;justify-content:center;gap:8px;border-radius:9px;font-weight:700;font-size:10px;text-decoration:none!important}
+.athena-demo-float-links a:first-child{color:#fff!important;background:#202922;padding:9px 11px}
+.athena-demo-float-links a:last-child{color:#25352b!important;border:1px solid #d5ddd4;background:#f2f5ef;padding:9px 10px}
+.athena-demo-float-note{font-size:9px!important;line-height:1.45!important;color:#66726a!important;margin:9px 0 0!important}
+.athena-demo-float :is(button,a):focus-visible{outline:3px solid #416ecb!important;outline-offset:3px}
+@media(max-width:760px){.athena-demo-float{left:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px))}.athena-demo-float-panel{width:min(288px,calc(100vw - 24px));padding:11px 13px}.athena-demo-float h2{font-size:16px!important}}
+@media(prefers-reduced-motion:reduce){.athena-demo-float *{scroll-behavior:auto!important}}

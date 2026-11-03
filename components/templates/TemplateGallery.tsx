@@ -21,6 +21,14 @@ export function TemplateGallery({templates,industries,styles}:{templates:Templat
   );
   return sort==="name"?[...filtered].sort((a,b)=>a.title.localeCompare(b.title,"vi")):filtered;
  },[templates,query,industry,style,sort]);
+ const openExperience=(item:Template)=>{
+  if(window.matchMedia("(max-width: 760px)").matches){
+   const path=item.slug==="digital-creators"?"/immersive/digital-creators/index.html":item.demoPath;
+   window.location.assign(path);
+   return;
+  }
+  setSelected(item);
+ };
  const clear=()=>{setQuery("");setIndustry("Tất cả ngành");setStyle("Tất cả phong cách");setSort("recommended");};
  return <section id="template-collection" className="templates-catalog" aria-label="Danh sách các mẫu website">
   <div className="templates-catalog-heading"><div><span>01 — THƯ VIỆN WEBSITE</span><h2>Tìm mẫu phù hợp<span>.</span></h2></div><p>Nhấn vào bản xem trước để trải nghiệm website thực tế ngay trong Athena.</p></div>
@@ -32,8 +40,8 @@ export function TemplateGallery({templates,industries,styles}:{templates:Templat
   </div>
   <div className="templates-results"><p aria-live="polite"><strong>{String(visible.length).padStart(2,"0")}</strong> / {String(templates.length).padStart(2,"0")} MẪU PHÙ HỢP</p>{(query||industry!=="Tất cả ngành"||style!=="Tất cả phong cách")&&<button type="button" onClick={clear}>Xóa bộ lọc ×</button>}</div>
   {visible.length?<div className="template-grid">{visible.map((item,index)=><article className="template-card" key={item.slug}>
-   <button type="button" className="template-card-preview" aria-haspopup="dialog" aria-label={"Trải nghiệm website "+item.title} onClick={()=>setSelected(item)}><TemplatePreview template={item}/><span className="template-preview-badge">XEM WEBSITE</span></button>
-   <div className="template-card-content"><div className="template-card-meta"><span>{String(index+1).padStart(2,"0")} / {item.industry}</span><span>{item.style}</span></div><h3>{item.title}</h3><p>{item.description}</p><div className="template-card-footer"><span>{item.qualityTier}</span><button type="button" onClick={()=>setSelected(item)}>Trải nghiệm mẫu</button></div></div>
+   <button type="button" className="template-card-preview" aria-label={"Trải nghiệm website "+item.title} onClick={()=>openExperience(item)}><TemplatePreview template={item}/><span className="template-preview-badge">XEM WEBSITE</span></button>
+   <div className="template-card-content"><div className="template-card-meta"><span>{String(index+1).padStart(2,"0")} / {item.industry}</span><span>{item.style}</span></div><h3>{item.title}</h3><p>{item.description}</p><div className="template-card-footer"><span>{item.qualityTier}</span><button type="button" onClick={()=>openExperience(item)}>Trải nghiệm mẫu</button></div></div>
   </article>)}</div>:<div className="template-empty"><h2>Không tìm thấy mẫu phù hợp.</h2><p>Thử một ngành khác hoặc xóa bộ lọc để xem toàn bộ thư viện.</p><button type="button" onClick={clear}>Hiển thị tất cả</button></div>}
   <div className="template-personalize-note"><div><small>02 — TỪ MẪU ĐẾN THƯƠNG HIỆU</small><strong>Điểm khởi đầu cho một website riêng.</strong><span>Athena điều chỉnh bố cục, nhận diện, nội dung và tính năng theo mục tiêu thực tế — không giao sản phẩm sao chép máy móc từ bản demo.</span></div><Link href="/contact?service=web-development">Trao đổi ý tưởng</Link></div>
   <TemplateDemoModal template={selected} onClose={closeDemo}/>
