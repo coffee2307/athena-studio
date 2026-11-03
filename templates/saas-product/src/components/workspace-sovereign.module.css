@@ -1,5 +1,5 @@
 /* LUMA Workspace — self-contained product-led SaaS website. */
-.root{--navy:#142536;--ink:#25364a;--soft:#f5f7fa;--white:#fff;--blue:#4f72e9;--blueInk:#3755b4;--mint:#a2dac7;--line:#e0e6ef;--muted:#68798d;--shadow:0 28px 70px #14253619;min-height:100vh;background:var(--soft);color:var(--ink);font:400 15px/1.55 Arial,"Helvetica Neue",sans-serif;overflow-x:clip}
+.root{--navy:#142536;--ink:#25364a;--soft:#f5f7fa;--white:#fff;--blue:#4f72e9;--blueInk:#3755b4;--mint:#a2dac7;--line:#e0e6ef;--muted:#68798d;--shadow:0 28px 70px #14253619;min-height:100vh;background:var(--soft);color:var(--ink);font:400 15px/1.55 "Segoe UI","Segoe UI",Arial,sans-serif;overflow-x:clip}
 .root *{box-sizing:border-box}
 .root :where(h1,h2,h3,h4,p,figure){margin:0}
 .root a{color:inherit;text-decoration:none}
@@ -8,10 +8,10 @@
 .root :where(button,a,input,textarea,select):focus-visible{outline:3px solid var(--blue);outline-offset:3px}
 .root ::selection{background:#bacbff;color:var(--navy)}
 .header{height:82px;background:var(--white);position:sticky;top:0;z-index:45;border-bottom:1px solid var(--line);padding:0 clamp(20px,4vw,78px);display:flex;align-items:center;gap:35px}
-.brand{display:inline-flex;align-items:center;gap:11px;font:900 27px/.9 Arial,sans-serif;letter-spacing:-.07em;white-space:nowrap}
+.brand{display:inline-flex;align-items:center;gap:11px;font:900 27px/.9 "Segoe UI",Arial,sans-serif;letter-spacing:-.045em;white-space:nowrap}
 .brand>span:last-child{display:flex;flex-direction:column}
-.brand small{letter-spacing:.16em;font:800 8px/1.6 Arial;margin-top:5px;color:var(--muted)}
-.brandGlyph{width:38px;height:38px;display:grid;place-items:center;background:var(--blue);border-radius:12px 12px 12px 4px;color:white;font:900 27px/.9 Arial,sans-serif;letter-spacing:-.08em;position:relative;overflow:hidden}
+.brand small{letter-spacing:.16em;font:800 8px/1.6 "Segoe UI",Arial;margin-top:5px;color:var(--muted)}
+.brandGlyph{width:38px;height:38px;display:grid;place-items:center;background:var(--blue);border-radius:12px 12px 12px 4px;color:white;font:900 27px/.9 "Segoe UI",Arial,sans-serif;letter-spacing:-.045em;position:relative;overflow:hidden}
 .brandGlyph span{position:absolute;right:4px;bottom:3px;width:11px;height:11px;border-radius:50%;background:var(--mint)}
 .desktopNav{display:flex;align-items:center;gap:clamp(17px,3vw,45px);margin-left:auto;font-size:13px;font-weight:700}
 .desktopNav a{padding:16px 0}.desktopNav a:hover{color:var(--blue)}
@@ -23,13 +23,13 @@
 .mobileMenu[data-open="true"]{visibility:visible;opacity:1;pointer-events:auto;transform:none}
 .mobileMenu a{border-bottom:1px solid var(--line);font-size:clamp(23px,7vw,38px);font-weight:800;letter-spacing:-.06em;padding:20px 0;display:flex;justify-content:space-between}
 .mobileMenu p{margin-top:28px;font-size:13px;color:var(--muted);max-width:37ch}
-.primary{display:inline-flex;align-items:center;justify-content:space-between;gap:25px;background:#3657c4;color:white!important;border:0;border-radius:12px;padding:16px 22px;min-height:52px;min-width:190px;font:800 11px/1.3 Arial,sans-serif;letter-spacing:.045em;transition:transform .2s ease,background .2s ease}
+.primary{display:inline-flex;align-items:center;justify-content:space-between;gap:25px;background:#3657c4;color:white!important;border:0;border-radius:12px;padding:16px 22px;min-height:52px;min-width:190px;font:800 11px/1.3 "Segoe UI",Arial,sans-serif;letter-spacing:.045em;transition:transform .2s ease,background .2s ease}
 .primary:hover{transform:translateY(-2px)}
 .hero{min-height:790px;display:grid;grid-template-columns:minmax(0,.87fr) minmax(0,1.13fr);background:var(--soft);position:relative;isolation:isolate}
 .heroCopy{padding:clamp(65px,9vw,155px) 3vw 80px clamp(20px,5vw,95px);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;position:relative;z-index:3}
-.heroEyebrow,.sectionLabel,.workEyebrow{display:inline-flex;gap:9px;align-items:center;font:800 10px/1.3 Arial;letter-spacing:.115em;color:var(--blueInk)}
+.heroEyebrow,.sectionLabel,.workEyebrow{display:inline-flex;gap:9px;align-items:center;font:800 10px/1.3 "Segoe UI",Arial;letter-spacing:.115em;color:var(--blueInk)}
 .heroEyebrow i,.livePill i{display:block;width:8px;height:8px;background:#30bb8f;border-radius:50%}
-.heroCopy h1{font:900 clamp(65px,6.8vw,122px)/.98 Arial,sans-serif;letter-spacing:-.085em;margin:24px 0 29px;max-width:8.5ch}
+.heroCopy h1{font:900 clamp(65px,6.8vw,122px)/.98 "Segoe UI",Arial,sans-serif;letter-spacing:-.045em;margin:24px 0 29px;max-width:8.5ch}
 .heroCopy h1 em,.statement h2 em,.featureHead h2 em,.bottomPitch h2 em,.pageHeading h1 em,.aboutHero h1 em,.contactCopy h1 em{font-style:normal;color:var(--blue)}
 .heroCopy>p{font-size:clamp(16px,1.5vw,20px);line-height:1.65;color:#546378;max-width:39ch}
 .heroActions{display:flex;align-items:center;gap:25px;flex-wrap:wrap;margin-top:34px}
@@ -43,7 +43,7 @@
 .workSidebar{background:#192b44;color:#edf2ff;display:flex;flex-direction:column;padding:18px 12px 15px;gap:25px;min-width:0}
 .workMark{display:flex;align-items:center;gap:7px;margin:5px 0 12px 4px}
 .workMark>span{width:28px;height:28px;border-radius:8px 8px 8px 3px;display:grid;place-items:center;background:var(--blue);color:white;font-weight:900;font-size:20px}
-.workMark strong{font-size:19px;letter-spacing:-.08em;line-height:.9}.workMark strong small{display:block;color:#93a6c1;font-size:6px;font-weight:700;letter-spacing:.16em;margin-top:5px}
+.workMark strong{font-size:19px;letter-spacing:-.045em;line-height:.9}.workMark strong small{display:block;color:#93a6c1;font-size:6px;font-weight:700;letter-spacing:.16em;margin-top:5px}
 .sidebarLabel{font-size:9px;color:#8093b0;letter-spacing:.13em;font-weight:800;padding:0 8px}
 .workNav{display:flex;flex-direction:column;gap:7px}
 .workNav button{border:0;background:transparent;color:#c4cfe0;text-align:left;border-radius:9px;padding:10px 11px;font-size:11px;font-weight:700;display:flex;align-items:center;gap:8px;min-height:37px;white-space:nowrap}
@@ -59,7 +59,7 @@
 .workTopbar b{color:#c0c6d2}.breadcrumbCircle{width:9px;height:9px;background:var(--blue);border-radius:3px;display:inline-block}
 .resetButton{border:0;background:none;color:var(--blueInk);font-weight:800;font-size:10px;white-space:nowrap;min-height:37px}
 .workTitle{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:23px 20px 17px}
-.workTitle h3{font:800 clamp(18px,1.55vw,25px)/1.14 Arial;letter-spacing:-.05em;margin:8px 0}
+.workTitle h3{font:800 clamp(18px,1.55vw,25px)/1.14 "Segoe UI",Arial;letter-spacing:-.05em;margin:8px 0}
 .workTitle p{color:#78859a;font-size:10px}
 .workEyebrow{font-size:9px}.workspaceAvatar{display:grid;place-items:center;background:#d7e3ff;color:#3f59ae;border-radius:12px;width:39px;height:39px;flex:none;font-size:12px;font-weight:900}
 .workContent{padding:0 20px 20px;min-width:0;flex:1}
@@ -95,7 +95,7 @@
 .progressPanel{padding:0 20px 25px;flex:1;display:flex;flex-direction:column;gap:22px}
 .progressHero{background:#edf2ff;border-radius:14px;padding:27px;max-width:100%}
 .progressHero>span{color:#4c67ac;font-size:9px;font-weight:900;letter-spacing:.1em}
-.progressHero strong{display:block;font:800 clamp(50px,7vw,100px)/1 Arial;letter-spacing:-.07em;color:var(--navy);margin:10px 0 20px}
+.progressHero strong{display:block;font:800 clamp(50px,7vw,100px)/1 "Segoe UI",Arial;letter-spacing:-.045em;color:var(--navy);margin:10px 0 20px}
 .progressHero strong small{font-size:.4em}
 .progressTrack{height:12px;border-radius:20px;background:#c8d5f4;overflow:hidden}
 .progressTrack i{display:block;height:100%;background:var(--blue);border-radius:20px;transition:width .24s ease}
@@ -114,22 +114,22 @@
 .statement{padding:120px clamp(20px,6vw,110px);display:grid;grid-template-columns:1fr 3fr;gap:40px;align-items:start;background:var(--navy);color:white}
 .statement>span{font-weight:800;font-size:11px;letter-spacing:.12em;color:#9aadd0}
 .statement>div{display:grid;grid-template-columns:1.4fr .6fr;gap:40px;align-items:end}
-.statement h2{font:850 clamp(45px,6vw,105px)/1.01 Arial;letter-spacing:-.08em}
+.statement h2{font:850 clamp(45px,6vw,105px)/1.01 "Segoe UI",Arial;letter-spacing:-.045em}
 .statement h2 em{color:var(--mint)}
 .statement p{font-size:16px;line-height:1.7;color:#b6c5d8;max-width:30ch}
 .featureEditorial{padding:110px clamp(20px,6vw,110px);background:var(--white)}
-.featureHead{margin-bottom:55px}.featureHead h2{font:850 clamp(39px,5.4vw,88px)/1.03 Arial;letter-spacing:-.075em;margin-top:22px}
+.featureHead{margin-bottom:55px}.featureHead h2{font:850 clamp(39px,5.4vw,88px)/1.03 "Segoe UI",Arial;letter-spacing:-.075em;margin-top:22px}
 .featureGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
 .featureTile{border:1px solid var(--line);border-radius:16px;min-height:400px;padding:30px;display:flex;align-items:flex-start;flex-direction:column;transition:transform .24s ease,box-shadow .24s ease}
 .featureTile:hover{transform:translateY(-5px);box-shadow:0 20px 45px #14253613}
 .featureTile:nth-child(2){background:#eaf0ff}.featureTile:nth-child(3){background:#e8f5ef}
 .featureNumber{font-size:10px;font-weight:800;color:#64768e;letter-spacing:.06em}
 .featureIcon{font-size:72px;line-height:1;color:var(--blue);margin:30px 0}
-.featureTile h3{font-size:clamp(25px,2.5vw,39px);letter-spacing:-.07em;line-height:1.1;max-width:14ch}
+.featureTile h3{font-size:clamp(25px,2.5vw,39px);letter-spacing:-.045em;line-height:1.1;max-width:14ch}
 .featureTile p{font-size:14px;color:#5f6e81;line-height:1.7;margin:19px 0 24px;max-width:38ch}
 .featureMore{font-size:10px;font-weight:800;letter-spacing:.055em;margin-top:auto;width:100%;border-top:1px solid #cbd2df;padding-top:20px;display:flex;justify-content:space-between}
 .bottomPitch{padding:110px clamp(20px,6vw,110px) 125px;background:#dfe9ff}
-.bottomPitch h2{font:850 clamp(45px,6vw,105px)/1 Arial;letter-spacing:-.08em;max-width:17ch;margin:25px 0}
+.bottomPitch h2{font:850 clamp(45px,6vw,105px)/1 "Segoe UI",Arial;letter-spacing:-.045em;max-width:17ch;margin:25px 0}
 .bottomPitch p{max-width:53ch;color:#506581;font-size:17px;line-height:1.7;margin-bottom:30px}
 .footer{background:var(--navy);color:white;padding:65px clamp(20px,5vw,95px) 24px}
 .footerTop{display:grid;grid-template-columns:1fr 1fr 1fr;gap:35px;align-items:start}
@@ -139,7 +139,7 @@
 .footerBottom{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-top:1px solid #ffffff33;margin-top:90px;padding-top:25px;font-size:10px;color:#a8b6ca;font-weight:800;letter-spacing:.04em}
 .workPage,.tourPage,.aboutPage,.contactPage,.detailPage{min-height:70vh}
 .pageHeading{padding:95px clamp(20px,6vw,105px) 70px}
-.pageHeading h1,.aboutHero h1,.contactCopy h1{font:850 clamp(58px,7vw,120px)/1 Arial;letter-spacing:-.085em;margin:25px 0}
+.pageHeading h1,.aboutHero h1,.contactCopy h1{font:850 clamp(58px,7vw,120px)/1 "Segoe UI",Arial;letter-spacing:-.045em;margin:25px 0}
 .pageHeading p{font-size:18px;color:#5f7188;max-width:52ch;line-height:1.7}
 .fullWorkspace{padding:0 clamp(20px,5vw,95px) 80px}
 .fullWorkspace .workspace{max-width:1250px;margin:0 auto;min-height:650px;grid-template-columns:215px minmax(0,1fr)}
@@ -157,7 +157,7 @@
 .workflowRow:hover{background:#e8eeff}
 .workflowIndex{font-weight:800;font-size:13px;color:var(--blue)}
 .workflowRow small{font-size:10px;letter-spacing:.08em;font-weight:800;color:#6f8095}
-.workflowRow h2{font:850 clamp(30px,3.7vw,55px)/1.1 Arial;letter-spacing:-.07em;margin:10px 0}
+.workflowRow h2{font:850 clamp(30px,3.7vw,55px)/1.1 "Segoe UI",Arial;letter-spacing:-.045em;margin:10px 0}
 .workflowRow p{max-width:64ch;color:#65758a;font-size:15px;line-height:1.65}
 .workflowArrow{font-size:65px;font-weight:300;justify-self:end;color:var(--blue)}
 .workPageCta{background:#e2eaff;padding:65px clamp(20px,6vw,105px);display:flex;align-items:center;justify-content:space-between;gap:40px}
@@ -178,10 +178,10 @@
 .aboutHero{display:grid;grid-template-columns:1.4fr .6fr;gap:30px;align-items:center}
 .aboutHero h1{font-size:clamp(57px,7.8vw,135px)}
 .aboutSquare{aspect-ratio:1;max-width:400px;background:var(--blue);border-radius:55px;display:grid;place-items:center;color:white;transform:rotate(-6deg);position:relative}
-.aboutSquare span{font:900 clamp(160px,22vw,350px)/1 Arial;letter-spacing:-.15em;margin-right:.16em}
+.aboutSquare span{font:900 clamp(160px,22vw,350px)/1 "Segoe UI",Arial;letter-spacing:-.15em;margin-right:.16em}
 .aboutColumns{border-top:1px solid #bfcbd9;display:grid;grid-template-columns:1fr 1fr;gap:6vw;padding-top:45px;margin-top:90px}
 .aboutColumns>div:first-child span{font-size:11px;font-weight:800;color:var(--blue)}
-.aboutColumns h2{font-size:clamp(40px,5vw,80px);line-height:1.08;letter-spacing:-.08em;max-width:11ch;margin-top:20px}
+.aboutColumns h2{font-size:clamp(40px,5vw,80px);line-height:1.08;letter-spacing:-.045em;max-width:11ch;margin-top:20px}
 .aboutColumns>div:last-child{display:flex;flex-direction:column;align-items:flex-start;gap:25px}
 .aboutColumns p{font-size:18px;color:#576b80;line-height:1.75}
 .contactPage{display:grid;grid-template-columns:1fr 1fr;gap:6vw;padding:110px clamp(20px,6vw,105px) 130px}
@@ -201,3 +201,12 @@
 @media(max-width:1020px){.header{height:72px}.desktopNav,.headerAction{display:none}.menuButton{display:flex}.mobileMenu{inset:72px 0 0}.hero{grid-template-columns:1fr;min-height:0}.heroCopy{padding:95px 6vw 50px}.heroCopy h1{font-size:clamp(62px,9vw,110px)}.heroProof{margin-top:35px}.heroWorkspace{padding:60px 6vw 90px}.heroWorkspace::before{inset:0 0 0 12%}.workspace{max-width:850px;margin:0 auto;grid-template-columns:175px minmax(0,1fr)}.workTitle{padding:20px}.workContent{padding:0 20px 20px}.boardColumn{padding:10px}.taskCard{padding:10px}.statement{grid-template-columns:1fr}.statement>div{grid-template-columns:1fr 1fr}.featureGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.featureTile:last-child{grid-column:1/-1;min-height:300px}.footerTop{grid-template-columns:1fr 1fr}.footerTop nav{grid-column:1/-1;flex-direction:row;gap:20px}.fullWorkspace .workspace{grid-template-columns:175px minmax(0,1fr)}.aboutHero{grid-template-columns:1fr .5fr}}
 @media(max-width:650px){.header{height:68px;padding:0 5vw}.mobileMenu{inset:68px 0 0}.heroCopy{padding:73px 5vw 38px}.heroCopy h1{font-size:clamp(55px,12.5vw,82px);margin:20px 0}.heroCopy>p{font-size:16px}.heroActions{align-items:stretch;gap:17px;flex-direction:column;width:100%}.heroActions .primary{justify-content:space-between}.heroActions .textLink{align-self:flex-start}.heroProof{margin-top:30px;gap:10px}.heroProof span{font-size:9px}.heroWorkspace{padding:36px 4vw 70px}.heroWorkspace::before{inset:0 0 9% 7%}.workspace{display:flex;flex-direction:column;min-height:520px;border-radius:15px}.workSidebar{padding:11px 13px;gap:6px}.workMark{margin:2px 0 6px}.workMark strong{font-size:18px}.sidebarLabel,.workSidebarBottom{display:none}.workNav{flex-direction:row;gap:4px}.workNav button{padding:9px 11px;flex:1;min-height:44px;justify-content:center;font-size:10px}.workNav button span{font-size:14px}.workTopbar{height:45px;min-height:45px;padding:0 12px}.workTitle{padding:19px 13px 15px}.workTitle h3{font-size:21px}.workTitle p{font-size:10px}.workContent{padding:0 12px 16px}.boardToolbar{align-items:flex-start;flex-direction:column;gap:9px}.filterRow{width:100%}.filterRow button{flex:1;min-height:39px;font-size:10px;padding:7px 5px}.teamFilter{width:100%;justify-content:space-between}.teamFilter select{max-width:75%;min-height:40px}.addButton{width:100%;min-height:43px}.boardColumns{grid-template-columns:1fr;gap:9px}.boardColumn{padding:11px;min-width:0}.taskList{display:grid;grid-template-columns:1fr;gap:8px}.taskCard{padding:13px}.taskCard h4{font-size:13px;margin:6px 0}.taskCard>div{gap:12px}.taskCard button{font-size:10px;padding:9px}.columnHeader strong{font-size:12px}.columnCaption{font-size:9px}.workBottom{padding:12px;font-size:9px;align-items:flex-start}.progressPanel{padding:0 13px 20px}.progressBreakdown{gap:5px}.progressBreakdown>div{padding:12px 9px}.progressBreakdown span{font-size:9px}.progressBreakdown strong{font-size:26px}.peoplePanel{padding:0 13px 20px}.peopleGrid{grid-template-columns:1fr;gap:8px}.peopleGrid button{min-height:65px}.statement{padding:80px 6vw;gap:25px}.statement>div{grid-template-columns:1fr;gap:20px}.statement h2{font-size:clamp(45px,10vw,65px)}.statement p{font-size:15px}.featureEditorial{padding:75px 5vw}.featureHead h2{font-size:clamp(41px,9vw,60px)}.featureGrid{grid-template-columns:1fr}.featureTile{min-height:335px;padding:25px}.featureTile:last-child{grid-column:auto;min-height:335px}.featureIcon{font-size:60px;margin:26px 0}.featureTile h3{font-size:31px}.bottomPitch{padding:85px 5vw 95px}.bottomPitch h2{font-size:clamp(46px,9vw,63px)}.bottomPitch p{font-size:15px}.footer{padding:65px 5vw 25px}.footerTop{grid-template-columns:1fr;gap:25px}.footerTop nav{grid-column:auto;flex-wrap:wrap}.footerBottom{margin-top:70px;font-size:9px}.pageHeading{padding:75px 5vw 50px}.pageHeading h1,.aboutHero h1,.contactCopy h1{font-size:clamp(49px,10.9vw,72px)}.pageHeading p{font-size:16px}.fullWorkspace{padding:0 3vw 45px}.fullWorkspace .workspace{min-height:0}.fullWorkspace .workSidebar{padding:11px 13px}.fullWorkspace .workTitle{padding:20px 13px}.fullWorkspace .workTitle h3{font-size:21px}.fullWorkspace .workContent{padding:0 12px 16px}.fullWorkspace .boardColumns{gap:9px}.fullWorkspace .boardColumn{padding:11px}.fullWorkspace .taskCard{padding:13px}.fullWorkspace .taskCard h4{font-size:13px}.demoDisclosure{padding:33px 5vw;flex-direction:column;gap:12px;font-size:13px}.workflowList{margin:0 5vw 55px}.workflowRow{grid-template-columns:45px 1fr 25px;gap:13px;padding:27px 0}.workflowRow h2{font-size:28px}.workflowRow p{font-size:13px}.workflowArrow{font-size:27px}.workPageCta{padding:55px 5vw;align-items:flex-start;flex-direction:column}.detailPage{padding:55px 5vw 85px}.detailHero{padding:65px 0 50px}.detailHero h1{font-size:clamp(48px,11vw,68px)}.detailHero p{font-size:17px}.detailProof{grid-template-columns:1fr;padding:35px 26px}.detailProof>span{font-size:120px}.detailProof h2{font-size:43px}.detailProof p{font-size:15px}.aboutPage{padding:80px 5vw}.aboutHero{grid-template-columns:1fr}.aboutSquare{max-width:240px;border-radius:35px}.aboutSquare span{font-size:170px}.aboutColumns{grid-template-columns:1fr;margin-top:60px;gap:30px}.aboutColumns h2{font-size:44px}.aboutColumns p{font-size:16px}.contactPage{grid-template-columns:1fr;padding:80px 5vw 100px}.contactCopy p{font-size:16px}.contactPattern{display:none}.contactForm{padding:25px}.contactForm .primary{min-width:0}}
 @media(prefers-reduced-motion:reduce){.root *, .root *::before,.root *::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* Vietnamese typography: avoid clipped tone marks in tight display text. */
+.root{font-family:"Segoe UI",Arial,sans-serif; font-synthesis:none}
+.root :where(h1,h2,h3,h4){line-height:max(1.12,1em);overflow-wrap:break-word}
+.root :where(input,textarea,select,button){font-family:inherit}
+/* Scroll-driven reveals enhance navigation without obscuring content without JS. */
+.root [data-scroll-reveal="true"]:not([data-scroll-visible="true"]){opacity:0;transform:translate3d(0,28px,0)}
+.root [data-scroll-reveal="true"][data-scroll-visible="true"]{opacity:1;transform:translate3d(0,0,0);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
+@media(prefers-reduced-motion:reduce){.root [data-scroll-reveal]{opacity:1!important;transform:none!important;transition:none!important}}
