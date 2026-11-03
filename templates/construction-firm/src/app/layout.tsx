@@ -1,4 +1,3 @@
-import "./globals.css";
 import type {Metadata} from "next";
 import site from "../data/site.json";
 export const metadata:Metadata={title:site.title,description:site.description};

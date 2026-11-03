@@ -45,7 +45,7 @@ export function TemplateExperienceInfo({slug}:{slug:string}){
    <p className="athena-demo-float-category">{template.industry} · {template.style}</p>
    <div className="athena-demo-float-price"><span>Chi phí dự kiến</span><strong>{template.estimatedPrice}</strong></div>
    <div className="athena-demo-float-links">
-    <Link href={inquiry}>Tùy biến mẫu này <span aria-hidden="true">↗</span></Link>
+    <Link href={inquiry}>Tùy biến mẫu này <span aria-hidden="true">→</span></Link>
     <Link href="/services/web-development/templates">Thư viện mẫu</Link>
    </div>
    <p className="athena-demo-float-note">Bản trình diễn · Chưa phải báo giá chính thức</p>

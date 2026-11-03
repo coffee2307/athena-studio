@@ -17,7 +17,7 @@
    '<h2>Digital Creators — Không gian sáng tạo số</h2>'+
    '<p class="athena-demo-float-category">Sáng tạo &amp; giáo dục · Immersive 3D</p>'+
    '<div class="athena-demo-float-price"><span>Chi phí dự kiến</span><strong>Theo phạm vi tùy biến</strong></div>'+
-   '<div class="athena-demo-float-links"><a href="'+inquiry+'">Tùy biến mẫu này <span aria-hidden="true">↗</span></a>'+
+   '<div class="athena-demo-float-links"><a href="'+inquiry+'">Tùy biến mẫu này <span aria-hidden="true">→</span></a>'+
    '<a href="/services/web-development/templates">Thư viện mẫu</a></div>'+
    '<p class="athena-demo-float-note">Bản trình diễn · Chưa phải báo giá chính thức</p></div>'+
    '<button type="button" class="athena-demo-float-handle" aria-controls="athena-dc-float-panel" aria-expanded="true" aria-label="Phóng to thông tin mẫu Digital Creators" title="Phóng to thông tin mẫu">'+lens(false)+'</button>';

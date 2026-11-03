@@ -72,7 +72,7 @@ const principles=[
 const navigation=[
  {text:"Giải pháp",href:"/work"},
  {text:"Quy trình",href:"/services"},
- {text:"Về NORTH",href:"/about"},
+ {text:"Về chúng tôi",href:"/about"},
  {text:"Liên hệ",href:"/contact"},
 ] as const;
 
@@ -91,18 +91,18 @@ export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:Props
 
  const createEmail=(event:React.FormEvent<HTMLFormElement>)=>{
   event.preventDefault();
-  const subject="NORTH / Yêu cầu tư vấn / "+issue;
+  const subject=site.brand+" / Yêu cầu tư vấn / "+issue;
   const body="Tên: "+clientName+"\nEmail: "+email+"\nVấn đề: "+issue+"\n\nBối cảnh:\n"+detail+
    "\n\nĐây là bản nháp từ website mẫu NORTH. Vui lòng tự chọn địa chỉ người nhận và kiểm tra nội dung trước khi gửi.";
   window.location.href="mailto:?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(body);
  };
 
  return <div className={s.north} data-north-page={section} onKeyDownCapture={event=>{if(event.key==="Escape")setMenu(false)}}>
-  <div className={s.utility}><span>NORTH / TƯ VẤN HỆ THỐNG</span><span>WEBSITE DEMO · NỘI DUNG MINH HỌA</span></div>
+  <div className={s.utility}><span>{site.brand.toLocaleUpperCase("vi")} / TƯ VẤN HỆ THỐNG</span><span>WEBSITE DEMO · NỘI DUNG MINH HỌA</span></div>
   <header className={s.globalHead}>
-   <Link href={go("/")} className={s.insignia} aria-label="NORTH — trang chủ">
-    <span className={s.monogram}>N<span>.</span></span>
-    <span className={s.brandText}>NORTH<small>SYSTEMS & STRATEGY</small></span>
+   <Link href={go("/")} className={s.insignia} aria-label={site.brand+" — trang chủ"}>
+    <span className={s.monogram}>{site.brand.slice(0,1).toLocaleUpperCase("vi")}<span>.</span></span>
+    <span className={s.brandText}>{site.brand}<small>SYSTEMS & STRATEGY</small></span>
    </Link>
    <nav className={s.topNav} aria-label="Điều hướng chính">
     {navigation.map(item=><Link href={go(item.href)} key={item.href} aria-current={section===item.href.slice(1)||(section==="detail"&&item.href==="/work")?"page":undefined}>{item.text}</Link>)}
@@ -114,7 +114,7 @@ export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:Props
   </header>
   {menu&&<button type="button" className={s.scrim} onClick={()=>setMenu(false)} aria-label="Đóng menu"/>}
   <div className={s.mobileMenu} id="north-mobile-menu" data-open={menu} inert={!menu}>
-   <div className={s.mobileMenuHeading}>Điều hướng <button type="button" onClick={()=>setMenu(false)}>Đóng</button></div>
+   <div className={s.mobileMenuHeading}>Điều hướng <button type="button" onClick={()=>setMenu(false)} aria-label="Đóng điều hướng"><span aria-hidden="true">×</span></button></div>
    {navigation.map(item=><Link href={go(item.href)} key={item.href} onClick={()=>setMenu(false)}>{item.text}<span aria-hidden="true">→</span></Link>)}
   </div>
 
@@ -159,7 +159,7 @@ export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:Props
       {process.map(item=><li key={item.number}><span>{item.number}</span><div><h3>{item.title}</h3><p>{item.description}</p></div></li>)}
      </ol>
     </section>
-    <NorthClosing go={go}/>
+    <NorthClosing go={go} brand={site.brand}/>
    </>}
 
    {section==="work"&&<>
@@ -181,7 +181,7 @@ export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:Props
       </div>
      </article>)}
     </section>
-    <NorthClosing go={go}/>
+    <NorthClosing go={go} brand={site.brand}/>
    </>}
 
    {section==="detail"&&<>
@@ -193,7 +193,7 @@ export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:Props
     </section>
     <section className={s.detailContent}>
      <div className={s.detailMain}>
-      <h2>Cách NORTH tiếp cận</h2>
+      <h2>Cách {site.brand} tiếp cận</h2>
       <div className={s.detailItem}><span>01 / VẤN ĐỀ</span><h3>Điều cần cải thiện</h3><p>{selectedDetail.problem}</p></div>
       <div className={s.detailItem}><span>02 / HƯỚNG GIẢI QUYẾT</span><h3>Những việc nên làm</h3><p>{selectedDetail.approach}</p></div>
       <div className={s.detailItem}><span>03 / KẾT QUẢ DỰ KIẾN</span><h3>Đầu ra cần xác nhận</h3><p>{selectedDetail.result}</p></div>
@@ -230,7 +230,7 @@ export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:Props
       </li>)}
      </ol>
     </section>
-    <NorthClosing go={go}/>
+    <NorthClosing go={go} brand={site.brand}/>
    </>}
 
    {section==="about"&&<>
@@ -247,7 +247,7 @@ export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:Props
       </article>)}
      </div>
     </section>
-    <NorthClosing go={go}/>
+    <NorthClosing go={go} brand={site.brand}/>
    </>}
 
    {section==="contact"&&<>
@@ -282,7 +282,7 @@ export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:Props
 
   <footer className={s.footer}>
    <div className={s.footerTop}>
-    <div><Link href={go("/")} className={s.footerBrand}>NORTH<span>.</span></Link><p>Rõ vấn đề. Đúng ưu tiên. Từng bước cải thiện.</p></div>
+    <div><Link href={go("/")} className={s.footerBrand}>{site.brand}<span>.</span></Link><p>Rõ vấn đề. Đúng ưu tiên. Từng bước cải thiện.</p></div>
     <nav aria-label="Điều hướng chân trang">{navigation.map(item=><Link href={go(item.href)} key={item.href}>{item.text}</Link>)}</nav>
    </div>
    <div className={s.footerBottom}><span>WEBSITE MINH HỌA / ATHENA STUDIO</span><span>Không đại diện cho doanh nghiệp thật.</span></div>
@@ -290,9 +290,9 @@ export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:Props
  </div>;
 }
 
-function NorthClosing({go}:{go:(path:string)=>string}){
+function NorthClosing({go,brand}:{go:(path:string)=>string;brand:string}){
  return <section className={s.closing}>
   <div><span>BƯỚC TIẾP THEO</span><h2>Biết rõ vấn đề.<br/><em>Dễ chọn hướng đi.</em></h2></div>
-  <Link href={go("/contact")}>Trao đổi với NORTH <span aria-hidden="true">→</span></Link>
+  <Link href={go("/contact")}>Trao đổi với {brand} <span aria-hidden="true">→</span></Link>
  </section>;
 }

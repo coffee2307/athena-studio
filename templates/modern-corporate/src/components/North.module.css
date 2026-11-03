@@ -21,7 +21,7 @@
 .insignia{display:flex;align-items:center;gap:13px;margin-right:auto;flex-shrink:0}
 .monogram{font-size:36px;font-weight:900;line-height:1;letter-spacing:-.12em}
 .monogram span,.footerBrand span{color:var(--accent)}
-.brandText{display:flex;flex-direction:column;gap:3px;padding-left:13px;border-left:1px solid #8da397;font-size:16px;line-height:1.1;font-weight:850;letter-spacing:.08em}
+.brandText{display:flex;flex-direction:column;gap:3px;padding-left:13px;border-left:1px solid #8da397;font-size:16px;line-height:1.1;font-weight:850;letter-spacing:.08em;overflow-wrap:anywhere;max-width:min(30vw,235px)}
 .brandText small{font-size:8px;font-weight:750;letter-spacing:.1em}
 .topNav{display:flex;align-items:center;gap:clamp(12px,2vw,31px)}
 .topNav a{font-size:12px;font-weight:750;padding:10px 0;border-bottom:2px solid transparent}
@@ -34,7 +34,7 @@
 .mobileMenu{position:fixed;z-index:70;top:0;right:0;bottom:0;width:min(390px,90vw);background:var(--paper);padding:24px;display:flex;flex-direction:column;overflow:auto;box-shadow:-18px 0 40px #11292b44;visibility:visible}
 .mobileMenu[data-open="false"]{visibility:hidden;pointer-events:none}
 .mobileMenuHeading{display:flex;justify-content:space-between;align-items:center;gap:14px;border-bottom:1px solid var(--line);font-size:12px;font-weight:800;padding:6px 0 25px}
-.mobileMenuHeading button{border:1px solid var(--ink);background:transparent;padding:9px 12px}
+.mobileMenuHeading button{border:1px solid var(--ink);background:transparent;min-width:44px;min-height:44px;display:grid;place-items:center;font-size:24px;line-height:1;padding:5px 10px}
 .mobileMenu>a{font-size:24px;font-weight:750;padding:21px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px}
 .mobileMenu>a span{color:var(--accent)}
 .hero{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);min-height:625px}

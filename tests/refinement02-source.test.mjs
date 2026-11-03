@@ -21,18 +21,19 @@ test("Actual McLaren loading state has a spinner with retry and fallback, never 
  assert.match(src,/onFallback/);
  assert.doesNotMatch(src,/ix-car-load-track|<span>.*%<\/span>/);
 });
-test("NORTH refuses a decorative circle drawn over written content",()=>{
- const src=load("templates/modern-corporate/src/components/North.module.css");
- assert.match(src,/\.north \.impactBody:after\{content:none!important\}/);
- assert.match(src,/\.impactMap\{/);
+test("NORTH removes its obsolete decorative impact map",()=>{
+ const css=load("templates/modern-corporate/src/components/North.module.css");
+ assert.doesNotMatch(css,/\.impactMap\{|\.impactBody:after\{/);
+ assert.match(css,/\.decisionPanel\{/);
 });
+
 test("All three distinct enhancements are source-owned, no shared visual object",()=>{
  const sora=load("templates/creative-studio/src/components/Site.tsx");
  const north=load("templates/modern-corporate/src/components/Site.tsx");
  const moc=load("templates/commerce-standard/src/components/Site.tsx");
  assert.match(sora,/editorialLayer/);
  assert.match(sora,/labStage/);
- assert.match(north,/impactJourney/);
+ assert.match(north,/decisionResult/);
  assert.match(moc,/brandName/);
  const mobile=load("components/templates/WorldSite.tsx");
  assert.match(mobile,/Đóng menu showroom/);

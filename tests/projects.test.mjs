@@ -17,7 +17,7 @@ test("published portfolio never exposes a source repository or nonapproved media
  const pham=getProjectBySlug("pham");
  assert.ok(pham.gallery.length>=3);
  assert.equal(pham.websiteUrl,"https://phamofficial.com/");
- for(const item of pham.gallery)assert.ok(existsSync("public"+item.src),item.src);
+ for(const item of pham.gallery)assert.ok(existsSync("public"+item.src.split("?")[0]),item.src);
 });
 test("unverified Qrio must not appear publicly",()=>{
  assert.ok(projects.some(p=>p.slug==="qrio"&&p.visibility==="review"));

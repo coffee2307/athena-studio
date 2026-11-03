@@ -22,7 +22,7 @@ for(const site of sites){
     const response=await page.goto(url,{waitUntil:"load",timeout:45000});
     if(response?.status()!==200)throw Error("HTTP "+response?.status()+" "+url);
     await page.evaluate(()=>document.fonts.ready);
-    const selectors=site==="creative-studio"?{root:".sora",close:'[class*="_drawerX__"]',panel:'[class*="_drawer__"]'}:site==="modern-corporate"?{root:".north",close:'[class*="_panelTop__"] button',panel:'[class*="_panel__"]'}:{root:".moc",close:'[class*="_browseClose__"]',panel:'[class*="_browsePanel__"]'};
+    const selectors=site==="creative-studio"?{root:".sora",close:'[class*="_drawerX__"]',panel:'[class*="_drawer__"]'}:site==="modern-corporate"?{root:".north",close:'[class*="_mobileMenuHeading__"] button',panel:'[class*="_mobileMenu__"]'}:{root:".moc",close:'[class*="_browseClose__"]',panel:'[class*="_browsePanel__"]'};
     const measured=await page.evaluate(({site,route})=>{
      const rect=e=>{const r=e.getBoundingClientRect();return {left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height}};
      const by=q=>[...document.querySelectorAll(q)].filter(e=>getComputedStyle(e).display!=="none");

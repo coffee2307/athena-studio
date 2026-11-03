@@ -23,10 +23,18 @@ test("all independent templates own pointer interactions and their own CSS",()=>
   const cssfile=readdirSync(base).find(f=>f.endsWith(".module.css")&&f!=="FashionHero3D.module.css");
   assert.ok(cssfile,"No sovereign CSS for "+slug);
   const css=read(base+cssfile);
-  assert.match(site,/dna04Pointer/,"Pointer effect in "+slug);
-  assert.match(site,/data-dna04-artifact/,"Local artifact in "+slug);
-  assert.match(css,/data-dna04-artifact/,"Local CSS in "+slug);
+  // NORTH intentionally removes pointer parallax in the approved simple design.
+  if(slug==="modern-corporate"){
+   assert.doesNotMatch(site,/dna04Pointer/,"NORTH stays simple");
+   assert.match(site,/className=\{s\.decisionPanel\}/);
+   assert.match(css,/\.decisionPanel\{/);
+  }else{
+   assert.match(site,/dna04Pointer/,"Pointer effect in "+slug);
+   assert.match(site,/data-dna04-artifact/,"Local artifact in "+slug);
+   assert.match(css,/data-dna04-artifact/,"Local CSS in "+slug);
+  }
   assert.match(css,/prefers-reduced-motion/,"Reduced motion in "+slug);
+
  }
 });
 test("NORTH and MỘC own their dropdown components",()=>{

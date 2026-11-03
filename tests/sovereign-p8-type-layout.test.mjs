@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 const targets=[
  ["creative-studio","Sora.module.css","s.drawerX"],
- ["modern-corporate","North.module.css","s.panelTop"],
+ ["modern-corporate","North.module.css","s.mobileMenuHeading"],
  ["commerce-standard","Moc.module.css","s.browseClose"]
 ];
 const root=new URL("../",import.meta.url);
