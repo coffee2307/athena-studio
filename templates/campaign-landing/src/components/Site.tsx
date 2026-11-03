@@ -25,6 +25,24 @@ export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:Props
  const current=chapters[active];
  const chapter=chapters[Math.max(0,Math.min(chapters.length-1,itemIndex-1))];
  useEffect(()=>setMenu(false),[section]);
+ /* Accessible, one-shot viewport reveals: never animate the live task board. */
+ useEffect(()=>{
+  const root=document.getElementById("campaign-landing-top");
+  if(!root||typeof IntersectionObserver==="undefined"||window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  const selectors="main > section, main > article, main > section > .reveal-block, footer";
+  const targets=Array.from(root.querySelectorAll<HTMLElement>(selectors));
+  const observer=new IntersectionObserver(entries=>{
+   entries.forEach(entry=>{
+    if(entry.isIntersecting){(entry.target as HTMLElement).dataset.scrollVisible="true";observer.unobserve(entry.target);}
+   });
+  },{threshold:0.08,rootMargin:"0px 0px -35px 0px"});
+  targets.forEach(target=>{
+   if(target.getBoundingClientRect().top<window.innerHeight*0.9){target.dataset.scrollVisible="true";return;}
+   target.dataset.scrollReveal="true";observer.observe(target);
+  });
+  return()=>observer.disconnect();
+ },[section]);
+
  useEffect(()=>{
   if(!menu)return;
   const close=(e:KeyboardEvent)=>{if(e.key==="Escape")setMenu(false)};
