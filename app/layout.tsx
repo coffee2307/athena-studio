@@ -58,6 +58,7 @@ import "@/app/black-velocity-mobile-showcase.css";
 import "@/app/template-navigation-identities.css";
 import "@/app/template-world-directions-v2.css";
 import "@/app/athena-dna04.css";
+import "@/public/athena-demo-info.css";
 
 fontAwesomeConfig.autoAddCss = false;
 

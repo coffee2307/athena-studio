@@ -113,3 +113,31 @@
  from{opacity:0;transform:translate3d(0,11px,0)}
  to{opacity:1;transform:translate3d(0,0,0)}
 }
+
+/* Instant first paint: a 23 KB poster captured from this exact CC BY McLaren GLB.
+   It disappears as soon as the real WebGL frame is ready; no 3D detail is removed. */
+.ix-auto-showroom .bv-cinematic-track .ix-hero-image.bv-studio-fallback::before{
+ content:"";position:absolute;inset:0;pointer-events:none;
+ background-image:url("/models/mclaren-poster.webp?v=20261103");
+ background-repeat:no-repeat;
+ background-size:min(62vw,930px) auto;
+ background-position:75% 56%;
+ opacity:1;
+}
+.ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track .ix-hero-image.bv-studio-fallback{
+ opacity:1;transition:opacity .32s ease;
+}
+.ix-auto-showroom.ix-site[data-immersive="true"] .bv-cinematic-track .ix-hero-visual:has(.ix-auto-3d-canvas[data-renderer="ready"]) .ix-hero-image.bv-studio-fallback{
+ opacity:0;
+}
+@media(max-width:760px){
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-image.bv-studio-fallback::before{
+  top:var(--bv-stage-top,240px);bottom:auto;
+  height:max(160px,calc(100svh - var(--bv-stage-top,240px) - var(--bv-stage-bottom,165px)));
+  background-size:min(110vw,530px) auto;
+  background-position:center center;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ .ix-auto-showroom .bv-cinematic-track .ix-hero-image.bv-studio-fallback{transition:none}
+}

@@ -20,7 +20,7 @@ export default function TemplatesPage(){
     </div>
     <div className="dna-library-gallery" aria-label="Ảnh giao diện từ hai website mẫu của Athena">
      <div className="dna-library-frame dna-library-frame-main"><div className="dna-library-frame-top"><i/><i/><i/><span>creative / preview</span></div><div className="dna-library-frame-media"><Image src={getTemplatePreviewSrc("creative-studio")} alt="Ảnh chụp website mẫu Creative Studio" fill priority sizes="(max-width:760px) 82vw, 45vw" style={{objectFit:"contain",objectPosition:"center top"}}/></div></div>
-     <div className="dna-library-frame dna-library-frame-side"><div className="dna-library-frame-top"><i/><i/><i/><span>pet / preview</span></div><div className="dna-library-frame-media"><Image src={getTemplatePreviewSrc("pet-store")} alt="Ảnh chụp website mẫu Pet Store" fill sizes="(max-width:760px) 35vw, 20vw" style={{objectFit:"contain",objectPosition:"center top"}}/></div></div>
+     <div className="dna-library-frame dna-library-frame-side"><div className="dna-library-frame-top"><i/><i/><i/><span>pet / preview</span></div><div className="dna-library-frame-media"><picture><source media="(max-width:760px)" type="image/webp" srcSet="/template-previews/pet-store-hero-mobile.webp?v=20261103"/><source media="(min-width:761px)" type="image/webp" srcSet="/template-previews/pet-store-hero-desktop.webp?v=20261103-01"/><Image src={getTemplatePreviewSrc("pet-store")} alt="Ảnh chụp giao diện Poppy & Co. trong khung trình duyệt" fill sizes="(max-width:760px) 35vw, 20vw" style={{objectFit:"contain",objectPosition:"center"}}/></picture></div></div>
      <div className="dna-library-stamp">{String(templates.length).padStart(2,"0")} <span>WEBSITE<br/>CONCEPTS</span></div>
     </div>
   </div></section>

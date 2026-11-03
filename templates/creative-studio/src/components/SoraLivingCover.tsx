@@ -58,10 +58,7 @@ export function SoraLivingCover({images,workHref}:{images:string[];workHref:stri
     <div className={s.livingSeal} aria-hidden="true"><span>SORA<br/>ISSUE</span><strong>01</strong></div>
     <div className={s.livingMarginNote} aria-hidden="true">NHẬN DIỆN / WEBSITE / QUẢNG BÁ</div>
    </div>
-   <div className={s.livingArtworkControls}>
-    <span className={s.dragHint}>KÉO ẢNH ĐỂ ĐỔI TRANG / HOẶC CHẠM NÚT</span>
-    <div className={s.livingArrows}><button type="button" onClick={()=>next(-1)} aria-label="Trang bìa trước">←</button><button type="button" onClick={()=>next(1)} aria-label="Trang bìa tiếp theo">→</button></div>
-   </div>
+
   </div>
   <div className={s.livingFolio} aria-hidden="true"><span>SORA / 01</span><span>HÌNH ẢNH • CÂU CHUYỆN • CHUYỂN ĐỘNG</span></div>
  </section>;

@@ -55,13 +55,16 @@ function tuneMaterials(model:THREE.Object3D,renderer:THREE.WebGLRenderer){
  // Keep the supplied color and texture maps intact; tame chrome-like carbon
  // reflections and sharpen sampled texture detail at oblique camera angles.
  const anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());
+ const tunedMaterials=new Set<THREE.Material>();
+ const tunedTextures=new Set<THREE.Texture>();
  model.traverse(child=>{
   if(!(child instanceof THREE.Mesh))return;
   child.castShadow=false;
   child.receiveShadow=false;
   const materials=Array.isArray(child.material)?child.material:[child.material];
   for(const mat of materials){
-   if(!(mat instanceof THREE.MeshStandardMaterial))continue;
+   if(!(mat instanceof THREE.MeshStandardMaterial)||tunedMaterials.has(mat))continue;
+   tunedMaterials.add(mat);
    const blackBase=mat.color.r<.03&&mat.color.g<.03&&mat.color.b<.03;
    if(mat.name==="carbon_1"){
     // glTF defaults an omitted metallicFactor to 1. Carbon is not polished metal.
@@ -81,7 +84,8 @@ function tuneMaterials(model:THREE.Object3D,renderer:THREE.WebGLRenderer){
     }
    }
    for(const texture of [mat.map,mat.normalMap,mat.roughnessMap,mat.metalnessMap,mat.aoMap]){
-    if(!texture)continue;
+    if(!texture||tunedTextures.has(texture))continue;
+    tunedTextures.add(texture);
     texture.anisotropy=anisotropy;
     texture.needsUpdate=true;
    }
@@ -190,6 +194,8 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
   draco.setDecoderPath("/draco/");
   draco.setDecoderConfig({type:"wasm"});
   loader.setDRACOLoader(draco);
+  // Decode workers warm up before GLB download finishes; never change geometry precision.
+  draco.preload();
 
   const car=new THREE.Group();
   scene.add(car);
@@ -405,7 +411,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
      resize();
     }
    }
-   if(!drawn){drawn=true;finishLoading();setPercent(100);setStatus("ready");}
+   if(!drawn){drawn=true;if(canvas)canvas.dataset.firstFrameMs=performance.now().toFixed(1);finishLoading();setPercent(100);setStatus("ready");}
    const movement=Math.abs(currentMode-modeRef.current)+Math.abs(currentProgress-goalProgress)+(scrollRootId?0:camera.position.distanceTo(wanted));
    if(movement>.006||yawTransition){queuedContinuation=true;schedule();}
   }
@@ -474,8 +480,10 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
 
   // This CC BY 4.0 McLaren P1 GLB uses Draco-compressed geometry and WebP textures.
   setPhase("Đang tải mô hình và vật liệu");
+  canvas.dataset.modelFetchStartMs=performance.now().toFixed(1);
   loader.load(MODEL_PATH,gltf=>{
    if(disposed)return;
+   canvas.dataset.modelDecodedMs=performance.now().toFixed(1);
    if(assetErrors>0){
     finishLoading();
     console.warn("Athena McLaren: refusing an incomplete 3D render because embedded textures did not load.");
@@ -484,6 +492,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    }
    setPercent(94);setPhase("Đang hoàn thiện ánh sáng và bề mặt sơn");
    model=gltf.scene;tuneMaterials(model,renderer);
+   canvas.dataset.materialsReadyMs=performance.now().toFixed(1);
    const bounds=new THREE.Box3().setFromObject(model);
    const dims=bounds.getSize(new THREE.Vector3());
    const center=bounds.getCenter(new THREE.Vector3());
@@ -493,6 +502,7 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
    car.add(model);
    car.updateMatrixWorld(true);
    silhouetteSupports=buildCarSilhouetteSupports(model,car);
+   canvas.dataset.silhouetteReadyMs=performance.now().toFixed(1);
    loaded=true;resize();measureProgress();schedule();
   },event=>{
    if(disposed||!event.total)return;
