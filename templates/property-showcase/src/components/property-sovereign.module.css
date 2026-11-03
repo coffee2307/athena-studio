@@ -42,7 +42,7 @@
  transition:transform .24s cubic-bezier(.2,.75,.25,1),box-shadow .3s ease;
 }
 @media (hover:hover) and (pointer:fine){
- .root :global([data-dna04-artifact]:hover){box-shadow:0 25px 32px #293a342d;border-radius:2px;outline:1px solid #d0b88c55}
+ .root :global([data-dna04-artifact]:hover){box-shadow:0 25px 32px #293a342d;outline:1px solid #d0b88c55}
 }
 @media (prefers-reduced-motion:reduce){
  .root :global([data-dna04-artifact]){transition:none!important;transform:none!important;box-shadow:none!important}
