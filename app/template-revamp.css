@@ -263,3 +263,7 @@ dialog.template-revamp-dialog{width:min(1600px,97vw);height:min(940px,95dvh);max
  .dna-library-page .dna-library-stamp span{font-size:8px}
  .dna-library-page .templates-catalog-heading h2{font-size:clamp(28px,7.6vw,40px)}
 }
+
+/* ATHENA PET HERO ART DIRECTION: portrait screenshot inside portrait display. */
+.dna-library-page .dna-library-frame-side .dna-library-frame-media picture{position:absolute;inset:0;display:block;overflow:hidden}
+.dna-library-page .dna-library-frame-side .dna-library-frame-media img{object-fit:cover!important;object-position:center top!important}

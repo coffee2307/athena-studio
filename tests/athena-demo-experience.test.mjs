@@ -38,3 +38,31 @@ test("Digital Creators standalone deploy receives independent overlay",()=>{
  assert.match(css,/safe-area-inset-bottom/);
  assert.match(css,/min-width:44px/);
 });
+
+test("Zoom controls and CSS animation replace three dots on all demos",()=>{
+ const widget=read("components/templates/TemplateExperienceInfo.tsx");
+ const digital=read("public/athena-digital-demo-info.js");
+ const css=read("public/athena-demo-info.css");
+ assert.match(widget,/<ZoomIcon out\/>/);
+ assert.match(widget,/<ZoomIcon\/>/);
+ assert.doesNotMatch(widget,/•••/);
+ assert.match(widget,/inert=\{!expanded\}/);
+ assert.match(digital,/const lens=/);
+ assert.doesNotMatch(digital,/•••/);
+ assert.match(css,/transition:opacity/);
+ assert.match(css,/prefers-reduced-motion:reduce/);
+});
+test("SORA removes redundant instruction and arrows, keeps page picker",()=>{
+ const src=read("templates/creative-studio/src/components/SoraLivingCover.tsx");
+ assert.doesNotMatch(src,/KÉO ẢNH ĐỂ ĐỔI TRANG/);
+ assert.doesNotMatch(src,/livingArtworkControls|livingArrows/);
+ assert.match(src,/livingPagePicker/);
+});
+test("Poppy hero uses portrait mobile image and cover instead of letterboxing",()=>{
+ const page=read("app/services/web-development/templates/page.tsx");
+ const css=read("app/template-revamp.css");
+ assert.match(page,/pet-store-hero-mobile.webp/);
+ assert.match(page,/media="\(max-width:760px\)"/);
+ assert.match(page,/objectFit:"cover"/);
+ assert.match(css,/ATHENA PET HERO ART DIRECTION/);
+});
