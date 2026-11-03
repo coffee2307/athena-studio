@@ -298,7 +298,7 @@
  transition:transform .24s cubic-bezier(.2,.75,.25,1),box-shadow .3s ease;
 }
 @media (hover:hover) and (pointer:fine){
- .root :global([data-dna04-artifact]:hover){box-shadow:10px 14px 0 #aa8d761f;border-radius:1px;filter:saturate(.96)}
+ .root :global([data-dna04-artifact]:hover){box-shadow:10px 14px 0 #aa8d761f;filter:saturate(.96)}
 }
 @media (prefers-reduced-motion:reduce){
  .root :global([data-dna04-artifact]){transition:none!important;transform:none!important;box-shadow:none!important}
