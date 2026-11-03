@@ -280,3 +280,18 @@
 }
 
 @media(prefers-reduced-motion:reduce){.dna-lab-core{transition:none!important}.dna-product-lab:hover .dna-lab-core{transform:rotate(9deg)!important}}
+
+/* SORA preview: show the entire 16:9 composition rather than cropping it in a narrow mobile column. */
+.dna-service-web-development .dna-scene-web{padding:12px;background:#e8e6de}
+.dna-service-web-development .dna-browser-bar{position:relative;inset:auto;width:100%;flex:none;height:29px;border-radius:9px 9px 0 0}
+.dna-service-web-development .dna-browser-bar span{min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.dna-service-web-development .dna-browser-preview{position:relative;inset:auto;width:100%;aspect-ratio:16/9;flex:none;border:1px solid #d8dcd5;border-top:0;border-radius:0 0 9px 9px;background:#f7f7f4;box-shadow:0 12px 22px #292a2924}
+.dna-service-web-development .dna-browser-preview img{object-fit:contain!important;object-position:center!important}
+.dna-service-web-development .dna-scene-web{flex-direction:column}
+@media(max-width:760px){
+ .dna-service-web-development{display:flex;flex-direction:column}
+ .dna-service-web-development .dna-service-scene{height:auto;aspect-ratio:auto;overflow:visible}
+ .dna-service-web-development .dna-scene-web{height:auto;min-height:0;padding:clamp(10px,3vw,16px)}
+ .dna-service-web-development .dna-browser-preview{aspect-ratio:16/9}
+ .dna-service-web-development .dna-service-body{width:100%;min-width:0}
+}
