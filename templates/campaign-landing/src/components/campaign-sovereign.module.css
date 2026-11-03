@@ -164,3 +164,12 @@
 .root [data-scroll-reveal="true"]:not([data-scroll-visible="true"]){opacity:0;transform:translate3d(0,28px,0)}
 .root [data-scroll-reveal="true"][data-scroll-visible="true"]{opacity:1;transform:translate3d(0,0,0);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
 @media(prefers-reduced-motion:reduce){.root [data-scroll-reveal]{opacity:1!important;transform:none!important;transition:none!important}}
+
+
+/* Vietnamese-safe display layout: no truncated diacritics or horizontal overflow. */
+.root :is(h1,h2,h3,h4){line-height:1.17!important;letter-spacing:-.035em;overflow-wrap:normal}
+.root .heroText h1{font-size:clamp(51px,7.25vw,116px)!important;line-height:1.2!important;letter-spacing:-.035em!important;white-space:normal;max-width:100%;overflow-wrap:normal}
+.root .heroText{min-width:0;max-width:100%}
+.root .heroText h1 em{font-style:normal}
+@media(max-width:650px){.root .heroText h1{font-size:clamp(36px,10.2vw,65px)!important;line-height:1.19!important}}
+
