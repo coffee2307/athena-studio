@@ -179,3 +179,20 @@
 .root .chapterButton>span{font-family:system-ui,"Segoe UI",Arial,sans-serif;font-weight:700;font-size:clamp(22px,2.35vw,36px);line-height:1.3!important;letter-spacing:0;max-width:none;text-wrap:balance}
 .root .sectionHeading h2{line-height:1.16!important;letter-spacing:-.02em}
 @media(max-width:650px){.root .manifesto p{font-size:clamp(30px,8vw,37px)}.root .chapterButton>span{font-size:clamp(21px,5.8vw,25px)}}
+
+
+/* MỞ: a tactile, printed-poster edition selector, not a shared gallery widget. */
+.root .heroArt{transition:background-color .38s ease}
+.root .heroArt[data-chapter="1"]{background:#a7aaff}
+.root .heroArt[data-chapter="2"]{background:#83cea7}
+.root .heroArt[data-chapter="1"] .artCenter{transform:rotate(7deg) scale(.94)}
+.root .heroArt[data-chapter="2"] .artCenter{transform:rotate(-9deg) scale(1.02)}
+.root .heroArt[data-chapter="2"] .artSeal{transform:rotate(-10deg)}
+.root .posterDial{position:absolute;z-index:8;bottom:22px;left:22px;width:min(63%,290px);min-height:90px;padding:14px 17px;display:flex;flex-direction:column;gap:5px;align-items:stretch;justify-content:center;text-align:left;background:var(--acid);color:var(--night);border:2px solid var(--night);border-radius:0;box-shadow:7px 7px 0 var(--night);font-family:system-ui,"Segoe UI",Arial,sans-serif;cursor:pointer;transition:transform .22s ease,box-shadow .22s ease}
+.root .posterDial:hover{transform:translateY(-3px);box-shadow:9px 10px 0 var(--night)}
+.root .posterDial:active{transform:translate(3px,3px);box-shadow:3px 3px 0 var(--night)}
+.root .posterDial>span{display:flex;justify-content:space-between;gap:8px;font-size:10px;line-height:1.35;font-weight:850;letter-spacing:.055em}
+.root .posterDial strong{font-size:clamp(11px,1.14vw,15px);line-height:1.35;letter-spacing:0}
+.root .posterDial small{font-size:9px;letter-spacing:.04em;font-weight:750}
+@media(max-width:650px){.root .posterDial{width:min(69%,270px);min-height:80px;padding:10px 12px;bottom:16px;left:16px}.root .posterDial strong{font-size:12px}.root .posterDial small{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.root .heroArt,.root .posterDial{transition:none!important}}
