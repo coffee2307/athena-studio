@@ -133,15 +133,15 @@
 .aboutPage h1{max-width:18ch}
 .aboutSplit{display:grid;grid-template-columns:1fr 1fr;gap:5vw;margin-top:70px;align-items:stretch}
 .aboutArt{min-height:560px;background:var(--signal);border:3px solid var(--night);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.aboutArt span{position:absolute;top:-70px;right:0;font:900 500px/1 Arial Black,Arial;color:var(--acid)}
-.aboutArt b{z-index:1;font:900 clamp(100px,15vw,240px)/.9 Arial Black,Arial;letter-spacing:-.14em;transform:rotate(-15deg)}
+.aboutArt span{position:absolute;top:-70px;right:0;font:900 500px/1 "Segoe UI",Arial;color:var(--acid)}
+.aboutArt b{z-index:1;font:900 clamp(100px,15vw,240px)/.9 "Segoe UI",Arial;letter-spacing:-.045em;transform:rotate(-15deg)}
 .aboutArt small{position:absolute;left:22px;bottom:22px;font-weight:900;font-size:11px}
 .aboutText{padding:35px 0;display:flex;flex-direction:column;align-items:start;justify-content:center;gap:25px}
-.aboutText h2{font:900 clamp(36px,4.5vw,76px)/.95 Arial Black,Arial;letter-spacing:-.06em}
+.aboutText h2{font:900 clamp(36px,4.5vw,76px)/.95 "Segoe UI",Arial;letter-spacing:-.06em}
 .aboutText p{max-width:54ch;font-size:17px;line-height:1.75}
 .contactPage{display:grid;grid-template-columns:1fr 1fr;gap:6vw;padding:95px clamp(20px,5vw,85px) 125px;background:var(--acid)}
 .contactIntro p{font-size:19px;font-weight:600;max-width:40ch}
-.contactGraphic{font:900 clamp(180px,27vw,400px)/1 Arial Black,Arial;color:var(--signal);text-align:center;transform:rotate(-11deg)}
+.contactGraphic{font:900 clamp(180px,27vw,400px)/1 "Segoe UI",Arial;color:var(--signal);text-align:center;transform:rotate(-11deg)}
 .contactForm{display:flex;flex-direction:column;gap:13px;background:var(--paper);border:3px solid var(--night);padding:clamp(22px,3vw,45px);align-self:start}
 .contactForm label{font-size:11px;font-weight:900;letter-spacing:.07em}
 .contactForm input,.contactForm select,.contactForm textarea{background:transparent;border:0;border-bottom:2px solid var(--night);color:var(--night);border-radius:0;padding:13px 3px;width:100%;min-width:0}
