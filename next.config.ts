@@ -80,6 +80,10 @@ const nextConfig:NextConfig={
  ];},
  async headers(){return [
   {source:"/:path*",headers},
+  // The model URL is versioned; avoid a 3.6 MB re-download or revalidation on every visit.
+  {source:"/models/mclaren.glb",headers:[{key:"Cache-Control",value:"public, max-age=31536000, immutable"}]},
+  {source:"/models/mclaren-poster.webp",headers:[{key:"Cache-Control",value:"public, max-age=31536000, immutable"}]},
+  {source:"/draco/:path*",headers:[{key:"Cache-Control",value:"public, max-age=31536000, immutable"}]},
   // Only interactive demo routes may be embedded by the same Athena origin.
   {source:"/template-demos/:path*",headers:[
    {key:"X-Frame-Options",value:"SAMEORIGIN"},
