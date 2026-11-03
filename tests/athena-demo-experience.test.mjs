@@ -63,6 +63,8 @@ test("Poppy hero uses portrait mobile image and cover instead of letterboxing",(
  const css=read("app/template-revamp.css");
  assert.match(page,/pet-store-hero-mobile.webp/);
  assert.match(page,/media="\(max-width:760px\)"/);
- assert.match(page,/objectFit:"cover"/);
+ assert.match(page,/pet-store-hero-desktop.webp/);
+ assert.match(page,/media="\(min-width:761px\)"/);
+ assert.match(page,/objectFit:"contain"/);
  assert.match(css,/ATHENA PET HERO ART DIRECTION/);
 });

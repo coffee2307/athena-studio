@@ -47,16 +47,26 @@ for(const width of [320,390,428]){
   }finally{await page.close()}
  });
 }
-await check("desktop Poppy preview remains real desktop shot and fully filled",async()=>{
- const page=await browser.newPage({viewport:{width:1440,height:900}});
- try{
-  await page.goto(origin+"/services/web-development/templates",{waitUntil:"domcontentloaded"});
-  const img=page.locator(".dna-library-frame-side .dna-library-frame-media img");
-  await img.waitFor();
-  const v=await img.evaluate(el=>({src:el.currentSrc,fit:getComputedStyle(el).objectFit}));
-  assert(v.src.includes("pet-store.jpg"),v.src);assert.equal(v.fit,"cover");
- }finally{await page.close()}
-});
+for(const width of [1024,1440,1720]){
+ await check("desktop "+width+" portrait Poppy screenshot fits without cropping",async()=>{
+  const page=await browser.newPage({viewport:{width,height:900},deviceScaleFactor:1});
+  try{
+   await page.goto(origin+"/services/web-development/templates",{waitUntil:"domcontentloaded"});
+   const img=page.locator(".dna-library-frame-side .dna-library-frame-media img");
+   await img.waitFor({state:"visible"});
+   await img.evaluate(async el=>{if(!el.complete)await new Promise(res=>el.addEventListener("load",res,{once:true}))});
+   const v=await img.evaluate(el=>{
+    const r=el.closest(".dna-library-frame-media").getBoundingClientRect();
+    return {src:el.currentSrc,fit:getComputedStyle(el).objectFit,frameRatio:r.width/r.height,imageRatio:el.naturalWidth/el.naturalHeight,width:el.naturalWidth};
+   });
+   assert(v.src.includes("pet-store-hero-desktop.webp"),v.src);
+   assert.equal(v.fit,"contain");
+   assert.equal(v.width,780);
+   assert(Math.abs(v.frameRatio-v.imageRatio)<0.04,JSON.stringify(v));
+   if(width===1440)await page.locator(".dna-library-gallery").screenshot({path:"F:/Athena Studio/.qa/poppy-desktop-fixed.png",animations:"disabled"});
+  }finally{await page.close()}
+ });
+}
 await check("Digital Creators uses same smooth zoom icons",async()=>{
  const page=await browser.newPage({viewport:{width:390,height:850}});
  try{

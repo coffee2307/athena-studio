@@ -266,4 +266,8 @@ dialog.template-revamp-dialog{width:min(1600px,97vw);height:min(940px,95dvh);max
 
 /* ATHENA PET HERO ART DIRECTION: portrait screenshot inside portrait display. */
 .dna-library-page .dna-library-frame-side .dna-library-frame-media picture{position:absolute;inset:0;display:block;overflow:hidden}
-.dna-library-page .dna-library-frame-side .dna-library-frame-media img{object-fit:cover!important;object-position:center top!important}
+.dna-library-page .dna-library-frame-side .dna-library-frame-media img{object-fit:contain!important;object-position:center center!important}
+@media(min-width:761px){.dna-library-page .dna-library-frame-side{inset:31% 0 2% auto;width:35%}}
+@media(max-width:760px){.dna-library-page .dna-library-frame-side .dna-library-frame-media img{object-fit:cover!important;object-position:center top!important}}
+
+@media(min-width:761px) and (max-width:1100px){.dna-library-page .dna-library-frame-side{width:33%}}
