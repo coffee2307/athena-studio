@@ -2,17 +2,16 @@
   "slug": "campaign-landing",
   "title": "Landing page chiến dịch",
   "industry": "Marketing",
-  "style": "Brutalist",
+  "style": "Living Poster / Experimental",
   "purpose": "Tập trung một chiến dịch hoặc sự kiện",
-  "description": "Một trang đơn có điểm nhấn mạnh, nội dung ngắn và CTA không bị phân tán.",
+  "description": "Living Poster: một chiến dịch giả định với chương trình tương tác, typography mạnh và hành trình mobile riêng.",
   "variant": "campaign",
   "features": [
-    "Một luồng nội dung xuyên suốt",
-    "Điểm nhấn chữ lớn",
-    "Có thể kết nối biểu mẫu theo cấu hình dự án",
-    "Website demo nhiều trang với điều hướng desktop/mobile",
-    "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
-    "Trải nghiệm trong popup hoặc mở toàn màn hình"
+    "Poster hero thiết kế riêng bằng CSS",
+    "Ba chương trình có thể chọn và đổi hình ảnh",
+    "Trang chi tiết mỗi chương trình, trải nghiệm và câu chuyện",
+    "Biểu mẫu tạo bản nháp email không lưu dữ liệu",
+    "Bố cục mobile tự thiết kế, không nghiêng nguyên mảng"
   ],
   "modules": [
     "content",

@@ -22,7 +22,8 @@ test("floating demo information excludes embedded previews and handles subpages"
 });
 test("immersive showroom defaults to zoom-in info to keep car CTA and camera controls accessible",()=>{
  const widget=read("components/templates/TemplateExperienceInfo.tsx");
- assert.match(widget,/useState\(slug!=="auto-showroom"\)/);
+ assert.match(widget,/compactByDefault=\["auto-showroom","campaign-landing","saas-product"\]/);
+ assert.match(widget,/useState\(!compactByDefault\)/);
  assert.match(widget,/if\(slug==="auto-showroom"\)\{setExpanded\(false\);return;\}/);
  assert.match(widget,/athena-demo-float-handle/);
 });

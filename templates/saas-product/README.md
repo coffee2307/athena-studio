@@ -1,6 +1,5 @@
-# Sản phẩm công nghệ — Athena independent template
-Standalone Next.js App Router project. This is a **DNA-03 extraction baseline** with its own app, components, visual assets, routes, package and content config. It is not yet a pixel-identical extraction of every previous Athena demo interaction; compare original /template-demos/saas-product and implement any missing bespoke scenes before delivery to a customer.
+# LUMA Workspace — Interactive SaaS (Athena demo)
 
-Setup: npm install && npm run build && npm run dev. Routes: /, /work, /services, /about, /contact.
-Customize src/data/site.json and src/app/globals.css. Never add production credentials. Contact form is demo-only; no submission or payment integration.
-Asset copyright/origin: see public/ASSET-SOURCES.md, original Athena registry and upstream credits. Don't claim example portfolio work is a customer commission.
+Website SaaS độc lập có workspace thực sự tương tác trong trình duyệt: bảng việc, thêm công việc, chuyển trạng thái, lọc trạng thái/vai trò, xem tiến độ tính trực tiếp và chọn nhóm. Tất cả dữ liệu khởi tạo là **mẫu trong bộ nhớ React**, reset khi tải lại; chưa có tài khoản, người dùng, API backend hay lưu trữ. Các route `/`, `/work`, `/work/1..3`, `/services`, `/about`, `/contact` được thiết kế riêng. Liên hệ mở bản nháp email không có người nhận mặc định, không tự động gửi dữ liệu.
+
+Chạy tại thư mục template: `npm ci`, `npm run build`, `npm run start`. Trên Athena Studio, xem `/template-demos/saas-product`. Cấu hình brand nằm trong `src/data/site.json`; cần cấu hình backend, xác thực và chính sách dữ liệu trước khi biến thành sản phẩm thật. Không mượn component giao diện từ template khác.
