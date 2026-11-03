@@ -1,5 +1,5 @@
 /* LUMA Workspace — self-contained product-led SaaS website. */
-.root{--navy:#142536;--ink:#25364a;--soft:#f5f7fa;--white:#fff;--blue:#4f72e9;--blueInk:#3755b4;--mint:#a2dac7;--line:#e0e6ef;--muted:#68798d;--shadow:0 28px 70px #14253619;min-height:100vh;background:var(--soft);color:var(--ink);font:400 15px/1.55 "Segoe UI","Segoe UI",Arial,sans-serif;overflow-x:clip}
+.root{--navy:#142536;--ink:#25364a;--soft:#f5f7fa;--white:#fff;--blue:#4f72e9;--blueInk:#3755b4;--mint:#a2dac7;--line:#e0e6ef;--muted:#68798d;--shadow:0 28px 70px #14253619;min-height:100vh;background:var(--soft);color:var(--ink);font:400 15px/1.55 "Segoe UI",Arial,sans-serif;overflow-x:clip}
 .root *{box-sizing:border-box}
 .root :where(h1,h2,h3,h4,p,figure){margin:0}
 .root a{color:inherit;text-decoration:none}
@@ -204,7 +204,7 @@
 
 /* Vietnamese typography: avoid clipped tone marks in tight display text. */
 .root{font-family:"Segoe UI",Arial,sans-serif; font-synthesis:none}
-.root :where(h1,h2,h3,h4){line-height:max(1.12,1em);overflow-wrap:break-word}
+.root :where(h1,h2,h3,h4){line-height:1.12;overflow-wrap:break-word}
 .root :where(input,textarea,select,button){font-family:inherit}
 /* Scroll-driven reveals enhance navigation without obscuring content without JS. */
 .root [data-scroll-reveal="true"]:not([data-scroll-visible="true"]){opacity:0;transform:translate3d(0,28px,0)}
