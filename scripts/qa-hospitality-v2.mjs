@@ -32,6 +32,11 @@ for(const width of widths){
     assert(info.overflow<=3,JSON.stringify(info));
     assert.deepEqual(info.broken,[]);
     assert.deepEqual(pageErrors,[]);
+    if(width<=768&&route==="booking"){
+     const form=await page.locator('[class*="bookingForm"]').boundingBox();
+     const aside=await page.locator('[class*="bookingAside"]').boundingBox();
+     assert(form&&aside&&aside.y>=form.y+form.height-2,"Mobile booking preview must follow, not overlap, the form");
+    }
     if((width===390||width===1440)&&["","work","booking","contact"].includes(route)){
      await page.screenshot({path:dir+"/"+(route||"home")+"-"+width+".png",fullPage:true,animations:"disabled",timeout:30000});
     }

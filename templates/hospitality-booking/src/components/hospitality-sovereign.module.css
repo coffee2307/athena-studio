@@ -381,3 +381,84 @@
  .root .heroFigure img,.root .menuSpotlight img{animation:none!important}
  .root .photoControls button,.root .storyChoices button,.root .featuredDish,.root .menuEntry,.root .menuFilters button{transition:none!important}
 }
+
+/* Hospitality alignment refinement / consistent editorial axes */
+.root{--hospitality-gutter:clamp(24px,6vw,96px)}
+.root .header{
+  grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+  column-gap:clamp(20px,3vw,48px);
+  min-height:94px;
+  padding:15px var(--hospitality-gutter);
+}
+.root .header>.logo{justify-self:start;min-width:0;white-space:nowrap;line-height:1.18;letter-spacing:-.045em}
+.root .header>nav{justify-self:center;gap:clamp(18px,2.25vw,36px);min-width:max-content}
+.root .header>nav a{font-size:12px;line-height:1.5;letter-spacing:.005em}
+.root .header>.actionHead{
+  justify-self:end;justify-content:space-between;gap:20px;
+  min-height:51px;min-width:162px;padding:8px 9px 8px 22px;
+  border:1px solid var(--ink);border-radius:100px;
+  background:var(--ink);color:var(--paper);
+  font:750 11px/1.4 "Be Vietnam Pro","Segoe UI",Arial,sans-serif;
+  letter-spacing:.08em;
+  box-shadow:0 4px 16px #27463819;
+  transition:background-color .2s ease,color .2s ease,box-shadow .2s ease;
+}
+.root .header>.actionHead span{
+  display:grid;place-items:center;
+  width:33px;height:33px;flex:0 0 33px;
+  border-radius:50%;background:#d6bd9c;color:var(--ink);
+  font-size:17px;line-height:1;font-weight:500;
+}
+.root .header>.actionHead:hover{background:#385b46;color:#fffaf1;box-shadow:0 7px 20px #2746382c}
+.root .header>.actionHead:hover span{background:#ead8bc}
+.root .tableStage{padding-inline:var(--hospitality-gutter);gap:clamp(30px,4vw,65px)}
+.root .tableStage .heroWords{padding:clamp(20px,2.2vw,36px) 0}
+.root .tableStage .heroWords h1{margin:27px 0 22px;font-size:clamp(49px,5.7vw,93px);line-height:1.16}
+.root .tableStage .heroWords p{margin:0}
+.root .storyRail,.root .featuredMenu,.root .menuPage,.root .bookingPage,.root .contactPage,.root .dishDetail,.root .kitchenOpening,.root .aboutPage{padding-left:var(--hospitality-gutter);padding-right:var(--hospitality-gutter)}
+.root .featuredTitle{align-items:end;min-height:185px}
+.root .featuredTitle>a{flex-shrink:0;align-self:flex-end}
+.root .featuredGrid{gap:clamp(20px,3vw,43px)}
+.root .featuredDish>div{padding-top:22px}
+.root .featuredDish h3{min-height:2.5em}
+.root .featuredDish p{min-height:5.15em}
+.root .bookingIntro{max-width:100%;margin-bottom:55px}
+.root .bookingIntro h1{max-width:14ch}
+.root .bookingLayout{grid-template-columns:minmax(0,1fr) minmax(0,.92fr);gap:clamp(38px,5vw,76px)}
+.root .contactPage{column-gap:clamp(44px,6vw,90px)}
+.root .contactPage .contactForm{margin-top:24px}
+.root .footer{padding-left:var(--hospitality-gutter);padding-right:var(--hospitality-gutter)}
+@media(max-width:1180px) and (min-width:851px){
+ .root .header{grid-template-columns:minmax(0,.95fr) auto minmax(0,.95fr);column-gap:18px}
+ .root .header>.logo{font-size:clamp(23px,2.5vw,30px)}
+ .root .header>nav{gap:14px}
+ .root .header>nav a{font-size:11px}
+ .root .header>.actionHead{min-width:142px;padding-left:15px;gap:10px}
+ .root .tableStage .heroWords h1{font-size:clamp(45px,5vw,66px)}
+}
+@media(max-width:850px){
+ .root .header{grid-template-columns:minmax(0,1fr) auto!important;min-height:76px!important;padding:12px var(--hospitality-gutter)}
+ .root .header>.logo{font-size:clamp(24px,3.3vw,29px)}
+ .root .header>.actionHead{display:none!important}
+ .root .tableStage{padding:25px var(--hospitality-gutter) 64px!important;gap:20px!important}
+ .root .tableStage .heroWords{padding:20px 0 0}
+ .root .tableStage .heroWords h1{font-size:clamp(46px,8vw,72px)}
+ .root .featuredTitle{min-height:0}
+ .root .featuredDish h3,.root .featuredDish p{min-height:0}
+ .root .contactPage .contactForm{margin-top:0}
+}
+@media(max-width:620px){
+ .root{--hospitality-gutter:clamp(20px,6vw,30px)}
+ .root .tableStage{padding:14px var(--hospitality-gutter) 60px!important}
+ .root .tableStage .heroWords h1{font-size:clamp(40px,10vw,61px)}
+ .root .featuredTitle{gap:12px}
+ .root .bookingLayout{gap:45px}
+}
+@media(prefers-reduced-motion:reduce){.root .header>.actionHead{transition:none}}
+
+/* Regression guard: reservation preview must never share a row with the form on mobile. */
+@media(max-width:850px){
+ .root .bookingLayout{grid-template-columns:minmax(0,1fr)!important}
+ .root .bookingForm,.root .bookingAside{min-width:0;width:100%;grid-column:1}
+ .root .bookingAside{position:relative;top:auto}
+}
