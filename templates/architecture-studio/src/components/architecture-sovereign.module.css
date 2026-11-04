@@ -47,3 +47,70 @@
 @media (prefers-reduced-motion:reduce){
  .root :global([data-dna04-artifact]){transition:none!important;transform:none!important;box-shadow:none!important}
 }
+
+/* FORMA / Datum-inspired motion grammar, FORMAs own independent editorial design. */
+.root{--ink:#302720;--paper:#eeece7;--accent:#ad9a80;--display:"Segoe UI",Arial,sans-serif;font-family:"Segoe UI",Arial,sans-serif}
+.root .header{position:sticky;top:0;grid-template-columns:1fr auto minmax(0,1.5fr);min-height:78px;gap:35px;padding:15px clamp(24px,4.2vw,75px);border-bottom:1px solid #a9a29866;background:#eeece7f5;backdrop-filter:blur(16px);z-index:65}
+.root .header>.logo{font-size:clamp(24px,2.6vw,34px);letter-spacing:-.065em}
+.root .header>.headStatus{font-size:9px;color:#796d61;justify-self:center}
+.root .header nav{justify-content:flex-end;gap:clamp(17px,2.35vw,39px)}
+.root .header nav a{font:600 12px/1.5 "Segoe UI",Arial,sans-serif;transition:color .2s}
+.root .header nav a:hover{color:#997d5d}
+.root .menuPanel{background:#eeece7}
+.root .menuPanel a{line-height:1.32}
+.root .menuPanel a:hover{padding-left:7px;transition:padding .2s ease}
+.root .archivePage,.root .servicePage,.root .detailPage,.root .aboutPage,.root .contactPage{background:#eeece7;color:#302720}
+.root .sectionTitle small,.root .contactIntro small,.root .aboutCopy small{font-size:10px;letter-spacing:.13em;color:#786e60}
+.root .sectionTitle h1,.root .contactIntro h1,.root .aboutCopy h1,.root .detailPage h1{font-weight:550;line-height:1.14;letter-spacing:-.055em;overflow-wrap:normal}
+.root .sectionTitle p,.root .contactIntro p,.root .aboutCopy p{line-height:1.75}
+.root .archivePage{background-image:linear-gradient(#8c85740f 1px,transparent 1px),linear-gradient(90deg,#8c85740f 1px,transparent 1px);background-size:32px 32px}
+.root .catalogGrid{gap:clamp(24px,4vw,64px)}
+.root .artifact{border-radius:0}
+.root .artifact img{aspect-ratio:4/4.5;filter:saturate(.84);transition:transform .55s ease,filter .55s ease}
+.root .artifact:hover img{filter:saturate(1);transform:scale(1.016)}
+.root .artifact h2{font-weight:570;letter-spacing:-.045em}
+.root .artifact p{line-height:1.7}
+.root .serviceSequence button{border-color:#a9a095;min-height:250px;background:transparent;transition:background .2s ease;color:#302720}
+.root .serviceSequence button:hover{background:#e0d9cb}
+.root .serviceSequence button[aria-pressed="true"]{background:#d7c8b6;color:#2d241c}
+.root .serviceSequence button strong{font-size:clamp(27px,3vw,42px);font-weight:550}
+.root .serviceVisual{background:#302720;color:#eeece7}
+.root .detailPage figure img{filter:saturate(.87)}
+.root .detailPair{border-color:#a9a095}
+.root .aboutMedia img{filter:saturate(.85)}
+.root .contactPage form{background:#302720}
+.root .contactPage form button{background:#cdb898;color:#302720}
+.root .footer{background:#29221d;color:#eae5dd;padding:80px clamp(24px,4.2vw,75px) 40px;min-height:400px}
+.root .footerTop{align-items:center;padding-bottom:30px;border-bottom:1px solid #d5c7b444}
+.root .footerTop small{max-width:45ch;line-height:1.6;letter-spacing:.11em}
+.root .footerTop a{display:inline-flex;align-items:center;min-height:44px;font-size:11px;white-space:normal;text-decoration:underline;text-underline-offset:7px}
+.root .footerSignature{font-weight:600;letter-spacing:-.075em;padding:43px 0 35px;font-size:clamp(67px,12.4vw,185px);line-height:1.09;overflow-wrap:normal}
+.root .footerMenu{display:flex;justify-content:space-between;align-items:center;padding:28px 0;gap:15px;flex-wrap:wrap}
+.root .footerMenu a{font-size:12px}
+.root .footer>small{display:block;line-height:1.6;letter-spacing:.07em}
+@media(max-width:850px){
+ .root .header{grid-template-columns:1fr auto!important;min-height:70px!important;padding:12px 5vw}
+ .root .header>.logo{font-size:29px}
+ .root .footer{padding:60px 5vw 35px;min-height:0}
+ .root .footerSignature{font-size:clamp(62px,13vw,104px)}
+ .root .footerTop{display:flex;align-items:flex-start}
+ .root .footerTop a{max-width:44%;text-align:right}
+ .root .aboutPage,.root .contactPage{gap:35px}
+}
+@media(max-width:540px){
+ .root .header{padding:11px 5vw}
+ .root .header>.logo{font-size:27px}
+ .root .archivePage,.root .servicePage,.root .detailPage,.root .aboutPage,.root .contactPage{padding:60px 5vw 80px}
+ .root .sectionTitle h1,.root .contactIntro h1,.root .aboutCopy h1,.root .detailPage h1{font-size:clamp(46px,11vw,63px);line-height:1.16}
+ .root .sectionTitle{padding-bottom:35px}
+ .root .catalogGrid{grid-template-columns:1fr}
+ .root .artifact:nth-child(2){margin-top:0}
+ .root .artifact img{aspect-ratio:4/3.3}
+ .root .footerTop{display:grid;grid-template-columns:1fr;gap:12px}
+ .root .footerTop a{max-width:none;text-align:left}
+ .root .footerSignature{font-size:clamp(57px,15vw,80px)}
+ .root .footerMenu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px}
+}
+@media(prefers-reduced-motion:reduce){
+ .root .artifact img,.root .serviceSequence button{transition:none!important}
+}
