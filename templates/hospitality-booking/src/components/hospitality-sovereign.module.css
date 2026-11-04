@@ -470,3 +470,121 @@
 .root .guestCounter legend{margin:0 0 11px;line-height:17px}
 .root .guestCounter>div{height:53px;min-height:53px;box-sizing:border-box}
 .root .guestCounter>div button{height:51px;min-height:51px;line-height:1}
+
+/* BẾP & CHUYỆN / Quiet luxury refinement — restrained material, type, and rhythm.
+   Native to this one restaurant concept; no generic template component. */
+.root{
+ --hospitality-ivory:#f4ede0;
+ --hospitality-forest:#203d31;
+ --hospitality-gold:#aa8760;
+ --hospitality-hairline:rgba(45,63,48,.25);
+ background:var(--hospitality-ivory);
+}
+.root .header{
+ background:rgba(244,237,224,.98);
+ border-bottom:1px solid var(--hospitality-hairline);
+ box-shadow:none;
+}
+.root .logo{letter-spacing:-.057em}
+.root .header nav a{font-weight:650;transition:color .2s ease,opacity .2s ease}
+.root .header nav a:hover{color:#9b7549}
+.root .actionHead{box-shadow:0 7px 19px rgba(24,51,40,.13)}
+.root .actionHead span{background:#ddc5a0}
+.root .tableInvitation{border-bottom:1px solid var(--hospitality-hairline);padding-bottom:19px;letter-spacing:.13em}
+.root .tableStage{background:var(--hospitality-ivory)}
+.root .tableStage .heroFigure{
+ overflow:hidden;border-radius:2px;
+ box-shadow:0 13px 35px rgba(33,48,35,.09);
+}
+.root .tableStage .heroFigure img{
+ filter:saturate(.91) contrast(1.035);
+ transition:filter .3s ease,transform .65s cubic-bezier(.2,.72,.2,1);
+}
+@media(hover:hover) and (pointer:fine){
+ .root .tableStage .heroFigure:hover img{filter:saturate(.99) contrast(1.04);transform:scale(1.015)}
+}
+.root .tableStage .heroWords small{letter-spacing:.14em;color:#68776b;font-weight:800}
+.root .tableStage .heroWords h1{letter-spacing:-.054em}
+.root .tableStage .heroWords h1 em{color:#9c7856}
+.root .tableStage .heroWords p{font-weight:420;color:#385246}
+.root .heroActions{margin-top:35px}
+.root .tableStage .heroWords .heroActions a:first-child{
+ min-height:54px;padding-inline:25px;border-radius:999px;
+ background:var(--hospitality-forest);color:#fbf5e9;
+ box-shadow:0 7px 18px rgba(25,49,35,.1);
+}
+.root .tableStage .heroWords .heroActions a:first-child:hover{background:#365b45}
+.root .photoControls{border-color:#c4b6a0;box-shadow:0 6px 20px rgba(18,38,30,.13)}
+.root .storyRail{background:#e7dfd2;border-top:1px solid #d0c4b2}
+.root .storyChoices button[aria-pressed="true"]{background:rgba(153,117,75,.11)}
+.root .storyChoices button strong{font-weight:620}
+.root .storyChoices button b{color:#9e7951}
+.root .featuredMenu{background:#f8f4ec}
+.root .featuredTitle{border-bottom:1px solid var(--hospitality-hairline);padding-bottom:32px}
+.root .featuredTitle h2{font-weight:600}
+.root .featuredDish img{
+ border-radius:48% 48% 2px 2px;
+ filter:saturate(.91);
+ transition:filter .35s ease;
+}
+.root .featuredDish:hover img{filter:saturate(1.02)}
+.root .featuredDish h3{font-weight:650}
+.root .featuredDish strong{color:#90704b}
+.root .homeInvitation{background:var(--hospitality-forest)}
+.root .homeInvitation img{filter:saturate(.83) contrast(1.045)}
+.root .homeInvitation a{background:#dec6a4}
+.root .menuPage{background:var(--hospitality-ivory)}
+.root .menuIntro{border-bottom:1px solid var(--hospitality-hairline);padding-bottom:35px}
+.root .menuIntro h1{font-weight:620}
+.root .menuFilters button{border-color:#b9b29f;transition:background-color .18s ease,color .18s ease}
+.root .menuFilters button[aria-pressed="true"]{background:var(--hospitality-forest)}
+.root .menuEntry{padding-top:28px;padding-bottom:28px}
+.root .menuEntry[aria-pressed="true"]{background:#e7dccc;box-shadow:inset 3px 0 0 var(--hospitality-gold)}
+.root .menuEntry:hover{background:#eee3d3}
+.root .menuEntry strong{font-weight:650}
+.root .menuPrice{color:#896844}
+.root .menuSpotlight{background:var(--hospitality-forest);padding:25px}
+.root .menuSpotlight img{filter:saturate(.91)}
+.root .bookingPage{background:var(--hospitality-ivory)}
+.root .bookingIntro{border-bottom:1px solid var(--hospitality-hairline);padding-bottom:34px}
+.root .bookingIntro h1{font-weight:630;line-height:1.15}
+.root .bookingIntro p{color:#456052}
+.root .formIntro{border-color:var(--hospitality-hairline)}
+.root .formIntro span,.root .bookingForm label,.root .bookingForm fieldset legend{letter-spacing:.13em}
+.root .bookingForm label input,.root .bookingForm label select,.root .bookingForm label textarea{
+ background:#faf7f0;border:1px solid #adbaa9;
+ transition:border-color .18s ease,box-shadow .18s ease;
+}
+.root .bookingForm label input:focus,.root .bookingForm label select:focus,.root .bookingForm label textarea:focus{
+ border-color:#8e744e;box-shadow:0 0 0 2px rgba(177,140,90,.12);
+}
+.root .guestCounter>div{background:#faf7f0;border-color:#adbaa9}
+.root .guestCounter button:hover:not(:disabled){background:#ebdfcd}
+.root .timeField button{background:#faf7f0;border-color:#b4bbaa}
+.root .timeField button[aria-pressed="true"]{background:var(--hospitality-forest);border-color:var(--hospitality-forest)}
+.root .bookingSubmit{background:var(--hospitality-forest);border-color:var(--hospitality-forest);min-height:59px;padding-inline:23px;letter-spacing:.085em}
+.root .bookingSubmit:hover{background:#355741}
+.root .bookingAside{background:var(--hospitality-forest);box-shadow:0 12px 30px rgba(24,48,36,.08)}
+.root .bookingAside img{filter:saturate(.83)}
+.root .bookingReceipt{padding:clamp(26px,3vw,44px)}
+.root .bookingReceipt dl>div{border-color:rgba(244,237,224,.23)}
+.root .bookingReceipt dt{font-size:12px;color:#e6dfcf}
+.root .bookingReceipt dd{font-weight:650}
+.root .contactPage{background:var(--hospitality-ivory)}
+.root .contactPage .contactForm{background:var(--hospitality-forest);padding:clamp(26px,3.4vw,48px)}
+.root .contactPage .contactForm input,.root .contactPage .contactForm textarea{background:#fbf7ef;border-color:#dbcdb6}
+.root .contactPage .contactForm button{background:#ddc49e;font-weight:800}
+.root .faqSection details{border-color:var(--hospitality-hairline)}
+.root .footer{background:var(--hospitality-forest)}
+.root .footerSignature{letter-spacing:-.068em;font-weight:740}
+.root .footerBooking{background:#dfc9a8}
+@media(max-width:850px){
+ .root .bookingIntro{padding-bottom:26px}
+ .root .featuredTitle{padding-bottom:25px}
+ .root .menuIntro{padding-bottom:25px}
+ .root .bookingReceipt{padding:25px}
+}
+@media(prefers-reduced-motion:reduce){
+ .root .tableStage .heroFigure img,.root .featuredDish img,.root .bookingForm label input,.root .bookingForm label select,.root .bookingForm label textarea{transition:none!important}
+ .root .tableStage .heroFigure:hover img{transform:none!important}
+}
