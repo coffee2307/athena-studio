@@ -40,7 +40,7 @@ try{
    await page.waitForTimeout(700);
    assert.equal(await page.locator('[class*="planDrawing"]').getAttribute("data-plan"),"2");
    if(width===390||width===1440)await page.screenshot({path:".qa/architecture-datum-v1/plan-"+width+".png",fullPage:false,animations:"disabled"});
-   const slider=page.getByRole("slider",{name:"Reveal line study versus architectural photograph"});
+   const slider=page.getByRole("slider",{name:"Reveal architectural drawing versus interior photograph"});
    await slider.scrollIntoViewIfNeeded();
    await slider.fill("73");
    assert.equal(await slider.inputValue(),"73");

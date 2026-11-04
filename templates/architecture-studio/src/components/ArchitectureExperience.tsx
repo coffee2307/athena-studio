@@ -2,6 +2,7 @@
 import Link from "next/link";
 import {useEffect,useRef,useState,type CSSProperties} from "react";
 import s from "./architecture-experience.module.css";
+import {formaText,type FormaLocale} from "./forma-language";
 
 type Chapter={step:string;title:string;note:string;image:number;meta:string};
 const chapters:Chapter[]=[
@@ -22,7 +23,8 @@ const materials=[
  {title:"Glass",code:"M04",description:"A threshold between built space, daylight and the outside world.",image:4}
 ];
 
-export function ArchitectureExperience({basePath="",assetBase="",images}:{basePath?:string;assetBase?:string;images:string[]}){
+export function ArchitectureExperience({basePath="",assetBase="",images,locale="en"}:{basePath?:string;assetBase?:string;images:string[];locale?:FormaLocale}){
+ const t=(source:string)=>formaText(locale,source);
  const [chapter,setChapter]=useState(0);
  const [plan,setPlan]=useState(0);
  const [material,setMaterial]=useState(0);
@@ -80,85 +82,85 @@ export function ArchitectureExperience({basePath="",assetBase="",images}:{basePa
  },[]);
  const active=chapters[chapter];
  return <div ref={root} className={s.experience} data-forma-home>
-  <section className={s.hero} aria-label="FORMA Architecture Studio">
-   <div className={s.heroMeta}><span>FORMA / ARCHITECTURAL ATELIER</span><span>INDEPENDENT CONCEPT STUDIO / 2026</span></div>
+  <section className={s.hero} aria-label={t("FORMA Architecture Studio")}>
+   <div className={s.heroMeta}><span>{t("FORMA / ARCHITECTURAL ATELIER")}</span><span>{t("INDEPENDENT CONCEPT STUDIO / 2026")}</span></div>
    <div className={s.heroLayout}>
     <div className={s.heroCopy}>
-     <small>EXPLORING SPACE, MATERIAL & LIGHT</small>
-     <h1>Space <em>shapes</em> thought.</h1>
-     <p>Architecture lives somewhere between the first line on paper and the way daylight enters a room.</p>
-     <Link className={s.primaryLink} href={go("/work")}>EXPLORE SELECTED STUDIES <span aria-hidden="true">↗</span></Link>
-     <div className={s.heroIndex}><span>01 / 04</span><span>SCROLL TO EXPLORE ↓</span></div>
+     <small>{t("EXPLORING SPACE, MATERIAL & LIGHT")}</small>
+     <h1>{locale==="vi"?<>Không gian <em>định hình</em> tư duy.</>:<>Space <em>shapes</em> thought.</>}</h1>
+     <p>{t("Architecture lives somewhere between the first line on paper and the way daylight enters a room.")}</p>
+     <Link className={s.primaryLink} href={go("/work")}>{t("EXPLORE SELECTED STUDIES")} <span aria-hidden="true">↗</span></Link>
+     <div className={s.heroIndex}><span>01 / 04</span><span>{t("SCROLL TO EXPLORE")} ↓</span></div>
     </div>
     <figure className={s.heroPicture}>
-     <img src={image(0)} alt="Concept architecture photo looking upward through contemporary structures"/>
-     <figcaption><span>FIG. 01 / ARCHITECTURAL PERSPECTIVE</span><span>VISUAL STUDY — DEMONSTRATION</span></figcaption>
+     <img src={image(0)} alt={t("Concept architecture photo looking upward through contemporary structures")}/>
+     <figcaption><span>{t("FIG. 01 / ARCHITECTURAL PERSPECTIVE")}</span><span>{t("VISUAL STUDY — DEMONSTRATION")}</span></figcaption>
      <span className={s.heroCrosshair} aria-hidden="true"/>
     </figure>
    </div>
   </section>
-  <section className={s.story} aria-label="From sketch to light">
+  <section className={s.story} aria-label={t("From sketch to light")}>
    <div className={s.storyVisual}>
     <div className={s.storyPicture}>
-     <img key={chapter} src={image(active.image)} alt={"Architectural image for "+active.title}/>
+     <img key={chapter} src={image(active.image)} alt={t("Architectural image for")+" "+t(active.title)}/>
      <div className={s.storyGrid} aria-hidden="true"/>
-     <div className={s.storyPictureFooter}><span>{active.meta}</span><span>{active.step} / 04</span></div>
+     <div className={s.storyPictureFooter}><span>{t(active.meta)}</span><span>{active.step} / 04</span></div>
     </div>
     <div className={s.storyIndicator} aria-hidden="true">{chapters.map((c,i)=><span key={c.step} data-active={chapter===i}/>)}</div>
    </div>
    <div className={s.storyChapters}>
     {chapters.map((c,i)=><article key={c.step} data-story-chapter={i} className={s.storyChapter} data-active={chapter===i}>
-     <div className={s.chapterNumber}>CHAPTER {c.step} <span>—</span> THE PROCESS</div>
-     <h2>{c.title}</h2><p>{c.note}</p>
+     <div className={s.chapterNumber}>{t("CHAPTER")} {c.step} <span>—</span> {t("THE PROCESS")}</div>
+     <h2>{t(c.title)}</h2><p>{t(c.note)}</p>
      <span className={s.chapterMarker}>0{i+1} / 04</span>
     </article>)}
    </div>
   </section>
   <section className={s.projects} data-reveal>
-   <div className={s.sectionTop}><span>02 / STUDIES IN SPACE</span><Link href={go("/work")}>VIEW THE INDEX <span aria-hidden="true">↗</span></Link></div>
-   <div className={s.sectionHeading}><h2>Selected work<span>.</span></h2><p>Three visual studies that reveal how structure, proportion and light work together. These are illustrative concepts, not commissioned projects.</p></div>
+   <div className={s.sectionTop}><span>{t("02 / STUDIES IN SPACE")}</span><Link href={go("/work")}>{t("VIEW THE INDEX")} <span aria-hidden="true">↗</span></Link></div>
+   <div className={s.sectionHeading}><h2>{t("Selected work")}<span>.</span></h2><p>{t("Three visual studies that reveal how structure, proportion and light work together. These are illustrative concepts, not commissioned projects.")}</p></div>
    <div className={s.projectGrid}>{projects.map((p,i)=><Link href={go("/work/"+(i+1))} className={s.projectCard} key={p.title} data-index={i+1}>
-    <div className={s.projectImage}><img src={image(p.image)} alt={"Illustration of "+p.title}/><span className={s.projectArrow} aria-hidden="true">↗</span></div>
-    <div className={s.projectCaption}><small>0{i+1} / {p.type}</small><h3>{p.title}</h3><p>{p.description}</p></div>
+    <div className={s.projectImage}><img src={image(p.image)} alt={t("Illustration of")+" "+t(p.title)}/><span className={s.projectArrow} aria-hidden="true">↗</span></div>
+    <div className={s.projectCaption}><small>0{i+1} / {t(p.type)}</small><h3>{t(p.title)}</h3><p>{t(p.description)}</p></div>
    </Link>)}</div>
   </section>
-  <section ref={planSection} className={s.planStudy} aria-label="The making of a plan">
+  <section ref={planSection} className={s.planStudy} aria-label={t("The making of a plan")}>
    <div className={s.planVisual}>
     <div className={s.planPaper}>
      <div className={s.planDrawing} data-plan={plan} style={{"--plan-reveal":Math.round(planProgress*100)+"%"} as CSSProperties}>
-      <img className={s.planAsset} src={architecturalDrawing} alt="Technical architectural perspective supplied for FORMAs drawing study"/>
+      <img className={s.planAsset} src={architecturalDrawing} alt={t("Technical architectural perspective supplied for FORMAs drawing study")}/>
       <div className={s.planRevealLine} aria-hidden="true"/>
-      <div className={s.planStageLabel}><span>ARCHITECTURAL DRAWING / 0{plan+1}</span><span>{plan===0?"COMPOSITION":plan===1?"SPATIAL LOGIC":"CONSTRUCTION DETAIL"}</span></div>
+      <div className={s.planStageLabel}><span>{t("ARCHITECTURAL DRAWING")} / 0{plan+1}</span><span>{t(plan===0?"COMPOSITION":plan===1?"SPATIAL LOGIC":"CONSTRUCTION DETAIL")}</span></div>
      </div>
-     <div className={s.planFoot}><span>PLATE 002 / DRAWING STUDY</span><span>1:100 / CONCEPT</span></div>
+     <div className={s.planFoot}><span>{t("PLATE 002 / DRAWING STUDY")}</span><span>{t("1:100 / CONCEPT")}</span></div>
     </div>
    </div>
    <div className={s.planChapters}>
-    {[["01","Every room begins as a line.","Lines establish boundaries. They also suggest where the human body can move."],["02","The plan becomes a sequence.","Proportion gives each room a purpose and creates a rhythm of spaces."],["03","The drawing makes room for life.","From a technical idea to a place for sunlight, conversation and the everyday."]].map(([n,title,body],i)=><article key={n} data-plan-chapter={i}><small>PLAN STUDY / {n}</small><h2>{title}</h2><p>{body}</p></article>)}
+    {[["01","Every room begins as a line.","Lines establish boundaries. They also suggest where the human body can move."],["02","The plan becomes a sequence.","Proportion gives each room a purpose and creates a rhythm of spaces."],["03","The drawing makes room for life.","From a technical idea to a place for sunlight, conversation and the everyday."]].map(([n,title,body],i)=><article key={n} data-plan-chapter={i}><small>{t("PLAN STUDY")} / {n}</small><h2>{t(title)}</h2><p>{t(body)}</p></article>)}
    </div>
   </section>
   <section className={s.compareSection} data-reveal>
-   <div className={s.sectionTop}><span>03 / FROM DRAWING TO BUILT</span><span>INTERACTIVE STUDY</span></div>
-   <div className={s.compareIntro}><h2>Drawn, then built.</h2><p>Drag the divider to compare the detailed drawing with its corresponding architectural photograph. This is a visual design study.</p></div>
+   <div className={s.sectionTop}><span>{t("03 / FROM DRAWING TO BUILT")}</span><span>{t("INTERACTIVE STUDY")}</span></div>
+   <div className={s.compareIntro}><h2>{t("Drawn, then built.")}</h2><p>{t("Drag the divider to compare the detailed drawing with its corresponding architectural photograph. This is a visual design study.")}</p></div>
    <div className={s.comparison} style={{"--compare":compare+"%"} as CSSProperties}>
-    <img className={s.afterImage} src={architecturalPhoto} alt="Interior photograph of the architectural project"/>
+    <img className={s.afterImage} src={architecturalPhoto} alt={t("Interior photograph of the architectural project")}/>
     <div className={s.beforeImage} aria-hidden="true"><img src={architecturalDrawing} alt=""/></div>
     <div className={s.compareDivider} aria-hidden="true"><span>↔</span></div>
-    <span className={s.beforeLabel}>ARCHITECTURAL DRAWING</span><span className={s.afterLabel}>PHOTOGRAPH</span>
-    <input aria-label="Reveal architectural drawing versus interior photograph" className={s.compareRange} type="range" min="0" max="100" step="1" value={compare} onChange={e=>setCompare(Number(e.target.value))}/>
+    <span className={s.beforeLabel}>{t("ARCHITECTURAL DRAWING")}</span><span className={s.afterLabel}>{t("PHOTOGRAPH")}</span>
+    <input aria-label={t("Reveal architectural drawing versus interior photograph")} className={s.compareRange} type="range" min="0" max="100" step="1" value={compare} onChange={e=>setCompare(Number(e.target.value))}/>
    </div>
   </section>
   <section className={s.materialSection} data-reveal>
-   <div className={s.sectionTop}><span>04 / THE MATERIAL LIBRARY</span><span>TOUCH, TEXTURE, TIME</span></div>
-   <div className={s.materialHeading}><h2>Honest materials.</h2><p>A few carefully chosen surfaces are enough to give an interior its character.</p></div>
+   <div className={s.sectionTop}><span>{t("04 / THE MATERIAL LIBRARY")}</span><span>{t("TOUCH, TEXTURE, TIME")}</span></div>
+   <div className={s.materialHeading}><h2>{t("Honest materials.")}</h2><p>{t("A few carefully chosen surfaces are enough to give an interior its character.")}</p></div>
    <div className={s.materialLayout}>
-    <div className={s.materialList} role="group" aria-label="Explore architectural materials">{materials.map((m,i)=><button key={m.code} type="button" aria-pressed={material===i} onClick={()=>setMaterial(i)}><span>{m.code}</span><strong>{m.title}</strong><span className={s.materialPlus} aria-hidden="true">{material===i?"−":"+"}</span></button>)}</div>
-    <figure className={s.materialVisual}><img key={material} src={image(materials[material].image)} alt={materials[material].title+" visual reference"}/><figcaption><span>{materials[material].code} / {materials[material].title}</span><p>{materials[material].description}</p></figcaption></figure>
+    <div className={s.materialList} role="group" aria-label={t("Explore architectural materials")}>{materials.map((m,i)=><button key={m.code} type="button" aria-pressed={material===i} onClick={()=>setMaterial(i)}><span>{m.code}</span><strong>{t(m.title)}</strong><span className={s.materialPlus} aria-hidden="true">{material===i?"−":"+"}</span></button>)}</div>
+    <figure className={s.materialVisual}><img key={material} src={image(materials[material].image)} alt={t(materials[material].title)+" "+t("visual reference")}/><figcaption><span>{materials[material].code} / {t(materials[material].title)}</span><p>{t(materials[material].description)}</p></figcaption></figure>
    </div>
   </section>
-  <section className={s.gallerySection} data-reveal><div className={s.sectionTop}><span>05 / LIGHT IN FRAMES</span><span>VISUAL ARCHIVE</span></div><h2>A quieter point of view.</h2>
-   <div className={s.galleryLayout}><figure><img key={gallery} src={image(gallery+1)} alt={"FORMA visual archive image "+(gallery+1)}/><figcaption>ARCHIVE / 0{gallery+1} OF 04</figcaption></figure><div className={s.galleryAside}><span>CURATED FRAMES</span><p>Each image explores a different quality of light, structure and material.</p><div className={s.galleryControls}><button onClick={()=>setGallery(v=>(v+3)%4)} aria-label="Previous archive image" type="button">←</button><span>0{gallery+1} / 04</span><button onClick={()=>setGallery(v=>(v+1)%4)} aria-label="Next archive image" type="button">→</button></div><Link href={go("/about")}>OUR PERSPECTIVE ↗</Link></div></div>
+  <section className={s.gallerySection} data-reveal><div className={s.sectionTop}><span>{t("05 / LIGHT IN FRAMES")}</span><span>{t("VISUAL ARCHIVE")}</span></div><h2>{t("A quieter point of view.")}</h2>
+   <div className={s.galleryLayout}><figure><img key={gallery} src={image(gallery+1)} alt={t("FORMA visual archive image")+" "+(gallery+1)}/><figcaption>{t("ARCHIVE")} / 0{gallery+1} {t("OF")} 04</figcaption></figure><div className={s.galleryAside}><span>{t("CURATED FRAMES")}</span><p>{t("Each image explores a different quality of light, structure and material.")}</p><div className={s.galleryControls}><button onClick={()=>setGallery(v=>(v+3)%4)} aria-label={t("Previous archive image")} type="button">←</button><span>0{gallery+1} / 04</span><button onClick={()=>setGallery(v=>(v+1)%4)} aria-label={t("Next archive image")} type="button">→</button></div><Link href={go("/about")}>{t("OUR PERSPECTIVE")} ↗</Link></div></div>
   </section>
-  <section className={s.finalCta} data-reveal><small>EVERY SPACE HAS A FIRST LINE</small><h2>Begin with a conversation.</h2><p>Tell us about a place, a material, or the way you want to live in a space.</p><Link href={go("/contact")}>START A CONVERSATION <span aria-hidden="true">↗</span></Link></section>
+  <section className={s.finalCta} data-reveal><small>{t("EVERY SPACE HAS A FIRST LINE")}</small><h2>{t("Begin with a conversation.")}</h2><p>{t("Tell us about a place, a material, or the way you want to live in a space.")}</p><Link href={go("/contact")}>{t("START A CONVERSATION")} <span aria-hidden="true">↗</span></Link></section>
  </div>;
 }
