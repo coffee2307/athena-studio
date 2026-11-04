@@ -42,7 +42,7 @@ const nextConfig:NextConfig={
  poweredByHeader:false,
  devIndicators:false,
  // Private project documents allow up to 8 MiB; request envelope has bounded overhead.
- experimental:{serverActions:{bodySizeLimit:"9mb"}},
+ experimental:{serverActions:{bodySizeLimit:"9mb"},...(process.env.ATHENA_LOW_MEMORY_BUILD==="1"?{cpus:1}:{})},
  async redirects(){return [
   {source:"/dich-vu/:path*",destination:"/services/:path*",permanent:true},
   {source:"/du-an/:path*",destination:"/projects/:path*",permanent:true},

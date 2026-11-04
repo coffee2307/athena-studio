@@ -9,13 +9,14 @@ import {ExperienceEffects} from "@/components/experience/ExperienceEffects";
 import {PageTransition} from "@/components/experience/PageTransition";
 import {AthenaPointerResponse} from "@/components/experience/AthenaPointerResponse";
 import {TemplateExperienceInfo} from "@/components/templates/TemplateExperienceInfo";
+import {TemplateLocaleBridge} from "@/components/templates/TemplateLocaleBridge";
 import {AthenaLanguageProvider} from "@/components/i18n/AthenaLanguageProvider";
 
 export function SiteChrome({children}:{children:ReactNode}){
  const pathname=usePathname();
  const isAuthenticationPage=pathname==="/login"||pathname==="/signup"||pathname==="/forgot-password";
  if(pathname.startsWith("/template-demos/")){
-  return <main id="main-content" className="template-demo-main">{children}<TemplateExperienceInfo slug={pathname.split("/")[2]}/></main>;
+  return <TemplateLocaleBridge slug={pathname.split("/")[2]}><main id="main-content" className="template-demo-main">{children}<TemplateExperienceInfo slug={pathname.split("/")[2]}/></main></TemplateLocaleBridge>;
  }
  if(isAuthenticationPage){
   return <AthenaLanguageProvider><AuthSessionProvider>
