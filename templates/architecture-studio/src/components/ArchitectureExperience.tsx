@@ -31,6 +31,10 @@ export function ArchitectureExperience({basePath="",assetBase="",images}:{basePa
  const root=useRef<HTMLDivElement>(null);
  const go=(path:string)=>basePath+(path==="/"?"":path);
  const image=(i:number)=>assetBase+images[i%images.length];
+ const architecturalPhoto=assetBase+"/images/forma-photo-user.webp";
+ const architecturalDrawing=assetBase+"/images/forma-drawing-user.webp";
+ const [planProgress,setPlanProgress]=useState(0);
+ const planSection=useRef<HTMLElement>(null);
  useEffect(()=>{
   const node=root.current;
   if(!node)return;
@@ -57,6 +61,22 @@ export function ArchitectureExperience({basePath="",assetBase="",images}:{basePa
    });
   }
   return()=>{observer.disconnect();revealObserver.disconnect();};
+ },[]);
+ useEffect(()=>{
+  const node=planSection.current;if(!node)return;
+  let raf=0;
+  const measure=()=>{
+   raf=0;if(document.hidden)return;
+   const r=node.getBoundingClientRect(),distance=Math.max(1,r.height-window.innerHeight);
+   const p=Math.max(0,Math.min(1,-r.top/distance));
+   setPlanProgress(prev=>Math.abs(prev-p)>.003?p:prev);
+  };
+  const onScroll=()=>{if(!raf)raf=requestAnimationFrame(measure)};
+  window.addEventListener("scroll",onScroll,{passive:true});
+  window.addEventListener("resize",onScroll);
+  document.addEventListener("visibilitychange",onScroll);
+  onScroll();
+  return()=>{window.removeEventListener("scroll",onScroll);window.removeEventListener("resize",onScroll);document.removeEventListener("visibilitychange",onScroll);cancelAnimationFrame(raf)};
  },[]);
  const active=chapters[chapter];
  return <div ref={root} className={s.experience} data-forma-home>
@@ -102,18 +122,13 @@ export function ArchitectureExperience({basePath="",assetBase="",images}:{basePa
     <div className={s.projectCaption}><small>0{i+1} / {p.type}</small><h3>{p.title}</h3><p>{p.description}</p></div>
    </Link>)}</div>
   </section>
-  <section className={s.planStudy} aria-label="The making of a plan">
+  <section ref={planSection} className={s.planStudy} aria-label="The making of a plan">
    <div className={s.planVisual}>
     <div className={s.planPaper}>
-     <div className={s.planDrawing} data-plan={plan}>
-      <svg aria-hidden="true" viewBox="0 0 600 530" fill="none" stroke="currentColor" strokeWidth="1.5">
-       <path d="M86 86H510V446H86z M86 270H510 M282 86V446 M282 196H510 M86 360H282 M396 196V446"/>
-       <path d="M114 112H254V244H114z M310 112H482V174H310z M310 298H370V420H310z M419 218H482V420H419z"/>
-       <path d="M86 72V55M510 72V55M86 60H510 M70 86H52M70 446H52M58 86V446" strokeDasharray="5 6"/>
-       <circle cx="282" cy="270" r="38"/><path d="M246 270h72M282 234v72" strokeDasharray="3 7"/>
-       <path d="M140 270q0 48 48 48 M282 364q50 0 50-50 M396 226q-48 0-48 48"/>
-      </svg>
-      <div className={s.planScan} aria-hidden="true"/>
+     <div className={s.planDrawing} data-plan={plan} style={{"--plan-reveal":Math.round(planProgress*100)+"%"} as CSSProperties}>
+      <img className={s.planAsset} src={architecturalDrawing} alt="Technical architectural perspective supplied for FORMAs drawing study"/>
+      <div className={s.planRevealLine} aria-hidden="true"/>
+      <div className={s.planStageLabel}><span>ARCHITECTURAL DRAWING / 0{plan+1}</span><span>{plan===0?"COMPOSITION":plan===1?"SPATIAL LOGIC":"CONSTRUCTION DETAIL"}</span></div>
      </div>
      <div className={s.planFoot}><span>PLATE 002 / DRAWING STUDY</span><span>1:100 / CONCEPT</span></div>
     </div>
@@ -124,13 +139,13 @@ export function ArchitectureExperience({basePath="",assetBase="",images}:{basePa
   </section>
   <section className={s.compareSection} data-reveal>
    <div className={s.sectionTop}><span>03 / FROM DRAWING TO BUILT</span><span>INTERACTIVE STUDY</span></div>
-   <div className={s.compareIntro}><h2>Drawn, then built.</h2><p>Move the divider to explore the relationship between a conceptual line drawing and its architectural photograph. An illustrative demonstration, not a real before-and-after project.</p></div>
+   <div className={s.compareIntro}><h2>Drawn, then built.</h2><p>Drag the divider to compare the detailed drawing with its corresponding architectural photograph. This is a visual design study.</p></div>
    <div className={s.comparison} style={{"--compare":compare+"%"} as CSSProperties}>
-    <img className={s.afterImage} src={image(3)} alt="Architectural photograph used in comparison"/>
-    <div className={s.beforeImage} aria-hidden="true"><img src={image(3)} alt=""/><div className={s.drawingOverlay}><svg viewBox="0 0 700 500" preserveAspectRatio="none" fill="none" stroke="currentColor" strokeWidth="1.25"><path d="M0 300L170 90L480 110L700 330 M130 500L210 155L460 180L600 500 M0 445L700 445 M210 155L210 500 M460 180L460 500 M170 90L170 500 M480 110L480 500"/><path d="M0 250H700M0 360H700M320 0V500" strokeDasharray="4 8"/></svg></div></div>
+    <img className={s.afterImage} src={architecturalPhoto} alt="Interior photograph of the architectural project"/>
+    <div className={s.beforeImage} aria-hidden="true"><img src={architecturalDrawing} alt=""/></div>
     <div className={s.compareDivider} aria-hidden="true"><span>↔</span></div>
-    <span className={s.beforeLabel}>LINE STUDY</span><span className={s.afterLabel}>PHOTOGRAPH</span>
-    <input aria-label="Reveal line study versus architectural photograph" className={s.compareRange} type="range" min="0" max="100" step="1" value={compare} onChange={e=>setCompare(Number(e.target.value))}/>
+    <span className={s.beforeLabel}>ARCHITECTURAL DRAWING</span><span className={s.afterLabel}>PHOTOGRAPH</span>
+    <input aria-label="Reveal architectural drawing versus interior photograph" className={s.compareRange} type="range" min="0" max="100" step="1" value={compare} onChange={e=>setCompare(Number(e.target.value))}/>
    </div>
   </section>
   <section className={s.materialSection} data-reveal>

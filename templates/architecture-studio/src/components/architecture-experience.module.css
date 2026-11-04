@@ -220,3 +220,23 @@
  .experience [data-reveal][data-pending="true"]{opacity:1!important;transform:none!important}
  .storyChapter{opacity:1}
 }
+
+/* FORMA V2 verified image comparison */
+.planStudy{background:#dcd7cd}
+.planVisual{padding:clamp(18px,3.4vw,58px)}
+.planPaper{background:#f5f2ed;border:1px solid #c3baac;box-shadow:0 12px 48px rgba(48,40,29,.09);padding:clamp(12px,1.65vw,26px)}
+.planDrawing{position:relative;background:#fbfaf7;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.planDrawing .planAsset{display:block;width:100%;height:100%;object-fit:contain;filter:none;transform:none;max-height:100%;clip-path:inset(0 calc(100% - var(--plan-reveal)) 0 0);transition:none}
+.planRevealLine{position:absolute;top:0;bottom:0;width:1px;left:var(--plan-reveal);background:#87776578;pointer-events:none}
+.planStageLabel{position:absolute;left:13px;bottom:13px;right:13px;display:flex;justify-content:space-between;gap:10px;background:#f6f2ebed;padding:10px 12px;color:#5c5447;font:700 9px/1.5 "Segoe UI",Arial,sans-serif;letter-spacing:.1em}
+.planFoot{border-top:1px solid #c9c2b7;margin-top:10px;color:#686053}
+.comparison{aspect-ratio:1250/848;height:auto;min-height:0;max-height:780px;background:#f4f0e9}
+.comparison .afterImage,.comparison .beforeImage img{object-fit:cover;object-position:center center;filter:none;transform:none}
+.comparison .beforeImage{clip-path:inset(0 calc(100% - var(--compare)) 0 0)}
+.comparison .compareDivider{background:#fff;box-shadow:0 0 14px #0004}
+.comparison .compareDivider span{background:#faf6ed;color:#312b23}
+.comparison .beforeLabel,.comparison .afterLabel{font-size:9px;background:#f7f3ecec;color:#302721}
+.comparison:focus-within{outline:3px solid #ad9273;outline-offset:3px}
+@media(max-width:850px){.planVisual{height:61svh;min-height:330px;padding:15px 5vw}.planPaper{padding:12px}.comparison{aspect-ratio:4/3;height:auto;min-height:300px}}
+@media(max-width:540px){.planVisual{height:52svh;min-height:320px}.planStageLabel{font-size:8px}.comparison{aspect-ratio:4/3;min-height:235px}.beforeLabel,.afterLabel{bottom:12px;font-size:8px}}
+@media(prefers-reduced-motion:reduce){.planDrawing .planAsset{clip-path:inset(0 0 0 0)!important}.planRevealLine{display:none}}
