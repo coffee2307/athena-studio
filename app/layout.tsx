@@ -59,6 +59,7 @@ import "@/app/template-navigation-identities.css";
 import "@/app/template-world-directions-v2.css";
 import "@/app/athena-dna04.css";
 import "@/public/athena-demo-info.css";
+import "@/app/athena-language.css";
 
 fontAwesomeConfig.autoAddCss = false;
 

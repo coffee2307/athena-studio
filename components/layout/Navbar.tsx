@@ -10,6 +10,7 @@ import {siteConfig} from "@/lib/constants";
 import {contactChannels} from "@/lib/contact-channels";
 import {ConsultationCTA} from "@/components/layout/ConsultationCTA";
 import {SessionNavigation} from "@/components/auth/SessionNavigation";
+import {AthenaLanguageSwitch} from "@/components/i18n/AthenaLanguageProvider";
 
 const solutions=[
  {href:"/services/web-development",title:"Thiết kế website",detail:"Website mới, landing page, trang bán hàng"},
@@ -89,6 +90,7 @@ export function Navbar(){
     <SessionNavigation/>
     <ConsultationCTA className="agency-primary-cta" label="Yêu cầu tư vấn" iconSize={17}/>
    </div>
+   <AthenaLanguageSwitch/>
    <button ref={trigger} type="button" className={open?"agency-menu-toggle is-open":"agency-menu-toggle"}
     aria-label={open?"Đóng menu":"Mở menu"} aria-expanded={open} aria-controls="athena-mobile-menu"
     onClick={()=>setOpen(o=>!o)} style={{touchAction:"manipulation"}}>

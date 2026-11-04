@@ -9,6 +9,7 @@ import {ExperienceEffects} from "@/components/experience/ExperienceEffects";
 import {PageTransition} from "@/components/experience/PageTransition";
 import {AthenaPointerResponse} from "@/components/experience/AthenaPointerResponse";
 import {TemplateExperienceInfo} from "@/components/templates/TemplateExperienceInfo";
+import {AthenaLanguageProvider} from "@/components/i18n/AthenaLanguageProvider";
 
 export function SiteChrome({children}:{children:ReactNode}){
  const pathname=usePathname();
@@ -17,17 +18,17 @@ export function SiteChrome({children}:{children:ReactNode}){
   return <main id="main-content" className="template-demo-main">{children}<TemplateExperienceInfo slug={pathname.split("/")[2]}/></main>;
  }
  if(isAuthenticationPage){
-  return <AuthSessionProvider>
+  return <AthenaLanguageProvider><AuthSessionProvider>
    <Navbar/>
    <main id="main-content" className="athena-auth-main">{children}</main>
-  </AuthSessionProvider>;
+  </AuthSessionProvider></AthenaLanguageProvider>;
  }
- return <AuthSessionProvider>
+ return <AthenaLanguageProvider><AuthSessionProvider>
   <Navbar/>
   <main id="main-content"><PageTransition>{children}</PageTransition></main>
   <Footer/>
   <ContactDock/>
   <ExperienceEffects/>
   <AthenaPointerResponse/>
- </AuthSessionProvider>;
+ </AuthSessionProvider></AthenaLanguageProvider>;
 }
