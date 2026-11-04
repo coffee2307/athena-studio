@@ -14,6 +14,13 @@ export function ContactForm({configured,siteKey}:Props){
  const [status,setStatus]=useState<Status>("idle"),[message,setMessage]=useState(""),[reference,setReference]=useState("");
  const [service,setService]=useState(""),[captcha,setCaptcha]=useState("");
  const [selectedTemplate,setSelectedTemplate]=useState("");
+ const [mobileEmailBrief,setMobileEmailBrief]=useState(false);
+ useEffect(()=>{
+  const media=window.matchMedia("(max-width: 767px)");
+  const sync=()=>setMobileEmailBrief(media.matches);
+  sync();media.addEventListener("change",sync);
+  return()=>media.removeEventListener("change",sync);
+ },[]);
  const updateCaptcha=useCallback((token:string)=>setCaptcha(token),[]);
  useEffect(()=>{const params=new URLSearchParams(window.location.search);const x=params.get("service");if(x&&["web-development","website-care","ai-integration","micro-saas","other"].includes(x))setService(x);const slug=params.get("template");if(slug&&getTemplate(slug)){setSelectedTemplate(slug);setService("web-development");}},[]);
  async function submit(event:FormEvent<HTMLFormElement>){
@@ -58,7 +65,7 @@ export function ContactForm({configured,siteKey}:Props){
    <p>Biểu mẫu trực tuyến chưa được kích hoạt. Bạn vẫn có thể gửi thông tin để trao đổi qua email; nút bên dưới mở một thư mẫu để bạn điền nhanh.</p>
    <button type="button" onClick={()=>showContactDialog("email")} className="pill-link pill-dark">Soạn email mô tả nhu cầu <Icon name="arrow-right" size={18}/></button>
   </div>
-   <details className="athena-email-brief-details" open={Boolean(selectedTemplate)}><summary>Hoặc chuẩn bị email theo nhu cầu cụ thể <Icon name="chevron-down" size={18}/></summary><ContactEmailBrief key={selectedTemplate||"default"} template={getTemplate(selectedTemplate)} defaultService={service}/></details>
+   <details className="athena-email-brief-details" open={Boolean(selectedTemplate)||mobileEmailBrief}><summary>Hoặc chuẩn bị email theo nhu cầu cụ thể <Icon name="chevron-down" size={18}/></summary><ContactEmailBrief key={selectedTemplate||"default"} template={getTemplate(selectedTemplate)} defaultService={service}/></details>
   </>}
   <p className="contact-notice">Nếu cần trao đổi trực tiếp, bạn có thể gọi điện hoặc gửi email qua phần Liên hệ phía dưới trang.</p>
  </div>;

@@ -49,3 +49,174 @@
 .athena-contact-dialog button{user-select:none}
 
 .athena-project-brief{border:0;border-top:1px solid #d3d3d3;margin:6px 0;padding:20px 0 0;display:grid;gap:18px;min-width:0}.athena-project-brief legend{padding:0 10px 0 0;font-size:11px;font-weight:650;letter-spacing:.03em;color:#343434}.athena-project-brief .brief-help{font-size:11px;line-height:1.7;color:#555;margin:0}.athena-project-brief select{min-height:44px}
+
+/* Contact page: mobile opens on the actual contact actions and inquiry form.
+   Desktop hero and guidance remain unchanged. */
+.athena-mobile-contact-entry{display:none}
+.athena-contact-form-column{min-width:0}
+@media(max-width:767px){
+ .athena-contact-page>.page-hero{display:none!important}
+ .athena-contact-page .athena-contact-section{
+  padding:18px 0 62px;
+  background:#fff;
+ }
+ .athena-contact-page .contact-area{
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  gap:0;
+ }
+ .athena-contact-page .athena-contact-sidebar{display:none}
+ .athena-contact-page .athena-mobile-contact-entry{
+  display:block;
+  width:100%;
+  margin:0 0 22px;
+ }
+ .athena-contact-page .athena-mobile-contact-kicker{
+  margin:0 0 9px;
+  font-size:10px;
+  line-height:1.5;
+  letter-spacing:.12em;
+  color:#596159;
+  font-weight:750;
+ }
+ .athena-contact-page .athena-mobile-contact-entry h1{
+  font-family:"Be Vietnam Pro",sans-serif;
+  font-size:clamp(28px,7.8vw,36px);
+  line-height:1.22;
+  font-weight:750;
+  letter-spacing:-.055em;
+  color:#171b19;
+  margin:0 0 17px;
+  overflow-wrap:normal;
+ }
+ .athena-contact-page .athena-mobile-contact-channels{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;
+ }
+ .athena-contact-page .athena-mobile-contact-channels a{
+  min-width:0;
+  min-height:61px;
+  border:1px solid #d9dddb;
+  background:#f8faf9;
+  border-radius:12px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  color:#171b19;
+  text-decoration:none;
+  font-size:12px;
+  font-weight:700;
+  line-height:1.3;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+ }
+ .athena-contact-page .athena-mobile-contact-channels a:first-child{
+  background:#f1f7ff;
+  border-color:#cee0f8;
+ }
+ .athena-contact-page .athena-mobile-contact-channels a:nth-child(2){
+  background:#eff9f2;
+  border-color:#cae8d2;
+ }
+ .athena-contact-page .athena-mobile-contact-channels img{
+  display:block;
+  width:23px;
+  height:23px;
+  object-fit:contain;
+ }
+ .athena-contact-page .athena-mobile-contact-channels svg{
+  width:23px;
+  height:23px;
+ }
+ .athena-contact-page .athena-mobile-contact-channels a:focus-visible{
+  outline:3px solid #1c5f99;
+  outline-offset:2px;
+ }
+ .athena-contact-page .athena-contact-form-column{width:100%;order:2}
+ .athena-contact-page .contact-box{
+  background:transparent;
+  padding:0;
+  margin:0;
+  border:0;
+ }
+ .athena-contact-page .contact-box>.small-index,
+ .athena-contact-page .contact-box>h2,
+ .athena-contact-page .contact-box>p:not(.contact-notice),
+ .athena-contact-page .contact-box>.form-offline{
+  display:none;
+ }
+ .athena-contact-page .contact-box .athena-email-brief-details{
+  margin:0;
+  background:transparent;
+  border:0;
+ }
+ .athena-contact-page .contact-box .athena-email-brief-details>summary{
+  display:none;
+ }
+ .athena-contact-page .contact-box .athena-email-brief{
+  padding:0;
+ }
+ .athena-contact-page .contact-box .athena-email-brief-heading>span{
+  font-size:10px;
+  color:#383d3a;
+  font-weight:800;
+  letter-spacing:.08em;
+ }
+ .athena-contact-page .contact-box .athena-email-brief-heading p{
+  margin:7px 0 0;
+  font-size:12px;
+  line-height:1.65;
+  color:#626963;
+ }
+ .athena-contact-page .contact-box .inquiry-form{
+  margin-top:17px;
+  gap:15px;
+ }
+ .athena-contact-page .contact-box .inquiry-form label{
+  gap:7px;
+  font-size:12px;
+ }
+ .athena-contact-page .contact-box .inquiry-form :is(input,select,textarea){
+  font-size:16px;
+  min-height:48px;
+  padding:13px 14px;
+ }
+ .athena-contact-page .contact-box .inquiry-form textarea{min-height:116px}
+ .athena-contact-page .contact-box .contact-notice{
+  margin-top:18px!important;
+  padding-top:14px;
+  font-size:11px!important;
+  line-height:1.65;
+ }
+ body:has(.athena-contact-page) .agency-contact-dock{display:none}
+}
+
+@media(max-width:767px){
+ /* Keep required asterisks beside labels rather than on separate rows. */
+ .athena-contact-page .athena-email-brief-form>.field-pair>label,
+ .athena-contact-page .athena-email-brief-form>label{
+  display:grid;
+  grid-template-columns:max-content min-content minmax(0,1fr);
+  align-items:baseline;
+  column-gap:4px;
+  row-gap:8px;
+ }
+ .athena-contact-page .athena-email-brief-form>.field-pair>label>span,
+ .athena-contact-page .athena-email-brief-form>label>span{
+  grid-column:2;
+  grid-row:1;
+ }
+ .athena-contact-page .athena-email-brief-form>.field-pair>label>input,
+ .athena-contact-page .athena-email-brief-form>label>select,
+ .athena-contact-page .athena-email-brief-form>label>textarea{
+  grid-column:1/-1;
+  grid-row:2;
+ }
+ .athena-contact-page .template-inquiry-selection{margin:0 0 19px}
+ /* The global footer sales hero repeats the form's CTA on this mobile page. */
+ body:has(.athena-contact-page) .agency-footer-cta{display:none}
+}
