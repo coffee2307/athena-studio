@@ -1,6 +1,8 @@
 "use client";
 import {createContext,useContext,useEffect,useMemo,useRef,useState,type ReactNode} from "react";
 import translations from "@/lib/athena-language-en.json";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faGlobe} from "@fortawesome/free-solid-svg-icons";
 
 export type AthenaLanguage="vi"|"en";
 const storageKey="athena-studio-language";
@@ -96,9 +98,23 @@ export function AthenaLanguageProvider({children}:{children:ReactNode}){
 }
 export function AthenaLanguageSwitch(){
  const {language,setLanguage}=useAthenaLanguage();
- return <div className="athena-language-switch" role="group" aria-label={language==="vi"?"Ngôn ngữ hiển thị":"Display language"} data-athena-no-translate>
-  <button type="button" lang="vi" aria-label="Tiếng Việt" aria-pressed={language==="vi"} onClick={()=>setLanguage("vi")}>VI</button>
-  <span aria-hidden="true">/</span>
-  <button type="button" lang="en" aria-label="English" aria-pressed={language==="en"} onClick={()=>setLanguage("en")}>EN</button>
+ const [open,setOpen]=useState(false);
+ const ref=useRef<HTMLDivElement>(null);
+ useEffect(()=>{
+  if(!open)return;
+  const close=(event:PointerEvent)=>{if(ref.current&&!ref.current.contains(event.target as Node))setOpen(false);};
+  const escape=(event:KeyboardEvent)=>{if(event.key==="Escape")setOpen(false);};
+  document.addEventListener("pointerdown",close);
+  document.addEventListener("keydown",escape);
+  return()=>{document.removeEventListener("pointerdown",close);document.removeEventListener("keydown",escape);};
+ },[open]);
+ return <div ref={ref} className="athena-language-switch" data-athena-no-translate>
+  <button type="button" className="athena-language-trigger" aria-label={language==="vi"?"Chọn ngôn ngữ":"Choose language"} aria-haspopup="menu" aria-controls="athena-language-options" aria-expanded={open} onClick={()=>setOpen(value=>!value)}>
+   <FontAwesomeIcon icon={faGlobe} aria-hidden="true"/><span className="athena-language-current">{language.toUpperCase()}</span>
+  </button>
+  {open&&<div id="athena-language-options" className="athena-language-options" role="menu" aria-label="Language">
+   <button type="button" role="menuitemradio" lang="vi" aria-checked={language==="vi"} onClick={()=>{setLanguage("vi");setOpen(false);}}>Tiếng Việt <span>VI</span></button>
+   <button type="button" role="menuitemradio" lang="en" aria-checked={language==="en"} onClick={()=>{setLanguage("en");setOpen(false);}}>English <span>EN</span></button>
+  </div>}
  </div>;
 }
