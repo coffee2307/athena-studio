@@ -119,9 +119,9 @@ export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:Props
       <img key={feature.image} src={media[feature.image]} alt={feature.title}/>
       <figcaption>{feature.label}</figcaption>
       <div className={s.photoControls} role="group" aria-label="Chọn câu chuyện hình ảnh">
-       <button type="button" aria-label="Hình trước" onClick={()=>setStory(i=>(i+stories.length-1)%stories.length)}>←</button>
+       <button type="button" aria-label="Hình trước" onClick={()=>setStory(i=>(i+stories.length-1)%stories.length)}><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M20 12H4m7-7-7 7 7 7"/></svg></button>
        <span>0{story+1} / 0{stories.length}</span>
-       <button type="button" aria-label="Hình tiếp theo" onClick={()=>setStory(i=>(i+1)%stories.length)}>→</button>
+       <button type="button" aria-label="Hình tiếp theo" onClick={()=>setStory(i=>(i+1)%stories.length)}><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M4 12h16m-7-7 7 7-7 7"/></svg></button>
       </div>
      </figure>
      <div className={s.heroWords}>

@@ -588,3 +588,7 @@
  .root .tableStage .heroFigure img,.root .featuredDish img,.root .bookingForm label input,.root .bookingForm label select,.root .bookingForm label textarea{transition:none!important}
  .root .tableStage .heroFigure:hover img{transform:none!important}
 }
+
+/* Paired navigation icons: identical dimensions and stroke on every device. */
+.root .photoControls button svg{display:block;width:24px;height:24px;flex:none;stroke:currentColor;stroke-width:1.7;vector-effect:non-scaling-stroke}
+.root .photoControls button{padding:0;align-items:center;justify-items:center}
