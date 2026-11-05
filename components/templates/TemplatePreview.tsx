@@ -8,7 +8,7 @@ export function TemplatePreview({template,device="desktop",language="vi"}:{templ
  return <div className="template-device-frame" data-device={device}>
   <div className="template-thumbnail">
    <div className="template-thumbnail-browser" aria-hidden="true"><span className="template-browser-dots"><i/><i/><i/></span><span>{template.slug}.preview</span><span></span></div>
-   <div className="template-thumbnail-screen"><Image className="template-thumbnail-image" src={screenshot} alt={(language==="en"?"Screenshot of the ":"Ảnh chụp giao diện website ")+template.title} fill sizes="(max-width: 640px) 100vw, (max-width: 1050px) 50vw, 33vw" priority={false}/></div>
+   <div className="template-thumbnail-screen"><Image key={template.slug+"-"+language} className="template-thumbnail-image" src={screenshot} alt={(language==="en"?"Screenshot of the ":"Ảnh chụp giao diện website ")+template.title} fill sizes="(max-width: 640px) 100vw, (max-width: 1050px) 50vw, 33vw" priority={false}/></div>
   </div>
  </div>;
 }

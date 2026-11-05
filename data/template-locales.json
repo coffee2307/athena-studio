@@ -1847,8 +1847,8 @@
     "Khám phá McLaren P1 qua năm góc nhìn 3D. Kéo ngang để xoay, dùng nút + và − để quan sát chi tiết, hoặc cuộn xuống để tiếp tục hành trình.": "Explore the McLaren P1 through five 3D perspectives. Drag horizontally to rotate, use the + and − buttons to observe details, or scroll down to continue your journey.",
     "XEM NĂM GÓC NHÌN": "SEE FIVE PERSPECTIVES",
     "BA NGHIÊN CỨU THIẾT KẾ": "THREE DESIGN STUDIES",
-    "Đang tải mô hình McLaren": "Loading McLaren models",
-    "Đang chuẩn bị trải nghiệm 3D…": "Preparing for a 3D experience…",
+    "Đang tải mô hình McLaren": "Loading the McLaren model",
+    "Đang chuẩn bị trải nghiệm 3D…": "Preparing the 3D experience…",
     "Camera chuyển sang mặt bên, làm rõ chiều dài thân xe và cách các bề mặt nối tiếp nhau từ đầu đến đuôi.": "The camera moves to the side, clarifying the length of the car's body and how the surfaces flow from head to tail.",
     "Quan sát mâm xe, các vùng sơn tối và chi tiết vật liệu ngay trên mô hình 3D khi camera tiến lại gần.": "Observe the wheels, dark paint areas, and material details right on the 3D model as the camera gets closer.",
     "Đi vòng ra phía sau để nhìn cánh gió, khe mở và hình khối đuôi xe từ góc khó thấy ở toàn cảnh.": "Go around to the rear to see the spoiler, openings and shape of the rear of the car from an angle that's hard to see in full view.",
@@ -1859,7 +1859,7 @@
     "Đóng điều hướng BLACK VELOCITY": "Close BLACK VELOCITY navigation",
     "Điều hướng mở rộng BLACK VELOCITY": "BLACK VELOCITY extended navigation",
     "Đóng menu showroom": "Close the showroom menu",
-    "Tiến độ tải mô hình McLaren": "McLaren model download progress",
+    "Tiến độ tải mô hình McLaren": "McLaren model loading progress",
     "Điều chỉnh mức phóng đại xe 3D": "Adjust the 3D vehicle magnification level",
     "Phóng to xe": "Zoom in on the car",
     "Thu nhỏ xe": "Minimize the car",
@@ -2154,7 +2154,12 @@
     "BLACK VELOCITY": "BLACK VELOCITY",
     "ATELIER ARCHIVE": "ATELIER ARCHIVE",
     "Digital Creators": "Digital Creators",
-    "MCLAREN P1": "MCLAREN P1"
+    "MCLAREN P1": "MCLAREN P1",
+    "Không thể hiển thị mô hình 3D": "Unable to display the 3D model",
+    "Bạn có thể thử tải lại hoặc chuyển sang nền studio tĩnh.": "Try reloading or switch to the static studio background.",
+    "Thử lại": "Retry",
+    "Dùng nền tĩnh": "Use static background",
+    "Đang hoàn thiện vật liệu và ánh sáng 3D…": "Finishing 3D materials and lighting…"
   },
   "meta": {
     "source": "public Athena Studio template demo copy",

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import {LocalizedTemplateImage} from "@/components/templates/LocalizedTemplateImage";
 import Link from "next/link";
 import {offerings} from "@/lib/offerings";
 
@@ -8,7 +8,7 @@ const services=offerings.filter(item=>item.slug!=="micro-saas");
 function ServiceScene({slug}:{slug:string}){
  if(slug==="web-development")return <div className="dna-scene dna-scene-web" aria-label="Ảnh giao diện website mẫu do Athena thiết kế">
   <div className="dna-browser-bar"><i/><i/><i/><span>studio / website preview</span></div>
-  <div className="dna-browser-preview"><Image src="/template-previews/creative-studio.jpg" alt="Bản xem trước SORA (Creative Studio) trong thư viện giao diện Athena" fill sizes="(max-width:760px) 92vw, (max-width:1020px) 45vw, 30vw" style={{objectFit:"contain",objectPosition:"center"}}/></div>
+  <div className="dna-browser-preview"><LocalizedTemplateImage slug="creative-studio" altVi="Bản xem trước SORA (Creative Studio) trong thư viện giao diện Athena" altEn="SORA (Creative Studio) website preview" fill sizes="(max-width:760px) 92vw, (max-width:1020px) 45vw, 30vw" style={{objectFit:"contain",objectPosition:"center"}}/></div>
   <span className="dna-scene-tag">DESIGN / DEVELOPMENT</span>
  </div>;
  if(slug==="website-care")return <div className="dna-scene dna-scene-care" aria-label="Quy trình chăm sóc website: kiểm tra, xác định ưu tiên, khắc phục">
