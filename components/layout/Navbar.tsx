@@ -8,7 +8,7 @@ import {navigation} from "@/data/navigation";
 import {Icon} from "@/components/ui/Icon";
 import {siteConfig} from "@/lib/constants";
 import {contactChannels} from "@/lib/contact-channels";
-import {ConsultationCTA} from "@/components/layout/ConsultationCTA";
+import {HeaderAccountActions,MobileConsultationAction} from "@/components/layout/HeaderAccountActions";
 import {SessionNavigation} from "@/components/auth/SessionNavigation";
 import {AthenaLanguageSwitch} from "@/components/i18n/AthenaLanguageProvider";
 
@@ -86,11 +86,7 @@ export function Navbar(){
     </details>
     {navigation.filter(i=>i.href!=="/services").map(i=><Link key={i.href} href={i.href} className={pathname===i.href||pathname.startsWith(i.href+"/")?"agency-nav-current":""}>{i.label}</Link>)}
    </nav>
-   <div className="agency-nav-actions">
-    <SessionNavigation/>
-    <ConsultationCTA className="agency-primary-cta" label="Yêu cầu tư vấn" iconSize={17}/>
-   </div>
-   <AthenaLanguageSwitch/>
+   <HeaderAccountActions/>
    <button ref={trigger} type="button" className={open?"agency-menu-toggle is-open":"agency-menu-toggle"}
     aria-label={open?"Đóng menu":"Mở menu"} aria-expanded={open} aria-controls="athena-mobile-menu"
     onClick={()=>setOpen(o=>!o)} style={{touchAction:"manipulation"}}>
@@ -114,9 +110,9 @@ export function Navbar(){
       {solutions.map((solution,index)=><Link href={solution.href} key={solution.href}><span className="agency-mobile-service-index">0{index+1}</span><span>{solution.title}</span><Icon name="arrow-right" size={15}/></Link>)}
      </div>
     </div>
-    <div className="agency-mobile-account"><SessionNavigation mobile/></div>
+    <div className="agency-mobile-account"><AthenaLanguageSwitch/><SessionNavigation mobile/></div>
     <div className="agency-mobile-contact">
-     <ConsultationCTA className="agency-mobile-cta" label="Gửi yêu cầu tư vấn" iconSize={18}/>
+     <MobileConsultationAction/>
      <div className="agency-mobile-contact-meta">
       <a href={contactChannels.phone} className="agency-mobile-email"><Icon name="phone" size={15}/>{siteConfig.phone}</a>
       <a href={contactChannels.email} className="agency-mobile-email"><Icon name="mail" size={15}/>Email</a>
