@@ -18,10 +18,28 @@ const attrNames=["placeholder","aria-label","title","alt"] as const;
 type Memo={source:string;last:string};
 const textMemo=new WeakMap<Text,Memo>();
 const attrMemo=new WeakMap<Element,Map<string,Memo>>();
+function translateDynamicLabel(key:string):string|undefined{
+ let match:RegExpExecArray|null;
+ if((match=/^Có thể thử lại sau (\d+)s$/.exec(key)))return "Try again in "+match[1]+"s";
+ if((match=/^Tham gia ngày (.+)$/.exec(key)))return "Member since "+match[1];
+ if((match=/^Xem trước website (.+)$/.exec(key)))return "Website preview: "+(en[match[1]]??match[1]);
+ if((match=/^Xem demo (.+)$/.exec(key)))return "View demo: "+(en[match[1]]??match[1]);
+ if((match=/^Giao diện mẫu (.+)$/.exec(key)))return "Template preview: "+(en[match[1]]??match[1]);
+ if((match=/^Chọn bản xem trước (.+)$/.exec(key)))return "Select preview: "+(en[match[1]]??match[1]);
+ if((match=/^(?:Ảnh chụp giao diện website|Ảnh chụp website mẫu) (.+)$/.exec(key)))return "Website screenshot: "+(en[match[1]]??match[1]);
+ if((match=/^(?:Website preview:|Demo website:) (.+)$/.exec(key)))return "Demo website: "+(en[match[1]]??match[1]);
+ if((match=/^Tiếp tục với (Google|GitHub)( \(chưa kết nối\))?$/.exec(key)))return "Continue with "+match[1]+(match[2]?" (not connected)":"");
+ if((match=/^Tiếp tục bằng (Google|GitHub)$/.exec(key)))return "Continue with "+match[1];
+ if((match=/^Chưa cấu hình ứng dụng OAuth (Google|GitHub)$/.exec(key)))return match[1]+" OAuth app not configured";
+ if((match=/^(.+?) (—|[|]) Athena Studio$/.exec(key))){
+  const title=en[match[1].trim()];if(title)return title+" "+match[2]+" Athena Studio";
+ }
+ return undefined;
+}
 function translateLiteral(raw:string,lang:AthenaLanguage){
  const key=raw.trim();
  if(!key)return raw;
- const translated=lang==="en"?en[key]:undefined;
+ const translated=lang==="en"?(en[key]??translateDynamicLabel(key)):undefined;
  if(!translated||translated===key)return raw;
  return raw.slice(0,raw.indexOf(key))+translated+raw.slice(raw.indexOf(key)+key.length);
 }

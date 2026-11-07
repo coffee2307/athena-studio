@@ -2,6 +2,7 @@ import Link from "next/link";
 import {notFound} from "next/navigation";
 import {Icon} from "@/components/ui/Icon";
 import {TemplatePreviewControls} from "@/components/templates/TemplatePreviewControls";
+import {LocalizedDemoLink} from "@/components/templates/LocalizedDemoLink";
 import {getTemplate,templates} from "@/lib/templates";
 import {createMetadata} from "@/lib/metadata";
 import "@/app/templates.css";
@@ -16,7 +17,7 @@ export default async function TemplateDetailPage({params}:Props){
   <section className="page-hero"><div className="container">
    <p className="page-kicker"><Link href="/services/web-development/templates">THƯ VIỆN MẪU</Link><span aria-hidden="true"> / </span>{item.category.toLocaleUpperCase("vi")}</p>
    <h1>{item.title}<br/><em>{item.style} / {item.industry}</em></h1>
-   <div className="page-hero-lede"><p>{item.description} Mở demo để thử bộ lọc, điều hướng và các tương tác mô phỏng; nội dung, ảnh và chức năng có thể được thay theo dự án.</p><Link href={item.demoPath} className="pill-link pill-dark" target="_blank">Mở demo toàn trang <Icon name="arrow-right" size={18}/></Link></div>
+   <div className="page-hero-lede"><p>{item.description} Mở demo để thử bộ lọc, điều hướng và các tương tác mô phỏng; nội dung, ảnh và chức năng có thể được thay theo dự án.</p><LocalizedDemoLink slug={item.slug} href={item.demoPath}/></div>
   </div></section>
   <section className="page-section"><div className="container template-detail-grid">
    <div><TemplatePreviewControls template={item}/><p className="template-preview-disclaimer">Đây là website demo hoạt động độc lập. Biểu mẫu, đặt lịch và thanh toán chỉ mô phỏng, không gửi dữ liệu hoặc tạo giao dịch thật.</p></div>

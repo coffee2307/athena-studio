@@ -15,7 +15,7 @@ export function TemplatePreviewControls({template}:{template:Template}){
    <a href={demo} target="_blank" rel="noopener noreferrer">Mở toàn trang </a>
   </div>
   <div className={"template-detail-iframe template-detail-iframe-"+device}>
-   <iframe key={template.slug+"-"+language} src={demo+(demo.includes("?")?"&":"?")+"embed=1"} title={"Website demo: "+template.title} loading="lazy"/>
+   <iframe key={template.slug+"-"+language} src={demo+(demo.includes("?")?"&":"?")+"embed=1"} title={(language==="en"?"Demo website: ":"Trang web mẫu: ")+template.title} loading="lazy"/>
   </div>
  </div>;
 }

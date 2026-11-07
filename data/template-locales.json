@@ -2159,7 +2159,12 @@
     "Bạn có thể thử tải lại hoặc chuyển sang nền studio tĩnh.": "Try reloading or switch to the static studio background.",
     "Thử lại": "Retry",
     "Dùng nền tĩnh": "Use static background",
-    "Đang hoàn thiện vật liệu và ánh sáng 3D…": "Finishing 3D materials and lighting…"
+    "Đang hoàn thiện vật liệu và ánh sáng 3D…": "Finishing 3D materials and lighting…",
+    "Đóng lời mời": "Close Invitation",
+    "ATHENA STUDIO / CÙNG BẠN LÀM RIÊNG": "ATHENA STUDIO / CUSTOMIZE YOUR WEBSITE",
+    "Bạn có thích mẫu này?": "Like This Design?",
+    "Hãy cho Athena biết điều bạn muốn giữ lại. Chúng tôi sẽ tùy biến giao diện theo thương hiệu, nội dung và cách bạn vận hành.": "Tell Athena which elements you want to keep. We'll tailor the design to your brand, content and workflow.",
+    "Tiếp tục xem demo": "Continue Exploring Demo"
   },
   "meta": {
     "source": "public Athena Studio template demo copy",
