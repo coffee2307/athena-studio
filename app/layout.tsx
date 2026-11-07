@@ -60,7 +60,6 @@ import "@/app/template-world-directions-v2.css";
 import "@/app/athena-dna04.css";
 import "@/public/athena-demo-info.css";
 import "@/app/athena-language.css";
-import "@/app/athena-auth-actions.css";
 
 fontAwesomeConfig.autoAddCss = false;
 
