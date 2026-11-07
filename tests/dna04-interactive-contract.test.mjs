@@ -20,8 +20,9 @@ test("all independent templates keep stable panels without cursor-driven tilt",(
  for(const slug of slugs.filter(x=>x!=="digital-creators"&&x!=="auto-showroom")){
   const base="templates/"+slug+"/src/components/";
   const site=read(base+"Site.tsx");
-  const cssfile=readdirSync(base).find(f=>f.endsWith(".module.css")&&f!=="FashionHero3D.module.css");
-  assert.ok(cssfile,"Independent CSS required for "+slug);
+  const imported=site.match(/import\s+\w+\s+from\s+["\u0027]\.\/([^"\u0027]+\.module\.css)["\u0027]/);
+  const cssfile=imported?.[1];
+  assert.ok(cssfile&&readdirSync(base).includes(cssfile),"Site must import an independent CSS module for "+slug);
   const css=read(base+cssfile);
   assert.doesNotMatch(site,/dna04Pointer|onPointerMove=\{dna04Pointer\}|onPointerOut=\{dna04PointerOut\}/,"Unwanted pointer-driven panel transforms in "+slug);
   assert.doesNotMatch(css,/--dna04-(?:shift|tilt|small-rotate|point)|transform:[^;{}]*rotate[XY]?\(var\(--dna04/,"Cursor-driven transforms must be absent in "+slug);

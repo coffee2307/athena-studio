@@ -64,10 +64,10 @@ test("Footer and contact shortcuts expose phone, email, WhatsApp and Zalo links"
  await expect(page.locator(".agency-footer-column a[href='/legal/service-policy']")).toBeVisible();
  const dock=page.getByRole("navigation",{name:"Liên hệ nhanh"});
  if(isMobile){
-  const toggle=dock.locator(".agency-contact-toggle");
-  await expect(toggle).toHaveAttribute("aria-expanded","false");
-  await toggle.click();
-  await expect(toggle).toHaveAttribute("aria-expanded","true");
+  // Three independent contact actions remain directly visible on mobile.
+  await expect(dock.locator(".agency-contact-toggle")).toHaveCount(0);
+  await expect(dock.getByRole("link")).toHaveCount(3);
+  await expect(dock.getByRole("link").first()).toBeVisible();
  }
  await expect(dock.getByRole("link",{name:/Gọi điện/})).toHaveAttribute("href","tel:+84965747147");
  await expect(dock.getByRole("link",{name:/WhatsApp/})).toHaveAttribute("href","https://wa.me/84965747147");
@@ -79,11 +79,11 @@ test("Footer and contact shortcuts expose phone, email, WhatsApp and Zalo links"
 
 test("Business process and pricing pages explain deliverables, customer responsibilities and cost scope",async({page})=>{
  await page.goto("/process");
- await expect(page.getByRole("heading",{level:1})).toContainText("Làm rõ đầu ra");
- await expect(page.locator(".dna02-journey-stop")).toHaveCount(6);
- await page.locator(".dna02-journey-details").first().locator("summary").click();
- await expect(page.locator(".dna02-journey-details")).toContainText("Bạn chuẩn bị");
- await page.getByRole("link",{name:/Xem cách Athena lập báo giá/}).click();
+ await expect(page.getByRole("heading",{level:1})).toContainText("Từ một");
+ await expect(page.locator(".dna04-blueprint-steps button")).toHaveCount(6);
+ await expect(page.locator(".dna04-blueprint-chapter")).toHaveCount(6);
+ await expect(page.locator(".dna04-process-commercial")).toContainText("chi phí mơ hồ");
+ await page.locator(".dna04-process-commercial a[href='/pricing']").click();
  await expect(page).toHaveURL(/\/pricing$/);
  await expect(page.locator(".agency-price-card")).toHaveCount(3);
  await expect(page.locator(".agency-pricing-inclusions>div")).toHaveCount(6);

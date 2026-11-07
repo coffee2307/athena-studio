@@ -82,7 +82,7 @@
 .root .tableStage .heroWords .heroActions a:first-child{background:var(--ink);color:var(--paper)}
 .root .tableStage .heroWords .heroActions a:last-child{border:0;background:transparent;padding-inline:7px;color:var(--ink);text-decoration:underline;text-underline-offset:7px}
 .root .tableStage .heroWords .heroActions a:hover{transform:translateY(-2px)}
-.root .demoHint{display:block;margin-top:20px;max-width:42ch;font-size:11px;line-height:1.5;color:#65736a}
+.root .demoHint{display:block;margin-top:20px;max-width:42ch;font-size:11px;line-height:1.5;color:#455c4c}
 .root .storyRail{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:7vw;align-items:start;padding:105px 7vw;background:#e5dccd}
 .root .storyRailIntro>small,.root .featuredTitle small,.root .homeInvitation small,.root .menuIntro small,.root .kitchenOpening small,.root .kitchenEnd small,.root .aboutCopy small,.root .bookingIntro small,.root .contactIntro small{font-size:10px;font-weight:800;letter-spacing:.13em}
 .root .storyRailIntro h2{font:700 clamp(40px,4.4vw,76px)/1.2 var(--display);margin:24px 0;max-width:11ch;letter-spacing:-.05em}
@@ -592,3 +592,7 @@
 /* Paired navigation icons: identical dimensions and stroke on every device. */
 .root .photoControls button svg{display:block;width:24px;height:24px;flex:none;stroke:currentColor;stroke-width:1.7;vector-effect:non-scaling-stroke}
 .root .photoControls button{padding:0;align-items:center;justify-items:center}
+
+/* Contrast improvements for small labels and action text on warm surfaces. */
+.root .tableStage .heroWords small{color:#4b614e}
+.root .featuredDish strong{color:#765636}

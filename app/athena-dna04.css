@@ -18,7 +18,7 @@
 .dna04-about-cta a:first-child{background:#1e2d26;color:#f5f6ed}
 .dna04-about-cta a:last-child{color:#1e2d26}
 @media(hover:hover){.dna04-about-cta a:hover{transform:translateY(-4px)}.dna04-about-cta a:last-child:hover{background:#c5d1b8}}
-.dna04-about-footnote{font-size:11px;letter-spacing:.08em;color:#667267;margin-top:44px}
+.dna04-about-footnote{font-size:11px;letter-spacing:.08em;color:#4b5d50;margin-top:44px}
 .dna04-desk{position:relative;background:#d9dfd1;border:1px solid #b8c2b2;padding:24px;min-width:0;border-radius:3px;box-shadow:24px 24px 0 #c8d1c1}
 .dna04-desk-top{display:flex;justify-content:space-between;gap:10px;font:800 10px/1.4 "Be Vietnam Pro",sans-serif;letter-spacing:.06em;color:#40544a}
 .dna04-desk-visual{position:relative;min-height:385px;display:flex;align-items:center;justify-content:center;perspective:1100px;isolation:isolate}
@@ -35,23 +35,23 @@
 .dna04-desk-slip small{font-size:9px;font-weight:850}.dna04-desk-slip strong{font-size:30px;line-height:1;align-self:flex-end}
 .dna04-desk-tabs{display:flex;gap:5px;border-top:1px solid #b7c4b0;padding-top:14px}
 .dna04-desk-tabs button{flex:1;min-height:46px;border:1px solid #b6c2af;background:#e1e9dd;display:flex;align-items:center;justify-content:center;gap:7px;font-weight:750;font-size:12px;color:#284236;cursor:pointer;transition:transform .2s ease,background .2s ease}
-.dna04-desk-tabs button span{font-size:10px;color:#5e7465}.dna04-desk-tabs button[aria-pressed="true"]{background:#284236;color:#fff}.dna04-desk-tabs button[aria-pressed="true"] span{color:#c5dcc8}
+.dna04-desk-tabs button span{font-size:10px;color:#405b49}.dna04-desk-tabs button[aria-pressed="true"]{background:#284236;color:#fff}.dna04-desk-tabs button[aria-pressed="true"] span{color:#c5dcc8}
 .dna04-desk-tabs button:hover{transform:translateY(-3px)}
 .dna04-desk-description{display:flex;justify-content:space-between;align-items:end;gap:22px;padding-top:22px}
 .dna04-desk-description>div{max-width:360px}
-.dna04-desk-description small{font-size:10px;letter-spacing:.06em;color:#527061;font-weight:800}
+.dna04-desk-description small{font-size:10px;letter-spacing:.06em;color:#385646;font-weight:800}
 .dna04-desk-description h2{font-size:clamp(21px,2vw,28px);line-height:1.3;margin:6px 0 9px}
 .dna04-desk-description p{font-size:12px;line-height:1.7;margin:0;color:#4f6054}
 .dna04-desk-description>a{flex-shrink:0;color:#264537;font-weight:800;border-bottom:1px solid #385b49;padding-bottom:9px;font-size:11px}
 .dna04-about-principles-section{padding:110px 0;background:#faf9f4}
 .dna04-section-heading{margin-bottom:50px;display:grid;grid-template-columns:1fr 1.35fr;gap:30px}
-.dna04-section-heading>span,.dna04-about-proof-head>span{font-size:11px;font-weight:750;letter-spacing:.12em;color:#5c695e}
+.dna04-section-heading>span,.dna04-about-proof-head>span{font-size:11px;font-weight:750;letter-spacing:.12em;color:#405347}
 .dna04-section-heading h2,.dna04-about-proof-head h2{font-size:clamp(44px,5vw,72px);line-height:1.12;margin:0}
 .dna04-section-heading>p{grid-column:2;max-width:510px;color:#687066;line-height:1.8;font-size:15px;margin:0}
 .dna04-principles{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .dna04-principles-nav{border-top:1px solid #b7bfb2}
 .dna04-principles-nav button{appearance:none;width:100%;display:grid;grid-template-columns:45px 1fr 30px;align-items:center;text-align:left;gap:12px;min-height:100px;padding:17px 16px;background:transparent;border:0;border-bottom:1px solid #bec6b9;color:#2f3e33;cursor:pointer;transition:padding .25s,background .25s}
-.dna04-principles-nav button>span:first-child{font-size:11px;color:#6b746b}
+.dna04-principles-nav button>span:first-child{font-size:11px;color:#495a4b}
 .dna04-principles-nav button strong{font-size:clamp(15px,1.5vw,21px);line-height:1.45}
 .dna04-principles-nav button>span:last-child{justify-self:end;font-size:24px;font-weight:400}
 .dna04-principles-nav button[aria-pressed="true"]{background:#dce8d9;padding-left:28px}
@@ -106,7 +106,7 @@
 .dna04-blueprint-lede{line-height:1.85;color:#687568;font-size:14px;max-width:400px}
 .dna04-blueprint-steps{margin-top:35px;border-top:1px solid #c0c9be}
 .dna04-blueprint-steps button{appearance:none;display:flex;align-items:center;gap:20px;text-align:left;background:transparent;color:#35483b;width:100%;border:0;border-bottom:1px solid #d5dbd2;padding:15px 0;min-height:53px;cursor:pointer;transition:padding-left .2s,background .2s}
-.dna04-blueprint-steps button span{font-size:10px;color:#657b66;font-weight:800}
+.dna04-blueprint-steps button span{font-size:10px;color:#445d48;font-weight:800}
 .dna04-blueprint-steps button strong{font-size:12px;font-weight:650}
 .dna04-blueprint-steps button i{width:7px;height:7px;margin-left:auto;border:1px solid #94a896;border-radius:50%}
 .dna04-blueprint-steps button[aria-pressed="true"]{background:#e1eadf;padding-left:15px}
@@ -124,10 +124,10 @@
 .dna04-blueprint-art-lines i{height:3px;background:#bfcbbc;width:80%}
 .dna04-blueprint-art-lines i:nth-child(2){width:65%}.dna04-blueprint-art-lines i:nth-child(3){width:48%}
 .dna04-blueprint-art-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:25px}
-.dna04-blueprint-art-tiles>div{min-height:55px;padding:10px 7px;background:#eff1eb;border:1px dashed #adb7ae;display:flex;flex-direction:column;justify-content:space-between;opacity:.3;transition:opacity .35s,background .35s}
+.dna04-blueprint-art-tiles>div{min-height:55px;padding:10px 7px;background:#eff1eb;border:1px dashed #adb7ae;display:flex;flex-direction:column;justify-content:space-between;opacity:1;color:#455846;transition:background .35s}
 .dna04-blueprint-art-tiles>div[data-ready="true"]{opacity:1;background:#d9e8d5;border-style:solid}
 .dna04-blueprint-art-tiles>div span{font-size:8px}.dna04-blueprint-art-tiles>div b{font-size:9px}
-.dna04-blueprint-stamp{position:absolute;right:0;bottom:24px;padding:14px 17px;background:#cc7655;color:#fff;font-size:10px;font-weight:750;transform:rotate(7deg)}
+.dna04-blueprint-stamp{position:absolute;right:0;bottom:24px;padding:14px 17px;background:#a3472b;color:#fff;font-size:10px;font-weight:750;transform:rotate(7deg)}
 .dna04-blueprint-stamp b{font-size:21px;display:block}
 .dna04-blueprint-current{position:relative;border-top:1px solid #9cad9f;display:flex;flex-direction:column;gap:5px;padding-top:17px;min-height:85px}
 .dna04-blueprint-current small{font-size:10px;letter-spacing:.1em;color:#536f55}
@@ -135,11 +135,11 @@
 .dna04-blueprint-chapters{padding-top:30px}
 .dna04-blueprint-chapter{min-height:380px;display:flex;flex-direction:column;justify-content:center;padding:45px 35px;margin-top:45px;background:#eef1e8;border-left:5px solid #c56f51;scroll-margin-top:150px}
 .dna04-blueprint-chapter:nth-child(even){background:#e8ebe4}
-.dna04-blueprint-chapter>span{font-size:10px;font-weight:800;letter-spacing:.1em;color:#8d684e}
+.dna04-blueprint-chapter>span{font-size:10px;font-weight:800;letter-spacing:.1em;color:#715035}
 .dna04-blueprint-chapter h3{font-size:clamp(22px,2.6vw,36px);line-height:1.22;margin:14px 0}
 .dna04-blueprint-chapter>p{line-height:1.85;color:#59695d;margin:0 0 22px;font-size:14px}
 .dna04-blueprint-responsibility{display:grid;grid-template-columns:1fr 1fr;gap:20px;border-top:1px solid #cbd2c5;padding-top:17px}
-.dna04-blueprint-responsibility small,.dna04-blueprint-mobile-output small{font-size:10px;letter-spacing:.08em;color:#5c7860;font-weight:800}
+.dna04-blueprint-responsibility small,.dna04-blueprint-mobile-output small{font-size:10px;letter-spacing:.08em;color:#426249;font-weight:800}
 .dna04-blueprint-responsibility p{font-size:12px;line-height:1.7;color:#435647}
 .dna04-blueprint-mobile-output{display:none}
 .dna04-process-commercial{background:#243b2f;color:#f2f6ec;padding:100px 0}
@@ -155,7 +155,7 @@
 .dna04-process-accordion details{border-bottom:1px solid #c4cdc1}
 .dna04-process-accordion summary{display:flex;align-items:center;gap:24px;list-style:none;padding:24px 8px;font-size:clamp(15px,1.55vw,19px);font-weight:700;cursor:pointer;min-height:76px}
 .dna04-process-accordion summary::-webkit-details-marker{display:none}
-.dna04-process-accordion summary span{font-size:10px;color:#727d72}
+.dna04-process-accordion summary span{font-size:10px;color:#536354}
 .dna04-process-accordion summary b{margin-left:auto;font-size:25px;font-weight:400}
 .dna04-process-accordion details[open] summary b{transform:rotate(45deg)}
 .dna04-process-accordion details>p{max-width:690px;padding:0 48px 22px;font-size:14px;color:#586b5c;line-height:1.8}

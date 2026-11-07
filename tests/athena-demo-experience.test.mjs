@@ -5,7 +5,8 @@ const read=(name)=>readFileSync(new URL("../"+name,import.meta.url),"utf8");
 test("mobile gallery navigates straight to real demo, desktop retains modal",()=>{
  const source=read("components/templates/TemplateGallery.tsx");
  assert.match(source,/matchMedia\("\(max-width: 760px\)"\)/);
- assert.match(source,/window\.location\.assign\(path\)/);
+ assert.match(source,/window\.location\.assign\(editable\?path/);
+ assert.match(source,/"lang="\+language/);
  assert.match(source,/setSelected\(item\)/);
  assert.match(source,/openExperience\(item\)/);
  assert.match(source,/TemplateDemoModal template=\{selected\}/);
@@ -22,7 +23,7 @@ test("floating demo information excludes embedded previews and handles subpages"
 });
 test("immersive showroom defaults to zoom-in info to keep car CTA and camera controls accessible",()=>{
  const widget=read("components/templates/TemplateExperienceInfo.tsx");
- assert.match(widget,/compactByDefault=\["auto-showroom","campaign-landing","saas-product"\]/);
+ assert.match(widget,/compactByDefault=\[[^\]]*"auto-showroom"[^\]]*"campaign-landing"[^\]]*"saas-product"[^\]]*\]\.includes\(slug\)/);
  assert.match(widget,/useState\(!compactByDefault\)/);
  assert.match(widget,/if\(slug==="auto-showroom"\)\{setExpanded\(false\);return;\}/);
  assert.match(widget,/athena-demo-float-handle/);

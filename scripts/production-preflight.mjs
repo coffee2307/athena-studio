@@ -9,6 +9,7 @@ import {existsSync,readFileSync} from "node:fs";
 import {resolve} from "node:path";
 import {publicReleaseDecision} from "../lib/release/public.ts";
 import {modelPublicationRights} from "../lib/release/model-rights.mjs";
+import {enabledNonMarketingFlags} from "../lib/release/marketing-only-flags.mjs";
 
 const production=process.argv.includes("--production");
 const root=resolve(import.meta.dirname,"..");
@@ -45,6 +46,10 @@ if(production){
   process.env.ATHENA_VPS_RELEASE_APPROVED!=="true"&&
   process.env.NEXT_PUBLIC_ATHENA_AUTH_ENABLED!=="true",
   "Production A must not activate unverified customer accounts");
+ const enabledFlags=enabledNonMarketingFlags(process.env);
+ check("marketing_only_feature_flags_disabled",enabledFlags.length===0,
+  "Production A must disable public, independent, local-only and VPS auth, email sender, operations and SitePulse flags"+
+  (enabledFlags.length?": "+enabledFlags.join(", "):""));
  check("production_build_exists",existsSync(resolve(root,".next","BUILD_ID")),
   "Reviewed Next.js production build must exist");
  const modelPath=resolve(root,"public/models/mclaren.glb");

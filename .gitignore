@@ -1,6 +1,11 @@
 node_modules
 .next
 .next-preview
+.next-*/
+# Local QA artifacts are never release source
+.release-*.log
+.release-*.json
+.mobile-language-build.log
 out
 .env*
 !.env.example

@@ -25,7 +25,7 @@
 .stageCounter{right:19px}
 .modelFooter{display:flex;align-items:center;justify-content:space-between;gap:15px;padding-top:21px;border-top:1px solid #b9ab9e;margin-top:15px}
 .modelText{min-width:0}
-.modelText span{font:800 9px/1.5 "Be Vietnam Pro",sans-serif;color:#956746;letter-spacing:.09em}
+.modelText span{font:800 9px/1.5 "Be Vietnam Pro",sans-serif;color:#805335;letter-spacing:.09em}
 .modelText strong{display:block;font:800 clamp(17px,1.45vw,23px)/1.4 "Be Vietnam Pro",sans-serif;letter-spacing:-.02em;margin-top:4px}
 .modelText p{color:#675c51;font:500 12px/1.55 "Be Vietnam Pro",sans-serif;margin:5px 0 0}
 .controls{display:flex;gap:0;flex:none;align-items:center}

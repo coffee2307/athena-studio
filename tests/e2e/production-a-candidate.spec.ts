@@ -8,12 +8,17 @@ test("Unapproved staging explicitly blocks robots and uses noindex metadata",asy
  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content",/noindex/i);
  await expect(page.locator('link[rel="canonical"]')).toHaveCount(0);
 });
-test("Customer can prepare a structured email without submitting to an unconfigured backend",async({page})=>{
+test("Customer can prepare a structured email without submitting to an unconfigured backend",async({page,isMobile})=>{
  const apiCalls:string[]=[];
  page.on("request",req=>{if(req.url().includes("/api/inquiry"))apiCalls.push(req.method());});
  await page.goto("/contact");
- await expect(page.locator(".form-offline")).toBeVisible();
- await page.locator(".athena-email-brief-details>summary").click();
+ if(isMobile){
+  await expect(page.locator(".athena-mobile-contact-channels a")).toHaveCount(3);
+  await expect(page.locator(".athena-email-brief-details")).toHaveAttribute("open","");
+ }else{
+  await expect(page.locator(".form-offline")).toBeVisible();
+  await page.locator(".athena-email-brief-details>summary").click();
+ }
  const form=page.locator(".athena-email-brief-form");
  await expect(form).toBeVisible();
  await form.locator('input[name="name"]').fill("Nguyễn Văn A");
