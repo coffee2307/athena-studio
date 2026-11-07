@@ -1,0 +1,37 @@
+/* Athena header: one compact Font Awesome globe control, never a second header row. */
+.agency-header .agency-nav-shell{position:relative}
+.athena-language-switch{position:relative;display:flex;align-items:center;flex:0 0 auto;margin:0;z-index:35}
+.athena-language-trigger{display:flex;align-items:center;justify-content:center;gap:7px;min-width:42px;height:42px;padding:0 10px;background:transparent;border:1px solid transparent;border-radius:7px;color:#171a18;cursor:pointer;font:700 11px/1 "Be Vietnam Pro",Arial,sans-serif}
+.athena-language-trigger svg{width:17px;height:17px}
+.athena-language-trigger:hover,.athena-language-trigger[aria-expanded="true"]{background:#f2f1ed;border-color:#d9d9d4}
+.athena-language-trigger:focus-visible,.athena-language-options button:focus-visible{outline:2px solid #3d6154;outline-offset:2px}
+.athena-language-options{position:absolute;top:calc(100% + 10px);right:0;width:172px;padding:6px;border:1px solid #e3e2dd;border-radius:10px;background:#fff;box-shadow:0 14px 35px rgba(0,0,0,.12);z-index:90}
+.athena-language-options button{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:39px;padding:9px 10px;border:0;border-radius:6px;background:transparent;color:#222;font:600 12px/1.3 "Be Vietnam Pro",Arial,sans-serif;text-align:left;cursor:pointer}
+.athena-language-options button span{font-size:10px;color:#777}
+.athena-language-options button:hover,.athena-language-options button[aria-checked="true"]{background:#f0f2ef}
+@media(min-width:981px){
+ .agency-header .agency-nav-shell{display:flex;align-items:center;justify-content:space-between;gap:clamp(8px,1vw,18px)}
+ .agency-header .agency-nav-shell>.brand-lockup{flex:0 0 auto}
+ .agency-header .agency-desktop-nav{flex:1 1 auto;min-width:0;justify-content:center}
+ .agency-header .agency-nav-actions{flex:0 0 auto}
+ .agency-header .agency-menu-toggle{display:none}
+}
+@media(max-width:980px){
+ .agency-header .agency-nav-shell{display:flex;align-items:center;justify-content:space-between;gap:10px}
+ .agency-header .agency-menu-toggle{flex:0 0 46px}
+}
+@media(max-width:700px){
+ html[data-athena-language="en"] .dna04-blueprint-left,
+ html[data-athena-language="en"] .dna04-blueprint-label,
+ html[data-athena-language="en"] .dna04-blueprint-steps{min-width:0;max-width:100%}
+ html[data-athena-language="en"] .dna04-blueprint-steps{grid-template-columns:repeat(3,minmax(0,1fr))}
+ html[data-athena-language="en"] .dna04-blueprint-steps button{min-width:0;gap:7px;padding-inline:7px}
+ html[data-athena-language="en"] .dna04-blueprint-steps button strong{min-width:0;overflow-wrap:anywhere;hyphens:auto;line-height:1.4}
+ html[data-athena-language="en"] .dna04-blueprint-steps button span{flex-shrink:0}
+ html[data-athena-language="en"] .dna04-blueprint-left h2{overflow-wrap:break-word}
+}
+
+/* Account group: language always precedes sign-in or profile. */
+.agency-header .agency-nav-actions>.athena-language-switch{order:0;margin-right:clamp(3px,.4vw,9px)}
+.agency-header .agency-nav-actions{gap:clamp(7px,.8vw,13px)}
+@media(max-width:980px){.agency-header .agency-nav-actions{display:none}}

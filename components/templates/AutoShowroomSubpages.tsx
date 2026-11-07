@@ -9,7 +9,7 @@ type Section="work"|"detail"|"services"|"about"|"contact";
 type Props={section:Section;itemIndex?:number;world:DemoCopy;extra:WorldDetail};
 const base="/template-demos/auto-showroom";
 const Pad=({number}:{number:string})=><span className="velar-index">{number} / VELAR</span>;
-const Arrow=()=> <span aria-hidden="true">↗</span>;
+const Arrow=()=> <span aria-hidden="true"></span>;
 function Breadcrumb({label}:{label:string}){
  return <nav className="velar-crumb" aria-label="Đường dẫn trang"><Link href={base}>VELAR</Link><span>/</span><span>{label}</span></nav>;
 }

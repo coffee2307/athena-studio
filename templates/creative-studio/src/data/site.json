@@ -1,0 +1,35 @@
+{
+  "slug": "creative-studio",
+  "title": "Studio sáng tạo",
+  "industry": "Sáng tạo",
+  "style": "Editorial",
+  "purpose": "Giới thiệu năng lực và dự án",
+  "description": "Một portfolio có nhịp đọc tạp chí, đặt tuyên ngôn và dự án nổi bật cạnh nhau.",
+  "variant": "portfolio",
+  "features": [
+    "Bố cục dự án bất đối xứng",
+    "Typography tiêu đề lớn",
+    "Trang case study theo cấu trúc bài toán và giải pháp",
+    "Website demo nhiều trang với điều hướng desktop/mobile",
+    "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
+    "Trải nghiệm trong popup hoặc mở toàn màn hình"
+  ],
+  "modules": [
+    "content",
+    "contact"
+  ],
+  "reference": {
+    "name": "startbootstrap-freelancer",
+    "url": "https://github.com/StartBootstrap/startbootstrap-freelancer",
+    "license": "MIT"
+  },
+  "brand": "SORA",
+  "layout": "editorial",
+  "images": [
+    "/images/image-1.jpg",
+    "/images/image-2.jpg",
+    "/images/image-3.jpg",
+    "/images/image-4.jpg",
+    "/images/image-5.jpg"
+  ]
+}

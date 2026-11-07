@@ -12,7 +12,7 @@ export default function SitePulsePage(){
    <p className="page-kicker"><span className="eyebrow-dot"/> ATHENA PRODUCT LAB / NGUYÊN MẪU KỸ THUẬT</p>
    <h1>Biết sớm.<br/><em>Xử lý rõ.</em></h1>
    <div className="page-hero-lede"><p>SitePulse đang được phát triển thành một công cụ hỗ trợ Website Care: không chỉ thấy trang web có phản hồi hay không, mà còn lưu bằng chứng để biết khi nào cần hành động.</p>
-    <Link className="pill-link pill-dark" href="/contact?service=micro-saas">Trao đổi về nhu cầu ↗</Link></div>
+    <Link className="pill-link pill-dark" href="/contact?service=micro-saas">Trao đổi về nhu cầu </Link></div>
    <div className="sitepulse-status"><span className="sitepulse-status-dot"/><span>CHƯA PHÁT HÀNH — KHÔNG CÓ GIÁM SÁT CÔNG KHAI ĐANG CHẠY</span></div>
   </div></section>
   <section className="page-section"><div className="container">
@@ -38,7 +38,7 @@ export default function SitePulsePage(){
    <div className="sitepulse-feedback"><div><h2>Website của bạn cần<br/><em>được theo dõi thế nào?</em></h2>
     <p>Chúng tôi muốn trao đổi với các chủ website, cửa hàng và doanh nghiệp nhỏ về việc phát hiện sự cố, chi phí downtime và nhu cầu nhận báo cáo bằng tiếng Việt. Cuộc trao đổi này không phải đăng ký gói dịch vụ.</p></div>
     <div><p>Ba điều Athena muốn tìm hiểu:</p><ol><li>Bạn đang kiểm tra website và phát hiện sự cố bằng cách nào?</li><li>Sự cố gần nhất ảnh hưởng công việc của bạn như thế nào?</li><li>Báo cáo hay hành động hỗ trợ nào thật sự đáng trả phí?</li></ol>
-    <Link className="pill-link pill-dark" href="/contact?service=micro-saas">Chia sẻ trải nghiệm ↗</Link></div></div>
+    <Link className="pill-link pill-dark" href="/contact?service=micro-saas">Chia sẻ trải nghiệm </Link></div></div>
   </div></section>
  </div>;
 }

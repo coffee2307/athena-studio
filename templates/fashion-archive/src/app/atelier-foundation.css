@@ -1,0 +1,7 @@
+:root{font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:auto;overflow-x:clip}
+body{margin:0;min-width:320px;background:#F5F1E9}
+button,textarea,input{font:inherit}
+img{max-width:100%}
+a{-webkit-tap-highlight-color:transparent}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}

@@ -1,13 +1,13 @@
 # ATHENA STUDIO
 
-> **Latest release candidate:** [Production A release gates and operator runbook](docs/ATHENA_PRODUCTION_A_RUNBOOK_20261022.md). URL paths are **English**, UI copy stays Vietnamese. Public indexing is OFF unless separately owner-approved. Older phase descriptions below are retained for historical context.
+> **Current engineering release candidate (03/11/2026):** [Production A RC and remaining GO/NO-GO gates](docs/ATHENA_PRODUCTION_A_RC_20261103.md). Historical [Production A runbook](docs/ATHENA_PRODUCTION_A_RUNBOOK_20261022.md). URL paths are **English**, UI copy stays Vietnamese. Public indexing is OFF unless separately owner-approved. Older phase descriptions below are retained for historical context.
 
 
 Website studio thiết kế và công nghệ độc lập, sử dụng **Next.js 15**, **React 19** và **TypeScript**. Các lĩnh vực gồm phát triển website, chăm sóc website, tích hợp AI và nghiên cứu công cụ Micro-SaaS. Website đang phát triển theo roadmap đã phê duyệt, **chưa đưa lên production**.
 
 **Soft Launch candidate:** [Playbook nhận dự án & điều kiện phát hành](docs/ATHENA_SOFT_LAUNCH_PLAYBOOK_20261023.md). Biểu mẫu hướng dẫn tại `/start` chỉ tạo bản nháp email, chưa tự gửi và không lưu thông tin lên máy chủ. Public production vẫn bị khóa cho đến khi có nghiệm thu riêng.
 
-**Điều kiện phát hành 3D:** Mô hình McLaren `mclaren.glb` đang được dùng trong QA riêng, nhưng chưa có bằng chứng cho quyền phân phối công khai. Preflight Production A chủ động chặn phát hành cho tới khi xác minh hồ sơ quyền sử dụng gắn với đúng file và có phê duyệt của chủ dự án; xem [cổng nghiệm thu tài sản](docs/ATHENA_PRODUCTION_A_RUNBOOK_20261022.md#mclaren-model-publication-hold).
+**Điều kiện phát hành 3D:** Mẫu McLaren gốc trên Sketchfab của vecarz được công bố dưới giấy phép CC Attribution; hồ sơ [ATTRIBUTION](public/models/ATTRIBUTION.md) đã ghi nguồn, CC BY 4.0, tệp hiện dùng và SHA-256. Phát hành công khai vẫn yêu cầu chủ dự án xác minh chính xác tài sản và thực hiện phê duyệt cuối cùng; không tự bật cờ xác nhận hoặc bỏ qua preflight.
 
 ## Tài liệu chính thức
 - [Roadmap Phase 0–7 đã phê duyệt](docs/ATHENA_MASTER_ROADMAP.md) — nguồn tham chiếu ưu tiên khi bắt đầu phiên làm việc mới.

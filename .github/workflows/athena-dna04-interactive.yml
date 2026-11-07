@@ -1,0 +1,111 @@
+name: Athena DNA04 — Independent Interactive Experiences
+on:
+  push:
+    branches:
+      - "feat/athena-dna04-interactive-*"
+    paths:
+      - "app/**"
+      - "components/**"
+      - "templates/**"
+      - "scripts/dna04-browser-qa.mjs"
+      - "tests/dna04-interactive-contract.test.mjs"
+      - ".github/workflows/athena-dna04-interactive.yml"
+  pull_request:
+    paths:
+      - "app/**"
+      - "components/**"
+      - "templates/**"
+      - "scripts/dna04-browser-qa.mjs"
+      - "tests/dna04-interactive-contract.test.mjs"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: dna04-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  source-and-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - name: Verify independent motion and removal of experimental loaders
+        run: node --test tests/dna04-interactive-contract.test.mjs
+      - name: Typecheck and lint
+        run: |
+          npm run typecheck
+          npm run lint
+      - name: Production build
+        run: npm run build
+      - name: Install Chromium for rendered screenshots
+        run: npx playwright install --with-deps chromium
+      - name: Start local Next.js
+        run: |
+          npm run start -- -p 3182 -H 127.0.0.1 > /tmp/athena-dna04-server.log 2>&1 &
+          for i in $(seq 1 90); do
+            curl -fsS http://127.0.0.1:3182/about > /dev/null && break
+            sleep 2
+          done
+          curl -f http://127.0.0.1:3182/process -o /dev/null
+      - name: Real Chrome gallery, About, Process, all sovereign home and subpages
+        run: node scripts/dna04-browser-qa.mjs
+      - name: Archive screenshots and route results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: athena-dna04-browser-evidence
+          path: |
+            .qa/dna04-browser/
+            /tmp/athena-dna04-server.log
+          if-no-files-found: warn
+  independent-template-builds:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        slug:
+          - creative-studio
+          - modern-corporate
+          - commerce-standard
+          - fashion-archive
+          - saas-product
+          - campaign-landing
+          - hospitality-booking
+          - architecture-studio
+          - wellness-clinic
+          - property-showcase
+          - education-platform
+          - pet-store
+          - auto-showroom
+          - construction-firm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install independently owned app
+        working-directory: templates/${{ matrix.slug }}
+        run: npm ci
+      - name: Independently build template website
+        working-directory: templates/${{ matrix.slug }}
+        run: npm run build
+  digital-creators-vite:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify static Vite application
+        working-directory: templates/digital-creators
+        run: |
+          npm ci
+          npm run build

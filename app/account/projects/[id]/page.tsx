@@ -38,21 +38,21 @@ export default async function ProjectDetail({params,searchParams}:Props){
     <div><StatusPill value={m.status} label={milestoneStatus[m.status as keyof typeof milestoneStatus]||"Chưa xác định"}/>
      {isAdmin&&<form action={changeMilestoneStatus} className="ops-inline-form"><input type="hidden" name="id" value={m.id}/><input type="hidden" name="project_id" value={id}/>
       <label>Đổi trạng thái<select name="status" defaultValue={m.status}>{Object.entries(milestoneStatus).map(([k,v])=><option value={k} key={k}>{v}</option>)}</select></label>
-      <button type="submit">Lưu ↗</button></form>}</div>
+      <button type="submit">Lưu </button></form>}</div>
    </article>)}</div>:<EmptyState title="Chưa có cột mốc." description="Các cột mốc sẽ được cập nhật khi Athena hoàn tất kế hoạch triển khai."/>}
    {isAdmin&&<div className="ops-admin-form"><h3>Thêm cột mốc</h3><form action={createMilestone} className="ops-form">
     <input name="project_id" value={id} type="hidden"/><label>Tiêu đề<input name="title" minLength={3} maxLength={150} required placeholder="Ví dụ: Nghiên cứu và thiết kế"/></label>
     <label>Ngày dự kiến<input name="due_date" type="date"/></label><label>Mô tả<textarea name="description" maxLength={1500} rows={3}/></label>
-    <button type="submit" className="pill-link pill-dark">Thêm cột mốc ↗</button></form></div>}
+    <button type="submit" className="pill-link pill-dark">Thêm cột mốc </button></form></div>}
    <SectionTitle index="02 / HỖ TRỢ" title="Trao đổi dự án."/>
    {tickets.data?.length?<div className="ops-simple-list">{tickets.data.map(t=><Link href={"/account/support/"+t.id} key={t.id}>
-     <div><strong>{t.title}</strong><small>{formatDate(t.created_at)}</small></div><StatusPill value={t.status} label={ticketStatus[t.status as keyof typeof ticketStatus]||"Chưa xác định"}/><span>↗</span></Link>)}</div>:<EmptyState title="Chưa có yêu cầu hỗ trợ." description="Bạn có thể gửi yêu cầu khi cần trao đổi hoặc yêu cầu điều chỉnh." action={<Link href="/account/support" className="underlined-link">Gửi yêu cầu ↗</Link>}/>}
+     <div><strong>{t.title}</strong><small>{formatDate(t.created_at)}</small></div><StatusPill value={t.status} label={ticketStatus[t.status as keyof typeof ticketStatus]||"Chưa xác định"}/><span></span></Link>)}</div>:<EmptyState title="Chưa có yêu cầu hỗ trợ." description="Bạn có thể gửi yêu cầu khi cần trao đổi hoặc yêu cầu điều chỉnh." action={<Link href="/account/support" className="underlined-link">Gửi yêu cầu </Link>}/>}
    <SectionTitle index="03 / TÀI LIỆU" title="Tệp riêng tư." detail="Mọi tài liệu chỉ được tải xuống qua liên kết tạm thời sau khi hệ thống xác nhận quyền dự án."/>
    {documents.data?.length?<div className="ops-simple-list">{documents.data.map(doc=><a href={"/api/operations/documents/"+doc.id} key={doc.id}>
-     <div><strong>{doc.file_name}</strong><small>{(doc.size_bytes/1024).toFixed(0)} KB · {formatDate(doc.created_at)}</small></div><span>Tải tài liệu ↗</span></a>)}</div>:<EmptyState title="Chưa có tài liệu." description="Athena chưa tải tài liệu được cấp phép chia sẻ cho dự án này."/>}
+     <div><strong>{doc.file_name}</strong><small>{(doc.size_bytes/1024).toFixed(0)} KB · {formatDate(doc.created_at)}</small></div><span>Tải tài liệu </span></a>)}</div>:<EmptyState title="Chưa có tài liệu." description="Athena chưa tải tài liệu được cấp phép chia sẻ cho dự án này."/>}
    {isAdmin&&<div className="ops-admin-form"><h3>Tải tài liệu riêng tư</h3><p>Tối đa 8 MB, chỉ PDF, PNG, JPG hoặc WebP. Tệp không công khai và cần đăng nhập để yêu cầu liên kết tải xuống.</p>
     <form action={uploadDocument} className="ops-form"><input type="hidden" name="project_id" value={id}/>
-    <label>Chọn tệp<input name="file" type="file" accept=".pdf,.png,.jpg,.jpeg,.webp" required/></label><button className="pill-link pill-dark" type="submit">Tải lên ↗</button></form></div>}
+    <label>Chọn tệp<input name="file" type="file" accept=".pdf,.png,.jpg,.jpeg,.webp" required/></label><button className="pill-link pill-dark" type="submit">Tải lên </button></form></div>}
    <SectionTitle index="04 / LỊCH SỬ" title="Dấu vết hoạt động." detail="Các sự kiện chính được ghi nhận tự động khi dự án thay đổi, không thể chỉnh sửa từ giao diện khách hàng."/>
    {audit.data?.length?<div className="ops-simple-list">{audit.data.map(event=><div className="ops-audit-row" key={event.id}>
     <span>{formatDate(event.created_at)}</span><strong>{({project_created:"Tạo dự án",project_status:"Cập nhật trạng thái dự án",milestone_created:"Tạo cột mốc",milestone_status:"Cập nhật cột mốc",ticket_created:"Tạo yêu cầu",ticket_status:"Cập nhật hỗ trợ",ticket_message:"Tin nhắn mới",document_registered:"Đăng ký tài liệu"} as Record<string,string>)[event.event_type]||"Hoạt động dự án"}</strong>
@@ -60,7 +60,7 @@ export default async function ProjectDetail({params,searchParams}:Props){
    </div>)}</div>:<EmptyState title="Chưa có nhật ký." description="Lịch sử sẽ được tạo khi các hoạt động dự án được ghi nhận trong hệ thống."/>}
    {isAdmin&&<div className="ops-admin-form"><h3>Quản lý trạng thái dự án</h3><form action={changeProjectStatus} className="ops-form">
     <input type="hidden" name="id" value={id}/><label>Trạng thái<select name="status" defaultValue={project.status}>{Object.entries(projectStatus).map(([k,v])=><option value={k} key={k}>{v}</option>)}</select></label>
-    <button className="pill-link pill-dark" type="submit">Cập nhật dự án ↗</button></form></div>}
+    <button className="pill-link pill-dark" type="submit">Cập nhật dự án </button></form></div>}
   </>}
   <div className="ops-bottom-link"><Link href="/account/projects">← Tất cả dự án</Link></div>
   {messageFromNotice(notice)&&<span className="sr-only">{messageFromNotice(notice)}</span>}

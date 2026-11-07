@@ -1,3 +1,4 @@
+import {ServiceVisualStage} from "@/components/experience/ServiceVisualStage";
 import Link from "next/link";
 import {notFound} from "next/navigation";
 import {getOffering,offerings} from "@/lib/offerings";
@@ -20,10 +21,11 @@ export default async function ServiceDetail({params}:PageProps){
  const research=item.slug==="micro-saas";
  const related=offerings.filter(o=>o.slug!==slug&&o.slug!=="micro-saas").slice(0,2);
  return <div className="page-shell">
-  <section className="page-hero"><div className="container">
+  <section className={"page-hero dna03-service-hero dna03-service-"+item.slug}><div className="container">
    <p className="page-kicker"><span className="eyebrow-dot"/> {research?"NGHIÊN CỨU · CHƯA MỞ BÁN":"DỊCH VỤ ATHENA / "+item.index}</p>
    <h1>{item.shortTitle}<br/><em>{research?"đang nghiên cứu.":"cho nhu cầu thực tế."}</em></h1>
    <div className="page-hero-lede"><p>{item.challenge}</p><Link href={research?"/products":"/contact?service="+encodeURIComponent(item.slug)} className="dna-button dna-button-primary">{research?"Xem trạng thái nghiên cứu":"Trao đổi nhu cầu"}</Link></div>
+   {!research&&<ServiceVisualStage slug={item.slug}/>}
   </div></section>
 
   <section className="page-section"><div className="container">
@@ -60,7 +62,7 @@ export default async function ServiceDetail({params}:PageProps){
    <div className="offer-list">{related.map(o=><Link className="offer-card" href={"/services/"+o.slug} key={o.slug}>
     <div className="service-meta"><span>{o.index} / ATHENA</span><span>{o.eyebrow}</span></div>
     <h3>{o.shortTitle}</h3><p>{o.challenge}</p>
-    <div className="card-bottom"><span>Xem dịch vụ</span><Icon name="arrow-up-right" size={18}/></div>
+    <div className="card-bottom"><span>Xem dịch vụ</span><Icon name="arrow-right" size={18}/></div>
    </Link>)}</div>
   </div></section>
  </div>;

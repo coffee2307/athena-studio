@@ -42,7 +42,7 @@ const nextConfig:NextConfig={
  poweredByHeader:false,
  devIndicators:false,
  // Private project documents allow up to 8 MiB; request envelope has bounded overhead.
- experimental:{serverActions:{bodySizeLimit:"9mb"}},
+ experimental:{serverActions:{bodySizeLimit:"9mb"},...(process.env.ATHENA_LOW_MEMORY_BUILD==="1"?{cpus:1}:{})},
  async redirects(){return [
   {source:"/dich-vu/:path*",destination:"/services/:path*",permanent:true},
   {source:"/du-an/:path*",destination:"/projects/:path*",permanent:true},
@@ -80,6 +80,10 @@ const nextConfig:NextConfig={
  ];},
  async headers(){return [
   {source:"/:path*",headers},
+  // The model URL is versioned; avoid a 3.6 MB re-download or revalidation on every visit.
+  {source:"/models/mclaren.glb",headers:[{key:"Cache-Control",value:"public, max-age=31536000, immutable"}]},
+  {source:"/models/mclaren-poster.webp",headers:[{key:"Cache-Control",value:"public, max-age=31536000, immutable"}]},
+  {source:"/draco/:path*",headers:[{key:"Cache-Control",value:"public, max-age=31536000, immutable"}]},
   // Only interactive demo routes may be embedded by the same Athena origin.
   {source:"/template-demos/:path*",headers:[
    {key:"X-Frame-Options",value:"SAMEORIGIN"},

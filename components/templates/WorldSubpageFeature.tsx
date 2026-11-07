@@ -55,7 +55,7 @@ export function WorldSubpageFeature({slug,section}:{slug:string;section:WorldSec
    </div>
    <div className="ix-subpage-feature-bottom">
     <span>ATHENA / DEMONSTRATION SITE</span>
-    <Link href={root+"/experience"}>{world==="auto-showroom"?"OPEN CINEMATIC STUDY":"KHÁM PHÁ KHÔNG GIAN 3D"} <span aria-hidden="true">↗</span></Link>
+    <Link href={root+"/experience"}>{world==="auto-showroom"?"OPEN CINEMATIC STUDY":"KHÁM PHÁ KHÔNG GIAN 3D"} <span aria-hidden="true"></span></Link>
    </div>
   </div>
   <div className="ix-subpage-feature-art">

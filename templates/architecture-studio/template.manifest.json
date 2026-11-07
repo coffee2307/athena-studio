@@ -1,0 +1,14 @@
+{
+  "slug": "architecture-studio",
+  "name": "Kiến trúc & không gian",
+  "layout": "editorial",
+  "originalDemo": "/template-demos/architecture-studio",
+  "status": "standalone-baseline-extraction",
+  "fidelity": "original bespoke demos require visual parity review",
+  "license": {
+    "name": "startbootstrap-agency",
+    "url": "https://github.com/StartBootstrap/startbootstrap-agency",
+    "license": "MIT"
+  },
+  "version": "0.1.0"
+}

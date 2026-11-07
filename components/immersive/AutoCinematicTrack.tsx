@@ -5,12 +5,12 @@ import type {ReactNode} from "react";
 
 export const AUTO_CINEMATIC_ID="bv-cinematic-track";
 
-const chapters=[
- {eyebrow:"01 / THE REVEAL",title:"BORN FOR THE EDGE.",description:"Một đường nét xuất hiện từ bóng tối. Cuộn xuống để đưa chiếc xe từ ánh sáng studio vào hành trình khám phá.",detail:"SILHOUETTE / LIGHT"},
- {eyebrow:"02 / SIDE PROFILE",title:"A LINE OF INTENT.",description:"Chiếc xe lướt ngang sân khấu. Camera đi cùng thân xe để bộc lộ tỷ lệ thấp, dáng dài và đường cắt dứt khoát.",detail:"PROPORTION / MOVEMENT"},
- {eyebrow:"03 / MATERIAL STUDY",title:"EVERY SURFACE COUNTS.",description:"Đến gần bề mặt sơn graphite, mâm xe và các mảng carbon. Không cần làm nhòe hình để tạo chiều sâu.",detail:"GRAPHITE / DETAIL"},
- {eyebrow:"04 / AERODYNAMICS",title:"SHAPED BY AIR.",description:"Góc máy dịch chuyển về phía đuôi xe, phơi bày các đường dẫn khí và cấu trúc phía sau của concept.",detail:"FORM / AERODYNAMICS"},
- {eyebrow:"05 / YOUR PERSPECTIVE",title:"TAKE ANOTHER LOOK.",description:"Trở về toàn cảnh. Kéo trực tiếp trên xe để đổi góc nhìn hoặc khám phá các nghiên cứu thiết kế tiếp theo.",detail:"EXPLORE / DISCOVER"}
+export const chapters=[
+ {eyebrow:"01 / THE REVEAL",title:"BORN FOR THE EDGE.",description:"McLaren P1 xuất hiện dưới ánh sáng studio. Bắt đầu với góc nhìn toàn cảnh để quan sát tỷ lệ và dáng thân xe thấp.",detail:"SILHOUETTE / LIGHT"},
+ {eyebrow:"02 / SIDE PROFILE",title:"A LINE OF INTENT.",description:"Camera chuyển sang mặt bên, làm rõ chiều dài thân xe và cách các bề mặt nối tiếp nhau từ đầu đến đuôi.",detail:"PROPORTION / MOVEMENT"},
+ {eyebrow:"03 / MATERIAL STUDY",title:"EVERY SURFACE COUNTS.",description:"Quan sát mâm xe, các vùng sơn tối và chi tiết vật liệu ngay trên mô hình 3D khi camera tiến lại gần.",detail:"GRAPHITE / DETAIL"},
+ {eyebrow:"04 / AERODYNAMICS",title:"SHAPED BY AIR.",description:"Đi vòng ra phía sau để nhìn cánh gió, khe mở và hình khối đuôi xe từ góc khó thấy ở toàn cảnh.",detail:"FORM / AERODYNAMICS"},
+ {eyebrow:"05 / YOUR PERSPECTIVE",title:"TAKE ANOTHER LOOK.",description:"Trở về góc rộng. Kéo để xoay McLaren P1 hoặc dùng nút + và − để chọn khoảng cách quan sát phù hợp.",detail:"EXPLORE / DISCOVER"}
 ] as const;
 
 const clamp=(value:number)=>Math.max(0,Math.min(1,value));
@@ -38,7 +38,8 @@ export function AutoCinematicTrack({children}:{children:ReactNode}){
    const rect=track.getBoundingClientRect();
    const p=clamp(-rect.top/Math.max(1,rect.height-window.innerHeight));
    track.style.setProperty("--bv-progress",p.toFixed(5));
-   const next=Math.min(4,Math.floor(p*5));
+   // Chapter labels switch at the midpoint between the five authored camera poses.
+   const next=Math.min(4,Math.round(p*4));
    setChapter(previous=>previous===next?previous:next);
   };
   const schedule=()=>{if(!raf)raf=requestAnimationFrame(update);};

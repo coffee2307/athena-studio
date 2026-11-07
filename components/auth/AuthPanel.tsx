@@ -106,7 +106,7 @@ export function AuthPanel({mode,googleEnabled=false}:{mode:Mode;googleEnabled?:b
   </form>
   {(mode==="login"||mode==="signup")&&<>
    <div className="auth-separator"><span>HOẶC</span></div>
-   <button type="button" className="auth-google" onClick={google} disabled={!googleEnabled||pending}>Tiếp tục với Google <span aria-hidden="true">↗</span></button>
+   <button type="button" className="auth-google" onClick={google} disabled={!googleEnabled||pending}>Tiếp tục với Google <span aria-hidden="true"></span></button>
    {!googleEnabled&&<p className="auth-footnote">Google OAuth sẽ khả dụng sau khi hoàn tất cấu hình và xác minh ứng dụng.</p>}
    <p className="auth-alternate">{mode==="login"?<>Chưa có tài khoản? <Link href="/signup">Đăng ký</Link></>:<>Đã có tài khoản? <Link href="/login">Đăng nhập</Link></>}</p>
   </>}

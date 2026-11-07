@@ -1,3 +1,5 @@
+import {ProcessBlueprint} from "@/components/experience/ProcessBlueprint";
+import {ProcessJourney} from "@/components/experience/ProcessJourney";
 import Link from "next/link";
 import {Icon} from "@/components/ui/Icon";
 import {createMetadata} from "@/lib/metadata";
@@ -24,37 +26,13 @@ const faqs=[
  ["Tôi cần bảo mật dữ liệu dự án?","Không gửi mật khẩu hoặc khóa API qua biểu mẫu. Các cách chia sẻ thông tin, quyền truy cập giới hạn, NDA (nếu cần) và lưu trữ chỉ triển khai sau khi được hai bên đồng ý."],
 ];
 export default function WorkflowPage(){
- return <div className="page-shell agency-process-page">
-  <section className="page-hero"><div className="container">
-   <p className="page-kicker"><span className="eyebrow-dot"/> CÁCH ATHENA HỢP TÁC</p>
-   <h1>Làm rõ đầu ra<br/><em>trước khi bắt đầu.</em></h1>
-   <div className="page-hero-lede"><p>Để khách biết mình cần chuẩn bị gì, nhận gì ở từng bước và khi nào cần đưa ra quyết định. Quy trình thực tế sẽ được điều chỉnh theo quy mô dự án và thỏa thuận.</p>
-    <Link className="pill-link pill-dark" href="/contact">Mô tả nhu cầu <Icon name="arrow-up-right" size={19}/></Link></div>
+ return <main className="dna04-process">
+  <section className="dna04-process-intro"><div className="container"><div className="dna04-process-index"><span>ATHENA / THE WORKING METHOD</span><span>EST. BY PROBLEM, NOT BY TEMPLATE</span></div>
+   <div className="dna04-process-intro-grid"><div><p>THE MAKING OF AN IDEA</p><h1>Từ một<br/><em>câu hỏi.</em><br/>Đến sản phẩm.</h1></div><div className="dna04-process-intro-aside"><div className="dna04-process-track" aria-hidden="true"><i/><i/><i/><i/><i/><i/></div><p>Chúng tôi không mở đầu bằng một mẫu giao diện. Trước tiên cần hiểu vấn đề, thống nhất đầu ra, rồi từng bước xây dựng và kiểm chứng.</p><a href="#journey">Khám phá sáu bước <span aria-hidden="true">↓</span></a></div></div>
   </div></section>
-  <section className="page-section"><div className="container">
-   <div className="agency-process-head"><p className="section-index"><span className="index-circle">01</span> TỪ YÊU CẦU ĐẾN BÀN GIAO</p>
-    <h2>Sáu bước để công việc <span>có thể kiểm soát.</span></h2></div>
-   <div className="agency-process-list">
-    {stages.map(s=><article className="agency-process-step" key={s.n}>
-     <span className="agency-process-index">{s.n}</span>
-     <div><h3>{s.title}</h3><p>{s.description}</p>
-      <div className="agency-process-deliverable"><Icon name="check" size={18}/><strong>Đầu ra:</strong> {s.deliverable}</div>
-     </div>
-     <div className="agency-process-roles"><p><strong>Khách hàng</strong>{s.customer}</p><p><strong>Athena</strong>{s.studio}</p></div>
-    </article>)}
-   </div>
-  </div></section>
-  <section className="page-section agency-section-muted"><div className="container">
-   <p className="section-index"><span className="index-circle">02</span> MINH BẠCH THƯƠNG MẠI</p>
-   <div className="agency-process-head"><h2>Không có <span>báo giá tùy tiện.</span></h2>
-    <p>Giá và lịch triển khai phụ thuộc hiện trạng, số lượng trang/tính năng, tích hợp, nội dung, bàn giao và mức hỗ trợ. Không đưa ra con số rẻ nhất chỉ để thu hút khách.</p></div>
-   <Link href="/pricing" className="agency-outline-cta">Xem cách Athena lập báo giá <Icon name="arrow-right" size={18}/></Link>
-  </div></section>
-  <section className="page-section"><div className="container">
-   <p className="section-index"><span className="index-circle">03</span> CÂU HỎI THƯỜNG GẶP</p>
-   <h2 className="agency-faq-title">Trước khi hợp tác,<br/><span>bạn có thể muốn biết.</span></h2>
-   <div className="agency-faq-list">{faqs.map(([q,a])=><details key={q}><summary>{q}<Icon name="chevron-down" size={20}/></summary><p>{a}</p></details>)}</div>
-  </div></section>
-  <section className="agency-final-cta"><div className="container"><p>ĐÃ CÓ MỘT VẤN ĐỀ CỤ THỂ?</p><h2>Gửi tình trạng thực tế.<br/>Nhận hướng trao đổi phù hợp.</h2><Link href="/contact">Bắt đầu bằng yêu cầu tư vấn <Icon name="arrow-up-right" size={18}/></Link></div></section>
- </div>;
+  <section id="journey" className="dna04-process-journey"><div className="container"><ProcessBlueprint stages={stages}/></div></section>
+  <section className="dna04-process-commercial"><div className="container"><span>BEFORE WE START / A CLEAR AGREEMENT</span><div><h2>Không có<br/><em>chi phí mơ hồ.</em></h2><p>Mỗi báo giá dựa trên phạm vi, mức độ phức tạp, tích hợp, nội dung, tiêu chí nghiệm thu và phương án hỗ trợ. Không tự phát sinh công việc có phí khi chưa được xác nhận.</p><Link href="/pricing">Cách Athena xây dựng báo giá →</Link></div></div></section>
+  <section className="dna04-process-questions"><div className="container"><div className="dna04-section-heading"><span>THE QUESTIONS / 06</span><h2>Trước khi hợp tác,<br/><em>bạn nên biết.</em></h2></div><div className="dna04-process-accordion">{faqs.map(([q,a],i)=><details key={q}><summary><span>{String(i+1).padStart(2,"0")}</span>{q}<b aria-hidden="true">+</b></summary><p>{a}</p></details>)}</div></div></section>
+  <section className="dna04-process-ending"><div className="container"><span>THE NEXT STEP IS YOURS</span><h2>Hãy gửi vấn đề.<br/><em>Chúng tôi giúp làm rõ hướng đi.</em></h2><Link href="/contact">Bắt đầu bằng cuộc trao đổi →</Link></div></section>
+ </main>;
 }

@@ -1,10 +1,9 @@
 import type {SVGProps} from "react";
 
-type IconName="arrow-right"|"arrow-up-right"|"chevron-down"|"menu"|"x"|"user"|"phone"|"mail"|"message"|"copy"|"briefcase"|"check"|"shield"|"clock";
+type IconName="arrow-right"|"chevron-down"|"menu"|"x"|"user"|"phone"|"mail"|"message"|"copy"|"briefcase"|"check"|"shield"|"clock";
 type Props=SVGProps<SVGSVGElement>&{name:IconName;size?:number};
 const paths:Record<IconName,React.ReactNode>={
  "arrow-right":<><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></>,
- "arrow-up-right":<><path d="M6 18 18 6"/><path d="M8 6h10v10"/></>,
  "chevron-down":<path d="m6 9 6 6 6-6"/>,
  "menu":<><path d="M4 8h16M4 16h16"/></>,
  "x":<path d="M5 5 19 19M19 5 5 19"/>,

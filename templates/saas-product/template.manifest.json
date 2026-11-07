@@ -1,0 +1,14 @@
+{
+  "slug": "saas-product",
+  "name": "Sản phẩm công nghệ",
+  "layout": "structured",
+  "originalDemo": "/template-demos/saas-product",
+  "status": "sovereign-interactive-demo",
+  "fidelity": "Original redesigned concept, with asset rights and visual review pending before public production",
+  "license": {
+    "name": "startbootstrap-new-age",
+    "url": "https://github.com/StartBootstrap/startbootstrap-new-age",
+    "license": "MIT"
+  },
+  "version": "3.0.0"
+}

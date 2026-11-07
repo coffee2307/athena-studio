@@ -1,0 +1,34 @@
+{
+  "slug": "saas-product",
+  "title": "Sản phẩm công nghệ",
+  "industry": "Phần mềm",
+  "style": "Product-led / Interactive",
+  "purpose": "Giải thích sản phẩm và chuyển đổi đăng ký",
+  "description": "Workspace tương tác với đầu việc thật trong phiên trình duyệt: tạo, lọc, chuyển trạng thái và quan sát tiến độ.",
+  "variant": "saas",
+  "features": [
+    "Bảng việc tương tác, thêm công việc và lọc theo trạng thái",
+    "Các trạng thái chuyển được và thanh tiến độ tính từ dữ liệu",
+    "Các chế độ bảng việc, tiến độ và nhóm",
+    "Website nhiều trang, chi tiết tính năng và biểu mẫu email nháp",
+    "Dữ liệu mô phỏng tại trình duyệt, không backend giả"
+  ],
+  "modules": [
+    "content",
+    "auth"
+  ],
+  "reference": {
+    "name": "startbootstrap-new-age",
+    "url": "https://github.com/StartBootstrap/startbootstrap-new-age",
+    "license": "MIT"
+  },
+  "brand": "LUMA Workspace",
+  "layout": "structured",
+  "images": [
+    "/images/image-1.jpg",
+    "/images/image-2.jpg",
+    "/images/image-3.jpg",
+    "/images/image-4.jpg",
+    "/images/image-5.jpg"
+  ]
+}

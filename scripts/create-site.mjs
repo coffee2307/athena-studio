@@ -3,14 +3,13 @@ import {dirname,resolve,relative,join,sep,isAbsolute,basename} from "node:path";
 import {fileURLToPath} from "node:url";
 
 const root=resolve(dirname(fileURLToPath(import.meta.url)),"..");
-const starter=join(root,"starter/web-foundation");
+const templatesRoot=join(root,"templates");
 const registry=JSON.parse(await readFile(join(root,"data/templates.json"),"utf8"));
 const supportedModules=new Set(["content","contact","catalog","commerce","auth","booking"]);
 function usage(){return "Usage: node scripts/create-site.mjs --template <slug> --name <project-slug> --brand <brand-name> --out <path> [--modules content,contact] [--email hello@example.com]";}
 function args(argv){const result={};const allowed=new Set(["template","name","brand","out","modules","email"]);for(let i=0;i<argv.length;i+=2){const key=argv[i].slice(2);if(!argv[i].startsWith("--")||!argv[i+1]||!allowed.has(key)||Object.hasOwn(result,key))throw Error(usage());result[key]=argv[i+1];}return result;}
 function safeSlug(value){return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value);}
 async function canonical(path){try{return await realpath(path);}catch(error){if(error?.code!=="ENOENT")throw error;return join(await canonical(dirname(path)),basename(path));}}
-async function walk(folder){const entries=await readdir(folder,{withFileTypes:true});const result=[];for(const entry of entries){const path=join(folder,entry.name);if(entry.isDirectory())result.push(...await walk(path));else result.push(path);}return result;}
 
 if(process.argv.includes("--help")){console.log(usage());process.exit(0);}
 const input=args(process.argv.slice(2));
@@ -27,12 +26,20 @@ const rel=relative(await realpath(root),await canonical(output));
 if(rel===""||(!isAbsolute(rel)&&rel!==".."&&!rel.startsWith(".."+sep)))throw Error("Đường dẫn --out phải nằm ngoài repository Athena.");
 try{const existing=await lstat(output);if(existing.isSymbolicLink()||!existing.isDirectory()||(await readdir(output)).length)throw Error("Thư mục đích đã tồn tại, là symlink hoặc không trống.");}catch(error){if(error?.code!=="ENOENT")throw error;}
 await mkdir(dirname(output),{recursive:true});
-await cp(starter,output,{recursive:true,errorOnExist:true,force:false});
-const safeBrand=brand.replaceAll("\\","\\\\").replaceAll('"','\\"');
-const replacements={"__PROJECT_NAME__":input.name,"__PROJECT_SLUG__":input.name,"__BRAND_NAME__":safeBrand,"__TEMPLATE_SLUG__":template.slug,"__TEMPLATE_VARIANT__":template.variant,"__TEMPLATE_VERSION__":template.version,"__CONTACT_EMAIL_JSON__":JSON.stringify(email),"__MODULES_JSON__":JSON.stringify(selected)};
-for(const path of await walk(output)){
- const original=await readFile(path,"utf8");
- const next=original.replace(/__(?:PROJECT_NAME|PROJECT_SLUG|BRAND_NAME|TEMPLATE_SLUG|TEMPLATE_VARIANT|TEMPLATE_VERSION|CONTACT_EMAIL_JSON|MODULES_JSON)__/g,token=>replacements[token]);
- if(next!==original)await writeFile(path,next,"utf8");
-}
+const source=join(templatesRoot,template.slug);
+await cp(source,output,{recursive:true,errorOnExist:true,force:false,filter:path=>!/(^|[\\/])(?:node_modules|\.next|\.git|test-results|\.qa)(?:[\\/]|$)/.test(path)});
+const sitePath=join(output,"src/data/site.json");
+const site=JSON.parse(await readFile(sitePath,"utf8"));
+site.brand=brand;site.projectName=input.name;site.contactEmail=email;site.modules=selected;
+await writeFile(sitePath,JSON.stringify(site,null,2)+"\n","utf8");
+const manifestPath=join(output,"template.manifest.json");
+const manifest=JSON.parse(await readFile(manifestPath,"utf8"));
+Object.assign(manifest,{projectSlug:input.name,brand,modules:selected,database:"not-configured",variant:template.variant});
+await writeFile(manifestPath,JSON.stringify(manifest,null,2)+"\n","utf8");
+const pkgPath=join(output,"package.json");
+const pkg=JSON.parse(await readFile(pkgPath,"utf8"));pkg.name=input.name;
+await writeFile(pkgPath,JSON.stringify(pkg,null,2)+"\n","utf8");
+const lockPath=join(output,"package-lock.json");
+const lock=JSON.parse(await readFile(lockPath,"utf8"));lock.name=input.name;lock.packages[""].name=input.name;
+await writeFile(lockPath,JSON.stringify(lock,null,2)+"\n","utf8");
 console.log(JSON.stringify({created:true,output,template:template.slug,templateVersion:template.version,compatibility:template.compatibility,modules:selected},null,2));

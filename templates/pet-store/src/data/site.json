@@ -1,0 +1,35 @@
+{
+  "slug": "pet-store",
+  "title": "Cửa hàng thú cưng Poppy",
+  "industry": "Thú cưng",
+  "style": "Playful Soft",
+  "purpose": "Website trình diễn với trải nghiệm theo ngành",
+  "description": "Poppy chọn đồ chơi, thức ăn và phụ kiện đáng yêu để mỗi ngày cùng thú cưng đều thú vị.",
+  "variant": "petshop",
+  "features": [
+    "Bố cục chuyên biệt theo ngành",
+    "Header, footer và menu điện thoại",
+    "Trang chi tiết & lọc nội dung",
+    "Biểu mẫu demo, không gửi dữ liệu thật",
+    "Hiệu ứng phản hồi và xem trước trực tiếp"
+  ],
+  "modules": [
+    "content",
+    "contact",
+    "catalog"
+  ],
+  "reference": {
+    "name": "Original Athena demo; inspiration: MIT templates",
+    "url": "https://pixelandoak.com/templates/",
+    "license": "MIT"
+  },
+  "brand": "Poppy & Co.",
+  "layout": "catalog",
+  "images": [
+    "/images/image-1.jpg",
+    "/images/image-2.jpg",
+    "/images/image-3.jpg",
+    "/images/image-4.jpg",
+    "/images/image-5.jpg"
+  ]
+}

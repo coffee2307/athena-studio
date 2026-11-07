@@ -2,7 +2,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { RoundedBox } from '@react-three/drei'
 import { useMemo, useRef } from 'react'
 import { Quaternion, Vector3, type Group } from 'three'
-import { ArrowDown, ArrowUpRight, Lightbulb, Sparkles } from 'lucide-react'
+import { ArrowDown, ArrowRight, Lightbulb, Sparkles } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useScrollScene } from '../hooks/useScrollScene'
 import SceneErrorBoundary from './SceneErrorBoundary'
@@ -122,14 +122,14 @@ export default function RubikScrollStory(){
         {copy.map((part,i)=><div key={part.tag} className={'motion-copy-panel'+(step===i?' selected':'')} aria-hidden={!reducedMotion&&step!==i}>
           <span className="motion-tag"><Lightbulb size={15}/>{part.tag}</span>
           <h2>{part.title}</h2><p>{part.detail}</p>
-          {i===2 && <Link className="motion-cta" to="/gioi-thieu" tabIndex={reducedMotion||step===i?0:-1}>Khám phá CLB <ArrowUpRight size={17}/></Link>}
+          {i===2 && <Link className="motion-cta" to="/gioi-thieu" tabIndex={reducedMotion||step===i?0:-1}>Khám phá CLB <ArrowRight size={17}/></Link>}
         </div>)}
       </div>
       <div className="motion-visual rubik-visual"><div className="rubik-ambient"/><div className="rubik-halo"/>
         <SceneErrorBoundary label="Rubik 3×3"><RubikCanvas progressRef={progressRef} reduced={reducedMotion} dark={dark}/></SceneErrorBoundary>
         <div className="visual-corner-label">27 CUBIES <span>·</span> 12 REVERSE MOVES</div>
       </div>
-      <button type="button" className="motion-skip" onClick={() => sectionRef.current?.nextElementSibling?.scrollIntoView({behavior: reducedMotion ? 'auto' : 'smooth',block:'start'})}>BỎ QUA HIỆU ỨNG ↗</button>
+      <button type="button" className="motion-skip" onClick={() => sectionRef.current?.nextElementSibling?.scrollIntoView({behavior: reducedMotion ? 'auto' : 'smooth',block:'start'})}>BỎ QUA HIỆU ỨNG </button>
       <div className="motion-footer"><span>SCROLL TO SOLVE</span><div className="motion-progress"><i style={{width:(progress*100)+'%'}}/></div><strong>0{step+1} / 03</strong></div>
     </div>
   </section>

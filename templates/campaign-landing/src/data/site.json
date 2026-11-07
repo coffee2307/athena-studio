@@ -1,0 +1,34 @@
+{
+  "slug": "campaign-landing",
+  "title": "Landing page chiến dịch",
+  "industry": "Marketing",
+  "style": "Living Poster / Experimental",
+  "purpose": "Tập trung một chiến dịch hoặc sự kiện",
+  "description": "Living Poster: một chiến dịch giả định với chương trình tương tác, typography mạnh và hành trình mobile riêng.",
+  "variant": "campaign",
+  "features": [
+    "Poster hero thiết kế riêng bằng CSS",
+    "Ba chương trình có thể chọn và đổi hình ảnh",
+    "Trang chi tiết mỗi chương trình, trải nghiệm và câu chuyện",
+    "Biểu mẫu tạo bản nháp email không lưu dữ liệu",
+    "Bố cục mobile tự thiết kế, không nghiêng nguyên mảng"
+  ],
+  "modules": [
+    "content",
+    "contact"
+  ],
+  "reference": {
+    "name": "startbootstrap-landing-page",
+    "url": "https://github.com/StartBootstrap/startbootstrap-landing-page",
+    "license": "MIT"
+  },
+  "brand": "MỞ Festival",
+  "layout": "statement",
+  "images": [
+    "/images/image-1.jpg",
+    "/images/image-2.jpg",
+    "/images/image-3.jpg",
+    "/images/image-4.jpg",
+    "/images/image-5.jpg"
+  ]
+}

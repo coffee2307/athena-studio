@@ -8,6 +8,6 @@ export function ModelAttribution({compact=false}:{compact?:boolean}){
   <a href="https://sketchfab.com/heynic" target="_blank" rel="noopener noreferrer">vecarz (@heynic)</a>
   {" · "}<a href={MODEL_URL} target="_blank" rel="noopener noreferrer">McLaren P1</a>
   {" · "}<a href={LICENSE_URL} target="_blank" rel="noopener noreferrer">CC BY 4.0</a>
-  {!compact&&". Bản trình diễn điều chỉnh ánh sáng và vật liệu hiển thị; VELAR không liên kết với McLaren Automotive hoặc tác giả mô hình."}
+  {!compact&&". Bản trình diễn điều chỉnh ánh sáng và vật liệu hiển thị; BLACK VELOCITY không liên kết với McLaren Automotive hoặc tác giả mô hình."}
  </p>;
 }

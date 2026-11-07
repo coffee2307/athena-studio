@@ -14,7 +14,6 @@ export function ContactDock(){
  const [active,setActive]=useState<Channel|null>(null);
  const [copied,setCopied]=useState(false);
  const [footerVisible,setFooterVisible]=useState(false);
- const [mobileExpanded,setMobileExpanded]=useState(false);
  useEffect(()=>{
   const footer=document.querySelector(".agency-footer");
   if(!footer||typeof IntersectionObserver==="undefined")return;
@@ -22,16 +21,6 @@ export function ContactDock(){
   observer.observe(footer);
   return()=>observer.disconnect();
  },[]);
- useEffect(()=>{
-  if(!mobileExpanded)return;
-  const dismiss=(event:PointerEvent)=>{
-   if(event.target instanceof Node&&!document.querySelector(".agency-contact-dock")?.contains(event.target))setMobileExpanded(false);
-  };
-  const escape=(event:KeyboardEvent)=>{if(event.key==="Escape")setMobileExpanded(false);};
-  document.addEventListener("pointerdown",dismiss);
-  document.addEventListener("keydown",escape);
-  return()=>{document.removeEventListener("pointerdown",dismiss);document.removeEventListener("keydown",escape);};
- },[mobileExpanded]);
  const closer=useRef<HTMLButtonElement>(null);
  const previous=useRef<HTMLElement|null>(null);
  const close=useCallback(()=>{setActive(null);previous.current?.focus();},[]);
@@ -76,15 +65,12 @@ export function ContactDock(){
  const choice=channels.find(c=>c.id===active);
  return <>
   <nav className={footerVisible?"agency-contact-dock is-footer-visible":"agency-contact-dock"} aria-label="Liên hệ nhanh">
-   <button className="agency-contact-toggle" type="button" aria-expanded={mobileExpanded} aria-controls="athena-contact-shortcuts" onClick={()=>setMobileExpanded(v=>!v)}>
-    <Icon name={mobileExpanded?"x":"message"} size={19}/><span>{mobileExpanded?"Đóng":"Liên hệ"}</span>
-   </button>
-   <div className={"agency-contact-shortcuts"+(mobileExpanded?" is-open":"")} id="athena-contact-shortcuts">
+   <div className="agency-contact-shortcuts">
     {channels.filter(c=>c.id!=="email").map(c=><a key={c.id} href={c.href}
       className={"agency-contact-action agency-contact-action-"+c.id}
       aria-label={c.id==="phone"?"Gọi điện trực tiếp cho Athena":"Mở "+c.label+" với số liên hệ Athena"}
       target={c.id==="phone"?undefined:"_blank"} rel={c.id==="phone"?undefined:"noopener noreferrer"}
-      onClick={e=>{setMobileExpanded(false);openChannel(e,c.id);}}>
+      onClick={e=>openChannel(e,c.id)}>
      {c.icon?<Image src={c.icon} width={31} height={31} alt="" aria-hidden="true"/>:<Icon name="phone" size={22}/>}
      <span>{c.id==="phone"?"Gọi ngay":c.label}</span>
     </a>)}
@@ -104,8 +90,8 @@ export function ContactDock(){
      <p>Chọn Gmail hoặc Outlook để mở thư đã điền sẵn nội dung. Bạn có thể chỉnh sửa trước khi gửi.</p>
      <div className="athena-email-address">coffee2307@gmail.com</div>
      <div className="athena-contact-buttons">
-      <a href={consultationGmail} target="_blank" rel="noopener noreferrer" className="athena-contact-primary">Soạn bằng Gmail <Icon name="arrow-up-right" size={16}/></a>
-      <a href={consultationOutlook} target="_blank" rel="noopener noreferrer">Soạn bằng Outlook <Icon name="arrow-up-right" size={16}/></a>
+      <a href={consultationGmail} target="_blank" rel="noopener noreferrer" className="athena-contact-primary">Soạn bằng Gmail <Icon name="arrow-right" size={16}/></a>
+      <a href={consultationOutlook} target="_blank" rel="noopener noreferrer">Soạn bằng Outlook <Icon name="arrow-right" size={16}/></a>
      </div>
     </>:<>
      <p>{active==="phone"?"Dùng điện thoại quét mã QR để mở bàn phím gọi điện đã điền sẵn số.":"Quét mã QR bằng camera điện thoại hoặc nhấn nút bên dưới để mở "+choice.label+"."}</p>
@@ -113,7 +99,7 @@ export function ContactDock(){
      <strong className="athena-contact-number">0965 747 147</strong>
      <div className="athena-contact-buttons">
       <a href={choice.href} target={active==="phone"?undefined:"_blank"} rel={active==="phone"?undefined:"noopener noreferrer"} className="athena-contact-primary">
-       {active==="phone"?"Mở ứng dụng gọi điện":"Mở "+choice.label} <Icon name="arrow-up-right" size={16}/>
+       {active==="phone"?"Mở ứng dụng gọi điện":"Mở "+choice.label} <Icon name="arrow-right" size={16}/>
       </a>
       <button onClick={()=>copy("0965747147")}>Sao chép số điện thoại <Icon name="arrow-right" size={16}/></button>
      </div>

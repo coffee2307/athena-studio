@@ -1,5 +1,5 @@
 import {notFound} from "next/navigation";
-import {WorldSite} from "@/components/templates/WorldSite";
+import {SovereignDemoRoute} from "@/components/sovereign/SovereignDemoRoute";
 import {getTemplate,templates} from "@/lib/templates";
 import type {Metadata} from "next";
 
@@ -14,5 +14,9 @@ export async function generateMetadata({params}:Props):Promise<Metadata>{
 export default async function TemplateDemoPage({params,searchParams}:Props){
  const [{slug},{embed}]=await Promise.all([params,searchParams]);
  if(!getTemplate(slug))notFound();
- return <WorldSite slug={slug} section="home" embedded={embed==="1"}/>;
+ return slug==="auto-showroom"?<>
+  <link rel="preload" href="/models/mclaren-poster.webp?v=20261103" as="image" type="image/webp" fetchPriority="high"/>
+  <link rel="preload" href="/models/mclaren.glb?v=20261029-p1-vecarz" as="fetch" type="model/gltf-binary" crossOrigin="anonymous" fetchPriority="high"/>
+  <SovereignDemoRoute slug={slug} section="home" embedded={embed==="1"}/>
+ </>:<SovereignDemoRoute slug={slug} section="home" embedded={embed==="1"}/>;
 }

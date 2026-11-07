@@ -1,3 +1,4 @@
+import {SitePulseDemo} from "@/components/experience/SitePulseDemo";
 import Link from "next/link";
 import {Icon} from "@/components/ui/Icon";
 import {createMetadata} from "@/lib/metadata";
@@ -38,23 +39,9 @@ export default function ProductsPage(){
        <div><span>ĐẦU RA</span><strong>Trạng thái, nhật ký và tóm tắt</strong></div>
        <div><span>TÌNH TRẠNG</span><strong>Thử nghiệm nội bộ, chưa phát hành</strong></div>
       </div>
-      <div className="athena-product-actions"><Link href="/products/sitepulse" className="athena-product-primary">Khám phá SitePulse <Icon name="arrow-up-right" size={18}/></Link><Link href="/contact" className="athena-product-secondary">Trao đổi về nhu cầu <Icon name="arrow-right" size={17}/></Link></div>
+      <div className="athena-product-actions"><Link href="/products/sitepulse" className="athena-product-primary">Khám phá SitePulse <Icon name="arrow-right" size={18}/></Link><Link href="/contact" className="athena-product-secondary">Trao đổi về nhu cầu <Icon name="arrow-right" size={17}/></Link></div>
      </div>
-     <div className="athena-product-visual" aria-label="Hình minh họa giao diện báo cáo SitePulse, không phải dữ liệu giám sát thời gian thực">
-      <div className="athena-product-window">
-       <div className="athena-product-window-top"><span><i/><i/><i/></span><span>SITEPULSE / DEMO INTERFACE</span><span>V0.1 / CONCEPT</span></div>
-       <div className="athena-product-window-body">
-        <div className="athena-product-window-label">WEBSITE RESPONSE / RESEARCH PREVIEW</div>
-        <h3>Overview<span>.</span></h3>
-        <div className="athena-product-sample">
-         <span>WEBSITE ĐƯỢC MINH HỌA</span><strong>example.com</strong><span>KHÔNG CÓ PHÉP ĐO TRỰC TIẾP</span>
-        </div>
-        <div className="athena-product-mini-grid"><div><span>HTTP RESPONSE</span><strong>—</strong><small>Chưa thực hiện kiểm tra</small></div><div><span>THỜI GIAN ĐÁP ỨNG</span><strong>—</strong><small>Chưa có dữ liệu</small></div></div>
-        <div className="athena-product-window-bottom"><span>WORKFLOW PREVIEW</span><span>Kiểm tra → Xác minh → Báo cáo</span></div>
-       </div>
-      </div>
-      <div className="athena-product-visual-foot"><span>FIG. 01 — MINH HỌA GIAO DIỆN</span><span>KHÔNG PHẢI HỆ THỐNG ĐANG THEO DÕI TRỰC TIẾP</span></div>
-     </div>
+     <div className="athena-product-visual"><SitePulseDemo/></div>
     </article>
    </div>
   </section>
@@ -66,6 +53,6 @@ export default function ProductsPage(){
    </div>
   </section>
 
-  <section className="athena-products-next"><div className="container athena-products-next-inner"><div><p className="section-index"><span className="index-circle">03</span> CÙNG XÁC ĐỊNH NHU CẦU</p><h2>Một vấn đề thực tế<br/>đáng để giải quyết?</h2><p>SitePulse chưa mở đăng ký công khai hoặc thu phí. Nếu website của bạn cần được theo dõi và kiểm tra có hệ thống, hãy chia sẻ vấn đề để Athena cân nhắc hướng phát triển phù hợp.</p></div><Link href="/contact" className="athena-product-primary">Trao đổi ý tưởng sản phẩm <Icon name="arrow-up-right" size={18}/></Link></div></section>
+  <section className="athena-products-next"><div className="container athena-products-next-inner"><div><p className="section-index"><span className="index-circle">03</span> CÙNG XÁC ĐỊNH NHU CẦU</p><h2>Một vấn đề thực tế<br/>đáng để giải quyết?</h2><p>SitePulse chưa mở đăng ký công khai hoặc thu phí. Nếu website của bạn cần được theo dõi và kiểm tra có hệ thống, hãy chia sẻ vấn đề để Athena cân nhắc hướng phát triển phù hợp.</p></div><Link href="/contact" className="athena-product-primary">Trao đổi ý tưởng sản phẩm <Icon name="arrow-right" size={18}/></Link></div></section>
  </div>;
 }

@@ -73,10 +73,10 @@ export default async function ProjectArticle({params}:Props){
     <section id="hien-trang" className="ae-article-section">
      <h2>Hiện trạng & giới hạn</h2><p>{p.outcome}</p>
      <p className="ae-article-notice">Các mô tả được cập nhật theo tiến độ dự án; không ngụ ý đã có hợp đồng, doanh thu hoặc hiệu quả kinh doanh/đầu tư được kiểm chứng.</p>
-     {p.websiteUrl&&<a className="ae-article-website" href={p.websiteUrl} target="_blank" rel="noopener noreferrer">Truy cập website dự án <span aria-hidden="true">↗</span></a>}
+     {p.websiteUrl&&<a className="ae-article-website" href={p.websiteUrl} target="_blank" rel="noopener noreferrer">Truy cập website dự án <span aria-hidden="true"></span></a>}
     </section>
-    <section id="du-an-khac" className="ae-article-section ae-article-related"><h2>Dự án liên quan</h2><ul>{others.map(item=><li key={item.slug}><Link href={"/projects/"+item.slug}><strong>{item.title}</strong><span>{item.category}</span><span aria-hidden="true">↗</span></Link></li>)}</ul></section>
-    <footer className="ae-article-end"><Link href="/projects">← Quay lại thư viện dự án</Link><Link href="/contact">Liên hệ Athena ↗</Link></footer>
+    <section id="du-an-khac" className="ae-article-section ae-article-related"><h2>Dự án liên quan</h2><ul>{others.map(item=><li key={item.slug}><Link href={"/projects/"+item.slug}><strong>{item.title}</strong><span>{item.category}</span><span aria-hidden="true"></span></Link></li>)}</ul></section>
+    <footer className="ae-article-end"><Link href="/projects">← Quay lại thư viện dự án</Link><Link href="/contact">Liên hệ Athena </Link></footer>
    </article>
    <aside className="ae-article-info" aria-label="Thông tin nhanh"><div className="ae-article-sticky">
     <span className="ae-article-info-label">THÔNG TIN DỰ ÁN</span>
@@ -87,7 +87,7 @@ export default async function ProjectArticle({params}:Props){
      <div><dt>Tình trạng</dt><dd>{p.status}</dd></div>
      <div><dt>Minh họa</dt><dd>{hasScreenshots?"Ảnh giao diện đã duyệt":"Chưa công bố ảnh giao diện"}</dd></div>
     </dl>
-    {p.websiteUrl&&<a href={p.websiteUrl} target="_blank" rel="noopener noreferrer">Website chính thức ↗</a>}
+    {p.websiteUrl&&<a href={p.websiteUrl} target="_blank" rel="noopener noreferrer">Website chính thức </a>}
    </div></aside>
   </div>
  </div>;
