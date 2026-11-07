@@ -18,7 +18,7 @@ export function AthenaHeroStage(){
      className={"dna-hero-window dna02-preview-window "+(active===i?"is-front":"is-back")}
      onClick={()=>setActive(i)} aria-pressed={active===i} aria-label={"Chọn bản xem trước "+item.name}>
      <span className="dna-hero-browser"><span><i/><i/><i/></span><small>{item.slug} / preview</small></span>
-     <span className="dna-hero-window-picture"><LocalizedTemplateImage slug={item.slug} altVi={"Giao diện mẫu "+item.name} altEn={"Preview of "+item.name} fill priority={i===0} sizes="(max-width:760px) 75vw, 38vw" style={{objectFit:"cover",objectPosition:"center top"}}/></span>
+     <span className="dna-hero-window-picture"><LocalizedTemplateImage slug={item.slug} altVi={"Giao diện mẫu "+item.name} altEn={"Preview of "+item.name} fill priority={i===0} sizes="(max-width:760px) 75vw, 38vw" style={{objectFit:active===i?"cover":"contain",objectPosition:"center top"}}/></span>
      <span className="dna02-preview-tag">{item.tag}</span>
    </button>)}
   </div>
