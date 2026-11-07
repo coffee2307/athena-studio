@@ -15,10 +15,10 @@ export function TemplateDemoModal({template,onClose,language="vi"}:{template:Tem
   dialog.addEventListener("cancel",cancel);
   return()=>dialog.removeEventListener("cancel",cancel);
  },[template,onClose]);
- const realSite=template?.slug==="digital-creators"?"/immersive/digital-creators/index.html":template?.demoPath;
+ const realSite=template?.slug==="digital-creators"?"/immersive/digital-creators/index.html":template?.slug==="saas-product"?"/immersive/qrio/index.html":template?.demoPath;
  const localized=template&&!["wellness-clinic","property-showcase","education-platform","pet-store","construction-firm"].includes(template.slug);
  const publicSite=realSite+(localized?"?lang="+language:"");
- const embeddedSite=template?.slug==="digital-creators"?publicSite:realSite+"?embed=1"+(localized?"&lang="+language:"");
+ const embeddedSite=template?.slug==="digital-creators"?publicSite:template?.slug==="saas-product"?realSite+"?embed=1&lang="+language:realSite+"?embed=1"+(localized?"&lang="+language:"");
  const inquiry=template?"/contact?service=web-development&template="+encodeURIComponent(template.slug):"/contact";
  return <dialog ref={dialogRef} className="template-demo-modal template-revamp-dialog" aria-labelledby={template?"template-demo-title":undefined} onClick={event=>{if(event.target===dialogRef.current)onClose();}} onClose={onClose}>
  {template&&<div className="template-demo-window">

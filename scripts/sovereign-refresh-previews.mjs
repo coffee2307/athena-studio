@@ -24,7 +24,7 @@ const browser=await chromium.launch({headless:true,channel:process.platform==="w
 const results=[],failures=[];
 for(const slug of slugs){
  const page=await browser.newPage({viewport:{width:1440,height:900},deviceScaleFactor:1,reducedMotion:slug==="auto-showroom"?"no-preference":"reduce"});
- const url=origin+"/template-demos/"+slug;
+ const url=origin+(slug==="saas-product"?"/immersive/qrio/index.html":"/template-demos/"+slug);
  const isDigital=slug==="digital-creators";
  const filename=slug+(isDigital?".png":".jpg");
  try{
@@ -33,6 +33,7 @@ for(const slug of slugs){
   if(response?.status()!==200)throw Error("HTTP "+response?.status());
   await page.evaluate(()=>document.fonts.ready);
   await page.locator("h1").first().waitFor({timeout:15000});
+  if(slug==="saas-product")await page.waitForFunction(()=>document.querySelector("#qr-canvas")?.width>250,null,{timeout:15000});
   // A finished GLB scene is part of the actual cover, not an optional decoration.
   // Never overwrite the Fashion cover with a blank "loading" placeholder.
   if(slug==="fashion-archive"){

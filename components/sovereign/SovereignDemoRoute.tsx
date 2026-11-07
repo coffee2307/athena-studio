@@ -11,6 +11,11 @@ export function SovereignDemoRoute({slug,section="home",itemIndex,embedded}:{
 }){
  const site=findSovereignSite(slug);
  if(!site)notFound();
+ if(slug==="saas-product"){
+  // Qrio is a separately authored, offline-safe showcase of the private Flask product.
+  // Do not expose private Qrio backend code, secrets or ticket/customer data.
+  redirect("/immersive/qrio/index.html");
+ }
  if(slug==="digital-creators"&&site.stage==="sovereign"){
   // Native Vite/Three.js owns all of its independent UI; the Next demo is a technical redirect only.
   redirect("/immersive/digital-creators/index.html");

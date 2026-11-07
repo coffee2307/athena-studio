@@ -17,14 +17,15 @@ async function processNext(){
  while(index<targets.length*2){
   const pos=index++,template=targets[Math.floor(pos/2)],lang=pos%2?"en":"vi";
   const isStatic=template.slug==="digital-creators";
-  const url=origin+(isStatic?"/immersive/digital-creators/index.html":"/template-demos/"+template.slug)+(isStatic?"?lang=":"?embed=1&lang=")+lang;
+  const isQrio=template.slug==="saas-product";
+  const url=origin+(isQrio?"/immersive/qrio/index.html":isStatic?"/immersive/digital-creators/index.html":"/template-demos/"+template.slug)+(isQrio||isStatic?"?lang=":"?embed=1&lang=")+lang;
   const page=await browser.newPage({viewport:{width:1600,height:1000},deviceScaleFactor:1.2,reducedMotion:"reduce"});
   const errors=[];page.on("pageerror",e=>errors.push(e.message));
   try{
    const response=await page.goto(url,{waitUntil:"domcontentloaded",timeout:35000});
    if(response?.status()!==200)throw Error("HTTP "+response?.status());
    await page.waitForTimeout(350);
-   await page.evaluate(({lang,dictionary})=>{
+   if(!isQrio)await page.evaluate(({lang,dictionary})=>{
     const root=document.querySelector(".template-demo-main")||document.querySelector("#root")||document.body;
     const memo=new WeakMap(),amemo=new WeakMap();
     const attrs=["title","alt","placeholder","aria-label"];
@@ -69,7 +70,10 @@ async function processNext(){
     root.dataset.templateLanguage=lang;
    },{lang,dictionary:dictionaries[lang]});
    await page.evaluate(()=>document.fonts.ready);
-   await page.waitForTimeout(template.slug==="auto-showroom"?2400:1050);
+   if(isQrio){
+    await page.waitForFunction(()=>document.querySelector("#qr-canvas")?.width>250,null,{timeout:15000});
+    await page.waitForTimeout(250);
+   }else await page.waitForTimeout(template.slug==="auto-showroom"?2400:1050);
    await page.evaluate(async()=>{
     await Promise.all([...document.images].filter(img=>{
      const r=img.getBoundingClientRect();return r.bottom>0&&r.top<innerHeight;
@@ -99,12 +103,17 @@ async function processNext(){
     return{title:document.title,examples:visible.slice(0,32),viFragments:visible.filter(x=>/[\u00c0-\u1ef9]/.test(x)).length,total:visible.length,overflow:document.documentElement.scrollWidth-innerWidth};
    });
    const stylesheets=await page.evaluate(()=>document.styleSheets.length);
-   if(stylesheets<(isStatic?3:5))throw Error("Missing CSS: only "+stylesheets+" stylesheets");
+   if(stylesheets<(isQrio?1:isStatic?3:5))throw Error("Missing CSS: only "+stylesheets+" stylesheets");
    const screenshot=await page.screenshot({animations:"disabled",timeout:30000});
    const destination="public/template-previews/"+template.slug+"-"+lang+".jpg";
    await sharp(screenshot).resize(1920,1200,{fit:"cover"}).jpeg({quality:87,mozjpeg:true,progressive:true}).toFile(destination);
    const hash=crypto.createHash("sha256").update(fs.readFileSync(destination)).digest("hex").slice(0,16);
    versions[template.slug+"-"+lang]=hash;
+   // Qrio is a native bilingual standalone experience; update its default cover as well.
+   if(isQrio&&lang==="vi"){
+    fs.copyFileSync(destination,"public/template-previews/saas-product.jpg");
+    versions["saas-product"]=hash;
+   }
    // Keep the unlocalized fallback in sync with the latest verified VI 3D cover.
    if(template.slug==="fashion-archive"&&lang==="vi"){
     fs.copyFileSync(destination,"public/template-previews/fashion-archive.jpg");

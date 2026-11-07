@@ -25,7 +25,7 @@ export function TemplateGallery({templates,industries,styles}:{templates:Templat
  },[templates,query,industry,style,sort]);
  const openExperience=(item:Template)=>{
   if(window.matchMedia("(max-width: 760px)").matches){
-   const path=item.slug==="digital-creators"?"/immersive/digital-creators/index.html":item.demoPath;
+   const path=item.slug==="digital-creators"?"/immersive/digital-creators/index.html":item.slug==="saas-product"?"/immersive/qrio/index.html":item.demoPath;
    const editable=!["wellness-clinic","property-showcase","education-platform","pet-store","construction-firm"].includes(item.slug);
    window.location.assign(editable?path+(path.includes("?")?"&":"?")+"lang="+language:path);
    return;

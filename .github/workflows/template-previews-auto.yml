@@ -10,6 +10,7 @@ on:
       - "public/sovereign/**"
       - "public/template-demos/**"
       - "public/immersive/digital-creators/**"
+      - "public/immersive/qrio/**"
       - "public/models/**"
       - "components/immersive/**"
       - "components/sovereign/**"

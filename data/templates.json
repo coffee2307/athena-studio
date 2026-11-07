@@ -230,58 +230,56 @@
   },
   {
     "slug": "saas-product",
-    "title": "Sản phẩm công nghệ",
-    "category": "SaaS / Công nghệ",
+    "title": "Qrio — Nền tảng QR tương tác",
+    "category": "QR / Công nghệ",
     "industry": "Phần mềm",
-    "style": "Product-led / Interactive",
-    "purpose": "Giải thích sản phẩm và chuyển đổi đăng ký",
-    "description": "Workspace tương tác với đầu việc thật trong phiên trình duyệt: tạo, lọc, chuyển trạng thái và quan sát tiến độ.",
+    "style": "QR Studio / Interactive",
+    "purpose": "Thiết kế mã QR và giới thiệu nền tảng vé điện tử",
+    "description": "Qrio là dự án công nghệ về thiết kế mã QR và vé điện tử. Trải nghiệm bản trình diễn tạo QR thực tế, tùy chỉnh màu và xuất PNG/SVG ngay trên trình duyệt.",
     "variant": "saas",
     "tags": [
-      "SaaS",
-      "Technology",
-      "Product-led"
+      "Qrio",
+      "QR Code",
+      "Product Demo",
+      "Interactive"
     ],
     "pages": [
       "Trang chủ",
-      "Nền tảng",
-      "Chi tiết tính năng",
-      "Tính năng",
-      "Về LUMA",
-      "Liên hệ"
+      "QR Studio",
+      "Giải pháp vé điện tử",
+      "Giới thiệu Qrio"
     ],
     "features": [
-      "Bảng việc tương tác, thêm công việc và lọc theo trạng thái",
-      "Các trạng thái chuyển được và thanh tiến độ tính từ dữ liệu",
-      "Các chế độ bảng việc, tiến độ và nhóm",
-      "Website nhiều trang, chi tiết tính năng và biểu mẫu email nháp",
-      "Dữ liệu mô phỏng tại trình duyệt, không backend giả"
+      "Nhập đường dẫn hoặc văn bản để tạo mã QR trực tiếp trên trình duyệt",
+      "Tùy chỉnh màu, kích thước, mức sửa lỗi và tải mã QR PNG/SVG",
+      "Giao diện độc lập đa ngôn ngữ và responsive",
+      "Giới thiệu tính năng vé điện tử, đơn hàng và check-in của Qrio gốc",
+      "Bản demo không kết nối API vé, thanh toán, quản trị hay dữ liệu khách hàng"
     ],
     "modules": [
-      "content",
-      "auth"
+      "content"
     ],
-    "version": "3.0.0",
+    "version": "1.0.0",
     "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
       "next": "15.5.x",
       "react": "19.x"
     },
-    "estimatedPrice": "30–75 triệu đồng",
-    "qualityTier": "Product UI",
+    "estimatedPrice": "Theo phạm vi tùy biến",
+    "qualityTier": "Original Project / QR",
     "demoPath": "/template-demos/saas-product",
     "images": [
-      "/template-demos/saas-product/image-1.jpg",
-      "/template-demos/saas-product/image-2.jpg",
-      "/template-demos/saas-product/image-3.jpg",
-      "/template-demos/saas-product/image-4.jpg",
-      "/template-demos/saas-product/image-5.jpg"
+      "/immersive/qrio/image-1.jpg",
+      "/immersive/qrio/image-2.jpg",
+      "/immersive/qrio/image-3.jpg",
+      "/immersive/qrio/image-4.jpg",
+      "/immersive/qrio/image-5.jpg"
     ],
     "reference": {
-      "name": "startbootstrap-new-age",
-      "url": "https://github.com/StartBootstrap/startbootstrap-new-age",
-      "license": "MIT"
+      "name": "Qrio — Original proprietary project",
+      "url": "https://github.com/coffee2307/Qrio",
+      "license": "Owner project"
     }
   },
   {

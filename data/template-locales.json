@@ -2181,5 +2181,21 @@
       "vi": 348
     },
     "failures": 0
-  }
+  },
+  "Qrio — Nền tảng QR tương tác": "Qrio — Interactive QR Platform",
+  "Qrio là dự án công nghệ về thiết kế mã QR và vé điện tử. Trải nghiệm bản trình diễn tạo QR thực tế, tùy chỉnh màu và xuất PNG/SVG ngay trên trình duyệt.": "Qrio is a real QR design and digital-ticketing project. Try a working, browser-only QR generator with color customization and PNG/SVG export.",
+  "Thiết kế mã QR và giới thiệu nền tảng vé điện tử": "QR design and digital ticketing platform showcase",
+  "QR Studio / Interactive": "QR Studio / Interactive",
+  "QR / Công nghệ": "QR / Technology",
+  "Trang chủ": "Home",
+  "QR Studio": "QR Studio",
+  "Giải pháp vé điện tử": "Digital Ticketing Solutions",
+  "Giới thiệu Qrio": "About Qrio",
+  "Nhập đường dẫn hoặc văn bản để tạo mã QR trực tiếp trên trình duyệt": "Enter a link or text to generate a working QR code in your browser",
+  "Tùy chỉnh màu, kích thước, mức sửa lỗi và tải mã QR PNG/SVG": "Choose colors, size and error correction, then download PNG or SVG",
+  "Giao diện độc lập đa ngôn ngữ và responsive": "Standalone multilingual and responsive interface",
+  "Giới thiệu tính năng vé điện tử, đơn hàng và check-in của Qrio gốc": "Introduce the original Qrio project's tickets, orders and check-in",
+  "Bản demo không kết nối API vé, thanh toán, quản trị hay dữ liệu khách hàng": "Showcase does not connect ticket APIs, payments, admin or customer data",
+  "Theo phạm vi tùy biến": "Quoted by integration scope",
+  "Original Project / QR": "Original Project / QR"
 }

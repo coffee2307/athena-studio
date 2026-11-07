@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#0e0d19">
+  <meta name="description" content="Qrio — bản giới thiệu tương tác của nền tảng thiết kế mã QR và hệ thống vé điện tử.">
+  <title>Qrio — QR Studio | Athena Showcase</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./qrcode.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="ambient ambient-a" aria-hidden="true"></div><div class="ambient ambient-b" aria-hidden="true"></div>
+  <header class="nav wrap">
+    <a class="identity" href="#top" aria-label="Qrio home"><span class="q-mark" aria-hidden="true">Q</span><span>Qrio<span class="identity-dot">.</span></span></a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#studio" data-i18n="navStudio">QR Studio</a>
+      <a href="#capabilities" data-i18n="navSolutions">Giải pháp</a>
+      <a href="#about" data-i18n="navAbout">Về Qrio</a>
+    </nav>
+    <div class="nav-actions">
+      <button id="language" class="language" aria-label="Change language" title="VI / EN">VI <span aria-hidden="true">⌄</span></button>
+      <a href="#studio" class="header-cta"><span data-i18n="navCreate">Tạo QR ngay</span> <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+  <main id="top">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="pulse" aria-hidden="true"></span> QRIO / DIGITAL PRODUCT <span class="eyebrow-index">01 — 03</span></div>
+        <h1 id="hero-title"><span data-i18n="heroLine1">Một mã QR.</span><br><span class="gradient-text" data-i18n="heroLine2">Vô vàn</span><br><span data-i18n="heroLine3">khả năng.</span></h1>
+        <p class="hero-description" data-i18n="heroDescription">Thiết kế mã QR theo phong cách riêng. Tùy chỉnh màu sắc, xem trước tức thì và tải xuống ngay trong trình duyệt.</p>
+        <div class="hero-buttons">
+          <a class="primary" href="#studio"><span data-i18n="heroAction">Bắt đầu thiết kế</span><span aria-hidden="true">↗</span></a>
+          <a class="secondary" href="#capabilities"><span data-i18n="heroExplore">Khám phá Qrio</span><span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="hero-facts"><span><b>01</b><small data-i18n="factOne">QR tùy biến trực tiếp</small></span><span><b>02</b><small data-i18n="factTwo">Xem trước tức thì</small></span><span><b>03</b><small data-i18n="factThree">Tải xuống PNG / SVG</small></span></div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="hero-preview">
+          <div class="preview-head"><span class="dots"><i></i><i></i><i></i></span><span>qrio / live canvas</span><span class="live-indicator">LIVE</span></div>
+          <div class="preview-body"><div id="hero-qr" class="hero-qr"></div><div class="preview-caption"><span>Qrio<span class="identity-dot">.</span></span><span>CREATED WITH QRIO</span></div></div>
+        </div>
+        <span class="float-note note-one">100% LOCAL</span><span class="float-note note-two">SVG · PNG</span>
+      </div>
+    </section>
+    <div class="marquee" aria-hidden="true"><div>DESIGN <span>✳</span> CUSTOMIZE <span>✳</span> GENERATE <span>✳</span> SHARE <span>✳</span> DESIGN <span>✳</span> CUSTOMIZE <span>✳</span> GENERATE <span>✳</span> SHARE <span>✳</span></div></div>
+    <section id="studio" class="studio wrap" aria-labelledby="studio-title">
+      <div class="section-heading"><div><p class="kicker">02 / QR STUDIO</p><h2 id="studio-title" data-i18n="studioTitle">Thiết kế mã QR<br><em>theo cách của bạn.</em></h2></div><p class="section-intro" data-i18n="studioIntro">Một không gian làm việc thực tế: nhập nội dung, đổi màu và xuất QR sử dụng được. Không cần tài khoản.</p></div>
+      <div class="studio-grid">
+        <div class="editor-panel">
+          <div class="panel-title"><span class="panel-number">01</span><h3 data-i18n="editorTitle">Tùy chỉnh QR</h3><span class="editor-state">● <span data-i18n="ready">Sẵn sàng</span></span></div>
+          <div class="field"><label for="qr-data" data-i18n="inputLabel">Đường dẫn hoặc nội dung</label><textarea id="qr-data" rows="3" maxlength="1600" spellcheck="false">https://example.com</textarea><small data-i18n="inputHint">Có thể nhập đường dẫn, văn bản hoặc thông tin liên hệ ngắn.</small></div>
+          <div class="field-grid"><div class="field"><label for="foreground" data-i18n="colorCode">Màu mã QR</label><div class="color-wrap"><input id="foreground" type="color" value="#8b5cf6"><output id="foreground-code" for="foreground">#8B5CF6</output></div></div><div class="field"><label for="background" data-i18n="colorBackground">Màu nền</label><div class="color-wrap"><input id="background" type="color" value="#ffffff"><output id="background-code" for="background">#FFFFFF</output></div></div></div>
+          <div class="field"><div class="field-row"><label for="qr-size" data-i18n="qrSize">Kích thước xuất ảnh</label><output id="qr-size-label" for="qr-size">512px</output></div><input type="range" id="qr-size" min="256" max="1024" value="512" step="128"></div>
+          <div class="field"><label for="qr-ecc" data-i18n="errorLevel">Mức sửa lỗi</label><select id="qr-ecc"><option value="L">L — 7%</option><option value="M" selected>M — 15%</option><option value="Q">Q — 25%</option><option value="H">H — 30%</option></select></div>
+          <div class="editor-actions"><button type="button" class="primary" id="generate"><span data-i18n="generate">Tạo mã QR</span><span aria-hidden="true">↗</span></button><button type="button" class="ghost-button" id="reset" data-i18n="reset">Mặc định</button></div>
+          <p class="privacy-note">✦ <span data-i18n="localPrivacy">Dữ liệu được xử lý ngay trong trình duyệt. Không gửi tới máy chủ.</span></p>
+        </div>
+        <div class="output-panel"><div class="panel-title"><span class="panel-number">02</span><h3 data-i18n="previewTitle">Xem trước trực tiếp</h3><span class="editor-state"><span class="live-dot"></span> <span data-i18n="live">Trực tiếp</span></span></div><div class="output-stage"><div class="output-frame"><canvas id="qr-canvas" role="img" aria-label="Generated QR code"></canvas></div><span class="scan-note" data-i18n="scanHint">Dùng camera để quét mã QR</span></div><div class="download-row"><button id="download-png" type="button" class="download-button"><span aria-hidden="true">↓</span><span>PNG</span></button><button id="download-svg" type="button" class="download-button"><span aria-hidden="true">↓</span><span>SVG</span></button></div><p id="feedback" class="feedback" role="status" aria-live="polite"></p></div>
+      </div>
+    </section>
+    <section id="capabilities" class="capabilities wrap" aria-labelledby="capabilities-title"><div class="section-heading"><div><p class="kicker">03 / BEYOND THE CODE</p><h2 id="capabilities-title" data-i18n="capabilitiesTitle">Hơn cả một<br><em>mã QR.</em></h2></div><p class="section-intro" data-i18n="capabilitiesIntro">Qrio còn được xây dựng cho những quy trình quản lý vé và kiểm soát lượt vào. Phần này giới thiệu năng lực của dự án gốc.</p></div>
+      <div class="feature-grid"><article class="feature-card feature-highlight"><span class="feature-index">01 / QR CREATOR</span><span class="feature-icon">⌗</span><h3 data-i18n="featureQrTitle">Thiết kế tự do</h3><p data-i18n="featureQrBody">Mã QR cho liên kết và nội dung, với tùy chỉnh màu sắc và xuất ảnh trực tiếp.</p><a href="#studio"><span data-i18n="tryNow">Thử ngay</span><span aria-hidden="true">↗</span></a></article><article class="feature-card"><span class="feature-index">02 / TICKETING</span><span class="feature-icon">▦</span><h3 data-i18n="featureTicketTitle">Vé điện tử</h3><p data-i18n="featureTicketBody">Dự án gốc có hệ thống tạo sự kiện, đặt vé và quản lý đơn hàng. Chưa kết nối vào bản demo này.</p><span class="feature-status" data-i18n="sourceSystem">Tính năng của hệ thống gốc</span></article><article class="feature-card"><span class="feature-index">03 / CHECK-IN</span><span class="feature-icon">◎</span><h3 data-i18n="featureScanTitle">Quét & kiểm soát</h3><p data-i18n="featureScanBody">Hệ thống gốc hỗ trợ quét và xác thực vé. Bản giới thiệu không truy cập dữ liệu khách hàng.</p><span class="feature-status" data-i18n="sourceSystem">Tính năng của hệ thống gốc</span></article></div>
+    </section>
+    <section id="about" class="about wrap"><div class="about-logo">Q<span>rio</span><i>.</i></div><div><p class="kicker">QRIO × ATHENA STUDIO</p><h2 data-i18n="aboutTitle">Một sản phẩm thật.<br>Một trải nghiệm rõ ràng.</h2><p data-i18n="aboutBody">Đây là bản trình diễn độc lập do Athena xây dựng để giới thiệu Qrio. Công cụ tạo QR hoạt động trong trình duyệt; máy chủ, thanh toán, cơ sở dữ liệu và quản trị Qrio không được tích hợp vào bản công khai.</p><div class="about-tags"><span>CLIENT-SIDE QR</span><span>ZERO ACCOUNT</span><span>NO PAYMENTS</span></div></div></section>
+  </main>
+  <footer class="footer wrap"><a class="identity" href="#top"><span class="q-mark">Q</span><span>Qrio<span class="identity-dot">.</span></span></a><span data-i18n="footerNote">Bản trình diễn bởi Athena Studio · Không phải dịch vụ vé trực tuyến</span><a href="#top" data-i18n="backTop">Lên đầu ↑</a></footer>
+</body>
+</html>

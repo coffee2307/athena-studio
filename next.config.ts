@@ -96,6 +96,11 @@ const nextConfig:NextConfig={
     .replace("script-src 'self' 'unsafe-inline'","script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'")
     + "; worker-src 'self' blob:"}
   ]},
+  // Qrio public showcase can be framed by Athena only; its private backend is never exposed.
+  {source:"/immersive/qrio/:path*",headers:[
+   {key:"X-Frame-Options",value:"SAMEORIGIN"},
+   {key:"Content-Security-Policy",value:policy.replace("frame-ancestors 'none'","frame-ancestors 'self'")}
+  ]},
   // Independently compiled Digital Creators must be frameable only by Athena's own gallery.
   // The original site's self-hosted assets and font links require route-specific policy.
   {source:"/immersive/digital-creators/:path*",headers:[

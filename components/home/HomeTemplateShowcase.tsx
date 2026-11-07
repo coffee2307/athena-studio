@@ -19,7 +19,8 @@ export function HomeTemplateShowcase(){
  const href=(item:NonNullable<ReturnType<typeof getTemplate>>)=>{
   const excluded=["wellness-clinic","property-showcase","education-platform","pet-store","construction-firm"];
   if(excluded.includes(item.slug))return item.demoPath;
-  return item.demoPath+(item.demoPath.includes("?")?"&":"?")+"lang="+language;
+  const path=item.slug==="saas-product"?"/immersive/qrio/index.html":item.demoPath;
+  return path+(path.includes("?")?"&":"?")+"lang="+language;
  };
  return <section className="home-demo-section section-space" id="website-mau" aria-labelledby="home-demo-title">
   <div className="container home-demo-layout">
