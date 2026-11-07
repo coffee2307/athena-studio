@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const previews=[
  {slug:"creative-studio",name:"Creative Studio",tag:"01 / STUDIO"},
- {slug:"fashion-archive",name:"Fashion Archive",tag:"02 / FASHION"}
+ {slug:"pet-store",name:"Pet Store",tag:"02 / PET STORE"}
 ] as const;
 export function AthenaHeroStage(){
  const [active,setActive]=useState(0);
