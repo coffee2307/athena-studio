@@ -42,7 +42,7 @@ export function Footer(){
     <div className="agency-footer-column"><h3>HỖ TRỢ</h3>
      <Link href="/process">Quy trình hợp tác</Link>
      <Link href="/pricing">Cách lập báo giá</Link>
-     <SessionNavigation mobile/>
+     <SessionNavigation footer/>
      <Link href="/legal/privacy">Quyền riêng tư</Link>
      <Link href="/legal/terms">Điều khoản sử dụng</Link>
      <Link href="/legal/service-policy">Chính sách dịch vụ</Link>

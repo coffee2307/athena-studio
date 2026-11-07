@@ -1,0 +1,121 @@
+/* Athena account actions: one icon language and consistent variants across all navigation surfaces. */
+.agency-header .agency-auth-link,
+.agency-header .agency-register-link {
+ display:inline-flex;
+ align-items:center;
+ justify-content:center;
+ gap:8px;
+ min-height:42px;
+ padding:10px 12px;
+ border:1px solid #dcdedb;
+ border-radius:9px;
+ color:#222;
+ background:#fff;
+ font-size:11px;
+ font-weight:700;
+ line-height:1.2;
+ text-decoration:none;
+ transition:background-color .2s ease,border-color .2s ease,transform .2s ease;
+}
+.agency-header .agency-register-link{background:#f0f0ee;border-color:#dfdfdc}
+.agency-header .agency-auth-link svg,
+.agency-header .agency-register-link svg{width:16px;height:16px;flex:none}
+.agency-header .agency-auth-link:hover,
+.agency-header .agency-register-link:hover{
+ background:#e6e6e3;
+ border-color:#b9bab7;
+ transform:translateY(-1px);
+ text-decoration:none;
+}
+.agency-header .agency-auth-link:focus-visible,
+.agency-header .agency-register-link:focus-visible{outline:2px solid #121212;outline-offset:3px}
+.agency-header .agency-auth-link:active,
+.agency-header .agency-register-link:active{transform:translateY(0)}
+/* Do not silently hide Sign Up between the mobile menu and full desktop widths. */
+@media(min-width:981px) and (max-width:1250px){
+ .agency-header .agency-register-link{display:inline-flex}
+ .agency-header .agency-auth-link,
+ .agency-header .agency-register-link{padding-inline:9px;gap:6px;font-size:10px}
+ .agency-header .agency-nav-actions{gap:6px}
+ .agency-header .agency-primary-cta{padding-inline:10px;gap:7px;font-size:11px}
+}
+@media(max-width:980px){
+ .agency-header .agency-nav-actions{display:none}
+ .agency-mobile-account>.athena-language-switch{
+  grid-column:1/-1;
+  justify-self:start;
+  margin:0 0 3px;
+ }
+ .agency-mobile-account a.agency-mobile-signin,
+ .agency-mobile-account a.agency-mobile-signup{gap:9px;min-height:52px}
+ .agency-mobile-account a.agency-mobile-signin svg,
+ .agency-mobile-account a.agency-mobile-signup svg{width:17px;height:17px;flex:none}
+ .agency-mobile-account a.agency-mobile-signin:focus-visible,
+ .agency-mobile-account a.agency-mobile-signup:focus-visible{outline:2px solid #121212;outline-offset:3px}
+}
+
+/* Footer: account destinations get a coherent button group, independent of the mobile menu. */
+.agency-footer-column .agency-footer-account-actions{
+ display:flex;
+ flex-direction:column;
+ align-items:stretch;
+ width:100%;
+ max-width:190px;
+ gap:8px;
+ margin:2px 0 5px;
+}
+.agency-footer-column a.agency-footer-auth-button{
+ display:inline-flex;
+ align-items:center;
+ justify-content:flex-start;
+ gap:9px;
+ min-height:44px;
+ width:100%;
+ padding:10px 12px;
+ border:1px solid #cdcecc;
+ border-radius:8px;
+ background:#fff;
+ color:#1c1c1c;
+ font-size:12px;
+ font-weight:700;
+ line-height:1.3;
+ text-decoration:none;
+ transition:background-color .2s ease,border-color .2s ease,transform .2s ease;
+}
+.agency-footer-column a.agency-footer-signup{
+ background:#171717;
+ border-color:#171717;
+ color:#fff;
+}
+.agency-footer-column a.agency-footer-auth-button svg{width:16px;height:16px;flex:none}
+.agency-footer-column a.agency-footer-signin:hover{background:#ebebea;border-color:#aaa}
+.agency-footer-column a.agency-footer-signup:hover{background:#393939;border-color:#393939;color:#fff}
+.agency-footer-column a.agency-footer-auth-button:hover{transform:translateY(-1px);text-decoration:none}
+.agency-footer-column a.agency-footer-auth-button:focus-visible{outline:2px solid #121212;outline-offset:3px}
+.agency-footer-column a.agency-footer-profile{
+ display:inline-flex;align-items:center;gap:10px;
+ min-height:44px;padding:6px 0;font-size:12px;font-weight:700;
+}
+.agency-footer-column .agency-footer-auth-loading{
+ display:inline-flex;align-items:center;min-height:44px;
+ color:#595959;font-size:12px;line-height:1.4;
+}
+@media(max-width:640px){
+ .agency-footer-column .agency-footer-account-actions{
+  grid-column:1/-1;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  max-width:none;
+  margin:3px 0;
+  gap:10px;
+ }
+ .agency-footer-column a.agency-footer-auth-button{
+  justify-content:center;min-height:48px;padding:10px 8px;
+ }
+ .agency-footer-column a.agency-footer-profile,
+ .agency-footer-column .agency-footer-auth-loading{grid-column:1/-1}
+}
+@media(prefers-reduced-motion:reduce){
+ .agency-header .agency-auth-link,.agency-header .agency-register-link,
+ .agency-footer-column a.agency-footer-auth-button{transition:none;transform:none!important}
+}
