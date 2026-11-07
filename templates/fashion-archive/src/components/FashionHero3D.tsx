@@ -6,9 +6,9 @@ import type * as THREE from "three";
 import s from "./FashionHero3D.module.css";
 
 const MODELS=[
- {id:"pose-floor",title:"THE SCULPTURAL POSE",caption:"Người mẫu ngồi — nghiên cứu hình thể",file:"pose-floor.glb"},
+ {id:"pose-floor",title:"THE SCULPTURAL POSE",caption:"Người mẫu ngồi — nghiên cứu hình thể",file:"pose-floor-fast.glb"},
  {id:"flowers",title:"THE GARDEN STUDY",caption:"Người mẫu và hoa — nghiên cứu chuyển động",file:"flowers.glb"},
- {id:"squat",title:"THE QUIET FORM",caption:"Dáng ngồi thấp — nghiên cứu đường nét",file:"squat.glb"}
+ {id:"squat",title:"THE QUIET FORM",caption:"Dáng ngồi thấp — nghiên cứu đường nét",file:"squat-fast.glb"}
 ] as const;
 
 type ThreeEngine={switchModel:(index:number)=>void;rotateBy:(deltaX:number)=>void;releaseDrag:()=>void;dispose:()=>void};
@@ -47,10 +47,10 @@ export default function FashionHero3D({modelBase,collectionUrl}:Props){
   const watchedCanvas=canvas.current;
 
   async function initialize(){
-   const [T,loaderModule,dracoModule]=await Promise.all([
+   const [T,loaderModule,meshoptModule]=await Promise.all([
     import("three"),
     import("three/examples/jsm/loaders/GLTFLoader.js"),
-    import("three/examples/jsm/loaders/DRACOLoader.js")
+    import("three/examples/jsm/libs/meshopt_decoder.module.js")
    ]);
    if(destroyed)return;
    const gl=new T.WebGLRenderer({canvas:watchedCanvas,alpha:true,antialias:true,powerPreference:"high-performance"});
@@ -68,11 +68,23 @@ export default function FashionHero3D({modelBase,collectionUrl}:Props){
    const key=new T.DirectionalLight(0xffffff,2.5);key.position.set(2,5,7);scene.add(key);
    const rim=new T.DirectionalLight(0xf0d4b6,1.5);rim.position.set(-5,-2,3);scene.add(rim);
    const pivot=new T.Group();scene.add(pivot);
-   const draco=new dracoModule.DRACOLoader();
-   draco.setDecoderPath(modelBase+"/draco/");
-   draco.preload();
+   // Meshopt decodes in WASM without the extra Draco worker download for the
+   // two most expensive figures. Only load Draco if the lightweight Flowers
+   // figure is actually selected.
    const gltfLoader=new loaderModule.GLTFLoader();
-   gltfLoader.setDRACOLoader(draco);
+   gltfLoader.setMeshoptDecoder(meshoptModule.MeshoptDecoder);
+   let draco:InstanceType<typeof import("three/examples/jsm/loaders/DRACOLoader.js").DRACOLoader>|null=null;
+   let dracoPromise:Promise<void>|null=null;
+   function ensureDraco(){
+    if(!dracoPromise)dracoPromise=import("three/examples/jsm/loaders/DRACOLoader.js").then(({DRACOLoader})=>{
+     if(destroyed)return;
+     draco=new DRACOLoader();
+     draco.setDecoderPath(modelBase+"/draco/");
+     gltfLoader.setDRACOLoader(draco);
+     draco.preload();
+    });
+    return dracoPromise;
+   }
    const cache=new Map<number,{group:THREE.Group;radius:number}>();
    let requestId=0,frameBefore=0,currentRadius=1.8,objectLoaded=false;
    let activeModelIndex=activeRef.current;
@@ -82,7 +94,7 @@ export default function FashionHero3D({modelBase,collectionUrl}:Props){
     const node=host.current;
     if(!node||destroyed)return;
     const width=Math.max(1,node.clientWidth),height=Math.max(1,node.clientHeight);
-    gl.setPixelRatio(Math.min(window.devicePixelRatio||1,width<520?1.45:1.8));
+    gl.setPixelRatio(Math.min(window.devicePixelRatio||1,width<520?1.3:1.6));
     gl.setSize(width,height,false);
     camera.aspect=width/height;
     camera.updateProjectionMatrix();
@@ -125,6 +137,8 @@ export default function FashionHero3D({modelBase,collectionUrl}:Props){
      pivot.rotation.z=0;dragging=false;freezeUntil=0;objectLoaded=true;fit();setStatus("ready");syncLoop();
     }
     if(cache.has(index)){present(cache.get(index)!);return}
+    const beginLoad=()=>{
+    if(destroyed||serial!==requestId)return;
     gltfLoader.load(modelBase+"/"+MODELS[index].file,gltf=>{
      if(destroyed){disposeScene(gltf.scene);return}
      const group=new T.Group();
@@ -143,6 +157,11 @@ export default function FashionHero3D({modelBase,collectionUrl}:Props){
      cache.set(index,{group,radius});
      present({group,radius});
     },undefined,err=>{if(!destroyed&&serial===requestId){console.error("FASHION_MODEL_LOAD",MODELS[index].id,err);setStatus("unavailable")}});
+    };
+    if(index===1)void ensureDraco().then(beginLoad).catch(error=>{
+     if(!destroyed&&serial===requestId){console.error("FASHION_DRACO_INIT",error);setStatus("unavailable")}
+    });
+    else beginLoad();
    }
    engine.current={switchModel:show,rotateBy:(deltaX:number)=>{
     if(!objectLoaded)return;
@@ -161,7 +180,7 @@ export default function FashionHero3D({modelBase,collectionUrl}:Props){
     cancelAnimationFrame(raf);observer?.disconnect();resize?.disconnect();
     document.removeEventListener("visibilitychange",onVisibility);
     reduceQuery.removeEventListener("change",onReduce);
-    draco.dispose();
+    draco?.dispose();
     for(const entry of cache.values())disposeScene(entry.group);
     cache.clear();gl.dispose();gl.forceContextLoss();
    };

@@ -15,3 +15,10 @@ Three compressed GLB models were supplied by the user. Adaptation: local compres
 - Woman Picking Flowers - Low Poly, by ART & MODELING / Fadly.W: https://sketchfab.com/3d-models/woman-picking-flowers-low-poly-f39b34790d464ad7ae84f504413ffc60 | CC BY 4.0 | models/flowers.glb
 - Graceful Squatting Female, by ART & MODELING / Fadly.W: https://sketchfab.com/3d-models/graceful-squatting-female-2c75128e56224662a5f27d613dd0f505 | CC BY 4.0 | models/squat.glb
 License text: https://creativecommons.org/licenses/by/4.0/
+
+### Performance derivatives (2026-11-07)
+Original user-supplied CC BY 4.0 GLB assets above remain byte-for-byte unchanged. The website now uses two derivative GLBs with the same attribution and no claim of endorsement:
+- `models/pose-floor-fast.glb`: mesh simplified (target ratio 0.50, maximum normalized error 0.002) and re-encoded with Meshopt by glTF-Transform v4.5.1. Original `pose-floor.glb` remains available.
+- `models/squat-fast.glb`: WebP texture re-encoded at quality 78 and geometry re-encoded with Meshopt by glTF-Transform v4.5.1. Original `squat.glb` remains available.
+- `models/flowers.glb` is unchanged and decoded with Draco on demand.
+For embedded demos, the optimized assets are mirrored in `public/sovereign/fashion-archive/models/`. This is an adaptation for delivery and rendering performance, not an original work.

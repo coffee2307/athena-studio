@@ -58,6 +58,7 @@ export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:{sect
   {storyMenu}
   <main>
    {section==="home"&&<>
+    <link rel="preload" href={assetBase+"/models/pose-floor-fast.glb"} as="fetch" crossOrigin="anonymous" fetchPriority="high"/>
     <FashionHero3D modelBase={assetBase+"/models"} collectionUrl={go("/work")}/>
     <section className={s.collectionSection} id="fashion-collection">
      <div className={s.sectionIntro}><span>01 / THE EDITION</span><h2>THREE LOOKS.<br/><em>THREE WAYS TO SEE.</em></h2><p>Ba hướng thể hiện phom dáng, màu sắc và ánh sáng. Đây là các mẫu minh họa cho trải nghiệm website, không phải sản phẩm đang bán.</p></div>
