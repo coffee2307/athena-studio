@@ -78,7 +78,9 @@ if(!failures.length&&results.length===slugs.length&&apply){
   if(item.companion)copyFileSync(join(temp,item.companion),join(out,item.companion));
   versions[item.slug]=item.hash;
  }
- for(const old of Object.keys(versions))if(!all.includes(old))delete versions[old];
+ // Locale-specific covers are managed by the separate capture pipeline.
+ // Never erase their cache keys when updating default screenshots.
+ for(const old of Object.keys(versions))if(!all.includes(old)&&!all.some(slug=>old===slug+"-vi"||old===slug+"-en"))delete versions[old];
  writeFileSync(versionsPath,JSON.stringify(versions,null,2)+"\n");
  applied=true;
 }

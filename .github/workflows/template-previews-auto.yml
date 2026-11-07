@@ -77,6 +77,11 @@ jobs:
       - name: Capture and apply changed site covers
         if: steps.targets.outputs.slugs != 'none'
         run: node scripts/sovereign-refresh-previews.mjs --apply --slugs=${{ steps.targets.outputs.slugs }}
+      - name: Refresh VI/EN covers for changed templates
+        if: steps.targets.outputs.slugs != 'none'
+        env:
+          ONLY_SLUGS: ${{ steps.targets.outputs.slugs }}
+        run: node scripts/capture-template-locales-prod.mjs
       - name: Upload real-browser capture evidence
         if: always()
         uses: actions/upload-artifact@v4

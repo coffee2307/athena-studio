@@ -5,7 +5,9 @@ import sharp from "sharp";
 const registry=JSON.parse(fs.readFileSync("data/templates.json","utf8"));
 const dictionaries=JSON.parse(fs.readFileSync("data/template-locales.json","utf8"));
 const excluded=new Set(["wellness-clinic","property-showcase","education-platform","pet-store","construction-firm"]);
-const targets=registry.filter(t=>!excluded.has(t.slug)&&(!process.env.ONLY_SLUG||t.slug===process.env.ONLY_SLUG));
+const selection=(process.env.ONLY_SLUGS||process.env.ONLY_SLUG||"all").split(",").map(x=>x.trim()).filter(Boolean);
+const targets=registry.filter(t=>!excluded.has(t.slug)&&(selection.includes("all")||selection.includes(t.slug)));
+if(selection.some(slug=>slug!=="all"&&!registry.some(t=>t.slug===slug)))throw Error("Unknown preview slug: "+selection.join(","));
 const origin=process.env.ATHENA_QA_ORIGIN||"http://127.0.0.1:3182";
 const versions=JSON.parse(fs.readFileSync("data/template-preview-versions.json","utf8"));
 const browser=await chromium.launch({channel:process.platform==="win32"?"chrome":undefined,headless:true,args:["--disable-dev-shm-usage"]});
@@ -74,7 +76,17 @@ async function processNext(){
     }).map(img=>img.decode().catch(()=>{})));
    });
    await page.waitForTimeout(200);
-   if(isStatic)await page.addStyleTag({content:".athena-demo-float,.athena-demo-info,.athena-demo-float-handle{display:none!important}"});
+   if(template.slug==="fashion-archive"){
+    // A rendered 3D figure is mandatory in the cover: wait for Meshopt + WebGL,
+    // not just DOM hydration. Never publish a screenshot of the loading state.
+    await page.locator('[data-active-model="pose-floor"][data-model-state="ready"]').waitFor({timeout:45000});
+    await page.waitForFunction(()=>{
+     const canvas=document.querySelector("[data-fashion-3d-hero] canvas");
+     return canvas instanceof HTMLCanvasElement&&canvas.width>100&&canvas.height>100;
+    },null,{timeout:10000});
+    await page.waitForTimeout(300);
+   }
+   if(isStatic||template.slug==="fashion-archive")await page.addStyleTag({content:".athena-demo-float,.athena-demo-info,.athena-demo-float-handle{display:none!important}"});
    const state=await page.evaluate(()=>{
     const main=document.querySelector(".template-demo-main")||document.querySelector("#root")||document.body;
     const walker=document.createTreeWalker(main,NodeFilter.SHOW_TEXT);let n;const visible=[];
@@ -93,6 +105,11 @@ async function processNext(){
    await sharp(screenshot).resize(1920,1200,{fit:"cover"}).jpeg({quality:87,mozjpeg:true,progressive:true}).toFile(destination);
    const hash=crypto.createHash("sha256").update(fs.readFileSync(destination)).digest("hex").slice(0,16);
    versions[template.slug+"-"+lang]=hash;
+   // Keep the unlocalized fallback in sync with the latest verified VI 3D cover.
+   if(template.slug==="fashion-archive"&&lang==="vi"){
+    fs.copyFileSync(destination,"public/template-previews/fashion-archive.jpg");
+    versions["fashion-archive"]=hash;
+   }
    report.push({slug:template.slug,lang,destination,hash,state,errors});
    console.log("COVER_OK",template.slug,lang,hash,"VI",state.viFragments,"/ text",state.total);
   }catch(e){const f={slug:template.slug,lang,error:String(e).slice(0,500),errors};failures.push(f);console.log("COVER_ERROR",JSON.stringify(f));}
