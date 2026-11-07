@@ -1,0 +1,1215 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <script>try{const value=new URLSearchParams(location.search).get("lang");if(value==="vi"||value==="en")localStorage.setItem("qr_lang",value)}catch{}</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="doc.title">About Us - Qrio</title>
+  <meta name="description" data-i18n-content="meta.description" content="Learn about Qrio - a free, fast, and easy-to-use QR code generator." />
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#7c3aed" />
+
+  <link rel="icon" type="image/x-icon" href="/immersive/qrio/static/logo/favicon_io%20(3)/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/immersive/qrio/static/logo/favicon_io%20(3)/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/immersive/qrio/static/logo/favicon_io%20(3)/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/immersive/qrio/static/logo/favicon_io%20(3)/apple-touch-icon.png">
+  <link rel="manifest" href="/immersive/qrio/static/logo/favicon_io%20(3)/site.webmanifest">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+      background: #1e1e2e;
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      height: 64px;
+      background: rgba(15, 15, 26, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .sticky-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      padding: 0 32px;
+    }
+
+    .sticky-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .sticky-brand .logo-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+    }
+
+    .sticky-brand .logo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .sticky-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn-sm {
+      padding: 8px 16px;
+      font-size: 13px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #e2e8f0;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(124, 58, 237, 0.3);
+    }
+
+    .bg-effects {
+      position: fixed;
+      inset: 0;
+      display: none;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .bg-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(56px);
+      opacity: 0.28;
+      will-change: transform;
+      animation: floatOrb 28s ease-in-out infinite;
+    }
+
+    .bg-orb-1 {
+      width: 420px;
+      height: 420px;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      top: -120px;
+      right: -140px;
+      animation-delay: 0s;
+    }
+
+    .bg-orb-2 {
+      width: 320px;
+      height: 320px;
+      background: linear-gradient(135deg, #06b6d4, #3b82f6);
+      bottom: 120px;
+      left: -120px;
+      animation-delay: -5s;
+    }
+
+    .bg-orb-3 {
+      width: 260px;
+      height: 260px;
+      background: linear-gradient(135deg, #ec4899, #f43f5e);
+      top: 42%;
+      right: 18%;
+      animation-delay: -10s;
+    }
+
+    @keyframes floatOrb {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(30px, -30px) scale(1.05); }
+      50% { transform: translate(-20px, 20px) scale(0.95); }
+      75% { transform: translate(-30px, -20px) scale(1.02); }
+    }
+
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      display: none;
+      background-image:
+        linear-gradient(rgba(124, 58, 237, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124, 58, 237, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+      z-index: 0;
+      animation: gridDrift 30s linear infinite;
+    }
+
+    @keyframes gridDrift {
+      from { background-position: 0 0; }
+      to { background-position: 240px 240px; }
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 16px;
+      border: 1px solid #3a3a50;
+      background: #2a2a3e;
+      border-radius: 14px;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .lang-picker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: rgba(226,232,240,0.95);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .lang-picker:hover {
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(124, 58, 237, 0.40);
+      transform: translateY(-1px);
+    }
+
+    .lang-picker i {
+      font-size: 14px;
+      color: #a5b4fc;
+      transition: transform 0.3s ease;
+    }
+
+    .lang-picker:hover i {
+      transform: rotate(15deg);
+      color: #c4b5fd;
+    }
+
+    .lang-label {
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .lang-picker:focus-visible {
+      outline: none;
+      border-color: rgba(124, 58, 237, 0.70);
+      box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.20);
+    }
+
+    @media (max-width: 768px) {
+      .lang-label { display: none; }
+      .lang-picker {
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        border-radius: 12px;
+        justify-content: center;
+        gap: 0;
+      }
+    }
+
+    .lang-select {
+      background: rgba(30, 30, 46, 0.8);
+      border: 1px solid rgba(124, 58, 237, 0.3);
+      border-radius: 6px;
+      color: #e2e8f0;
+      font-size: 13px;
+      font-weight: 600;
+      outline: none;
+      cursor: pointer;
+      padding: 4px 8px;
+      transition: all 0.2s ease;
+    }
+
+    .lang-select:hover {
+      background: rgba(30, 30, 46, 0.95);
+      border-color: rgba(124, 58, 237, 0.5);
+    }
+
+    .lang-select:focus {
+      border-color: rgba(124, 58, 237, 0.7);
+      box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2);
+    }
+
+    .lang-select option {
+      background: #1e1e2e;
+      color: #e2e8f0;
+      padding: 8px;
+    }
+
+    .lang-native {
+      display: none;
+    }
+
+    .lang-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.62);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 9999;
+    }
+
+    .lang-modal-overlay.show {
+      display: flex;
+    }
+
+    .lang-modal {
+      width: 100%;
+      max-width: 420px;
+      background: #232337;
+      border: 1px solid #3a3a50;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 30px 90px rgba(0,0,0,0.55);
+    }
+
+    .lang-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid #3a3a50;
+    }
+
+    .lang-modal-title {
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .lang-modal-close {
+      background: transparent;
+      border: 0;
+      color: #c9c9da;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 6px 8px;
+      border-radius: 10px;
+    }
+
+    .lang-modal-close:hover {
+      background: rgba(255,255,255,0.06);
+    }
+
+    .lang-modal-body {
+      padding: 10px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .lang-modal-item {
+      width: 100%;
+      text-align: left;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(124, 58, 237, 0.25);
+      background: rgba(255,255,255,0.04);
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .lang-modal-item:hover {
+      border-color: rgba(124, 58, 237, 0.55);
+      background: rgba(124, 58, 237, 0.14);
+    }
+
+    .lang-modal-item.active {
+      border-color: rgba(124, 58, 237, 0.75);
+      background: rgba(124, 58, 237, 0.20);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .home-btn {
+      width: 40px;
+      height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      background: #1e1e2e;
+      border: 1px solid #3a3a50;
+      color: #d9d6ff;
+      text-decoration: none;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      flex: 0 0 auto;
+    }
+
+    .home-btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(124, 58, 237, 0.70);
+    }
+
+    .home-btn i { font-size: 15px; }
+
+    .brand .logo-box {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      overflow: hidden;
+      background: transparent;
+      display: grid;
+      place-items: center;
+    }
+
+    .brand .logo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .header {
+      margin-top: 20px;
+      padding: 18px 2px 6px;
+    }
+
+    h1 {
+      font-size: clamp(22px, 3.6vw, 36px);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #ffffff, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: #b7b7c9;
+      font-size: 14px;
+      line-height: 1.6;
+      max-width: 84ch;
+    }
+
+    .card {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 14px;
+      background: #2a2a3e;
+      border: 1px solid #3a3a50;
+    }
+
+    .card h2 {
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: #eae9ff;
+    }
+
+    .card p {
+      color: #c9c9da;
+      font-size: 14px;
+      line-height: 1.75;
+      margin: 8px 0;
+    }
+
+    .card ul {
+      margin: 10px 0 0 18px;
+      color: #c9c9da;
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .card li { margin: 6px 0; }
+
+    .highlight-box {
+      border: 1px dashed rgba(124, 58, 237, 0.35);
+      background: rgba(124, 58, 237, 0.10);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-top: 14px;
+    }
+
+    .highlight-box p { margin: 0; }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px;
+      background: rgba(124, 58, 237, 0.08);
+      border-radius: 10px;
+      border: 1px solid rgba(124, 58, 237, 0.15);
+    }
+
+    .feature-item i {
+      font-size: 18px;
+      color: #a78bfa;
+      margin-top: 2px;
+    }
+
+    .feature-item div {
+      flex: 1;
+    }
+
+    .feature-item strong {
+      color: #eae9ff;
+      font-size: 14px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .feature-item span {
+      color: #b7b7c9;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .footer {
+      margin-top: 26px;
+      padding: 16px 2px 0;
+      color: #7f7f98;
+      font-size: 12.5px;
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer > span {
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-items: center;
+      min-width: 0;
+    }
+
+    .footer a {
+      color: #a78bfa;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 720px) {
+      .topbar { flex-direction: row; align-items: center; }
+      .topbar-right { justify-content: flex-end; }
+      .footer { justify-content: center; flex-wrap: wrap; }
+      .footer-links { justify-content: center; }
+      .feature-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="sticky-header">
+    <div class="sticky-inner">
+      <a class="sticky-brand" href="index.html">
+        <span class="logo-box"><img src="/immersive/qrio/static/logo/logo.png" alt="Qrio"></span>
+        <span>Qrio</span>
+      </a>
+    </div>
+  </div>
+  <div class="bg-effects">
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+  </div>
+  <div class="bg-grid"></div>
+
+  <main class="page">
+    <div class="topbar">
+      <a class="home-btn" href="/" aria-label="Trang chủ" title="Trang chủ"><i class="fa-solid fa-house"></i></a>
+      <div class="topbar-right">
+      </div>
+    </div>
+
+    <header class="header">
+      <h1 data-i18n="about.h1">Về chúng tôi</h1>
+      <p class="subtitle" data-i18n="about.subtitle">Chào mừng bạn đến với Qrio - công cụ tạo mã QR miễn phí, nhanh chóng và dễ sử dụng nhất.</p>
+    </header>
+
+    <section class="card">
+      <h2 data-i18n="about.mission.h2">Sứ mệnh của chúng tôi</h2>
+      <p data-i18n="about.mission.p1">Qrio được tạo ra với mục tiêu mang đến cho mọi người một công cụ tạo mã QR đơn giản, nhanh chóng và hoàn toàn miễn phí. Chúng tôi tin rằng công nghệ nên dễ tiếp cận với tất cả mọi người.</p>
+      <div class="highlight-box">
+        <p data-i18n="about.mission.highlight"><strong>Cam kết:</strong> Qrio luôn miễn phí và không yêu cầu đăng ký tài khoản để sử dụng các tính năng cơ bản.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 data-i18n="about.features.h2">Tính năng nổi bật</h2>
+      <p data-i18n="about.features.p1">Qrio cung cấp đa dạng các loại mã QR để đáp ứng nhu cầu của bạn:</p>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <i class="fa-solid fa-link"></i>
+          <div>
+            <strong data-i18n="about.features.url.title">QR URL</strong>
+            <span data-i18n="about.features.url.desc">Tạo mã QR cho đường link website</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fa-solid fa-font"></i>
+          <div>
+            <strong data-i18n="about.features.text.title">QR Text</strong>
+            <span data-i18n="about.features.text.desc">Mã hóa văn bản bất kỳ</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fa-solid fa-wifi"></i>
+          <div>
+            <strong data-i18n="about.features.wifi.title">QR Wi-Fi</strong>
+            <span data-i18n="about.features.wifi.desc">Chia sẻ thông tin kết nối Wi-Fi</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fa-solid fa-address-card"></i>
+          <div>
+            <strong data-i18n="about.features.vcard.title">QR vCard</strong>
+            <span data-i18n="about.features.vcard.desc">Tạo danh thiếp điện tử</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fa-solid fa-file"></i>
+          <div>
+            <strong data-i18n="about.features.file.title">QR File</strong>
+            <span data-i18n="about.features.file.desc">Chia sẻ tệp tin qua mã QR</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <i class="fa-solid fa-palette"></i>
+          <div>
+            <strong data-i18n="about.features.custom.title">Tùy chỉnh</strong>
+            <span data-i18n="about.features.custom.desc">Thay đổi màu sắc và kiểu dáng</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 data-i18n="about.why.h2">Tại sao chọn Qrio?</h2>
+      <ul>
+        <li data-i18n="about.why.li1"><strong>Miễn phí 100%:</strong> Không có chi phí ẩn, không cần đăng ký.</li>
+        <li data-i18n="about.why.li2"><strong>Nhanh chóng:</strong> Tạo mã QR chỉ trong vài giây.</li>
+        <li data-i18n="about.why.li3"><strong>Bảo mật:</strong> Dữ liệu được xử lý ngay trên trình duyệt của bạn.</li>
+        <li data-i18n="about.why.li4"><strong>Đa dạng:</strong> Hỗ trợ nhiều loại mã QR khác nhau.</li>
+        <li data-i18n="about.why.li5"><strong>Dễ sử dụng:</strong> Giao diện đơn giản, thân thiện với người dùng.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2 data-i18n="about.team.h2">Đội ngũ phát triển</h2>
+      <p data-i18n="about.team.p1">Qrio được phát triển bởi một nhóm các nhà phát triển đam mê công nghệ, với mong muốn tạo ra những công cụ hữu ích cho cộng đồng.</p>
+      <p data-i18n="about.team.p2">Chúng tôi luôn lắng nghe phản hồi từ người dùng để cải thiện và phát triển thêm nhiều tính năng mới.</p>
+    </section>
+
+    <div class="footer">
+      <span data-i18n="common.copyright">© 2025 Qrio</span>
+      <div class="footer-links">
+        <a href="terms.html" data-i18n="footer.terms">Điều khoản sử dụng</a>
+        <a href="privacy.html" data-i18n="footer.privacy">Chính sách bảo mật</a>
+        <a href="disclaimer.html" data-i18n="footer.disclaimer">Miễn trừ trách nhiệm</a>
+        <a href="contact.html" data-i18n="footer.contact">Liên hệ</a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const LANG_KEY = 'qr_lang';
+
+    const SUPPORTED_LANGS = ['en', 'zh', 'hi', 'es', 'fr', 'ar', 'pt', 'ru', 'id', 'vi'];
+
+    const I18N = {
+      vi: {
+        'doc.title': 'Về chúng tôi - Qrio',
+        'meta.description': 'Tìm hiểu về Qrio - công cụ tạo mã QR miễn phí, nhanh chóng và dễ sử dụng.',
+        'aria.language': 'Ngôn ngữ',
+
+        'about.h1': 'Về chúng tôi',
+        'about.subtitle': 'Chào mừng bạn đến với Qrio - công cụ tạo mã QR miễn phí, nhanh chóng và dễ sử dụng nhất.',
+
+        'about.mission.h2': 'Sứ mệnh của chúng tôi',
+        'about.mission.p1': 'Qrio được tạo ra với mục tiêu mang đến cho mọi người một công cụ tạo mã QR đơn giản, nhanh chóng và hoàn toàn miễn phí. Chúng tôi tin rằng công nghệ nên dễ tiếp cận với tất cả mọi người.',
+        'about.mission.highlight': '<strong>Cam kết:</strong> Qrio luôn miễn phí và không yêu cầu đăng ký tài khoản để sử dụng các tính năng cơ bản.',
+
+        'about.features.h2': 'Tính năng nổi bật',
+        'about.features.p1': 'Qrio cung cấp đa dạng các loại mã QR để đáp ứng nhu cầu của bạn:',
+        'about.features.url.title': 'QR URL',
+        'about.features.url.desc': 'Tạo mã QR cho đường link website',
+        'about.features.text.title': 'QR Text',
+        'about.features.text.desc': 'Mã hóa văn bản bất kỳ',
+        'about.features.wifi.title': 'QR Wi-Fi',
+        'about.features.wifi.desc': 'Chia sẻ thông tin kết nối Wi-Fi',
+        'about.features.vcard.title': 'QR vCard',
+        'about.features.vcard.desc': 'Tạo danh thiếp điện tử',
+        'about.features.file.title': 'QR File',
+        'about.features.file.desc': 'Chia sẻ tệp tin qua mã QR',
+        'about.features.custom.title': 'Tùy chỉnh',
+        'about.features.custom.desc': 'Thay đổi màu sắc và kiểu dáng',
+
+        'about.why.h2': 'Tại sao chọn Qrio?',
+        'about.why.li1': '<strong>Miễn phí 100%:</strong> Không có chi phí ẩn, không cần đăng ký.',
+        'about.why.li2': '<strong>Nhanh chóng:</strong> Tạo mã QR chỉ trong vài giây.',
+        'about.why.li3': '<strong>Bảo mật:</strong> Dữ liệu được xử lý ngay trên trình duyệt của bạn.',
+        'about.why.li4': '<strong>Đa dạng:</strong> Hỗ trợ nhiều loại mã QR khác nhau.',
+        'about.why.li5': '<strong>Dễ sử dụng:</strong> Giao diện đơn giản, thân thiện với người dùng.',
+
+        'about.team.h2': 'Đội ngũ phát triển',
+        'about.team.p1': 'Qrio được phát triển bởi một nhóm các nhà phát triển đam mê công nghệ, với mong muốn tạo ra những công cụ hữu ích cho cộng đồng.',
+        'about.team.p2': 'Chúng tôi luôn lắng nghe phản hồi từ người dùng để cải thiện và phát triển thêm nhiều tính năng mới.',
+
+        'footer.terms': 'Điều khoản sử dụng',
+        'footer.privacy': 'Chính sách bảo mật',
+        'footer.disclaimer': 'Miễn trừ trách nhiệm',
+        'footer.contact': 'Liên hệ',
+        'common.copyright': '© 2025 Qrio',
+      },
+      en: {
+        'doc.title': 'About Us - Qrio',
+        'meta.description': 'Learn about Qrio - a free, fast, and easy-to-use QR code generator.',
+        'aria.language': 'Language',
+
+        'about.h1': 'About Us',
+        'about.subtitle': 'Welcome to Qrio - the free, fast, and easy-to-use QR code generator.',
+
+        'about.mission.h2': 'Our Mission',
+        'about.mission.p1': 'Qrio was created with the goal of providing everyone with a simple, fast, and completely free QR code generator. We believe technology should be accessible to everyone.',
+        'about.mission.highlight': '<strong>Commitment:</strong> Qrio is always free and does not require registration to use basic features.',
+
+        'about.features.h2': 'Key Features',
+        'about.features.p1': 'Qrio offers a variety of QR codes to meet your needs:',
+        'about.features.url.title': 'QR URL',
+        'about.features.url.desc': 'Create QR codes for website links',
+        'about.features.text.title': 'QR Text',
+        'about.features.text.desc': 'Encode any text',
+        'about.features.wifi.title': 'QR Wi-Fi',
+        'about.features.wifi.desc': 'Share Wi-Fi connection info',
+        'about.features.vcard.title': 'QR vCard',
+        'about.features.vcard.desc': 'Create digital business cards',
+        'about.features.file.title': 'QR File',
+        'about.features.file.desc': 'Share files via QR code',
+        'about.features.custom.title': 'Customization',
+        'about.features.custom.desc': 'Change colors and styles',
+
+        'about.why.h2': 'Why Choose Qrio?',
+        'about.why.li1': '<strong>100% Free:</strong> No hidden costs, no registration required.',
+        'about.why.li2': '<strong>Fast:</strong> Create QR codes in seconds.',
+        'about.why.li3': '<strong>Secure:</strong> Data is processed right in your browser.',
+        'about.why.li4': '<strong>Versatile:</strong> Supports multiple QR code types.',
+        'about.why.li5': '<strong>Easy to Use:</strong> Simple, user-friendly interface.',
+
+        'about.team.h2': 'Development Team',
+        'about.team.p1': 'Qrio is developed by a group of passionate tech developers who want to create useful tools for the community.',
+        'about.team.p2': 'We always listen to user feedback to improve and develop new features.',
+
+        'footer.terms': 'Terms of Service',
+        'footer.privacy': 'Privacy Policy',
+        'footer.disclaimer': 'Disclaimer',
+        'footer.contact': 'Contact',
+        'common.copyright': '© 2025 Qrio',
+      },
+      zh: {
+        'doc.title': '关于我们 - Qrio',
+        'meta.description': '了解 Qrio——免费、快速、易用的二维码生成器。',
+        'aria.language': '语言',
+
+        'about.h1': '关于我们',
+        'about.subtitle': '欢迎使用 Qrio——免费、快速、易用的二维码生成工具。',
+
+        'about.mission.h2': '我们的使命',
+        'about.mission.p1': 'Qrio 的目标是为每个人提供一个简单、快速且完全免费的二维码生成器。我们相信技术应该人人可用。',
+        'about.mission.highlight': '<strong>承诺：</strong>Qrio 始终免费，使用基础功能无需注册。',
+
+        'about.features.h2': '核心功能',
+        'about.features.p1': 'Qrio 提供多种二维码类型，满足你的需求：',
+        'about.features.url.title': 'QR URL',
+        'about.features.url.desc': '为网站链接创建二维码',
+        'about.features.text.title': 'QR 文本',
+        'about.features.text.desc': '编码任意文本',
+        'about.features.wifi.title': 'QR Wi‑Fi',
+        'about.features.wifi.desc': '分享 Wi‑Fi 连接信息',
+        'about.features.vcard.title': 'QR vCard',
+        'about.features.vcard.desc': '创建电子名片',
+        'about.features.file.title': 'QR 文件',
+        'about.features.file.desc': '通过二维码分享文件',
+        'about.features.custom.title': '自定义',
+        'about.features.custom.desc': '更改颜色与样式',
+
+        'about.why.h2': '为什么选择 Qrio？',
+        'about.why.li1': '<strong>100% 免费：</strong>无隐藏费用，无需注册。',
+        'about.why.li2': '<strong>快速：</strong>几秒钟生成二维码。',
+        'about.why.li3': '<strong>安全：</strong>数据在浏览器中处理。',
+        'about.why.li4': '<strong>多用途：</strong>支持多种二维码类型。',
+        'about.why.li5': '<strong>易用：</strong>界面简洁友好。',
+
+        'about.team.h2': '开发团队',
+        'about.team.p1': 'Qrio 由一群热爱技术的开发者打造，希望为社区提供有用的工具。',
+        'about.team.p2': '我们持续倾听用户反馈，不断改进并开发新功能。',
+
+        'footer.terms': '服务条款',
+        'footer.privacy': '隐私政策',
+        'footer.disclaimer': '免责声明',
+        'footer.contact': '联系我们',
+        'common.copyright': '© 2025 Qrio',
+      },
+      hi: {
+        'doc.title': 'हमारे बारे में - Qrio',
+        'meta.description': 'Qrio के बारे में जानें — मुफ्त, तेज़ और आसान QR जनरेटर।',
+        'aria.language': 'भाषा',
+
+        'about.h1': 'हमारे बारे में',
+        'about.subtitle': 'Qrio में आपका स्वागत है — मुफ्त, तेज़ और उपयोग में आसान QR कोड जनरेटर।',
+
+        'about.mission.h2': 'हमारा मिशन',
+        'about.mission.p1': 'Qrio का लक्ष्य सभी के लिए एक सरल, तेज़ और पूरी तरह मुफ्त QR कोड जनरेटर उपलब्ध कराना है।',
+        'about.mission.highlight': '<strong>प्रतिबद्धता:</strong> Qrio हमेशा मुफ्त है और बुनियादी सुविधाओं के लिए रजिस्ट्रेशन की जरूरत नहीं।',
+
+        'about.features.h2': 'मुख्य विशेषताएँ',
+        'about.features.p1': 'Qrio आपकी जरूरतों के लिए कई प्रकार के QR कोड प्रदान करता है:',
+        'about.features.url.title': 'QR URL',
+        'about.features.url.desc': 'वेबसाइट लिंक के लिए QR बनाएं',
+        'about.features.text.title': 'QR टेक्स्ट',
+        'about.features.text.desc': 'किसी भी टेक्स्ट को एन्कोड करें',
+        'about.features.wifi.title': 'QR Wi‑Fi',
+        'about.features.wifi.desc': 'Wi‑Fi जानकारी साझा करें',
+        'about.features.vcard.title': 'QR vCard',
+        'about.features.vcard.desc': 'डिजिटल बिजनेस कार्ड बनाएं',
+        'about.features.file.title': 'QR फ़ाइल',
+        'about.features.file.desc': 'QR के जरिए फ़ाइल साझा करें',
+        'about.features.custom.title': 'कस्टमाइज़ेशन',
+        'about.features.custom.desc': 'रंग और स्टाइल बदलें',
+
+        'about.why.h2': 'Qrio क्यों चुनें?',
+        'about.why.li1': '<strong>100% मुफ्त:</strong> कोई छिपा शुल्क नहीं, रजिस्ट्रेशन नहीं।',
+        'about.why.li2': '<strong>तेज़:</strong> सेकंडों में QR बनाएं।',
+        'about.why.li3': '<strong>सुरक्षित:</strong> डेटा आपके ब्राउज़र में ही प्रोसेस होता है।',
+        'about.why.li4': '<strong>बहुउपयोगी:</strong> कई प्रकार के QR समर्थित।',
+        'about.why.li5': '<strong>आसान:</strong> सरल और यूज़र‑फ्रेंडली UI।',
+
+        'about.team.h2': 'डेवलपमेंट टीम',
+        'about.team.p1': 'Qrio को ऐसे डेवलपर्स ने बनाया है जो समुदाय के लिए उपयोगी टूल बनाना चाहते हैं।',
+        'about.team.p2': 'हम फ़ीडबैक सुनते हैं और लगातार सुधार करते हैं।',
+
+        'footer.terms': 'सेवा की शर्तें',
+        'footer.privacy': 'गोपनीयता नीति',
+        'footer.disclaimer': 'अस्वीकरण',
+        'footer.contact': 'संपर्क',
+        'common.copyright': '© 2025 Qrio',
+      },
+      es: {
+        'doc.title': 'Sobre nosotros - Qrio',
+        'meta.description': 'Conoce Qrio: un generador de QR gratis, rápido y fácil de usar.',
+        'aria.language': 'Idioma',
+
+        'about.h1': 'Sobre nosotros',
+        'about.subtitle': 'Bienvenido a Qrio: el generador de códigos QR gratuito, rápido y fácil de usar.',
+
+        'about.mission.h2': 'Nuestra misión',
+        'about.mission.p1': 'Qrio fue creado para ofrecer a todos un generador de QR simple, rápido y completamente gratuito.',
+        'about.mission.highlight': '<strong>Compromiso:</strong> Qrio siempre es gratis y no requiere registro para funciones básicas.',
+
+        'about.features.h2': 'Funciones principales',
+        'about.features.p1': 'Qrio ofrece varios tipos de QR para tus necesidades:',
+        'about.features.url.title': 'QR URL',
+        'about.features.url.desc': 'Crea QR para enlaces web',
+        'about.features.text.title': 'QR Texto',
+        'about.features.text.desc': 'Codifica cualquier texto',
+        'about.features.wifi.title': 'QR Wi‑Fi',
+        'about.features.wifi.desc': 'Comparte datos de Wi‑Fi',
+        'about.features.vcard.title': 'QR vCard',
+        'about.features.vcard.desc': 'Crea tarjetas de presentación digitales',
+        'about.features.file.title': 'QR Archivo',
+        'about.features.file.desc': 'Comparte archivos vía QR',
+        'about.features.custom.title': 'Personalización',
+        'about.features.custom.desc': 'Cambia colores y estilos',
+
+        'about.why.h2': '¿Por qué elegir Qrio?',
+        'about.why.li1': '<strong>100% gratis:</strong> sin costos ocultos ni registro.',
+        'about.why.li2': '<strong>Rápido:</strong> crea QR en segundos.',
+        'about.why.li3': '<strong>Seguro:</strong> los datos se procesan en tu navegador.',
+        'about.why.li4': '<strong>Versátil:</strong> soporta varios tipos de QR.',
+        'about.why.li5': '<strong>Fácil:</strong> interfaz simple y amigable.',
+
+        'about.team.h2': 'Equipo de desarrollo',
+        'about.team.p1': 'Qrio es desarrollado por un grupo de personas apasionadas por la tecnología.',
+        'about.team.p2': 'Escuchamos el feedback para mejorar y crear nuevas funciones.',
+
+        'footer.terms': 'Términos del servicio',
+        'footer.privacy': 'Política de privacidad',
+        'footer.disclaimer': 'Aviso legal',
+        'footer.contact': 'Contacto',
+        'common.copyright': '© 2025 Qrio',
+      },
+      fr: {
+        'doc.title': 'À propos - Qrio',
+        'meta.description': 'Découvrez Qrio — un générateur de QR gratuit, rapide et simple.',
+        'aria.language': 'Langue',
+
+        'about.h1': 'À propos',
+        'about.subtitle': 'Bienvenue sur Qrio — le générateur de QR gratuit, rapide et facile à utiliser.',
+
+        'about.mission.h2': 'Notre mission',
+        'about.mission.p1': 'Qrio a été créé pour offrir à tous un générateur de QR simple, rapide et entièrement gratuit.',
+        'about.mission.highlight': '<strong>Engagement :</strong> Qrio est toujours gratuit et ne nécessite pas d’inscription pour les fonctions de base.',
+
+        'about.features.h2': 'Fonctionnalités clés',
+        'about.features.p1': 'Qrio propose plusieurs types de QR pour répondre à vos besoins :',
+        'about.features.url.title': 'QR URL',
+        'about.features.url.desc': 'Créer des QR pour des liens web',
+        'about.features.text.title': 'QR Texte',
+        'about.features.text.desc': 'Encoder n’importe quel texte',
+        'about.features.wifi.title': 'QR Wi‑Fi',
+        'about.features.wifi.desc': 'Partager des infos Wi‑Fi',
+        'about.features.vcard.title': 'QR vCard',
+        'about.features.vcard.desc': 'Créer des cartes de visite digitales',
+        'about.features.file.title': 'QR Fichier',
+        'about.features.file.desc': 'Partager des fichiers via QR',
+        'about.features.custom.title': 'Personnalisation',
+        'about.features.custom.desc': 'Changer les couleurs et styles',
+
+        'about.why.h2': 'Pourquoi choisir Qrio ?',
+        'about.why.li1': '<strong>100% gratuit :</strong> aucun coût caché, aucune inscription.',
+        'about.why.li2': '<strong>Rapide :</strong> créez des QR en quelques secondes.',
+        'about.why.li3': '<strong>Sécurisé :</strong> traitement dans votre navigateur.',
+        'about.why.li4': '<strong>Polyvalent :</strong> plusieurs types de QR.',
+        'about.why.li5': '<strong>Simple :</strong> interface claire et conviviale.',
+
+        'about.team.h2': 'Équipe de développement',
+        'about.team.p1': 'Qrio est développé par des passionnés de technologie.',
+        'about.team.p2': 'Nous écoutons les retours pour améliorer et ajouter des fonctionnalités.',
+
+        'footer.terms': 'Conditions d’utilisation',
+        'footer.privacy': 'Politique de confidentialité',
+        'footer.disclaimer': 'Avertissement',
+        'footer.contact': 'Contact',
+        'common.copyright': '© 2025 Qrio',
+      },
+      ar: {
+        'doc.title': 'معلومات عنا - Qrio',
+        'meta.description': 'تعرّف على Qrio — مولّد QR مجاني وسريع وسهل الاستخدام.',
+        'aria.language': 'اللغة',
+
+        'about.h1': 'معلومات عنا',
+        'about.subtitle': 'مرحباً بك في Qrio — مولّد رموز QR مجاني وسريع وسهل الاستخدام.',
+
+        'about.mission.h2': 'مهمتنا',
+        'about.mission.p1': 'تم إنشاء Qrio بهدف توفير مولّد QR بسيط وسريع ومجاني للجميع.',
+        'about.mission.highlight': '<strong>التزام:</strong> Qrio مجاني دائماً ولا يتطلب تسجيلًا للميزات الأساسية.',
+
+        'about.features.h2': 'الميزات الرئيسية',
+        'about.features.p1': 'يوفر Qrio أنواعاً متعددة من رموز QR لتلبية احتياجاتك:',
+        'about.features.url.title': 'QR URL',
+        'about.features.url.desc': 'إنشاء QR لروابط المواقع',
+        'about.features.text.title': 'QR نص',
+        'about.features.text.desc': 'ترميز أي نص',
+        'about.features.wifi.title': 'QR Wi‑Fi',
+        'about.features.wifi.desc': 'مشاركة معلومات اتصال Wi‑Fi',
+        'about.features.vcard.title': 'QR vCard',
+        'about.features.vcard.desc': 'إنشاء بطاقات أعمال رقمية',
+        'about.features.file.title': 'QR ملف',
+        'about.features.file.desc': 'مشاركة الملفات عبر QR',
+        'about.features.custom.title': 'تخصيص',
+        'about.features.custom.desc': 'تغيير الألوان والأنماط',
+
+        'about.why.h2': 'لماذا Qrio؟',
+        'about.why.li1': '<strong>مجاني 100%:</strong> بلا تكاليف مخفية ولا تسجيل.',
+        'about.why.li2': '<strong>سريع:</strong> أنشئ QR خلال ثوانٍ.',
+        'about.why.li3': '<strong>آمن:</strong> تتم المعالجة في متصفحك.',
+        'about.why.li4': '<strong>متعدد الاستخدام:</strong> يدعم عدة أنواع.',
+        'about.why.li5': '<strong>سهل:</strong> واجهة بسيطة وسهلة.',
+
+        'about.team.h2': 'فريق التطوير',
+        'about.team.p1': 'تم تطوير Qrio بواسطة مطورين شغوفين بالتقنية لخدمة المجتمع.',
+        'about.team.p2': 'نستمع لآراء المستخدمين لتحسين وإضافة ميزات جديدة.',
+
+        'footer.terms': 'شروط الخدمة',
+        'footer.privacy': 'سياسة الخصوصية',
+        'footer.disclaimer': 'إخلاء المسؤولية',
+        'footer.contact': 'اتصل بنا',
+        'common.copyright': '© 2025 Qrio',
+      },
+      pt: {
+        'doc.title': 'Sobre nós - Qrio',
+        'meta.description': 'Saiba mais sobre o Qrio — gerador de QR gratuito, rápido e fácil.',
+        'aria.language': 'Idioma',
+
+        'about.h1': 'Sobre nós',
+        'about.subtitle': 'Bem-vindo ao Qrio — gerador de QR gratuito, rápido e fácil de usar.',
+
+        'about.mission.h2': 'Nossa missão',
+        'about.mission.p1': 'O Qrio foi criado para oferecer a todos um gerador de QR simples, rápido e totalmente gratuito.',
+        'about.mission.highlight': '<strong>Compromisso:</strong> o Qrio é sempre gratuito e não exige cadastro para recursos básicos.',
+
+        'about.features.h2': 'Principais recursos',
+        'about.features.p1': 'O Qrio oferece vários tipos de QR para suas necessidades:',
+        'about.features.url.title': 'QR URL',
+        'about.features.url.desc': 'Criar QR para links de sites',
+        'about.features.text.title': 'QR Texto',
+        'about.features.text.desc': 'Codificar qualquer texto',
+        'about.features.wifi.title': 'QR Wi‑Fi',
+        'about.features.wifi.desc': 'Compartilhar informações de Wi‑Fi',
+        'about.features.vcard.title': 'QR vCard',
+        'about.features.vcard.desc': 'Criar cartões de visita digitais',
+        'about.features.file.title': 'QR Arquivo',
+        'about.features.file.desc': 'Compartilhar arquivos via QR',
+        'about.features.custom.title': 'Personalização',
+        'about.features.custom.desc': 'Alterar cores e estilos',
+
+        'about.why.h2': 'Por que escolher o Qrio?',
+        'about.why.li1': '<strong>100% grátis:</strong> sem custos ocultos, sem cadastro.',
+        'about.why.li2': '<strong>Rápido:</strong> crie QR em segundos.',
+        'about.why.li3': '<strong>Seguro:</strong> dados processados no seu navegador.',
+        'about.why.li4': '<strong>Versátil:</strong> suporta vários tipos de QR.',
+        'about.why.li5': '<strong>Fácil:</strong> interface simples e amigável.',
+
+        'about.team.h2': 'Equipe de desenvolvimento',
+        'about.team.p1': 'O Qrio é desenvolvido por pessoas apaixonadas por tecnologia.',
+        'about.team.p2': 'Ouvimos o feedback para melhorar e criar novas funções.',
+
+        'footer.terms': 'Termos de serviço',
+        'footer.privacy': 'Política de privacidade',
+        'footer.disclaimer': 'Aviso legal',
+        'footer.contact': 'Contato',
+        'common.copyright': '© 2025 Qrio',
+      },
+      ru: {
+        'doc.title': 'О нас — Qrio',
+        'meta.description': 'Узнайте о Qrio — бесплатном, быстром и простом генераторе QR.',
+        'aria.language': 'Язык',
+
+        'about.h1': 'О нас',
+        'about.subtitle': 'Добро пожаловать в Qrio — бесплатный, быстрый и удобный генератор QR‑кодов.',
+
+        'about.mission.h2': 'Наша миссия',
+        'about.mission.p1': 'Qrio создан, чтобы дать каждому простой, быстрый и полностью бесплатный генератор QR‑кодов.',
+        'about.mission.highlight': '<strong>Обязательство:</strong> Qrio всегда бесплатен и не требует регистрации для базовых функций.',
+
+        'about.features.h2': 'Ключевые функции',
+        'about.features.p1': 'Qrio предлагает разные типы QR для ваших задач:',
+        'about.features.url.title': 'QR URL',
+        'about.features.url.desc': 'QR для ссылок на сайты',
+        'about.features.text.title': 'QR Текст',
+        'about.features.text.desc': 'Кодирование любого текста',
+        'about.features.wifi.title': 'QR Wi‑Fi',
+        'about.features.wifi.desc': 'Поделиться данными Wi‑Fi',
+        'about.features.vcard.title': 'QR vCard',
+        'about.features.vcard.desc': 'Создать цифровые визитки',
+        'about.features.file.title': 'QR Файл',
+        'about.features.file.desc': 'Делиться файлами через QR',
+        'about.features.custom.title': 'Настройка',
+        'about.features.custom.desc': 'Изменять цвета и стиль',
+
+        'about.why.h2': 'Почему Qrio?',
+        'about.why.li1': '<strong>100% бесплатно:</strong> без скрытых платежей и регистрации.',
+        'about.why.li2': '<strong>Быстро:</strong> создавайте QR за секунды.',
+        'about.why.li3': '<strong>Безопасно:</strong> обработка в браузере.',
+        'about.why.li4': '<strong>Универсально:</strong> поддерживает разные типы.',
+        'about.why.li5': '<strong>Просто:</strong> понятный интерфейс.',
+
+        'about.team.h2': 'Команда разработки',
+        'about.team.p1': 'Qrio создаёт команда разработчиков, увлечённых технологиями.',
+        'about.team.p2': 'Мы слушаем отзывы и постоянно улучшаем продукт.',
+
+        'footer.terms': 'Условия',
+        'footer.privacy': 'Конфиденциальность',
+        'footer.disclaimer': 'Отказ от ответственности',
+        'footer.contact': 'Контакты',
+        'common.copyright': '© 2025 Qrio',
+      },
+      id: {
+        'doc.title': 'Tentang Kami - Qrio',
+        'meta.description': 'Pelajari Qrio — pembuat QR gratis, cepat, dan mudah digunakan.',
+        'aria.language': 'Bahasa',
+
+        'about.h1': 'Tentang Kami',
+        'about.subtitle': 'Selamat datang di Qrio — pembuat QR gratis, cepat, dan mudah digunakan.',
+
+        'about.mission.h2': 'Misi Kami',
+        'about.mission.p1': 'Qrio dibuat untuk menyediakan pembuat QR yang sederhana, cepat, dan sepenuhnya gratis untuk semua orang.',
+        'about.mission.highlight': '<strong>Komitmen:</strong> Qrio selalu gratis dan tidak perlu registrasi untuk fitur dasar.',
+
+        'about.features.h2': 'Fitur Utama',
+        'about.features.p1': 'Qrio menyediakan berbagai jenis QR untuk kebutuhan Anda:',
+        'about.features.url.title': 'QR URL',
+        'about.features.url.desc': 'Buat QR untuk tautan website',
+        'about.features.text.title': 'QR Teks',
+        'about.features.text.desc': 'Enkode teks apa pun',
+        'about.features.wifi.title': 'QR Wi‑Fi',
+        'about.features.wifi.desc': 'Bagikan info koneksi Wi‑Fi',
+        'about.features.vcard.title': 'QR vCard',
+        'about.features.vcard.desc': 'Buat kartu nama digital',
+        'about.features.file.title': 'QR File',
+        'about.features.file.desc': 'Bagikan file lewat QR',
+        'about.features.custom.title': 'Kustomisasi',
+        'about.features.custom.desc': 'Ubah warna dan gaya',
+
+        'about.why.h2': 'Kenapa pilih Qrio?',
+        'about.why.li1': '<strong>100% Gratis:</strong> tanpa biaya tersembunyi, tanpa registrasi.',
+        'about.why.li2': '<strong>Cepat:</strong> buat QR dalam hitungan detik.',
+        'about.why.li3': '<strong>Aman:</strong> data diproses di browser.',
+        'about.why.li4': '<strong>Serbaguna:</strong> mendukung banyak jenis QR.',
+        'about.why.li5': '<strong>Mudah:</strong> antarmuka sederhana dan ramah pengguna.',
+
+        'about.team.h2': 'Tim Pengembang',
+        'about.team.p1': 'Qrio dikembangkan oleh tim pengembang yang bersemangat membuat alat bermanfaat.',
+        'about.team.p2': 'Kami selalu mendengar masukan untuk terus meningkatkan fitur.',
+
+        'footer.terms': 'Syarat layanan',
+        'footer.privacy': 'Kebijakan privasi',
+        'footer.disclaimer': 'Disklaimer',
+        'footer.contact': 'Kontak',
+        'common.copyright': '© 2025 Qrio',
+      }
+    };
+
+    function normalizeLang(raw) {
+      const v = String(raw || '').toLowerCase();
+      return SUPPORTED_LANGS.includes(v) ? v : 'en';
+    }
+
+    function detectDefaultLang() {
+      return 'en';
+    }
+
+    function getLang() {
+      return normalizeLang(localStorage.getItem(LANG_KEY) || detectDefaultLang());
+    }
+
+    function formatWithVars(template, vars) {
+      return String(template).replace(/\{(\w+)\}/g, (_, k) => {
+        const v = vars && Object.prototype.hasOwnProperty.call(vars, k) ? vars[k] : '';
+        return String(v);
+      });
+    }
+
+    function t(key, vars, langOverride) {
+      const lang = normalizeLang(langOverride || getLang());
+      const dict = I18N[lang] || I18N.vi;
+      const fallback = I18N.vi || {};
+      const value = dict[key] ?? fallback[key] ?? key;
+      return formatWithVars(value, vars);
+    }
+
+    function applyI18n(lang) {
+      const normalized = normalizeLang(lang);
+      document.documentElement.lang = normalized;
+      document.title = String(t('doc.title', undefined, normalized));
+
+      document.querySelectorAll('[data-i18n-content]').forEach(el => {
+        const key = el.getAttribute('data-i18n-content');
+        el.setAttribute('content', String(t(key, undefined, normalized)));
+      });
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const value = t(key, undefined, normalized);
+        if (typeof value === 'string') el.innerHTML = value;
+      });
+
+      document.querySelectorAll('[data-i18n-title]').forEach(el => {
+        const key = el.getAttribute('data-i18n-title');
+        el.setAttribute('title', String(t(key, undefined, normalized)));
+      });
+
+      document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+        const key = el.getAttribute('data-i18n-aria');
+        el.setAttribute('aria-label', String(t(key, undefined, normalized)));
+      });
+    }
+
+    function setLang(lang) {
+      const normalized = normalizeLang(lang);
+      localStorage.setItem(LANG_KEY, normalized);
+      applyI18n(normalized);
+    }
+
+    applyI18n(getLang());
+  </script>
+</body>
+
+</html>

@@ -71,7 +71,7 @@ async function processNext(){
    },{lang,dictionary:dictionaries[lang]});
    await page.evaluate(()=>document.fonts.ready);
    if(isQrio){
-    await page.waitForFunction(()=>document.querySelector("#qr-canvas")?.width>250,null,{timeout:15000});
+    await page.locator(".hero-title").waitFor({state:"visible",timeout:15000});
     await page.waitForTimeout(250);
    }else await page.waitForTimeout(template.slug==="auto-showroom"?2400:1050);
    await page.evaluate(async()=>{

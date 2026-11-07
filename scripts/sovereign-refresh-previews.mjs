@@ -33,7 +33,7 @@ for(const slug of slugs){
   if(response?.status()!==200)throw Error("HTTP "+response?.status());
   await page.evaluate(()=>document.fonts.ready);
   await page.locator("h1").first().waitFor({timeout:15000});
-  if(slug==="saas-product")await page.waitForFunction(()=>document.querySelector("#qr-canvas")?.width>250,null,{timeout:15000});
+  if(slug==="saas-product")await page.locator(".hero-title").waitFor({state:"visible",timeout:15000});
   // A finished GLB scene is part of the actual cover, not an optional decoration.
   // Never overwrite the Fashion cover with a blank "loading" placeholder.
   if(slug==="fashion-archive"){

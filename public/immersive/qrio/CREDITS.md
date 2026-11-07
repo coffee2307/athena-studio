@@ -1,35 +1,32 @@
-Qrio — Athena standalone showcase
-==================================
-This is an independently authored, public-facing QR demonstration commissioned
-for Athena Studio. The original Qrio application at coffee2307/Qrio is private,
-and no backend, source application templates, database, credentials, payment
-handlers or private customer records have been copied into this public repo.
+﻿# Qrio native interface mirror â€” Athena Studio
 
-Third-party QR encoding implementation:
-- qrcode-generator v1.4.4 by Kazuhiko Arase
-- https://github.com/kazuhikoarase/qrcode-generator
-- Copyright (c) 2009 Kazuhiko Arase
-- License: MIT
+The user owns the original Qrio project (private repository: coffee2307/Qrio).
+This showcase mirrors only its **client-facing HTML, CSS and JavaScript** from
+the local Windows project at F:\qrio, including its public logo files, to
+maintain the original visual identity and interaction flow. This UI source is
+included in Athena's public repository for the requested preview integration.
+Review this public exposure before merging or publishing production.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Source of truth: F:\qrio (local project). Native UI pages mirrored: index/home,
+edit, scan, about, contact, terms, privacy and disclaimer. The mirroring
+script used in the local development workspace: scripts/qrio-refresh-from-local.mjs.
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
+NO PRIVATE BACKEND: Qrio's app.py, admin.py, database, .env, actual payment,
+ticketing, administrator routes, uploaded files and secrets are NOT present.
+The locally bundled client-only bridge traps all /api/* requests. Basic QR
+generation works locally in the browser; advanced styling, file upload,
+VietQR, event tickets, payments, scanning-backed validation and server-backed
+features are not part of the working Athena demo. Do not describe this as the
+full Flask application. The scanner page may be restricted by Athena's
+camera permission settings.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+Third-party QR encoding:
+qrcode-generator 1.4.4 (Kazuhiko Arase), MIT License.
+Original project: https://github.com/kazuhikoarase/qrcode-generator
+(c) 2009 Kazuhiko Arase.
+The MIT license notice is included in qrcode.js, alongside the original
+source file.
 
-Security and capability boundary:
-QR creation is local to the browser; no customer data is submitted to Athena.
-Ticket creation, checking, orders, payments and the original Qrio Flask APIs are
-not included or connected. Static page output is not a hosted ticket service.
+Qrio's logos and public-facing UI remain the property of their respective
+owner(s). The hosted Athena page must retain "noindex" for this demo and may
+only be framed from the same Athena origin.

@@ -1,0 +1,2220 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <meta name="robots" content="noindex,nofollow">
+  <script src="./local-api-bridge.js"></script>
+  <script>try{const value=new URLSearchParams(location.search).get("lang");if(value==="vi"||value==="en")localStorage.setItem("qr_lang",value)}catch{}</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="doc.title">Qrio - Quét QR</title>
+  <meta name="description" data-i18n-content="meta.description" content="Quét và giải mã tất cả các loại mã QR." />
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="canonical" href="https://qrio.site/scan.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://qrio.site/scan.html" />
+  <meta property="og:title" content="Qrio - Quét QR" />
+  <meta property="og:description" content="Quét và giải mã tất cả các loại mã QR." />
+  <meta property="og:image" content="https://qrio.site/immersive/qrio/static/logo/logo.png" />
+
+  <meta name="theme-color" content="#7c3aed" />
+
+  <link rel="icon" type="image/x-icon" href="/immersive/qrio/static/logo/favicon_io%20(3)/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/immersive/qrio/static/logo/favicon_io%20(3)/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/immersive/qrio/static/logo/favicon_io%20(3)/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://unpkg.com/jsqr@1.4.0/dist/jsQR.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+      background: #0f0f1a;
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ANIMATED BACKGROUND */
+    .bg-effects {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .bg-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(56px);
+      opacity: 0.28;
+      animation: floatOrb 28s ease-in-out infinite;
+    }
+
+    .bg-orb-1 {
+      width: 400px;
+      height: 400px;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      top: -100px;
+      right: -100px;
+    }
+
+    .bg-orb-2 {
+      width: 300px;
+      height: 300px;
+      background: linear-gradient(135deg, #06b6d4, #3b82f6);
+      bottom: 100px;
+      left: -100px;
+      animation-delay: -5s;
+    }
+
+    @keyframes floatOrb {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(30px, -30px) scale(1.05); }
+      50% { transform: translate(-20px, 20px) scale(0.95); }
+      75% { transform: translate(-30px, -20px) scale(1.02); }
+    }
+
+    .bg-grid {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image:
+        linear-gradient(rgba(124, 58, 237, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124, 58, 237, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* HEADER */
+    .header {
+      height: 64px;
+      background: rgba(15, 15, 26, 0.95);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .logo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .header h1 {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    @media (max-width: 500px) {
+      .header {
+        padding: 0 16px;
+      }
+
+      .header-right {
+        gap: 8px;
+      }
+
+      .header-right .btn {
+        width: 40px;
+        height: 40px;
+        padding: 0;
+      }
+
+      .header-right .btn span {
+        display: none;
+      }
+    }
+
+    .lang-picker {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      color: #e2e8f0;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .lang-picker:hover {
+      background: rgba(255, 255, 255, 0.10);
+      border-color: rgba(124, 58, 237, 0.3);
+    }
+    .lang-native { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+
+    .lang-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+    .lang-modal {
+      width: 100%;
+      max-width: 420px;
+      background: rgba(24, 24, 27, 0.95);
+      border: 1px solid rgba(124, 58, 237, 0.25);
+      border-radius: 16px;
+      padding: 14px;
+    }
+    .lang-modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .lang-modal-title { font-weight: 900; font-size: 14px; color: #e2e8f0; }
+    .lang-close {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.05);
+      color: #e2e8f0;
+      cursor: pointer;
+    }
+    .lang-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    @media (max-width: 420px) { .lang-list { grid-template-columns: 1fr; } }
+    .lang-item {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #e2e8f0;
+      cursor: pointer;
+    }
+    .lang-item.active { border-color: rgba(124,58,237,0.45); background: rgba(124,58,237,0.12); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .btn-sm {
+      padding: 8px 16px;
+      font-size: 13px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #e2e8f0;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(124, 58, 237, 0.3);
+    }
+
+    .btn-success {
+      background: linear-gradient(135deg, #10b981, #22c55e);
+      color: #fff;
+    }
+
+    .btn-success:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    /* CONTAINER */
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .page-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(79, 70, 229, 0.1));
+      border: 1px solid rgba(124, 58, 237, 0.3);
+      border-radius: 999px;
+      font-size: 13px;
+      color: #a78bfa;
+      margin-bottom: 16px;
+    }
+
+    .page-title {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #ffffff, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .page-subtitle {
+      color: #94a3b8;
+      font-size: 14px;
+    }
+
+    /* CARD */
+    .card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 20px;
+      padding: 28px;
+      backdrop-filter: blur(10px);
+      margin-bottom: 24px;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-title i {
+      color: #a78bfa;
+    }
+
+    /* TABS */
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .tab {
+      flex: 1;
+      padding: 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      color: #94a3b8;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .tab:hover {
+      background: rgba(124, 58, 237, 0.1);
+      border-color: rgba(124, 58, 237, 0.2);
+    }
+
+    .tab.active {
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(79, 70, 229, 0.1));
+      border-color: rgba(124, 58, 237, 0.4);
+      color: #fff;
+    }
+
+    .tab.active i {
+      color: #a78bfa;
+    }
+
+    /* SCANNER */
+    .scanner-container {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #000;
+      width: 100%;
+      max-width: 520px;
+      aspect-ratio: 3 / 4;
+      max-height: 70vh;
+      margin: 0 auto;
+    }
+
+    #scanner-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .scanner-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .scanner-frame {
+      width: min(320px, 72%);
+      height: min(320px, 72%);
+      border: 3px solid #7c3aed;
+      border-radius: 20px;
+      box-shadow: 0 0 0 9999px rgba(0,0,0,0.5);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    .scanner-frame::before,
+    .scanner-frame::after {
+      content: '';
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      border-color: #22c55e;
+      border-style: solid;
+    }
+
+    .scanner-frame::before {
+      top: -3px;
+      left: -3px;
+      border-width: 4px 0 0 4px;
+      border-radius: 10px 0 0 0;
+    }
+
+    .scanner-frame::after {
+      bottom: -3px;
+      right: -3px;
+      border-width: 0 4px 4px 0;
+      border-radius: 0 0 10px 0;
+    }
+
+    .scanner-hint {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: #fff;
+      font-size: 13px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    /* FILE UPLOAD */
+    .file-upload-area {
+      border: 2px dashed rgba(124, 58, 237, 0.4);
+      border-radius: 16px;
+      padding: 48px 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .file-upload-area:hover {
+      border-color: #7c3aed;
+      background: rgba(124, 58, 237, 0.05);
+    }
+
+    .file-upload-area.dragover {
+      border-color: #22c55e;
+      background: rgba(34, 197, 94, 0.1);
+    }
+
+    .upload-icon {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(79, 70, 229, 0.1));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 28px;
+      color: #a78bfa;
+    }
+
+    .file-upload-area h4 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .file-upload-area p {
+      color: #94a3b8;
+      font-size: 13px;
+    }
+
+    #file-input {
+      display: none;
+    }
+
+    /* MANUAL INPUT */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #94a3b8;
+      margin-bottom: 8px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      font-size: 14px;
+      font-family: inherit;
+      background: rgba(255, 255, 255, 0.03);
+      color: #fff;
+      transition: all 0.2s;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: rgba(124, 58, 237, 0.5);
+      background: rgba(124, 58, 237, 0.05);
+    }
+
+    .form-group input::placeholder {
+      color: #64748b;
+    }
+
+    /* RESULT */
+    .result-box {
+      text-align: center;
+      padding: 24px;
+    }
+
+    .result-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 36px;
+    }
+
+    .result-icon.success {
+      background: linear-gradient(135deg, #10b981, #22c55e);
+    }
+
+    .result-icon.error {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+    }
+
+    .result-icon.warning {
+      background: linear-gradient(135deg, #f59e0b, #f97316);
+    }
+
+    .result-box h3 {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .result-box p {
+      color: #94a3b8;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .result-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    /* LOADING */
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(124, 58, 237, 0.2);
+      border-top-color: #7c3aed;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 40px auto;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* RECENT SCANS */
+    .recent-scans {
+      margin-top: 24px;
+    }
+
+    .recent-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #94a3b8;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .recent-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .recent-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.06);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .recent-item:hover {
+      background: rgba(124, 58, 237, 0.1);
+      border-color: rgba(124, 58, 237, 0.2);
+    }
+
+    .recent-item-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .recent-item-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(34, 197, 94, 0.2);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #22c55e;
+    }
+
+    .recent-item-icon.used {
+      background: rgba(239, 68, 68, 0.2);
+      color: #ef4444;
+    }
+
+    .recent-item-text h5 {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .recent-item-text p {
+      font-size: 11px;
+      color: #64748b;
+    }
+
+    .recent-item-time {
+      font-size: 11px;
+      color: #64748b;
+    }
+
+    /* PAYMENT STATUS BADGES */
+    .payment-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .payment-status.paid {
+      background: rgba(34, 197, 94, 0.2);
+      color: #22c55e;
+    }
+
+    .payment-status.pending {
+      background: rgba(251, 191, 36, 0.2);
+      color: #fbbf24;
+    }
+
+    .payment-status.pending_verification {
+      background: rgba(59, 130, 246, 0.2);
+      color: #3b82f6;
+    }
+
+    .payment-status.pending_payment {
+      background: rgba(249, 115, 22, 0.2);
+      color: #f97316;
+    }
+
+    /* TICKET DETAILS IN RESULT */
+    .ticket-details {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 16px 0;
+      text-align: left;
+    }
+
+    .ticket-detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 13px;
+    }
+
+    .ticket-detail-row:last-child {
+      border-bottom: none;
+    }
+
+    .ticket-detail-row span:first-child {
+      color: #94a3b8;
+    }
+
+    .ticket-detail-row span:last-child {
+      color: #fff;
+      font-weight: 500;
+    }
+
+    /* PROOF IMAGE */
+    .proof-section {
+      margin: 16px 0;
+      text-align: center;
+    }
+
+    .proof-section h4 {
+      font-size: 14px;
+      color: #94a3b8;
+      margin-bottom: 12px;
+    }
+
+    .proof-image-container {
+      max-width: 300px;
+      margin: 0 auto;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .proof-image-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ACTION BUTTONS */
+    .action-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .btn-confirm {
+      background: linear-gradient(135deg, #10b981, #22c55e);
+      color: #fff;
+    }
+
+    .btn-confirm:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4);
+    }
+
+    .btn-cancel {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: #fff;
+    }
+
+    .btn-cancel:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+    }
+
+    .btn-back-scan {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #e2e8f0;
+    }
+
+    @media (max-width: 500px) {
+      .header {
+        padding: 0 16px;
+      }
+
+      .header-right span {
+        display: none;
+      }
+
+      .container {
+        padding: 24px 16px;
+      }
+
+      .tabs {
+        flex-direction: column;
+      }
+
+      .scanner-frame {
+        width: 160px;
+        height: 160px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-effects">
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+  </div>
+  <div class="bg-grid"></div>
+
+  <header class="header">
+    <div class="header-left">
+      <a href="index.html" class="logo-box"><img src="/immersive/qrio/static/logo/logo.png" alt="Qrio"></a>
+      <h1>Qrio</h1>
+    </div>
+    <div class="header-right">
+      <a href="ticket-create.html" class="btn btn-secondary btn-sm" data-i18n-title="nav.createTicket">
+        <i class="fa-solid fa-plus"></i>
+        <span data-i18n="nav.createTicket">Tạo vé</span>
+      </a>
+      <a href="index.html" class="btn btn-primary btn-sm" data-i18n-title="nav.home">
+        <i class="fa-solid fa-house"></i>
+        <span data-i18n="nav.home">Trang chủ</span>
+      </a>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="page-header">
+      <div class="page-badge"><i class="fa-solid fa-qrcode"></i> <span data-i18n="scan.badge">Dành cho nhân viên</span></div>
+      <h1 class="page-title" data-i18n="scan.title">Quét Vé Điện Tử</h1>
+      <p class="page-subtitle" data-i18n="scan.subtitle">Quét mã QR trên vé điện tử để kiểm tra và xác nhận</p>
+    </div>
+
+    <div class="card">
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab active" onclick="switchTab(event, 'camera')">
+          <i class="fa-solid fa-camera"></i>
+          <span data-i18n="scan.tab.camera">Camera</span>
+        </button>
+        <button class="tab" onclick="switchTab(event, 'upload')">
+          <i class="fa-solid fa-image"></i>
+          <span data-i18n="scan.tab.upload">Tải ảnh</span>
+        </button>
+        <button class="tab" onclick="switchTab(event, 'manual')">
+          <i class="fa-solid fa-keyboard"></i>
+          <span data-i18n="scan.tab.manual">Nhập mã</span>
+        </button>
+      </div>
+
+      <!-- Camera Scanner -->
+      <div id="tab-camera">
+        <div class="scanner-container">
+          <video id="scanner-video" autoplay playsinline muted></video>
+          <canvas id="scanner-canvas" style="display: none;"></canvas>
+          <div class="scanner-overlay">
+            <div class="scanner-frame"></div>
+          </div>
+          <div class="scanner-hint" data-i18n="scan.hint">Đưa mã QR vào khung hình</div>
+        </div>
+        <div style="text-align: center; margin-top: 16px;">
+          <button class="btn btn-secondary" id="toggle-camera" onclick="toggleCamera()">
+            <i class="fa-solid fa-video"></i>
+            <span data-i18n="scan.toggleCamera">Bật camera</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- File Upload -->
+      <div id="tab-upload" class="hidden">
+        <div class="file-upload-area" id="drop-zone" onclick="document.getElementById('file-input').click()">
+          <div class="upload-icon"><i class="fa-solid fa-cloud-upload-alt"></i></div>
+          <h4 data-i18n="scan.uploadTitle">Tải ảnh mã QR</h4>
+          <p data-i18n="scan.uploadHint">Kéo thả hoặc nhấn để chọn ảnh</p>
+        </div>
+        <input type="file" id="file-input" accept="image/*" onchange="handleFileSelect(event)" />
+      </div>
+
+      <!-- Manual Input -->
+      <div id="tab-manual" class="hidden">
+        <div class="form-group">
+          <label data-i18n="scan.manualLabel">Nhập mã vé</label>
+          <input type="text" id="manual-code" placeholder="VD: https://example.com" data-i18n-placeholder="scan.manualPlaceholder" />
+        </div>
+        <button class="btn btn-primary" onclick="checkManualCode()" style="width: 100%;">
+          <i class="fa-solid fa-search"></i>
+          <span data-i18n="scan.check">Kiểm tra vé</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Result -->
+    <div class="card hidden" id="result-section">
+      <div class="result-box" id="result-content">
+        <!-- Dynamic content -->
+      </div>
+    </div>
+
+    <!-- Recent Scans -->
+    <div class="card" id="recent-section">
+      <div class="recent-scans">
+        <div class="recent-title">
+          <i class="fa-solid fa-history"></i>
+          <span data-i18n="scan.recent">Quét gần đây</span>
+        </div>
+        <div class="recent-list" id="recent-list">
+          <p style="color: #64748b; font-size: 13px; text-align: center; padding: 20px;" data-i18n="scan.recentEmpty">Chưa có lịch sử quét</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ---- i18n (10 languages; non-vi defaults to English) ----
+    const LANG_KEY = 'qr_lang';
+    const SUPPORTED_LANGS = ['en','zh','hi','es','fr','ar','pt','ru','id','vi'];
+
+    const I18N = {
+      vi: {
+        'doc.title': 'Qrio - Quét QR',
+        'meta.description': 'Quét và giải mã tất cả các loại mã QR.',
+        'aria.language': 'Ngôn ngữ',
+        'nav.home': 'Trang chủ',
+        'nav.createTicket': 'Tạo vé',
+
+        'scan.badge': 'Dành cho nhân viên',
+        'scan.title': 'Quét Mã QR',
+        'scan.subtitle': 'Quét và giải mã nội dung từ tất cả các loại mã QR',
+        'scan.tab.camera': 'Camera',
+        'scan.tab.upload': 'Tải ảnh',
+        'scan.tab.manual': 'Nhập mã',
+        'scan.hint': 'Đưa mã QR vào khung hình',
+        'scan.toggleCamera': 'Bật camera',
+        'scan.uploadTitle': 'Tải ảnh mã QR',
+        'scan.uploadHint': 'Kéo thả hoặc nhấn để chọn ảnh',
+        'scan.manualLabel': 'Nhập nội dung QR',
+        'scan.manualPlaceholder': 'VD: https://example.com',
+        'scan.check': 'Giải mã',
+        'scan.recent': 'Quét gần đây',
+        'scan.recentEmpty': 'Chưa có lịch sử quét',
+
+        'scan.msg.enterContent': 'Vui lòng nhập nội dung QR',
+        'scan.msg.privateTitle': 'Mã riêng tư',
+        'scan.msg.privateBody': 'Mã này thuộc vé/sự kiện và không thể quét ở trang này. Vui lòng dùng trang “Quét Vé” (dành cho nhân viên).',
+        'scan.msg.decodedTitle': 'Đã giải mã',
+        'scan.msg.decodedBody': 'Nội dung QR bên dưới:',
+        'scan.action.copy': 'Sao chép',
+        'scan.action.open': 'Mở liên kết',
+        'scan.action.scanAgain': 'Quét lại',
+
+        'scan.detail.ticketQty': 'Số vé',
+        'scan.detail.price': 'Giá vé',
+        'scan.detail.paymentType': 'Loại thanh toán',
+        'scan.detail.cash': 'Tiền mặt',
+        'scan.detail.paidAt': 'Thời điểm thanh toán',
+        'scan.detail.proofTitle': 'Ảnh xác nhận thanh toán',
+        'scan.action.confirmPay': 'Xác nhận thanh toán',
+        'scan.action.cancelTicket': 'Hủy vé',
+        'scan.action.markUsed': 'Đánh dấu đã dùng',
+        'scan.action.viewInfo': 'Xem chi tiết',
+        'scan.action.scanNext': 'Quét tiếp',
+        'scan.action.rescan': 'Quét lại',
+        'scan.msg.confirmedTitle': 'Đã xác nhận thanh toán',
+        'scan.msg.confirmedBody': 'Vé "{id}" đã được xác nhận thanh toán thành công.',
+        'scan.msg.confirmFailed': 'Không thể xác nhận',
+        'scan.msg.cancelConfirm': 'Bạn có chắc muốn hủy vé này?',
+      },
+      en: {
+        'doc.title': 'Qrio - Scan QR',
+        'meta.description': 'Scan and decode any QR code content.',
+        'aria.language': 'Language',
+        'nav.home': 'Home',
+        'nav.createTicket': 'Create ticket',
+
+        'scan.badge': 'For staff',
+        'scan.title': 'Scan QR Code',
+        'scan.subtitle': 'Scan and decode content from any QR code',
+        'scan.tab.camera': 'Camera',
+        'scan.tab.upload': 'Upload',
+        'scan.tab.manual': 'Manual',
+        'scan.hint': 'Place the QR code inside the frame',
+        'scan.toggleCamera': 'Enable camera',
+        'scan.uploadTitle': 'Upload QR image',
+        'scan.uploadHint': 'Drag & drop or click to choose an image',
+        'scan.manualLabel': 'Enter QR content',
+        'scan.manualPlaceholder': 'e.g. https://example.com',
+        'scan.check': 'Decode',
+        'scan.recent': 'Recent scans',
+        'scan.recentEmpty': 'No scan history yet',
+
+        'scan.msg.enterContent': 'Please enter QR content',
+        'scan.msg.privateTitle': 'Private code',
+        'scan.msg.privateBody': 'This code belongs to a ticket/event and cannot be scanned on this page. Please use the staff “Scan Ticket” page.',
+        'scan.msg.decodedTitle': 'Decoded',
+        'scan.msg.decodedBody': 'QR content below:',
+        'scan.action.copy': 'Copy',
+        'scan.action.open': 'Open link',
+        'scan.action.scanAgain': 'Scan again',
+
+        'scan.detail.ticketQty': 'Tickets',
+        'scan.detail.price': 'Price',
+        'scan.detail.paymentType': 'Payment type',
+        'scan.detail.cash': 'Cash',
+        'scan.detail.paidAt': 'Paid at',
+        'scan.detail.proofTitle': 'Payment proof image',
+        'scan.action.confirmPay': 'Confirm payment',
+        'scan.action.cancelTicket': 'Cancel ticket',
+        'scan.action.markUsed': 'Mark as used',
+        'scan.action.viewInfo': 'View details',
+        'scan.action.scanNext': 'Scan next',
+        'scan.action.rescan': 'Scan again',
+        'scan.msg.confirmedTitle': 'Payment confirmed',
+        'scan.msg.confirmedBody': 'Ticket "{id}" payment confirmed successfully.',
+        'scan.msg.confirmFailed': 'Unable to confirm',
+        'scan.msg.cancelConfirm': 'Are you sure you want to cancel this ticket?',
+      },
+      zh: {
+        'doc.title': 'Qrio - 扫描二维码',
+        'meta.description': '扫描并解码任意二维码内容。',
+        'aria.language': '语言',
+        'nav.home': '主页',
+        'nav.createTicket': '创建票券',
+
+        'scan.badge': '工作人员使用',
+        'scan.title': '扫描二维码',
+        'scan.subtitle': '扫描并解码任何二维码内容',
+        'scan.tab.camera': '相机',
+        'scan.tab.upload': '上传',
+        'scan.tab.manual': '手动',
+        'scan.hint': '将二维码放入框内',
+        'scan.toggleCamera': '启用相机',
+        'scan.uploadTitle': '上传二维码图片',
+        'scan.uploadHint': '拖放或点击选择图片',
+        'scan.manualLabel': '输入二维码内容',
+        'scan.manualPlaceholder': '例如：https://example.com',
+        'scan.check': '解码',
+        'scan.recent': '最近扫描',
+        'scan.recentEmpty': '暂无扫描记录',
+
+        'scan.msg.enterContent': '请输入二维码内容',
+        'scan.msg.privateTitle': '私密码',
+        'scan.msg.privateBody': '此码属于票券/活动，不能在此页面扫描。请使用工作人员“扫描票券”页面。',
+        'scan.msg.decodedTitle': '已解码',
+        'scan.msg.decodedBody': '二维码内容如下：',
+        'scan.action.copy': '复制',
+        'scan.action.open': '打开链接',
+        'scan.action.scanAgain': '再次扫描',
+
+        'scan.detail.ticketQty': '票数',
+        'scan.detail.price': '价格',
+        'scan.detail.paymentType': '支付方式',
+        'scan.detail.cash': '现金',
+        'scan.detail.paidAt': '支付时间',
+        'scan.detail.proofTitle': '付款凭证图片',
+        'scan.action.confirmPay': '确认付款',
+        'scan.action.cancelTicket': '取消票券',
+        'scan.action.markUsed': '标记已使用',
+        'scan.action.viewInfo': '查看详情',
+        'scan.action.scanNext': '扫描下一个',
+        'scan.action.rescan': '再次扫描',
+        'scan.msg.confirmedTitle': '付款已确认',
+        'scan.msg.confirmedBody': '已成功确认票券“{id}”的付款。',
+        'scan.msg.confirmFailed': '无法确认',
+        'scan.msg.cancelConfirm': '确定要取消此票券吗？',
+      },
+      hi: {
+        'doc.title': 'Qrio - QR स्कैन',
+        'meta.description': 'किसी भी QR कोड की सामग्री स्कैन और डिकोड करें।',
+        'aria.language': 'भाषा',
+        'nav.home': 'होम',
+        'nav.createTicket': 'टिकट बनाएं',
+
+        'scan.badge': 'स्टाफ के लिए',
+        'scan.title': 'QR कोड स्कैन करें',
+        'scan.subtitle': 'किसी भी QR कोड से सामग्री स्कैन और डिकोड करें',
+        'scan.tab.camera': 'कैमरा',
+        'scan.tab.upload': 'अपलोड',
+        'scan.tab.manual': 'मैन्युअल',
+        'scan.hint': 'QR कोड को फ्रेम के अंदर रखें',
+        'scan.toggleCamera': 'कैमरा चालू करें',
+        'scan.uploadTitle': 'QR इमेज अपलोड करें',
+        'scan.uploadHint': 'खींचें/छोड़ें या क्लिक करके इमेज चुनें',
+        'scan.manualLabel': 'QR सामग्री दर्ज करें',
+        'scan.manualPlaceholder': 'जैसे https://example.com',
+        'scan.check': 'डिकोड',
+        'scan.recent': 'हाल की स्कैन',
+        'scan.recentEmpty': 'अभी तक कोई स्कैन इतिहास नहीं',
+
+        'scan.msg.enterContent': 'कृपया QR सामग्री दर्ज करें',
+        'scan.msg.privateTitle': 'निजी कोड',
+        'scan.msg.privateBody': 'यह कोड टिकट/इवेंट से संबंधित है और इस पेज पर स्कैन नहीं किया जा सकता। कृपया स्टाफ “Scan Ticket” पेज का उपयोग करें।',
+        'scan.msg.decodedTitle': 'डिकोड हो गया',
+        'scan.msg.decodedBody': 'नीचे QR सामग्री:',
+        'scan.action.copy': 'कॉपी',
+        'scan.action.open': 'लिंक खोलें',
+        'scan.action.scanAgain': 'फिर से स्कैन करें',
+
+        'scan.detail.ticketQty': 'टिकट',
+        'scan.detail.price': 'कीमत',
+        'scan.detail.paymentType': 'भुगतान प्रकार',
+        'scan.detail.cash': 'नकद',
+        'scan.detail.paidAt': 'भुगतान समय',
+        'scan.detail.proofTitle': 'भुगतान प्रमाण छवि',
+        'scan.action.confirmPay': 'भुगतान पुष्टि करें',
+        'scan.action.cancelTicket': 'टिकट रद्द करें',
+        'scan.action.markUsed': 'उपयोग किया हुआ चिन्हित करें',
+        'scan.action.viewInfo': 'विवरण देखें',
+        'scan.action.scanNext': 'अगला स्कैन करें',
+        'scan.action.rescan': 'फिर से स्कैन',
+        'scan.msg.confirmedTitle': 'भुगतान पुष्टि',
+        'scan.msg.confirmedBody': 'टिकट "{id}" का भुगतान सफलतापूर्वक पुष्टि हुआ।',
+        'scan.msg.confirmFailed': 'पुष्टि नहीं हो सकी',
+        'scan.msg.cancelConfirm': 'क्या आप वाकई इस टिकट को रद्द करना चाहते हैं?',
+      },
+      es: {
+        'doc.title': 'Qrio - Escanear QR',
+        'meta.description': 'Escanea y decodifica cualquier contenido de QR.',
+        'aria.language': 'Idioma',
+        'nav.home': 'Inicio',
+        'nav.createTicket': 'Crear ticket',
+
+        'scan.badge': 'Para staff',
+        'scan.title': 'Escanear código QR',
+        'scan.subtitle': 'Escanea y decodifica contenido de cualquier QR',
+        'scan.tab.camera': 'Cámara',
+        'scan.tab.upload': 'Subir',
+        'scan.tab.manual': 'Manual',
+        'scan.hint': 'Coloca el QR dentro del marco',
+        'scan.toggleCamera': 'Activar cámara',
+        'scan.uploadTitle': 'Subir imagen de QR',
+        'scan.uploadHint': 'Arrastra y suelta o haz clic para elegir una imagen',
+        'scan.manualLabel': 'Ingresa contenido del QR',
+        'scan.manualPlaceholder': 'p. ej. https://example.com',
+        'scan.check': 'Decodificar',
+        'scan.recent': 'Escaneos recientes',
+        'scan.recentEmpty': 'Aún no hay historial',
+
+        'scan.msg.enterContent': 'Ingresa el contenido del QR',
+        'scan.msg.privateTitle': 'Código privado',
+        'scan.msg.privateBody': 'Este código pertenece a un ticket/evento y no puede escanearse en esta página. Usa la página de staff “Scan Ticket”.',
+        'scan.msg.decodedTitle': 'Decodificado',
+        'scan.msg.decodedBody': 'Contenido del QR:',
+        'scan.action.copy': 'Copiar',
+        'scan.action.open': 'Abrir enlace',
+        'scan.action.scanAgain': 'Escanear de nuevo',
+
+        'scan.detail.ticketQty': 'Tickets',
+        'scan.detail.price': 'Precio',
+        'scan.detail.paymentType': 'Tipo de pago',
+        'scan.detail.cash': 'Efectivo',
+        'scan.detail.paidAt': 'Pagado el',
+        'scan.detail.proofTitle': 'Imagen de comprobante',
+        'scan.action.confirmPay': 'Confirmar pago',
+        'scan.action.cancelTicket': 'Cancelar ticket',
+        'scan.action.markUsed': 'Marcar como usado',
+        'scan.action.viewInfo': 'Ver detalles',
+        'scan.action.scanNext': 'Escanear siguiente',
+        'scan.action.rescan': 'Escanear de nuevo',
+        'scan.msg.confirmedTitle': 'Pago confirmado',
+        'scan.msg.confirmedBody': 'Pago del ticket "{id}" confirmado correctamente.',
+        'scan.msg.confirmFailed': 'No se pudo confirmar',
+        'scan.msg.cancelConfirm': '¿Seguro que deseas cancelar este ticket?',
+      },
+      fr: {
+        'doc.title': 'Qrio - Scanner QR',
+        'meta.description': 'Scannez et décodez le contenu de n’importe quel QR.',
+        'aria.language': 'Langue',
+        'nav.home': 'Accueil',
+        'nav.createTicket': 'Créer un billet',
+
+        'scan.badge': 'Pour le staff',
+        'scan.title': 'Scanner un QR code',
+        'scan.subtitle': 'Scannez et décodez le contenu de tout QR code',
+        'scan.tab.camera': 'Caméra',
+        'scan.tab.upload': 'Téléverser',
+        'scan.tab.manual': 'Manuel',
+        'scan.hint': 'Placez le QR dans le cadre',
+        'scan.toggleCamera': 'Activer la caméra',
+        'scan.uploadTitle': 'Téléverser une image QR',
+        'scan.uploadHint': 'Glisser-déposer ou cliquer pour choisir une image',
+        'scan.manualLabel': 'Entrer le contenu du QR',
+        'scan.manualPlaceholder': 'ex. https://example.com',
+        'scan.check': 'Décoder',
+        'scan.recent': 'Scans récents',
+        'scan.recentEmpty': 'Aucun historique pour le moment',
+
+        'scan.msg.enterContent': 'Veuillez entrer le contenu du QR',
+        'scan.msg.privateTitle': 'Code privé',
+        'scan.msg.privateBody': 'Ce code appartient à un billet/événement et ne peut pas être scanné sur cette page. Utilisez la page staff “Scan Ticket”.',
+        'scan.msg.decodedTitle': 'Décodé',
+        'scan.msg.decodedBody': 'Contenu du QR :',
+        'scan.action.copy': 'Copier',
+        'scan.action.open': 'Ouvrir le lien',
+        'scan.action.scanAgain': 'Rescanner',
+
+        'scan.detail.ticketQty': 'Billets',
+        'scan.detail.price': 'Prix',
+        'scan.detail.paymentType': 'Type de paiement',
+        'scan.detail.cash': 'Espèces',
+        'scan.detail.paidAt': 'Payé le',
+        'scan.detail.proofTitle': 'Image de preuve de paiement',
+        'scan.action.confirmPay': 'Confirmer le paiement',
+        'scan.action.cancelTicket': 'Annuler le billet',
+        'scan.action.markUsed': 'Marquer comme utilisé',
+        'scan.action.viewInfo': 'Voir les détails',
+        'scan.action.scanNext': 'Scanner suivant',
+        'scan.action.rescan': 'Rescanner',
+        'scan.msg.confirmedTitle': 'Paiement confirmé',
+        'scan.msg.confirmedBody': 'Paiement du billet "{id}" confirmé avec succès.',
+        'scan.msg.confirmFailed': 'Impossible de confirmer',
+        'scan.msg.cancelConfirm': 'Voulez-vous vraiment annuler ce billet ?',
+      },
+      ar: {
+        'doc.title': 'Qrio - مسح QR',
+        'meta.description': 'امسح وفك ترميز أي محتوى لرمز QR.',
+        'aria.language': 'اللغة',
+        'nav.home': 'الرئيسية',
+        'nav.createTicket': 'إنشاء تذكرة',
+
+        'scan.badge': 'للموظفين',
+        'scan.title': 'مسح رمز QR',
+        'scan.subtitle': 'امسح وفك ترميز المحتوى من أي رمز QR',
+        'scan.tab.camera': 'الكاميرا',
+        'scan.tab.upload': 'رفع',
+        'scan.tab.manual': 'يدوي',
+        'scan.hint': 'ضع رمز QR داخل الإطار',
+        'scan.toggleCamera': 'تفعيل الكاميرا',
+        'scan.uploadTitle': 'رفع صورة QR',
+        'scan.uploadHint': 'اسحب وأفلت أو انقر لاختيار صورة',
+        'scan.manualLabel': 'أدخل محتوى QR',
+        'scan.manualPlaceholder': 'مثال: https://example.com',
+        'scan.check': 'فك الترميز',
+        'scan.recent': 'عمليات المسح الأخيرة',
+        'scan.recentEmpty': 'لا يوجد سجل بعد',
+
+        'scan.msg.enterContent': 'يرجى إدخال محتوى QR',
+        'scan.msg.privateTitle': 'رمز خاص',
+        'scan.msg.privateBody': 'هذا الرمز يخص تذكرة/حدث ولا يمكن مسحه في هذه الصفحة. يرجى استخدام صفحة الموظفين “Scan Ticket”.',
+        'scan.msg.decodedTitle': 'تم فك الترميز',
+        'scan.msg.decodedBody': 'محتوى QR:',
+        'scan.action.copy': 'نسخ',
+        'scan.action.open': 'فتح الرابط',
+        'scan.action.scanAgain': 'مسح مرة أخرى',
+
+        'scan.detail.ticketQty': 'التذاكر',
+        'scan.detail.price': 'السعر',
+        'scan.detail.paymentType': 'نوع الدفع',
+        'scan.detail.cash': 'نقداً',
+        'scan.detail.paidAt': 'وقت الدفع',
+        'scan.detail.proofTitle': 'صورة إثبات الدفع',
+        'scan.action.confirmPay': 'تأكيد الدفع',
+        'scan.action.cancelTicket': 'إلغاء التذكرة',
+        'scan.action.markUsed': 'وضع علامة مستخدمة',
+        'scan.action.viewInfo': 'عرض التفاصيل',
+        'scan.action.scanNext': 'مسح التالي',
+        'scan.action.rescan': 'مسح مرة أخرى',
+        'scan.msg.confirmedTitle': 'تم تأكيد الدفع',
+        'scan.msg.confirmedBody': 'تم تأكيد دفع التذكرة "{id}" بنجاح.',
+        'scan.msg.confirmFailed': 'تعذر التأكيد',
+        'scan.msg.cancelConfirm': 'هل أنت متأكد من إلغاء هذه التذكرة؟',
+      },
+      pt: {
+        'doc.title': 'Qrio - Escanear QR',
+        'meta.description': 'Escaneie e decodifique qualquer conteúdo de QR.',
+        'aria.language': 'Idioma',
+        'nav.home': 'Início',
+        'nav.createTicket': 'Criar ticket',
+
+        'scan.badge': 'Para equipe',
+        'scan.title': 'Escanear QR Code',
+        'scan.subtitle': 'Escaneie e decodifique conteúdo de qualquer QR',
+        'scan.tab.camera': 'Câmera',
+        'scan.tab.upload': 'Enviar',
+        'scan.tab.manual': 'Manual',
+        'scan.hint': 'Coloque o QR dentro do quadro',
+        'scan.toggleCamera': 'Ativar câmera',
+        'scan.uploadTitle': 'Enviar imagem do QR',
+        'scan.uploadHint': 'Arraste e solte ou clique para escolher uma imagem',
+        'scan.manualLabel': 'Digite o conteúdo do QR',
+        'scan.manualPlaceholder': 'ex.: https://example.com',
+        'scan.check': 'Decodificar',
+        'scan.recent': 'Scans recentes',
+        'scan.recentEmpty': 'Ainda não há histórico',
+
+        'scan.msg.enterContent': 'Digite o conteúdo do QR',
+        'scan.msg.privateTitle': 'Código privado',
+        'scan.msg.privateBody': 'Este código pertence a um ticket/evento e não pode ser escaneado nesta página. Use a página da equipe “Scan Ticket”.',
+        'scan.msg.decodedTitle': 'Decodificado',
+        'scan.msg.decodedBody': 'Conteúdo do QR:',
+        'scan.action.copy': 'Copiar',
+        'scan.action.open': 'Abrir link',
+        'scan.action.scanAgain': 'Escanear novamente',
+
+        'scan.detail.ticketQty': 'Ingressos',
+        'scan.detail.price': 'Preço',
+        'scan.detail.paymentType': 'Tipo de pagamento',
+        'scan.detail.cash': 'Dinheiro',
+        'scan.detail.paidAt': 'Pago em',
+        'scan.detail.proofTitle': 'Imagem do comprovante',
+        'scan.action.confirmPay': 'Confirmar pagamento',
+        'scan.action.cancelTicket': 'Cancelar ticket',
+        'scan.action.markUsed': 'Marcar como usado',
+        'scan.action.viewInfo': 'Ver detalhes',
+        'scan.action.scanNext': 'Escanear próximo',
+        'scan.action.rescan': 'Escanear novamente',
+        'scan.msg.confirmedTitle': 'Pagamento confirmado',
+        'scan.msg.confirmedBody': 'Pagamento do ticket "{id}" confirmado com sucesso.',
+        'scan.msg.confirmFailed': 'Não foi possível confirmar',
+        'scan.msg.cancelConfirm': 'Tem certeza que deseja cancelar este ticket?',
+      },
+      ru: {
+        'doc.title': 'Qrio — Сканировать QR',
+        'meta.description': 'Сканируйте и декодируйте содержимое любого QR-кода.',
+        'aria.language': 'Язык',
+        'nav.home': 'Главная',
+        'nav.createTicket': 'Создать билет',
+
+        'scan.badge': 'Для персонала',
+        'scan.title': 'Сканировать QR‑код',
+        'scan.subtitle': 'Сканируйте и декодируйте содержимое любого QR‑кода',
+        'scan.tab.camera': 'Камера',
+        'scan.tab.upload': 'Загрузить',
+        'scan.tab.manual': 'Вручную',
+        'scan.hint': 'Поместите QR‑код в рамку',
+        'scan.toggleCamera': 'Включить камеру',
+        'scan.uploadTitle': 'Загрузить изображение QR',
+        'scan.uploadHint': 'Перетащите файл или нажмите, чтобы выбрать изображение',
+        'scan.manualLabel': 'Введите содержимое QR',
+        'scan.manualPlaceholder': 'например https://example.com',
+        'scan.check': 'Декодировать',
+        'scan.recent': 'Недавние сканы',
+        'scan.recentEmpty': 'История сканов пуста',
+
+        'scan.msg.enterContent': 'Введите содержимое QR',
+        'scan.msg.privateTitle': 'Приватный код',
+        'scan.msg.privateBody': 'Этот код относится к билету/событию и не может быть отсканирован на этой странице. Используйте страницу персонала “Scan Ticket”.',
+        'scan.msg.decodedTitle': 'Декодировано',
+        'scan.msg.decodedBody': 'Содержимое QR:',
+        'scan.action.copy': 'Копировать',
+        'scan.action.open': 'Открыть ссылку',
+        'scan.action.scanAgain': 'Сканировать снова',
+
+        'scan.detail.ticketQty': 'Билеты',
+        'scan.detail.price': 'Цена',
+        'scan.detail.paymentType': 'Тип оплаты',
+        'scan.detail.cash': 'Наличные',
+        'scan.detail.paidAt': 'Оплачено',
+        'scan.detail.proofTitle': 'Изображение подтверждения оплаты',
+        'scan.action.confirmPay': 'Подтвердить оплату',
+        'scan.action.cancelTicket': 'Отменить билет',
+        'scan.action.markUsed': 'Отметить как использованный',
+        'scan.action.viewInfo': 'Подробнее',
+        'scan.action.scanNext': 'Сканировать следующий',
+        'scan.action.rescan': 'Сканировать снова',
+        'scan.msg.confirmedTitle': 'Оплата подтверждена',
+        'scan.msg.confirmedBody': 'Оплата билета "{id}" подтверждена.',
+        'scan.msg.confirmFailed': 'Не удалось подтвердить',
+        'scan.msg.cancelConfirm': 'Вы уверены, что хотите отменить этот билет?',
+      },
+      id: {
+        'doc.title': 'Qrio - Pindai QR',
+        'meta.description': 'Pindai dan dekode konten QR apa pun.',
+        'aria.language': 'Bahasa',
+        'nav.home': 'Beranda',
+        'nav.createTicket': 'Buat tiket',
+
+        'scan.badge': 'Untuk staf',
+        'scan.title': 'Pindai Kode QR',
+        'scan.subtitle': 'Pindai dan dekode konten dari kode QR apa pun',
+        'scan.tab.camera': 'Kamera',
+        'scan.tab.upload': 'Unggah',
+        'scan.tab.manual': 'Manual',
+        'scan.hint': 'Tempatkan kode QR di dalam bingkai',
+        'scan.toggleCamera': 'Aktifkan kamera',
+        'scan.uploadTitle': 'Unggah gambar QR',
+        'scan.uploadHint': 'Seret & lepas atau klik untuk memilih gambar',
+        'scan.manualLabel': 'Masukkan konten QR',
+        'scan.manualPlaceholder': 'mis. https://example.com',
+        'scan.check': 'Dekode',
+        'scan.recent': 'Pemindaian terbaru',
+        'scan.recentEmpty': 'Belum ada riwayat pemindaian',
+
+        'scan.msg.enterContent': 'Silakan masukkan konten QR',
+        'scan.msg.privateTitle': 'Kode privat',
+        'scan.msg.privateBody': 'Kode ini milik tiket/acara dan tidak bisa dipindai di halaman ini. Silakan gunakan halaman staf “Scan Ticket”.',
+        'scan.msg.decodedTitle': 'Terdekode',
+        'scan.msg.decodedBody': 'Konten QR:',
+        'scan.action.copy': 'Salin',
+        'scan.action.open': 'Buka tautan',
+        'scan.action.scanAgain': 'Pindai lagi',
+
+        'scan.detail.ticketQty': 'Tiket',
+        'scan.detail.price': 'Harga',
+        'scan.detail.paymentType': 'Jenis pembayaran',
+        'scan.detail.cash': 'Tunai',
+        'scan.detail.paidAt': 'Dibayar pada',
+        'scan.detail.proofTitle': 'Gambar bukti pembayaran',
+        'scan.action.confirmPay': 'Konfirmasi pembayaran',
+        'scan.action.cancelTicket': 'Batalkan tiket',
+        'scan.action.markUsed': 'Tandai sudah digunakan',
+        'scan.action.viewInfo': 'Lihat detail',
+        'scan.action.scanNext': 'Pindai berikutnya',
+        'scan.action.rescan': 'Pindai lagi',
+        'scan.msg.confirmedTitle': 'Pembayaran dikonfirmasi',
+        'scan.msg.confirmedBody': 'Pembayaran tiket "{id}" berhasil dikonfirmasi.',
+        'scan.msg.confirmFailed': 'Tidak dapat mengonfirmasi',
+        'scan.msg.cancelConfirm': 'Yakin ingin membatalkan tiket ini?',
+      },
+    };
+
+    function normalizeLang(input) {
+      const raw = String(input || '').trim().toLowerCase();
+      if (SUPPORTED_LANGS.includes(raw)) return raw;
+      const prefix = raw.split('-')[0];
+      if (SUPPORTED_LANGS.includes(prefix)) return prefix;
+      return 'vi';
+    }
+    function getLang() {
+      const saved = localStorage.getItem(LANG_KEY);
+      if (saved) return normalizeLang(saved);
+      return normalizeLang(navigator.language || 'vi');
+    }
+    function t(key, lang) {
+      const l = normalizeLang(lang);
+      return (I18N[l] && I18N[l][key]) || (I18N.en && I18N.en[key]) || key;
+    }
+    function tr(key) { return t(key, getLang()); }
+    function trf(key, vars) {
+      let s = tr(key);
+      const v = vars || {};
+      Object.keys(v).forEach(k => {
+        s = s.replaceAll(`{${k}}`, String(v[k]));
+      });
+      return s;
+    }
+
+    function applyI18n(lang) {
+      const l = normalizeLang(lang);
+      document.documentElement.lang = l;
+      document.querySelectorAll('[data-i18n-content]').forEach(el => {
+        const key = el.getAttribute('data-i18n-content');
+        el.setAttribute('content', t(key, l));
+      });
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        el.textContent = t(key, l);
+      });
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        el.setAttribute('placeholder', t(key, l));
+      });
+      document.querySelectorAll('[data-i18n-title]').forEach(el => {
+        const key = el.getAttribute('data-i18n-title');
+        el.setAttribute('title', t(key, l));
+      });
+      document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+        const key = el.getAttribute('data-i18n-aria');
+        el.setAttribute('aria-label', t(key, l));
+      });
+    }
+
+    applyI18n(getLang());
+  </script>
+
+  <script>
+    let videoStream = null;
+    let scannerActive = false;
+    let currentTab = 'camera';
+    let lastCameraErrorShown = false;
+
+    const CAM_AUTOSTART_KEY = 'qr_cam_autostart_v1';
+
+    function markCameraGranted() {
+      try { localStorage.setItem(CAM_AUTOSTART_KEY, '1'); } catch { /* ignore */ }
+    }
+
+    function hasCameraGrantedHint() {
+      try { return localStorage.getItem(CAM_AUTOSTART_KEY) === '1'; } catch { return false; }
+    }
+
+    async function isCameraPermissionGranted() {
+      try {
+        if (!navigator.permissions || !navigator.permissions.query) return false;
+        const status = await navigator.permissions.query({ name: 'camera' });
+        return status && status.state === 'granted';
+      } catch {
+        return false;
+      }
+    }
+
+    async function maybeAutoStartCamera() {
+      if (currentTab !== 'camera') return;
+      if (scannerActive || videoStream) return;
+
+      const granted = hasCameraGrantedHint() || await isCameraPermissionGranted();
+      if (!granted) return;
+
+      await startScanner({ silent: true });
+    }
+
+    // ===== TAB SWITCHING =====
+    function switchTab(evt, tab) {
+      currentTab = tab;
+
+      // Update tab buttons
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      if (evt && evt.target) {
+        const btn = evt.target.closest('.tab');
+        if (btn) btn.classList.add('active');
+      }
+
+      // Show/hide content
+      document.getElementById('tab-camera').classList.toggle('hidden', tab !== 'camera');
+      document.getElementById('tab-upload').classList.toggle('hidden', tab !== 'upload');
+      document.getElementById('tab-manual').classList.toggle('hidden', tab !== 'manual');
+
+      // Manage camera
+      if (tab === 'camera') {
+        // Only start camera on user gesture (tab click)
+        startScanner();
+      } else {
+        stopScanner();
+      }
+
+      // Hide result
+      document.getElementById('result-section').classList.add('hidden');
+    }
+
+    // ===== CAMERA SCANNER =====
+    async function startScanner(opts = {}) {
+      const silent = !!opts.silent;
+      try {
+        if (videoStream && scannerActive) {
+          return;
+        }
+
+        const isLocalhost = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+        const isSecure = window.isSecureContext || location.protocol === 'https:' || isLocalhost;
+        if (!isSecure) {
+          stopScanner();
+          if (!silent) {
+            showResult('error', 'Không thể mở camera', 'Trình duyệt chỉ cho phép mở camera trên HTTPS. Vui lòng mở website bằng https:// hoặc dùng chế độ “Tải ảnh / Nhập mã”.');
+          }
+          return;
+        }
+
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+          stopScanner();
+          if (!silent) {
+            showResult('error', 'Không hỗ trợ camera', 'Thiết bị/trình duyệt của bạn không hỗ trợ camera. Vui lòng dùng “Tải ảnh” hoặc “Nhập mã”.');
+          }
+          return;
+        }
+
+        const video = document.getElementById('scanner-video');
+        video.muted = true;
+        videoStream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: 'environment' }
+        });
+        markCameraGranted();
+        video.srcObject = videoStream;
+
+        // iOS/Safari sometimes needs explicit play()
+        try { await video.play(); } catch (e) { /* ignore */ }
+
+        scannerActive = true;
+        lastCameraErrorShown = false;
+        requestAnimationFrame(scanFrame);
+
+        document.getElementById('toggle-camera').innerHTML = '<i class="fa-solid fa-video-slash"></i> Tắt camera';
+      } catch (error) {
+        console.error('Camera error:', error);
+        stopScanner();
+
+        if (silent) return;
+
+        if (lastCameraErrorShown) return;
+        lastCameraErrorShown = true;
+
+        let msg = 'Không thể truy cập camera. Vui lòng cho phép quyền truy cập hoặc sử dụng “Tải ảnh”.';
+        if (error && (error.name === 'NotAllowedError' || error.name === 'PermissionDeniedError')) {
+          msg = 'Bạn đã từ chối quyền camera. Hãy vào cài đặt trình duyệt để bật lại quyền camera cho website, hoặc dùng “Tải ảnh / Nhập mã”.';
+        } else if (error && (error.name === 'NotFoundError' || error.name === 'OverconstrainedError')) {
+          msg = 'Không tìm thấy camera phù hợp trên thiết bị. Vui lòng dùng “Tải ảnh / Nhập mã”.';
+        }
+
+        showResult('error', 'Không thể mở camera', msg);
+      }
+    }
+
+    function stopScanner() {
+      scannerActive = false;
+      if (videoStream) {
+        videoStream.getTracks().forEach(track => track.stop());
+        videoStream = null;
+      }
+      const video = document.getElementById('scanner-video');
+      if (video) {
+        try { video.pause(); } catch (e) { /* ignore */ }
+        video.srcObject = null;
+      }
+      document.getElementById('toggle-camera').innerHTML = '<i class="fa-solid fa-video"></i> Bật camera';
+    }
+
+    function toggleCamera() {
+      if (scannerActive) {
+        stopScanner();
+      } else {
+        startScanner();
+      }
+    }
+
+    function scanFrame() {
+      if (!scannerActive) return;
+
+      const video = document.getElementById('scanner-video');
+      const canvas = document.getElementById('scanner-canvas');
+      const ctx = canvas.getContext('2d');
+
+      if (video.readyState === video.HAVE_ENOUGH_DATA) {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        ctx.drawImage(video, 0, 0);
+
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const code = jsQR(imageData.data, canvas.width, canvas.height);
+
+        if (code) {
+          scannerActive = false;
+          processQRData(code.data);
+          return;
+        }
+      }
+
+      requestAnimationFrame(scanFrame);
+    }
+
+    // ===== FILE UPLOAD =====
+    const dropZone = document.getElementById('drop-zone');
+
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('dragover');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.classList.remove('dragover');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('dragover');
+      const file = e.dataTransfer.files[0];
+      if (file && file.type.startsWith('image/')) {
+        processImageFile(file);
+      }
+    });
+
+    function handleFileSelect(event) {
+      const file = event.target.files[0];
+      if (file) {
+        processImageFile(file);
+      }
+    }
+
+    function processImageFile(file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          const tryDecodeAtMaxSize = (maxSize) => {
+            const canvas = document.createElement('canvas');
+            const scale = Math.min(1, maxSize / Math.max(img.width, img.height));
+            canvas.width = Math.max(1, Math.floor(img.width * scale));
+            canvas.height = Math.max(1, Math.floor(img.height * scale));
+            const ctx = canvas.getContext('2d', { willReadFrequently: true });
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            return jsQR(imageData.data, canvas.width, canvas.height);
+          };
+
+          const sizes = [1600, 1200, 900, 600, 420];
+          let code = null;
+          for (const s of sizes) {
+            code = tryDecodeAtMaxSize(s);
+            if (code) break;
+          }
+
+          if (code && code.data) {
+            processQRData(code.data);
+            return;
+          }
+
+          showResult('error', 'Không tìm thấy mã QR', 'Vui lòng chọn ảnh có chứa mã QR rõ ràng (ảnh nét, đủ sáng, không bị lóa).');
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // ===== MANUAL INPUT =====
+    function checkManualCode() {
+      const code = String(document.getElementById('manual-code').value || '').trim();
+      if (!code) {
+        alert(tr('scan.msg.enterContent'));
+        return;
+      }
+
+      // Always validate via the same pipeline
+      processQRData(code);
+    }
+
+    // ===== PROCESS QR DATA =====
+    function processQRData(data) {
+      const raw = String(data || '').trim();
+      if (!raw) {
+        showResult('error', 'Mã QR không hợp lệ', 'Không thể đọc dữ liệu từ mã QR này.');
+        return;
+      }
+
+      if (isPrivateTicketQr(raw)) {
+        showResult('error', tr('scan.msg.privateTitle'), tr('scan.msg.privateBody'));
+        return;
+      }
+
+      addToRecentScans(raw);
+      showDecoded(raw);
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+    }
+
+    function isHttpUrl(text) {
+      return /^https?:\/\//i.test(String(text || '').trim());
+    }
+
+    function isPrivateTicketQr(raw) {
+      const text = String(raw || '').trim();
+      const upper = text.toUpperCase();
+
+      // Ticket codes are considered private (staff-only scanning page)
+      if (/^VEM[0-9A-Z]{4,}$/i.test(upper)) return true;
+
+      // URLs that point to ticket pages are considered private
+      if (isHttpUrl(text)) {
+        try {
+          const u = new URL(text);
+          const p = (u.pathname || '').toLowerCase();
+          if (p.endsWith('/ticket.html') || p.endsWith('/owner-ticket.html') || p.endsWith('/scan-ticket.html') || p.endsWith('/information.html')) {
+            return true;
+          }
+          if (u.searchParams.has('ticketId') || u.searchParams.has('id')) {
+            // Many ticket URLs use id/ticketId query param.
+            return true;
+          }
+        } catch {
+          // ignore
+        }
+      }
+
+      // JSON payloads that include ticket identifiers are private
+      if (text.startsWith('{') && text.endsWith('}')) {
+        try {
+          const obj = JSON.parse(text);
+          if (obj && (obj.ticketId || obj.orderId) ) return true;
+        } catch {
+          // ignore
+        }
+      }
+
+      return false;
+    }
+
+    async function copyText(text) {
+      const value = String(text || '');
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(value);
+          return true;
+        }
+      } catch {
+        // ignore
+      }
+
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = value;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        const ok = document.execCommand('copy');
+        document.body.removeChild(ta);
+        return ok;
+      } catch {
+        return false;
+      }
+    }
+
+    function showDecoded(raw) {
+      const resultSection = document.getElementById('result-section');
+      const resultContent = document.getElementById('result-content');
+      const safe = escapeHtml(raw);
+      const url = isHttpUrl(raw) ? String(raw).trim() : '';
+
+      const openBtn = url
+        ? `<a class="btn btn-primary" href="${escapeHtml(url)}" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> ${escapeHtml(tr('scan.action.open'))}</a>`
+        : '';
+
+      resultContent.innerHTML = `
+        <div class="result-icon success"><i class="fa-solid fa-check"></i></div>
+        <h3>${escapeHtml(tr('scan.msg.decodedTitle'))}</h3>
+        <p>${escapeHtml(tr('scan.msg.decodedBody'))}</p>
+        <div style="margin-top: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 12px;">
+          <pre style="white-space: pre-wrap; word-break: break-word; font-size: 13px; line-height: 1.5; color: #e2e8f0;">${safe}</pre>
+        </div>
+        <div class="btn-group" style="margin-top: 12px; display:flex; gap:10px; flex-wrap: wrap;">
+          <button class="btn btn-secondary" type="button" onclick="copyDecoded()"><i class="fa-solid fa-copy"></i> ${escapeHtml(tr('scan.action.copy'))}</button>
+          ${openBtn}
+          <button class="btn btn-secondary" type="button" onclick="resetScanner()"><i class="fa-solid fa-rotate-right"></i> ${escapeHtml(tr('scan.action.scanAgain'))}</button>
+        </div>
+      `;
+
+      window.__lastDecodedText = raw;
+      resultSection.classList.remove('hidden');
+      try { resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch {}
+    }
+
+    function copyDecoded() {
+      const txt = window.__lastDecodedText || '';
+      copyText(txt);
+    }
+
+    async function showResult(type, title, message, ticket = null) {
+      const resultSection = document.getElementById('result-section');
+      const resultContent = document.getElementById('result-content');
+
+      let iconClass = type === 'pending' || type === 'cash_pending' ? 'warning' : type;
+      let icon = type === 'success' ? 'fa-check' : (type === 'error' ? 'fa-times' : 'fa-exclamation');
+
+      let html = `
+        <div class="result-icon ${iconClass}"><i class="fa-solid ${icon}"></i></div>
+        <h3>${title}</h3>
+        <p>${message}</p>
+      `;
+
+      if (ticket) {
+        let order = null;
+        if (ticket.orderId) {
+          order = await fetchOrderData(ticket.orderId);
+        }
+
+        const totalTickets = Math.max(1, parseInt(ticket.totalTickets || (order && order.quantity) || 1, 10) || 1);
+        const perTicket = Number(ticket.price || 0) || 0;
+        const totalAmount = (order && typeof order.totalAmount === 'number')
+          ? Number(order.totalAmount || 0)
+          : (perTicket * totalTickets);
+
+        // Payment status badge
+        let statusBadge = '';
+        if (ticket.status === 'valid' || ticket.status === 'paid') {
+          statusBadge = '<div class="payment-status paid"><i class="fa-solid fa-check-circle"></i> Đã thanh toán</div>';
+        } else if (ticket.status === 'pending_verification') {
+          statusBadge = '<div class="payment-status pending_verification"><i class="fa-solid fa-clock"></i> Chờ xác nhận</div>';
+        } else if (ticket.status === 'pending_payment') {
+          statusBadge = '<div class="payment-status pending_payment"><i class="fa-solid fa-money-bill"></i> Chờ thanh toán tiền mặt</div>';
+        } else if (ticket.status === 'used') {
+          statusBadge = '<div class="payment-status pending"><i class="fa-solid fa-check-double"></i> Đã sử dụng</div>';
+        }
+
+        // Ticket details
+        html += `
+          ${statusBadge}
+          <div class="ticket-details">
+            <div class="ticket-detail-row">
+              <span>Mã vé</span>
+              <span>${ticket.ticketId}</span>
+            </div>
+            <div class="ticket-detail-row">
+              <span>Sự kiện</span>
+              <span>${ticket.eventName || 'N/A'}</span>
+            </div>
+            <div class="ticket-detail-row">
+              <span>Người mua</span>
+              <span>${ticket.buyerName || 'N/A'}</span>
+            </div>
+            <div class="ticket-detail-row">
+              <span>Email</span>
+              <span>${ticket.buyerEmail || 'N/A'}</span>
+            </div>
+            <div class="ticket-detail-row">
+              <span>Số điện thoại</span>
+              <span>${ticket.buyerPhone || 'N/A'}</span>
+            </div>
+            <div class="ticket-detail-row">
+              <span>${tr('scan.detail.ticketQty')}</span>
+              <span>${totalTickets} / ${totalTickets}</span>
+            </div>
+            <div class="ticket-detail-row">
+              <span>${tr('scan.detail.price')}</span>
+              <span>${formatCurrency(totalAmount)}</span>
+            </div>
+            ${ticket.paymentType === 'cash' ? `
+            <div class="ticket-detail-row">
+              <span>${tr('scan.detail.paymentType')}</span>
+              <span><i class="fa-solid fa-money-bill" style="color: #22c55e;"></i> ${tr('scan.detail.cash')}</span>
+            </div>
+            <div class="ticket-detail-row">
+              <span>${tr('scan.detail.paidAt')}</span>
+              <span>${ticket.cashPaymentTime || 'N/A'}</span>
+            </div>
+            ` : ''}
+          </div>
+        `;
+
+        // Try to get proof image from order
+        let proofImage = null;
+        if (order && order.proofImage) {
+          proofImage = order.proofImage;
+        }
+
+        // Show proof image if available
+        if (proofImage) {
+          html += `
+            <div class="proof-section">
+              <h4><i class="fa-solid fa-image"></i> ${tr('scan.detail.proofTitle')}</h4>
+              <div class="proof-image-container">
+                <img src="${proofImage}" alt="Ảnh xác nhận" />
+              </div>
+            </div>
+          `;
+        }
+
+        // Action buttons based on status
+        html += '<div class="action-buttons">';
+
+        if (ticket.status === 'pending_verification' || ticket.status === 'pending_payment') {
+          html += `
+            <button class="btn btn-confirm" onclick="confirmTicketPayment('${ticket.ticketId}')">
+              <i class="fa-solid fa-check"></i>
+              ${tr('scan.action.confirmPay')}
+            </button>
+            <button class="btn btn-cancel" onclick="cancelTicket('${ticket.ticketId}')">
+              <i class="fa-solid fa-times"></i>
+              ${tr('scan.action.cancelTicket')}
+            </button>
+          `;
+        } else if (ticket.status !== 'used') {
+          html += `
+            <button class="btn btn-success" onclick="markAsUsed('${ticket.ticketId}')">
+              <i class="fa-solid fa-check"></i>
+              ${tr('scan.action.markUsed')}
+            </button>
+          `;
+        }
+
+        html += `
+            <button class="btn btn-secondary" onclick="viewTicketInfo('${ticket.ticketId}')">
+              <i class="fa-solid fa-eye"></i>
+              ${tr('scan.action.viewInfo')}
+            </button>
+            <button class="btn btn-back-scan" onclick="resetScanner()">
+              <i class="fa-solid fa-qrcode"></i>
+              ${tr('scan.action.scanNext')}
+            </button>
+          </div>
+        `;
+      } else {
+        html += `
+          <div class="action-buttons">
+            <button class="btn btn-back-scan" onclick="resetScanner()">
+              <i class="fa-solid fa-redo"></i>
+              ${tr('scan.action.rescan')}
+            </button>
+          </div>
+        `;
+      }
+
+      resultContent.innerHTML = html;
+      resultSection.classList.remove('hidden');
+    }
+
+    function formatCurrency(amount) {
+      return new Intl.NumberFormat('vi-VN').format(amount || 0) + ' đ';
+    }
+
+    async function confirmTicketPayment(ticketId) {
+      try {
+        // For server tickets, confirming payment is an order-level action.
+        // Try to resolve orderId from server first.
+        let orderId = '';
+        try {
+          const resp = await fetch(`/api/ticket/tickets/${encodeURIComponent(ticketId)}`);
+          const json = await resp.json().catch(() => ({}));
+          if (resp.ok && json && json.orderId) orderId = json.orderId;
+        } catch {}
+
+        if (orderId) {
+          await fetch(`/api/ticket/orders/${encodeURIComponent(orderId)}/confirm`, { method: 'POST' });
+        }
+
+        showResult('success', tr('scan.msg.confirmedTitle'), trf('scan.msg.confirmedBody', { id: ticketId }));
+        updateRecentScans();
+      } catch (e) {
+        showResult('error', tr('scan.msg.confirmFailed'), String(e.message || e));
+      }
+    }
+
+    async function cancelTicket(ticketId) {
+      if (!confirm(tr('scan.msg.cancelConfirm'))) return;
+
+      try {
+        // Prefer server-side cancel (ticket-level)
+        const resp = await fetch(`/api/ticket/tickets/${encodeURIComponent(ticketId)}/cancel`, { method: 'POST' });
+        const json = await resp.json().catch(() => ({}));
+        if (!resp.ok || (json && json.error)) throw new Error((json && json.error) || 'Không thể hủy vé');
+
+        showResult('error', 'Đã hủy vé', `Vé "${ticketId}" đã bị hủy.`);
+        updateRecentScans();
+      } catch (e) {
+        showResult('error', 'Không thể hủy vé', String(e.message || e));
+      }
+    }
+
+    function viewTicketInfo(ticketId) {
+      window.location.href = `information.html?id=${ticketId}`;
+    }
+
+    function markAsUsed(ticketId) {
+      (async () => {
+        try {
+          const resp = await fetch(`/api/ticket/tickets/${encodeURIComponent(ticketId)}/use`, { method: 'POST' });
+          const json = await resp.json().catch(() => ({}));
+          if (!resp.ok || (json && json.error)) throw new Error((json && json.error) || 'Không thể cập nhật vé');
+
+          showResult('success', 'Đã xác nhận', `Vé "${ticketId}" đã được đánh dấu là đã sử dụng.`);
+          updateRecentScans();
+          return;
+        } catch (e) {
+          // fallback local
+          try {
+            const stored = localStorage.getItem('ticket_' + ticketId);
+            if (stored) {
+              const ticket = JSON.parse(stored);
+              ticket.status = 'used';
+              ticket.usedAt = new Date().toISOString();
+              localStorage.setItem('ticket_' + ticketId, JSON.stringify(ticket));
+              showResult('success', 'Đã xác nhận', `Vé "${ticketId}" đã được đánh dấu là đã sử dụng.`);
+              updateRecentScans();
+              return;
+            }
+          } catch {}
+
+          showResult('error', 'Không thể cập nhật vé', String(e.message || e));
+        }
+      })();
+    }
+
+    function resetScanner() {
+      document.getElementById('result-section').classList.add('hidden');
+      if (currentTab === 'camera') {
+        if (videoStream) {
+          scannerActive = true;
+          requestAnimationFrame(scanFrame);
+        } else {
+          startScanner();
+        }
+      }
+    }
+
+    // ===== RECENT SCANS =====
+    const RECENT_QR_KEY = 'recent_qr_scans_v1';
+    window.__recentQrCache = [];
+
+    function addToRecentScans(text) {
+      let recent = JSON.parse(localStorage.getItem(RECENT_QR_KEY) || '[]');
+      const value = String(text || '').trim();
+      if (!value) return;
+
+      recent = recent.filter(r => r && r.text !== value);
+      recent.unshift({
+        text: value,
+        isUrl: isHttpUrl(value),
+        scannedAt: new Date().toISOString()
+      });
+
+      recent = recent.slice(0, 10);
+      localStorage.setItem(RECENT_QR_KEY, JSON.stringify(recent));
+      updateRecentScans();
+    }
+
+    function handleRecentClick(index) {
+      const item = (window.__recentQrCache || [])[index];
+      if (!item || !item.text) return;
+      if (item.isUrl) {
+        window.open(item.text, '_blank', 'noopener');
+        return;
+      }
+      copyText(item.text);
+    }
+
+    function updateRecentScans() {
+      const recent = JSON.parse(localStorage.getItem(RECENT_QR_KEY) || '[]');
+      const listEl = document.getElementById('recent-list');
+      window.__recentQrCache = Array.isArray(recent) ? recent : [];
+
+      if (!listEl) return;
+
+      if (window.__recentQrCache.length === 0) {
+        listEl.innerHTML = `<p style="color: #64748b; font-size: 13px; text-align: center; padding: 20px;">${tr('scan.recentEmpty')}</p>`;
+        return;
+      }
+
+      listEl.innerHTML = window.__recentQrCache.map((item, idx) => {
+        const time = new Date(item.scannedAt).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+        const icon = item.isUrl ? 'fa-link' : 'fa-qrcode';
+        const title = escapeHtml(item.isUrl ? 'URL' : 'TEXT');
+        const snippet = escapeHtml(String(item.text).slice(0, 80));
+        const hint = escapeHtml(item.isUrl ? tr('scan.action.open') : tr('scan.action.copy'));
+
+        return `
+          <div class="recent-item" onclick="handleRecentClick(${idx})" title="${hint}">
+            <div class="recent-item-info">
+              <div class="recent-item-icon">
+                <i class="fa-solid ${icon}"></i>
+              </div>
+              <div class="recent-item-text">
+                <h5>${title}</h5>
+                <p>${snippet}${String(item.text).length > 80 ? '…' : ''}</p>
+              </div>
+            </div>
+            <span class="recent-item-time">${time}</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // ===== INIT =====
+    document.addEventListener('DOMContentLoaded', () => {
+      updateRecentScans();
+      // Auto-start camera if permission was already granted.
+      maybeAutoStartCamera();
+    });
+
+    window.addEventListener('focus', () => {
+      maybeAutoStartCamera();
+    });
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        stopScanner();
+      } else {
+        maybeAutoStartCamera();
+      }
+    });
+  </script>
+</body>
+</html>

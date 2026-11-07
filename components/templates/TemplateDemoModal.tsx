@@ -39,7 +39,7 @@ export function TemplateDemoModal({template,onClose,language="vi"}:{template:Tem
    <div className="template-demo-quality"><span>ĐỊNH HƯỚNG CHẤT LƯỢNG</span><strong>{template.qualityTier}</strong><small>Thiết kế riêng · Responsive · Kiểm thử trước bàn giao</small></div>
    <div className="template-demo-scope"><h3>Cấu trúc dự kiến</h3><ul>{template.pages.map(page=><li key={page}>{page}</li>)}</ul></div>
    <div className="template-demo-info-actions"><Link href={inquiry} className="template-demo-contact" onClick={onClose}>Tùy biến mẫu này <span aria-hidden="true"></span></Link><a className="template-demo-open" href={publicSite} target="_blank" rel="noopener noreferrer">Xem demo toàn màn hình </a></div>
-   <p className="template-demo-note">Đây là bản trình diễn. Giỏ hàng, đặt lịch và biểu mẫu chỉ mô phỏng; không tạo đơn hàng hoặc gửi dữ liệu thật.</p>
+   <p className="template-demo-note">{template.slug==="saas-product"?"Qrio sử dụng giao diện dự án gốc; bộ tạo QR cơ bản chạy trong trình duyệt. Backend vé, thanh toán, quản trị, quét xác thực và dữ liệu khách hàng không được kết nối.":"Đây là bản trình diễn. Giỏ hàng, đặt lịch và biểu mẫu chỉ mô phỏng; không tạo đơn hàng hoặc gửi dữ liệu thật."}</p>
   </aside>
  </div>}
  </dialog>;

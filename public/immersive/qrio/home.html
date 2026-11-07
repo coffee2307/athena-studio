@@ -1,0 +1,4301 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <script>try{const value=new URLSearchParams(location.search).get("lang");if(value==="vi"||value==="en")localStorage.setItem("qr_lang",value)}catch{}</script>
+  <meta name="robots" content="noindex,nofollow">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="doc.title">Qrio - Free QR Code Generator</title>
+  <meta name="description" content="Công cụ thiết kế mã QR miễn phí với 100+ kiểu dáng, 150+ font chữ. Tạo mã QR đẹp, chuyên nghiệp chỉ trong vài giây. Xuất HD, thêm logo, tùy chỉnh màu sắc." />
+  <meta name="keywords" content="tạo mã QR, QR code, mã QR miễn phí, thiết kế QR, QR logo, Qrio" />
+   <meta name="author" content="Qrio" />
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="canonical" href="https://qrio.site/" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://qrio.site/" />
+  <meta property="og:title" content="Qrio - Tạo mã QR miễn phí, đẹp mắt" />
+  <meta property="og:description" content="Công cụ thiết kế mã QR miễn phí với 100+ kiểu dáng, 150+ font chữ. Xuất HD, thêm logo." />
+  <meta property="og:image" content="https://qrio.site/immersive/qrio/static/logo/logo.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://qrio.site/" />
+  <meta name="twitter:title" content="Qrio - Tạo mã QR miễn phí" />
+  <meta name="twitter:description" content="Thiết kế mã QR chuyên nghiệp với 100+ kiểu dáng, 150+ font chữ." />
+  <meta name="twitter:image" content="https://qrio.site/immersive/qrio/static/logo/logo.png" />
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Qrio",
+      "url": "https://qrio.site/",
+      "inLanguage": "vi"
+    }
+  </script>
+
+  <!-- Theme color -->
+  <meta name="theme-color" content="#7c3aed" />
+
+  <link rel="icon" type="image/x-icon" href="/immersive/qrio/static/logo/favicon_io%20(3)/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/immersive/qrio/static/logo/favicon_io%20(3)/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/immersive/qrio/static/logo/favicon_io%20(3)/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/immersive/qrio/static/logo/favicon_io%20(3)/apple-touch-icon.png">
+  <link rel="manifest" href="/immersive/qrio/static/logo/favicon_io%20(3)/site.webmanifest">
+  <link rel="icon" type="image/png" sizes="48x48" href="/immersive/qrio/static/logo/logo.png">
+  <link rel="shortcut icon" href="/immersive/qrio/static/logo/logo.png">
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
+  <!-- Fonts with display swap for performance -->
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+      background: #0f0f1a;
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+    }
+
+    /* ANIMATED BACKGROUND */
+    .bg-effects {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .bg-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(56px);
+      opacity: 0.28;
+      will-change: transform;
+      animation: floatOrb 28s ease-in-out infinite;
+    }
+
+    .bg-orb-1 {
+      width: 400px;
+      height: 400px;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      top: -100px;
+      right: -100px;
+      animation-delay: 0s;
+    }
+
+    .bg-orb-2 {
+      width: 300px;
+      height: 300px;
+      background: linear-gradient(135deg, #06b6d4, #3b82f6);
+      bottom: 100px;
+      left: -100px;
+      animation-delay: -5s;
+    }
+
+    .bg-orb-3 {
+      width: 250px;
+      height: 250px;
+      background: linear-gradient(135deg, #ec4899, #f43f5e);
+      top: 40%;
+      right: 20%;
+      animation-delay: -10s;
+    }
+
+    @keyframes floatOrb {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(30px, -30px) scale(1.05); }
+      50% { transform: translate(-20px, 20px) scale(0.95); }
+      75% { transform: translate(-30px, -20px) scale(1.02); }
+    }
+
+    /* GRID PATTERN */
+    .bg-grid {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image:
+        linear-gradient(rgba(124, 58, 237, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124, 58, 237, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      background-position: 0 0;
+      pointer-events: none;
+      z-index: 0;
+      animation: gridDrift 30s linear infinite;
+    }
+
+    @keyframes gridDrift {
+      from { background-position: 0 0; }
+      to { background-position: 240px 240px; }
+    }
+
+    /* HERO SECTION */
+    .hero-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 32px 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-content {
+      animation: fadeInLeft 0.8s ease-out;
+    }
+
+    @keyframes fadeInLeft {
+      from { opacity: 0; transform: translateX(-40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(79, 70, 229, 0.1));
+      border: 1px solid rgba(124, 58, 237, 0.3);
+      border-radius: 999px;
+      font-size: 13px;
+      color: #a78bfa;
+      margin-bottom: 20px;
+      animation: badgePulse 2s ease-in-out infinite;
+    }
+
+    @keyframes badgePulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.4); }
+      50% { box-shadow: 0 0 20px 5px rgba(124, 58, 237, 0.2); }
+    }
+
+    .hero-title {
+      font-size: clamp(22px, 4.2vw, 42px);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #ffffff, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .title-nowrap {
+      white-space: nowrap;
+    }
+
+    .typing-text {
+      color: #7c3aed;
+      -webkit-text-fill-color: #7c3aed;
+      white-space: nowrap;
+      display: inline-block;
+      min-width: 0;
+    }
+
+    .typing-text::after {
+      content: '';
+      display: inline-block;
+      width: 2px;
+      height: 0.95em;
+      margin-left: 6px;
+      background: currentColor;
+      vertical-align: -0.1em;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    .hero-subtitle {
+      font-size: 16px;
+      color: #94a3b8;
+      line-height: 1.7;
+      margin-bottom: 30px;
+      max-width: 480px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-lg {
+      padding: 14px 28px;
+      font-size: 15px;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #e2e8f0;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(124, 58, 237, 0.3);
+      box-shadow: inset 0 0 0 1px rgba(124, 58, 237, 0.45);
+    }
+
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: fadeInRight 0.8s ease-out 0.3s both;
+    }
+
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .hero-qr-demo {
+      position: relative;
+      width: 200px;
+      height: 200px;
+    }
+
+    .demo-qr {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 20px 40px rgba(124, 58, 237, 0.3));
+      animation: floatQR 4s ease-in-out infinite;
+    }
+
+    @keyframes floatQR {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(3deg); }
+    }
+
+    .qr-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 250px;
+      height: 250px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.4), transparent 60%);
+      filter: blur(40px);
+      z-index: -1;
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
+    }
+
+    /* STATS SECTION */
+    .stats-section {
+      max-width: 1000px;
+      margin: 0 auto 40px;
+      padding: 0 32px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      background: rgba(124, 58, 237, 0.08);
+      border-color: rgba(124, 58, 237, 0.3);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .stat-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 12px;
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(79, 70, 229, 0.1));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #a78bfa;
+    }
+
+    .stat-number {
+      font-size: 32px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffffff, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 4px;
+    }
+
+    .stat-number::after {
+      content: '+';
+      -webkit-text-fill-color: #7c3aed;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: #64748b;
+    }
+
+    @media (max-width: 900px) {
+      .hero-section {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 40px 20px;
+      }
+      .hero-subtitle { margin: 0 auto 30px; }
+      .hero-actions { justify-content: center; }
+      .hero-visual { order: -1; }
+      .stats-section { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 500px) {
+      .hero-title { font-size: 28px; }
+      .stats-section { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .stat-card { padding: 16px; }
+      .stat-number { font-size: 24px; }
+    }
+
+    /* SCROLL REVEAL ANIMATIONS */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* HEADER */
+    .header {
+      height: 64px;
+      background: rgba(15, 15, 26, 0.95);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .logo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .header h1 {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .lang-picker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: rgba(226,232,240,0.95);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .lang-picker:hover {
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(124, 58, 237, 0.40);
+      transform: translateY(-1px);
+    }
+
+    .lang-picker i {
+      font-size: 14px;
+      color: #a5b4fc;
+      transition: transform 0.3s ease;
+    }
+
+    .lang-picker:hover i {
+      transform: rotate(15deg);
+      color: #c4b5fd;
+    }
+
+    .lang-label {
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .lang-picker:focus-visible {
+      outline: none;
+      border-color: rgba(124, 58, 237, 0.70);
+      box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.20);
+    }
+
+    @media (max-width: 768px) {
+      .lang-label { display: none; }
+      .lang-picker {
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        border-radius: 12px;
+        justify-content: center;
+        gap: 0;
+      }
+    }
+
+    .lang-select {
+      background: rgba(30, 30, 46, 0.8);
+      border: 1px solid rgba(124, 58, 237, 0.3);
+      border-radius: 6px;
+      color: #e2e8f0;
+      font-size: 13px;
+      font-weight: 600;
+      outline: none;
+      cursor: pointer;
+      padding: 4px 8px;
+      transition: all 0.2s ease;
+    }
+
+    .lang-select:hover {
+      background: rgba(30, 30, 46, 0.95);
+      border-color: rgba(124, 58, 237, 0.5);
+    }
+
+    .lang-select:focus {
+      border-color: rgba(124, 58, 237, 0.7);
+      box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2);
+    }
+
+    .lang-select option {
+      background: #1e1e2e;
+      color: #e2e8f0;
+      padding: 8px;
+    }
+
+    .lang-native {
+      display: none;
+    }
+
+    .lang-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.62);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 9999;
+    }
+
+    .lang-modal-overlay.show {
+      display: flex;
+    }
+
+    .lang-modal {
+      width: 100%;
+      max-width: 440px;
+      background: #232337;
+      border: 1px solid #3a3a50;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 30px 90px rgba(0,0,0,0.55);
+    }
+
+    /* Project modal (bigger + animated) */
+    #project-modal .lang-modal {
+      max-width: 620px;
+      border-color: rgba(124, 58, 237, 0.35);
+      transform: translateY(16px) scale(0.98);
+      opacity: 0;
+      transition: transform 220ms cubic-bezier(0.175, 0.885, 0.32, 1.2), opacity 220ms ease;
+      will-change: transform, opacity;
+    }
+
+    #project-modal.show .lang-modal {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    #project-modal {
+      background:
+        radial-gradient(900px 500px at 30% 20%, rgba(124, 58, 237, 0.20), transparent 65%),
+        radial-gradient(800px 500px at 70% 80%, rgba(79, 70, 229, 0.14), transparent 60%),
+        rgba(0,0,0,0.62);
+    }
+
+    .lang-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid #3a3a50;
+    }
+
+    .lang-modal-title {
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .lang-modal-close {
+      background: transparent;
+      border: 0;
+      color: #c9c9da;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 6px 8px;
+      border-radius: 10px;
+    }
+
+    .lang-modal-close:hover {
+      background: rgba(255,255,255,0.06);
+    }
+
+    .lang-modal-body {
+      padding: 10px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .lang-modal-item {
+      width: 100%;
+      text-align: left;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(124, 58, 237, 0.25);
+      background: rgba(255,255,255,0.04);
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .lang-modal-item:hover {
+      border-color: rgba(124, 58, 237, 0.55);
+      background: rgba(124, 58, 237, 0.14);
+    }
+
+    .lang-modal-item.active {
+      border-color: rgba(124, 58, 237, 0.75);
+      background: rgba(124, 58, 237, 0.20);
+    }
+
+    .project-choice {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .project-choice i {
+      width: 18px;
+      text-align: center;
+      color: #a78bfa;
+    }
+
+    .project-modal-hero {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 14px;
+      align-items: center;
+      padding: 6px 4px 10px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.03);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .project-modal-copy {
+      padding: 6px 10px 6px 0;
+    }
+
+    .project-modal-sub {
+      font-weight: 900;
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .project-modal-hint {
+      font-size: 13px;
+      color: #cbd5e1;
+      line-height: 1.45;
+    }
+
+    .project-modal-qr {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(124,58,237,0.20);
+      box-shadow: 0 18px 50px rgba(124,58,237,0.16);
+      overflow: hidden;
+    }
+
+    .project-modal-qr-svg {
+      width: 200px;
+      height: 200px;
+      position: relative;
+      z-index: 1;
+      transform-origin: center;
+      animation: projectQrFloat 3.6s ease-in-out infinite;
+    }
+
+    .project-modal-qr-glow {
+      position: absolute;
+      inset: -40px;
+      background: radial-gradient(circle, rgba(124,58,237,0.22), transparent 60%);
+      filter: blur(12px);
+      animation: projectGlowPulse 2.8s ease-in-out infinite;
+    }
+
+    @keyframes projectQrFloat {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-4px) scale(1.01); }
+    }
+
+    @keyframes projectGlowPulse {
+      0%, 100% { opacity: 0.65; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+
+    @media (max-width: 520px) {
+      .project-modal-hero {
+        grid-template-columns: 1fr;
+      }
+      .project-modal-qr {
+        width: 100%;
+        height: 220px;
+      }
+      .project-modal-copy {
+        padding: 0 8px 6px;
+      }
+    }
+
+    .lang-picker {
+      position: relative;
+    }
+
+    .lang-picker::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 10px 24px rgba(79, 70, 229, 0.35);
+    }
+
+    /* MAIN CONTENT */
+    .main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.01);
+      border: 1px solid rgba(255,255,255,0.04);
+      backdrop-filter: blur(10px);
+    }
+
+    /* PROJECTS SECTION */
+    .projects-section {
+      margin-bottom: 48px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .section-header h2 {
+      font-size: 20px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-header h2 i {
+      color: #7c3aed;
+    }
+
+    /* PROJECTS GRID */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .new-project-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(124, 58, 237, 0.05));
+      border: 2px dashed rgba(124, 58, 237, 0.3);
+      border-radius: 16px;
+      text-decoration: none;
+      color: #a5b4fc;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .new-project-card::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.2) 0%, transparent 70%);
+      transition: all 0.5s ease;
+      transform: translate(-50%, -50%);
+    }
+
+    .new-project-card:hover::before {
+      width: 300%;
+      height: 300%;
+    }
+
+    .new-project-card:hover {
+      border-color: #7c3aed;
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.15), rgba(124, 58, 237, 0.1));
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 16px 40px rgba(124, 58, 237, 0.2);
+    }
+
+    .new-project-card .icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(124, 58, 237, 0.2);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      transition: transform 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .new-project-card:hover .icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .new-project-card .text {
+      font-weight: 600;
+      font-size: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .project-card {
+      background: #1a1a2e;
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 1px solid rgba(255,255,255,0.05);
+      position: relative;
+    }
+
+    .project-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, transparent, rgba(124, 58, 237, 0.1));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .project-card:hover::after {
+      opacity: 1;
+    }
+
+    .project-card.selected {
+      border-color: #7c3aed;
+      box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.3);
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(124, 58, 237, 0.15);
+      border-color: rgba(124, 58, 237, 0.4);
+    }
+
+    .project-preview {
+      height: 140px;
+      background: linear-gradient(135deg, #232336, #1a1a2e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-preview img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+    }
+
+    .project-preview .placeholder {
+      font-size: 48px;
+      color: #3a3a50;
+    }
+
+    .project-info {
+      padding: 16px;
+    }
+
+    .project-name-wrapper {
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 8px 12px;
+      margin-bottom: 6px;
+      background: rgba(255, 255, 255, 0.02);
+      transition: border 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .project-name-wrapper:hover {
+      border-color: rgba(124, 58, 237, 0.6);
+      box-shadow: 0 0 0 1px rgba(124, 58, 237, 0.25);
+    }
+
+    .project-name-wrapper:focus-visible {
+      outline: none;
+      border-color: #7c3aed;
+      box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.35);
+    }
+
+    .project-name {
+      font-weight: 600;
+      font-size: 14px;
+      color: #fff;
+      flex: 1;
+      white-space: pre;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .project-name-input {
+      width: 100%;
+      font-weight: 600;
+      font-size: 14px;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      padding: 6px 10px;
+      box-sizing: border-box;
+      caret-color: #fff;
+    }
+
+    .project-name-input:focus {
+      outline: none;
+      border-color: #7c3aed;
+      box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.25);
+    }
+
+    .project-name-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .project-date {
+      font-size: 12px;
+      color: #666;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .project-actions {
+      display: flex;
+      gap: 8px;
+      padding: 0 16px 16px;
+    }
+
+    .project-action-btn {
+      flex: 1;
+      padding: 8px;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.05);
+      color: #888;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 12px;
+    }
+
+    .project-action-btn:hover {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+    }
+
+    .project-action-btn.delete:hover {
+      background: rgba(239, 68, 68, 0.2);
+      color: #ef4444;
+    }
+
+    /* EMPTY STATE */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #666;
+    }
+
+    .empty-state i {
+      font-size: 48px;
+      margin-bottom: 16px;
+      color: #3a3a50;
+    }
+
+    .empty-state h4 {
+      font-size: 16px;
+      margin-bottom: 8px;
+      color: #888;
+    }
+
+    /* FEATURES SECTION */
+    .features-section {
+      padding: 32px 0;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .features-section h2 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .features-section h2 i {
+      color: #10b981;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .feature-card {
+      padding: 24px;
+      background: rgba(255,255,255,0.02);
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .feature-card:hover::before {
+      left: 100%;
+    }
+
+    .feature-card:hover {
+      background: rgba(124, 58, 237, 0.08);
+      transform: translateY(-4px);
+      border-color: rgba(124, 58, 237, 0.2);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+    }
+
+    .feature-card h4 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .feature-card h4 i {
+      color: #7c3aed;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(124, 58, 237, 0.15);
+      border-radius: 6px;
+      transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover h4 i {
+      transform: scale(1.1);
+    }
+
+    .feature-card p {
+      font-size: 13px;
+      color: #888;
+      line-height: 1.6;
+      padding-left: 34px;
+    }
+
+    /* PREVIEW SECTION */
+    .preview-section {
+      padding: 40px 0 8px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .preview-section h2 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .preview-section h2 i {
+      color: #7c3aed;
+    }
+
+    .preview-board {
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.10), rgba(124, 58, 237, 0.06));
+      border: 1px solid rgba(124, 58, 237, 0.18);
+      border-radius: 16px;
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 16px;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+      transform: perspective(900px) rotateX(var(--tiltX, 0deg)) rotateY(var(--tiltY, 0deg));
+      transition: transform 0.18s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      will-change: transform;
+    }
+
+    .preview-board:hover {
+      border-color: rgba(124, 58, 237, 0.35);
+      box-shadow: 0 18px 46px rgba(0,0,0,0.35), 0 0 18px rgba(124,58,237,0.14);
+    }
+
+    .preview-board::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.22), transparent 60%);
+      filter: blur(18px);
+    }
+
+    .preview-frame {
+      width: 140px;
+      height: 140px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .preview-frame::after {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border-radius: 12px;
+      background: linear-gradient(120deg, transparent 0%, rgba(124,58,237,0.14) 40%, rgba(255,255,255,0.10) 50%, rgba(79,70,229,0.10) 60%, transparent 100%);
+      transform: translateX(-130%);
+      animation: previewScan 4.2s ease-in-out infinite;
+      pointer-events: none;
+      opacity: 0.9;
+    }
+
+    @keyframes previewScan {
+      0% { transform: translateX(-130%); opacity: 0; }
+      16% { opacity: 0.75; }
+      40% { transform: translateX(130%); opacity: 0.0; }
+      100% { transform: translateX(130%); opacity: 0.0; }
+    }
+
+    /* Reduce motion + reduce GPU load */
+    @media (prefers-reduced-motion: reduce) {
+      .bg-orb,
+      .bg-grid,
+      .preview-frame::after,
+      .footer-brand .logo-box,
+      .about-section h2 i,
+      .footer-heart {
+        animation: none !important;
+      }
+      .reveal {
+        transition: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+      }
+      .preview-board {
+        transition: none !important;
+        transform: none !important;
+      }
+    }
+
+    .preview-meta {
+      position: relative;
+      z-index: 1;
+    }
+
+    .preview-title {
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .preview-subtitle {
+      font-size: 12px;
+      color: #94a3b8;
+      line-height: 1.6;
+    }
+
+    .preview-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .preview-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      color: #cbd5e1;
+      font-size: 12px;
+      cursor: pointer;
+      transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .preview-pill:hover {
+      transform: translateY(-1px);
+      background: rgba(124,58,237,0.10);
+      border-color: rgba(124,58,237,0.25);
+    }
+
+    .preview-pill.active {
+      background: linear-gradient(135deg, rgba(79,70,229,0.35), rgba(124,58,237,0.25));
+      border-color: rgba(124,58,237,0.40);
+      color: #ffffff;
+    }
+
+    .preview-status {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #a78bfa;
+    }
+
+    @media (max-width: 560px) {
+      .preview-board {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+      }
+    }
+
+    /* ABOUT SECTION */
+    .about-section {
+      padding: 48px 0 32px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .about-section h2 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .about-section h2 i {
+      color: #ef4444;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .about-card {
+      padding: 28px;
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(79, 70, 229, 0.04));
+      border-radius: 20px;
+      border: 1px solid rgba(124, 58, 237, 0.15);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, transparent 50%);
+      transform: rotate(45deg);
+      transition: transform 0.6s ease;
+      opacity: 0;
+    }
+
+    .about-card:hover::before {
+      opacity: 1;
+      transform: rotate(45deg) translate(10%, 10%);
+    }
+
+    .about-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      border-color: rgba(124, 58, 237, 0.4);
+      box-shadow: 0 20px 40px rgba(124, 58, 237, 0.15);
+    }
+
+    .about-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 18px;
+      transition: transform 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-card:hover .about-icon {
+      transform: scale(1.1) rotate(-5deg);
+    }
+
+    .about-card h4 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-card p {
+      font-size: 13px;
+      color: #888;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* FOOTER */
+    .footer {
+      padding: 48px 0;
+      margin-top: 48px;
+      background: linear-gradient(180deg, transparent, rgba(124, 58, 237, 0.05));
+      border-top: 1px solid rgba(255,255,255,0.05);
+      text-align: center;
+      position: relative;
+    }
+
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #7c3aed, transparent);
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 18px;
+      transition: transform 0.3s ease;
+    }
+
+    .footer-brand:hover {
+      transform: scale(1.05);
+    }
+
+    .footer-brand .logo-box {
+      width: 48px;
+      height: 48px;
+      font-size: 11px;
+      animation: none;
+    }
+
+    @keyframes rotateLogo {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .footer-text {
+      font-size: 14px;
+      color: #888;
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #666;
+      flex-wrap: wrap;
+      justify-content: center;
+      text-align: center;
+      flex-direction: column;
+    }
+
+    .footer-links .nowrap { white-space: nowrap; }
+
+    .footer-legal {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      max-width: 100%;
+    }
+
+    .footer-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      border-radius: 0;
+      background: transparent;
+      border: none;
+      color: rgba(226, 232, 240, 0.58);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s ease, text-decoration-color 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .footer-link:hover {
+      transform: none;
+      color: rgba(226, 232, 240, 0.90);
+      text-decoration: underline;
+    }
+
+    .footer-made {
+      color: #777;
+    }
+
+    @media (min-width: 720px) {
+      .footer-links {
+        flex-direction: row;
+        gap: 14px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .footer-links { gap: 12px; }
+      .footer-link { width: auto; }
+      .footer-legal { width: 100%; justify-content: center; }
+    }
+
+    .footer-heart {
+      color: #ef4444;
+      animation: heartbeat 1.5s ease-in-out infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      padding: 12px 20px;
+      background: #1a1a2e;
+      color: #fff;
+      border-radius: 10px;
+      font-size: 13px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      z-index: 1000;
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Background animation */
+    .bg-gradient {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      z-index: -1;
+      background: radial-gradient(circle at 20% 20%, rgba(79, 70, 229, 0.08) 0%, transparent 40%),
+                  radial-gradient(circle at 80% 80%, rgba(124, 58, 237, 0.06) 0%, transparent 40%);
+      animation: bgPulse 20s ease-in-out infinite;
+    }
+
+    @keyframes bgPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    /* Floating Shapes Background */
+    .floating-shapes {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .floating-shape {
+      position: absolute;
+      opacity: 0.05;
+      animation: floatShape 20s infinite ease-in-out;
+    }
+
+    .floating-shape:nth-child(1) {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      border-radius: 50%;
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+      animation-duration: 25s;
+    }
+
+    .floating-shape:nth-child(2) {
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, #7c3aed, #ec4899);
+      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      top: 70%;
+      left: 80%;
+      animation-delay: -5s;
+      animation-duration: 30s;
+    }
+
+    .floating-shape:nth-child(3) {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #10b981, #3b82f6);
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+      top: 30%;
+      right: 15%;
+      animation-delay: -10s;
+      animation-duration: 22s;
+    }
+
+    .floating-shape:nth-child(4) {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, #f59e0b, #ef4444);
+      clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+      bottom: 20%;
+      left: 20%;
+      animation-delay: -7s;
+      animation-duration: 28s;
+    }
+
+    .floating-shape:nth-child(5) {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #06b6d4, #8b5cf6);
+      border-radius: 20%;
+      top: 50%;
+      left: 50%;
+      animation-delay: -12s;
+      animation-duration: 35s;
+    }
+
+    .floating-shape:nth-child(6) {
+      width: 90px;
+      height: 90px;
+      background: linear-gradient(135deg, #ec4899, #f97316);
+      clip-path: polygon(50% 0%, 100% 38%, 81% 100%, 19% 100%, 0% 38%);
+      top: 80%;
+      left: 40%;
+      animation-delay: -3s;
+      animation-duration: 26s;
+    }
+
+    @keyframes floatShape {
+      0%, 100% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+      }
+      25% {
+        transform: translate(30px, -40px) rotate(90deg) scale(1.1);
+      }
+      50% {
+        transform: translate(-20px, 30px) rotate(180deg) scale(0.9);
+      }
+      75% {
+        transform: translate(40px, 20px) rotate(270deg) scale(1.05);
+      }
+    }
+
+    /* Glowing orbs */
+    .glow-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: -1;
+      animation: orbGlow 8s ease-in-out infinite;
+    }
+
+    .glow-orb-1 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(79, 70, 229, 0.3), transparent 70%);
+      top: -100px;
+      left: -100px;
+      animation-delay: 0s;
+    }
+
+    .glow-orb-2 {
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.25), transparent 70%);
+      bottom: -50px;
+      right: -50px;
+      animation-delay: -4s;
+    }
+
+    .glow-orb-3 {
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.15), transparent 70%);
+      top: 50%;
+      left: 30%;
+      animation-delay: -2s;
+    }
+
+    @keyframes orbGlow {
+      0%, 100% {
+        opacity: 0.5;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.8;
+        transform: scale(1.2);
+      }
+    }
+
+    /* Grid pattern overlay */
+    .grid-pattern {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: gridMove 30s linear infinite;
+    }
+
+    @keyframes gridMove {
+      0% { background-position: 0 0; }
+      100% { background-position: 50px 50px; }
+    }
+
+    /* Header entrance */
+    .header {
+      height: 64px;
+      background: rgba(15, 15, 26, 0.95);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      animation: slideDown 0.6s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Logo animation */
+    .logo-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      animation: none;
+      box-shadow: none;
+    }
+
+    @keyframes logoSpin {
+      from { transform: rotate(-180deg) scale(0); opacity: 0; }
+      to { transform: rotate(0deg) scale(1); opacity: 1; }
+    }
+
+    @keyframes logoPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.4); }
+      50% { box-shadow: 0 0 20px 5px rgba(124, 58, 237, 0.2); }
+    }
+
+    /* Button hover effects */
+    .btn-primary {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(79, 70, 229, 0.5);
+    }
+
+    /* Section entrance animations */
+    .projects-section {
+      margin-bottom: 48px;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    .features-section {
+      padding: 32px 0;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      animation: fadeInUp 0.8s ease-out 0.4s both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* New project card animation */
+    .new-project-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(124, 58, 237, 0.05));
+      border: 2px dashed rgba(124, 58, 237, 0.3);
+      border-radius: 16px;
+      text-decoration: none;
+      color: #a5b4fc;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .new-project-card::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.3), transparent 70%);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+      border-radius: 50%;
+    }
+
+    .new-project-card:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .new-project-card:hover {
+      border-color: #7c3aed;
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(124, 58, 237, 0.2);
+    }
+
+    .new-project-card:hover .icon {
+      transform: rotate(90deg) scale(1.2);
+      background: rgba(124, 58, 237, 0.4);
+    }
+
+    .new-project-card .icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(124, 58, 237, 0.2);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      z-index: 1;
+    }
+
+    .new-project-card .text {
+      font-weight: 600;
+      font-size: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Project card stagger animation */
+    .project-card {
+      background: #1a1a2e;
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 1px solid rgba(255,255,255,0.05);
+      animation: cardEntrance 0.6s ease-out both;
+    }
+
+    @keyframes cardEntrance {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 30px rgba(124, 58, 237, 0.15);
+      border-color: rgba(124, 58, 237, 0.4);
+    }
+
+    .project-preview {
+      height: 140px;
+      background: linear-gradient(135deg, #232336, #1a1a2e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-preview::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 0deg, transparent, rgba(124, 58, 237, 0.1), transparent 30%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      animation: rotateConic 3s linear infinite paused;
+    }
+
+    .project-card:hover .project-preview::before {
+      opacity: 1;
+      animation-play-state: running;
+    }
+
+    @keyframes rotateConic {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Feature cards stagger */
+    .feature-card {
+      padding: 20px;
+      background: rgba(255,255,255,0.02);
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), transparent);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .feature-card:hover::before {
+      opacity: 1;
+    }
+
+    .feature-card:hover {
+      background: rgba(255,255,255,0.05);
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+      border-color: rgba(124, 58, 237, 0.3);
+    }
+
+    .feature-card:hover h4 i {
+      transform: scale(1.3) rotate(10deg);
+    }
+
+    .feature-card h4 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .feature-card h4 i {
+      color: #7c3aed;
+      width: 20px;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .feature-card p {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.5;
+      padding-left: 30px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Particles effect container */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(124, 58, 237, 0.5);
+      border-radius: 50%;
+      animation: particleFloat 15s infinite linear;
+    }
+
+    @keyframes particleFloat {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    /* Toast animation improved */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      padding: 12px 20px;
+      background: linear-gradient(135deg, #1a1a2e, #2a2a4e);
+      color: #fff;
+      border-radius: 10px;
+      font-size: 13px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      z-index: 1000;
+      animation: toastIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 1px solid rgba(124, 58, 237, 0.3);
+    }
+
+    @keyframes toastIn {
+      from {
+        transform: translateX(100%) scale(0.5);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+      }
+    }
+
+    /* Section title animation */
+    .section-header h2, .features-section h2 {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-header h2::after, .features-section > h2::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #7c3aed, transparent);
+      animation: underlineGrow 1s ease-out 0.8s forwards;
+    }
+
+    @keyframes underlineGrow {
+      to { width: 100%; }
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        padding: 0 16px;
+      }
+      .header h1 {
+        font-size: 16px;
+      }
+      .main {
+        padding: 20px 16px;
+        margin: 0;
+        border-radius: 0;
+      }
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      .projects-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 12px;
+      }
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+      .preview-board {
+        grid-template-columns: 1fr;
+        padding: 16px;
+      }
+      .hero-title {
+        font-size: 24px;
+      }
+      .hero-subtitle {
+        font-size: 14px;
+      }
+      .btn-lg {
+        padding: 12px 20px;
+        font-size: 13px;
+      }
+      .hero-actions {
+        flex-direction: column;
+        gap: 12px;
+      }
+      .hero-actions .btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .footer {
+        padding: 32px 16px;
+      }
+      .footer-brand {
+        font-size: 16px;
+      }
+      .footer-text {
+        font-size: 12px;
+        text-align: center;
+      }
+      .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        font-size: 11px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .hero-title {
+        font-size: 20px;
+      }
+      .typing-text {
+        min-width: 0;
+      }
+      .stat-card {
+        padding: 12px;
+      }
+      .stat-number {
+        font-size: 20px;
+      }
+      .stat-label {
+        font-size: 11px;
+      }
+      .project-preview {
+        height: 100px;
+      }
+      .new-project-card {
+        padding: 24px 16px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        background: #05060d;
+      }
+
+      .header {
+        padding: 0 16px;
+        height: 56px;
+      }
+
+      /* Mobile header: language picker as globe icon only */
+      .lang-picker {
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        border-radius: 12px;
+        justify-content: center;
+        gap: 0;
+        position: relative;
+      }
+
+      .lang-picker i {
+        font-size: 16px;
+      }
+
+      .lang-select {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        -webkit-appearance: none;
+        appearance: none;
+      }
+
+      .hero-section {
+        grid-template-columns: 1fr;
+        padding: 32px 20px 16px;
+        gap: 24px;
+      }
+
+      .hero-visual {
+        justify-content: flex-start;
+      }
+
+      .hero-qr-demo {
+        width: 180px;
+        height: 180px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .main {
+        padding: 20px;
+        margin: 0;
+        border-radius: 16px;
+      }
+
+      .projects-grid,
+      .features-grid,
+      .about-grid,
+      .preview-board {
+        grid-template-columns: 1fr;
+      }
+
+      .features-grid {
+        gap: 16px;
+      }
+
+      .feature-card,
+      .about-card {
+        padding: 18px;
+      }
+
+      .preview-board {
+        padding: 16px;
+        gap: 18px;
+      }
+
+      .particles {
+        display: none;
+      }
+
+      .footer {
+        padding: 32px 16px;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 4px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Animated Background Effects -->
+  <div class="bg-effects">
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+  </div>
+  <div class="bg-grid"></div>
+  <div class="particles" id="particles"></div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-left">
+      <a href="index.html" class="logo-box"><img src="/immersive/qrio/static/logo/logo.png" alt="Qrio"></a>
+      <h1>Qrio</h1>
+    </div>
+    <div class="header-right">
+      <button type="button" class="lang-picker" id="lang-btn" aria-label="Language" aria-haspopup="dialog" aria-expanded="false">
+        <i class="fa-solid fa-globe"></i>
+        <span id="lang-label" class="lang-label">English</span>
+      </button>
+      <select id="lang-select" class="lang-native" aria-hidden="true" tabindex="-1">
+        <option value="en">English</option>
+        <option value="zh">中文</option>
+        <option value="hi">हिन्दी</option>
+        <option value="es">Español</option>
+        <option value="fr">Français</option>
+        <option value="ar">العربية</option>
+        <option value="pt">Português</option>
+        <option value="ru">Русский</option>
+        <option value="id">Bahasa Indonesia</option>
+        <option value="vi">Tiếng Việt</option>
+      </select>
+      <a href="edit.html" class="btn btn-primary" onclick="createNewProject(event)">
+        <i class="fa-solid fa-plus"></i>
+        <span data-i18n="home.createNew">Tạo mới</span>
+      </a>
+    </div>
+  </header>
+
+  <div class="lang-modal-overlay" id="lang-modal" aria-hidden="true">
+    <div class="lang-modal" role="dialog" aria-modal="true">
+      <div class="lang-modal-header">
+        <div class="lang-modal-title">Language</div>
+        <button type="button" class="lang-modal-close" id="lang-modal-close" aria-label="Close">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="lang-modal-body" id="lang-modal-list"></div>
+    </div>
+  </div>
+
+  <div class="lang-modal-overlay" id="project-modal" aria-hidden="true">
+    <div class="lang-modal project-modal" role="dialog" aria-modal="true">
+      <div class="lang-modal-header">
+        <div class="lang-modal-title" data-i18n="projectType.title">Tạo dự án mới</div>
+        <button type="button" class="lang-modal-close" id="project-modal-close" aria-label="Close">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="lang-modal-body">
+        <div class="project-modal-hero" aria-hidden="true">
+          <div class="project-modal-qr">
+            <svg viewBox="0 0 220 220" class="project-modal-qr-svg">
+              <rect x="10" y="10" width="200" height="200" rx="26" fill="#0f0f1a" />
+              <rect x="28" y="28" width="54" height="54" rx="12" fill="#7c3aed" opacity="0.95" />
+              <rect x="138" y="28" width="54" height="54" rx="12" fill="#4f46e5" opacity="0.9" />
+              <rect x="28" y="138" width="54" height="54" rx="12" fill="#7c3aed" opacity="0.9" />
+              <rect x="98" y="96" width="24" height="24" rx="6" fill="#ffffff" opacity="0.9" />
+              <rect x="130" y="96" width="18" height="18" rx="5" fill="#a78bfa" opacity="0.9" />
+              <rect x="98" y="130" width="18" height="18" rx="5" fill="#a78bfa" opacity="0.75" />
+              <rect x="130" y="130" width="24" height="24" rx="6" fill="#ffffff" opacity="0.75" />
+              <text x="110" y="116" text-anchor="middle" fill="#0f0f1a" font-size="12" font-weight="900">QR</text>
+            </svg>
+            <div class="project-modal-qr-glow"></div>
+          </div>
+          <div class="project-modal-copy">
+            <div class="project-modal-sub" data-i18n="projectType.subtitle">Chọn loại dự án bạn muốn tạo</div>
+            <div class="project-modal-hint" data-i18n="projectType.hint">Bạn có thể tạo vé bán hàng hoặc tạo QR tuỳ chỉnh.</div>
+          </div>
+        </div>
+
+        <button type="button" class="lang-modal-item project-choice" id="project-choice-ticket">
+          <i class="fa-solid fa-ticket" aria-hidden="true"></i>
+          <span data-i18n="projectType.ticket">Tạo vé</span>
+        </button>
+        <button type="button" class="lang-modal-item project-choice" id="project-choice-qr">
+          <i class="fa-solid fa-qrcode" aria-hidden="true"></i>
+          <span data-i18n="projectType.qr">Tạo QR tuỳ chỉnh</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="hero-badge" data-i18n="home.badge">✨ Miễn phí mãi mãi</div>
+      <h1 class="hero-title">
+        <span data-i18n="home.titlePrefix">Tạo mã</span> <span class="title-nowrap">QR&nbsp;<span class="typing-text" id="typing-text"></span></span>
+      </h1>
+      <p class="hero-subtitle" data-i18n="home.subtitle">Thiết kế mã QR chuyên nghiệp với 100+ kiểu dáng, 150+ font chữ và xuất ảnh chất lượng cao.</p>
+      <div class="hero-actions">
+        <a href="edit.html" class="btn btn-primary btn-lg" onclick="createNewProject(event)">
+          <i class="fa-solid fa-rocket"></i> <span data-i18n="home.startNow">Bắt đầu ngay</span>
+        </a>
+        <a href="scan.html" class="btn btn-secondary">
+          <i class="fa-solid fa-qrcode"></i> <span data-i18n="home.scanQr">Quét QR</span>
+        </a>
+        <a href="#features" class="btn btn-secondary" id="features-anchor">
+          <i class="fa-solid fa-play"></i> <span data-i18n="home.viewFeatures">Xem tính năng</span>
+        </a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-qr-demo">
+        <svg viewBox="0 0 200 200" class="demo-qr">
+          <rect x="10" y="10" width="180" height="180" rx="20" fill="#1a1a2e"/>
+          <rect x="25" y="25" width="45" height="45" rx="8" fill="#7c3aed"/>
+          <rect x="130" y="25" width="45" height="45" rx="8" fill="#7c3aed"/>
+          <rect x="25" y="130" width="45" height="45" rx="8" fill="#7c3aed"/>
+          <circle cx="100" cy="100" r="25" fill="#4f46e5"/>
+          <text x="100" y="105" text-anchor="middle" fill="white" font-size="12" font-weight="bold">QR</text>
+        </svg>
+        <div class="qr-glow"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS COUNTER
+  <section class="stats-section">
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fa-solid fa-qrcode"></i></div>
+      <div class="stat-number" data-target="10000">0</div>
+      <div class="stat-label">Mã QR đã tạo</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+      <div class="stat-number" data-target="5000">0</div>
+      <div class="stat-label">Người dùng</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fa-solid fa-shapes"></i></div>
+      <div class="stat-number" data-target="100">0</div>
+      <div class="stat-label">Kiểu thiết kế</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon"><i class="fa-solid fa-star"></i></div>
+      <div class="stat-number" data-target="99">0</div>
+      <div class="stat-label">% Hài lòng</div>
+    </div>
+  </section>
+  -->
+
+  <!-- MAIN CONTENT -->
+  <main class="main" style="position:relative;z-index:1;">
+    <!-- PROJECTS SECTION -->
+    <section class="projects-section">
+      <div class="section-header">
+        <h2><i class="fa-solid fa-folder-open"></i> <span data-i18n="projects.title">Dự án của bạn</span></h2>
+        <div class="section-actions" id="section-actions" style="display:none;">
+          <button class="btn" style="background:rgba(239,68,68,0.2);color:#ef4444;" id="delete-selected-btn">
+            <i class="fa-solid fa-trash"></i> <span data-i18n="projects.deleteSelected">Xóa đã chọn</span> (<span id="selected-count">0</span>)
+          </button>
+          <button class="btn" style="background:rgba(255,255,255,0.1);color:#888;" id="cancel-select-btn">
+            <span data-i18n="common.cancel">Hủy</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="projects-grid" id="projects-grid">
+        <a href="edit.html" class="new-project-card" onclick="createNewProject(event)">
+          <div class="icon"><i class="fa-solid fa-plus"></i></div>
+          <div class="text" data-i18n="projects.newProject">Tạo dự án mới</div>
+        </a>
+      </div>
+
+      <div class="empty-state" id="empty-state" style="display: none;">
+        <i class="fa-solid fa-folder-open"></i>
+        <h4 data-i18n="projects.emptyState">Chưa có dự án nào</h4>
+        <p data-i18n="projects.emptyStateDesc">Bấm "Tạo mới" để bắt đầu</p>
+      </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section id="features" class="features-section reveal">
+      <h2><i class="fa-solid fa-sparkles"></i> <span data-i18n="features.title">Tính năng nổi bật</span></h2>
+      <div class="features-grid">
+        <div class="feature-card reveal reveal-delay-1">
+          <h4><i class="fa-solid fa-palette"></i> <span data-i18n="features.color.title">Tùy chỉnh màu sắc</span></h4>
+          <p data-i18n="features.color.desc">Thay đổi màu mã QR và nền theo thương hiệu của bạn.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-2">
+          <h4><i class="fa-solid fa-image"></i> <span data-i18n="features.logo.title">Thêm logo</span></h4>
+          <p data-i18n="features.logo.desc">Chèn logo vào giữa mã QR mà vẫn đảm bảo quét được.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-3">
+          <h4><i class="fa-solid fa-shapes"></i> <span data-i18n="features.shapes.title">100+ Hình dạng</span></h4>
+          <p data-i18n="features.shapes.desc">Vuông, tròn, ngôi sao, mũi tên và nhiều hơn nữa.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-1">
+          <h4><i class="fa-solid fa-font"></i> <span data-i18n="features.fonts.title">150+ Font chữ</span></h4>
+          <p data-i18n="features.fonts.desc">Thêm văn bản với hơn 150 font đẹp từ Google Fonts.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-2">
+          <h4><i class="fa-solid fa-download"></i> <span data-i18n="features.export.title">Xuất HD</span></h4>
+          <p data-i18n="features.export.desc">Tải xuống PNG, JPG, SVG với độ phân giải tùy chỉnh lên đến 4K.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-3">
+          <h4><i class="fa-solid fa-cloud"></i> <span data-i18n="features.autosave.title">Lưu tự động</span></h4>
+          <p data-i18n="features.autosave.desc">Dự án tự động lưu mỗi 10 giây, không lo mất dữ liệu.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREVIEW SECTION -->
+    <section class="preview-section reveal">
+      <h2><i class="fa-solid fa-qrcode"></i> <span data-i18n="preview.title">Xem trước</span></h2>
+      <div class="preview-board">
+        <div class="preview-frame" aria-label="QR preview">
+          <svg id="preview-qr" viewBox="0 0 210 210" width="112" height="112" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="QR sample"></svg>
+        </div>
+        <div class="preview-meta">
+          <div class="preview-title" data-i18n="preview.boardTitle">Bảng preview mã QR</div>
+          <div class="preview-subtitle" data-i18n="preview.boardSubtitle">Chọn thử màu/kiểu chấm/logo để xem trước cảm giác thiết kế.</div>
+          <div class="preview-controls" aria-label="Preview controls">
+            <div class="preview-pill active" data-preview-theme="purple"><i class="fa-solid fa-droplet"></i> <span data-i18n="preview.purple">Tím</span></div>
+            <div class="preview-pill" data-preview-theme="blue"><i class="fa-solid fa-droplet"></i> <span data-i18n="preview.blue">Xanh</span></div>
+            <div class="preview-pill" data-preview-theme="green"><i class="fa-solid fa-droplet"></i> <span data-i18n="preview.green">Lục</span></div>
+            <div class="preview-pill active" data-preview-style="rounded"><i class="fa-solid fa-border-all"></i> <span data-i18n="preview.rounded">Bo</span></div>
+            <div class="preview-pill" data-preview-style="square"><i class="fa-solid fa-border-none"></i> <span data-i18n="preview.square">Vuông</span></div>
+            <div class="preview-pill" data-preview-logo="on"><i class="fa-solid fa-image"></i> <span data-i18n="preview.logo">Logo</span></div>
+          </div>
+          <div class="preview-status" id="preview-status" data-i18n="preview.status">Đang preview: Tím • Bo • Không logo</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about-section reveal">
+      <h2><i class="fa-solid fa-heart"></i> <span data-i18n="about.title">Về Chúng tôi</span></h2>
+      <div class="about-grid">
+        <div class="about-card reveal reveal-delay-1">
+          <div class="about-icon"><i class="fa-solid fa-bullseye"></i></div>
+          <h4 data-i18n="about.card1.title">Mục tiêu dự án</h4>
+          <p data-i18n="about.card1.body">Tạo ra công cụ thiết kế mã QR miễn phí, đẹp mắt và dễ sử dụng cho mọi người. Chúng tôi tin rằng mã QR không chỉ là công nghệ, mà còn là nghệ thuật.</p>
+        </div>
+        <div class="about-card reveal reveal-delay-2">
+          <div class="about-icon"><i class="fa-solid fa-code"></i></div>
+          <h4 data-i18n="about.card2.title">Công nghệ sử dụng</h4>
+          <p data-i18n="about.card2.body">Xây dựng bằng HTML5 Canvas, JavaScript thuần và Python Flask. Sử dụng thư viện qrcode-svg để tạo mã QR chất lượng cao.</p>
+        </div>
+        <div class="about-card reveal reveal-delay-3">
+          <div class="about-icon"><i class="fa-solid fa-rocket"></i></div>
+          <h4 data-i18n="about.card3.title">Liên tục cập nhật</h4>
+          <p data-i18n="about.card3.body">Dự án được phát triển liên tục với các tính năng mới. Đóng góp ý tưởng và phản hồi luôn được hoan nghênh!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer reveal">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="logo-box"><img src="/immersive/qrio/static/logo/logo.png" alt="Qrio"></div>
+          <span>Qrio</span>
+        </div>
+        <p class="footer-text" data-i18n="footer.tagline">Công cụ thiết kế mã QR miễn phí • Tạo mã QR đẹp chỉ trong vài giây</p>
+        <div class="footer-links">
+          <span class="nowrap">© 2025 Qrio</span>
+          <span class="footer-legal" aria-label="Legal">
+            <a class="footer-link" href="terms.html" data-i18n="footer.terms">Điều khoản sử dụng</a>
+            <a class="footer-link" href="privacy.html" data-i18n="footer.privacy">Chính sách bảo mật</a>
+            <a class="footer-link" href="disclaimer.html" data-i18n="footer.disclaimer">Miễn trừ trách nhiệm</a>
+            <a class="footer-link" href="about.html" data-i18n="footer.about">Về chúng tôi</a>
+            <a class="footer-link" href="contact.html" data-i18n="footer.contact">Liên hệ</a>
+          </span>
+          <span class="footer-made" data-i18n="footer.madeWith">Made with  <i class="fa-solid fa-heart footer-heart"></i>  in Vietnam</span>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const LANG_KEY = 'qr_lang';
+
+    const I18N = {
+      vi: {
+        'doc.title': 'Qrio - Tạo mã QR miễn phí, đẹp mắt',
+        'home.createNew': 'Tạo mới',
+        'projectType.title': 'Tạo dự án mới',
+        'projectType.subtitle': 'Chọn loại dự án bạn muốn tạo',
+        'projectType.hint': 'Bạn có thể tạo vé bán hàng hoặc tạo QR tuỳ chỉnh.',
+        'projectType.ticket': 'Tạo vé',
+        'projectType.qr': 'Tạo QR tuỳ chỉnh',
+        'home.badge': '✨ Miễn phí mãi mãi',
+        'home.titlePrefix': 'Tạo mã',
+        'home.subtitle': 'Thiết kế mã QR chuyên nghiệp với 100+ kiểu dáng, 150+ font chữ và xuất ảnh chất lượng cao.',
+        'home.startNow': 'Bắt đầu ngay',
+        'home.viewFeatures': 'Xem tính năng',
+        'home.scanQr': 'Quét QR',
+        'projects.title': 'Dự án của bạn',
+        'projects.deleteSelected': 'Xóa đã chọn',
+        'projects.newProject': 'Tạo dự án mới',
+        'projects.emptyState': 'Chưa có dự án nào',
+        'projects.emptyStateDesc': 'Bấm "Tạo mới" để bắt đầu',
+        'projects.copy': 'Sao chép',
+        'common.cancel': 'Hủy',
+        'confirm.deleteSelected': 'Xóa {count} dự án đã chọn?',
+        'confirm.deleteOne': 'Xóa dự án này?',
+        'toast.deletedCount': 'Đã xóa {count} dự án',
+        'toast.deleted': 'Đã xóa',
+        'toast.copied': 'Đã sao chép',
+        'project.newName': 'Dự án mới',
+        'project.copySuffix': ' (sao chép)',
+        'time.justNow': 'Vừa xong',
+        'time.minutesAgo': '{count} phút trước',
+        'time.hoursAgo': '{count} giờ trước',
+        'time.daysAgo': '{count} ngày trước',
+        'about.title': 'Về Chúng tôi',
+        'about.card1.title': 'Mục tiêu dự án',
+        'about.card1.body': 'Tạo ra công cụ thiết kế mã QR miễn phí, đẹp mắt và dễ sử dụng cho mọi người. Chúng tôi tin rằng mã QR không chỉ là công nghệ, mà còn là nghệ thuật.',
+        'about.card2.title': 'Công nghệ sử dụng',
+        'about.card2.body': 'Xây dựng bằng HTML5 Canvas, JavaScript thuần và Python Flask. Sử dụng thư viện qrcode-svg để tạo mã QR chất lượng cao.',
+        'about.card3.title': 'Liên tục cập nhật',
+        'about.card3.body': 'Dự án được phát triển liên tục với các tính năng mới. Đóng góp ý tưởng và phản hồi luôn được hoan nghênh!',
+        'footer.tagline': 'Công cụ thiết kế mã QR miễn phí • Tạo mã QR đẹp chỉ trong vài giây',
+        'footer.terms': 'Điều khoản sử dụng',
+        'footer.privacy': 'Chính sách bảo mật',
+        'footer.disclaimer': 'Miễn trừ trách nhiệm',
+        'footer.about': 'Về chúng tôi',
+        'footer.contact': 'Liên hệ',
+        'footer.madeWith': 'Made with <i class="fa-solid fa-heart footer-heart"></i> in Vietnam',
+        'typing.words': ['đẹp mắt', 'miễn phí', 'nhanh chóng', 'sáng tạo', 'đa dạng', 'hiện đại'],
+        'features.title': 'Tính năng nổi bật',
+        'features.color.title': 'Tùy chỉnh màu sắc',
+        'features.color.desc': 'Thay đổi màu mã QR và nền theo thương hiệu của bạn.',
+        'features.logo.title': 'Thêm logo',
+        'features.logo.desc': 'Chèn logo vào giữa mã QR mà vẫn đảm bảo quét được.',
+        'features.shapes.title': '100+ Hình dạng',
+        'features.shapes.desc': 'Vuông, tròn, ngôi sao, mũi tên và nhiều hơn nữa.',
+        'features.fonts.title': '150+ Font chữ',
+        'features.fonts.desc': 'Thêm văn bản với hơn 150 font đẹp từ Google Fonts.',
+        'features.export.title': 'Xuất HD',
+        'features.export.desc': 'Tải xuống PNG, JPG, SVG với độ phân giải tùy chỉnh lên đến 4K.',
+        'features.autosave.title': 'Lưu tự động',
+        'features.autosave.desc': 'Dự án tự động lưu mỗi 10 giây, không lo mất dữ liệu.',
+        'preview.title': 'Xem trước',
+        'preview.boardTitle': 'Bảng preview mã QR',
+        'preview.boardSubtitle': 'Chọn thử màu/kiểu chấm/logo để xem trước cảm giác thiết kế.',
+        'preview.purple': 'Tím',
+        'preview.blue': 'Xanh',
+        'preview.green': 'Lục',
+        'preview.rounded': 'Bo',
+        'preview.square': 'Vuông',
+        'preview.logo': 'Logo',
+        'preview.status': 'Đang preview: Tím • Bo • Không logo',
+        'preview.statusTemplate': 'Đang preview: {theme} • {style} • {logo}',
+        'preview.withLogo': 'Có logo',
+        'preview.noLogo': 'Không logo',
+      },
+      en: {
+        'doc.title': 'Qrio - Free QR Code Generator',
+        'home.createNew': 'New',
+        'projectType.title': 'Create new project',
+        'projectType.subtitle': 'Choose what you want to create',
+        'projectType.hint': 'Create tickets to sell, or design a custom QR.',
+        'projectType.ticket': 'Create tickets',
+        'projectType.qr': 'Custom QR',
+        'home.badge': '✨ Free forever',
+        'home.titlePrefix': 'Create',
+        'home.subtitle': 'Design professional QR codes with 100+ styles, 150+ fonts, and high-quality exports.',
+        'home.startNow': 'Start now',
+        'home.viewFeatures': 'View features',
+        'home.scanQr': 'Scan QR',
+        'projects.title': 'Your projects',
+        'projects.deleteSelected': 'Delete selected',
+        'projects.newProject': 'Create new project',
+        'projects.copy': 'Duplicate',
+        'common.cancel': 'Cancel',
+        'confirm.deleteSelected': 'Delete {count} selected project(s)?',
+        'confirm.deleteOne': 'Delete this project?',
+        'toast.deletedCount': 'Deleted {count} project(s)',
+        'toast.deleted': 'Deleted',
+        'toast.copied': 'Duplicated',
+        'project.newName': 'New project',
+        'projects.emptyState': 'No projects yet',
+        'projects.emptyStateDesc': 'Click "New" to get started',
+        'project.copySuffix': ' (copy)',
+        'time.justNow': 'Just now',
+        'time.minutesAgo': '{count} min ago',
+        'time.hoursAgo': '{count} hr ago',
+        'time.daysAgo': '{count} day(s) ago',
+        'about.title': 'About us',
+        'about.card1.title': 'Our mission',
+        'about.card1.body': 'Build a free, beautiful, and easy QR design tool for everyone. We believe QR codes are not just technology, but also art.',
+        'about.card2.title': 'Technology',
+        'about.card2.body': 'Built with HTML5 Canvas, vanilla JavaScript, and Python Flask. Uses qrcode-svg to generate high-quality QR.',
+        'about.card3.title': 'Always improving',
+        'about.card3.body': 'We continuously ship new features. Ideas and feedback are always welcome!',
+        'footer.tagline': 'Free QR design tool • Create beautiful QR codes in seconds',
+        'footer.terms': 'Terms of Service',
+        'footer.privacy': 'Security Policy',
+        'footer.disclaimer': 'Disclaimer',
+        'footer.about': 'About Us',
+        'footer.contact': 'Contact',
+        'footer.madeWith': 'Made with  <i class="fa-solid fa-heart footer-heart"></i>  in Vietnam',
+        'typing.words': ['beautiful', 'free', 'fast', 'creative', 'flexible', 'modern'],
+        'features.title': 'Key Features',
+        'features.color.title': 'Custom Colors',
+        'features.color.desc': 'Change QR code and background colors to match your brand.',
+        'features.logo.title': 'Add Logo',
+        'features.logo.desc': 'Insert your logo in the center while keeping it scannable.',
+        'features.shapes.title': '100+ Shapes',
+        'features.shapes.desc': 'Square, rounded, star, arrow, and many more styles.',
+        'features.fonts.title': '150+ Fonts',
+        'features.fonts.desc': 'Add text with 150+ beautiful fonts from Google Fonts.',
+        'features.export.title': 'HD Export',
+        'features.export.desc': 'Download PNG, JPG, SVG with custom resolution up to 4K.',
+        'features.autosave.title': 'Auto Save',
+        'features.autosave.desc': 'Projects auto-save every 10 seconds. Never lose your work.',
+        'preview.title': 'Live Preview',
+        'preview.boardTitle': 'QR Preview Board',
+        'preview.boardSubtitle': 'Try different colors, styles, and logos to see how your design looks.',
+        'preview.purple': 'Purple',
+        'preview.blue': 'Blue',
+        'preview.green': 'Green',
+        'preview.rounded': 'Rounded',
+        'preview.square': 'Square',
+        'preview.logo': 'Logo',
+        'preview.status': 'Preview: Purple • Rounded • No logo',
+        'preview.statusTemplate': 'Preview: {theme} • {style} • {logo}',
+        'preview.withLogo': 'With logo',
+        'preview.noLogo': 'No logo',
+      },
+      zh: {
+        'doc.title': 'Qrio - 免费二维码生成器',
+        'home.createNew': '新建',
+        'projectType.title': '创建新项目',
+        'projectType.subtitle': '选择要创建的内容',
+        'projectType.hint': '你可以创建售票项目，或设计自定义二维码。',
+        'projectType.ticket': '创建门票',
+        'projectType.qr': '自定义二维码',
+        'home.badge': '✨ 永久免费',
+        'home.titlePrefix': '创建',
+        'home.subtitle': '使用 100+ 风格、150+ 字体，快速设计专业二维码并导出高清图片。',
+        'home.startNow': '立即开始',
+        'home.viewFeatures': '查看功能',
+        'home.scanQr': '扫描二维码',
+        'projects.title': '你的项目',
+        'projects.deleteSelected': '删除所选',
+        'projects.newProject': '创建新项目',
+        'projects.emptyState': '还没有项目',
+        'projects.emptyStateDesc': '点击“新建”开始使用',
+        'projects.copy': '复制',
+        'common.cancel': '取消',
+        'confirm.deleteSelected': '删除已选的 {count} 个项目？',
+        'confirm.deleteOne': '删除该项目？',
+        'toast.deletedCount': '已删除 {count} 个项目',
+        'toast.deleted': '已删除',
+        'toast.copied': '已复制',
+        'project.newName': '新项目',
+        'project.copySuffix': '（副本）',
+        'time.justNow': '刚刚',
+        'time.minutesAgo': '{count} 分钟前',
+        'time.hoursAgo': '{count} 小时前',
+        'time.daysAgo': '{count} 天前',
+        'about.title': '关于我们',
+        'about.card1.title': '项目目标',
+        'about.card1.body': '为每个人打造免费、美观、易用的二维码设计工具。我们相信二维码不仅是技术，也是艺术。',
+        'about.card2.title': '使用技术',
+        'about.card2.body': '基于 HTML5 Canvas、原生 JavaScript 与 Python Flask 构建，并使用 qrcode-svg 生成高质量二维码。',
+        'about.card3.title': '持续更新',
+        'about.card3.body': '项目持续迭代并不断加入新功能。欢迎提出想法与反馈！',
+        'footer.tagline': '免费二维码设计工具 • 几秒钟生成漂亮二维码',
+        'footer.terms': '服务条款',
+        'footer.privacy': '安全政策',
+        'footer.disclaimer': '免责声明',
+        'footer.about': '关于我们',
+        'footer.contact': '联系我们',
+        'footer.madeWith': 'Made with  <i class="fa-solid fa-heart footer-heart"></i>  in Vietnam',
+        'typing.words': ['美观', '免费', '快速', '创意', '多样', '现代'],
+        'features.title': '主要功能',
+        'features.color.title': '自定义颜色',
+        'features.color.desc': '更改二维码和背景颜色以匹配您的品牌。',
+        'features.logo.title': '添加Logo',
+        'features.logo.desc': '在中心插入Logo，同时保持可扫描性。',
+        'features.shapes.title': '100+ 形状',
+        'features.shapes.desc': '方形、圆形、星形、箭头等多种样式。',
+        'features.fonts.title': '150+ 字体',
+        'features.fonts.desc': '使用来自 Google Fonts 的 150+ 精美字体添加文本。',
+        'features.export.title': '高清导出',
+        'features.export.desc': '下载 PNG、JPG、SVG，自定义分辨率高达 4K。',
+        'features.autosave.title': '自动保存',
+        'features.autosave.desc': '项目每 10 秒自动保存，永不丢失数据。',
+        'preview.title': '实时预览',
+        'preview.boardTitle': '二维码预览面板',
+        'preview.boardSubtitle': '尝试不同的颜色、样式和Logo，查看设计效果。',
+        'preview.purple': '紫色',
+        'preview.blue': '蓝色',
+        'preview.green': '绿色',
+        'preview.rounded': '圆角',
+        'preview.square': '方形',
+        'preview.logo': 'Logo',
+        'preview.status': '预览: 紫色 • 圆角 • 无Logo',
+        'preview.statusTemplate': '预览: {theme} • {style} • {logo}',
+        'preview.withLogo': '有Logo',
+        'preview.noLogo': '无Logo',
+      },
+      hi: {
+        'doc.title': 'Qrio - मुफ्त QR कोड जनरेटर',
+        'home.createNew': 'नया',
+        'projectType.title': 'नया प्रोजेक्ट बनाएँ',
+        'projectType.subtitle': 'आप क्या बनाना चाहते हैं चुनें',
+        'projectType.hint': 'टिकट बेचने के लिए बनाएं, या कस्टम QR डिज़ाइन करें।',
+        'projectType.ticket': 'टिकट बनाएँ',
+        'projectType.qr': 'कस्टम QR',
+        'home.badge': '✨ हमेशा के लिए मुफ्त',
+        'home.titlePrefix': 'बनाएँ',
+        'home.subtitle': '100+ स्टाइल, 150+ फॉन्ट और हाई-क्वालिटी एक्सपोर्ट के साथ प्रोफेशनल QR कोड डिज़ाइन करें।',
+        'home.startNow': 'अभी शुरू करें',
+        'home.viewFeatures': 'फ़ीचर देखें',
+        'home.scanQr': 'QR स्कैन करें',
+        'projects.title': 'आपके प्रोजेक्ट',
+        'projects.deleteSelected': 'चयनित हटाएँ',
+        'projects.newProject': 'नया प्रोजेक्ट बनाएँ',
+        'projects.emptyState': 'कोई प्रोजेक्ट नहीं है',
+        'projects.emptyStateDesc': '"नया" पर क्लिक करके शुरू करें',
+        'projects.copy': 'डुप्लिकेट',
+        'common.cancel': 'रद्द करें',
+        'confirm.deleteSelected': 'चयनित {count} प्रोजेक्ट हटाएँ?',
+        'confirm.deleteOne': 'यह प्रोजेक्ट हटाएँ?',
+        'toast.deletedCount': '{count} प्रोजेक्ट हटाए गए',
+        'toast.deleted': 'हटा दिया गया',
+        'toast.copied': 'डुप्लिकेट हो गया',
+        'project.newName': 'नया प्रोजेक्ट',
+        'project.copySuffix': ' (कॉपी)',
+        'time.justNow': 'अभी',
+        'time.minutesAgo': '{count} मिनट पहले',
+        'time.hoursAgo': '{count} घंटे पहले',
+        'time.daysAgo': '{count} दिन पहले',
+        'about.title': 'हमारे बारे में',
+        'about.card1.title': 'उद्देश्य',
+        'about.card1.body': 'सभी के लिए एक मुफ्त, सुंदर और आसान QR डिज़ाइन टूल बनाना। हम मानते हैं कि QR सिर्फ तकनीक नहीं, कला भी है।',
+        'about.card2.title': 'तकनीक',
+        'about.card2.body': 'HTML5 Canvas, वैनिला JavaScript और Python Flask से बनाया गया। हाई-क्वालिटी QR के लिए qrcode-svg उपयोग करता है।',
+        'about.card3.title': 'लगातार अपडेट',
+        'about.card3.body': 'हम लगातार नए फीचर जोड़ते हैं। आपके विचार और फीडबैक का स्वागत है!',
+        'footer.tagline': 'मुफ़्त QR डिज़ाइन टूल • सेकंडों में सुंदर QR बनाएँ',
+        'footer.terms': 'सेवा की शर्तें',
+        'footer.privacy': 'सुरक्षा नीति',
+        'footer.disclaimer': 'अस्वीकरण',
+        'footer.about': 'हमारे बारे में',
+        'footer.contact': 'संपर्क करें',
+        'footer.madeWith': 'Made with  <i class="fa-solid fa-heart footer-heart"></i>  in Vietnam',
+        'typing.words': ['सुंदर', 'मुफ़्त', 'तेज़', 'रचनात्मक', 'विविध', 'आधुनिक'],
+        'features.title': 'मुख्य विशेषताएं',
+        'features.color.title': 'कस्टम रंग',
+        'features.color.desc': 'अपने ब्रांड से मिलान के लिए QR और बैकग्राउंड रंग बदलें।',
+        'features.logo.title': 'Logo जोड़ें',
+        'features.logo.desc': 'स्कैन योग्य रखते हुए बीच में Logo डालें।',
+        'features.shapes.title': '100+ आकार',
+        'features.shapes.desc': 'चौकोर, गोल, स्टार, तीर और कई अन्य।',
+        'features.fonts.title': '150+ फॉन्ट',
+        'features.fonts.desc': 'Google Fonts से 150+ सुंदर फॉन्ट के साथ टेक्स्ट जोड़ें।',
+        'features.export.title': 'HD एक्सपोर्ट',
+        'features.export.desc': '4K तक कस्टम रेज़ोल्यूशन में PNG, JPG, SVG डाउनलोड करें।',
+        'features.autosave.title': 'ऑटो सेव',
+        'features.autosave.desc': 'हर 10 सेकंड में ऑटो-सेव। डेटा कभी न खोएं।',
+        'preview.title': 'लाइव प्रीव्यू',
+        'preview.boardTitle': 'QR प्रीव्यू बोर्ड',
+        'preview.boardSubtitle': 'अलग-अलग रंग, स्टाइल और Logo आज़माएं।',
+        'preview.purple': 'बैंगनी',
+        'preview.blue': 'नीला',
+        'preview.green': 'हरा',
+        'preview.rounded': 'गोल',
+        'preview.square': 'चौकोर',
+        'preview.logo': 'Logo',
+        'preview.status': 'प्रीव्यू: बैंगनी • गोल • बिना Logo',
+        'preview.statusTemplate': 'प्रीव्यू: {theme} • {style} • {logo}',
+        'preview.withLogo': 'Logo के साथ',
+        'preview.noLogo': 'बिना Logo',
+      },
+      es: {
+        'doc.title': 'Qrio - Generador de códigos QR gratuito',
+        'home.createNew': 'Nuevo',
+        'projectType.title': 'Crear nuevo proyecto',
+        'projectType.subtitle': 'Elige qué quieres crear',
+        'projectType.hint': 'Crea entradas para vender o diseña un QR personalizado.',
+        'projectType.ticket': 'Crear entradas',
+        'projectType.qr': 'QR personalizado',
+        'home.badge': '✨ Gratis para siempre',
+        'home.titlePrefix': 'Crea',
+        'home.subtitle': 'Diseña códigos QR profesionales con 100+ estilos, 150+ fuentes y exportaciones de alta calidad.',
+        'home.startNow': 'Empezar',
+        'home.viewFeatures': 'Ver funciones',
+        'home.scanQr': 'Escanear QR',
+        'projects.title': 'Tus proyectos',
+        'projects.deleteSelected': 'Eliminar seleccionados',
+        'projects.newProject': 'Crear nuevo proyecto',
+        'projects.emptyState': 'Aún no hay proyectos',
+        'projects.emptyStateDesc': 'Haz clic en "Nuevo" para comenzar',
+        'projects.copy': 'Duplicar',
+        'common.cancel': 'Cancelar',
+        'confirm.deleteSelected': '¿Eliminar {count} proyecto(s) seleccionado(s)?',
+        'confirm.deleteOne': '¿Eliminar este proyecto?',
+        'toast.deletedCount': 'Se eliminaron {count} proyecto(s)',
+        'toast.deleted': 'Eliminado',
+        'toast.copied': 'Duplicado',
+        'project.newName': 'Nuevo proyecto',
+        'project.copySuffix': ' (copia)',
+        'time.justNow': 'Ahora mismo',
+        'time.minutesAgo': 'hace {count} min',
+        'time.hoursAgo': 'hace {count} h',
+        'time.daysAgo': 'hace {count} día(s)',
+        'about.title': 'Acerca de',
+        'about.card1.title': 'Misión',
+        'about.card1.body': 'Crear una herramienta gratuita, bonita y fácil para diseñar QR. Creemos que el QR no es solo tecnología, también es arte.',
+        'about.card2.title': 'Tecnología',
+        'about.card2.body': 'Construido con HTML5 Canvas, JavaScript puro y Python Flask. Usa qrcode-svg para generar QR de alta calidad.',
+        'about.card3.title': 'Mejoras constantes',
+        'about.card3.body': 'Seguimos añadiendo nuevas funciones. ¡Las ideas y comentarios son bienvenidos!',
+        'footer.tagline': 'Herramienta gratis de diseño QR • Crea QR bonitos en segundos',
+        'footer.terms': 'Términos de uso',
+        'footer.privacy': 'Política de seguridad',
+        'footer.disclaimer': 'Descargo de responsabilidad',
+        'footer.about': 'Sobre nosotros',
+        'footer.contact': 'Contacto',
+        'footer.madeWith': 'Made with  <i class="fa-solid fa-heart footer-heart"></i>  in Vietnam',
+        'typing.words': ['bonito', 'gratis', 'rápido', 'creativo', 'variado', 'moderno'],
+        'features.title': 'Funciones principales',
+        'features.color.title': 'Colores personalizados',
+        'features.color.desc': 'Cambia los colores del QR y fondo para tu marca.',
+        'features.logo.title': 'Añadir Logo',
+        'features.logo.desc': 'Inserta tu logo en el centro manteniendo la legibilidad.',
+        'features.shapes.title': '100+ Formas',
+        'features.shapes.desc': 'Cuadrado, redondo, estrella, flecha y muchos más.',
+        'features.fonts.title': '150+ Fuentes',
+        'features.fonts.desc': 'Añade texto con 150+ fuentes de Google Fonts.',
+        'features.export.title': 'Exportar HD',
+        'features.export.desc': 'Descarga PNG, JPG, SVG con resolución hasta 4K.',
+        'features.autosave.title': 'Guardado automático',
+        'features.autosave.desc': 'Guardado automático cada 10 segundos. Nunca pierdas tu trabajo.',
+        'preview.title': 'Vista previa',
+        'preview.boardTitle': 'Panel de vista previa QR',
+        'preview.boardSubtitle': 'Prueba diferentes colores, estilos y logos.',
+        'preview.purple': 'Morado',
+        'preview.blue': 'Azul',
+        'preview.green': 'Verde',
+        'preview.rounded': 'Redondeado',
+        'preview.square': 'Cuadrado',
+        'preview.logo': 'Logo',
+        'preview.status': 'Vista previa: Morado • Redondeado • Sin logo',
+        'preview.statusTemplate': 'Vista previa: {theme} • {style} • {logo}',
+        'preview.withLogo': 'Con logo',
+        'preview.noLogo': 'Sin logo',
+      },
+      fr: {
+        'doc.title': 'Qrio - Générateur de codes QR gratuit',
+        'home.createNew': 'Nouveau',
+        'projectType.title': 'Créer un nouveau projet',
+        'projectType.subtitle': 'Choisissez ce que vous voulez créer',
+        'projectType.hint': 'Créez des billets à vendre ou concevez un QR personnalisé.',
+        'projectType.ticket': 'Créer des billets',
+        'projectType.qr': 'QR personnalisé',
+        'home.badge': '✨ Gratuit pour toujours',
+        'home.titlePrefix': 'Créez',
+        'home.subtitle': 'Concevez des QR codes professionnels avec 100+ styles, 150+ polices et des exports haute qualité.',
+        'home.startNow': 'Commencer',
+        'home.viewFeatures': 'Voir les fonctionnalités',
+        'home.scanQr': 'Scanner un QR',
+        'projects.title': 'Vos projets',
+        'projects.deleteSelected': 'Supprimer la sélection',
+        'projects.newProject': 'Créer un nouveau projet',
+        'projects.emptyState': 'Pas encore de projets',
+        'projects.emptyStateDesc': 'Cliquez sur "Nouveau" pour commencer',
+        'projects.copy': 'Dupliquer',
+        'common.cancel': 'Annuler',
+        'confirm.deleteSelected': 'Supprimer {count} projet(s) sélectionné(s) ?',
+        'confirm.deleteOne': 'Supprimer ce projet ?',
+        'toast.deletedCount': '{count} projet(s) supprimé(s)',
+        'toast.deleted': 'Supprimé',
+        'toast.copied': 'Dupliqué',
+        'project.newName': 'Nouveau projet',
+        'project.copySuffix': ' (copie)',
+        'time.justNow': 'À l’instant',
+        'time.minutesAgo': 'il y a {count} min',
+        'time.hoursAgo': 'il y a {count} h',
+        'time.daysAgo': 'il y a {count} j',
+        'about.title': 'À propos',
+        'about.card1.title': 'Objectif',
+        'about.card1.body': 'Créer un outil gratuit, beau et simple pour concevoir des QR. Pour nous, le QR est aussi un art.',
+        'about.card2.title': 'Technologie',
+        'about.card2.body': 'Construit avec HTML5 Canvas, JavaScript vanilla et Python Flask. Utilise qrcode-svg pour des QR de haute qualité.',
+        'about.card3.title': 'Améliorations continues',
+        'about.card3.body': 'De nouvelles fonctions arrivent régulièrement. Vos idées et retours sont les bienvenus !',
+        'footer.tagline': 'Outil gratuit de design QR • Créez de beaux QR en quelques secondes',
+        'footer.terms': 'Conditions d’utilisation',
+        'footer.privacy': 'Politique de confidentialité',
+        'footer.disclaimer': 'Avertissement',
+        'footer.about': 'À propos',
+        'footer.contact': 'Contact',
+        'footer.madeWith': 'Made with  <i class="fa-solid fa-heart footer-heart"></i>  in Vietnam',
+        'typing.words': ['beau', 'gratuit', 'rapide', 'créatif', 'varié', 'moderne'],
+        'features.title': 'Fonctionnalités clés',
+        'features.color.title': 'Couleurs personnalisées',
+        'features.color.desc': 'Changez les couleurs du QR et du fond selon votre marque.',
+        'features.logo.title': 'Ajouter un logo',
+        'features.logo.desc': 'Insérez votre logo au centre tout en restant scannable.',
+        'features.shapes.title': '100+ Formes',
+        'features.shapes.desc': 'Carré, rond, étoile, flèche et bien plus.',
+        'features.fonts.title': '150+ Polices',
+        'features.fonts.desc': 'Ajoutez du texte avec 150+ polices de Google Fonts.',
+        'features.export.title': 'Export HD',
+        'features.export.desc': 'Téléchargez PNG, JPG, SVG en résolution jusqu\'à 4K.',
+        'features.autosave.title': 'Sauvegarde auto',
+        'features.autosave.desc': 'Sauvegarde automatique toutes les 10 secondes.',
+        'preview.title': 'Aperçu en direct',
+        'preview.boardTitle': 'Panneau d\'aperçu QR',
+        'preview.boardSubtitle': 'Essayez différentes couleurs, styles et logos.',
+        'preview.purple': 'Violet',
+        'preview.blue': 'Bleu',
+        'preview.green': 'Vert',
+        'preview.rounded': 'Arrondi',
+        'preview.square': 'Carré',
+        'preview.logo': 'Logo',
+        'preview.status': 'Aperçu: Violet • Arrondi • Sans logo',
+        'preview.statusTemplate': 'Aperçu: {theme} • {style} • {logo}',
+        'preview.withLogo': 'Avec logo',
+        'preview.noLogo': 'Sans logo',
+      },
+      ar: {
+        'doc.title': ' Qrio - مولد رمز الاستجابة السريعة المجاني',
+        'home.createNew': 'جديد',
+        'projectType.title': 'إنشاء مشروع جديد',
+        'projectType.subtitle': 'اختر ما تريد إنشاءه',
+        'projectType.hint': 'أنشئ تذاكر للبيع أو صمّم رمز QR مخصصًا.',
+        'projectType.ticket': 'إنشاء تذاكر',
+        'projectType.qr': 'QR مخصص',
+        'home.badge': '✨ مجاني للأبد',
+        'home.titlePrefix': 'أنشئ',
+        'home.subtitle': 'صمّم رموز QR احترافية مع أكثر من 100 نمط و150 خطًا وتصدير عالي الجودة.',
+        'home.startNow': 'ابدأ الآن',
+        'home.viewFeatures': 'عرض الميزات',
+        'home.scanQr': 'مسح QR',
+        'projects.title': 'مشاريعك',
+        'projects.deleteSelected': 'حذف المحدد',
+        'projects.newProject': 'إنشاء مشروع جديد',
+        'projects.emptyState': 'لا توجد مشاريع بعد',
+        'projects.emptyStateDesc': 'انقر على "جديد" للبدء',
+        'projects.copy': 'نسخ',
+        'common.cancel': 'إلغاء',
+        'confirm.deleteSelected': 'هل تريد حذف {count} من المشاريع المحددة؟',
+        'confirm.deleteOne': 'هل تريد حذف هذا المشروع؟',
+        'toast.deletedCount': 'تم حذف {count} مشروع/مشاريع',
+        'toast.deleted': 'تم الحذف',
+        'toast.copied': 'تم النسخ',
+        'project.newName': 'مشروع جديد',
+        'project.copySuffix': ' (نسخة)',
+        'time.justNow': 'الآن',
+        'time.minutesAgo': 'قبل {count} دقيقة',
+        'time.hoursAgo': 'قبل {count} ساعة',
+        'time.daysAgo': 'قبل {count} يوم',
+        'about.title': 'من نحن',
+        'about.card1.title': 'الهدف',
+        'about.card1.body': 'إنشاء أداة مجانية وجميلة وسهلة لتصميم رموز QR للجميع. نؤمن أن QR ليس تقنية فقط بل فن أيضًا.',
+        'about.card2.title': 'التقنية',
+        'about.card2.body': 'مبني باستخدام HTML5 Canvas وJavaScript خالص وPython Flask. يستخدم qrcode-svg لإنشاء QR عالي الجودة.',
+        'about.card3.title': 'تحديثات مستمرة',
+        'about.card3.body': 'نطوّر المشروع باستمرار بميزات جديدة. نرحّب بالأفكار والملاحظات!',
+        'footer.tagline': 'أداة مجانية لتصميم QR • أنشئ QR جميلًا خلال ثوانٍ',
+        'footer.terms': 'شروط الاستخدام',
+        'footer.privacy': 'سياسة الأمان',
+        'footer.disclaimer': 'إخلاء المسؤولية',
+        'footer.about': 'من نحن',
+        'footer.contact': 'اتصل بنا',
+        'footer.madeWith': 'Made with  <i class="fa-solid fa-heart footer-heart"></i>  in Vietnam',
+        'typing.words': ['جميل', 'مجاني', 'سريع', 'إبداعي', 'متنوع', 'حديث'],
+        'features.title': 'الميزات الرئيسية',
+        'features.color.title': 'ألوان مخصصة',
+        'features.color.desc': 'غيّر ألوان QR والخلفية لتتناسب مع علامتك التجارية.',
+        'features.logo.title': 'إضافة Logo',
+        'features.logo.desc': 'أدرج Logo في المركز مع الحفاظ على قابلية المسح.',
+        'features.shapes.title': '100+ شكل',
+        'features.shapes.desc': 'مربع، دائري، نجمة، سهم والمزيد.',
+        'features.fonts.title': '150+ خط',
+        'features.fonts.desc': 'أضف نصًا بأكثر من 150 خط من Google Fonts.',
+        'features.export.title': 'تصدير HD',
+        'features.export.desc': 'حمّل PNG، JPG، SVG بدقة تصل إلى 4K.',
+        'features.autosave.title': 'حفظ تلقائي',
+        'features.autosave.desc': 'حفظ تلقائي كل 10 ثوانٍ. لن تفقد عملك أبدًا.',
+        'preview.title': 'معاينة مباشرة',
+        'preview.boardTitle': 'لوحة معاينة QR',
+        'preview.boardSubtitle': 'جرّب ألوانًا وأنماطًا وشعارات مختلفة.',
+        'preview.purple': 'بنفسجي',
+        'preview.blue': 'أزرق',
+        'preview.green': 'أخضر',
+        'preview.rounded': 'مدور',
+        'preview.square': 'مربع',
+        'preview.logo': 'Logo',
+        'preview.status': 'معاينة: بنفسجي • مدور • بدون Logo',
+        'preview.statusTemplate': 'معاينة: {theme} • {style} • {logo}',
+        'preview.withLogo': 'مع Logo',
+        'preview.noLogo': 'بدون Logo',
+      },
+      pt: {
+        'doc.title': 'Qrio - Gerador de Código QR Gratuito',
+        'home.createNew': 'Novo',
+        'projectType.title': 'Criar novo projeto',
+        'projectType.subtitle': 'Escolha o que deseja criar',
+        'projectType.hint': 'Crie ingressos para vender ou desenhe um QR personalizado.',
+        'projectType.ticket': 'Criar ingressos',
+        'projectType.qr': 'QR personalizado',
+        'home.badge': '✨ Grátis para sempre',
+        'home.titlePrefix': 'Crie',
+        'home.subtitle': 'Crie QR codes profissionais com 100+ estilos, 150+ fontes e exportação em alta qualidade.',
+        'home.startNow': 'Começar agora',
+        'home.viewFeatures': 'Ver recursos',
+        'home.scanQr': 'Escanear QR',
+        'projects.title': 'Seus projetos',
+        'projects.deleteSelected': 'Excluir selecionados',
+        'projects.newProject': 'Criar novo projeto',
+        'projects.emptyState': 'Nenhum projeto ainda',
+        'projects.emptyStateDesc': 'Clique em "Novo" para começar',
+        'projects.copy': 'Duplicar',
+        'common.cancel': 'Cancelar',
+        'confirm.deleteSelected': 'Excluir {count} projeto(s) selecionado(s)?',
+        'confirm.deleteOne': 'Excluir este projeto?',
+        'toast.deletedCount': '{count} projeto(s) excluído(s)',
+        'toast.deleted': 'Excluído',
+        'toast.copied': 'Duplicado',
+        'project.newName': 'Novo projeto',
+        'project.copySuffix': ' (cópia)',
+        'time.justNow': 'Agora',
+        'time.minutesAgo': 'há {count} min',
+        'time.hoursAgo': 'há {count} h',
+        'time.daysAgo': 'há {count} dia(s)',
+        'about.title': 'Sobre',
+        'about.card1.title': 'Objetivo',
+        'about.card1.body': 'Criar uma ferramenta gratuita, bonita e fácil de usar para design de QR. Acreditamos que QR é tecnologia e arte.',
+        'about.card2.title': 'Tecnologia',
+        'about.card2.body': 'Construído com HTML5 Canvas, JavaScript puro e Python Flask. Usa qrcode-svg para gerar QR de alta qualidade.',
+        'about.card3.title': 'Sempre melhorando',
+        'about.card3.body': 'O projeto evolui continuamente com novas funções. Ideias e feedback são bem-vindos!',
+        'footer.tagline': 'Ferramenta gratuita de design QR • Crie QR bonitos em segundos',
+        'footer.terms': 'Termos de uso',
+        'footer.privacy': 'Política de segurança',
+        'footer.disclaimer': 'Aviso legal',
+        'footer.about': 'Sobre nós',
+        'footer.contact': 'Contato',
+        'footer.madeWith': 'Made with  <i class="fa-solid fa-heart footer-heart"></i>  in Vietnam',
+        'typing.words': ['bonito', 'grátis', 'rápido', 'criativo', 'diverso', 'moderno'],
+        'features.title': 'Recursos principais',
+        'features.color.title': 'Cores personalizadas',
+        'features.color.desc': 'Altere as cores do QR e do fundo para sua marca.',
+        'features.logo.title': 'Adicionar Logo',
+        'features.logo.desc': 'Insira seu logo no centro mantendo a leitura.',
+        'features.shapes.title': '100+ Formas',
+        'features.shapes.desc': 'Quadrado, redondo, estrela, seta e muito mais.',
+        'features.fonts.title': '150+ Fontes',
+        'features.fonts.desc': 'Adicione texto com 150+ fontes do Google Fonts.',
+        'features.export.title': 'Exportar HD',
+        'features.export.desc': 'Baixe PNG, JPG, SVG com resolução até 4K.',
+        'features.autosave.title': 'Salvamento automático',
+        'features.autosave.desc': 'Salvamento automático a cada 10 segundos.',
+        'preview.title': 'Visualização ao vivo',
+        'preview.boardTitle': 'Painel de visualização QR',
+        'preview.boardSubtitle': 'Experimente diferentes cores, estilos e logos.',
+        'preview.purple': 'Roxo',
+        'preview.blue': 'Azul',
+        'preview.green': 'Verde',
+        'preview.rounded': 'Arredondado',
+        'preview.square': 'Quadrado',
+        'preview.logo': 'Logo',
+        'preview.status': 'Visualização: Roxo • Arredondado • Sem logo',
+        'preview.statusTemplate': 'Visualização: {theme} • {style} • {logo}',
+        'preview.withLogo': 'Com logo',
+        'preview.noLogo': 'Sem logo',
+      },
+      ru: {
+        'doc.title': 'Qrio - Бесплатный генератор QR-кодов',
+        'home.createNew': 'Создать',
+        'projectType.title': 'Создать новый проект',
+        'projectType.subtitle': 'Выберите, что вы хотите создать',
+        'projectType.hint': 'Создайте билеты для продажи или сделайте кастомный QR.',
+        'projectType.ticket': 'Создать билеты',
+        'projectType.qr': 'Кастомный QR',
+        'home.badge': '✨ Бесплатно навсегда',
+        'home.titlePrefix': 'Создавайте',
+        'home.subtitle': 'Создавайте профессиональные QR-коды: 100+ стилей, 150+ шрифтов и экспорт высокого качества.',
+        'home.startNow': 'Начать',
+        'home.viewFeatures': 'Посмотреть возможности',
+        'home.scanQr': 'Сканировать QR',
+        'projects.title': 'Ваши проекты',
+        'projects.deleteSelected': 'Удалить выбранное',
+        'projects.newProject': 'Создать проект',
+        'projects.emptyState': 'Проектов пока нет',
+        'projects.emptyStateDesc': 'Нажмите "Создать", чтобы начать',
+        'projects.copy': 'Дублировать',
+        'common.cancel': 'Отмена',
+        'confirm.deleteSelected': 'Удалить выбранные проекты ({count})?',
+        'confirm.deleteOne': 'Удалить этот проект?',
+        'toast.deletedCount': 'Удалено проектов: {count}',
+        'toast.deleted': 'Удалено',
+        'toast.copied': 'Скопировано',
+        'project.newName': 'Новый проект',
+        'project.copySuffix': ' (копия)',
+        'time.justNow': 'Только что',
+        'time.minutesAgo': '{count} мин назад',
+        'time.hoursAgo': '{count} ч назад',
+        'time.daysAgo': '{count} дн назад',
+        'about.title': 'О нас',
+        'about.card1.title': 'Цель',
+        'about.card1.body': 'Создать бесплатный, красивый и простой инструмент для дизайна QR. Мы считаем, что QR — это не только технология, но и искусство.',
+        'about.card2.title': 'Технологии',
+        'about.card2.body': 'HTML5 Canvas, чистый JavaScript и Python Flask. Используется qrcode-svg для высококачественных QR.',
+        'about.card3.title': 'Постоянные обновления',
+        'about.card3.body': 'Мы постоянно добавляем новые функции. Идеи и отзывы приветствуются!',
+        'footer.tagline': 'Бесплатный редактор QR • Красивые QR за секунды',
+        'footer.terms': 'Условия использования',
+        'footer.privacy': 'Политика безопасности',
+        'footer.disclaimer': 'Отказ от ответственности',
+        'footer.about': 'О нас',
+        'footer.contact': 'Контакты',
+        'footer.madeWith': 'Made with  <i class="fa-solid fa-heart footer-heart"></i>  in Vietnam',
+        'typing.words': ['красиво', 'бесплатно', 'быстро', 'креативно', 'разнообразно', 'современно'],
+        'features.title': 'Основные функции',
+        'features.color.title': 'Пользовательские цвета',
+        'features.color.desc': 'Меняйте цвета QR и фона под ваш бренд.',
+        'features.logo.title': 'Добавить Logo',
+        'features.logo.desc': 'Вставьте логотип в центр, сохраняя сканируемость.',
+        'features.shapes.title': '100+ форм',
+        'features.shapes.desc': 'Квадрат, круг, звезда, стрелка и многое другое.',
+        'features.fonts.title': '150+ шрифтов',
+        'features.fonts.desc': 'Добавьте текст с 150+ шрифтами от Google Fonts.',
+        'features.export.title': 'Экспорт HD',
+        'features.export.desc': 'Скачивайте PNG, JPG, SVG с разрешением до 4K.',
+        'features.autosave.title': 'Автосохранение',
+        'features.autosave.desc': 'Автоматическое сохранение каждые 10 секунд.',
+        'preview.title': 'Живой предпросмотр',
+        'preview.boardTitle': 'Панель предпросмотра QR',
+        'preview.boardSubtitle': 'Пробуйте разные цвета, стили и логотипы.',
+        'preview.purple': 'Фиолетовый',
+        'preview.blue': 'Синий',
+        'preview.green': 'Зеленый',
+        'preview.rounded': 'Скругленный',
+        'preview.square': 'Квадрат',
+        'preview.logo': 'Logo',
+        'preview.status': 'Предпросмотр: Фиолетовый • Скругленный • Без Logo',
+        'preview.statusTemplate': 'Предпросмотр: {theme} • {style} • {logo}',
+        'preview.withLogo': 'С Logo',
+        'preview.noLogo': 'Без Logo',
+      },
+      id: {
+        'doc.title': 'Qrio - Generator Kode QR Gratis',
+        'home.createNew': 'Baru',
+        'projectType.title': 'Buat proyek baru',
+        'projectType.subtitle': 'Pilih yang ingin Anda buat',
+        'projectType.hint': 'Buat tiket untuk dijual, atau desain QR kustom.',
+        'projectType.ticket': 'Buat tiket',
+        'projectType.qr': 'QR kustom',
+        'home.badge': '✨ Gratis selamanya',
+        'home.titlePrefix': 'Buat',
+        'home.subtitle': 'Desain QR profesional dengan 100+ gaya, 150+ font, dan ekspor berkualitas tinggi.',
+        'home.startNow': 'Mulai sekarang',
+        'home.viewFeatures': 'Lihat fitur',
+        'home.scanQr': 'Pindai QR',
+        'projects.title': 'Proyek Anda',
+        'projects.deleteSelected': 'Hapus yang dipilih',
+        'projects.newProject': 'Buat proyek baru',
+        'projects.emptyState': 'Belum ada proyek',
+        'projects.emptyStateDesc': 'Klik "Baru" untuk memulai',
+        'projects.copy': 'Duplikat',
+        'common.cancel': 'Batal',
+        'confirm.deleteSelected': 'Hapus {count} proyek yang dipilih?',
+        'confirm.deleteOne': 'Hapus proyek ini?',
+        'toast.deletedCount': '{count} proyek dihapus',
+        'toast.deleted': 'Dihapus',
+        'toast.copied': 'Diduplikasi',
+        'project.newName': 'Proyek baru',
+        'project.copySuffix': ' (salinan)',
+        'time.justNow': 'Baru saja',
+        'time.minutesAgo': '{count} menit lalu',
+        'time.hoursAgo': '{count} jam lalu',
+        'time.daysAgo': '{count} hari lalu',
+        'about.title': 'Tentang kami',
+        'about.card1.title': 'Tujuan',
+        'about.card1.body': 'Membuat alat desain QR gratis, cantik, dan mudah digunakan untuk semua orang. QR bukan hanya teknologi, tapi juga seni.',
+        'about.card2.title': 'Teknologi',
+        'about.card2.body': 'Dibangun dengan HTML5 Canvas, JavaScript murni, dan Python Flask. Menggunakan qrcode-svg untuk QR berkualitas tinggi.',
+        'about.card3.title': 'Terus diperbarui',
+        'about.card3.body': 'Kami terus menambahkan fitur baru. Ide dan masukan sangat diterima!',
+        'footer.tagline': 'Alat desain QR gratis • Buat QR cantik dalam hitungan detik',
+        'footer.terms': 'Ketentuan layanan',
+        'footer.privacy': 'Kebijakan keamanan',
+        'footer.disclaimer': 'Disclaimer',
+        'footer.about': 'Tentang Kami',
+        'footer.contact': 'Kontak',
+        'footer.madeWith': 'Made with  <i class="fa-solid fa-heart footer-heart"></i>  in Vietnam',
+        'typing.words': ['cantik', 'gratis', 'cepat', 'kreatif', 'beragam', 'modern'],
+        'features.title': 'Fitur Utama',
+        'features.color.title': 'Warna Kustom',
+        'features.color.desc': 'Ubah warna QR dan latar belakang sesuai merek Anda.',
+        'features.logo.title': 'Tambah Logo',
+        'features.logo.desc': 'Sisipkan logo di tengah sambil tetap dapat dipindai.',
+        'features.shapes.title': '100+ Bentuk',
+        'features.shapes.desc': 'Kotak, bulat, bintang, panah, dan banyak lagi.',
+        'features.fonts.title': '150+ Font',
+        'features.fonts.desc': 'Tambahkan teks dengan 150+ font dari Google Fonts.',
+        'features.export.title': 'Ekspor HD',
+        'features.export.desc': 'Unduh PNG, JPG, SVG dengan resolusi hingga 4K.',
+        'features.autosave.title': 'Simpan Otomatis',
+        'features.autosave.desc': 'Simpan otomatis setiap 10 detik. Tidak akan kehilangan pekerjaan.',
+        'preview.title': 'Pratinjau Langsung',
+        'preview.boardTitle': 'Panel Pratinjau QR',
+        'preview.boardSubtitle': 'Coba berbagai warna, gaya, dan logo.',
+        'preview.purple': 'Ungu',
+        'preview.blue': 'Biru',
+        'preview.green': 'Hijau',
+        'preview.rounded': 'Bulat',
+        'preview.square': 'Kotak',
+        'preview.logo': 'Logo',
+        'preview.status': 'Pratinjau: Ungu • Bulat • Tanpa logo',
+        'preview.statusTemplate': 'Pratinjau: {theme} • {style} • {logo}',
+        'preview.withLogo': 'Dengan logo',
+        'preview.noLogo': 'Tanpa logo',
+      },
+    };
+
+    function detectDefaultLang() {
+      return 'en';
+    }
+
+    function getLang() {
+      return localStorage.getItem(LANG_KEY) || detectDefaultLang();
+    }
+
+    function setLang(lang) {
+      localStorage.setItem(LANG_KEY, lang);
+      applyI18n(lang);
+      // Re-render dynamic areas and re-init animations that depend on text.
+      try { renderProjects(); } catch {}
+      try { initTypingAnimation(); } catch {}
+    }
+
+    function formatWithVars(template, vars) {
+      return String(template).replace(/\{(\w+)\}/g, (_, k) => {
+        const v = vars && Object.prototype.hasOwnProperty.call(vars, k) ? vars[k] : '';
+        return String(v);
+      });
+    }
+
+    function escapeHtml(value) {
+      return String(value || '').replace(/[&<>"']/g, char => {
+        switch (char) {
+          case '&': return '&amp;';
+          case '<': return '&lt;';
+          case '>': return '&gt;';
+          case '"': return '&quot;';
+          case "'": return '&#39;';
+          default: return char;
+        }
+      });
+    }
+
+    function t(key, vars, langOverride) {
+      const lang = langOverride || getLang();
+      const dict = I18N[lang] || I18N.vi;
+      const fallback = I18N.vi || {};
+      const value = dict[key] ?? fallback[key] ?? key;
+      if (Array.isArray(value)) return value;
+      return formatWithVars(value, vars);
+    }
+
+    function applyI18n(lang) {
+      document.documentElement.lang = lang;
+      document.title = String(t('doc.title', undefined, lang));
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const value = t(key, undefined, lang);
+        if (typeof value === 'string') el.innerHTML = value;
+      });
+
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        el.setAttribute('placeholder', t(key, undefined, lang));
+      });
+
+      document.querySelectorAll('[data-i18n-title]').forEach(el => {
+        const key = el.getAttribute('data-i18n-title');
+        el.setAttribute('title', t(key, undefined, lang));
+      });
+
+      document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+        const key = el.getAttribute('data-i18n-aria');
+        el.setAttribute('aria-label', t(key, undefined, lang));
+      });
+
+      // Update the language selector UI (if present)
+      const select = document.getElementById('lang-select');
+      if (select && select.value !== lang) select.value = lang;
+
+      const label = document.getElementById('lang-label');
+      if (label && select) {
+        const opt = select.options[select.selectedIndex];
+        label.textContent = opt ? opt.textContent : 'Language';
+      }
+    }
+
+    const STORAGE_KEY = 'qr_studio_projects';
+    let selectedProjects = new Set();
+    let selectMode = false;
+    const PROJECT_NAME_INPUT_MAX_LENGTH = 64;
+    let activeProjectNameEditor = null;
+
+    function loadProjects() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      } catch {
+        return [];
+      }
+    }
+
+    function saveProjects(projects) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
+    }
+
+    function updateSelectUI() {
+      const actionsDiv = document.getElementById('section-actions');
+      const countSpan = document.getElementById('selected-count');
+      if (selectedProjects.size > 0) {
+        actionsDiv.style.display = 'flex';
+        actionsDiv.style.gap = '8px';
+        countSpan.textContent = selectedProjects.size;
+        selectMode = true;
+      } else {
+        actionsDiv.style.display = 'none';
+        selectMode = false;
+      }
+    }
+
+    function toggleProjectSelection(id, e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (selectedProjects.has(id)) {
+        selectedProjects.delete(id);
+      } else {
+        selectedProjects.add(id);
+      }
+      updateSelectUI();
+      renderProjects();
+    }
+
+    function deleteSelectedProjects() {
+      if (selectedProjects.size === 0) return;
+      const count = selectedProjects.size;
+      if (!confirm(t('confirm.deleteSelected', { count }))) return;
+      let projects = loadProjects().filter(p => !selectedProjects.has(p.id));
+      saveProjects(projects);
+      selectedProjects.clear();
+      updateSelectUI();
+      renderProjects();
+      showToast(t('toast.deletedCount', { count }));
+    }
+
+    function cancelSelection() {
+      selectedProjects.clear();
+      updateSelectUI();
+      renderProjects();
+    }
+
+    function createNewProject(e) {
+      if (e) e.preventDefault();
+      try { openProjectTypeModal(); } catch { createQrProjectAndGo(); }
+    }
+
+    function createQrProjectAndGo() {
+      const projectId = 'project-' + Date.now();
+      const projects = loadProjects();
+      projects.unshift({
+        id: projectId,
+        name: t('project.newName'),
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      });
+      saveProjects(projects);
+      window.location.href = `edit.html?project=${projectId}`;
+    }
+
+    function deleteProject(id, e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (!confirm(t('confirm.deleteOne'))) return;
+      const projects = loadProjects().filter(p => p.id !== id);
+      saveProjects(projects);
+      renderProjects();
+      showToast(t('toast.deleted'));
+    }
+
+    function duplicateProject(id, e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const projects = loadProjects();
+      const project = projects.find(p => p.id === id);
+      if (!project) return;
+      if (project.type === 'ticket') return;
+      const newProject = {
+        ...JSON.parse(JSON.stringify(project)),
+        id: 'project-' + Date.now(),
+        name: project.name + t('project.copySuffix'),
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+      projects.unshift(newProject);
+      saveProjects(projects);
+      renderProjects();
+      showToast(t('toast.copied'));
+    }
+
+    function formatDate(dateString) {
+      const diff = Date.now() - new Date(dateString);
+      if (diff < 60000) return t('time.justNow');
+      if (diff < 3600000) return t('time.minutesAgo', { count: Math.floor(diff / 60000) });
+      if (diff < 86400000) return t('time.hoursAgo', { count: Math.floor(diff / 3600000) });
+      if (diff < 604800000) return t('time.daysAgo', { count: Math.floor(diff / 86400000) });
+      const lang = getLang();
+      const locale =
+        lang === 'vi' ? 'vi-VN' :
+        lang === 'zh' ? 'zh-CN' :
+        lang === 'hi' ? 'hi-IN' :
+        lang === 'es' ? 'es-ES' :
+        lang === 'fr' ? 'fr-FR' :
+        lang === 'ar' ? 'ar' :
+        lang === 'pt' ? 'pt-BR' :
+        lang === 'ru' ? 'ru-RU' :
+        lang === 'id' ? 'id-ID' :
+        'en-US';
+      return new Date(dateString).toLocaleDateString(locale);
+    }
+
+    function renderProjects() {
+      const grid = document.getElementById('projects-grid');
+      const emptyState = document.getElementById('empty-state');
+      const projects = loadProjects();
+
+      const newCard = grid.querySelector('.new-project-card');
+      grid.innerHTML = '';
+      if (newCard) grid.appendChild(newCard);
+
+      if (projects.length === 0) {
+        emptyState.style.display = 'block';
+        return;
+      }
+
+      emptyState.style.display = 'none';
+      projects.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+
+      projects.forEach(project => {
+        const card = document.createElement('div');
+        const isSelected = selectedProjects.has(project.id);
+        const safeName = escapeHtml(project.name);
+        const projectType = project.type || 'qr';
+        card.className = 'project-card' + (isSelected ? ' selected' : '');
+        card.onclick = (e) => {
+          if (selectMode) {
+            toggleProjectSelection(project.id, e);
+          } else {
+            if (projectType === 'ticket' && project.eventId) {
+              window.location.href = `owner-ticket.html?event=${encodeURIComponent(project.eventId)}`;
+            } else {
+              window.location.href = `edit.html?project=${project.id}`;
+            }
+          }
+        };
+        card.innerHTML = `
+          <div class="project-select-checkbox" onclick="toggleProjectSelection('${project.id}', event)" style="position:absolute;top:8px;left:8px;z-index:10;width:24px;height:24px;border-radius:6px;background:${isSelected ? '#7c3aed' : 'rgba(255,255,255,0.1)'};border:2px solid ${isSelected ? '#7c3aed' : 'rgba(255,255,255,0.2)'};display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;">
+            ${isSelected ? '<i class="fa-solid fa-check" style="color:#fff;font-size:12px;"></i>' : ''}
+          </div>
+          <div class="project-preview">
+            ${project.thumbnail
+              ? `<img src="${project.thumbnail}" alt="" />`
+              : (projectType === 'ticket' ? `<i class="fa-solid fa-ticket placeholder"></i>` : `<i class="fa-solid fa-qrcode placeholder"></i>`)
+            }
+          </div>
+          <div class="project-info">
+            <div class="project-name-wrapper" role="button" tabindex="0">
+              <div class="project-name">${safeName}</div>
+              <div class="project-name-label" aria-hidden="true"><i class="fa-solid fa-pen"></i></div>
+            </div>
+            <div class="project-date">
+              <i class="fa-solid fa-clock"></i>
+              ${formatDate(project.updatedAt)}
+            </div>
+          </div>
+          <div class="project-actions">
+            ${projectType === 'ticket' ? '' : `
+            <button class="project-action-btn" onclick="duplicateProject('${project.id}', event)">
+              <i class="fa-solid fa-clone"></i> ${t('projects.copy')}
+            </button>
+            `}
+            <button class="project-action-btn delete" onclick="deleteProject('${project.id}', event)">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+        `;
+        const nameWrapper = card.querySelector('.project-name-wrapper');
+        if (nameWrapper) {
+          nameWrapper.addEventListener('click', (e) => {
+            // If already editing (click inside input), just keep focus and don't let card handler run.
+            if (activeProjectNameEditor && e.target === activeProjectNameEditor) {
+              e.stopPropagation();
+              return;
+            }
+            startProjectNameEditing(project.id, nameWrapper, e);
+          });
+
+          nameWrapper.addEventListener('keydown', (e) => {
+            // Don't hijack typing inside the input (space must insert a space)
+            const target = e.target;
+            if (target && target.tagName === 'INPUT') return;
+
+            if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+              e.preventDefault();
+              startProjectNameEditing(project.id, nameWrapper, e);
+            }
+          });
+        }
+        grid.appendChild(card);
+      });
+    }
+
+    function startProjectNameEditing(projectId, nameElement, event) {
+      event.preventDefault();
+      event.stopPropagation();
+      if (activeProjectNameEditor) return;
+      const projects = loadProjects();
+      const project = projects.find(p => p.id === projectId);
+      if (!project) return;
+      if ((project.type || 'qr') === 'ticket') return;
+
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.className = 'project-name-input';
+      input.value = project.name || '';
+      input.maxLength = PROJECT_NAME_INPUT_MAX_LENGTH;
+      input.autocomplete = 'off';
+      input.spellcheck = false;
+      input.setAttribute('aria-label', t('projects.title'));
+
+      // Prevent click/typing in the input from triggering the card click (which navigates).
+      input.addEventListener('click', (e) => e.stopPropagation());
+      input.addEventListener('mousedown', (e) => e.stopPropagation());
+      input.addEventListener('keydown', (e) => e.stopPropagation());
+
+      nameElement.innerHTML = '';
+      nameElement.appendChild(input);
+      input.focus();
+      input.setSelectionRange(0, input.value.length);
+      let committed = false;
+
+      const finalize = (shouldSave) => {
+        if (committed) return;
+        committed = true;
+        if (activeProjectNameEditor === input) activeProjectNameEditor = null;
+        const trimmed = input.value.trim();
+        if (shouldSave && trimmed && trimmed !== project.name) {
+          const updatedProjects = loadProjects();
+          const target = updatedProjects.find(p => p.id === projectId);
+          if (target) {
+            target.name = trimmed;
+            target.updatedAt = new Date().toISOString();
+            saveProjects(updatedProjects);
+          }
+        }
+        renderProjects();
+      };
+
+      const onKeyDown = (evt) => {
+        if (evt.key === 'Enter') {
+          evt.preventDefault();
+          finalize(true);
+        } else if (evt.key === 'Escape') {
+          evt.preventDefault();
+          finalize(false);
+        }
+      };
+
+      input.addEventListener('keydown', onKeyDown);
+      input.addEventListener('blur', () => finalize(true));
+      activeProjectNameEditor = input;
+    }
+
+    function showToast(message) {
+      const existing = document.querySelector('.toast');
+      if (existing) existing.remove();
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.textContent = message;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 2000);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const initialLang = getLang();
+      applyI18n(initialLang);
+      const langSelect = document.getElementById('lang-select');
+      if (langSelect) langSelect.value = initialLang;
+
+      // Language modal (always modal)
+      (function initLangModal() {
+        const btn = document.getElementById('lang-btn');
+        const overlay = document.getElementById('lang-modal');
+        const closeBtn = document.getElementById('lang-modal-close');
+        const list = document.getElementById('lang-modal-list');
+        const select = document.getElementById('lang-select');
+        if (!btn || !overlay || !list || !select) return;
+
+        function open() {
+          overlay.classList.add('show');
+          overlay.setAttribute('aria-hidden', 'false');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+
+        function close() {
+          overlay.classList.remove('show');
+          overlay.setAttribute('aria-hidden', 'true');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+
+        function render() {
+          const current = getLang();
+          list.innerHTML = '';
+          Array.from(select.options).forEach(opt => {
+            const b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'lang-modal-item' + (opt.value === current ? ' active' : '');
+            b.textContent = opt.textContent;
+            b.addEventListener('click', () => {
+              setLang(opt.value);
+              close();
+            });
+            list.appendChild(b);
+          });
+        }
+
+        btn.addEventListener('click', () => {
+          render();
+          open();
+        });
+        if (closeBtn) closeBtn.addEventListener('click', close);
+        overlay.addEventListener('click', (e) => {
+          if (e && e.target === overlay) close();
+        });
+        document.addEventListener('keydown', (e) => {
+          if (e && e.key === 'Escape') close();
+        });
+      })();
+
+      // Project type modal (ticket vs custom QR)
+      (function initProjectTypeModal() {
+        const overlay = document.getElementById('project-modal');
+        const closeBtn = document.getElementById('project-modal-close');
+        const ticketBtn = document.getElementById('project-choice-ticket');
+        const qrBtn = document.getElementById('project-choice-qr');
+        if (!overlay || !closeBtn || !ticketBtn || !qrBtn) return;
+
+        let lastActiveEl = null;
+
+        function open() {
+          lastActiveEl = document.activeElement;
+          overlay.classList.add('show');
+          overlay.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+          setTimeout(() => ticketBtn.focus(), 0);
+        }
+
+        function close() {
+          overlay.classList.remove('show');
+          overlay.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+          if (lastActiveEl && typeof lastActiveEl.focus === 'function') {
+            try { lastActiveEl.focus(); } catch {}
+          }
+        }
+
+        window.openProjectTypeModal = open;
+
+        closeBtn.addEventListener('click', close);
+        overlay.addEventListener('click', (e) => {
+          if (e && e.target === overlay) close();
+        });
+        document.addEventListener('keydown', (e) => {
+          if (!e || e.key !== 'Escape') return;
+          if (!overlay.classList.contains('show')) return;
+          e.preventDefault();
+          close();
+        });
+
+        ticketBtn.addEventListener('click', () => {
+          close();
+          window.location.href = 'ticket-create.html';
+        });
+
+        qrBtn.addEventListener('click', () => {
+          close();
+          createQrProjectAndGo();
+        });
+      })();
+
+      renderProjects();
+      initScrollReveal();
+      initTypingAnimation();
+      initCounterAnimation();
+
+      const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduceMotion) createParticles();
+      addStaggerAnimation();
+      initPreviewDemo();
+
+      // Bind multi-select delete buttons
+      document.getElementById('delete-selected-btn').onclick = deleteSelectedProjects;
+      document.getElementById('cancel-select-btn').onclick = cancelSelection;
+      const featureAnchor = document.getElementById('features-anchor');
+      const featureSection = document.getElementById('features');
+      if (featureAnchor && featureSection) {
+        featureAnchor.addEventListener('click', (e) => {
+          e.preventDefault();
+          const offset = featureSection.getBoundingClientRect().top + window.scrollY - 24;
+          smoothScrollTo(offset);
+        });
+      }
+    });
+
+    function initPreviewDemo() {
+      const board = document.querySelector('.preview-board');
+      const status = document.getElementById('preview-status');
+      const svg = document.getElementById('preview-qr');
+      if (!board || !svg) return;
+
+      const themes = {
+        purple: { key: 'preview.purple', color: '#7c3aed' },
+        blue: { key: 'preview.blue', color: '#3b82f6' },
+        green: { key: 'preview.green', color: '#10b981' }
+      };
+
+      let currentTheme = 'purple';
+      let currentStyle = 'rounded';
+      let logoOn = false;
+
+      // A fixed 21x21 QR-like pattern (visual demo, not necessarily scannable)
+      // 1 = dark module, 0 = empty
+      const demoMatrix = [
+        '111111100001011111111',
+        '100000100110010000001',
+        '101110100001010111101',
+        '101110100111010111101',
+        '101110100010010111101',
+        '100000100101010000001',
+        '111111101010111111111',
+        '000000001101000000000',
+        '110011100001110010101',
+        '001100011010001111000',
+        '101010111001011001011',
+        '010001001111100010010',
+        '111000110010001110101',
+        '000000001011000010000',
+        '111111101001111011111',
+        '100000100110001000001',
+        '101110100011101011101',
+        '101110100100101011101',
+        '101110100111001011101',
+        '100000100001011000001',
+        '111111101010111111111'
+      ];
+
+      function el(name, attrs = {}) {
+        const node = document.createElementNS('http://www.w3.org/2000/svg', name);
+        Object.entries(attrs).forEach(([k, v]) => node.setAttribute(k, String(v)));
+        return node;
+      }
+
+      function renderPreviewQR() {
+        const themeColor = themes[currentTheme]?.color || themes.purple.color;
+        const moduleColor = '#111827';
+
+        // Clear
+        while (svg.firstChild) svg.removeChild(svg.firstChild);
+
+        // Layout
+        const size = 210;
+        const quiet = 18;
+        const modules = 21;
+        const moduleSize = Math.floor((size - quiet * 2) / modules);
+        const rounded = currentStyle === 'rounded';
+        const rx = rounded ? Math.max(0, Math.floor(moduleSize * 0.35)) : 0;
+        const finderOuterRx = rounded ? Math.max(0, Math.floor(moduleSize * 1.4)) : 0;
+        const finderInnerRx = rounded ? Math.max(0, Math.floor(moduleSize * 1.1)) : 0;
+        const finderCoreRx = rounded ? Math.max(0, Math.floor(moduleSize * 0.9)) : 0;
+
+        // Background
+        svg.appendChild(el('rect', { x: 0, y: 0, width: size, height: size, rx: 22, fill: '#ffffff' }));
+
+        // Finder patterns helper
+        const drawFinder = (gx, gy) => {
+          const x = quiet + gx * moduleSize;
+          const y = quiet + gy * moduleSize;
+          // outer
+          svg.appendChild(el('rect', { x, y, width: moduleSize * 7, height: moduleSize * 7, rx: finderOuterRx, ry: finderOuterRx, fill: themeColor }));
+          // inner white
+          svg.appendChild(el('rect', { x: x + moduleSize, y: y + moduleSize, width: moduleSize * 5, height: moduleSize * 5, rx: finderInnerRx, ry: finderInnerRx, fill: '#ffffff' }));
+          // core
+          svg.appendChild(el('rect', { x: x + moduleSize * 2, y: y + moduleSize * 2, width: moduleSize * 3, height: moduleSize * 3, rx: finderCoreRx, ry: finderCoreRx, fill: themeColor }));
+        };
+
+        drawFinder(0, 0);
+        drawFinder(14, 0);
+        drawFinder(0, 14);
+
+        // Timing patterns
+        for (let i = 8; i <= 12; i++) {
+          const on = i % 2 === 0;
+          if (!on) continue;
+          svg.appendChild(el('rect', { x: quiet + i * moduleSize, y: quiet + 6 * moduleSize, width: moduleSize, height: moduleSize, rx, fill: moduleColor }));
+          svg.appendChild(el('rect', { x: quiet + 6 * moduleSize, y: quiet + i * moduleSize, width: moduleSize, height: moduleSize, rx, fill: moduleColor }));
+        }
+
+        // Data modules
+        const g = el('g', {});
+        for (let r = 0; r < modules; r++) {
+          const row = demoMatrix[r] || ''.padEnd(modules, '0');
+          for (let c = 0; c < modules; c++) {
+            const bit = row[c] === '1';
+            if (!bit) continue;
+
+            // Skip finder areas
+            const inTL = r < 7 && c < 7;
+            const inTR = r < 7 && c >= 14;
+            const inBL = r >= 14 && c < 7;
+            if (inTL || inTR || inBL) continue;
+
+            // Leave quiet area for center logo
+            const center = 10;
+            const inCenter = Math.abs(r - center) <= 2 && Math.abs(c - center) <= 2;
+            if (inCenter) continue;
+
+            g.appendChild(el('rect', {
+              x: quiet + c * moduleSize,
+              y: quiet + r * moduleSize,
+              width: moduleSize,
+              height: moduleSize,
+              rx,
+              ry: rx,
+              fill: moduleColor
+            }));
+          }
+        }
+        svg.appendChild(g);
+
+        // Accent dot
+        svg.appendChild(el('circle', { cx: size - 36, cy: Math.floor(size / 2), r: 10, fill: themeColor, opacity: 0.92 }));
+
+        // Center logo
+        if (logoOn) {
+          svg.appendChild(el('circle', { cx: Math.floor(size / 2), cy: Math.floor(size / 2), r: 22, fill: '#ffffff' }));
+          svg.appendChild(el('circle', { cx: Math.floor(size / 2), cy: Math.floor(size / 2), r: 18, fill: themeColor, opacity: 0.92 }));
+          const t = el('text', {
+            x: Math.floor(size / 2),
+            y: Math.floor(size / 2) + 6,
+            'text-anchor': 'middle',
+            'font-family': "'Be Vietnam Pro', system-ui, sans-serif",
+            'font-size': 14,
+            'font-weight': 800,
+            fill: '#ffffff'
+          });
+          t.textContent = 'QR';
+          svg.appendChild(t);
+        }
+      }
+
+      function setTheme(key) {
+        currentTheme = key;
+        renderPreviewQR();
+      }
+
+      function setStyle(style) {
+        currentStyle = style;
+        renderPreviewQR();
+      }
+
+      function setLogo(on) {
+        logoOn = on;
+        renderPreviewQR();
+      }
+
+      function updateStatus() {
+        if (!status) return;
+        const themeName = t(themes[currentTheme]?.key || 'preview.purple');
+        const styleName = currentStyle === 'rounded' ? t('preview.rounded') : t('preview.square');
+        const logoText = logoOn ? t('preview.withLogo') : t('preview.noLogo');
+        status.textContent = t('preview.statusTemplate', { theme: themeName, style: styleName, logo: logoText });
+      }
+
+      function setActive(selector, attr, value) {
+        board.querySelectorAll(selector).forEach(el => {
+          if (el.getAttribute(attr) === value) el.classList.add('active');
+          else el.classList.remove('active');
+        });
+      }
+
+      // Bind controls
+      board.querySelectorAll('[data-preview-theme]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const themeKey = btn.getAttribute('data-preview-theme');
+          setTheme(themeKey);
+          setActive('[data-preview-theme]', 'data-preview-theme', themeKey);
+          updateStatus();
+        });
+      });
+
+      board.querySelectorAll('[data-preview-style]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const styleKey = btn.getAttribute('data-preview-style');
+          setStyle(styleKey);
+          setActive('[data-preview-style]', 'data-preview-style', styleKey);
+          updateStatus();
+        });
+      });
+
+      const logoBtn = board.querySelector('[data-preview-logo]');
+      if (logoBtn) {
+        logoBtn.addEventListener('click', () => {
+          setLogo(!logoOn);
+          logoBtn.classList.toggle('active', logoOn);
+          updateStatus();
+        });
+      }
+
+      // Hover tilt (RAF-throttled to reduce jank)
+      const canTilt = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
+      if (canTilt) {
+        const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+        let pending = false;
+        let nextX = 0;
+        let nextY = 0;
+        const apply = () => {
+          pending = false;
+          board.style.setProperty('--tiltX', `${nextX}deg`);
+          board.style.setProperty('--tiltY', `${nextY}deg`);
+        };
+        board.addEventListener('mousemove', (e) => {
+          const rect = board.getBoundingClientRect();
+          const px = (e.clientX - rect.left) / rect.width;
+          const py = (e.clientY - rect.top) / rect.height;
+          nextY = clamp((px - 0.5) * 10, -5, 5);
+          nextX = clamp((0.5 - py) * 10, -5, 5);
+          if (!pending) {
+            pending = true;
+            requestAnimationFrame(apply);
+          }
+        });
+        board.addEventListener('mouseleave', () => {
+          nextX = 0;
+          nextY = 0;
+          if (!pending) requestAnimationFrame(apply);
+        });
+      }
+
+      // Defaults
+      setTheme('purple');
+      setStyle('rounded');
+      setLogo(false);
+      updateStatus();
+    }
+
+    // Create floating particles
+    function createParticles() {
+      const container = document.getElementById('particles');
+      if (!container) return;
+
+      // Avoid duplicates if init is called more than once.
+      container.innerHTML = '';
+
+      for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 15 + 's';
+        particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+        particle.style.width = (2 + Math.random() * 4) + 'px';
+        particle.style.height = particle.style.width;
+        particle.style.background = `rgba(${124 + Math.random() * 50}, ${58 + Math.random() * 50}, ${237}, ${0.3 + Math.random() * 0.4})`;
+        container.appendChild(particle);
+      }
+    }
+
+    function smoothScrollTo(targetY, duration = 750) {
+      const startY = window.scrollY;
+      const distance = targetY - startY;
+      const startTime = performance.now();
+
+      function step(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease = 0.5 - Math.cos(progress * Math.PI) / 2;
+        window.scrollTo(0, startY + distance * ease);
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        }
+      }
+
+      requestAnimationFrame(step);
+    }
+
+    // Typing Animation
+    function initTypingAnimation() {
+      const typingEl = document.getElementById('typing-text');
+      if (!typingEl) return;
+
+      // Cleanup previous run (if any) to avoid duplicate timers/listeners.
+      if (window.__qrTypingCleanup && typeof window.__qrTypingCleanup === 'function') {
+        window.__qrTypingCleanup();
+        window.__qrTypingCleanup = null;
+      }
+
+      const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const words = t('typing.words');
+      if (reduceMotion) {
+        typingEl.textContent = Array.isArray(words) ? (words[0] || '') : '';
+        return;
+      }
+
+      if (!Array.isArray(words) || words.length === 0) {
+        typingEl.textContent = '';
+        return;
+      }
+
+      let wordIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+      let typeSpeed = 100;
+
+      let typingTimeoutId = null;
+      function schedule(nextDelay) {
+        if (typingTimeoutId) clearTimeout(typingTimeoutId);
+        typingTimeoutId = setTimeout(type, nextDelay);
+      }
+
+      function type() {
+        const currentWord = words[wordIndex];
+
+        if (isDeleting) {
+          typingEl.textContent = currentWord.substring(0, charIndex - 1);
+          charIndex--;
+          typeSpeed = 50;
+        } else {
+          typingEl.textContent = currentWord.substring(0, charIndex + 1);
+          charIndex++;
+          typeSpeed = 100;
+        }
+
+        if (!isDeleting && charIndex === currentWord.length) {
+          typeSpeed = 2000; // Pause at end
+          isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+          isDeleting = false;
+          wordIndex = (wordIndex + 1) % words.length;
+          typeSpeed = 500; // Pause before next word
+        }
+
+        schedule(typeSpeed);
+      }
+
+      const onVisibility = () => {
+        if (document.hidden) {
+          if (typingTimeoutId) clearTimeout(typingTimeoutId);
+          typingTimeoutId = null;
+        } else {
+          schedule(200);
+        }
+      };
+      document.addEventListener('visibilitychange', onVisibility);
+
+      window.__qrTypingCleanup = () => {
+        if (typingTimeoutId) clearTimeout(typingTimeoutId);
+        typingTimeoutId = null;
+        document.removeEventListener('visibilitychange', onVisibility);
+      };
+
+      schedule(1000);
+    }
+
+    // Counter Animation
+    function initCounterAnimation() {
+      const counters = document.querySelectorAll('.stat-number');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const counter = entry.target;
+            const target = parseInt(counter.dataset.target) || 0;
+            const duration = 2000;
+            const startTime = Date.now();
+
+            function updateCounter() {
+              const elapsed = Date.now() - startTime;
+              const progress = Math.min(elapsed / duration, 1);
+
+              // Easing function (ease-out)
+              const easeOut = 1 - Math.pow(1 - progress, 3);
+              const current = Math.floor(target * easeOut);
+
+              counter.textContent = current.toLocaleString();
+
+              if (progress < 1) {
+                requestAnimationFrame(updateCounter);
+              } else {
+                counter.textContent = target.toLocaleString();
+              }
+            }
+
+            updateCounter();
+            observer.unobserve(counter);
+          }
+        });
+      }, { threshold: 0.5 });
+
+      counters.forEach(counter => observer.observe(counter));
+    }
+
+    // Scroll Reveal Animation
+    function initScrollReveal() {
+      const reveals = document.querySelectorAll('.reveal');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      });
+
+      reveals.forEach(el => observer.observe(el));
+    }
+
+    // Add stagger animation to cards
+    function addStaggerAnimation() {
+      const featureCards = document.querySelectorAll('.feature-card');
+      featureCards.forEach((card, i) => {
+        card.style.animationDelay = (0.5 + i * 0.1) + 's';
+        card.style.animation = 'fadeInUp 0.6s ease-out both';
+      });
+    }
+  </script>
+</body>
+</html>
