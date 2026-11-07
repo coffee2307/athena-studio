@@ -87,6 +87,7 @@ export function Navbar(){
     {navigation.filter(i=>i.href!=="/services").map(i=><Link key={i.href} href={i.href} className={pathname===i.href||pathname.startsWith(i.href+"/")?"agency-nav-current":""}>{i.label}</Link>)}
    </nav>
    <HeaderAccountActions/>
+   <div className="agency-mobile-language"><AthenaLanguageSwitch/></div>
    <button ref={trigger} type="button" className={open?"agency-menu-toggle is-open":"agency-menu-toggle"}
     aria-label={open?"Đóng menu":"Mở menu"} aria-expanded={open} aria-controls="athena-mobile-menu"
     onClick={()=>setOpen(o=>!o)} style={{touchAction:"manipulation"}}>
@@ -110,7 +111,7 @@ export function Navbar(){
       {solutions.map((solution,index)=><Link href={solution.href} key={solution.href}><span className="agency-mobile-service-index">0{index+1}</span><span>{solution.title}</span><Icon name="arrow-right" size={15}/></Link>)}
      </div>
     </div>
-    <div className="agency-mobile-account"><AthenaLanguageSwitch/><SessionNavigation mobile/></div>
+    <div className="agency-mobile-account"><SessionNavigation mobile/></div>
     <div className="agency-mobile-contact">
      <MobileConsultationAction/>
      <div className="agency-mobile-contact-meta">

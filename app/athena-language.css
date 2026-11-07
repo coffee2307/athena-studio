@@ -35,3 +35,12 @@
 .agency-header .agency-nav-actions>.athena-language-switch{order:0;margin-right:clamp(3px,.4vw,9px)}
 .agency-header .agency-nav-actions{gap:clamp(7px,.8vw,13px)}
 @media(max-width:980px){.agency-header .agency-nav-actions{display:none}}
+
+/* Mobile language selector lives in the header, directly beside the menu trigger. */
+.agency-header .agency-mobile-language{display:none}
+@media(max-width:980px){
+ .agency-header .agency-mobile-language{display:flex;align-items:center;margin-left:auto;flex:0 0 auto;position:relative;z-index:125}
+ .agency-header .agency-mobile-language .athena-language-trigger{min-width:44px;min-height:44px}
+ .agency-header .agency-menu-toggle{margin-left:0}
+}
+
