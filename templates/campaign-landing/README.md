@@ -1,5 +1,9 @@
-# MỞ Festival — Living Poster (Athena demo)
+# MỞ Festival — Cinematic Culture V4 (Athena Demo)
 
-Website chiến dịch giả định, thiết kế theo hướng Living Poster. Các route `/`, `/work`, `/work/1..3`, `/services`, `/about`, `/contact` đều hoạt động độc lập. Poster hero được dựng bằng CSS; ba chương sáng tạo có thể chọn và thay đổi minh họa, có phiên bản mobile riêng và `prefers-reduced-motion`. Biểu mẫu liên hệ chỉ tạo bản nháp email **không có người nhận mặc định**; bản demo không thu thập dữ liệu, bán vé hoặc công bố sự kiện có thật.
+Independent campaign landing page with a photo-led interactive poster hero, a 3-chapter selector, a full-size native dialog poster viewer, Escape-key support, accessible navigation and mobile-first layouts. The original autonomous routes `/`, `/work`, `/work/1..3`, `/services`, `/about` and `/contact` remain available.
 
-Chạy tại thư mục template: `npm ci`, `npm run build`, `npm run start`. Trên Athena Studio, xem `/template-demos/campaign-landing`. Có thể thay tên trong `src/data/site.json`; nội dung và hình ảnh minh họa cần tùy biến lại cho dự án thật, quyền dùng ảnh cần được kiểm tra trước khi công bố. Không mượn các component giao diện từ template khác.
+This is a **fictional** festival concept. The Pexels photographs are illustrative and do **not** document any actual MỞ event, lineup, venue or tickets. No payment is accepted, and the contact form opens an email draft without an intended recipient or backend data capture.
+
+Optimizations: three local hero photographs are existing JPGs, no WebGL runtime; image transitions are CSS opacity-based, the initial hero image uses eager loading / fetch priority, and reduced-motion preferences are respected. Template CSS and components are independent of other Athena demos.
+
+Standalone: `npm ci && npm run build && npm run start`. Integrated: `/template-demos/campaign-landing`. Rights notes: `public/ASSET-SOURCES.md` and `template.manifest.json`.

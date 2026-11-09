@@ -2,16 +2,16 @@
   "slug": "campaign-landing",
   "title": "Landing page chiến dịch",
   "industry": "Marketing",
-  "style": "Living Poster / Experimental",
+  "style": "Cinematic Culture / Living Poster",
   "purpose": "Tập trung một chiến dịch hoặc sự kiện",
-  "description": "Living Poster: một chiến dịch giả định với chương trình tương tác, typography mạnh và hành trình mobile riêng.",
+  "description": "MỞ Festival — landing page chiến dịch mang phong cách poster điện ảnh, ảnh chuyển theo ba chương, trình xem poster tương tác và bố cục mobile độc lập.",
   "variant": "campaign",
   "features": [
-    "Poster hero thiết kế riêng bằng CSS",
-    "Ba chương trình có thể chọn và đổi hình ảnh",
-    "Trang chi tiết mỗi chương trình, trải nghiệm và câu chuyện",
-    "Biểu mẫu tạo bản nháp email không lưu dữ liệu",
-    "Bố cục mobile tự thiết kế, không nghiêng nguyên mảng"
+    "Hero điện ảnh với ba ảnh poster được chuyển bằng bộ chọn chương",
+    "Xem poster cỡ lớn, chọn chương và đóng bằng bàn phím Escape",
+    "Ba chương trình có trang riêng, ảnh minh họa và trải nghiệm chọn chủ đề",
+    "Biểu mẫu liên hệ chỉ mở bản nháp email, không lưu dữ liệu",
+    "Tương tác nhẹ, giảm chuyển động khi được yêu cầu và tối ưu mobile"
   ],
   "modules": [
     "content",

@@ -114,6 +114,11 @@ async function processNext(){
     fs.copyFileSync(destination,"public/template-previews/saas-product.jpg");
     versions["saas-product"]=hash;
    }
+   // Campaign V4 uses a single verified cinematic hero across default and VI covers.
+   if(template.slug==="campaign-landing"&&lang==="vi"){
+    fs.copyFileSync(destination,"public/template-previews/campaign-landing.jpg");
+    versions["campaign-landing"]=hash;
+   }
    // Keep the unlocalized fallback in sync with the latest verified VI 3D cover.
    if(template.slug==="fashion-archive"&&lang==="vi"){
     fs.copyFileSync(destination,"public/template-previews/fashion-archive.jpg");

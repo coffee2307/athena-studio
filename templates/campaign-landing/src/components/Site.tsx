@@ -7,9 +7,9 @@ import s from "./campaign-sovereign.module.css";
 type Section="home"|"work"|"services"|"about"|"contact"|"detail";
 type Props={section?:Section;itemIndex?:number;basePath?:string;assetBase?:string};
 const chapters=[
- {id:"01",slug:"sound",eyebrow:"ÂM THANH / NHỊP ĐIỆU",title:"Để thành phố lên tiếng.",short:"Nghe những điều bình thường theo cách khác.",detail:"Một góc nhìn giả định về âm thanh, chuyển động và nhịp sống. Không phải lịch diễn hoặc danh sách nghệ sĩ đã xác nhận.",call:"LẮNG NGHE",image:0},
- {id:"02",slug:"vision",eyebrow:"THỊ GIÁC / KHÔNG GIAN",title:"Nhìn lại điều quen thuộc.",short:"Thay đổi góc nhìn, mở ra một không gian mới.",detail:"Một chương hình ảnh minh họa cách nghệ thuật có thể biến bức tường, ánh sáng và phố xá thành chất liệu kể chuyện.",call:"QUAN SÁT",image:1},
- {id:"03",slug:"make",eyebrow:"XƯỞNG / THỰC HÀNH",title:"Ý tưởng cần người bắt đầu.",short:"Chạm vào chất liệu. Thử một điều chưa từng thử.",detail:"Một ý tưởng workshop mô phỏng, nơi người tham gia tự sáng tạo thay vì chỉ đứng nhìn. Không nhận đăng ký hoặc thu phí thật.",call:"TẠO NÊN",image:2}
+ {id:"01",slug:"sound",eyebrow:"ÂM THANH / NHỊP ĐIỆU",title:"Để thành phố lên tiếng.",short:"Khi mọi nhịp điệu tìm được tiếng nói chung.",detail:"Một góc nhìn giả định về âm thanh, chuyển động và nhịp sống. Không phải lịch diễn hoặc danh sách nghệ sĩ đã xác nhận.",call:"ÂM THANH",image:3},
+ {id:"02",slug:"vision",eyebrow:"THỊ GIÁC / KHÔNG GIAN",title:"Nhìn lại điều quen thuộc.",short:"Mỗi góc nhìn tạo nên một thế giới mới.",detail:"Một chương hình ảnh minh họa cách nghệ thuật có thể biến bức tường, ánh sáng và phố xá thành chất liệu kể chuyện.",call:"THỊ GIÁC",image:2},
+ {id:"03",slug:"make",eyebrow:"XƯỞNG / THỰC HÀNH",title:"Ý tưởng cần người bắt đầu.",short:"Gặp gỡ, đối thoại và cùng tạo ra điều mới.",detail:"Một ý tưởng workshop mô phỏng, nơi người tham gia tự sáng tạo thay vì chỉ đứng nhìn. Không nhận đăng ký hoặc thu phí thật.",call:"KẾT NỐI",image:0}
 ];
 const navigation:[string,string][]=[["Chương trình","/work"],["Trải nghiệm","/services"],["Câu chuyện","/about"]];
 export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:Props){
@@ -20,6 +20,7 @@ export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:Props
  const [interest,setInterest]=useState("Chương trình sáng tạo");
  const [notice,setNotice]=useState("");
  const stageRef=useRef<HTMLDivElement>(null);
+ const posterDialogRef=useRef<HTMLDialogElement>(null);
  const go=(target:string)=>basePath+(target==="/"?"":target);
  const media=site.images.map(file=>assetBase+file);
  const current=chapters[active];
@@ -75,19 +76,37 @@ export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:Props
    {[["Khám phá","/"],...navigation,["Liên hệ","/contact"]].map(([title,route],i)=><Link key={route} href={go(route)} onClick={()=>setMenu(false)}><small>0{i+1}</small>{title}<span aria-hidden="true">↗</span></Link>)}
    <p>Website mẫu sáng tạo. Không có hoạt động bán vé hoặc nhận đăng ký thực tế.</p>
   </div>
-  <main>
+  <main id="mo-main">
    {section==="home"&&<>
-    <section className={s.posterStage} data-dna04-artifact="campaign-landing-posterStage">
-     <div className={s.heroTop}><span>CHƯƠNG TRÌNH SÁNG TẠO — DEMO</span><span>KHÔNG CÓ NGÀY DIỄN RA THỰC TẾ</span></div>
-     <div className={s.heroText}>
-      <span className={s.heroOverline}><i/> KHÔNG GIAN MỞ / Ý TƯỞNG MỚI</span>
-      <h1>THÀNH PHỐ<br/><em>LÀ SÂN</em><br/>KHẤU<span className={s.heroPeriod}>.</span></h1>
-      <p>Không chỉ nhìn. Không chỉ nghe. Hãy bước vào một thành phố được kể lại bằng nghệ thuật và trí tưởng tượng.</p>
-      <div className={s.heroActions}><Link href={go("/work")} className={s.primary}>KHÁM PHÁ CHƯƠNG TRÌNH <span aria-hidden="true">↗</span></Link><button type="button" className={s.scrollAction} onClick={()=>stageRef.current?.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"})}>XEM TIẾP <span aria-hidden="true">↓</span></button></div>
+    <section className={s.posterStage} data-dna04-artifact="campaign-landing-posterStage" data-active-chapter={active}>
+     <div className={s.posterImages} aria-hidden="true">{chapters.map((ch,i)=><img key={ch.id} src={media[ch.image]} alt="" className={s.posterImage} data-visible={active===i} loading={i===0?"eager":"lazy"} fetchPriority={i===0?"high":"auto"}/>)}</div>
+     <div className={s.posterFilm} aria-hidden="true"/>
+     <div className={s.posterTopline}><span><i className={s.liveSymbol}/> MỞ / CULTURAL EXPERIMENT</span><span>2026 — CONCEPT EDITION</span><span>THÀNH PHỐ / KHÔNG GIỚI HẠN</span></div>
+     <div className={s.posterContent}>
+      <div className={s.posterEyebrow}><span className={s.posterChip}>CREATIVE CULTURE / 001</span><span className={s.posterEdition}>Một thành phố. Vô vàn cách cảm nhận.</span></div>
+      <h1 className={s.posterHeadline}><span>THÀNH PHỐ</span><span>LÀ SÂN <em>KHẤU.</em></span></h1>
+      <div className={s.posterIntro}>
+       <p>Không chỉ là một nơi chốn. Đây là lời mời nghe khác đi, nhìn gần hơn và biến thành phố thành không gian của mọi ý tưởng.</p>
+       <div className={s.posterActions}>
+        <Link href={go("/work")} className={s.posterPrimary}>KHÁM PHÁ 03 CHƯƠNG <span aria-hidden="true">↗</span></Link>
+        <button type="button" className={s.posterView} onClick={()=>posterDialogRef.current?.showModal()}>XEM POSTER <span aria-hidden="true">◌</span></button>
+       </div>
+      </div>
      </div>
-     <div className={s.heroArt} data-chapter={active} data-mo-poster><div className={s.artHalo} aria-hidden="true"/><span className={s.artTop} aria-hidden="true">THIS<br/>CITY</span><span className={s.artCenter} aria-hidden="true">MỞ</span><span className={s.artBottom} aria-hidden="true">IS YOUR<br/>STAGE.</span><span className={s.artSeal} aria-hidden="true">CONCEPT<br/>EDITION<br/>26</span><button type="button" className={s.posterDial} onClick={()=>setActive(i=>(i+1)%chapters.length)} aria-label={"Đổi poster sang chương tiếp theo. Hiện tại: "+current.eyebrow}><span>CHẠM ĐỂ ĐỔI POSTER <b aria-hidden="true">↗</b></span><strong aria-live="polite">{current.eyebrow}</strong><small>0{active+1} / 03 — POSTER TƯƠNG TÁC</small></button></div>
-     <div className={s.heroBottom}><span>01 / 03 — KHÁM PHÁ TỪNG CHƯƠNG</span><span>↓ CUỘN ĐỂ MỞ RA</span></div>
+     <div className={s.posterWatermark} aria-hidden="true">MỞ<span>®</span></div>
+     <div className={s.posterNavigation}>
+      <div className={s.posterNavIntro}><span>ĐANG KHÁM PHÁ</span><strong>0{active+1}<small> / 03</small></strong></div>
+      <div className={s.posterChapterButtons} role="group" aria-label="Chọn hình ảnh poster theo chương">{chapters.map((ch,i)=><button type="button" key={ch.id} onClick={()=>setActive(i)} aria-pressed={active===i} className={s.posterChapter}><span>0{i+1}</span><strong>{ch.call}</strong><small>{ch.eyebrow.split(" / ")[0]}</small><i aria-hidden="true"/></button>)}</div>
+      <button type="button" className={s.posterNext} aria-label="Chuyển đến chương tiếp theo" onClick={()=>setActive(i=>(i+1)%chapters.length)}><span aria-hidden="true">→</span></button>
+     </div>
+     <div className={s.posterBottomline}><span>GIẢI PHÓNG TƯỞNG TƯỢNG</span><span>SCROLL TO DISCOVER <span aria-hidden="true">↓</span></span></div>
     </section>
+    <dialog ref={posterDialogRef} className={s.posterModal} aria-label="Poster chương trình MỞ Festival">
+     <div className={s.posterModalBar}><span>MỞ FESTIVAL / POSTER EDITION</span><button type="button" aria-label="Đóng poster" onClick={()=>posterDialogRef.current?.close()}>ĐÓNG <span aria-hidden="true">×</span></button></div>
+     <figure className={s.posterModalArtwork}><img src={media[current.image]} alt={"Minh họa chương "+current.eyebrow}/><figcaption><small>0{active+1} / 03 — MỞ CONCEPT</small><strong>{current.call}</strong><p>{current.short}</p></figcaption></figure>
+     <div className={s.posterModalNav} role="group" aria-label="Chọn poster trong chế độ xem lớn">{chapters.map((ch,i)=><button key={ch.id} type="button" onClick={()=>setActive(i)} aria-pressed={active===i}>0{i+1} / {ch.call}</button>)}</div>
+     <p className={s.posterModalDisclaimer}>Hình ảnh minh họa. MỞ là chiến dịch giả định, không phải sự kiện đang bán vé.</p>
+    </dialog>
     <section className={s.manifesto} ref={stageRef}><span className={s.eyebrow}>BẢN TUYÊN NGÔN / 001</span><div><p>VẪN CÒN <strong>RẤT NHIỀU</strong> CÁCH ĐỂ NHÌN THẾ GIỚI.</p><Link href={go("/about")}>ĐÂY LÀ MỞ <span aria-hidden="true">↗</span></Link></div><span className={s.manifestoGlyph} aria-hidden="true">↗</span></section>
     <section className={s.chapterSection}>
      <div className={s.sectionHeading}><div><span className={s.eyebrow}>BA CHƯƠNG / MỘT Ý TƯỞNG</span><h2>MỞ TỪ<br/>MỌI PHÍA.</h2></div><p>Chọn một chương để thay đổi poster. Mỗi phần là một hướng khám phá của chương trình khái niệm.</p></div>

@@ -4,11 +4,11 @@
   "layout": "statement",
   "originalDemo": "/template-demos/campaign-landing",
   "status": "sovereign-interactive-demo",
-  "fidelity": "Original redesigned concept, with asset rights and visual review pending before public production",
+  "fidelity": "Independent cinematic campaign concept. Photographs are illustrative Pexels demo assets; verify downstream rights before production.",
   "license": {
     "name": "startbootstrap-landing-page",
     "url": "https://github.com/StartBootstrap/startbootstrap-landing-page",
     "license": "MIT"
   },
-  "version": "3.0.0"
+  "version": "4.0.0"
 }
