@@ -6,7 +6,7 @@ const registry=JSON.parse(fs.readFileSync("data/templates.json","utf8"));
 const dictionaries=JSON.parse(fs.readFileSync("data/template-locales.json","utf8"));
 const excluded=new Set(["wellness-clinic","property-showcase","education-platform","pet-store","construction-firm"]);
 const selection=(process.env.ONLY_SLUGS||process.env.ONLY_SLUG||"all").split(",").map(x=>x.trim()).filter(Boolean);
-const targets=registry.filter(t=>!excluded.has(t.slug)&&(selection.includes("all")||selection.includes(t.slug)));
+const targets=registry.filter(t=>selection.includes("all")?!excluded.has(t.slug):selection.includes(t.slug));
 if(selection.some(slug=>slug!=="all"&&!registry.some(t=>t.slug===slug)))throw Error("Unknown preview slug: "+selection.join(","));
 const origin=process.env.ATHENA_QA_ORIGIN||"http://127.0.0.1:3182";
 const versions=JSON.parse(fs.readFileSync("data/template-preview-versions.json","utf8"));
@@ -24,7 +24,7 @@ async function processNext(){
   try{
    const response=await page.goto(url,{waitUntil:"domcontentloaded",timeout:35000});
    if(response?.status()!==200)throw Error("HTTP "+response?.status());
-   await page.waitForTimeout(350);
+   await page.waitForTimeout(["pet-store","architecture-studio","hospitality-booking"].includes(template.slug)?900:350);
    if(!isQrio)await page.evaluate(({lang,dictionary})=>{
     const root=document.querySelector(".template-demo-main")||document.querySelector("#root")||document.body;
     const memo=new WeakMap(),amemo=new WeakMap();
@@ -90,7 +90,8 @@ async function processNext(){
     },null,{timeout:10000});
     await page.waitForTimeout(300);
    }
-   if(isStatic||template.slug==="fashion-archive")await page.addStyleTag({content:".athena-demo-float,.athena-demo-info,.athena-demo-float-handle{display:none!important}"});
+   // The cover must show the template itself, never Athena preview controls.
+   await page.addStyleTag({content:".athena-demo-float,.athena-demo-info,.athena-demo-float-handle{display:none!important}"});
    const state=await page.evaluate(()=>{
     const main=document.querySelector(".template-demo-main")||document.querySelector("#root")||document.body;
     const walker=document.createTreeWalker(main,NodeFilter.SHOW_TEXT);let n;const visible=[];
@@ -103,7 +104,18 @@ async function processNext(){
     return{title:document.title,examples:visible.slice(0,32),viFragments:visible.filter(x=>/[\u00c0-\u1ef9]/.test(x)).length,total:visible.length,overflow:document.documentElement.scrollWidth-innerWidth};
    });
    const stylesheets=await page.evaluate(()=>document.styleSheets.length);
-   if(stylesheets<(isQrio?1:isStatic?3:5))throw Error("Missing CSS: only "+stylesheets+" stylesheets");
+   // Standalone sovereign demos may ship only two CSS bundles. Validate actual
+   // rendered styles rather than requiring the old multi-style template shell.
+   const isIndependent=["pet-store","architecture-studio","hospitality-booking"].includes(template.slug);
+   const expectedSheets=isQrio?1:isStatic?3:isIndependent?2:5;
+   if(stylesheets<expectedSheets)throw Error("Missing CSS: only "+stylesheets+" stylesheets");
+   if(isIndependent){
+    const styled=await page.evaluate(slug=>{
+     const root=document.querySelector(slug==="pet-store"?"[data-dna04-artifact=\"pet-store-poppyScene\"]":slug==="hospitality-booking"?"[data-dna04-artifact=\"hospitality-booking-tableStage\"]":"[data-forma-home]");
+     return !!root&&getComputedStyle(root).display!=="none";
+    },template.slug);
+    if(!styled)throw Error("Independent template CSS / hero not mounted");
+   }
    const screenshot=await page.screenshot({animations:"disabled",timeout:30000});
    const destination="public/template-previews/"+template.slug+"-"+lang+".jpg";
    await sharp(screenshot).resize(1920,1200,{fit:"cover"}).jpeg({quality:87,mozjpeg:true,progressive:true}).toFile(destination);
@@ -118,6 +130,12 @@ async function processNext(){
    if(template.slug==="campaign-landing"&&lang==="vi"){
     fs.copyFileSync(destination,"public/template-previews/campaign-landing.jpg");
     versions["campaign-landing"]=hash;
+   }
+   // Preserve each independently styled demo cover in both localized cards and fallback.
+   // Prevent outdated images after a gallery redesign; avoid touching unrelated previews.
+   if(["pet-store","architecture-studio","hospitality-booking"].includes(template.slug)&&lang==="vi"){
+    fs.copyFileSync(destination,"public/template-previews/"+template.slug+".jpg");
+    versions[template.slug]=hash;
    }
    // Keep the unlocalized fallback in sync with the latest verified VI 3D cover.
    if(template.slug==="fashion-archive"&&lang==="vi"){

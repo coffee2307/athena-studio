@@ -2,17 +2,16 @@
   "slug": "hospitality-booking",
   "title": "Nhà hàng và đặt lịch",
   "industry": "Nhà hàng",
-  "style": "Warm Minimal",
+  "style": "Warm Dining Editorial / Table Invitation",
   "purpose": "Giới thiệu địa điểm và nhận đặt chỗ",
-  "description": "Thông tin địa điểm, thực đơn và hành động đặt chỗ được ưu tiên trên điện thoại.",
+  "description": "Bếp & Chuyện — trải nghiệm nhà hàng phong cách biên tập ẩm thực, ảnh không gian tràn khung và tấm thiệp thực đơn đặt nổi, có bộ lọc món và bản nháp đặt bàn.",
   "variant": "hospitality",
   "features": [
-    "Thông tin giờ mở cửa và địa điểm",
-    "Nội dung phục vụ lựa chọn dịch vụ",
-    "Module booking chỉ bật khi có backend đã kiểm thử",
-    "Website demo nhiều trang với điều hướng desktop/mobile",
-    "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
-    "Trải nghiệm trong popup hoặc mở toàn màn hình"
+    "Hero ảnh nhà hàng tràn khung và thiệp thực đơn phủ trên ảnh",
+    "Bộ ảnh bàn ăn thay đổi có điều khiển rõ ràng",
+    "Thực đơn có bộ lọc món và các trang món ăn",
+    "Biểu mẫu đặt bàn tạo bản nháp, không giữ chỗ thực tế",
+    "Bố cục mobile dạng tạp chí ẩm thực, hỗ trợ giảm chuyển động"
   ],
   "modules": [
     "content",

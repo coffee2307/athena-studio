@@ -343,14 +343,14 @@
     "title": "Nhà hàng và đặt lịch",
     "category": "Nhà hàng / Dịch vụ",
     "industry": "Nhà hàng",
-    "style": "Warm Minimal",
+    "style": "Warm Dining Editorial / Table Invitation",
     "purpose": "Giới thiệu địa điểm và nhận đặt chỗ",
-    "description": "Thông tin địa điểm, thực đơn và hành động đặt chỗ được ưu tiên trên điện thoại.",
+    "description": "Bếp & Chuyện — trải nghiệm nhà hàng phong cách biên tập ẩm thực, ảnh không gian tràn khung và tấm thiệp thực đơn đặt nổi, có bộ lọc món và bản nháp đặt bàn.",
     "variant": "hospitality",
     "tags": [
       "Hospitality",
-      "Booking",
-      "Mobile-first"
+      "Dining Editorial",
+      "Reservation Draft"
     ],
     "pages": [
       "Trang chủ",
@@ -361,19 +361,18 @@
       "Đặt bàn"
     ],
     "features": [
-      "Thông tin giờ mở cửa và địa điểm",
-      "Nội dung phục vụ lựa chọn dịch vụ",
-      "Module booking chỉ bật khi có backend đã kiểm thử",
-      "Website demo nhiều trang với điều hướng desktop/mobile",
-      "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
-      "Trải nghiệm trong popup hoặc mở toàn màn hình"
+      "Hero ảnh nhà hàng tràn khung và thiệp thực đơn phủ trên ảnh",
+      "Bộ ảnh bàn ăn thay đổi có điều khiển rõ ràng",
+      "Thực đơn có bộ lọc món và các trang món ăn",
+      "Biểu mẫu đặt bàn tạo bản nháp, không giữ chỗ thực tế",
+      "Bố cục mobile dạng tạp chí ẩm thực, hỗ trợ giảm chuyển động"
     ],
     "modules": [
       "content",
       "contact",
       "booking"
     ],
-    "version": "2.0.0",
+    "version": "4.0.0",
     "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
@@ -401,14 +400,14 @@
     "title": "Kiến trúc & không gian",
     "category": "Kiến trúc / Nội thất",
     "industry": "Kiến trúc",
-    "style": "Vật liệu tối giản",
+    "style": "Architectural Blueprint / Technical Monograph",
     "purpose": "Trưng bày công trình, quy trình và năng lực thiết kế",
-    "description": "Một portfolio giàu khoảng thở, để ảnh công trình dẫn dắt câu chuyện từ ý tưởng đến không gian hoàn thiện.",
+    "description": "FORMA — studio kiến trúc trình bày theo tinh thần bản vẽ kỹ thuật: nền xanh than, lưới tọa độ, chú thích hình và hành trình từ phác thảo đến vật liệu.",
     "variant": "architecture",
     "tags": [
       "Architecture",
-      "Interior",
-      "Portfolio"
+      "Blueprint",
+      "Material Study"
     ],
     "pages": [
       "Trang chủ",
@@ -419,18 +418,17 @@
       "Liên hệ"
     ],
     "features": [
-      "Bộ lọc công trình theo loại hình",
-      "Thư viện ảnh toàn màn hình",
-      "Trang dự án theo giai đoạn",
-      "Website demo nhiều trang với điều hướng desktop/mobile",
-      "Trang chi tiết, biểu mẫu tương tác và footer đầy đủ",
-      "Trải nghiệm trong popup hoặc mở toàn màn hình"
+      "Hero kiểu bản vẽ kiến trúc với lưới tọa độ và chú thích kỹ thuật",
+      "Chương kể chuyện tương tác theo quá trình thiết kế",
+      "So sánh bản vẽ và ảnh, lựa chọn vật liệu",
+      "Bộ ảnh công trình minh họa và trang dự án riêng",
+      "Responsive, giảm chuyển động, không nhận dự án hoặc đặt hàng thật"
     ],
     "modules": [
       "content",
       "contact"
     ],
-    "version": "2.0.0",
+    "version": "4.0.0",
     "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@1",
@@ -632,14 +630,14 @@
     "title": "Cửa hàng thú cưng Poppy",
     "category": "Lifestyle / Retail",
     "industry": "Thú cưng",
-    "style": "Playful Soft",
+    "style": "Playful Pet Zine / Sticker Collage",
     "purpose": "Website trình diễn với trải nghiệm theo ngành",
-    "description": "Poppy chọn đồ chơi, thức ăn và phụ kiện đáng yêu để mỗi ngày cùng thú cưng đều thú vị.",
+    "description": "Poppy & Co. — cửa hàng thú cưng minh họa với ảnh vui nhộn, nhãn dán, hình khối tự do và bộ chọn trải nghiệm cho chó, mèo, vui chơi.",
     "variant": "petshop",
     "tags": [
-      "Thú cưng",
-      "Playful Soft",
-      "Interactive multi-page"
+      "Pet Boutique",
+      "Playful",
+      "Sticker Collage"
     ],
     "pages": [
       "Trang chủ",
@@ -650,18 +648,18 @@
       "Liên hệ"
     ],
     "features": [
-      "Bố cục chuyên biệt theo ngành",
-      "Header, footer và menu điện thoại",
-      "Trang chi tiết & lọc nội dung",
-      "Biểu mẫu demo, không gửi dữ liệu thật",
-      "Hiệu ứng phản hồi và xem trước trực tiếp"
+      "Hero ảnh bo tự do, nhãn dán và phong cách tạp chí thú cưng",
+      "Chọn ba câu chuyện về chó, mèo và vui chơi ngay tại trang đầu",
+      "Danh mục nội dung và trang chi tiết độc lập",
+      "Thiết kế responsive, hiệu ứng nhẹ có giảm chuyển động",
+      "Đây là bản demo, không nhận đơn hàng hoặc thanh toán"
     ],
     "modules": [
       "content",
       "contact",
       "catalog"
     ],
-    "version": "3.0.0",
+    "version": "4.0.0",
     "status": "interactive-demo",
     "compatibility": {
       "starter": "web-foundation@2",

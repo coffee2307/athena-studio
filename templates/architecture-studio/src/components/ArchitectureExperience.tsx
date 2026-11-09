@@ -87,7 +87,7 @@ export function ArchitectureExperience({basePath="",assetBase="",images}:{basePa
      <small>EXPLORING SPACE, MATERIAL & LIGHT</small>
      <h1>Space <em>shapes</em> thought.</h1>
      <p>Architecture lives somewhere between the first line on paper and the way daylight enters a room.</p>
-     <Link className={s.primaryLink} href={go("/work")}>EXPLORE SELECTED STUDIES <span aria-hidden="true">↗</span></Link>
+     <Link className={s.primaryLink} href={go("/work")}>EXPLORE SELECTED STUDIES <span aria-hidden="true">+</span></Link>
      <div className={s.heroIndex}><span>01 / 04</span><span>SCROLL TO EXPLORE ↓</span></div>
     </div>
     <figure className={s.heroPicture}>
@@ -115,10 +115,10 @@ export function ArchitectureExperience({basePath="",assetBase="",images}:{basePa
    </div>
   </section>
   <section className={s.projects} data-reveal>
-   <div className={s.sectionTop}><span>02 / STUDIES IN SPACE</span><Link href={go("/work")}>VIEW THE INDEX <span aria-hidden="true">↗</span></Link></div>
+   <div className={s.sectionTop}><span>02 / STUDIES IN SPACE</span><Link href={go("/work")}>VIEW THE INDEX <span aria-hidden="true">+</span></Link></div>
    <div className={s.sectionHeading}><h2>Selected work<span>.</span></h2><p>Three visual studies that reveal how structure, proportion and light work together. These are illustrative concepts, not commissioned projects.</p></div>
    <div className={s.projectGrid}>{projects.map((p,i)=><Link href={go("/work/"+(i+1))} className={s.projectCard} key={p.title} data-index={i+1}>
-    <div className={s.projectImage}><img src={image(p.image)} alt={"Illustration of "+p.title}/><span className={s.projectArrow} aria-hidden="true">↗</span></div>
+    <div className={s.projectImage}><img src={image(p.image)} alt={"Illustration of "+p.title}/><span className={s.projectArrow} aria-hidden="true">+</span></div>
     <div className={s.projectCaption}><small>0{i+1} / {p.type}</small><h3>{p.title}</h3><p>{p.description}</p></div>
    </Link>)}</div>
   </section>
@@ -157,8 +157,8 @@ export function ArchitectureExperience({basePath="",assetBase="",images}:{basePa
    </div>
   </section>
   <section className={s.gallerySection} data-reveal><div className={s.sectionTop}><span>05 / LIGHT IN FRAMES</span><span>VISUAL ARCHIVE</span></div><h2>A quieter point of view.</h2>
-   <div className={s.galleryLayout}><figure><img key={gallery} src={image(gallery+1)} alt={"FORMA visual archive image "+(gallery+1)}/><figcaption>ARCHIVE / 0{gallery+1} OF 04</figcaption></figure><div className={s.galleryAside}><span>CURATED FRAMES</span><p>Each image explores a different quality of light, structure and material.</p><div className={s.galleryControls}><button onClick={()=>setGallery(v=>(v+3)%4)} aria-label="Previous archive image" type="button">←</button><span>0{gallery+1} / 04</span><button onClick={()=>setGallery(v=>(v+1)%4)} aria-label="Next archive image" type="button">→</button></div><Link href={go("/about")}>OUR PERSPECTIVE ↗</Link></div></div>
+   <div className={s.galleryLayout}><figure><img key={gallery} src={image(gallery+1)} alt={"FORMA visual archive image "+(gallery+1)}/><figcaption>ARCHIVE / 0{gallery+1} OF 04</figcaption></figure><div className={s.galleryAside}><span>CURATED FRAMES</span><p>Each image explores a different quality of light, structure and material.</p><div className={s.galleryControls}><button onClick={()=>setGallery(v=>(v+3)%4)} aria-label="Previous archive image" type="button">←</button><span>0{gallery+1} / 04</span><button onClick={()=>setGallery(v=>(v+1)%4)} aria-label="Next archive image" type="button">→</button></div><Link href={go("/about")}>OUR PERSPECTIVE +</Link></div></div>
   </section>
-  <section className={s.finalCta} data-reveal><small>EVERY SPACE HAS A FIRST LINE</small><h2>Begin with a conversation.</h2><p>Tell us about a place, a material, or the way you want to live in a space.</p><Link href={go("/contact")}>START A CONVERSATION <span aria-hidden="true">↗</span></Link></section>
+  <section className={s.finalCta} data-reveal><small>EVERY SPACE HAS A FIRST LINE</small><h2>Begin with a conversation.</h2><p>Tell us about a place, a material, or the way you want to live in a space.</p><Link href={go("/contact")}>START A CONVERSATION <span aria-hidden="true">+</span></Link></section>
  </div>;
 }

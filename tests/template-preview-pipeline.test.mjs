@@ -10,7 +10,7 @@ const registry=JSON.parse(read("data/templates.json"));
 const versions=JSON.parse(read("data/template-preview-versions.json"));
 const removed=["editorial-journal","music-label","live-concert","team-intranet","engineering-industry","finance-trust"];
 // These templates have approved separate VI/EN screenshots, in addition to legacy covers.
-const localized=["creative-studio","modern-corporate","commerce-standard","fashion-archive","saas-product","campaign-landing","hospitality-booking","architecture-studio","auto-showroom","digital-creators"];
+const localized=["creative-studio","modern-corporate","commerce-standard","fashion-archive","saas-product","campaign-landing","hospitality-booking","architecture-studio","pet-store","auto-showroom","digital-creators"];
 
 test("the reduced gallery has exactly 15 standalone demos and no removed exposure",()=>{
  assert.equal(registry.length,15);
