@@ -195,3 +195,15 @@
 @media (prefers-reduced-motion:reduce){
  .moc :global([data-dna04-artifact]){transition:none!important;transform:none!important;box-shadow:none!important}
 }
+
+/* MỘC: add-to-cart remains a true circular control with mathematically centered strokes. */
+.tileAdd{width:44px;height:44px;min-width:44px;min-height:44px;display:grid;place-items:center;padding:0;line-height:1}
+.plusMark{display:block;position:relative;width:18px;height:18px;flex-shrink:0}
+.plusMark::before,.plusMark::after{content:"";position:absolute;top:50%;left:50%;background:currentColor;border-radius:4px;transform:translate(-50%,-50%)}
+.plusMark::before{width:16px;height:1.6px}.plusMark::after{width:1.6px;height:16px}
+.tileAdd:focus-visible{outline:3px solid #a46b4f;outline-offset:3px}
+
+.browseClose{border:0!important;border-radius:999px;padding:8px 14px;min-height:44px}
+.browseClose:hover{background:#f5e9df}
+.moc button[aria-label="Đóng giỏ"]{border:0!important;background:transparent!important;width:44px;height:44px;min-width:44px;min-height:44px;border-radius:50%;display:grid;place-items:center;font:400 27px/1 Arial,sans-serif}
+.moc button[aria-label="Đóng giỏ"]:hover{background:#e9dfd5!important}

@@ -11,9 +11,9 @@ test("mobile gallery navigates straight to real demo, desktop retains modal",()=
  assert.match(source,/openExperience\(item\)/);
  assert.match(source,/TemplateDemoModal template=\{selected\}/);
 });
-test("Each Next demo is free of Athena floating widgets while the gallery retains its own details",()=>{
+test("Every standalone Next demo restores the floating information card",()=>{
  const site=read("components/layout/SiteChrome.tsx");
- assert.doesNotMatch(site,/TemplateExperienceInfo/);
+ assert.match(site,/TemplateExperienceInfo slug=\{pathname\.split/);
  assert.match(site,/TemplateLocaleBridge/);
  assert.match(site,/className="template-demo-main"/);
  const gallery=read("components/templates/TemplateGallery.tsx");
@@ -27,14 +27,15 @@ test("desktop modal controls and sidebar remain unchanged",()=>{
  assert.match(modal,/setDevice\("mobile"\)/);
  assert.match(modal,/template-demo-info/);
 });
-test("Digital Creators information overlay is opt-in and never covers the native UI by default",()=>{
+test("Digital Creators standalone demo restores information overlay, excluding iframe previews",()=>{
  const html=read("public/immersive/digital-creators/index.html");
  const js=read("public/athena-digital-demo-info.js");
  const css=read("public/athena-demo-info.css");
  assert.match(html,/athena-demo-info\.css/);
  assert.match(html,/athena-digital-demo-info\.js/);
  assert.match(js,/window\.self!==window\.top/);
- assert.match(js,/get\("athenaInfo"\)!=="1"/);
+ assert.doesNotMatch(js,/get\("athenaInfo"\)/);
+ assert.match(js,/sessionStorage\.getItem\(key\)!=="collapsed"/);
  assert.match(js,/sessionStorage/);
  assert.match(css,/safe-area-inset-bottom/);
  assert.match(css,/min-width:44px/);

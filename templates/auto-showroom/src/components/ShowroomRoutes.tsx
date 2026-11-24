@@ -35,7 +35,7 @@ export function AutoShowroomSubpages({section,itemIndex=1,world,extra}:Props){
      <span className="velar-study-number">0{index+1}</span><div><small>{item.label}</small><h2>{item.title}</h2><p>{item.text}</p></div><span className="velar-row-arrow"><Arrow/></span>
     </Link>)}
    </section>
-   <div className="velar-work-end"><span>FORM / SURFACE / AERODYNAMICS</span><span>01 — 03</span></div>
+   <div className="velar-work-end"><span>FORM · SURFACE · AERODYNAMICS</span><span>01 — 03</span></div>
    {closing}
   </>}
   {section==="detail"&&<>
@@ -60,7 +60,7 @@ export function AutoShowroomSubpages({section,itemIndex=1,world,extra}:Props){
     <div className="velar-process-title"><span>THE EXPERIENCE</span><h2>Ít giao diện.<br/>Nhiều không gian.</h2><Link className="velar-inline" href={base+"/experience"}>MỞ SHOWROOM 3D <Arrow/></Link></div>
     <div className="velar-process-list">{extra.services.map((item,index)=><details key={item.number} open={index===0}><summary><span>0{index+1}</span><strong>{item.title}</strong><span aria-hidden="true">+</span></summary><p>{item.detail}</p><small>{item.outcome}</small></details>)}</div>
    </section>
-   <div className="velar-process-bottom"><span>INTERACTION / RESPONSIVE / MATERIAL</span><Link href={base+"/contact"}>GỬI YÊU CẦU DEMO <Arrow/></Link></div>{closing}
+   <div className="velar-process-bottom"><span>INTERACTION · RESPONSIVE · MATERIAL</span><Link href={base+"/contact"}>GỬI YÊU CẦU DEMO <Arrow/></Link></div>{closing}
   </>}
   {section==="about"&&<>
    <section className="velar-about-head"><Breadcrumb label="Design philosophy"/><Pad number="03"/><span className="velar-overline">A STUDY IN RESTRAINT</span><h1>LESS NOISE.<br/><em>MORE FORM.</em></h1><p>BLACK VELOCITY là bản trình diễn cách một trải nghiệm xe 3D có thể trở nên tập trung: cho phép đường nét, chiều sâu và vật liệu tự kể câu chuyện.</p></section>
@@ -70,7 +70,7 @@ export function AutoShowroomSubpages({section,itemIndex=1,world,extra}:Props){
   {section==="contact"&&<>
    <section className="velar-contact-head"><Breadcrumb label="Enquiry"/><Pad number="04"/><h1>LET&apos;S TALK<br/><em>EXPERIENCE.</em></h1><p>Chia sẻ hướng trải nghiệm bạn muốn thử. Đây là biểu mẫu mô phỏng, không gửi dữ liệu hay tạo yêu cầu tư vấn xe thực tế.</p></section>
    <section className="velar-contact-main">
-    <aside><span>01 / YOUR ENQUIRY</span><h2>Start with<br/>one idea.</h2><p>{extra.contactIntro}</p><div><strong>DEMO STATUS</strong><span>Không gửi dữ liệu lên máy chủ.</span></div></aside>
+    <aside><span>YOUR ENQUIRY</span><h2>Start with<br/>one idea.</h2><p>{extra.contactIntro}</p><div><strong>DEMO STATUS</strong><span>Không gửi dữ liệu lên máy chủ.</span></div></aside>
     <form onSubmit={(event:FormEvent<HTMLFormElement>)=>{event.preventDefault();setSubmitted(true);}}>
      <div className="velar-form-pair"><label htmlFor={uid+"-name"}>Tên của bạn *<input id={uid+"-name"} autoComplete="name" required minLength={2} placeholder="Họ và tên"/></label><label htmlFor={uid+"-email"}>Email *<input id={uid+"-email"} type="email" autoComplete="email" required placeholder="ten@example.com"/></label></div>
      <label htmlFor={uid+"-topic"}>Nội dung quan tâm *<select id={uid+"-topic"} required defaultValue=""><option value="" disabled>Chọn một hướng trải nghiệm</option>{extra.services.map(item=><option key={item.number} value={item.title}>{item.title}</option>)}<option value="other">Trao đổi khác</option></select></label>

@@ -39,7 +39,7 @@ export default function HeroRubikCard() {
     <div className="scene-blob scene-blob-a"/><div className="scene-blob scene-blob-b"/>
     <div className="hero3d-floating-stage">
       <div className="hero3d-card">
-        <div className="teaser-windowbar"><span/><span/><span/><small>digital-creators / lab-01</small></div>
+        <div className="teaser-windowbar"><span/><span/><span/><small>digital-creators · lab-01</small></div>
         <div className="hero3d-head"><span>CREATIVE LOGIC</span><strong>THINK<br/>BEYOND.</strong></div>
         <div className="hero3d-cube-position">
           <div className="hero3d-cube" aria-hidden="true">
@@ -48,7 +48,7 @@ export default function HeroRubikCard() {
           </div>
           <div className="hero3d-floor-shadow"/>
         </div>
-        <div className="hero3d-footer"><span>03 × 03 / EXPLORE</span><span>PLAY WITH IDEAS <Sparkles size={14}/></span></div>
+        <div className="hero3d-footer"><span>03 × 03 · EXPLORE</span><span>PLAY WITH IDEAS <Sparkles size={14}/></span></div>
         <div className="hero3d-glare"/>
       </div>
     </div>

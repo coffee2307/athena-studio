@@ -5,11 +5,11 @@ import { useScrollScene } from '../hooks/useScrollScene'
 import MobilePaintingCanvas from './MobilePaintingCanvas'
 
 const chapters = [
-  { label: '01 / KHỞI NGUỒN', headline: <>Một khoảng trắng. <em>Vô vàn ý tưởng.</em></>,
+  { label: 'KHỞI NGUỒN', headline: <>Một khoảng trắng. <em>Vô vàn ý tưởng.</em></>,
     desc: 'Cũng như một bức tranh bắt đầu từ tấm toan, hành trình sáng tạo bắt đầu từ trí tò mò.' },
-  { label: '02 / NÉT CỌ', headline: <>Mỗi nét vẽ đem <em>cảm hứng thành hình.</em></>,
+  { label: 'NÉT CỌ', headline: <>Mỗi nét vẽ đem <em>cảm hứng thành hình.</em></>,
     desc: 'Từng dải sơn dầu, nét cọ chồng lên nhau và những sắc màu bất ngờ dần kể nên một câu chuyện.' },
-  { label: '03 / TÁC PHẨM', headline: <>Biến cảm hứng thành <em>một thế giới rực rỡ.</em></>,
+  { label: 'TÁC PHẨM', headline: <>Biến cảm hứng thành <em>một thế giới rực rỡ.</em></>,
     desc: 'Một tác phẩm được hình thành từng nét — như những ý tưởng số mà chúng ta có thể cùng nhau tạo ra.' },
 ]
 
@@ -32,7 +32,7 @@ export default function PaintingAboutVisual() {
     aria-label="Cọ sơn dầu vẽ từ trên xuống dưới, đồng bộ theo cuộn trang">
     <div className="motion-sticky painting-stage">
       <div className="motion-topline">
-        <span><Paintbrush size={15}/> DIGITAL CREATORS / ART IN MOTION</span>
+        <span><Paintbrush size={15}/>ART IN MOTION</span>
         <span>OIL PAINTING <ArrowDown size={14}/></span>
       </div>
       <div className="motion-copy">
@@ -57,7 +57,7 @@ export default function PaintingAboutVisual() {
         BỎ QUA HIỆU ỨNG 
       </button>
       <div className="motion-footer">
-        <span>IMAGINE / PAINT / CREATE</span>
+        <span>IMAGINE · PAINT · CREATE</span>
         <div className="motion-progress"><i style={{ width: progress * 100 + '%' }}/></div>
         <strong>0{step + 1} / 03</strong>
       </div>

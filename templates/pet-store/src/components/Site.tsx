@@ -25,7 +25,7 @@ export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:{sect
  <main>
  {section==="home"&&<>
   <section className={style.poppyScene} data-dna04-artifact="pet-store-poppyScene">
-   <div className={style.poppyKicker}><span>POPPY & CO. / LITTLE THINGS, BIG FEELINGS</span><span>MADE FOR YOUR FAVOURITE SIDEKICK</span></div>
+   <div className={style.poppyKicker}><span>LITTLE THINGS, BIG FEELINGS</span><span>MADE FOR YOUR FAVOURITE SIDEKICK</span></div>
    <figure className={style.heroFigure}>
     <img key={selected} src={media[selected%media.length]} alt={"Ảnh minh họa "+artifacts[selected].title} fetchPriority="high"/>
     <div className={style.poppyPhotoBadge} aria-hidden="true"><span>100%</span>GOOD<br/>BOY<br/>ENERGY</div>
@@ -52,6 +52,6 @@ export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:{sect
  {section==="about"&&<PoppyMarket section="about" itemIndex={itemIndex} basePath={basePath} assetBase={assetBase} images={site.images}/>}
  {section==="contact"&&<PoppyMarket section="contact" itemIndex={itemIndex} basePath={basePath} assetBase={assetBase} images={site.images}/>}
  </main>
-<footer className={frame.footer}><div className={frame.footerGraphic}>GOOD <em>PET</em> DAYS.</div><div className={frame.footerContent}><div><strong>{site.brand}</strong><p>Một góc nhỏ về tình bạn với thú cưng, được thiết kế như một cửa hàng concept vui nhộn.</p></div><nav aria-label="Điều hướng cuối trang">{navItems.map(([label,path])=><Link href={go(path)} key={path}>{label}</Link>)}</nav></div><small>POPPY & CO. / ATHENA STUDIO — WEBSITE DEMO. Không có sản phẩm thực tế, đơn hàng hoặc thanh toán.</small></footer>
+<footer className={frame.footer}><div className={frame.footerGraphic}>GOOD <em>PET</em> DAYS.</div><div className={frame.footerContent}><div><strong>{site.brand}</strong><p>Một góc nhỏ về tình bạn với thú cưng, được thiết kế như một cửa hàng concept vui nhộn.</p></div><nav aria-label="Điều hướng cuối trang">{navItems.map(([label,path])=><Link href={go(path)} key={path}>{label}</Link>)}</nav></div><small>ATHENA STUDIO — WEBSITE DEMO. Không có sản phẩm thực tế, đơn hàng hoặc thanh toán.</small></footer>
  </div>;
 }

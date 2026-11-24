@@ -96,7 +96,7 @@ function ActivityCards() {
     {plannedActivities.map((activity, i) => {
       const Icon = icons[i]
       return <article className={'activity theme-' + activity.tone} key={activity.number}>
-        <div className="activity-art"><span className="activity-counter">{activity.number} / DỰ KIẾN</span><div className="activity-icon"><Icon size={62} strokeWidth={1.1}/></div><span className="star star-left">·</span><span className="star star-right">✦</span></div>
+        <div className="activity-art"><span className="activity-counter">HOẠT ĐỘNG DỰ KIẾN</span><div className="activity-icon"><Icon size={62} strokeWidth={1.1}/></div><span className="star star-left">·</span><span className="star star-right">✦</span></div>
         <div className="activity-text"><span className="activity-kind">{activity.category}</span><h3>{activity.title}</h3><p>{activity.description}</p><div className="tags">{activity.tags.map(tag => <span key={tag}>{tag}</span>)}</div></div>
       </article>
     })}
@@ -115,12 +115,12 @@ function Home() {
     </div><HeroRubikCard/></section>
     <div className="marquee" aria-label="Sáng tạo, kết nối, phát triển"><div className="marquee-rail">{[0,1].map(i=><span key={i}>DESIGN <b>·</b> CODE <b>·</b> CREATE <b>·</b> EXPLORE <b>·</b> CONNECT <b>·</b> </span>)}</div></div>
     <Suspense fallback={<div className="visual-scene-loading">Đang tải không gian Rubik…</div>}><RubikScrollStory/></Suspense>
-    <section className="section wrap"><div className="section-heading"><Intro code="01 / KHÁM PHÁ" title="Có rất nhiều cách để sáng tạo." desc="Không cần giỏi sẵn từ đầu. Chỉ cần tò mò, dám thử và sẵn sàng cùng nhau học hỏi."/><span className="side-note">FIND YOUR THING </span></div><FieldCards/></section>
+    <section className="section wrap"><div className="section-heading"><Intro code="KHÁM PHÁ" title="Có rất nhiều cách để sáng tạo." desc="Không cần giỏi sẵn từ đầu. Chỉ cần tò mò, dám thử và sẵn sàng cùng nhau học hỏi."/><span className="side-note">FIND YOUR THING </span></div><FieldCards/></section>
     <CreativeLab/>
     <section className="section story"><div className="wrap story-grid"><div className="story-art"><div className="orbit orbit-outer"/><div className="orbit orbit-inner"/><div className="idea-center"><Lightbulb size={78} strokeWidth={1.2}/></div><span className="idea-pill idea-top">IDEAS <Sparkles size={15}/></span><span className="idea-pill idea-bottom">MAKE IT REAL <ArrowRight size={15}/></span></div>
-      <div className="story-content"><Eyebrow>02 / CÂU CHUYỆN</Eyebrow><h2>Từ một ý tưởng nhỏ, <em>có thể bắt đầu</em> điều lớn lao.</h2><p>Digital Creators được đề xuất nhằm tạo một môi trường học sinh cùng khám phá thiết kế, công nghệ và sáng tạo nội dung, học qua trải nghiệm và phát triển kỹ năng cùng nhau.</p><div className="story-values"><span><Check size={17}/> Học hỏi cùng nhau</span><span><Check size={17}/> Trân trọng mọi ý tưởng</span><span><Check size={17}/> Cùng tạo nên sản phẩm số</span></div><Link className="text-link" to="/gioi-thieu">Khám phá câu chuyện <ArrowRight size={18}/></Link></div>
+      <div className="story-content"><Eyebrow>CÂU CHUYỆN</Eyebrow><h2>Từ một ý tưởng nhỏ, <em>có thể bắt đầu</em> điều lớn lao.</h2><p>Digital Creators được đề xuất nhằm tạo một môi trường học sinh cùng khám phá thiết kế, công nghệ và sáng tạo nội dung, học qua trải nghiệm và phát triển kỹ năng cùng nhau.</p><div className="story-values"><span><Check size={17}/> Học hỏi cùng nhau</span><span><Check size={17}/> Trân trọng mọi ý tưởng</span><span><Check size={17}/> Cùng tạo nên sản phẩm số</span></div><Link className="text-link" to="/gioi-thieu">Khám phá câu chuyện <ArrowRight size={18}/></Link></div>
     </div></section>
-    <section className="section wrap"><div className="section-heading"><Intro code="04 / CÙNG THỰC HIỆN" title="Không chỉ học. Chúng mình còn tạo ra." desc="Các nội dung sau là những hoạt động dự kiến tổ chức sau khi câu lạc bộ được thành lập."/><Link className="text-link" to="/hoat-dong">Xem tất cả <ArrowRight size={18}/></Link></div><ActivityCards/></section>
+    <section className="section wrap"><div className="section-heading"><Intro code="CÙNG THỰC HIỆN" title="Không chỉ học. Chúng mình còn tạo ra." desc="Các nội dung sau là những hoạt động dự kiến tổ chức sau khi câu lạc bộ được thành lập."/><Link className="text-link" to="/hoat-dong">Xem tất cả <ArrowRight size={18}/></Link></div><ActivityCards/></section>
     <section className="section wrap"><CallToAction/></section>
   </>
 }
@@ -177,7 +177,7 @@ function Register() {
       <div className="register-card"><div className="form-title"><span className="form-mark"><Send size={24}/></span><div><h2>Đăng ký tham gia</h2><p>Biểu mẫu mô phỏng · Chưa tiếp nhận đăng ký thật</p></div></div>
       {sent ? <div className="form-success" role="status"><div className="success-icon"><Check size={32}/></div><h3>Hoàn tất bản đăng ký mô phỏng!</h3><p>Bạn đã trải nghiệm thành công biểu mẫu. Không có thông tin nào được gửi đi hoặc lưu trữ. Khi CLB được thành lập và mở đăng ký thật, website sẽ được cập nhật.</p><button className="btn btn-ink" onClick={()=>setSent(false)}>Thử đăng ký lại <ArrowRight size={18}/></button></div> :
       <form onSubmit={handleSubmit}><div className="form-field"><label htmlFor="full-name">Họ và tên <b>*</b></label><input required maxLength={100} id="full-name" name="full-name" autoComplete="name" placeholder="Nhập họ và tên của bạn"/></div>
-      <div className="form-row"><div className="form-field"><label htmlFor="classroom">Lớp <b>*</b></label><input required maxLength={30} id="classroom" name="classroom" placeholder="Ví dụ: 12A1"/></div><div className="form-field"><label htmlFor="contact">Email / liên hệ <b>*</b></label><input required maxLength={120} id="contact" name="contact" placeholder="Thông tin liên hệ"/></div></div>
+      <div className="form-row"><div className="form-field"><label htmlFor="classroom">Lớp <b>*</b></label><input required maxLength={30} id="classroom" name="classroom" placeholder="Ví dụ: 12A1"/></div><div className="form-field"><label htmlFor="contact">Email · liên hệ <b>*</b></label><input required maxLength={120} id="contact" name="contact" placeholder="Thông tin liên hệ"/></div></div>
       <fieldset className="form-field interest-field"><legend>Bạn quan tâm lĩnh vực nào? <b>*</b></legend><p>Có thể chọn nhiều lĩnh vực</p><div className="choices">{interests.map((interest, i) => {const Icon = fieldIcons[i];const active=chosen.includes(interest);return <label key={interest} className={'choice'+(active?' checked':'')}><input type="checkbox" name="interest" value={interest} checked={active} onChange={()=>toggle(interest)}/><Icon size={17}/><span>{interest}</span><span className="checkbox-indicator">{active && <Check size={13}/>}</span></label>})}</div>{error&&<span className="field-error" role="alert">Vui lòng chọn ít nhất một lĩnh vực.</span>}</fieldset>
       <div className="form-field"><label htmlFor="motivation">Lý do muốn tham gia CLB <b>*</b></label><textarea required maxLength={1000} minLength={5} rows={4} id="motivation" name="motivation" placeholder="Điều gì khiến bạn hào hứng với sáng tạo số?"/></div>
       <div className="form-disclaimer">Đây là website minh họa. Nút gửi chỉ hiển thị xác nhận, không thu thập dữ liệu thật.</div><button className="btn btn-ink submit" type="submit">Gửi đăng ký mô phỏng <ArrowRight size={18}/></button></form>}
@@ -185,7 +185,7 @@ function Register() {
     </section>
   </>
 }
-function NotFound() {return <div className="not-found wrap"><span>404 / LOST IN SPACE</span><h1>Trang này chưa tồn tại.</h1><p>Đôi khi một đường dẫn cũng cần một chút sáng tạo.</p><Link className="btn btn-ink" to="/">Trở về trang chủ <ArrowRight size={18}/></Link></div>}
+function NotFound() {return <div className="not-found wrap"><span>404 · LOST IN SPACE</span><h1>Trang này chưa tồn tại.</h1><p>Đôi khi một đường dẫn cũng cần một chút sáng tạo.</p><Link className="btn btn-ink" to="/">Trở về trang chủ <ArrowRight size={18}/></Link></div>}
 
 function AppShell() {
   return <><ScrollReveals/><Header/><main id="main" tabIndex={-1}><Routes><Route path="/" element={<Home/>}/><Route path="/gioi-thieu" element={<About/>}/><Route path="/hoat-dong" element={<Activities/>}/><Route path="/dang-ky" element={<Register/>}/><Route path="*" element={<NotFound/>}/></Routes></main><Footer/></>

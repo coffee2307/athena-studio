@@ -19,10 +19,9 @@ export function TemplateExperienceInfo({slug}:{slug:string}){
  const key="athena-demo-info:"+slug;
  useEffect(()=>{
   setEligible(window.self===window.top&&new URLSearchParams(window.location.search).get("embed")!=="1");
-  // Immersive showroom controls must be available on first entry at every viewport.
-  if(slug==="auto-showroom"){setExpanded(false);return;}
-  setExpanded(false);
- },[slug]);
+  // Restore the information card on every direct template visit. User minimization is per template.
+  try{setExpanded(window.sessionStorage.getItem(key)!=="collapsed");}catch{setExpanded(true);}
+ },[slug,key]);
  const toggle=useCallback((next:boolean)=>{
   setExpanded(next);
   try{window.sessionStorage.setItem(key,next?"expanded":"collapsed");}catch{}
@@ -38,7 +37,7 @@ export function TemplateExperienceInfo({slug}:{slug:string}){
  return <aside className={"athena-demo-float"+(expanded?" is-expanded":" is-collapsed")} data-athena-demo-info={slug} aria-label={"Thông tin mẫu "+template.title}>
   <div id={id} className="athena-demo-float-panel" aria-hidden={!expanded} inert={!expanded}>
    <div className="athena-demo-float-header">
-    <span>ATHENA / WEBSITE DEMO</span>
+    <span>ATHENA STUDIO · BẢN XEM TRƯỚC</span>
     <button type="button" className="athena-demo-float-toggle" onClick={()=>toggle(false)} aria-controls={id} aria-expanded={expanded} aria-label="Thu nhỏ bảng thông tin mẫu" title="Thu nhỏ"><ZoomIcon out/></button>
    </div>
    <p className="athena-demo-float-brand">{site?.owner?.replaceAll("-"," ")??"WEBSITE"}</p>
@@ -46,8 +45,8 @@ export function TemplateExperienceInfo({slug}:{slug:string}){
    <p className="athena-demo-float-category">{template.industry} · {template.style}</p>
    <div className="athena-demo-float-price"><span>Chi phí dự kiến</span><strong>{template.estimatedPrice}</strong></div>
    <div className="athena-demo-float-links">
-    <Link href={inquiry}>Tùy biến mẫu này <span aria-hidden="true">→</span></Link>
-    <Link href="/services/web-development/templates">Thư viện mẫu</Link>
+    <Link href={inquiry}>Tùy biến mẫu này</Link>
+    <Link href="/services/web-development/templates">Quay lại thư viện</Link>
    </div>
    <p className="athena-demo-float-note">Bản trình diễn · Chưa phải báo giá chính thức</p>
   </div>

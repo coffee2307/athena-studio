@@ -40,3 +40,14 @@ body:has(.dc-constellation-toggle) .theme-toggle{min-width:44px;min-height:44px}
  html:has(.dc-constellation-toggle),body:has(.dc-constellation-toggle){overflow-x:clip}
  body:has(.dc-constellation-toggle) .nav-actions{transform:translateX(-20px)!important}
 }
+
+/* Restore a light, accessible Athena information dock; no framed-square minimize control. */
+.athena-demo-float{z-index:310}
+.athena-demo-float-panel{width:min(324px,calc(100vw - 28px));border:1px solid #dadcd5;border-radius:19px;box-shadow:0 18px 50px #0c151a35;padding:16px 17px 13px}
+.athena-demo-float-toggle{border:0!important;background:transparent!important;border-radius:50%!important;color:#1f2a26;min-width:44px;min-height:44px;width:44px;height:44px}
+.athena-demo-float-toggle:hover{background:#e9eee8!important}
+.athena-demo-float-handle{border-radius:50%!important;background:#fdfdf9;border:1px solid #aab5aa!important;width:48px;height:48px}
+.athena-demo-float-header>span{font-size:10px;letter-spacing:.03em}
+.athena-demo-float-links a{border-radius:9px}
+.athena-demo-float-links a:last-child{text-align:center;min-width:96px}
+@media(max-width:760px){.athena-demo-float-panel{max-height:min(66dvh,390px);width:min(300px,calc(100vw - 26px));padding:14px}.athena-demo-float{left:13px}}

@@ -214,9 +214,9 @@ function CityCanvas({progressRef,reduced,dark}:{progressRef:React.RefObject<numb
   </Canvas>
 }
 const steps=[
- {label:'01 / Ý TƯỞNG',heading:<>Mỗi thành phố khởi đầu từ <em>một viên gạch.</em></>,description:'Những ý tưởng nhỏ đang tìm đến nhau — mỗi viên gạch đều có vị trí trong một tổng thể lớn.'},
- {label:'02 / HỢP TÁC',heading:<>Kết nối từng <em>mảnh sáng tạo.</em></>,description:'Những khối lắp ghép tạo thành các studio, tòa nhà và không gian chung khi bạn tiếp tục cuộn.'},
- {label:'03 / THÀNH PHẨM',heading:<>Một thành phố được tạo nên <em>cùng nhau.</em></>,description:'Từ từng chi tiết nhỏ tới một thành phố sáng tạo có ánh đèn, quảng trường và những công trình đầy màu sắc.'},
+ {label:'Ý TƯỞNG',heading:<>Mỗi thành phố khởi đầu từ <em>một viên gạch.</em></>,description:'Những ý tưởng nhỏ đang tìm đến nhau — mỗi viên gạch đều có vị trí trong một tổng thể lớn.'},
+ {label:'HỢP TÁC',heading:<>Kết nối từng <em>mảnh sáng tạo.</em></>,description:'Những khối lắp ghép tạo thành các studio, tòa nhà và không gian chung khi bạn tiếp tục cuộn.'},
+ {label:'THÀNH PHẨM',heading:<>Một thành phố được tạo nên <em>cùng nhau.</em></>,description:'Từ từng chi tiết nhỏ tới một thành phố sáng tạo có ánh đèn, quảng trường và những công trình đầy màu sắc.'},
 ]
 export default function LegoActivitiesVisual(){
   const {sectionRef,progress,progressRef,reducedMotion}=useScrollScene()
@@ -224,7 +224,7 @@ export default function LegoActivitiesVisual(){
   const phase=progress<.3?0:progress<.8?1:2
   return <section ref={sectionRef} className={'motion-chapter city-story'+(reducedMotion?' motion-reduced':'')} aria-label="Thành phố khối lắp ghép 3D hình thành theo cuộn">
     <div className="motion-sticky city-stage">
-      <div className="motion-topline"><span><Blocks size={15}/> DIGITAL CREATORS / BUILD TOGETHER</span><span>CREATIVE MINI CITY <ArrowDown size={14}/></span></div>
+      <div className="motion-topline"><span><Blocks size={15}/>BUILD TOGETHER</span><span>CREATIVE MINI CITY <ArrowDown size={14}/></span></div>
       <div className="motion-copy">
         {steps.map((story,i)=><div key={story.label} className={'motion-copy-panel'+(i===phase?' selected':'')} aria-hidden={!reducedMotion&&i!==phase}>
           <span className="motion-tag"><Sparkles size={15}/>{story.label}</span><h2>{story.heading}</h2><p>{story.description}</p>
@@ -236,7 +236,7 @@ export default function LegoActivitiesVisual(){
         <div className="city-tag city-tag-bottom">DESIGN • CODE • CREATE <span>·</span></div>
       </div>
       <button type="button" className="motion-skip" onClick={()=>sectionRef.current?.nextElementSibling?.scrollIntoView({behavior:reducedMotion?'auto':'smooth',block:'start'})}>BỎ QUA HIỆU ỨNG </button>
-      <div className="motion-footer"><span>IMAGINE / BUILD / CONNECT</span><div className="motion-progress"><i style={{width:progress*100+'%'}}/></div><strong>0{phase+1} / 03</strong></div>
+      <div className="motion-footer"><span>IMAGINE · BUILD · CONNECT</span><div className="motion-progress"><i style={{width:progress*100+'%'}}/></div><strong>0{phase+1} / 03</strong></div>
     </div>
   </section>
 }

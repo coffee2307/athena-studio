@@ -14,14 +14,14 @@ export function WellnessJournal({basePath,assetBase,images}:{basePath:string;ass
  const photo=(i:number)=>assetBase+images[i%images.length];
  return <div className={s.journal}>
   <section className={s.chapter} aria-labelledby="an-nhien-moments-title">
-   <div className={s.intro}><p>MỘT NHẬT KÝ NHỎ / CARE JOURNAL</p><h2 id="an-nhien-moments-title">Ngày hôm nay,<br/><em>bạn muốn dành thời gian</em><br/>cho điều gì?</h2><span>Không có lịch trình bắt buộc. Hãy chọn một khoảnh khắc phù hợp với bạn.</span></div>
+   <div className={s.intro}><p>NHỮNG KHOẢNG DỪNG TRONG NGÀY</p><h2 id="an-nhien-moments-title">Ngày hôm nay,<br/><em>bạn muốn dành thời gian</em><br/>cho điều gì?</h2><span>Không có lịch trình bắt buộc. Hãy chọn một khoảnh khắc phù hợp với bạn.</span></div>
    <div className={s.workspace}>
     <figure className={s.ambient}><img key={selected} src={photo(current.image)} alt={"Ảnh minh họa cho "+current.name}/><figcaption><span>AN NHIÊN / {current.duration}</span><span>{current.purpose}</span></figcaption></figure>
     <div className={s.entry}>
      <p>CHỌN MỘT KHOẢNG DỪNG</p>
      <div className={s.options} role="group" aria-label="Chọn khoảng thời gian">{moments.map((x,i)=><button type="button" key={x.name} onClick={()=>setSelected(i)} aria-pressed={selected===i}><span>{x.duration}</span><strong>{x.name}</strong><span aria-hidden="true">{selected===i?"●":"○"}</span></button>)}</div>
      <div className={s.reading} aria-live="polite"><span>GỢI Ý / {current.purpose}</span><h3>{current.caption}</h3><p>{current.task}</p></div>
-     <Link href={basePath+"/work/"+(selected+1)}>Đọc thêm về khoảnh khắc này <span aria-hidden="true">→</span></Link>
+     <Link href={basePath+"/work/"+(selected+1)}>Đọc thêm về khoảnh khắc này </Link>
     </div>
    </div>
   </section>

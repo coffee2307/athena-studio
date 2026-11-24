@@ -43,8 +43,8 @@ export function TemplateDemoModal({template,onClose,language="vi"}:{template:Tem
    </div>
   </section>
   <aside className="template-demo-info">
-   <p className="template-demo-eyebrow">ATHENA STUDIO / DEMO LIBRARY</p><span className="template-demo-index">{template.industry.toUpperCase()} / {template.style}</span>
-   <h2 id="template-demo-title">{template.title}<span>.</span></h2>
+   <p className="template-demo-eyebrow">MẪU THIẾT KẾ ATHENA STUDIO</p><span className="template-demo-index">{template.industry} · {template.style}</span>
+   <h2 id="template-demo-title">{template.title}</h2>
    <p className="template-demo-description">{template.description}</p>
    <div className="template-demo-price"><span>CHI PHÍ DỰ KIẾN</span><strong>{template.estimatedPrice}</strong><small>Ước tính sơ bộ, chưa phải báo giá chính thức.</small></div>
    <div className="template-demo-quality"><span>ĐỊNH HƯỚNG CHẤT LƯỢNG</span><strong>{template.qualityTier}</strong><small>Thiết kế riêng · Responsive · Kiểm thử trước bàn giao</small></div>

@@ -284,3 +284,8 @@
 
 
 @media(max-width:760px){.logotype{min-height:44px;display:inline-flex;align-items:center}}
+
+/* Menu dismissal belongs to the SORA paper navigation, not a framed-square icon. */
+.drawerX{border:0!important;background:transparent!important;border-radius:999px;min-width:44px;min-height:44px;padding:6px 12px}
+.drawerX:hover{background:#e4eacb20!important}
+.drawerX span{line-height:1}

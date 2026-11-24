@@ -33,15 +33,15 @@ export function SoraLetterDesk(){
    <span className={s.letterCharacters}>{brief.length} / 2000</span>
   </div>
   <div className={s.letterPreview} aria-label="Xem trước nội dung thư">
-   <div className={s.letterPreviewHeader}><span>THƯ NHÁP / SỐ 01</span><span>ĐƯỢC VIẾT BỞI BẠN</span></div>
+   <div className={s.letterPreviewHeader}><span>THƯ NHÁP · SỐ 01</span><span>ĐƯỢC VIẾT BỞI BẠN</span></div>
    <div className={s.letterPreviewMain}><div className={s.letterPreviewMark} aria-hidden="true">{topics[choice].monogram}</div>
     <div><small>{topics[choice].token}</small><h2>{topics[choice].title}</h2><p>{brief.trim()||"Nội dung yêu cầu của bạn sẽ xuất hiện tại đây. Hãy ghi các hạng mục cần thiết kế và mục đích sử dụng."}</p></div>
    </div>
-   <div className={s.letterPreviewFooter}>SORA / BẢN NHÁP YÊU CẦU THIẾT KẾ</div>
+   <div className={s.letterPreviewFooter}>BẢN NHÁP YÊU CẦU THIẾT KẾ</div>
   </div>
   <div className={s.letterCommands}>
    <button type="button" onClick={copy} className={s.letterCopy}>Sao chép thư <span aria-hidden="true">⧉</span></button>
-   <button type="submit" className={s.letterSend}>Soạn trong email <span aria-hidden="true">→</span></button>
+   <button type="submit" className={s.letterSend}>Soạn trong email </button>
   </div>
   <p className={s.letterStatus} role="status">{copied||"Bản mẫu không gửi dữ liệu lên máy chủ. Nút email mở trình soạn thư, không có địa chỉ nhận được thiết lập sẵn."}</p>
  </form>;

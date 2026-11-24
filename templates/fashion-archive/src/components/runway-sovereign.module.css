@@ -303,3 +303,6 @@
 @media (prefers-reduced-motion:reduce){
  .root :global([data-dna04-artifact]){transition:none!important;transform:none!important;box-shadow:none!important}
 }
+
+.menuPanel button{align-self:flex-start;background:transparent!important;color:#f5efe4!important;border:0!important;border-bottom:1px solid #e0b891!important;padding:14px 0 11px;text-align:left}
+.menuPanel button:hover{color:#e4bb90!important}

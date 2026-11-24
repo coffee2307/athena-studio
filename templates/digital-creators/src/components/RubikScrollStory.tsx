@@ -106,9 +106,9 @@ function RubikCanvas({progressRef,reduced,dark}:{progressRef:React.RefObject<num
   </Canvas>
 }
 const copy = [
-  {tag:'01 / TƯ DUY',title:<>Mọi ý tưởng đều bắt đầu từ <em>một thử thách.</em></>,detail:'Đôi khi mọi thứ trông thật phức tạp. Nhưng mỗi vấn đề đều có thể được khám phá từ những bước nhỏ nhất.'},
-  {tag:'02 / KHÁM PHÁ',title:<>Từng bước tìm ra <em>lời giải.</em></>,detail:'Hãy tiếp tục cuộn: từng tầng Rubik thay đổi vị trí theo hành trình giải mã, từng lựa chọn tạo nên tiến bộ.'},
-  {tag:'03 / PHÁT TRIỂN',title:<>Từ hỗn độn đến <em>trật tự.</em></>,detail:'Một khối Rubik hoàn chỉnh — tượng trưng cho tư duy logic, sự kiên trì và tinh thần không ngừng khám phá.'}
+  {tag:'TƯ DUY',title:<>Mọi ý tưởng đều bắt đầu từ <em>một thử thách.</em></>,detail:'Đôi khi mọi thứ trông thật phức tạp. Nhưng mỗi vấn đề đều có thể được khám phá từ những bước nhỏ nhất.'},
+  {tag:'KHÁM PHÁ',title:<>Từng bước tìm ra <em>lời giải.</em></>,detail:'Hãy tiếp tục cuộn: từng tầng Rubik thay đổi vị trí theo hành trình giải mã, từng lựa chọn tạo nên tiến bộ.'},
+  {tag:'PHÁT TRIỂN',title:<>Từ hỗn độn đến <em>trật tự.</em></>,detail:'Một khối Rubik hoàn chỉnh — tượng trưng cho tư duy logic, sự kiên trì và tinh thần không ngừng khám phá.'}
 ]
 export default function RubikScrollStory(){
   const {sectionRef,progress,progressRef,reducedMotion}=useScrollScene()
@@ -116,7 +116,7 @@ export default function RubikScrollStory(){
   const step=progress<.23?0:progress<.78?1:2
   return <section ref={sectionRef} id="hanh-trinh" className={'motion-chapter rubik-story'+(reducedMotion?' motion-reduced':'')} aria-label="Rubik 3x3 tự giải theo cuộn trang">
     <div className="motion-sticky rubik-stage">
-      <div className="motion-topline"><span><Sparkles size={16}/> DIGITAL CREATORS / THINK IN 3D</span><span>RUBIK 3×3 <ArrowDown size={14}/></span></div>
+      <div className="motion-topline"><span><Sparkles size={16}/>THINK IN 3D</span><span>RUBIK 3×3 <ArrowDown size={14}/></span></div>
       <div className="motion-overline">THINK<br/>DIFFERENT</div>
       <div className="motion-copy">
         {copy.map((part,i)=><div key={part.tag} className={'motion-copy-panel'+(step===i?' selected':'')} aria-hidden={!reducedMotion&&step!==i}>

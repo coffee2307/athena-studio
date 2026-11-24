@@ -8,3 +8,13 @@
 @media(max-width:900px){.shelf{grid-template-columns:repeat(2,minmax(0,1fr))}.guide,.story,.hello{grid-template-columns:1fr;gap:40px}.detailGrid{grid-template-columns:1fr;gap:20px}.detailImage{min-height:430px}.detailCopy{padding:15px 0}}
 @media(max-width:640px){.market,.detail,.guide,.story,.hello{padding:38px 20px 65px}.head{display:block}.head .cartToggle{margin-top:25px}.shelf{grid-template-columns:1fr 1fr;gap:25px 13px}.product h2{font-size:23px}.product figure{border-radius:80px 80px 12px 12px}.details{display:block}.details>span{display:block;font-size:10px;margin-bottom:12px}.add{font-size:10px;padding:10px}.detailCopy h1,.head h1,.guide h1,.story h1,.hello h1{font-size:56px}.detailImage{min-height:52svh}.guidePanel>img{height:280px}.storyImage img{height:350px}.top{gap:15px}}
 @media(prefers-reduced-motion:reduce){.product figure img{transition:none}}
+/* Poppy: playful capsules, centered add glyph, borderless modal dismiss. */
+.add{display:inline-flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:6px 8px 6px 18px;border-radius:999px;line-height:1.2}
+.addGlyph{position:relative;display:inline-grid;place-items:center;margin:0!important;width:28px;height:28px;min-width:28px;border-radius:50%;background:#fff1e6;color:#5b2b45}
+.addGlyph::before,.addGlyph::after{content:"";position:absolute;left:50%;top:50%;background:currentColor;transform:translate(-50%,-50%);border-radius:3px}
+.addGlyph::before{width:11px;height:1.6px}.addGlyph::after{width:1.6px;height:11px}
+.drawerHead button{border:0!important;background:transparent!important;border-radius:50%;display:grid;place-items:center;font:400 30px/1 Arial,sans-serif;width:44px;height:44px;min-width:44px;min-height:44px;flex-shrink:0}
+.drawerHead button:hover{background:#f2dce1!important}
+.stepper button{display:grid;place-items:center;border-radius:50%;width:36px;height:36px;min-width:36px;min-height:36px}
+.cartToggle b{line-height:1;min-width:28px;height:28px}
+@media(max-width:640px){.add{min-height:44px;font-size:10px;padding:6px 6px 6px 12px;gap:4px}.addGlyph{width:27px;height:27px;min-width:27px}}

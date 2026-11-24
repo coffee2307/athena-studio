@@ -14,7 +14,7 @@ export function Site({section="home",itemIndex=1,basePath="/template-demos/archi
  return <div className={s.shell} data-world="architecture-studio">
  <header className={s.header}>
   <Link href={basePath} className={s.wordmark}><b>F.</b><span>{site.brand}<small>ARCHITECTURAL STUDIES</small></span></Link>
-  <p>KHÔNG GIAN / HÌNH KHỐI / ÁNH SÁNG</p>
+  <p>TỶ LỆ. ÁNH SÁNG. ĐỜI SỐNG.</p>
   <nav className={s.nav} aria-label="Các khu vực FORMA">{nav.map(([name,url])=><Link key={url} href={basePath+url} aria-current={section===url.slice(1)?"page":undefined}>{name}</Link>)}</nav>
   <button className={s.toggle} type="button" onClick={()=>setOpen(v=>!v)} aria-expanded={open} aria-label={open?"Đóng điều hướng":"Mở điều hướng"}>{open?"Đóng":"Menu"}<span aria-hidden="true">+</span></button>
  </header>
@@ -22,6 +22,6 @@ export function Site({section="home",itemIndex=1,basePath="/template-demos/archi
  <main>
  {section==="home"?<ArchitectureExperience basePath={basePath} assetBase={assetBase} images={site.images}/>:<div data-dna04-artifact="architecture-studio-atlas"><FormaAtlas section={section} itemIndex={itemIndex} basePath={basePath} assetBase={assetBase} images={site.images}/></div>}
  </main>
- <footer className={s.footer}><div><small>FORMA / STUDIO STUDY</small><Link href={basePath}>Nơi ý tưởng<br/>thành không gian.</Link></div><nav>{nav.map(([name,url])=><Link key={url} href={basePath+url}>{name}</Link>)}</nav><p>Website concept do Athena Studio xây dựng. Các hình ảnh và hồ sơ là nội dung minh họa, không phải dự án đã thi công.</p></footer>
+ <footer className={s.footer}><div><small>STUDIO STUDY</small><Link href={basePath}>Nơi ý tưởng<br/>thành không gian.</Link></div><nav>{nav.map(([name,url])=><Link key={url} href={basePath+url}>{name}</Link>)}</nav><p>Website concept do Athena Studio xây dựng. Các hình ảnh và hồ sơ là nội dung minh họa, không phải dự án đã thi công.</p></footer>
  </div>;
 }

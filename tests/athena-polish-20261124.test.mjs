@@ -2,11 +2,12 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 const read=f=>readFileSync(f,"utf8");
-test("Athena leaves every Next demo UI unoccluded and Digital Creators info requires opt-in",()=>{
+test("Athena preserves template-specific popups and restores the native demo information",()=>{
  const chrome=read("components/layout/SiteChrome.tsx");
- assert.doesNotMatch(chrome,/TemplateExperienceInfo/);
+ assert.match(chrome,/TemplateExperienceInfo/);
  const native=read("public/athena-digital-demo-info.js");
- assert.match(native,/get\("athenaInfo"\)!=="1"/);
+ assert.doesNotMatch(native,/get\("athenaInfo"\)/);
+ assert.match(native,/sessionStorage\.getItem\(key\)!=="collapsed"/);
  const lib=read("components/templates/TemplateGallery.tsx");
  assert.match(lib,/template-card-content/);
 });

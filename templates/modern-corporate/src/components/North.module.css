@@ -213,3 +213,6 @@
 @media(hover:none){.problemChoice:hover{background:transparent}.problemChoice[aria-pressed="true"]:hover{background:#dce9dc}}
 @media(prefers-reduced-motion:reduce){.north *,.north *:before,.north *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 @media(max-width:760px){.globalHead :is(a,button){min-height:44px}}
+
+.mobileMenuHeading button{border:0!important;background:transparent;border-radius:50%;width:44px;height:44px;min-width:44px;min-height:44px;padding:0}
+.mobileMenuHeading button:hover{background:#e5ebe4}
