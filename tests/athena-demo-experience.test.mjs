@@ -11,23 +11,15 @@ test("mobile gallery navigates straight to real demo, desktop retains modal",()=
  assert.match(source,/openExperience\(item\)/);
  assert.match(source,/TemplateDemoModal template=\{selected\}/);
 });
-test("floating demo information excludes embedded previews and handles subpages",()=>{
+test("Each Next demo is free of Athena floating widgets while the gallery retains its own details",()=>{
  const site=read("components/layout/SiteChrome.tsx");
- const widget=read("components/templates/TemplateExperienceInfo.tsx");
- assert.match(site,/TemplateExperienceInfo slug=\{pathname\.split\("\/"\)\[2\]\}/);
- assert.match(widget,/window\.self===window\.top/);
- assert.match(widget,/get\("embed"\)!=="1"/);
- assert.match(widget,/window\.sessionStorage/);
- assert.match(widget,/Escape/);
- assert.match(widget,/template\.estimatedPrice/);
+ assert.doesNotMatch(site,/TemplateExperienceInfo/);
+ assert.match(site,/TemplateLocaleBridge/);
+ assert.match(site,/className="template-demo-main"/);
+ const gallery=read("components/templates/TemplateGallery.tsx");
+ assert.match(gallery,/TemplateDemoModal template=\{selected\}/);
+ assert.match(gallery,/template-card-content/);
 });
-test("Athena information panel defaults to collapsed without obscuring individual templates",()=>{
- const widget=read("components/templates/TemplateExperienceInfo.tsx");
- assert.match(widget,/const \[expanded,setExpanded\]=useState\(false\)/);
- assert.match(widget,/if\(slug==="auto-showroom"\)\{setExpanded\(false\);return;\}/);
- assert.match(widget,/athena-demo-float-handle/);
-});
-
 test("desktop modal controls and sidebar remain unchanged",()=>{
  const modal=read("components/templates/TemplateDemoModal.tsx");
  assert.match(modal,/dialogRef\.current/);
@@ -35,13 +27,14 @@ test("desktop modal controls and sidebar remain unchanged",()=>{
  assert.match(modal,/setDevice\("mobile"\)/);
  assert.match(modal,/template-demo-info/);
 });
-test("Digital Creators standalone deploy receives independent overlay",()=>{
+test("Digital Creators information overlay is opt-in and never covers the native UI by default",()=>{
  const html=read("public/immersive/digital-creators/index.html");
  const js=read("public/athena-digital-demo-info.js");
  const css=read("public/athena-demo-info.css");
  assert.match(html,/athena-demo-info\.css/);
  assert.match(html,/athena-digital-demo-info\.js/);
  assert.match(js,/window\.self!==window\.top/);
+ assert.match(js,/get\("athenaInfo"\)!=="1"/);
  assert.match(js,/sessionStorage/);
  assert.match(css,/safe-area-inset-bottom/);
  assert.match(css,/min-width:44px/);

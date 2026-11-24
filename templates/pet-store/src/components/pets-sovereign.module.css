@@ -118,3 +118,10 @@
  .poppyScene .heroFigure img{height:clamp(240px,36svh,340px)}
  .poppyScene .heroWords h1{font-size:clamp(53px,12vw,74px)}
 }
+
+/* Scoped interaction polish for this template only. */
+
+@media(prefers-reduced-motion:no-preference){
+ .heroFigure img{animation:poppy-snapshot 620ms cubic-bezier(.2,.75,.2,1) both}
+ @keyframes poppy-snapshot{from{opacity:.2;transform:rotate(-1.4deg) scale(1.05)}to{opacity:1;transform:rotate(0) scale(1)}}
+}

@@ -281,3 +281,6 @@
 @media (prefers-reduced-motion:reduce){
  .sora :global([data-dna04-artifact]){transition:none!important;transform:none!important;box-shadow:none!important}
 }
+
+
+@media(max-width:760px){.logotype{min-height:44px;display:inline-flex;align-items:center}}

@@ -430,3 +430,11 @@
 @media(prefers-reduced-motion:reduce){
  .posterImage,.posterPrimary,.posterView,.posterChapter,.posterChapter::before,.posterNext,.programCard,.programPhoto img{transition:none!important;transform:none!important}
 }
+
+
+/* MỞ: poster-like entrance; not a universal template reveal. */
+@media(prefers-reduced-motion:no-preference){
+ .posterStage{animation:mo-poster-enter 580ms cubic-bezier(.16,.8,.2,1) both}
+ @keyframes mo-poster-enter{from{opacity:.65;clip-path:inset(0 0 8% 0)}to{opacity:1;clip-path:inset(0)}}
+}
+@media(max-width:760px){.logo{display:inline-flex;align-items:center;min-height:44px}}

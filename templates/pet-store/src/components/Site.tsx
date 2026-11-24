@@ -20,7 +20,7 @@ export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:{sect
 
 
  return <div className={style.root} id="pet-store-top">
-<header className={frame.header}><Link className={frame.logo} href={go("/")}>Poppy <span>& Co.</span><i aria-hidden="true"/></Link><nav aria-label="Poppy">{navItems.slice(0,3).map(([label,path])=><Link key={path} href={go(path)}>{label}</Link>)}</nav><Link className={frame.hello} href={go("/contact")}>Say hello! <span aria-hidden="true">♥</span></Link><button className={frame.menu} aria-expanded={menu} onClick={()=>setMenu(v=>!v)}>{menu?"Đóng":"Menu"}</button></header>
+<header className={frame.header}><Link className={frame.logo} href={go("/")}>{site.brand}<i aria-hidden="true"/></Link><nav aria-label="Poppy">{navItems.slice(0,3).map(([label,path])=><Link key={path} href={go(path)}>{label}</Link>)}</nav><Link className={frame.hello} href={go("/contact")}>Say hello! <span aria-hidden="true">♥</span></Link><button className={frame.menu} aria-expanded={menu} onClick={()=>setMenu(v=>!v)}>{menu?"Đóng":"Menu"}</button></header>
  {menu&&<nav className={frame.menuPanel} aria-label="Poppy mobile">{navItems.map(([label,path])=><Link key={path} href={go(path)} onClick={()=>setMenu(false)}>{label}</Link>)}</nav>}
  <main>
  {section==="home"&&<>
@@ -52,6 +52,6 @@ export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:{sect
  {section==="about"&&<PoppyMarket section="about" itemIndex={itemIndex} basePath={basePath} assetBase={assetBase} images={site.images}/>}
  {section==="contact"&&<PoppyMarket section="contact" itemIndex={itemIndex} basePath={basePath} assetBase={assetBase} images={site.images}/>}
  </main>
-<footer className={frame.footer}><div className={frame.footerGraphic}>GOOD <em>PET</em> DAYS.</div><div className={frame.footerContent}><div><strong>Poppy & Co.</strong><p>Một góc nhỏ về tình bạn với thú cưng, được thiết kế như một cửa hàng concept vui nhộn.</p></div><nav aria-label="Điều hướng cuối trang">{navItems.map(([label,path])=><Link href={go(path)} key={path}>{label}</Link>)}</nav></div><small>POPPY & CO. / ATHENA STUDIO — WEBSITE DEMO. Không có sản phẩm thực tế, đơn hàng hoặc thanh toán.</small></footer>
+<footer className={frame.footer}><div className={frame.footerGraphic}>GOOD <em>PET</em> DAYS.</div><div className={frame.footerContent}><div><strong>{site.brand}</strong><p>Một góc nhỏ về tình bạn với thú cưng, được thiết kế như một cửa hàng concept vui nhộn.</p></div><nav aria-label="Điều hướng cuối trang">{navItems.map(([label,path])=><Link href={go(path)} key={path}>{label}</Link>)}</nav></div><small>POPPY & CO. / ATHENA STUDIO — WEBSITE DEMO. Không có sản phẩm thực tế, đơn hàng hoặc thanh toán.</small></footer>
  </div>;
 }

@@ -2,7 +2,7 @@
  * Native site React components, menus, 3D and CSS remain untouched.
  */
 (function(){
-  if(window.self!==window.top || new URLSearchParams(window.location.search).get("embed")==="1")return;
+  if(window.self!==window.top || new URLSearchParams(window.location.search).get("embed")==="1" || new URLSearchParams(window.location.search).get("athenaInfo")!=="1")return;
   const key="athena-demo-info:digital-creators";
   const host=document.createElement("aside");
   host.className="athena-demo-float is-collapsed";

@@ -657,3 +657,11 @@
  .root .tableStage .heroFigure{height:43svh;min-height:300px}
  .root .photoControls{top:10px;right:10px;bottom:auto}
 }
+
+
+/* Bếp & Chuyện: a deliberate photographic reveal and easy mobile header. */
+@media(prefers-reduced-motion:no-preference){
+ .heroFigure img{animation:bep-photo-arrive 750ms cubic-bezier(.2,.72,.3,1) both}
+ @keyframes bep-photo-arrive{from{opacity:.65;transform:translateY(10px) scale(1.02)}to{opacity:1;transform:translateY(0) scale(1)}}
+}
+@media(max-width:760px){.logo{display:inline-flex;align-items:center;min-height:44px}}

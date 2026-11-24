@@ -25,3 +25,18 @@
 .athena-demo-float :is(button,a):focus-visible{outline:3px solid #416ecb!important;outline-offset:3px}
 @media(max-width:760px){.athena-demo-float{left:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px))}.athena-demo-float-panel{width:min(288px,calc(100vw - 24px));padding:11px 13px}.athena-demo-float h2{font-size:16px!important}}
 @media(prefers-reduced-motion:reduce){.athena-demo-float .athena-demo-float-panel,.athena-demo-float .athena-demo-float-handle,.athena-demo-float svg{transition:none!important}}
+
+/* Digital Creators-only mobile adjustments. */
+@media(max-width:360px){
+ body:has(.dc-constellation-toggle) .nav-actions{transform:translateX(-8px)}
+ body:has(.dc-constellation-toggle) .motion-overline{max-width:calc(100vw - 24px)}
+ body:has(.dc-constellation-toggle) .rubik-halo{max-width:calc(100vw - 18px)}
+ body:has(.dc-constellation-toggle) .lab-ruler-top{max-width:calc(100vw - 50px);overflow:hidden}
+}
+body:has(.dc-constellation-toggle) .theme-toggle{min-width:44px;min-height:44px}
+
+/* Final narrow-device containment for the independent Digital Creators experience. */
+@media(max-width:360px){
+ html:has(.dc-constellation-toggle),body:has(.dc-constellation-toggle){overflow-x:clip}
+ body:has(.dc-constellation-toggle) .nav-actions{transform:translateX(-20px)!important}
+}

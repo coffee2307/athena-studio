@@ -5,3 +5,14 @@
 @media(max-width:1050px){.issue{display:none}.stage{grid-template-columns:1.15fr .85fr}.inspector{padding:35px}.photograph{min-height:600px}.indexGrid a>div{height:240px}}
 @media(max-width:760px){.header{height:65px;padding-inline:19px}.nav{display:none}.menuButton{display:block;margin-left:auto;border:1px solid #aab5a9;background:transparent;padding:10px}.mobileNav{display:grid;padding:20px;background:#e8e7df;gap:15px}.mobileNav a{color:#25352a;font-size:16px;text-decoration:none}.stage{display:flex;flex-direction:column}.photograph{min-height:55svh}.inspector{padding:45px 22px}.inspector h1{font-size:54px;margin:20px 0}.below{padding:45px 20px}.below>div{grid-template-columns:1fr}.indexGrid{grid-template-columns:1fr}.indexGrid a>div{height:280px}.criterion{grid-template-columns:30px 1fr}.criterion img{display:none}.contact,.about>div{grid-template-columns:1fr}.footer{align-items:start;flex-direction:column}.footer nav{flex-wrap:wrap}}
 @media(prefers-reduced-motion:reduce){.indexGrid img,.photograph>img{transition:none}}
+
+@media(max-width:760px){.photoNavigation button{min-width:44px;min-height:44px}.menuButton{min-width:44px;min-height:44px}.brand{min-height:44px;justify-content:center}}
+
+/* Scoped interaction polish for this template only. */
+
+@media(prefers-reduced-motion:no-preference){
+ .photograph>img{animation:nest-image-reveal 680ms cubic-bezier(.22,.6,.26,1) both}
+ .selectedSpace{animation:nest-notes-slide 380ms ease both}
+ @keyframes nest-image-reveal{from{opacity:.68;transform:scale(1.035)}to{opacity:1;transform:scale(1)}}
+ @keyframes nest-notes-slide{from{opacity:.1;transform:translateX(-9px)}to{opacity:1;transform:translateX(0)}}
+}

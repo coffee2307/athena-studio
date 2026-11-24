@@ -8,3 +8,12 @@
 .mobileMenu{display:none}
 @media(max-width:760px){.header{height:62px;padding-inline:20px}.header>span,.header nav{display:none}.menu{display:block;border:1px solid #9aaf9a;padding:10px;background:transparent;margin-left:auto}.mobileMenu{display:grid;gap:14px;padding:22px;background:#e9f0e5}.mobileMenu a{color:inherit;text-decoration:none}.welcome{display:flex;flex-direction:column;padding:50px 22px 65px;gap:30px;min-height:0}.intro h1{font-size:58px}.portrait{max-width:450px}.finder,.rituals,.contact{grid-template-columns:1fr;gap:35px;padding:65px 22px}.collection,.chapter,.story{padding:65px 22px}.tiles{grid-template-columns:1fr}.tiles img{height:300px}.story>div{grid-template-columns:1fr}.footer{grid-template-columns:1fr;padding:50px 23px}.footer nav,.footer small{grid-column:auto}}
 @media(prefers-reduced-motion:reduce){.portrait img{transition:none}}
+
+/* Scoped interaction polish for this template only. */
+
+@media(prefers-reduced-motion:no-preference){
+ .portrait img{animation:an-nhien-hero-light 850ms cubic-bezier(.18,.7,.3,1) both}
+ .result{animation:an-nhien-note-appear 480ms ease both}
+ @keyframes an-nhien-hero-light{from{opacity:.65;filter:blur(5px);transform:scale(1.035)}to{opacity:1;filter:blur(0);transform:scale(1)}}
+ @keyframes an-nhien-note-appear{from{opacity:.2;transform:translateY(12px)}to{opacity:1;transform:none}}
+}

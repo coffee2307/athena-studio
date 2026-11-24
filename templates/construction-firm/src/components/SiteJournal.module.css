@@ -6,3 +6,13 @@
 @media(max-width:850px){.descriptor{display:none}.headline{grid-template-columns:1fr}.headline>div:first-child{padding:55px 24px}.headline h1{font-size:64px;margin:35px 0}.image{min-height:420px}.header{height:64px;padding-inline:20px}.header nav{display:none}.menu{display:block;margin-left:auto;border:1px solid #888e84;padding:9px 13px;background:transparent}.mobileMenu{display:grid;background:#eee8df;padding:20px;gap:13px}.mobileMenu a{color:inherit;text-decoration:none}.timeline{grid-template-columns:1fr}.timeline button{min-height:110px}.logDetail{grid-template-columns:1fr}.logDetail>div{padding:25px 0}.logDetail img{height:290px}.document{grid-template-columns:1fr 25px}.document>span{grid-column:1/-1}.document p{display:none}.contact,.about>div:last-child{grid-template-columns:1fr}.footer{display:grid}.footer nav{flex-wrap:wrap}.documents,.process,.about,.detail,.contact{padding:60px 22px}}
 
 @media(prefers-reduced-motion:reduce){.root *{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* Scoped interaction polish for this template only. */
+
+@media(prefers-reduced-motion:no-preference){
+ .image img,.logDetail img,.processImage img{animation:terra-field-wipe 600ms cubic-bezier(.2,.7,.2,1) both}
+ .timeline button{transition:background .25s ease,border-color .25s ease,transform .25s ease}
+ .timeline button:hover:not([aria-pressed=true]){transform:translateY(-4px);border-color:#e7b08d}
+ @keyframes terra-field-wipe{from{clip-path:inset(0 100% 0 0);filter:contrast(1.15) saturate(.75)}to{clip-path:inset(0);filter:contrast(1) saturate(1)}}
+}
+@media(prefers-reduced-motion:reduce){.image img,.logDetail img,.processImage img,.timeline button{animation:none!important;transition:none!important}}
