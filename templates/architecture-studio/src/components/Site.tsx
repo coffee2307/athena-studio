@@ -6,7 +6,7 @@ import style from "./architecture-sovereign.module.css";
 import {ArchitectureExperience} from "./ArchitectureExperience";
 type Section="home"|"work"|"services"|"about"|"contact"|"detail";
 const navItems:[string,string][]=[["Residences","/work"],["Material studies","/services"],["The studio","/about"],["Contact","/contact"]];
-const artifacts=[{"title":"Residences","description":"An independent exploration of craft, process and everyday moments."},{"title":"Material studies","description":"A closer look at the detail, people and thinking behind the work."},{"title":"Public spaces","description":"A practical path from first idea to a considered experience."}];
+const artifacts=[{"title":"Residences","description":"Không gian nhà ở và cách tổ chức ánh sáng, đường đi, tỷ lệ và sử dụng thực tế."},{"title":"Material studies","description":"Chất liệu, bề mặt và chi tiết hoàn thiện ảnh hưởng đến cảm nhận một công trình."},{"title":"Public spaces","description":"Không gian cộng đồng cần dung hòa công năng, khả năng tiếp cận và sử dụng linh hoạt."}];
 export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:{section?:Section;itemIndex?:number;basePath?:string;assetBase?:string}){
  const [menu,setMenu]=useState(false);
  const [selected,setSelected]=useState(0);

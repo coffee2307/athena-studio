@@ -5,7 +5,7 @@ import site from "../data/site.json";
 import style from "./pets-sovereign.module.css";
 type Section="home"|"work"|"services"|"about"|"contact"|"detail";
 const navItems:[string,string][]=[["For dogs","/work"],["For cats","/services"],["The studio","/about"],["Contact","/contact"]];
-const artifacts=[{"title":"For dogs","description":"An independent exploration of craft, process and everyday moments."},{"title":"For cats","description":"A closer look at the detail, people and thinking behind the work."},{"title":"Play & care","description":"A practical path from first idea to a considered experience."}];
+const artifacts=[{"title":"For dogs","description":"Sản phẩm và hoạt động mô phỏng dành cho chó: đồ chơi, vận động, chăm sóc."},{"title":"For cats","description":"Những sản phẩm, góc nghỉ và hoạt động phù hợp với mèo trong không gian sống."},{"title":"Play & care","description":"Khám phá đồ chơi và phụ kiện qua các thẻ sản phẩm minh họa, không phát sinh mua bán."}];
 export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:{section?:Section;itemIndex?:number;basePath?:string;assetBase?:string}){
  const [menu,setMenu]=useState(false);
  const [selected,setSelected]=useState(0);

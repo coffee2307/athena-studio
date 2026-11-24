@@ -26,9 +26,20 @@ test("all independent templates keep stable panels without cursor-driven tilt",(
   const css=read(base+cssfile);
   assert.doesNotMatch(site,/dna04Pointer|onPointerMove=\{dna04Pointer\}|onPointerOut=\{dna04PointerOut\}/,"Unwanted pointer-driven panel transforms in "+slug);
   assert.doesNotMatch(css,/--dna04-(?:shift|tilt|small-rotate|point)|transform:[^;{}]*rotate[XY]?\(var\(--dna04/,"Cursor-driven transforms must be absent in "+slug);
+  const newExperience={
+   "property-showcase":["stage","photoNavigation"],
+   "wellness-clinic":["finder","answer"],
+   "education-platform":["classroom","exercise"],
+   "construction-firm":["timeline","logDetail"]
+  };
   if(slug==="modern-corporate"){
    assert.match(site,/className=\{s\.decisionPanel\}/);
    assert.match(css,/\.decisionPanel\{/);
+  }else if(newExperience[slug]){
+   for(const selector of newExperience[slug]){
+    assert.ok(site.includes("s."+selector),"Industry-specific experience missing in "+slug+": "+selector);
+    assert.ok(css.includes("."+selector+"{"),"Industry-specific stylesheet missing in "+slug+": "+selector);
+   }
   }else{
    assert.match(site,/data-dna04-artifact/,"Keep visual artifacts in "+slug);
    assert.match(css,/data-dna04-artifact/,"Keep hover/focus styling in "+slug);
