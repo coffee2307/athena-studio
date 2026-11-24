@@ -3,8 +3,10 @@ import Link from "next/link";
 import {useState,useEffect} from "react";
 import site from "../data/site.json";
 import style from "./pets-sovereign.module.css";
+import {PoppyMarket} from "./PoppyMarket";
+import frame from "./PoppyFrame.module.css";
 type Section="home"|"work"|"services"|"about"|"contact"|"detail";
-const navItems:[string,string][]=[["For dogs","/work"],["For cats","/services"],["The studio","/about"],["Contact","/contact"]];
+const navItems:[string,string][]=[["Cửa hàng","/work"],["Cẩm nang","/services"],["Nhà Poppy","/about"],["Liên hệ","/contact"]];
 const artifacts=[{"title":"For dogs","description":"Sản phẩm và hoạt động mô phỏng dành cho chó: đồ chơi, vận động, chăm sóc."},{"title":"For cats","description":"Những sản phẩm, góc nghỉ và hoạt động phù hợp với mèo trong không gian sống."},{"title":"Play & care","description":"Khám phá đồ chơi và phụ kiện qua các thẻ sản phẩm minh họa, không phát sinh mua bán."}];
 export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:{section?:Section;itemIndex?:number;basePath?:string;assetBase?:string}){
  const [menu,setMenu]=useState(false);
@@ -18,8 +20,8 @@ export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:{sect
 
 
  return <div className={style.root} id="pet-store-top">
-<header className={style.header}><Link className={style.logo} href={go("/")}>{site.brand}</Link><nav>{navItems.slice(0,2).map(([x,p])=><Link href={go(p)} key={p}>{x}</Link>)}</nav><button className={style.hamburger} aria-expanded={menu} onClick={()=>setMenu(v=>!v)} aria-label={menu?"Đóng điều hướng":"Mở điều hướng"}><i/><i/><i/></button><Link className={style.actionHead} href={go("/contact")}>Hi there!</Link></header>
- {menu&&<button className={style.menuScrim} aria-label="Đóng điều hướng" onClick={()=>setMenu(false)}/>}<aside className={style.menuPanel} inert={!menu} aria-hidden={!menu}><div className={style.menuTitle}>NAVIGATION / {site.brand}</div>{navItems.map(([label,path],i)=><Link key={path} href={go(path)} onClick={()=>setMenu(false)}><small>0{i+1}</small>{label}</Link>)}<button onClick={()=>setMenu(false)}>CLOSE / MENU</button></aside>
+<header className={frame.header}><Link className={frame.logo} href={go("/")}>Poppy <span>& Co.</span><i aria-hidden="true"/></Link><nav aria-label="Poppy">{navItems.slice(0,3).map(([label,path])=><Link key={path} href={go(path)}>{label}</Link>)}</nav><Link className={frame.hello} href={go("/contact")}>Say hello! <span aria-hidden="true">♥</span></Link><button className={frame.menu} aria-expanded={menu} onClick={()=>setMenu(v=>!v)}>{menu?"Đóng":"Menu"}</button></header>
+ {menu&&<nav className={frame.menuPanel} aria-label="Poppy mobile">{navItems.map(([label,path])=><Link key={path} href={go(path)} onClick={()=>setMenu(false)}>{label}</Link>)}</nav>}
  <main>
  {section==="home"&&<>
   <section className={style.poppyScene} data-dna04-artifact="pet-store-poppyScene">
@@ -44,12 +46,12 @@ export function Site({section="home",itemIndex=1,basePath="",assetBase=""}:{sect
    <div className={style.interactive} role="group" aria-label="Khám phá nội dung">{artifacts.map((item,i)=><button type="button" key={item.title} aria-pressed={selected===i} onClick={()=>setSelected(i)}><span>0{i+1}</span><b>{item.title}</b></button>)}</div>
   </section>
  </>}
- {section==="work"&&<><section className={style.archivePage}><div className={style.sectionTitle}><small>POPPY / FRIENDLY FINDS</small><h1>For dogs / For cats</h1><p>The essentials for a happier everyday with your pet.</p></div><div className={style.catalogGrid}>{artifacts.map((item,i)=><Link key={item.title} href={go("/work/"+(i+1))} className={style.artifact} data-dna04-artifact="pet-store-artifact"><img src={media[i%media.length]} alt={item.title}/><small>0{i+1} / PETS</small><h2>{item.title}</h2><p>{item.description}</p></Link>)}</div></section></>}
- {section==="detail"&&<><article className={style.detailPage}><Link href={go("/work")}>← BACK TO INDEX</Link><small>FILE / 0{itemIndex}</small><h1>{artifacts[(itemIndex-1)%3].title}</h1><p>{artifacts[(itemIndex-1)%3].description}</p><figure><img src={media[(itemIndex-1)%media.length]} alt="Illustrative case material"/><figcaption>VISUAL STUDY / DEMONSTRATION MATERIAL</figcaption></figure><div className={style.detailPair}><span>CONTEXT</span><p>The essentials for a happier everyday with your pet.</p><span>PROCESS</span><p>Trình bày phương pháp minh họa. Không phải hồ sơ dự án đã thực hiện cho khách hàng.</p></div><Link href={go("/contact")}>START A CONVERSATION →</Link></article></>}
- {section==="services"&&<><section className={style.servicePage}><div className={style.sectionTitle}><small>THE PRACTICE / 01—03</small><h1>For dogs / For cats / Play &amp; care</h1><p>The essentials for a happier everyday with your pet.</p></div><div className={style.serviceSequence}>{artifacts.map((item,i)=><button key={item.title} onClick={()=>setSelected(i)} aria-pressed={selected===i}><span>0{i+1}</span><strong>{item.title}</strong><p>{item.description}</p></button>)}</div><figure className={style.serviceVisual}><img src={media[selected%media.length]} alt={artifacts[selected].title}/><figcaption>{artifacts[selected].title} / SELECTED DISCIPLINE</figcaption></figure></section></>}
- {section==="about"&&<><section className={style.aboutPage}><div className={style.aboutCopy}><small>ABOUT / PETS</small><h1>Every little friend matters.</h1><p>The essentials for a happier everyday with your pet.</p><p>Đây là thương hiệu khái niệm trong thư viện Athena Studio. Nội dung và hình ảnh minh họa không được trình bày là thành tích của khách hàng thật.</p></div><div className={style.aboutMedia}><img src={media[3%media.length]} alt="Illustrative brand material"/><span>THE PRINCIPLES / 2026</span></div></section></>}
- {section==="contact"&&<><section className={style.contactPage}><div className={style.contactIntro}><small>INQUIRY / PETS</small><h1>Let’s talk about for dogs.</h1><p>The essentials for a happier everyday with your pet.</p></div><form onSubmit={e=>{e.preventDefault();window.location.href="mailto:hello@example.com?subject="+encodeURIComponent("Poppy & Co. / enquiry")+"&body="+encodeURIComponent(inquiry)}}><label htmlFor="independent-inquiry-pet-store">YOUR MESSAGE</label><textarea id="independent-inquiry-pet-store" required minLength={10} value={inquiry} onChange={e=>setInquiry(e.target.value)} placeholder="Mô tả nhu cầu của bạn…"/><button type="submit">MỞ ỨNG DỤNG EMAIL →</button><p>Website demo không thu thập hoặc gửi dữ liệu đến máy chủ.</p></form></section></>}
+ {section==="work"&&<PoppyMarket section="work" itemIndex={itemIndex} basePath={basePath} assetBase={assetBase} images={site.images}/>}
+ {section==="detail"&&<PoppyMarket section="detail" itemIndex={itemIndex} basePath={basePath} assetBase={assetBase} images={site.images}/>}
+ {section==="services"&&<PoppyMarket section="services" itemIndex={itemIndex} basePath={basePath} assetBase={assetBase} images={site.images}/>}
+ {section==="about"&&<PoppyMarket section="about" itemIndex={itemIndex} basePath={basePath} assetBase={assetBase} images={site.images}/>}
+ {section==="contact"&&<PoppyMarket section="contact" itemIndex={itemIndex} basePath={basePath} assetBase={assetBase} images={site.images}/>}
  </main>
-<footer className={style.footer}><div className={style.footerTop}><small>END OF THIS JOURNEY / NEXT STARTS HERE</small><Link href={go("/contact")}>START A CONVERSATION →</Link></div><div className={style.footerSignature}>{site.brand}</div><div className={style.footerMenu}>{navItems.map(([x,p])=><Link href={go(p)} key={p}>{x}</Link>)}</div><small>AN INDEPENDENT DEMO, NOT A VERIFIED COMMERCIAL ENTITY.</small></footer>
+<footer className={frame.footer}><div className={frame.footerGraphic}>GOOD <em>PET</em> DAYS.</div><div className={frame.footerContent}><div><strong>Poppy & Co.</strong><p>Một góc nhỏ về tình bạn với thú cưng, được thiết kế như một cửa hàng concept vui nhộn.</p></div><nav aria-label="Điều hướng cuối trang">{navItems.map(([label,path])=><Link href={go(path)} key={path}>{label}</Link>)}</nav></div><small>POPPY & CO. / ATHENA STUDIO — WEBSITE DEMO. Không có sản phẩm thực tế, đơn hàng hoặc thanh toán.</small></footer>
  </div>;
 }

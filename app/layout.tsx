@@ -61,6 +61,7 @@ import "@/app/athena-dna04.css";
 import "@/public/athena-demo-info.css";
 import "@/app/athena-language.css";
 import "@/app/athena-preview-final.css";
+import "@/app/template-editorial-gallery.css";
 
 fontAwesomeConfig.autoAddCss = false;
 
