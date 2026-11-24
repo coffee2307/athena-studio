@@ -22,19 +22,23 @@ test("No public template route directly renders the legacy WorldSite shell",()=>
  const router=load("components/sovereign/SovereignDemoRoute.tsx");
  assert.doesNotMatch(router,/from ["']@\/components\/templates\/WorldSite["']/);
  assert.match(router,/sovereignRenderers/);
- assert.match(router,/LegacyWorldSiteAdapter/);
+ assert.doesNotMatch(router,/LegacyWorldSiteAdapter/);
 });
-test("Only the explicitly isolated compatibility adapter can import the shared WorldSite",()=>{
- const source=load("components/sovereign/LegacyWorldSiteAdapter.tsx");
- assert.match(source,/from ["']@\/components\/templates\/WorldSite["']/);
+test("Auto Showroom owns its full site renderer and cinematic controls",()=>{
+ const route=load("components/sovereign/SovereignDemoRoute.tsx");
  const implementation=load("components/sovereign/sovereign-renderers.ts");
- assert.doesNotMatch(implementation,/from ["']@\/components\/templates\/WorldSite["']/);
- assert.doesNotMatch(implementation,/^import.*(?:WorldMotion|WorldExperiencePages).*$/m);
+ const own=load("templates/auto-showroom/src/components/Site.tsx");
+ assert.doesNotMatch(route,/LegacyWorldSiteAdapter/);
+ assert.match(implementation,/AutoShowroomSite/);
+ assert.match(own,/CinematicExperience/);
+ assert.match(own,/AutoShowroomSubpages/);
+ assert.match(own,/BlackVelocityMotion/);
+ assert.doesNotMatch(own,/@\/components\/templates\//);
 });
 test("P0/P1 structural audit reports existing design debt without falsely claiming 21 designs",()=>{
  const r=spawnSync(process.execPath,[join(root,"scripts/sovereign-audit.mjs"),"--check"],{cwd:root,encoding:"utf8"});
  assert.equal(r.status,0,r.stdout+"\n"+r.stderr);
- assert.match(r.stdout,/"legacy":1/);
+ assert.match(r.stdout,/"legacy":0/);
  assert.match(r.stdout,/"native-static":0/);
- assert.match(r.stdout,/"sovereign":14/);
+ assert.match(r.stdout,/"sovereign":15/);
 });

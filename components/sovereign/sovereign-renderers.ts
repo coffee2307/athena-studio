@@ -14,6 +14,7 @@ import {Site as PropertyShowcaseSite} from "@/templates/property-showcase/src/co
 import {Site as EducationPlatformSite} from "@/templates/education-platform/src/components/Site";
 import {Site as PetStoreSite} from "@/templates/pet-store/src/components/Site";
 import {Site as ConstructionFirmSite} from "@/templates/construction-firm/src/components/Site";
+import {Site as AutoShowroomSite} from "@/templates/auto-showroom/src/components/Site";
 
 /** Only technical site dispatch; never export shared headers, buttons, page shells or motion. */
 export type IndependentPageProps={
@@ -37,5 +38,6 @@ export const sovereignRenderers:Partial<Record<SovereignSlug,IndependentRenderer
  "property-showcase":PropertyShowcaseSite,
  "education-platform":EducationPlatformSite,
  "pet-store":PetStoreSite,
- "construction-firm":ConstructionFirmSite
+ "construction-firm":ConstructionFirmSite,
+ "auto-showroom":AutoShowroomSite
 };

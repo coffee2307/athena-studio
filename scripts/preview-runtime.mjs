@@ -6,7 +6,7 @@ if(command!=="build"&&command!=="start"){
  process.exit(2);
 }
 const nextBin=resolve("node_modules/next/dist/bin/next");
-const args=[nextBin,command,...(command==="start"?["-H","127.0.0.1","-p","3182"]:[])];
+const args=[nextBin,command,...(command==="start"?["-H","127.0.0.1","-p",String(process.env.ATHENA_PREVIEW_PORT||3182)]:[])];
 const child=spawn(process.execPath,args,{
  cwd:process.cwd(),
  env:{...process.env,ATHENA_NEXT_DIST_DIR:".next-preview",NEXT_PUBLIC_ATHENA_READ_ONLY_PREVIEW:"true"},

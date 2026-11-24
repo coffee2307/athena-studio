@@ -112,6 +112,9 @@ export function McLarenShowroomScene({preset,enabled=true,scrollRootId,onRequest
  modeRef.current=preset;
  zoomRef.current=zoom;
  useEffect(()=>{wakeRef.current();},[preset,zoom]);
+ // A failed or unsupported WebGL context must never cover the car with an error popup.
+ // Return immediately to the high-quality static poster and preserve all page controls.
+ useEffect(()=>{if(status==="fallback")onRequestFallback?.();},[status,onRequestFallback]);
 
  useEffect(()=>{
   const canvas=canvasRef.current;

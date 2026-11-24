@@ -5,7 +5,7 @@
   if(window.self!==window.top || new URLSearchParams(window.location.search).get("embed")==="1")return;
   const key="athena-demo-info:digital-creators";
   const host=document.createElement("aside");
-  host.className="athena-demo-float is-expanded";
+  host.className="athena-demo-float is-collapsed";
   host.dataset.athenaDemoInfo="digital-creators";
   host.setAttribute("aria-label","Thông tin mẫu Digital Creators");
   const inquiry="/contact?service=web-development&template=digital-creators";
@@ -37,9 +37,7 @@
   }
   function mount(){
     document.body.appendChild(host);
-    let expanded=true;
-    try{expanded=window.sessionStorage.getItem(key)!=="collapsed";}catch{}
-    setExpanded(expanded);
+    setExpanded(false);
     closeButton.addEventListener("click",()=>setExpanded(false));
     openButton.addEventListener("click",()=>setExpanded(true));
     document.addEventListener("keydown",(event)=>{

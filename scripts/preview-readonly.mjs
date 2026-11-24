@@ -5,6 +5,7 @@ import {timingSafeEqual,createHash} from "node:crypto";
 const PASSWORD=readFileSync(new URL("../.qa/preview-password.txt",import.meta.url),"utf8").trim();
 const USER="athena";
 const PORT=3184;
+const UPSTREAM_PORT=Number(process.env.ATHENA_PREVIEW_UPSTREAM_PORT||3182);
 const failed=new Map();
 const matches=(auth)=>{
  if(typeof auth!=="string"||!auth.startsWith("Basic "))return false;
@@ -36,9 +37,9 @@ const server=http.createServer((req,res)=>{
  }
  if(req.method!=="GET"&&req.method!=="HEAD"){res.writeHead(405,{"Allow":"GET, HEAD","Cache-Control":"no-store","X-Robots-Tag":"noindex"});res.end("Read-only visual preview");return;}
  const staticAsset=pathname.startsWith("/_next/static/");
- const headers={...req.headers,host:"127.0.0.1:3182"};
+ const headers={...req.headers,host:"127.0.0.1:"+UPSTREAM_PORT};
  for(const key of ["connection","authorization","cookie","x-forwarded-host","x-forwarded-proto","x-forwarded-for","cf-connecting-ip","cf-ray"])delete headers[key];
- const forward=http.request({hostname:"127.0.0.1",port:3182,method:req.method,path:req.url,headers,timeout:20000,agent},up=>{
+ const forward=http.request({hostname:"127.0.0.1",port:UPSTREAM_PORT,method:req.method,path:req.url,headers,timeout:20000,agent},up=>{
   const out={...up.headers,
    "cache-control":staticAsset&&(up.statusCode===200||up.statusCode===206)?"private, max-age=31536000, immutable":"private, no-store",
    "x-robots-tag":"noindex, nofollow, noarchive",

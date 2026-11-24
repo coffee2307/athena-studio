@@ -15,7 +15,7 @@ export const sovereignSites = {
  "property-showcase":{stage:"sovereign",archetype:"property-exploration",owner:"PROPERTY"},
  "education-platform":{stage:"sovereign",archetype:"learning-paths",owner:"EDUCATION"},
  "pet-store":{stage:"sovereign",archetype:"pet-commerce",owner:"POPPY"},
- "auto-showroom":{stage:"legacy",archetype:"cinematic-webgl",owner:"BLACK-VELOCITY"},
+ "auto-showroom":{stage:"sovereign",archetype:"cinematic-webgl",owner:"BLACK-VELOCITY"},
  "construction-firm":{stage:"sovereign",archetype:"construction-progress",owner:"TERRACON"},
  "digital-creators":{stage:"sovereign",archetype:"creative-club-webgl",owner:"DIGITAL-CREATORS"}
 } as const;

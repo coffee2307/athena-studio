@@ -5,15 +5,25 @@ import type {Template} from "@/lib/templates";
 
 export function TemplateDemoModal({template,onClose,language="vi"}:{template:Template|null;onClose:()=>void;language?:"vi"|"en"}){
  const dialogRef=useRef<HTMLDialogElement>(null);
+ const triggerRef=useRef<HTMLElement|null>(null);
+ const [loaded,setLoaded]=useState(false);
  const [device,setDevice]=useState<"desktop"|"mobile">("desktop");
  useEffect(()=>{
   const dialog=dialogRef.current;
   if(!dialog)return;
-  if(template&&!dialog.open){setDevice("desktop");dialog.showModal();}
-  if(!template&&dialog.open)dialog.close();
+  if(template&&!dialog.open){
+   if(document.activeElement instanceof HTMLElement)triggerRef.current=document.activeElement;
+   setDevice("desktop");setLoaded(false);dialog.showModal();
+  }
+  if(!template&&dialog.open){
+   dialog.close();
+   if(triggerRef.current?.isConnected)triggerRef.current.focus({preventScroll:true});
+  }
+  const originalOverflow=document.body.style.overflow;
+  if(template)document.body.style.overflow="hidden";
   const cancel=(event:Event)=>{event.preventDefault();onClose();};
   dialog.addEventListener("cancel",cancel);
-  return()=>dialog.removeEventListener("cancel",cancel);
+  return()=>{dialog.removeEventListener("cancel",cancel);if(template)document.body.style.overflow=originalOverflow;};
  },[template,onClose]);
  const realSite=template?.slug==="digital-creators"?"/immersive/digital-creators/index.html":template?.slug==="saas-product"?"/immersive/qrio/index.html":template?.demoPath;
  const localized=template&&!["wellness-clinic","property-showcase","education-platform","pet-store","construction-firm"].includes(template.slug);
@@ -28,7 +38,8 @@ export function TemplateDemoModal({template,onClose,language="vi"}:{template:Tem
     <a href={publicSite} target="_blank" rel="noopener noreferrer">Mở tab mới </a><button className="template-demo-close" type="button" onClick={onClose} aria-label="Đóng bản xem trước">×</button>
    </div></div>
    <div className={"template-demo-viewport template-demo-viewport-"+device}>
-    <iframe key={template.slug+"-"+(localized?language:"original")} title={"Website demo "+template.title} src={embeddedSite} loading="eager" referrerPolicy="same-origin" />
+    <iframe key={template.slug+"-"+(localized?language:"original")} title={"Website demo "+template.title} src={embeddedSite} loading="eager" referrerPolicy="same-origin" onLoad={()=>setLoaded(true)} />
+    {!loaded&&<div className="template-preview-loading" role="status">Đang tải bản xem trước...</div>}
    </div>
   </section>
   <aside className="template-demo-info">

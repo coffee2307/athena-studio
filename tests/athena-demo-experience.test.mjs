@@ -21,10 +21,9 @@ test("floating demo information excludes embedded previews and handles subpages"
  assert.match(widget,/Escape/);
  assert.match(widget,/template\.estimatedPrice/);
 });
-test("immersive showroom defaults to zoom-in info to keep car CTA and camera controls accessible",()=>{
+test("Athena information panel defaults to collapsed without obscuring individual templates",()=>{
  const widget=read("components/templates/TemplateExperienceInfo.tsx");
- assert.match(widget,/compactByDefault=\[[^\]]*"auto-showroom"[^\]]*"campaign-landing"[^\]]*"saas-product"[^\]]*\]\.includes\(slug\)/);
- assert.match(widget,/useState\(!compactByDefault\)/);
+ assert.match(widget,/const \[expanded,setExpanded\]=useState\(false\)/);
  assert.match(widget,/if\(slug==="auto-showroom"\)\{setExpanded\(false\);return;\}/);
  assert.match(widget,/athena-demo-float-handle/);
 });
